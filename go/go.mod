@@ -3,6 +3,7 @@ module github.com/openziti/edge-api/go
 go 1.19
 
 require (
+	github.com/fullsailor/pkcs7 v0.0.0-20190404230743-d7302db945fa
 	github.com/go-openapi/errors v0.20.3
 	github.com/go-openapi/loads v0.21.2
 	github.com/go-openapi/runtime v0.25.0
@@ -11,6 +12,9 @@ require (
 	github.com/go-openapi/swag v0.22.3
 	github.com/go-openapi/validate v0.22.1
 	github.com/jessevdk/go-flags v1.5.0
+	github.com/openziti/edge v0.24.110
+	github.com/pkg/errors v0.9.1
+	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/net v0.5.0
 )
 

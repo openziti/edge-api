@@ -1,24 +1,87 @@
-# Overview
+# Edge APIs
 
-This folder contains the specifications for the two current edge APIs:
+This repository contains the Open API 2.0 specification for the OpenZiti Edge Client and Management REST APIs. It also
+contains a generated go module, in the `go` directory that can be used to develop against OpenZiti Controllers.
 
-    - `client.yml` - OpenZiti Edge Client REST API
-    - `management.yml` - OpenZiti Edge Management REST API
+# Versioning
 
-These two specs are built from the sharded files that are maintained in the `source` directory. To consume the
-specs as is, single reference `client.yml` or `management.yml` when invoking your tool of choice.
+Versioning of the APIs in this repository are independent of the OpenZiti releases created in the 
+[`ziti`](https://github.com/openziti/zit) repository. Many versions of these API specifications are  compatible with 
+multiple versions of the OpenZiti release versions. To make it somewhat intuitive, the version number of the API
+is the *minimum version of the `ziti`* repository releases that this API is compatible with. It will also be 
+compatible up until the next version of the specifications.
 
-# Updating
+For simplicity each controller hosts the specification version they expect and may be used instead of this repository
+for live deployments.
 
-To modify or enhance the specifications in any manner, the changes must be made within the files in the `source`
-directory. If not, during generation, any modifications to the top level `client.yml` and `management.yml` files
-will be lost.
+# Client & Server Generation
 
-After modifying files within the `source` directory, use either the powershell or bash scripts located in the `scripts`
-directory. These scripts will invoke `go-swagger`, so please ensure it is available on your path.
+The root level `client.yml` and `management.yml` files are generated from the `source` directory. There are scripts
+within the `script` directory that will do the heavy lifting of re-generating them if needed.Both scripts require
+that the `swagger` executable be available on your `path` environment variable. Releases of it are available in the
+[GitHub Go-Swagger](https://github.com/go-swagger/go-swagger/releases) repository.
 
-* Download/install `swagger` from https://github.com/go-swagger/go-swagger/releases
-* cd to the directory containing this README
-* issue either:
-  ** `scripts/generate_rest.sh`
-  ** `powershell -file "scripts/generate_rest.ps1"`
+```bash
+#bash
+./scripts/generate_rest.sh
+```
+
+```powershell
+#powershell
+./scripts/generate_rest.ps1
+```
+
+# Using the generated go module
+
+Within the go module within the `go` directory is a submodule named `rest_util` with contains
+helper functions for using its sibling `*_client` submodules. This package is not generated.
+
+
+Example:
+```go
+func main() {
+	ctrlAddress := "https://localhost:1280"
+	caCerts, err := rest_util.GetControllerWellKnownCas(ctrlAddress)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	caPool := x509.NewCertPool()
+
+	for _, ca := range caCerts {
+		caPool.AddCert(ca)
+	}
+
+	ok, err := rest_util.VerifyController(ctrlAddress, caPool)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if !ok {
+		log.Fatal("controller failed CA validation")
+	}
+
+	client, err := rest_util.NewEdgeManagementClientWithUpdb("admin", "admin", ctrlAddress, caPool)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	params := &identity.ListIdentitiesParams{
+		Context: context.Background(),
+	}
+
+	resp, err := client.Identity.ListIdentities(params, nil)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	println("\n=== Identity List ===")
+	for _, identityItem := range resp.GetPayload().Data {
+		println(*identityItem.Name)
+	}
+}
+```
