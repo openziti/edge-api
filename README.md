@@ -1,7 +1,7 @@
 # Edge APIs
 
 This repository contains the Open API 2.0 specification for the OpenZiti Edge Client and Management REST APIs. It also
-contains a generated go module, in the `go` directory that can be used to develop against OpenZiti Controllers.
+contains a generated go module, in the `rest_*` directories that can be used to develop against OpenZiti Controllers.
 
 # Versioning
 

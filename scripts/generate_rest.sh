@@ -24,7 +24,7 @@ swagger flatten "$clientSourceSpec" -o "$clientSwagSpec" --format yaml
 echo "...flattening management spec"
 swagger flatten "$managementSourceSpec" -o "$managementSwagSpec" --format yaml
 
-codeTarget="$rootDir/go"
+codeTarget="$rootDir"
 
 clientServerPath=$(realpath -m "$codeTarget/rest_client_api_server")
 echo "...removing any existing server from $clientServerPath"
@@ -84,8 +84,6 @@ if [ ${exit_status} -ne 0 ]; then
 fi
 
 echo "...fixing go module deps"
-pwd
-echo $rootDir
 prev=$(pwd)
 cd $codeTarget
 go mod init github.com/openziti/edge-api || true

@@ -39,7 +39,7 @@ try
     $clientSpec = Join-Path $rootDir "/client.yml" -Resolve
     $managementSpec = Join-Path $rootDir "/management.yml" -Resolve
 
-    $codeTarget = Join-Path $rootDir "go"
+    $codeTarget = $rootDir
 
     $clientServerOutDir = Join-Path $codeTarget "/rest_client_api_server"
     "...removing any existing server from $clientServerOutDir"
