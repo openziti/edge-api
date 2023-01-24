@@ -85,10 +85,10 @@ fi
 
 echo "...fixing go module deps"
 pwd
-echo $codeTarget
+echo $rootDir
 prev=$(pwd)
 cd $codeTarget
-go mod init github.com/openziti/edge-api/go || true
+go mod init github.com/openziti/edge-api || true
 go get -u ./...
 go mod tidy
 cd $prev

@@ -131,8 +131,8 @@ try
     $content | Set-Content $configureFile -nonewline
 
     "...fixing go module deps"
-    Push-Location $codeTarget
-    go mod init github.com/openziti/edge-api/go
+    Push-Location $rootDir
+    go mod init github.com/openziti/edge-api
     go get -u -f ./...
     go mod tidy
     Pop-Location

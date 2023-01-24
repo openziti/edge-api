@@ -1,4 +1,4 @@
-module github.com/openziti/edge-api/go
+module github.com/openziti/edge-api
 
 go 1.19
 
