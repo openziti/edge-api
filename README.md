@@ -7,9 +7,10 @@ contains a generated go module, in the `rest_*` directories that can be used to 
 
 Versioning of the APIs in this repository are independent of the OpenZiti releases created in the 
 [`ziti`](https://github.com/openziti/zit) repository. Many versions of these API specifications are  compatible with 
-multiple versions of the OpenZiti release versions. To make it somewhat intuitive, the version number of the API
-is the *minimum version of the `ziti`* repository releases that this API is compatible with. It will also be 
-compatible up until the next version of the specifications.
+multiple versions of the OpenZiti release versions. To make it somewhat intuitive, the minor version number of the API
+is the *minimum minor version of the `ziti`* repository releases that this API is compatible with. It will also be 
+compatible up until the next minor version of the specifications. Patch versions are used for internal fixes and release
+tags.
 
 For simplicity each controller hosts the specification version they expect and may be used instead of this repository
 for live deployments.
@@ -33,8 +34,8 @@ that the `swagger` executable be available on your `path` environment variable. 
 
 # Using the generated go module
 
-Within the go module within the `go` directory is a submodule named `rest_util` with contains
-helper functions for using its sibling `*_client` submodules. This package is not generated.
+Within the go module within the `go` directory is a submodule named `rest_util` with contains helper functions for using
+its sibling `*_client` submodules. This package is not generated. See `rest_util/examples` for full examples.
 
 
 Example:
