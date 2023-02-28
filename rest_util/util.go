@@ -42,7 +42,7 @@ type ZitiTokenAuth struct {
 
 // AuthenticateRequest injects the API Session token into outgoing requests.
 func (e *ZitiTokenAuth) AuthenticateRequest(request openApiRuntime.ClientRequest, _ strfmt.Registry) error {
-	return request.SetHeaderParam("zt-session", e.Token)
+	return request.SetHeaderParam("authorization", e.Token)
 }
 
 // NewHttpClientWithTlsConfig provides a default HTTP client with generous default timeouts.

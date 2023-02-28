@@ -119,9 +119,11 @@ func NewEdgeClientClientWithToken(httpClient *http.Client, apiAddress string, ap
 
 	clientRuntime := httptransport.NewWithClient(ctrlUrl.Host, rest_client_api_client.DefaultBasePath, rest_client_api_client.DefaultSchemes, httpClient)
 
-	clientRuntime.DefaultAuthentication = &ZitiTokenAuth{
+	tokenAuth := &ZitiTokenAuth{
 		Token: apiSessionToken,
 	}
+
+	clientRuntime.DefaultAuthentication = tokenAuth
 
 	return rest_client_api_client.New(clientRuntime, nil), nil
 }

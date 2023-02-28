@@ -28,6 +28,7 @@ import (
 	"github.com/openziti/edge-api/rest_model"
 	"net/http"
 	"net/url"
+	"sync"
 )
 
 // Authenticator is an interface that facilitates obtaining an API Session.
@@ -39,6 +40,9 @@ type Authenticator interface {
 	//BuildHttpClient returns a http.Client to use for an API client. This specifically allows
 	//client certificate authentication to be configured in the http.Client's transport/tls.Config
 	BuildHttpClient() (*http.Client, error)
+
+	//SetInfo sets the env and sdk info submitted on Authenticate
+	SetInfo(*rest_model.EnvInfo, *rest_model.SdkInfo)
 }
 
 // HttpClientFunc allows an external HttpClient to be created and used.
@@ -89,6 +93,11 @@ func (a *AuthenticatorBase) BuildHttpClientWithModifyTls(modifyTls func(*tls.Con
 	return httpClient, err
 }
 
+func (a *AuthenticatorBase) SetInfo(env *rest_model.EnvInfo, sdk *rest_model.SdkInfo) {
+	a.EnvInfo = env
+	a.SdkInfo = sdk
+}
+
 var _ Authenticator = &AuthenticatorUpdb{}
 
 // AuthenticatorUpdb is an implementation of Authenticator that can fulfill username/password authentication
@@ -131,7 +140,12 @@ func (a *AuthenticatorUpdb) Authenticate(controllerAddress *url.URL) (*rest_mode
 		return nil, err
 	}
 
-	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, rest_management_api_client.DefaultBasePath, rest_management_api_client.DefaultSchemes, httpClient)
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
 
 	client := rest_management_api_client.New(clientRuntime, nil)
 
@@ -151,6 +165,29 @@ func (a *AuthenticatorUpdb) Authenticate(controllerAddress *url.URL) (*rest_mode
 }
 
 var _ Authenticator = &AuthenticatorCert{}
+
+// CertProvider scopes a subset of the identity.Identity interface
+type CertProvider interface {
+	Cert() *tls.Certificate
+	CA() *x509.CertPool
+	ClientTLSConfig() *tls.Config
+}
+
+// AuthenticatorIdentity is meant to deal with OpenZiti identity files and interfaces defined in the `identity`
+// repository
+type AuthenticatorIdentity struct {
+	CertProvider
+	AuthenticatorBase
+	load sync.Once
+}
+
+func (a *AuthenticatorIdentity) BuildHttpClient() (*http.Client, error) {
+	return a.BuildHttpClientWithModifyTls(func(config *tls.Config) {
+		src := a.CertProvider.ClientTLSConfig()
+		config.Certificates = src.Certificates
+		config.RootCAs = src.RootCAs
+	})
+}
 
 // AuthenticatorCert is an implementation of Authenticator that can fulfill client certificate authentication
 // requests.
@@ -184,7 +221,12 @@ func (a *AuthenticatorCert) Authenticate(controllerAddress *url.URL) (*rest_mode
 		return nil, err
 	}
 
-	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, rest_management_api_client.DefaultBasePath, rest_management_api_client.DefaultSchemes, httpClient)
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
 
 	client := rest_management_api_client.New(clientRuntime, nil)
 
@@ -245,7 +287,12 @@ func (a *AuthenticatorAuthHeader) Authenticate(controllerAddress *url.URL) (*res
 		return nil, err
 	}
 
-	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, rest_management_api_client.DefaultBasePath, rest_management_api_client.DefaultSchemes, httpClient)
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
 
 	clientRuntime.DefaultAuthentication = &HeaderAuth{
 		HeaderName:  "Authorization",
