@@ -22,7 +22,9 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"github.com/go-openapi/runtime"
 	openapiclient "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/openziti/edge-api/rest_management_api_client"
 	"github.com/openziti/edge-api/rest_management_api_client/authentication"
 	"github.com/openziti/edge-api/rest_model"
@@ -262,6 +264,16 @@ type AuthenticatorAuthHeader struct {
 	Token string
 }
 
+func (a *AuthenticatorAuthHeader) AuthenticateRequest(request runtime.ClientRequest, registry strfmt.Registry) error {
+	return request.SetHeaderParam("authorization", a.Token)
+}
+
+func (a *AuthenticatorAuthHeader) BuildHttpClient() (*http.Client, error) {
+	return a.AuthenticatorBase.BuildHttpClientWithModifyTls(func(config *tls.Config) {
+		config.InsecureSkipVerify = true
+	})
+}
+
 func NewAuthenticatorAuthHeader(token string) *AuthenticatorAuthHeader {
 	return &AuthenticatorAuthHeader{
 		Token: token,
@@ -275,13 +287,13 @@ func (a *AuthenticatorAuthHeader) Params() *authentication.AuthenticateParams {
 			EnvInfo:     a.EnvInfo,
 			SdkInfo:     a.SdkInfo,
 		},
-		Method:  "jwt",
+		Method:  "ext-jwt",
 		Context: context.Background(),
 	}
 }
 
 func (a *AuthenticatorAuthHeader) Authenticate(controllerAddress *url.URL) (*rest_model.CurrentAPISessionDetail, error) {
-	httpClient, err := a.BuildHttpClientWithModifyTls(nil)
+	httpClient, err := a.BuildHttpClient()
 
 	if err != nil {
 		return nil, err

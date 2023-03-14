@@ -20,6 +20,7 @@ import (
 	"crypto/tls"
 	openApiRuntime "github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/openziti/edge-api/rest_model"
 	"net"
 	"net/http"
 	"time"
@@ -28,6 +29,10 @@ import (
 type HeaderAuth struct {
 	HeaderName  string
 	HeaderValue string
+}
+
+type ApiErrorPayload interface {
+	GetPayload() *rest_model.APIErrorEnvelope
 }
 
 func (e *HeaderAuth) AuthenticateRequest(request openApiRuntime.ClientRequest, _ strfmt.Registry) error {
@@ -42,7 +47,7 @@ type ZitiTokenAuth struct {
 
 // AuthenticateRequest injects the API Session token into outgoing requests.
 func (e *ZitiTokenAuth) AuthenticateRequest(request openApiRuntime.ClientRequest, _ strfmt.Registry) error {
-	return request.SetHeaderParam("authorization", e.Token)
+	return request.SetHeaderParam("zt-session", e.Token)
 }
 
 // NewHttpClientWithTlsConfig provides a default HTTP client with generous default timeouts.
