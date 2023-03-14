@@ -30,7 +30,6 @@ import (
 	"github.com/openziti/edge-api/rest_model"
 	"net/http"
 	"net/url"
-	"sync"
 )
 
 // Authenticator is an interface that facilitates obtaining an API Session.
@@ -180,7 +179,6 @@ type CertProvider interface {
 type AuthenticatorIdentity struct {
 	CertProvider
 	AuthenticatorBase
-	load sync.Once
 }
 
 func (a *AuthenticatorIdentity) BuildHttpClient() (*http.Client, error) {
