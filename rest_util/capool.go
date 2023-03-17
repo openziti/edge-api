@@ -86,3 +86,21 @@ func GetControllerWellKnownCas(controllerAddr string) ([]*x509.Certificate, erro
 
 	return certs.Certificates, nil
 }
+
+// GetControllerWellKnownCaPool will attempt to connect to a controller and retrieve its PKCS11 well-known CA bundle as
+// an x509.CertPool
+func GetControllerWellKnownCaPool(controllerAddr string) (*x509.CertPool, error) {
+	certs, err := GetControllerWellKnownCas(controllerAddr)
+
+	if err != nil {
+		return nil, err
+	}
+
+	pool := x509.NewCertPool()
+
+	for _, cert := range certs {
+		pool.AddCert(cert)
+	}
+
+	return pool, nil
+}

@@ -22,7 +22,9 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"github.com/go-openapi/runtime"
 	openapiclient "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/openziti/edge-api/rest_management_api_client"
 	"github.com/openziti/edge-api/rest_management_api_client/authentication"
 	"github.com/openziti/edge-api/rest_model"
@@ -39,6 +41,9 @@ type Authenticator interface {
 	//BuildHttpClient returns a http.Client to use for an API client. This specifically allows
 	//client certificate authentication to be configured in the http.Client's transport/tls.Config
 	BuildHttpClient() (*http.Client, error)
+
+	//SetInfo sets the env and sdk info submitted on Authenticate
+	SetInfo(*rest_model.EnvInfo, *rest_model.SdkInfo)
 }
 
 // HttpClientFunc allows an external HttpClient to be created and used.
@@ -89,6 +94,11 @@ func (a *AuthenticatorBase) BuildHttpClientWithModifyTls(modifyTls func(*tls.Con
 	return httpClient, err
 }
 
+func (a *AuthenticatorBase) SetInfo(env *rest_model.EnvInfo, sdk *rest_model.SdkInfo) {
+	a.EnvInfo = env
+	a.SdkInfo = sdk
+}
+
 var _ Authenticator = &AuthenticatorUpdb{}
 
 // AuthenticatorUpdb is an implementation of Authenticator that can fulfill username/password authentication
@@ -131,7 +141,12 @@ func (a *AuthenticatorUpdb) Authenticate(controllerAddress *url.URL) (*rest_mode
 		return nil, err
 	}
 
-	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, rest_management_api_client.DefaultBasePath, rest_management_api_client.DefaultSchemes, httpClient)
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
 
 	client := rest_management_api_client.New(clientRuntime, nil)
 
@@ -151,6 +166,28 @@ func (a *AuthenticatorUpdb) Authenticate(controllerAddress *url.URL) (*rest_mode
 }
 
 var _ Authenticator = &AuthenticatorCert{}
+
+// CertProvider scopes a subset of the identity.Identity interface
+type CertProvider interface {
+	Cert() *tls.Certificate
+	CA() *x509.CertPool
+	ClientTLSConfig() *tls.Config
+}
+
+// AuthenticatorIdentity is meant to deal with OpenZiti identity files and interfaces defined in the `identity`
+// repository
+type AuthenticatorIdentity struct {
+	CertProvider
+	AuthenticatorBase
+}
+
+func (a *AuthenticatorIdentity) BuildHttpClient() (*http.Client, error) {
+	return a.BuildHttpClientWithModifyTls(func(config *tls.Config) {
+		src := a.CertProvider.ClientTLSConfig()
+		config.Certificates = src.Certificates
+		config.RootCAs = src.RootCAs
+	})
+}
 
 // AuthenticatorCert is an implementation of Authenticator that can fulfill client certificate authentication
 // requests.
@@ -184,7 +221,12 @@ func (a *AuthenticatorCert) Authenticate(controllerAddress *url.URL) (*rest_mode
 		return nil, err
 	}
 
-	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, rest_management_api_client.DefaultBasePath, rest_management_api_client.DefaultSchemes, httpClient)
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
 
 	client := rest_management_api_client.New(clientRuntime, nil)
 
@@ -220,6 +262,16 @@ type AuthenticatorAuthHeader struct {
 	Token string
 }
 
+func (a *AuthenticatorAuthHeader) AuthenticateRequest(request runtime.ClientRequest, registry strfmt.Registry) error {
+	return request.SetHeaderParam("authorization", a.Token)
+}
+
+func (a *AuthenticatorAuthHeader) BuildHttpClient() (*http.Client, error) {
+	return a.AuthenticatorBase.BuildHttpClientWithModifyTls(func(config *tls.Config) {
+		config.InsecureSkipVerify = true
+	})
+}
+
 func NewAuthenticatorAuthHeader(token string) *AuthenticatorAuthHeader {
 	return &AuthenticatorAuthHeader{
 		Token: token,
@@ -233,19 +285,24 @@ func (a *AuthenticatorAuthHeader) Params() *authentication.AuthenticateParams {
 			EnvInfo:     a.EnvInfo,
 			SdkInfo:     a.SdkInfo,
 		},
-		Method:  "jwt",
+		Method:  "ext-jwt",
 		Context: context.Background(),
 	}
 }
 
 func (a *AuthenticatorAuthHeader) Authenticate(controllerAddress *url.URL) (*rest_model.CurrentAPISessionDetail, error) {
-	httpClient, err := a.BuildHttpClientWithModifyTls(nil)
+	httpClient, err := a.BuildHttpClient()
 
 	if err != nil {
 		return nil, err
 	}
 
-	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, rest_management_api_client.DefaultBasePath, rest_management_api_client.DefaultSchemes, httpClient)
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
 
 	clientRuntime.DefaultAuthentication = &HeaderAuth{
 		HeaderName:  "Authorization",
