@@ -276,6 +276,9 @@ definitions:
       noTraversal:
         type: boolean
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       roleAttributes:
         $ref: '../shared/base-entity.yml#/definitions/attributes'
       tags:
@@ -301,6 +304,9 @@ definitions:
       noTraversal:
         type: boolean
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       roleAttributes:
         $ref: '../shared/base-entity.yml#/definitions/attributes'
       tags:
@@ -323,6 +329,9 @@ definitions:
         minimum: 0
         maximum: 65535
       noTraversal:
+        type: boolean
+        x-nullable: true
+      disabled:
         type: boolean
         x-nullable: true
       roleAttributes:

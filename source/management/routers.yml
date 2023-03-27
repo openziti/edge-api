@@ -301,6 +301,7 @@ definitions:
           - fingerprint
           - cost
           - noTraversal
+          - disabled
         properties:
           name:
             type: string
@@ -338,6 +339,8 @@ definitions:
             maximum: 65535
           noTraversal:
             type: boolean
+          disabled:
+            type: boolean
   routerCreate:
     type: object
     required:
@@ -351,6 +354,9 @@ definitions:
         minimum: 0
         maximum: 65535
       noTraversal:
+        type: boolean
+        x-nullable: true
+      disabled:
         type: boolean
         x-nullable: true
       tags:
@@ -370,6 +376,9 @@ definitions:
       noTraversal:
         type: boolean
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   routerPatch:
@@ -383,6 +392,9 @@ definitions:
         minimum: 0
         maximum: 65535
       noTraversal:
+        type: boolean
+        x-nullable: true
+      disabled:
         type: boolean
         x-nullable: true
       tags:
