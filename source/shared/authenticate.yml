@@ -17,7 +17,7 @@ paths:
     post:
       summary: Authenticate via a method supplied via a query string parameter
       description: |
-        Allows authentication  Methods include "password" and "cert"
+        Allowed authentication methods include "password", "cert", and "ext-jwt"
       security: [ ]
       tags:
         - Authentication
