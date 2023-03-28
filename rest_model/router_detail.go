@@ -50,6 +50,10 @@ type RouterDetail struct {
 	// Minimum: 0
 	Cost *int64 `json:"cost"`
 
+	// disabled
+	// Required: true
+	Disabled *bool `json:"disabled"`
+
 	// enrollment created at
 	// Format: date-time
 	EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
@@ -104,6 +108,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO1 struct {
 		Cost *int64 `json:"cost"`
 
+		Disabled *bool `json:"disabled"`
+
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
 
 		EnrollmentExpiresAt *strfmt.DateTime `json:"enrollmentExpiresAt,omitempty"`
@@ -131,6 +137,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 	}
 
 	m.Cost = dataAO1.Cost
+
+	m.Disabled = dataAO1.Disabled
 
 	m.EnrollmentCreatedAt = dataAO1.EnrollmentCreatedAt
 
@@ -169,6 +177,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 	var dataAO1 struct {
 		Cost *int64 `json:"cost"`
 
+		Disabled *bool `json:"disabled"`
+
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
 
 		EnrollmentExpiresAt *strfmt.DateTime `json:"enrollmentExpiresAt,omitempty"`
@@ -193,6 +203,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 	}
 
 	dataAO1.Cost = m.Cost
+
+	dataAO1.Disabled = m.Disabled
 
 	dataAO1.EnrollmentCreatedAt = m.EnrollmentCreatedAt
 
@@ -234,6 +246,10 @@ func (m *RouterDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCost(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDisabled(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -282,6 +298,15 @@ func (m *RouterDetail) validateCost(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MaximumInt("cost", "body", *m.Cost, 65535, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RouterDetail) validateDisabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("disabled", "body", m.Disabled); err != nil {
 		return err
 	}
 

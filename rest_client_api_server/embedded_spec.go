@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.6"
+    "version": "0.25.9"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -113,7 +113,7 @@ func init() {
     "/authenticate": {
       "post": {
         "security": [],
-        "description": "Allows authentication  Methods include \"password\" and \"cert\"\n",
+        "description": "Allowed authentication methods include \"password\", \"cert\", and \"ext-jwt\"\n",
         "tags": [
           "Authentication"
         ],
@@ -4219,7 +4219,8 @@ func init() {
         "syncStatus",
         "isOnline",
         "cost",
-        "noTraversal"
+        "noTraversal",
+        "disabled"
       ],
       "properties": {
         "appData": {
@@ -4229,6 +4230,9 @@ func init() {
           "type": "integer",
           "maximum": 65535,
           "x-nullable": true
+        },
+        "disabled": {
+          "type": "boolean"
         },
         "hostname": {
           "type": "string"
@@ -5988,7 +5992,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.6"
+    "version": "0.25.9"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -6037,7 +6041,7 @@ func init() {
     "/authenticate": {
       "post": {
         "security": [],
-        "description": "Allows authentication  Methods include \"password\" and \"cert\"\n",
+        "description": "Allowed authentication methods include \"password\", \"cert\", and \"ext-jwt\"\n",
         "tags": [
           "Authentication"
         ],
@@ -10225,7 +10229,8 @@ func init() {
         "syncStatus",
         "isOnline",
         "cost",
-        "noTraversal"
+        "noTraversal",
+        "disabled"
       ],
       "properties": {
         "appData": {
@@ -10236,6 +10241,9 @@ func init() {
           "maximum": 65535,
           "minimum": 0,
           "x-nullable": true
+        },
+        "disabled": {
+          "type": "boolean"
         },
         "hostname": {
           "type": "string"

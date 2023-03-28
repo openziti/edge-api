@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.25.7
+  version: 0.25.9
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -13016,6 +13016,7 @@ definitions:
     - isOnline
     - cost
     - noTraversal
+    - disabled
     properties:
       appData:
         $ref: '#/definitions/tags'
@@ -13024,6 +13025,8 @@ definitions:
         maximum: 65535
         minimum: 0
         x-nullable: true
+      disabled:
+        type: boolean
       hostname:
         type: string
       isOnline:
@@ -13613,6 +13616,9 @@ definitions:
         maximum: 65535
         minimum: 0
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       isTunnelerEnabled:
         type: boolean
       name:
@@ -13725,6 +13731,9 @@ definitions:
         maximum: 65535
         minimum: 0
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       isTunnelerEnabled:
         type: boolean
       name:
@@ -13823,6 +13832,9 @@ definitions:
         type: integer
         maximum: 65535
         minimum: 0
+        x-nullable: true
+      disabled:
+        type: boolean
         x-nullable: true
       isTunnelerEnabled:
         type: boolean
@@ -15786,6 +15798,9 @@ definitions:
         maximum: 65535
         minimum: 0
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       name:
         type: string
       noTraversal:
@@ -15805,11 +15820,14 @@ definitions:
       - fingerprint
       - cost
       - noTraversal
+      - disabled
       properties:
         cost:
           type: integer
           maximum: 65535
           minimum: 0
+        disabled:
+          type: boolean
         enrollmentCreatedAt:
           type: string
           format: date-time
@@ -15864,6 +15882,9 @@ definitions:
         maximum: 65535
         minimum: 0
         x-nullable: true
+      disabled:
+        type: boolean
+        x-nullable: true
       name:
         type: string
       noTraversal:
@@ -15880,6 +15901,9 @@ definitions:
         type: integer
         maximum: 65535
         minimum: 0
+        x-nullable: true
+      disabled:
+        type: boolean
         x-nullable: true
       name:
         type: string

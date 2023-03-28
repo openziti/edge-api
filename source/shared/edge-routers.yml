@@ -10,6 +10,7 @@ definitions:
       - isOnline
       - cost
       - noTraversal
+      - disabled
     properties:
       hostname:
         type: string
@@ -31,5 +32,7 @@ definitions:
       noTraversal:
         type: boolean
         x-nullable: true
+      disabled:
+        type: boolean
       appData:
         $ref: 'base-entity.yml#/definitions/tags'

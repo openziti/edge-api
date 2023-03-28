@@ -52,6 +52,10 @@ type CommonEdgeRouterProperties struct {
 	// Minimum: 0
 	Cost *int64 `json:"cost"`
 
+	// disabled
+	// Required: true
+	Disabled *bool `json:"disabled"`
+
 	// hostname
 	// Required: true
 	Hostname *string `json:"hostname"`
@@ -86,6 +90,10 @@ func (m *CommonEdgeRouterProperties) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCost(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDisabled(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,6 +157,15 @@ func (m *CommonEdgeRouterProperties) validateCost(formats strfmt.Registry) error
 	}
 
 	if err := validate.MaximumInt("cost", "body", *m.Cost, 65535, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CommonEdgeRouterProperties) validateDisabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("disabled", "body", m.Disabled); err != nil {
 		return err
 	}
 

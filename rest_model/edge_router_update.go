@@ -51,6 +51,9 @@ type EdgeRouterUpdate struct {
 	// Minimum: 0
 	Cost *int64 `json:"cost,omitempty"`
 
+	// disabled
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// is tunneler enabled
 	IsTunnelerEnabled bool `json:"isTunnelerEnabled,omitempty"`
 

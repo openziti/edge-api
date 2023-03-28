@@ -64,7 +64,7 @@ type ClientService interface {
 /*
   Authenticate authenticates via a method supplied via a query string parameter
 
-  Allows authentication  Methods include "password" and "cert"
+  Allowed authentication methods include "password", "cert", and "ext-jwt"
 
 */
 func (a *Client) Authenticate(params *AuthenticateParams, opts ...ClientOption) (*AuthenticateOK, error) {

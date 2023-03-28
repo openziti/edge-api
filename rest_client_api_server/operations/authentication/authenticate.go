@@ -57,7 +57,7 @@ func NewAuthenticate(ctx *middleware.Context, handler AuthenticateHandler) *Auth
 
 Authenticate via a method supplied via a query string parameter
 
-Allows authentication  Methods include "password" and "cert"
+Allowed authentication methods include "password", "cert", and "ext-jwt"
 
 
 */
