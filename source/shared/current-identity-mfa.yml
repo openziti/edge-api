@@ -51,12 +51,6 @@ paths:
         - MFA
       operationId: deleteMfa
       parameters:
-        - name: mfaValidation
-          in: body
-          required: false
-          description: 'An MFA validation request'
-          schema:
-            $ref: 'authenticate.yml#/definitions/mfaCode'
         - name: mfa-validation-code
           in: header
           required: false
