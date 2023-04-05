@@ -47,6 +47,10 @@ type IdentityDetail struct {
 	// app data
 	AppData *Tags `json:"appData,omitempty"`
 
+	// auth policy
+	// Required: true
+	AuthPolicy *EntityRef `json:"authPolicy"`
+
 	// auth policy Id
 	// Required: true
 	AuthPolicyID *string `json:"authPolicyId"`
@@ -148,6 +152,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO1 struct {
 		AppData *Tags `json:"appData,omitempty"`
 
+		AuthPolicy *EntityRef `json:"authPolicy"`
+
 		AuthPolicyID *string `json:"authPolicyId"`
 
 		Authenticators *IdentityAuthenticators `json:"authenticators"`
@@ -197,6 +203,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 	}
 
 	m.AppData = dataAO1.AppData
+
+	m.AuthPolicy = dataAO1.AuthPolicy
 
 	m.AuthPolicyID = dataAO1.AuthPolicyID
 
@@ -257,6 +265,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 	var dataAO1 struct {
 		AppData *Tags `json:"appData,omitempty"`
 
+		AuthPolicy *EntityRef `json:"authPolicy"`
+
 		AuthPolicyID *string `json:"authPolicyId"`
 
 		Authenticators *IdentityAuthenticators `json:"authenticators"`
@@ -303,6 +313,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 	}
 
 	dataAO1.AppData = m.AppData
+
+	dataAO1.AuthPolicy = m.AuthPolicy
 
 	dataAO1.AuthPolicyID = m.AuthPolicyID
 
@@ -366,6 +378,10 @@ func (m *IdentityDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAppData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAuthPolicy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -475,6 +491,26 @@ func (m *IdentityDetail) validateAppData(formats strfmt.Registry) error {
 				return ve.ValidateName("appData")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("appData")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IdentityDetail) validateAuthPolicy(formats strfmt.Registry) error {
+
+	if err := validate.Required("authPolicy", "body", m.AuthPolicy); err != nil {
+		return err
+	}
+
+	if m.AuthPolicy != nil {
+		if err := m.AuthPolicy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authPolicy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authPolicy")
 			}
 			return err
 		}
@@ -814,6 +850,10 @@ func (m *IdentityDetail) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAuthPolicy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAuthenticators(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -868,6 +908,22 @@ func (m *IdentityDetail) contextValidateAppData(ctx context.Context, formats str
 				return ve.ValidateName("appData")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("appData")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IdentityDetail) contextValidateAuthPolicy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AuthPolicy != nil {
+		if err := m.AuthPolicy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authPolicy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authPolicy")
 			}
 			return err
 		}
