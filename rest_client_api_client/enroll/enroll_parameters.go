@@ -83,6 +83,9 @@ func NewEnrollParamsWithHTTPClient(client *http.Client) *EnrollParams {
 */
 type EnrollParams struct {
 
+	// Method.
+	Method *string
+
 	// Token.
 	//
 	// Format: uuid
@@ -141,6 +144,17 @@ func (o *EnrollParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithMethod adds the method to the enroll params
+func (o *EnrollParams) WithMethod(method *string) *EnrollParams {
+	o.SetMethod(method)
+	return o
+}
+
+// SetMethod adds the method to the enroll params
+func (o *EnrollParams) SetMethod(method *string) {
+	o.Method = method
+}
+
 // WithToken adds the token to the enroll params
 func (o *EnrollParams) WithToken(token *strfmt.UUID) *EnrollParams {
 	o.SetToken(token)
@@ -159,6 +173,23 @@ func (o *EnrollParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 	var res []error
+
+	if o.Method != nil {
+
+		// query param method
+		var qrMethod string
+
+		if o.Method != nil {
+			qrMethod = *o.Method
+		}
+		qMethod := qrMethod
+		if qMethod != "" {
+
+			if err := r.SetQueryParam("method", qMethod); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.Token != nil {
 

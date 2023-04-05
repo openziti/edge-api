@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.25.10
+  version: 0.25.11
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -1509,7 +1509,7 @@ paths:
                 apiVersion: 0.0.1
   /enroll:
     post:
-      description: endpoint defers to the logic in the more specific `enroll/*` endpoints
+      description: present a OTT and CSR to receive a long-lived client certificate
       consumes:
       - application/pkcs10
       - application/json
@@ -1520,7 +1520,7 @@ paths:
       - application/json
       tags:
       - Enroll
-      summary: Legacy enrollment endpoint
+      summary: Enroll an identity via one-time-token
       operationId: enroll
       responses:
         "200":
@@ -1549,6 +1549,9 @@ paths:
     - type: string
       format: uuid
       name: token
+      in: query
+    - type: string
+      name: method
       in: query
   /enroll/ca:
     post:

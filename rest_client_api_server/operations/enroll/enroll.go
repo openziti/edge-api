@@ -55,9 +55,9 @@ func NewEnroll(ctx *middleware.Context, handler EnrollHandler) *Enroll {
 
 /* Enroll swagger:route POST /enroll Enroll enroll
 
-Legacy enrollment endpoint
+Enroll an identity via one-time-token
 
-endpoint defers to the logic in the more specific `enroll/*` endpoints
+present a OTT and CSR to receive a long-lived client certificate
 
 */
 type Enroll struct {

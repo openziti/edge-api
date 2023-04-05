@@ -39,7 +39,8 @@ import (
 
 // EnrollURL generates an URL for the enroll operation
 type EnrollURL struct {
-	Token *strfmt.UUID
+	Method *string
+	Token  *strfmt.UUID
 
 	_basePath string
 	// avoid unkeyed usage
@@ -74,6 +75,14 @@ func (o *EnrollURL) Build() (*url.URL, error) {
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
+
+	var methodQ string
+	if o.Method != nil {
+		methodQ = *o.Method
+	}
+	if methodQ != "" {
+		qs.Set("method", methodQ)
+	}
 
 	var tokenQ string
 	if o.Token != nil {

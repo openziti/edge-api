@@ -59,6 +59,10 @@ type EnrollParams struct {
 	/*
 	  In: query
 	*/
+	Method *string
+	/*
+	  In: query
+	*/
 	Token *strfmt.UUID
 }
 
@@ -73,6 +77,11 @@ func (o *EnrollParams) BindRequest(r *http.Request, route *middleware.MatchedRou
 
 	qs := runtime.Values(r.URL.Query())
 
+	qMethod, qhkMethod, _ := qs.GetOK("method")
+	if err := o.bindMethod(qMethod, qhkMethod, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qToken, qhkToken, _ := qs.GetOK("token")
 	if err := o.bindToken(qToken, qhkToken, route.Formats); err != nil {
 		res = append(res, err)
@@ -80,6 +89,24 @@ func (o *EnrollParams) BindRequest(r *http.Request, route *middleware.MatchedRou
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindMethod binds and validates parameter Method from query.
+func (o *EnrollParams) bindMethod(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.Method = &raw
+
 	return nil
 }
 
