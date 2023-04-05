@@ -1511,16 +1511,20 @@ paths:
     post:
       description: present a OTT and CSR to receive a long-lived client certificate
       consumes:
+      - application/pkcs10
+      - application/json
       - application/x-pem-file
+      - text/plain
       produces:
       - application/x-pem-file
+      - application/json
       tags:
       - Enroll
       summary: Enroll an identity via one-time-token
       operationId: enroll
       responses:
         "200":
-          description: issued x509 certificate as PEM with newlines 
+          description: Base empty response
           schema:
             $ref: '#/definitions/empty'
         "404":

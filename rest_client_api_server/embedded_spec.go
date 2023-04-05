@@ -2032,7 +2032,7 @@ func init() {
     },
     "/enroll": {
       "post": {
-        "description": "endpoint defers to the logic in the more specific ` + "`" + `enroll/*` + "`" + ` endpoints",
+        "description": "present a OTT and CSR to receive a long-lived client certificate",
         "consumes": [
           "application/pkcs10",
           "application/json",
@@ -2046,7 +2046,7 @@ func init() {
         "tags": [
           "Enroll"
         ],
-        "summary": "Legacy enrollment endpoint",
+        "summary": "Enroll an identity via one-time-token",
         "operationId": "enroll",
         "responses": {
           "200": {
@@ -2088,6 +2088,11 @@ func init() {
           "type": "string",
           "format": "uuid",
           "name": "token",
+          "in": "query"
+        },
+        {
+          "type": "string",
+          "name": "method",
           "in": "query"
         }
       ]
@@ -7964,7 +7969,7 @@ func init() {
     },
     "/enroll": {
       "post": {
-        "description": "endpoint defers to the logic in the more specific ` + "`" + `enroll/*` + "`" + ` endpoints",
+        "description": "present a OTT and CSR to receive a long-lived client certificate",
         "consumes": [
           "application/json",
           "application/pkcs10",
@@ -7978,7 +7983,7 @@ func init() {
         "tags": [
           "Enroll"
         ],
-        "summary": "Legacy enrollment endpoint",
+        "summary": "Enroll an identity via one-time-token",
         "operationId": "enroll",
         "responses": {
           "200": {
@@ -8020,6 +8025,11 @@ func init() {
           "type": "string",
           "format": "uuid",
           "name": "token",
+          "in": "query"
+        },
+        {
+          "type": "string",
+          "name": "method",
           "in": "query"
         }
       ]

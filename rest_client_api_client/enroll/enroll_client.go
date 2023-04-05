@@ -72,9 +72,9 @@ type ClientService interface {
 }
 
 /*
-  Enroll legacies enrollment endpoint
+  Enroll enrolls an identity via one time token
 
-  endpoint defers to the logic in the more specific `enroll/*` endpoints
+  present a OTT and CSR to receive a long-lived client certificate
 */
 func (a *Client) Enroll(params *EnrollParams, opts ...ClientOption) (*EnrollOK, error) {
 	// TODO: Validate the params before sending
