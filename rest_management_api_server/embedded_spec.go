@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.11"
+    "version": "0.25.12"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -4826,14 +4826,6 @@ func init() {
         "summary": "Disable MFA for the current identity",
         "operationId": "deleteMfa",
         "parameters": [
-          {
-            "description": "An MFA validation request",
-            "name": "mfaValidation",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/mfaCode"
-            }
-          },
           {
             "type": "string",
             "name": "mfa-validation-code",
@@ -23324,7 +23316,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.11"
+    "version": "0.25.12"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -28086,14 +28078,6 @@ func init() {
         "summary": "Disable MFA for the current identity",
         "operationId": "deleteMfa",
         "parameters": [
-          {
-            "description": "An MFA validation request",
-            "name": "mfaValidation",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/mfaCode"
-            }
-          },
           {
             "type": "string",
             "name": "mfa-validation-code",

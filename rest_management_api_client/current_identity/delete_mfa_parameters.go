@@ -38,8 +38,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/openziti/edge-api/rest_model"
 )
 
 // NewDeleteMfaParams creates a new DeleteMfaParams object,
@@ -87,12 +85,6 @@ type DeleteMfaParams struct {
 
 	// MfaValidationCode.
 	MfaValidationCode *string
-
-	/* MfaValidation.
-
-	   An MFA validation request
-	*/
-	MfaValidation *rest_model.MfaCode
 
 	timeout    time.Duration
 	Context    context.Context
@@ -158,17 +150,6 @@ func (o *DeleteMfaParams) SetMfaValidationCode(mfaValidationCode *string) {
 	o.MfaValidationCode = mfaValidationCode
 }
 
-// WithMfaValidation adds the mfaValidation to the delete mfa params
-func (o *DeleteMfaParams) WithMfaValidation(mfaValidation *rest_model.MfaCode) *DeleteMfaParams {
-	o.SetMfaValidation(mfaValidation)
-	return o
-}
-
-// SetMfaValidation adds the mfaValidation to the delete mfa params
-func (o *DeleteMfaParams) SetMfaValidation(mfaValidation *rest_model.MfaCode) {
-	o.MfaValidation = mfaValidation
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteMfaParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -181,11 +162,6 @@ func (o *DeleteMfaParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 
 		// header param mfa-validation-code
 		if err := r.SetHeaderParam("mfa-validation-code", *o.MfaValidationCode); err != nil {
-			return err
-		}
-	}
-	if o.MfaValidation != nil {
-		if err := r.SetBodyParam(o.MfaValidation); err != nil {
 			return err
 		}
 	}
