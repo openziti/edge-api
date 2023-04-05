@@ -3,9 +3,10 @@ paths:
   enroll:
     parameters:
       - $ref: '../shared/parameters.yml#/token-optional'
+      - $ref: '../shared/parameters.yml#/method-optional'
     post:
-      summary: Legacy enrollment endpoint
-      description: endpoint defers to the logic in the more specific `enroll/*` endpoints
+      summary: Enroll an identity via one-time-token
+      description: present a OTT and CSR to receive a long-lived client certificate
       operationId: enroll
       tags:
         - Enroll

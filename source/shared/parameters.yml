@@ -34,6 +34,10 @@ token-optional:
   type: string
   format: uuid
   in: query
+method-optional:
+  name: method
+  type: string
+  in: query
 authMethod:
   name: method
   in: query
