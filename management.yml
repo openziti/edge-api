@@ -655,7 +655,7 @@ paths:
     post:
       security: []
       description: |
-        Allowed authentication methods include "password", "cert", and "ext-jwt"
+        Allows authentication  Methods include "password" and "cert"
       tags:
       - Authentication
       summary: Authenticate via a method supplied via a query string parameter
@@ -3495,6 +3495,10 @@ paths:
       - MFA
       summary: Disable MFA for the current identity
       operationId: deleteMfa
+      parameters:
+      - type: string
+        name: mfa-validation-code
+        in: header
       responses:
         "200":
           description: Base empty response

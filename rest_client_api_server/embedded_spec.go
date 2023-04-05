@@ -1672,14 +1672,6 @@ func init() {
         "operationId": "deleteMfa",
         "parameters": [
           {
-            "description": "An MFA validation request",
-            "name": "mfaValidation",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/mfaCode"
-            }
-          },
-          {
             "type": "string",
             "name": "mfa-validation-code",
             "in": "header"
@@ -7608,14 +7600,6 @@ func init() {
         "summary": "Disable MFA for the current identity",
         "operationId": "deleteMfa",
         "parameters": [
-          {
-            "description": "An MFA validation request",
-            "name": "mfaValidation",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/mfaCode"
-            }
-          },
           {
             "type": "string",
             "name": "mfa-validation-code",

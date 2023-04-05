@@ -30,16 +30,11 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
-	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/validate"
-
-	"github.com/openziti/edge-api/rest_model"
 )
 
 // NewDeleteMfaParams creates a new DeleteMfaParams object
@@ -63,10 +58,6 @@ type DeleteMfaParams struct {
 	  In: header
 	*/
 	MfaValidationCode *string
-	/*An MFA validation request
-	  In: body
-	*/
-	MfaValidation *rest_model.MfaCode
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -80,28 +71,6 @@ func (o *DeleteMfaParams) BindRequest(r *http.Request, route *middleware.Matched
 
 	if err := o.bindMfaValidationCode(r.Header[http.CanonicalHeaderKey("mfa-validation-code")], true, route.Formats); err != nil {
 		res = append(res, err)
-	}
-
-	if runtime.HasBody(r) {
-		defer r.Body.Close()
-		var body rest_model.MfaCode
-		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			res = append(res, errors.NewParseError("mfaValidation", "body", "", err))
-		} else {
-			// validate body object
-			if err := body.Validate(route.Formats); err != nil {
-				res = append(res, err)
-			}
-
-			ctx := validate.WithOperationRequest(context.Background())
-			if err := body.ContextValidate(ctx, route.Formats); err != nil {
-				res = append(res, err)
-			}
-
-			if len(res) == 0 {
-				o.MfaValidation = &body
-			}
-		}
 	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
