@@ -20,7 +20,8 @@ for live deployments.
 The root level `client.yml` and `management.yml` files are generated from the `source` directory. There are scripts
 within the `script` directory that will do the heavy lifting of re-generating them if needed.Both scripts require
 that the `swagger` executable be available on your `path` environment variable. Releases of it are available in the
-[GitHub Go-Swagger](https://github.com/go-swagger/go-swagger/releases) repository.
+[GitHub Go-Swagger](https://github.com/go-swagger/go-swagger/releases) repository. Avoid release 0.30 for now because
+it has a bug. 0.29 works.
 
 ```bash
 #bash
