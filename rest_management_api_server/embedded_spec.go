@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.12"
+    "version": "0.25.15"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -1038,7 +1038,7 @@ func init() {
               }
             }
           },
-          "403": {
+          "401": {
             "description": "The authentication request could not be processed as the credentials are invalid",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
@@ -23316,7 +23316,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.12"
+    "version": "0.25.15"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -24290,7 +24290,7 @@ func init() {
               }
             }
           },
-          "403": {
+          "401": {
             "description": "The authentication request could not be processed as the credentials are invalid",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"

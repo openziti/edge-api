@@ -59,8 +59,8 @@ func (o *AuthenticateReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-	case 403:
-		result := NewAuthenticateForbidden()
+	case 401:
+		result := NewAuthenticateUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -134,27 +134,27 @@ func (o *AuthenticateBadRequest) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-// NewAuthenticateForbidden creates a AuthenticateForbidden with default headers values
-func NewAuthenticateForbidden() *AuthenticateForbidden {
-	return &AuthenticateForbidden{}
+// NewAuthenticateUnauthorized creates a AuthenticateUnauthorized with default headers values
+func NewAuthenticateUnauthorized() *AuthenticateUnauthorized {
+	return &AuthenticateUnauthorized{}
 }
 
-/* AuthenticateForbidden describes a response with status code 403, with default header values.
+/* AuthenticateUnauthorized describes a response with status code 401, with default header values.
 
 The authentication request could not be processed as the credentials are invalid
 */
-type AuthenticateForbidden struct {
+type AuthenticateUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *AuthenticateForbidden) Error() string {
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateForbidden  %+v", 403, o.Payload)
+func (o *AuthenticateUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /authenticate][%d] authenticateUnauthorized  %+v", 401, o.Payload)
 }
-func (o *AuthenticateForbidden) GetPayload() *rest_model.APIErrorEnvelope {
+func (o *AuthenticateUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
-func (o *AuthenticateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthenticateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

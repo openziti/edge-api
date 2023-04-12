@@ -125,14 +125,14 @@ func (o *AuthenticateBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 	}
 }
 
-// AuthenticateForbiddenCode is the HTTP code returned for type AuthenticateForbidden
-const AuthenticateForbiddenCode int = 403
+// AuthenticateUnauthorizedCode is the HTTP code returned for type AuthenticateUnauthorized
+const AuthenticateUnauthorizedCode int = 401
 
-/*AuthenticateForbidden The authentication request could not be processed as the credentials are invalid
+/*AuthenticateUnauthorized The authentication request could not be processed as the credentials are invalid
 
-swagger:response authenticateForbidden
+swagger:response authenticateUnauthorized
 */
-type AuthenticateForbidden struct {
+type AuthenticateUnauthorized struct {
 
 	/*
 	  In: Body
@@ -140,27 +140,27 @@ type AuthenticateForbidden struct {
 	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
 }
 
-// NewAuthenticateForbidden creates AuthenticateForbidden with default headers values
-func NewAuthenticateForbidden() *AuthenticateForbidden {
+// NewAuthenticateUnauthorized creates AuthenticateUnauthorized with default headers values
+func NewAuthenticateUnauthorized() *AuthenticateUnauthorized {
 
-	return &AuthenticateForbidden{}
+	return &AuthenticateUnauthorized{}
 }
 
-// WithPayload adds the payload to the authenticate forbidden response
-func (o *AuthenticateForbidden) WithPayload(payload *rest_model.APIErrorEnvelope) *AuthenticateForbidden {
+// WithPayload adds the payload to the authenticate unauthorized response
+func (o *AuthenticateUnauthorized) WithPayload(payload *rest_model.APIErrorEnvelope) *AuthenticateUnauthorized {
 	o.Payload = payload
 	return o
 }
 
-// SetPayload sets the payload to the authenticate forbidden response
-func (o *AuthenticateForbidden) SetPayload(payload *rest_model.APIErrorEnvelope) {
+// SetPayload sets the payload to the authenticate unauthorized response
+func (o *AuthenticateUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) {
 	o.Payload = payload
 }
 
 // WriteResponse to the client
-func (o *AuthenticateForbidden) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+func (o *AuthenticateUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
-	rw.WriteHeader(403)
+	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
 		if err := producer.Produce(rw, payload); err != nil {
