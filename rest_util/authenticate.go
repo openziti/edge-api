@@ -208,8 +208,9 @@ func (a *AuthenticatorCert) BuildHttpClient() (*http.Client, error) {
 	return a.BuildHttpClientWithModifyTls(func(config *tls.Config) {
 		config.Certificates = []tls.Certificate{
 			{
-				PrivateKey: a.PrivateKey,
-				Leaf:       a.Certificate,
+				PrivateKey:  a.PrivateKey,
+				Leaf:        a.Certificate,
+				Certificate: [][]byte{a.Certificate.Raw},
 			},
 		}
 	})
@@ -252,7 +253,7 @@ func (a *AuthenticatorCert) Params() *authentication.AuthenticateParams {
 			EnvInfo:     a.EnvInfo,
 			SdkInfo:     a.SdkInfo,
 		},
-		Method:  "cert'",
+		Method:  "cert",
 		Context: context.Background(),
 	}
 }
