@@ -10,6 +10,7 @@ parameters:
       - password
       - cert
       - ext-jwt
+      - dual-auth
 paths:
   authenticate:
     parameters:
@@ -17,7 +18,7 @@ paths:
     post:
       summary: Authenticate via a method supplied via a query string parameter
       description: |
-        Allowed authentication methods include "password", "cert", and "ext-jwt"
+        Allowed authentication methods include "password", "cert", "ext-jwt", and "dual-auth".
       security: [ ]
       tags:
         - Authentication

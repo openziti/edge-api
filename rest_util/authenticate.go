@@ -326,3 +326,70 @@ func (a *AuthenticatorAuthHeader) Authenticate(controllerAddress *url.URL) (*res
 
 	return resp.GetPayload().Data, nil
 }
+
+// AuthenticatorDual uses OpenZiti identity files along with JWTs to authenticate
+type AuthenticatorDual struct {
+	CertProvider
+	AuthenticatorBase
+	Token string
+}
+
+func (a *AuthenticatorDual) BuildHttpClient() (*http.Client, error) {
+	return a.BuildHttpClientWithModifyTls(func(config *tls.Config) {
+		src := a.CertProvider.ClientTLSConfig()
+		config.Certificates = src.Certificates
+		config.RootCAs = src.RootCAs
+	})
+}
+
+func (a *AuthenticatorDual) AuthenticateRequest(request runtime.ClientRequest, _ strfmt.Registry) error {
+	return request.SetHeaderParam("authorization", a.Token)
+}
+
+func (a *AuthenticatorDual) Params() *authentication.AuthenticateParams {
+	return &authentication.AuthenticateParams{
+		Auth: &rest_model.Authenticate{
+			ConfigTypes: a.ConfigTypes,
+			EnvInfo:     a.EnvInfo,
+			SdkInfo:     a.SdkInfo,
+		},
+		Method:  "dual",
+		Context: context.Background(),
+	}
+}
+
+func (a *AuthenticatorDual) Authenticate(controllerAddress *url.URL) (*rest_model.CurrentAPISessionDetail, error) {
+	httpClient, err := a.BuildHttpClient()
+
+	if err != nil {
+		return nil, err
+	}
+
+	path := rest_management_api_client.DefaultBasePath
+	if controllerAddress.Path != "" && controllerAddress.Path != "/" {
+		path = controllerAddress.Path
+	}
+
+	clientRuntime := openapiclient.NewWithClient(controllerAddress.Host, path, rest_management_api_client.DefaultSchemes, httpClient)
+
+	clientRuntime.DefaultAuthentication = &HeaderAuth{
+		HeaderName:  "Authorization",
+		HeaderValue: a.Token,
+	}
+
+	client := rest_management_api_client.New(clientRuntime, nil)
+
+	params := a.Params()
+
+	resp, err := client.Authentication.Authenticate(params)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.GetPayload() == nil {
+		return nil, fmt.Errorf("error, nil payload: %v", resp.Error())
+	}
+
+	return resp.GetPayload().Data, nil
+}
