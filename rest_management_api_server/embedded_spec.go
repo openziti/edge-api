@@ -943,7 +943,7 @@ func init() {
     "/authenticate": {
       "post": {
         "security": [],
-        "description": "Allowed authentication methods include \"password\", \"cert\", and \"ext-jwt\"\n",
+        "description": "Allowed authentication methods include \"password\", \"cert\", \"ext-jwt\", and \"dual-auth\".\n",
         "tags": [
           "Authentication"
         ],
@@ -1069,7 +1069,8 @@ func init() {
           "enum": [
             "password",
             "cert",
-            "ext-jwt"
+            "ext-jwt",
+            "dual-auth"
           ],
           "type": "string",
           "name": "method",
@@ -24195,7 +24196,7 @@ func init() {
     "/authenticate": {
       "post": {
         "security": [],
-        "description": "Allowed authentication methods include \"password\", \"cert\", and \"ext-jwt\"\n",
+        "description": "Allowed authentication methods include \"password\", \"cert\", \"ext-jwt\", and \"dual-auth\".\n",
         "tags": [
           "Authentication"
         ],
@@ -24321,7 +24322,8 @@ func init() {
           "enum": [
             "password",
             "cert",
-            "ext-jwt"
+            "ext-jwt",
+            "dual-auth"
           ],
           "type": "string",
           "name": "method",

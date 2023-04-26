@@ -120,7 +120,7 @@ paths:
     post:
       security: []
       description: |
-        Allowed authentication methods include "password", "cert", and "ext-jwt"
+        Allowed authentication methods include "password", "cert", "ext-jwt", and "dual-auth".
       tags:
       - Authentication
       summary: Authenticate via a method supplied via a query string parameter
@@ -211,6 +211,7 @@ paths:
       - password
       - cert
       - ext-jwt
+      - dual-auth
       type: string
       name: method
       in: query
