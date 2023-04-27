@@ -353,7 +353,7 @@ func (a *AuthenticatorDual) Params() *authentication.AuthenticateParams {
 			EnvInfo:     a.EnvInfo,
 			SdkInfo:     a.SdkInfo,
 		},
-		Method:  "dual",
+		Method:  "dual-auth",
 		Context: context.Background(),
 	}
 }
