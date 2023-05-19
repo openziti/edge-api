@@ -21,7 +21,6 @@ import (
 	openApiRuntime "github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 	"github.com/openziti/edge-api/rest_model"
-	"net"
 	"net/http"
 	"time"
 )
@@ -54,11 +53,6 @@ func (e *ZitiTokenAuth) AuthenticateRequest(request openApiRuntime.ClientRequest
 func NewHttpClientWithTlsConfig(tlsClientConfig *tls.Config) (*http.Client, error) {
 	httpClientTransport := &http.Transport{
 		Proxy: http.ProxyFromEnvironment,
-		DialContext: (&net.Dialer{
-			Timeout:   10 * time.Second,
-			KeepAlive: 10 * time.Second,
-		}).DialContext,
-
 		ForceAttemptHTTP2:     true,
 		MaxIdleConns:          10,
 		IdleConnTimeout:       10 * time.Second,
