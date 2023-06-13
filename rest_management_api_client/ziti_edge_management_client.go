@@ -57,6 +57,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_client/service_policy"
 	"github.com/openziti/edge-api/rest_management_api_client/session"
 	"github.com/openziti/edge-api/rest_management_api_client/terminator"
+	"github.com/openziti/edge-api/rest_management_api_client/well_known"
 )
 
 // Default ziti edge management HTTP client.
@@ -124,6 +125,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *ZitiEdgeMa
 	cli.ServicePolicy = service_policy.New(transport, formats)
 	cli.Session = session.New(transport, formats)
 	cli.Terminator = terminator.New(transport, formats)
+	cli.WellKnown = well_known.New(transport, formats)
 	return cli
 }
 
@@ -214,6 +216,8 @@ type ZitiEdgeManagement struct {
 
 	Terminator terminator.ClientService
 
+	WellKnown well_known.ClientService
+
 	Transport runtime.ClientTransport
 }
 
@@ -243,4 +247,5 @@ func (c *ZitiEdgeManagement) SetTransport(transport runtime.ClientTransport) {
 	c.ServicePolicy.SetTransport(transport)
 	c.Session.SetTransport(transport)
 	c.Terminator.SetTransport(transport)
+	c.WellKnown.SetTransport(transport)
 }

@@ -87,6 +87,29 @@ func init() {
         }
       }
     },
+    "/.well-known/est/cacerts": {
+      "get": {
+        "security": [],
+        "description": "This endpoint is used during enrollments to bootstrap trust between enrolling clients and the Ziti Edge API.\nThis endpoint returns a base64 encoded PKCS7 store. The content can be base64 decoded and parsed by any library\nthat supports parsing PKCS7 stores.\n",
+        "produces": [
+          "application/pkcs7-mime"
+        ],
+        "tags": [
+          "Well Known"
+        ],
+        "summary": "Get CA Cert Store",
+        "operationId": "listWellKnownCas",
+        "responses": {
+          "200": {
+            "description": "A base64 encoded PKCS7 store",
+            "schema": {
+              "type": "string",
+              "example": "MIIMUQYJKoZIhvcNAQcCoIIMQjCCDD4CAQExADALBgkqhkiG9w0BBwGgggwkMIIG\nBjCCA+6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwgZcxCzAJBgNVBAYTAlVTMRcw\nFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTESMBAGA1UEBwwJQ2hhcmxvdHRlMRMwEQYD\nVQQKDApOZXRGb3VuZHJ5MSkwJwYDVQQLDCBOZXRGb3VuZHJ5IENlcnRpZmljYXRl\nIEF1dGhvcml0eTEbMBkGA1UEAwwSTmV0Rm91bmRyeSBSb290IENBMB4XDTE4MDUx\nODE2NTcyM1oXDTI4MDUxNTE2NTcyM1owgYsxCzAJBgNVBAYTAlVTMRcwFQYDVQQI\nDA5Ob3J0aCBDYXJvbGluYTETMBEGA1UECgwKTmV0Rm91bmRyeTEpMCcGA1UECwwg\nTmV0Rm91bmRyeSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkxIzAhBgNVBAMMGk5ldEZv\ndW5kcnkgSW50ZXJtZWRpYXRlIENBMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIIC\nCgKCAgEAsb1EPhMUweS9WpjT7L54xAOmZqugJ6fhSrFfLUwNUy172q+ASvZTpT1z\nKIPcZpGmPB3TX2bHaAR67BbRkUR11JgWE3U8+FsGrYmPZtaKM6fg8Mh0WZ41oMYQ\nNJyQixOktrgqfybyJoT5PeT5AA7QQmd8mku2X9nkAu6gWPf2nHNc7SeQdijmyQQa\nVK3oqyaxOzWzsU/XbfMEz/ObkefUxgt5Z6jlK0xcW0Q+QgtawMKLUiuo6obWRPcl\n7Hm9Sze8XJS5pbvS5JkUszxoRZuDVHZylrlHIpA/IL+BnvS+M7SP28UWe9skrv/s\n6ACpJtuPJ1EYf5fakugOpY7i+hq7YNi//csbc49Qjn2OtttrR7JcTaHUEU1I/tQb\nQGAtNkI4pJjRVUdDawQFQlWHZD1COixNLErs2HzAI00DhLrY6SKITI/kjN0Xx010\nXdMcdfay0PLWm6RwxiRmMQFL4GNIC895NF1q6xV4W4rWgqUNlcvKpy+i1chWpRbU\nHe16ul0qh10fcESrRvAbXn5YrQJLrwbSr+85ubN8lYdNLE0qg2cIXZlUilarZZzW\nghtCe+KkUpjfRuAi/CqfSwNK3QXEfeVEK6S49mHeSekOizFIw7fmDhCz9vXwMOnb\n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\n"
+            }
+          }
+        }
+      }
+    },
     "/api-sessions": {
       "get": {
         "security": [
@@ -23334,6 +23357,29 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/est/cacerts": {
+      "get": {
+        "security": [],
+        "description": "This endpoint is used during enrollments to bootstrap trust between enrolling clients and the Ziti Edge API.\nThis endpoint returns a base64 encoded PKCS7 store. The content can be base64 decoded and parsed by any library\nthat supports parsing PKCS7 stores.\n",
+        "produces": [
+          "application/pkcs7-mime"
+        ],
+        "tags": [
+          "Well Known"
+        ],
+        "summary": "Get CA Cert Store",
+        "operationId": "listWellKnownCas",
+        "responses": {
+          "200": {
+            "description": "A base64 encoded PKCS7 store",
+            "schema": {
+              "type": "string",
+              "example": "MIIMUQYJKoZIhvcNAQcCoIIMQjCCDD4CAQExADALBgkqhkiG9w0BBwGgggwkMIIG\nBjCCA+6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwgZcxCzAJBgNVBAYTAlVTMRcw\nFQYDVQQIDA5Ob3J0aCBDYXJvbGluYTESMBAGA1UEBwwJQ2hhcmxvdHRlMRMwEQYD\nVQQKDApOZXRGb3VuZHJ5MSkwJwYDVQQLDCBOZXRGb3VuZHJ5IENlcnRpZmljYXRl\nIEF1dGhvcml0eTEbMBkGA1UEAwwSTmV0Rm91bmRyeSBSb290IENBMB4XDTE4MDUx\nODE2NTcyM1oXDTI4MDUxNTE2NTcyM1owgYsxCzAJBgNVBAYTAlVTMRcwFQYDVQQI\nDA5Ob3J0aCBDYXJvbGluYTETMBEGA1UECgwKTmV0Rm91bmRyeTEpMCcGA1UECwwg\nTmV0Rm91bmRyeSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkxIzAhBgNVBAMMGk5ldEZv\ndW5kcnkgSW50ZXJtZWRpYXRlIENBMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIIC\nCgKCAgEAsb1EPhMUweS9WpjT7L54xAOmZqugJ6fhSrFfLUwNUy172q+ASvZTpT1z\nKIPcZpGmPB3TX2bHaAR67BbRkUR11JgWE3U8+FsGrYmPZtaKM6fg8Mh0WZ41oMYQ\nNJyQixOktrgqfybyJoT5PeT5AA7QQmd8mku2X9nkAu6gWPf2nHNc7SeQdijmyQQa\nVK3oqyaxOzWzsU/XbfMEz/ObkefUxgt5Z6jlK0xcW0Q+QgtawMKLUiuo6obWRPcl\n7Hm9Sze8XJS5pbvS5JkUszxoRZuDVHZylrlHIpA/IL+BnvS+M7SP28UWe9skrv/s\n6ACpJtuPJ1EYf5fakugOpY7i+hq7YNi//csbc49Qjn2OtttrR7JcTaHUEU1I/tQb\nQGAtNkI4pJjRVUdDawQFQlWHZD1COixNLErs2HzAI00DhLrY6SKITI/kjN0Xx010\nXdMcdfay0PLWm6RwxiRmMQFL4GNIC895NF1q6xV4W4rWgqUNlcvKpy+i1chWpRbU\nHe16ul0qh10fcESrRvAbXn5YrQJLrwbSr+85ubN8lYdNLE0qg2cIXZlUilarZZzW\nghtCe+KkUpjfRuAi/CqfSwNK3QXEfeVEK6S49mHeSekOizFIw7fmDhCz9vXwMOnb\n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\n"
             }
           }
         }

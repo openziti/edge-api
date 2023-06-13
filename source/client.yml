@@ -31,7 +31,7 @@ paths:
     $ref: 'shared/version.yml#/paths/root'
 
   '/.well-known/est/cacerts':
-    $ref: 'client/well-known.yml#/paths/well-known-est-cacerts'
+    $ref: 'shared/well-known.yml#/paths/well-known-est-cacerts'
 
   '/authenticate':
     $ref: 'shared/authenticate.yml#/paths/authenticate'

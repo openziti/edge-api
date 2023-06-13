@@ -30,6 +30,9 @@ paths:
   '/':
     $ref: 'shared/version.yml#/paths/root'
 
+  '/.well-known/est/cacerts':
+    $ref: 'shared/well-known.yml#/paths/well-known-est-cacerts'
+
   '/api-sessions':
     $ref: 'management/api-sessions.yml#/paths/api-sessions'
   '/api-sessions/{id}':
