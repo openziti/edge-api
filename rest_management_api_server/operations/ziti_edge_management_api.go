@@ -67,6 +67,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/session"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/terminator"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/well_known"
 )
 
 // NewZitiEdgeManagementAPI creates a new ZitiEdgeManagement instance
@@ -92,6 +93,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 
 		ApplicationJWTProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 			return errors.NotImplemented("applicationJwt producer has not yet been implemented")
+		}),
+		ApplicationPkcs7MimeProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+			return errors.NotImplemented("applicationPkcs7Mime producer has not yet been implemented")
 		}),
 		BinProducer:  runtime.ByteStreamProducer(),
 		JSONProducer: runtime.JSONProducer(),
@@ -519,6 +523,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		InformationalListVersionHandler: informational.ListVersionHandlerFunc(func(params informational.ListVersionParams) middleware.Responder {
 			return middleware.NotImplemented("operation informational.ListVersion has not yet been implemented")
 		}),
+		WellKnownListWellKnownCasHandler: well_known.ListWellKnownCasHandlerFunc(func(params well_known.ListWellKnownCasParams) middleware.Responder {
+			return middleware.NotImplemented("operation well_known.ListWellKnownCas has not yet been implemented")
+		}),
 		AuthPolicyPatchAuthPolicyHandler: auth_policy.PatchAuthPolicyHandlerFunc(func(params auth_policy.PatchAuthPolicyParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation auth_policy.PatchAuthPolicy has not yet been implemented")
 		}),
@@ -687,6 +694,9 @@ type ZitiEdgeManagementAPI struct {
 	// ApplicationJWTProducer registers a producer for the following mime types:
 	//   - application/jwt
 	ApplicationJWTProducer runtime.Producer
+	// ApplicationPkcs7MimeProducer registers a producer for the following mime types:
+	//   - application/pkcs7-mime
+	ApplicationPkcs7MimeProducer runtime.Producer
 	// BinProducer registers a producer for the following mime types:
 	//   - image/png
 	BinProducer runtime.Producer
@@ -984,6 +994,8 @@ type ZitiEdgeManagementAPI struct {
 	RouterListTransitRoutersHandler router.ListTransitRoutersHandler
 	// InformationalListVersionHandler sets the operation handler for the list version operation
 	InformationalListVersionHandler informational.ListVersionHandler
+	// WellKnownListWellKnownCasHandler sets the operation handler for the list well known cas operation
+	WellKnownListWellKnownCasHandler well_known.ListWellKnownCasHandler
 	// AuthPolicyPatchAuthPolicyHandler sets the operation handler for the patch auth policy operation
 	AuthPolicyPatchAuthPolicyHandler auth_policy.PatchAuthPolicyHandler
 	// AuthenticatorPatchAuthenticatorHandler sets the operation handler for the patch authenticator operation
@@ -1144,6 +1156,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 
 	if o.ApplicationJWTProducer == nil {
 		unregistered = append(unregistered, "ApplicationJWTProducer")
+	}
+	if o.ApplicationPkcs7MimeProducer == nil {
+		unregistered = append(unregistered, "ApplicationPkcs7MimeProducer")
 	}
 	if o.BinProducer == nil {
 		unregistered = append(unregistered, "BinProducer")
@@ -1579,6 +1594,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.InformationalListVersionHandler == nil {
 		unregistered = append(unregistered, "informational.ListVersionHandler")
 	}
+	if o.WellKnownListWellKnownCasHandler == nil {
+		unregistered = append(unregistered, "well_known.ListWellKnownCasHandler")
+	}
 	if o.AuthPolicyPatchAuthPolicyHandler == nil {
 		unregistered = append(unregistered, "auth_policy.PatchAuthPolicyHandler")
 	}
@@ -1761,6 +1779,8 @@ func (o *ZitiEdgeManagementAPI) ProducersFor(mediaTypes []string) map[string]run
 		switch mt {
 		case "application/jwt":
 			result["application/jwt"] = o.ApplicationJWTProducer
+		case "application/pkcs7-mime":
+			result["application/pkcs7-mime"] = o.ApplicationPkcs7MimeProducer
 		case "image/png":
 			result["image/png"] = o.BinProducer
 		case "application/json":
@@ -2367,6 +2387,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/version"] = informational.NewListVersion(o.context, o.InformationalListVersionHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/.well-known/est/cacerts"] = well_known.NewListWellKnownCas(o.context, o.WellKnownListWellKnownCasHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}

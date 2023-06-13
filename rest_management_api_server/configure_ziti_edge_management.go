@@ -59,6 +59,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/session"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/terminator"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/well_known"
 )
 
 //go:generate swagger generate server --target ../../edge-api --name ZitiEdgeManagement --spec ../management.yml --model-package rest_model --server-package rest_management_api_server --principal interface{} --exclude-main
@@ -86,6 +87,9 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 
 	api.ApplicationJWTProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 		return errors.NotImplemented("applicationJwt producer has not yet been implemented")
+	})
+	api.ApplicationPkcs7MimeProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+		return errors.NotImplemented("applicationPkcs7Mime producer has not yet been implemented")
 	})
 	api.BinProducer = runtime.ByteStreamProducer()
 	api.JSONProducer = runtime.JSONProducer()
@@ -804,6 +808,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.InformationalListVersionHandler == nil {
 		api.InformationalListVersionHandler = informational.ListVersionHandlerFunc(func(params informational.ListVersionParams) middleware.Responder {
 			return middleware.NotImplemented("operation informational.ListVersion has not yet been implemented")
+		})
+	}
+	if api.WellKnownListWellKnownCasHandler == nil {
+		api.WellKnownListWellKnownCasHandler = well_known.ListWellKnownCasHandlerFunc(func(params well_known.ListWellKnownCasParams) middleware.Responder {
+			return middleware.NotImplemented("operation well_known.ListWellKnownCas has not yet been implemented")
 		})
 	}
 	if api.AuthPolicyPatchAuthPolicyHandler == nil {

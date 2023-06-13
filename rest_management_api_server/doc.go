@@ -40,6 +40,7 @@
 //
 //  Produces:
 //    - application/jwt
+//    - application/pkcs7-mime
 //    - image/png
 //    - application/json
 //    - text/yaml
