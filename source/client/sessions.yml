@@ -9,7 +9,8 @@ paths:
         Sessions are tied to an API session and are moved when an API session times out or logs out. Active sessions
         (i.e. Ziti SDK connected to an edge router) will keep the session and API session marked as active.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Session
       operationId: listSessions
@@ -28,7 +29,8 @@ paths:
       summary: Create a session resource
       description: Create a session resource.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Session
       operationId: createSession
@@ -53,7 +55,8 @@ paths:
       summary: Retrieves a single session
       description: Retrieves a single session by id.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Session
       operationId: detailSession
@@ -68,7 +71,8 @@ paths:
       summary: Delete a session
       description: Delete a session by id.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Session
       operationId: deleteSession

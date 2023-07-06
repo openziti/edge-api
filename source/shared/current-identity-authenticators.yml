@@ -6,7 +6,8 @@ paths:
       summary: List authenticators for the current identity
       description: Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: listCurrentIdentityAuthenticators
@@ -28,7 +29,8 @@ paths:
       summary: Retrieve an authenticator for the current identity
       description: Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: detailCurrentIdentityAuthenticator
@@ -45,7 +47,8 @@ paths:
         Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's
         identity.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: updateCurrentIdentityAuthenticator
@@ -71,7 +74,8 @@ paths:
         Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API
         session's identity.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: patchCurrentIdentityAuthenticator
@@ -110,7 +114,8 @@ paths:
         After verification is completion any new connections must be made with new certificate.
         Prior to verification the old client certificate remains active.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       operationId: extendCurrentIdentityAuthenticator
       parameters:
         - name: extend
@@ -139,7 +144,8 @@ paths:
         
         After receipt, the new client certificate must be used for new authentication requests.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       operationId: extendVerifyCurrentIdentityAuthenticator
       parameters:
         - name: extend

@@ -5,7 +5,8 @@ paths:
       summary: List Client Authentication External JWT
       description: Retrieves a list of external JWT signers for authentication
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - External JWT Signer
       operationId: listExternalJwtSigners

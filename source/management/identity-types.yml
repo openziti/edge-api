@@ -7,7 +7,8 @@ paths:
       description: |
         Retrieves a list of identity types; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentityTypes
@@ -29,7 +30,8 @@ paths:
       summary: Retrieves a identity type
       description: Retrieves a single identity type by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: detailIdentityType

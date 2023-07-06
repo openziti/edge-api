@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.25.15
+  version: 0.25.31
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -219,6 +219,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Completes MFA authentication by submitting a MFA time based one
         time token or backup code.
       tags:
@@ -246,6 +248,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves the API session that was used to issue the current request
       tags:
       - Current API Session
@@ -302,6 +306,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Terminates the current API session
       tags:
       - Current API Session
@@ -334,6 +340,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of certificate resources for the current API session;
         supports filtering, sorting, and pagination
       tags:
@@ -406,6 +414,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Creates an ephemeral certificate for the current API Session. This
         endpoint expects a PEM encoded CSRs to be provided for fulfillment as a property
         of a JSON payload. It is up to the client to manage the private key backing
@@ -478,6 +488,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single ephemeral certificate by id
       tags:
       - Current API Session
@@ -528,6 +540,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Delete an ephemeral certificateby id
       tags:
@@ -598,6 +612,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves data indicating the last time data relevant to this API Session was altered that would necessitate
         service refreshes.
@@ -635,6 +651,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Returns the identity associated with the API sessions used to issue
         the current request
       tags:
@@ -700,6 +718,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of authenticators assigned to the current API
         session's identity; supports filtering, sorting, and pagination.
       tags:
@@ -773,6 +793,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single authenticator by id. Will only show authenticators
         assigned to the API session's identity.
       tags:
@@ -824,6 +846,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's
         identity.
@@ -913,6 +937,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API
         session's identity.
@@ -1009,6 +1035,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |-
         This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.
         Allows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.
@@ -1061,6 +1089,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |-
         After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.
         After receipt, the new client certificate must be used for new authentication requests.
@@ -1110,6 +1140,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Lists the Edge Routers that the current identity has access to via policies. The data returned
         includes their address and online status
@@ -1146,6 +1178,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
       tags:
@@ -1198,6 +1232,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via `POST /current-identity/mfa/verify`
       tags:
@@ -1249,6 +1285,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
       tags:
@@ -1306,6 +1344,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.
       produces:
@@ -1325,6 +1365,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.
       tags:
@@ -1386,6 +1428,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.
       tags:
@@ -1446,6 +1490,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via `POST /current-identity/mfa`.
       tags:
@@ -1778,6 +1824,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of external JWT signers for authentication
       tags:
       - External JWT Signer
@@ -1850,6 +1898,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Submits posture responses
       tags:
       - Posture Checks
@@ -1919,6 +1969,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Submits posture responses
       tags:
       - Posture Checks
@@ -2002,6 +2054,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -2084,6 +2138,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single service by id. Requires admin access.
       tags:
       - Service
@@ -2134,6 +2190,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a service by id. Requires admin access.
       tags:
       - Service
@@ -2221,6 +2279,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a service by id. Requires admin access.
       tags:
       - Service
@@ -2302,6 +2362,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on a service. Requires admin access.
       tags:
       - Service
@@ -2396,6 +2458,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
       tags:
@@ -2475,6 +2539,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of active sessions resources; supports filtering, sorting, and pagination.
 
@@ -2550,6 +2616,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a session resource.
       tags:
       - Session
@@ -2620,6 +2688,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single session by id.
       tags:
       - Session
@@ -2670,6 +2740,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a session by id.
       tags:
       - Session
@@ -4249,6 +4321,13 @@ definitions:
         type: string
         example: v0.9.0
 securityDefinitions:
+  oauth2:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: /oidc/authorize
+    tokenUrl: /oidc/token
+    scopes:
+      openid: openid
   ztSession:
     description: An API Key that is provided post authentication
     type: apiKey

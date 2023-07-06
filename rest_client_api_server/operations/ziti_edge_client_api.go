@@ -252,6 +252,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 			return middleware.NotImplemented("operation current_identity.VerifyMfa has not yet been implemented")
 		}),
 
+		Oauth2Auth: func(token string, scopes []string) (interface{}, error) {
+			return nil, errors.NotImplemented("oauth2 bearer auth (oauth2) has not yet been implemented")
+		},
 		// Applies when the "zt-session" header is set
 		ZtSessionAuth: func(token string) (interface{}, error) {
 			return nil, errors.NotImplemented("api key auth (ztSession) zt-session from header param [zt-session] has not yet been implemented")
@@ -317,6 +320,10 @@ type ZitiEdgeClientAPI struct {
 	// TextYamlProducer registers a producer for the following mime types:
 	//   - text/yaml
 	TextYamlProducer runtime.Producer
+
+	// Oauth2Auth registers a function that takes an access token and a collection of required scopes and returns a principal
+	// it performs authentication based on an oauth2 bearer token provided in the request
+	Oauth2Auth func(string, []string) (interface{}, error)
 
 	// ZtSessionAuth registers a function that takes a token and returns a principal
 	// it performs authentication based on an api key zt-session provided in the header
@@ -528,6 +535,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 		unregistered = append(unregistered, "TextYamlProducer")
 	}
 
+	if o.Oauth2Auth == nil {
+		unregistered = append(unregistered, "Oauth2Auth")
+	}
 	if o.ZtSessionAuth == nil {
 		unregistered = append(unregistered, "ZtSessionAuth")
 	}
@@ -703,6 +713,9 @@ func (o *ZitiEdgeClientAPI) AuthenticatorsFor(schemes map[string]spec.SecuritySc
 	result := make(map[string]runtime.Authenticator)
 	for name := range schemes {
 		switch name {
+		case "oauth2":
+			result[name] = o.BearerAuthenticator(name, o.Oauth2Auth)
+
 		case "ztSession":
 			scheme := schemes[name]
 			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, o.ZtSessionAuth)

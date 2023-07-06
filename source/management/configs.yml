@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Config
       operationId: listConfigs
@@ -25,7 +26,8 @@ paths:
       summary: Create a config resource
       description: Create a config resource. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Config
       operationId: createConfig
@@ -50,7 +52,8 @@ paths:
       summary: Retrieves a single config
       description: Retrieves a single config by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Config
       operationId: detailConfig
@@ -65,7 +68,8 @@ paths:
       summary: Update all fields on a config
       description: Update all fields on a config by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Config
       operationId: updateConfig
@@ -89,7 +93,8 @@ paths:
       summary: Update the supplied fields on a config
       description: Update the supplied fields on a config. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Config
       operationId: patchConfig
@@ -113,7 +118,8 @@ paths:
       summary: Delete a config
       description: Delete a config by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Config
       operationId: deleteConfig

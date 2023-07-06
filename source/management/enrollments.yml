@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Enrollment
       operationId: listEnrollments
@@ -28,7 +29,8 @@ paths:
         is already outstanding the request will fail with a 409 conflict. If desired, an existing enrollment
         can be refreshed by `enrollments/:id/refresh` or deleted.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Enrollment
       operationId: createEnrollment
@@ -55,7 +57,8 @@ paths:
       summary: Retrieves an outstanding enrollment
       description: Retrieves a single outstanding enrollment by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Enrollment
       operationId: detailEnrollment
@@ -70,7 +73,8 @@ paths:
       summary: Delete an outstanding enrollment
       description: Delete an outstanding enrollment by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Enrollment
       operationId: deleteEnrollment
@@ -90,7 +94,8 @@ paths:
           For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated
           and must be used for the enrollment.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Enrollment
       operationId: refreshEnrollment

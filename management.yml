@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.25.15
+  version: 0.25.31
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -120,6 +120,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Returns a list of active API sessions. The resources can be sorted, filtered, and paginated. This endpoint
         requires admin access.
@@ -304,6 +306,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of Auth Policies
       tags:
       - Auth Policy
@@ -839,6 +843,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Completes MFA authentication by submitting a MFA time based one
         time token or backup code.
       tags:
@@ -866,6 +872,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
         This endpoint requires admin access.
@@ -1375,6 +1383,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of CA resources; supports filtering, sorting,
         and pagination. Requires admin access.
       tags:
@@ -1978,6 +1988,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of config-type resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -2453,6 +2465,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -2525,6 +2539,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a config resource. Requires admin access.
       tags:
       - Config
@@ -2595,6 +2611,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single config by id. Requires admin access.
       tags:
       - Config
@@ -2645,6 +2663,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a config by id. Requires admin access.
       tags:
       - Config
@@ -2732,6 +2752,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a config by id. Requires admin access.
       tags:
       - Config
@@ -2813,6 +2835,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on a config. Requires admin access.
       tags:
       - Config
@@ -2907,6 +2931,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves the API session that was used to issue the current request
       tags:
       - Current API Session
@@ -2963,6 +2989,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Terminates the current API session
       tags:
       - Current API Session
@@ -2995,6 +3023,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Returns the identity associated with the API sessions used to issue
         the current request
       tags:
@@ -3060,6 +3090,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of authenticators assigned to the current API
         session's identity; supports filtering, sorting, and pagination.
       tags:
@@ -3133,6 +3165,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single authenticator by id. Will only show authenticators
         assigned to the API session's identity.
       tags:
@@ -3184,6 +3218,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's
         identity.
@@ -3273,6 +3309,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API
         session's identity.
@@ -3369,6 +3407,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |-
         This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.
         Allows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.
@@ -3421,6 +3461,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |-
         After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.
         After receipt, the new client certificate must be used for new authentication requests.
@@ -3470,6 +3512,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
       tags:
@@ -3522,6 +3566,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via `POST /current-identity/mfa/verify`
       tags:
@@ -3573,6 +3619,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
       tags:
@@ -3630,6 +3678,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.
       produces:
@@ -3649,6 +3699,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.
       tags:
@@ -3710,6 +3762,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.
       tags:
@@ -3770,6 +3824,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via `POST /current-identity/mfa`.
       tags:
@@ -3830,6 +3886,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Starts a data integrity scan on the datastore. Requires admin access.
         Only once instance may run at a time, including runs of fixDataIntegrity.
       tags:
@@ -3970,6 +4028,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a new database snapshot. Requires admin access.
       tags:
       - Database
@@ -4021,6 +4081,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -4093,6 +4155,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create an edge router policy resource. Requires admin access.
       tags:
       - Edge Router Policy
@@ -4163,6 +4227,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single edge router policy by id. Requires admin access.
       tags:
       - Edge Router Policy
@@ -4213,6 +4279,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on an edge router policy by id. Requires admin
         access.
       tags:
@@ -4301,6 +4369,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete an edge router policy by id. Requires admin access.
       tags:
       - Edge Router Policy
@@ -4382,6 +4452,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on an edge router policy. Requires admin
         access.
       tags:
@@ -4477,6 +4549,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of edge routers an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -4535,6 +4609,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of identities an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -4593,6 +4669,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of role attributes in use by edge routers; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -4666,6 +4744,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of edge router resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -5424,6 +5504,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -5496,6 +5578,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Creates a new OTT, OTTCA, or UPDB enrollment for a specific identity.
         If an enrollment of the same type is already outstanding the request will
         fail with a 409 conflict. If desired, an existing enrollment can be refreshed
@@ -5574,6 +5658,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single outstanding enrollment by id. Requires admin
         access.
       tags:
@@ -5625,6 +5711,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete an outstanding enrollment by id. Requires admin access.
       tags:
       - Enrollment
@@ -5694,6 +5782,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: For expired or unexpired enrollments, reset the expiration window.
         A new JWT will be generated and must be used for the enrollment.
       tags:
@@ -5771,6 +5861,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of external JWT signers for authentication
       tags:
       - External JWT Signer
@@ -5842,6 +5934,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Creates an External JWT Signer. Requires admin access.
       tags:
       - External JWT Signer
@@ -5912,6 +6006,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single External JWT Signer by id. Requires admin access.
       tags:
       - External JWT Signer
@@ -5962,6 +6058,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on an External JWT Signer by id. Requires admin
         access.
       tags:
@@ -6050,6 +6148,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Delete an External JWT Signer by id. Requires admin access.
       tags:
@@ -6113,6 +6213,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update only the supplied fields on an External JWT Signer by id.
         Requires admin access.
       tags:
@@ -6208,6 +6310,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -6289,6 +6393,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create an identity resource. Requires admin access.
       tags:
       - Identity
@@ -6359,6 +6465,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single identity by id. Requires admin access.
       tags:
       - Identity
@@ -6409,6 +6517,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on an identity by id. Requires admin access.
       tags:
       - Identity
@@ -6496,6 +6606,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete an identity by id. Requires admin access.
       tags:
       - Identity
@@ -6577,6 +6689,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on an identity. Requires admin access.
       tags:
       - Identity
@@ -6794,6 +6908,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of edge router policies that apply to the specified
         identity.
       tags:
@@ -6852,6 +6968,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of edge-routers that the given identity may use to access services. Supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -7146,6 +7264,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Analyzes policies to see if the given identity should be able to dial or bind the given service. |
         Will check services policies to see if the identity can access the service. Will check edge router policies |
@@ -7212,6 +7332,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Returns a nested map data represeting the posture data of the identity.
         This data should be considered volatile.
@@ -7271,6 +7393,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of service configs associated to a specific identity
       tags:
       - Identity
@@ -7321,6 +7445,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Associate service configs to a specific identity
       tags:
       - Identity
@@ -7407,6 +7533,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Remove service configs from a specific identity
       tags:
       - Identity
@@ -7499,6 +7627,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a list of service policies that apply to the specified
         identity.
       tags:
@@ -7557,6 +7687,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -7783,6 +7915,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of identity types; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -7856,6 +7990,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single identity type by id. Requires admin access.
       tags:
       - Identity
@@ -7913,6 +8049,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of posture check types
       produces:
@@ -7988,6 +8126,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single posture check type by id
       tags:
       - Posture Checks
@@ -8045,6 +8185,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of posture checks
       produces:
@@ -8128,6 +8270,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Creates a Posture Checks
       tags:
       - Posture Checks
@@ -8198,6 +8342,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single Posture Checks by id
       tags:
       - Posture Checks
@@ -8248,6 +8394,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a Posture Checks by id
       tags:
       - Posture Checks
@@ -8335,6 +8483,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Deletes and Posture Checks by id
       tags:
       - Posture Checks
@@ -8386,6 +8536,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update only the supplied fields on a Posture Checks by id
       tags:
       - Posture Checks
@@ -8480,6 +8632,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -8552,6 +8706,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a router resource. Requires admin access.
       tags:
       - Router
@@ -8622,6 +8778,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single router by id. Requires admin access.
       tags:
       - Router
@@ -8672,6 +8830,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a router by id. Requires admin access.
       tags:
       - Router
@@ -8759,6 +8919,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a router by id. Requires admin access.
       tags:
       - Router
@@ -8840,6 +9002,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on a router. Requires admin access.
       tags:
       - Router
@@ -8934,6 +9098,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of service edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -9006,6 +9172,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a service edge router policy resource. Requires admin access.
       tags:
       - Service Edge Router Policy
@@ -9076,6 +9244,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single service edge policy by id. Requires admin access.
       tags:
       - Service Edge Router Policy
@@ -9126,6 +9296,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a service edge policy by id. Requires admin
         access.
       tags:
@@ -9214,6 +9386,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a service edge policy by id. Requires admin access.
       tags:
       - Service Edge Router Policy
@@ -9295,6 +9469,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on a service edge policy. Requires admin
         access.
       tags:
@@ -9390,6 +9566,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: List the edge routers that a service edge router policy applies
         to
       tags:
@@ -9448,6 +9626,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: List the services that a service edge router policy applies to
       tags:
       - Service Edge Router Policy
@@ -10237,6 +10417,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -10318,6 +10500,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a services resource. Requires admin access.
       tags:
       - Service
@@ -10388,6 +10572,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single service by id. Requires admin access.
       tags:
       - Service
@@ -10438,6 +10624,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a service by id. Requires admin access.
       tags:
       - Service
@@ -10525,6 +10713,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a service by id. Requires admin access.
       tags:
       - Service
@@ -10606,6 +10796,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on a service. Requires admin access.
       tags:
       - Service
@@ -10700,6 +10892,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of config resources associated to a specific service; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -10779,6 +10973,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of edge-routers that may be used to access the given service. Supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -10858,6 +11054,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of identities that have access to this service. Supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -10937,6 +11135,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of service edge router policy resources that affect a specific service; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -11016,6 +11216,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of service policy resources that affect specific service; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -11095,6 +11297,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
       tags:
@@ -11174,6 +11378,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of active sessions resources; supports filtering, sorting, and pagination. Requires admin access.
 
@@ -11250,6 +11456,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single session by id. Requires admin access.
       tags:
       - Session
@@ -11300,6 +11508,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a session by id. Requires admin access.
       tags:
       - Session
@@ -11388,6 +11598,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single session's route path by id. Requires admin access.
       tags:
       - Session
@@ -11536,6 +11748,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of terminator resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -11608,6 +11822,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a terminator resource. Requires admin access.
       tags:
       - Terminator
@@ -11678,6 +11894,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single terminator by id. Requires admin access.
       tags:
       - Terminator
@@ -11990,6 +12208,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: |
         Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
       tags:
@@ -12062,6 +12282,8 @@ paths:
     post:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Create a router resource. Requires admin access.
       tags:
       - Router
@@ -12132,6 +12354,8 @@ paths:
     get:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Retrieves a single router by id. Requires admin access.
       tags:
       - Router
@@ -12182,6 +12406,8 @@ paths:
     put:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update all fields on a router by id. Requires admin access.
       tags:
       - Router
@@ -12269,6 +12495,8 @@ paths:
     delete:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Delete a router by id. Requires admin access.
       tags:
       - Router
@@ -12350,6 +12578,8 @@ paths:
     patch:
       security:
       - ztSession: []
+      - oauth2:
+        - openid
       description: Update the supplied fields on a router. Requires admin access.
       tags:
       - Router
@@ -16649,6 +16879,13 @@ definitions:
       version:
         type: string
 securityDefinitions:
+  oauth2:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: /oidc/authorize
+    tokenUrl: /oidc/token
+    scopes:
+      openid: openid
   ztSession:
     description: An API Key that is provided post authentication
     type: apiKey

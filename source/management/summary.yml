@@ -5,7 +5,7 @@ paths:
       summary: Returns a list of accessible resource counts
       description: This endpoint is usefull for UIs that wish to display UI elements with counts.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Informational
       operationId: listSummary

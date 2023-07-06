@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of terminator resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Terminator
       operationId: listTerminators
@@ -25,7 +26,8 @@ paths:
       summary: Create a terminator resource
       description: Create a terminator resource. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Terminator
       operationId: createTerminator
@@ -50,7 +52,8 @@ paths:
       summary: Retrieves a single terminator
       description: Retrieves a single terminator by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Terminator
       operationId: detailTerminator
@@ -65,7 +68,7 @@ paths:
       summary: Update all fields on a terminator
       description: Update all fields on a terminator by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Terminator
       operationId: updateTerminator
@@ -89,7 +92,7 @@ paths:
       summary: Update the supplied fields on a terminator
       description: Update the supplied fields on a terminator. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Terminator
       operationId: patchTerminator
@@ -113,7 +116,7 @@ paths:
       summary: Delete a terminator
       description: Delete a terminator by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Terminator
       operationId: deleteTerminator

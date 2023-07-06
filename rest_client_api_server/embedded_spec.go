@@ -253,6 +253,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Completes MFA authentication by submitting a MFA time based one time token or backup code.",
@@ -294,6 +299,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves the API session that was used to issue the current request",
@@ -375,6 +385,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Terminates the current API session",
@@ -421,6 +436,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of certificate resources for the current API session; supports filtering, sorting, and pagination",
@@ -520,6 +540,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates an ephemeral certificate for the current API Session. This endpoint expects a PEM encoded CSRs to be provided for fulfillment as a property of a JSON payload. It is up to the client to manage the private key backing the CSR request.",
@@ -615,6 +640,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single ephemeral certificate by id",
@@ -686,6 +716,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an ephemeral certificateby id\n",
@@ -779,6 +814,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves data indicating the last time data relevant to this API Session was altered that would necessitate\nservice refreshes.\n",
@@ -827,6 +867,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns the identity associated with the API sessions used to issue the current request",
@@ -916,6 +961,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.",
@@ -1017,6 +1067,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.",
@@ -1088,6 +1143,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's\nidentity.\n",
@@ -1207,6 +1267,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API\nsession's identity.\n",
@@ -1337,6 +1402,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.\nAllows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.\nThe response from this endpoint is a new client certificate which the client must  be verified via the /authenticators/{id}/extend-verify endpoint.\nAfter verification is completion any new connections must be made with new certificate. Prior to verification the old client certificate remains active.",
@@ -1405,6 +1475,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.\nAfter receipt, the new client certificate must be used for new authentication requests.",
@@ -1473,6 +1548,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Lists the Edge Routers that the current identity has access to via policies. The data returned\nincludes their address and online status\n",
@@ -1521,6 +1601,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a ` + "`" + `POST /current-identity/mfa/verify` + "`" + `.\n",
@@ -1593,6 +1678,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via ` + "`" + `POST /current-identity/mfa/verify` + "`" + `\n",
@@ -1661,6 +1751,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via ` + "`" + `DELETE /identities/\u003cid\u003e/mfa` + "`" + `.\n",
@@ -1742,6 +1837,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.\n",
@@ -1770,6 +1870,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.\n",
@@ -1857,6 +1962,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.\n",
@@ -1942,6 +2052,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via ` + "`" + `POST /current-identity/mfa` + "`" + `.\n",
@@ -2360,6 +2475,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of external JWT signers for authentication",
@@ -2461,6 +2581,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Submits posture responses",
@@ -2556,6 +2681,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Submits posture responses",
@@ -2672,6 +2802,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -2787,6 +2922,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single service by id. Requires admin access.",
@@ -2858,6 +2998,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a service by id. Requires admin access.",
@@ -2977,6 +3122,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a service by id. Requires admin access.",
@@ -3084,6 +3234,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a service. Requires admin access.",
@@ -3214,6 +3369,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.\n",
@@ -3324,6 +3484,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of active sessions resources; supports filtering, sorting, and pagination.\n\nSessions are tied to an API session and are moved when an API session times out or logs out. Active sessions\n(i.e. Ziti SDK connected to an edge router) will keep the session and API session marked as active.\n",
@@ -3423,6 +3588,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Create a session resource.",
@@ -3518,6 +3688,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single session by id.",
@@ -3589,6 +3764,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a session by id.",
@@ -5962,6 +6142,15 @@ func init() {
     }
   },
   "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "/oidc/authorize",
+      "tokenUrl": "/oidc/token",
+      "scopes": {
+        "openid": "openid"
+      }
+    },
     "ztSession": {
       "description": "An API Key that is provided post authentication",
       "type": "apiKey",
@@ -6182,6 +6371,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Completes MFA authentication by submitting a MFA time based one time token or backup code.",
@@ -6223,6 +6417,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves the API session that was used to issue the current request",
@@ -6304,6 +6503,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Terminates the current API session",
@@ -6350,6 +6554,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of certificate resources for the current API session; supports filtering, sorting, and pagination",
@@ -6449,6 +6658,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates an ephemeral certificate for the current API Session. This endpoint expects a PEM encoded CSRs to be provided for fulfillment as a property of a JSON payload. It is up to the client to manage the private key backing the CSR request.",
@@ -6544,6 +6758,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single ephemeral certificate by id",
@@ -6615,6 +6834,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an ephemeral certificateby id\n",
@@ -6708,6 +6932,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves data indicating the last time data relevant to this API Session was altered that would necessitate\nservice refreshes.\n",
@@ -6756,6 +6985,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns the identity associated with the API sessions used to issue the current request",
@@ -6845,6 +7079,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.",
@@ -6946,6 +7185,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.",
@@ -7017,6 +7261,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's\nidentity.\n",
@@ -7136,6 +7385,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API\nsession's identity.\n",
@@ -7266,6 +7520,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.\nAllows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.\nThe response from this endpoint is a new client certificate which the client must  be verified via the /authenticators/{id}/extend-verify endpoint.\nAfter verification is completion any new connections must be made with new certificate. Prior to verification the old client certificate remains active.",
@@ -7334,6 +7593,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.\nAfter receipt, the new client certificate must be used for new authentication requests.",
@@ -7402,6 +7666,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Lists the Edge Routers that the current identity has access to via policies. The data returned\nincludes their address and online status\n",
@@ -7450,6 +7719,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a ` + "`" + `POST /current-identity/mfa/verify` + "`" + `.\n",
@@ -7522,6 +7796,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via ` + "`" + `POST /current-identity/mfa/verify` + "`" + `\n",
@@ -7590,6 +7869,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via ` + "`" + `DELETE /identities/\u003cid\u003e/mfa` + "`" + `.\n",
@@ -7671,6 +7955,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.\n",
@@ -7699,6 +7988,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.\n",
@@ -7786,6 +8080,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.\n",
@@ -7871,6 +8170,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via ` + "`" + `POST /current-identity/mfa` + "`" + `.\n",
@@ -8289,6 +8593,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of external JWT signers for authentication",
@@ -8390,6 +8699,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Submits posture responses",
@@ -8485,6 +8799,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Submits posture responses",
@@ -8601,6 +8920,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -8716,6 +9040,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single service by id. Requires admin access.",
@@ -8787,6 +9116,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a service by id. Requires admin access.",
@@ -8906,6 +9240,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a service by id. Requires admin access.",
@@ -9013,6 +9352,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a service. Requires admin access.",
@@ -9143,6 +9487,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.\n",
@@ -9253,6 +9602,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of active sessions resources; supports filtering, sorting, and pagination.\n\nSessions are tied to an API session and are moved when an API session times out or logs out. Active sessions\n(i.e. Ziti SDK connected to an edge router) will keep the session and API session marked as active.\n",
@@ -9352,6 +9706,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Create a session resource.",
@@ -9447,6 +9806,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single session by id.",
@@ -9518,6 +9882,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a session by id.",
@@ -11975,6 +12344,15 @@ func init() {
     }
   },
   "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "/oidc/authorize",
+      "tokenUrl": "/oidc/token",
+      "scopes": {
+        "openid": "openid"
+      }
+    },
     "ztSession": {
       "description": "An API Key that is provided post authentication",
       "type": "apiKey",

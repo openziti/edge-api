@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Service
       operationId: listServices
@@ -30,7 +31,8 @@ paths:
       summary: Retrieves a single service
       description: Retrieves a single service by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Service
       operationId: detailService
@@ -50,7 +52,8 @@ paths:
       description: |
         Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Service
       operationId: listServiceTerminators

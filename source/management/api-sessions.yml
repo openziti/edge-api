@@ -8,7 +8,8 @@ paths:
         Returns a list of active API sessions. The resources can be sorted, filtered, and paginated. This endpoint
         requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - API Session
       operationId: listAPISessions
@@ -32,7 +33,7 @@ paths:
       summary: Retrieves a single API Session
       description: Retrieves a single API Session by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - API Session
       operationId: detailAPISessions
@@ -47,7 +48,7 @@ paths:
       summary: Deletes an API Sessions
       description: Deletes and API sesion by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - API Session
       operationId: deleteAPISessions
