@@ -5,7 +5,8 @@ paths:
       summary: Submit a posture response to a posture query
       description: Submits posture responses
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: createPostureResponse
@@ -28,7 +29,8 @@ paths:
       summary: Submit multiple posture responses
       description: Submits posture responses
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: createPostureResponseBulk

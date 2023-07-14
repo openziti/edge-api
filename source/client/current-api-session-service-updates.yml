@@ -7,7 +7,8 @@ paths:
         Retrieves data indicating the last time data relevant to this API Session was altered that would necessitate
         service refreshes.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
         - Services

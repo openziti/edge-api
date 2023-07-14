@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentities
@@ -27,7 +28,8 @@ paths:
       summary: Create an identity resource
       description: Create an identity resource. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: createIdentity
@@ -52,7 +54,8 @@ paths:
       summary: Retrieves a single identity
       description: Retrieves a single identity by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: detailIdentity
@@ -67,7 +70,8 @@ paths:
       summary: Update all fields on an identity
       description: Update all fields on an identity by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: updateIdentity
@@ -91,7 +95,8 @@ paths:
       summary: Update the supplied fields on an identity
       description: Update the supplied fields on an identity. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: patchIdentity
@@ -115,7 +120,8 @@ paths:
       summary: Delete an identity
       description: Delete an identity by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: deleteIdentity
@@ -135,7 +141,8 @@ paths:
       summary: List the edge router policies that affect an identity
       description: Retrieves a list of edge router policies that apply to the specified identity.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentitysEdgeRouterPolicies
@@ -153,7 +160,8 @@ paths:
       summary: List the service configs associated a specific identity
       description: Retrieves a list of service configs associated to a specific identity
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentitysServiceConfigs
@@ -175,7 +183,8 @@ paths:
           schema:
             $ref: 'service-configs.yml#/definitions/serviceConfigsAssignList'
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: associateIdentitysServiceConfigs
@@ -199,7 +208,8 @@ paths:
           schema:
             $ref: 'service-configs.yml#/definitions/serviceConfigsAssignList'
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: disassociateIdentitysServiceConfigs
@@ -219,7 +229,8 @@ paths:
       summary: List the service policies that affect an identity
       description: Retrieves a list of service policies that apply to the specified identity.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentityServicePolicies
@@ -239,7 +250,8 @@ paths:
       description: |
         Retrieves a list of edge-routers that the given identity may use to access services. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentityEdgeRouters
@@ -259,7 +271,8 @@ paths:
       description: |
         Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: listIdentityServices
@@ -283,7 +296,8 @@ paths:
         to check if the identity and service have access to common edge routers so that a connnection can be made. |
         Will also check if at least one edge router is on-line. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: getIdentityPolicyAdvice
@@ -303,7 +317,8 @@ paths:
         Returns a nested map data represeting the posture data of the identity.
         This data should be considered volatile.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Identity
       operationId: getIdentityPostureData
@@ -322,7 +337,7 @@ paths:
       description: |
         Returns a list of authenticators associated to the identity specified
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
       operationId: getIdentityAuthenticators
@@ -341,7 +356,7 @@ paths:
       description: |
         Returns a list of enrollments associated to the identity specified
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
       operationId: getIdentityEnrollments
@@ -362,7 +377,7 @@ paths:
         every policy that was verified against and every failed check in each policy. Each check will include
         the historical posture data and posture check configuration.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
       operationId: getIdentityFailedServiceRequests
@@ -381,7 +396,7 @@ paths:
       description: |
         Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
         - MFA
@@ -401,7 +416,7 @@ paths:
       description: |
         Allows an admin to enable/disable data flow tracing for an identity
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
         - Tracing
@@ -430,7 +445,7 @@ paths:
       description: |
         Allows an admin to remove disabled statuses from an identity.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
       operationId: enableIdentity
@@ -449,7 +464,7 @@ paths:
       description: |
         Allows an admin disable an identity for a set amount of time or indefinitely.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Identity
       operationId: disableIdentity

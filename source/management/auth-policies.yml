@@ -6,7 +6,8 @@ paths:
       summary: List Auth Policies
       description: Retrieves a list of Auth Policies
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Auth Policy
       operationId: listAuthPolicies
@@ -25,7 +26,7 @@ paths:
       summary: Creates an Auth Policy
       description: Creates an Auth Policy. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Auth Policy
       operationId: createAuthPolicy
@@ -50,7 +51,7 @@ paths:
       summary: Retrieves a single Auth Policy
       description: Retrieves a single Auth Policy by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Auth Policy
       operationId: detailAuthPolicy
@@ -65,7 +66,7 @@ paths:
       summary: Update all fields on an Auth Policy
       description: Update all fields on an Auth Policy by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Auth Policy
       operationId: updateAuthPolicy
@@ -89,7 +90,7 @@ paths:
       summary: Update the supplied fields on an Auth Policy
       description: Update only the supplied fields on an Auth Policy by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Auth Policy
       operationId: patchAuthPolicy
@@ -114,7 +115,7 @@ paths:
       description: |
         Delete an Auth Policy by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Auth Policy
       operationId: deleteAuthPolicy

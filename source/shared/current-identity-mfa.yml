@@ -8,7 +8,8 @@ paths:
         disabled before attempting to re-enroll. Subsequent enrollment request is completed via
         `POST /current-identity/mfa/verify`
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA
@@ -26,7 +27,8 @@ paths:
         Returns details about the current MFA enrollment. If enrollment has not been completed it will
         return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA
@@ -45,7 +47,8 @@ paths:
         has been completed. If not, code should be an empty string. If one time passwords are not available and admin
         account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA
@@ -69,7 +72,8 @@ paths:
         Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or
         not started.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA
@@ -89,7 +93,8 @@ paths:
         Completes MFA enrollment by accepting a time based one time password as verification. Called
         after MFA enrollment has been initiated via `POST /current-identity/mfa`.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA
@@ -115,7 +120,8 @@ paths:
         Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid
         time based one time password to interact with. Available after a completed MFA enrollment.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA
@@ -145,7 +151,8 @@ paths:
         time based one time password to interact with. Available after a completed MFA enrollment. This replaces
         all existing recovery codes.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current Identity
         - MFA

@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.25.15
+  version: 0.25.31
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -25,7 +25,13 @@ securityDefinitions:
     in: header
     name: zt-session
     description: An API Key that is provided post authentication
-
+  oauth2:
+    type: oauth2
+    tokenUrl: /oidc/token
+    flow: accessCode
+    authorizationUrl: /oidc/authorize
+    scopes:
+      openid: openid
 paths:
   '/':
     $ref: 'shared/version.yml#/paths/root'

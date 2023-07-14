@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of role attributes in use by edge routers; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Role Attributes
       operationId: listEdgeRouterRoleAttributes
@@ -28,7 +29,7 @@ paths:
       description: |
         Retrieves a list of role attributes in use by identities; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Role Attributes
       operationId: listIdentityRoleAttributes
@@ -50,7 +51,7 @@ paths:
       description: |
         Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Role Attributes
       operationId: listServiceRoleAttributes

@@ -7,7 +7,8 @@ paths:
       description: |
         Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: listTransitRouters
@@ -26,7 +27,8 @@ paths:
       summary: Create a router resource
       description: Create a router resource. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: createTransitRouter
@@ -51,7 +53,8 @@ paths:
       summary: Retrieves a single router
       description: Retrieves a single router by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: detailTransitRouter
@@ -66,7 +69,8 @@ paths:
       summary: Update all fields on a router
       description: Update all fields on a router by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: updateTransitRouter
@@ -90,7 +94,8 @@ paths:
       summary: Update the supplied fields on a router
       description: Update the supplied fields on a router. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: patchTransitRouter
@@ -114,7 +119,8 @@ paths:
       summary: Delete a router
       description: Delete a router by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: deleteTransitRouter
@@ -133,7 +139,8 @@ paths:
       description: |
         Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: listRouters
@@ -152,7 +159,8 @@ paths:
       summary: Create a router resource
       description: Create a router resource. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: createRouter
@@ -177,7 +185,8 @@ paths:
       summary: Retrieves a single router
       description: Retrieves a single router by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: detailRouter
@@ -192,7 +201,8 @@ paths:
       summary: Update all fields on a router
       description: Update all fields on a router by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: updateRouter
@@ -216,7 +226,8 @@ paths:
       summary: Update the supplied fields on a router
       description: Update the supplied fields on a router. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: patchRouter
@@ -240,7 +251,8 @@ paths:
       summary: Delete a router
       description: Delete a router by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Router
       operationId: deleteRouter

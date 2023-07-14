@@ -5,7 +5,8 @@ paths:
       summary: List CAs
       description: Retrieves a list of CA resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Certificate Authority
       operationId: listCas
@@ -24,7 +25,7 @@ paths:
       summary: Creates a CA
       description: Creates a CA in an unverified state. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: createCa
@@ -50,7 +51,7 @@ paths:
       summary: Retrieves a single CA
       description: Retrieves a single CA by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: detailCa
@@ -65,7 +66,7 @@ paths:
       summary: Update all fields on a CA
       description: Update all fields on a CA by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: updateCa
@@ -89,7 +90,7 @@ paths:
       summary: Update the supplied fields on a CA
       description: Update only the supplied fields on a CA by id. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: patchCa
@@ -115,7 +116,7 @@ paths:
         Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it
         impossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: deleteCa
@@ -135,7 +136,7 @@ paths:
         For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides
         the jwt as a text response.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: getCaJwt
@@ -166,7 +167,7 @@ paths:
         The common name on the certificate must match the verificationToken property of the CA. Unverfieid CAs can not
         be used for enrollment/authentication. Requires admin access.
       security:
-        - ztSession: [ ]
+        - ztSession: []
       tags:
         - Certificate Authority
       operationId: verifyCa

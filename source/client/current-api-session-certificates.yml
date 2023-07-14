@@ -5,7 +5,8 @@ paths:
       summary: List the ephemeral certificates available for the current API Session
       description: Retrieves a list of certificate resources for the current API session; supports filtering, sorting, and pagination
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: listCurrentApiSessionCertificates
@@ -26,7 +27,8 @@ paths:
         expects a PEM encoded CSRs to be provided for fulfillment as a property of a JSON payload.
         It is up to the client to manage the private key backing the CSR request.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: createCurrentApiSessionCertificate
@@ -51,7 +53,8 @@ paths:
       summary: Retrieves an ephemeral certificate
       description: Retrieves a single ephemeral certificate by id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: detailCurrentApiSessionCertificate
@@ -67,7 +70,8 @@ paths:
       description: |
         Delete an ephemeral certificateby id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: deleteCurrentApiSessionCertificate

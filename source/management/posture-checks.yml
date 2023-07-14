@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of posture checks
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: listPostureChecks
@@ -29,7 +30,8 @@ paths:
       summary: Creates a Posture Checks
       description: Creates a Posture Checks
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: createPostureCheck
@@ -54,7 +56,8 @@ paths:
       summary: Retrieves a single Posture Checks
       description: Retrieves a single Posture Checks by id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: detailPostureCheck
@@ -69,7 +72,8 @@ paths:
       summary: Update all fields on a Posture Checks
       description: Update all fields on a Posture Checks by id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: updatePostureCheck
@@ -93,7 +97,8 @@ paths:
       summary: Update the supplied fields on a Posture Checks
       description: Update only the supplied fields on a Posture Checks by id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: patchPostureCheck
@@ -117,7 +122,8 @@ paths:
       summary: Deletes an Posture Checks
       description: Deletes and Posture Checks by id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: deletePostureCheck

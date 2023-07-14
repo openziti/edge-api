@@ -41,7 +41,8 @@ paths:
       summary: Complete MFA authentication
       description: Completes MFA authentication by submitting a MFA time based one time token or backup code.
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Authentication
         - MFA

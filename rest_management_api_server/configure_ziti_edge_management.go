@@ -97,6 +97,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 		return errors.NotImplemented("textYaml producer has not yet been implemented")
 	})
 
+	if api.Oauth2Auth == nil {
+		api.Oauth2Auth = func(token string, scopes []string) (interface{}, error) {
+			return nil, errors.NotImplemented("oauth2 bearer auth (oauth2) has not yet been implemented")
+		}
+	}
 	// Applies when the "zt-session" header is set
 	if api.ZtSessionAuth == nil {
 		api.ZtSessionAuth = func(token string) (interface{}, error) {

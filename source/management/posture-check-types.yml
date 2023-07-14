@@ -6,7 +6,8 @@ paths:
       description: |
         Retrieves a list of posture check types
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: listPostureCheckTypes
@@ -30,7 +31,8 @@ paths:
       summary: Retrieves a single posture check type
       description: Retrieves a single posture check type by id
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Posture Checks
       operationId: detailPostureCheckType

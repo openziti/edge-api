@@ -5,7 +5,8 @@ paths:
       summary: Return the current API session
       description: Retrieves the API session that was used to issue the current request
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       operationId: getCurrentAPISession
@@ -18,7 +19,8 @@ paths:
       summary: Logout
       description: Terminates the current API session
       security:
-        - ztSession: [ ]
+        - ztSession: []
+        - oauth2: [openid]
       tags:
         - Current API Session
       responses:
