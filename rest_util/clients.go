@@ -36,17 +36,19 @@ package rest_util
 import (
 	"crypto"
 	"crypto/x509"
+	"net/http"
+	"net/url"
+
+	"errors"
+
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/openziti/edge-api/rest_client_api_client"
 	"github.com/openziti/edge-api/rest_management_api_client"
-	"github.com/pkg/errors"
-	"net/http"
-	"net/url"
 )
 
 // NewEdgeManagementClientWithToken will generate a new rest_management_api_client.ZitiEdgeManagement client based
 // upon a provided http.Client, controller address, and an API Session token that has been previously obtained.
-func NewEdgeManagementClientWithToken(httpClient *http.Client, apiAddress string, apiSessionToken string) (*rest_management_api_client.ZitiEdgeManagement, error) {
+func NewEdgeManagementClientWithToken(httpClient *http.Client, apiAddress, apiSessionToken string) (*rest_management_api_client.ZitiEdgeManagement, error) {
 	ctrlUrl, err := url.Parse(apiAddress)
 
 	if err != nil {
@@ -65,7 +67,7 @@ func NewEdgeManagementClientWithToken(httpClient *http.Client, apiAddress string
 // NewEdgeManagementClientWithUpdb will generate a new rest_management_api_client.ZitiEdgeManagement client based
 // upon a provided http.Client, controller address, and will authenticate via username/password database (updb)
 // to obtain an API Session token.
-func NewEdgeManagementClientWithUpdb(username, password string, apiAddress string, rootCas *x509.CertPool) (*rest_management_api_client.ZitiEdgeManagement, error) {
+func NewEdgeManagementClientWithUpdb(username, password, apiAddress string, rootCas *x509.CertPool) (*rest_management_api_client.ZitiEdgeManagement, error) {
 	auth := NewAuthenticatorUpdb(username, password)
 	auth.RootCas = rootCas
 	return NewEdgeManagementClientWithAuthenticator(auth, apiAddress)
@@ -74,7 +76,8 @@ func NewEdgeManagementClientWithUpdb(username, password string, apiAddress strin
 // NewEdgeManagementClientWithCert will generate a new rest_management_api_client.ZitiEdgeManagement client based
 // upon a provided http.Client, controller address, and will authenticate via client certificate to obtain
 // an API Session token.
-func NewEdgeManagementClientWithCert(cert *x509.Certificate, privateKey crypto.PrivateKey, apiAddress string, rootCas *x509.CertPool) (*rest_management_api_client.ZitiEdgeManagement, error) {
+func NewEdgeManagementClientWithCert(cert *x509.Certificate, privateKey crypto.PrivateKey, apiAddress string,
+	rootCas *x509.CertPool) (*rest_management_api_client.ZitiEdgeManagement, error) {
 	auth := NewAuthenticatorCert(cert, privateKey)
 	auth.RootCas = rootCas
 	return NewEdgeManagementClientWithAuthenticator(auth, apiAddress)
@@ -110,7 +113,7 @@ func NewEdgeManagementClientWithAuthenticator(authenticator Authenticator, apiAd
 
 // NewEdgeClientClientWithToken will generate a new rest_client_api_client.ZitiEdgeClient client based
 // upon a provided http.Client, controller address, and an API Session token that has been previously obtained.
-func NewEdgeClientClientWithToken(httpClient *http.Client, apiAddress string, apiSessionToken string) (*rest_client_api_client.ZitiEdgeClient, error) {
+func NewEdgeClientClientWithToken(httpClient *http.Client, apiAddress, apiSessionToken string) (*rest_client_api_client.ZitiEdgeClient, error) {
 	ctrlUrl, err := url.Parse(apiAddress)
 
 	if err != nil {
@@ -131,7 +134,7 @@ func NewEdgeClientClientWithToken(httpClient *http.Client, apiAddress string, ap
 // NewEdgeClientClientWithUpdb will generate a new rest_client_api_client.ZitiEdgeClient client based
 // upon a provided http.Client, controller address, and will authenticate via username/password database (updb)
 // to obtain an API Session token.
-func NewEdgeClientClientWithUpdb(username, password string, apiAddress string, rootCas *x509.CertPool) (*rest_client_api_client.ZitiEdgeClient, error) {
+func NewEdgeClientClientWithUpdb(username, password, apiAddress string, rootCas *x509.CertPool) (*rest_client_api_client.ZitiEdgeClient, error) {
 	auth := NewAuthenticatorUpdb(username, password)
 	auth.RootCas = rootCas
 	return NewEdgeClientClientWithAuthenticator(auth, apiAddress)

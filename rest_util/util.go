@@ -18,11 +18,12 @@ package rest_util
 
 import (
 	"crypto/tls"
+	"net/http"
+	"time"
+
 	openApiRuntime "github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 	"github.com/openziti/edge-api/rest_model"
-	"net/http"
-	"time"
 )
 
 type HeaderAuth struct {
@@ -51,12 +52,16 @@ func (e *ZitiTokenAuth) AuthenticateRequest(request openApiRuntime.ClientRequest
 
 // NewHttpClientWithTlsConfig provides a default HTTP client with generous default timeouts.
 func NewHttpClientWithTlsConfig(tlsClientConfig *tls.Config) (*http.Client, error) {
+	const (
+		maxIdleConns = 10
+		timeout      = 10
+	)
 	httpClientTransport := &http.Transport{
-		Proxy: http.ProxyFromEnvironment,
+		Proxy:                 http.ProxyFromEnvironment,
 		ForceAttemptHTTP2:     true,
-		MaxIdleConns:          10,
-		IdleConnTimeout:       10 * time.Second,
-		TLSHandshakeTimeout:   10 * time.Second,
+		MaxIdleConns:          maxIdleConns,
+		IdleConnTimeout:       timeout * time.Second,
+		TLSHandshakeTimeout:   timeout * time.Second,
 		ExpectContinueTimeout: 1 * time.Second,
 	}
 
@@ -64,7 +69,7 @@ func NewHttpClientWithTlsConfig(tlsClientConfig *tls.Config) (*http.Client, erro
 
 	httpClient := &http.Client{
 		Transport: httpClientTransport,
-		Timeout:   10 * time.Second,
+		Timeout:   timeout * time.Second,
 	}
 	return httpClient, nil
 }

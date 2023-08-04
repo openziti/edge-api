@@ -17,11 +17,14 @@
 package rest_util
 
 import (
+	"context"
 	"crypto/x509"
 	"encoding/base64"
 	"fmt"
-	"github.com/fullsailor/pkcs7"
 	"io"
+	"net/http"
+
+	"github.com/fullsailor/pkcs7"
 )
 
 // VerifyController will attempt to use the provided x509.CertPool to connect to the provided controller.
@@ -36,14 +39,22 @@ func VerifyController(controllerAddr string, caPool *x509.CertPool) (bool, error
 	tlsConfig.RootCAs = caPool
 
 	httpClient, err := NewHttpClientWithTlsConfig(tlsConfig)
-
 	if err != nil {
 		return false, err
 	}
 
-	_, err = httpClient.Get(controllerAddr + "/edge/client/v1/versions")
-
+	queryReq, err := http.NewRequestWithContext(context.Background(), http.MethodGet,
+		controllerAddr+"/edge/client/v1/versions", http.NoBody)
 	if err != nil {
+		return false, err
+	}
+
+	resp, err := httpClient.Do(queryReq)
+	if err != nil {
+		return false, err
+	}
+
+	if err := resp.Body.Close(); err != nil {
 		return false, err
 	}
 
@@ -61,15 +72,21 @@ func GetControllerWellKnownCas(controllerAddr string) ([]*x509.Certificate, erro
 	tlsConfig.InsecureSkipVerify = true
 
 	httpClient, err := NewHttpClientWithTlsConfig(tlsConfig)
-
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := httpClient.Get(fmt.Sprintf("%v/.well-known/est/cacerts", controllerAddr))
+	queryReq, err := http.NewRequestWithContext(context.Background(), http.MethodGet,
+		fmt.Sprintf("%v/.well-known/est/cacerts", controllerAddr), http.NoBody)
 	if err != nil {
 		return nil, err
 	}
+
+	resp, err := httpClient.Do(queryReq)
+	if err != nil {
+		return nil, err
+	}
+
 	defer func() { _ = resp.Body.Close() }()
 	encoded, err := io.ReadAll(resp.Body)
 	if err != nil {

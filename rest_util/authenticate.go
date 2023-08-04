@@ -22,27 +22,28 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"net/http"
+	"net/url"
+
 	"github.com/go-openapi/runtime"
 	openapiclient "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/openziti/edge-api/rest_management_api_client"
 	"github.com/openziti/edge-api/rest_management_api_client/authentication"
 	"github.com/openziti/edge-api/rest_model"
-	"net/http"
-	"net/url"
 )
 
 // Authenticator is an interface that facilitates obtaining an API Session.
 type Authenticator interface {
-	//Authenticate issues an authentication HTTP requests to the designated controller. The method and operation
+	// Authenticate issues an authentication HTTP requests to the designated controller. The method and operation
 	// of this authentication request is determined by the implementor.
 	Authenticate(controllerAddress *url.URL) (*rest_model.CurrentAPISessionDetail, error)
 
-	//BuildHttpClient returns a http.Client to use for an API client. This specifically allows
-	//client certificate authentication to be configured in the http.Client's transport/tls.Config
+	// BuildHttpClient returns a http.Client to use for an API client. This specifically allows
+	// client certificate authentication to be configured in the http.Client's transport/tls.Config
 	BuildHttpClient() (*http.Client, error)
 
-	//SetInfo sets the env and sdk info submitted on Authenticate
+	// SetInfo sets the env and sdk info submitted on Authenticate
 	SetInfo(*rest_model.EnvInfo, *rest_model.SdkInfo)
 }
 

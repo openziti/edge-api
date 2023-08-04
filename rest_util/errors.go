@@ -18,6 +18,7 @@ package rest_util
 
 import (
 	"fmt"
+
 	"github.com/openziti/edge-api/rest_model"
 )
 
