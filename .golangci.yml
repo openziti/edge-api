@@ -1,0 +1,83 @@
+# options for analysis running
+run:
+  modules-download-mode: mod
+linters-settings:
+  depguard:
+    rules:
+      # Name of a rule.
+      main:
+        # List of file globs that will match this list of settings to compare against.
+        files:
+          - $all
+        # List of allowed packages.
+        allow:
+          - $gostd
+          - github.com/openziti
+          - github.com/go-openapi
+          - github.com/fullsailor/pkcs7
+        # Packages that are not allowed where the value is a suggestion.
+        deny:
+          - pkg: "github.com/sirupsen/logrus"
+            desc: not allowed
+          - pkg: "github.com/pkg/errors"
+            desc: Should be replaced by standard lib errors package
+  funlen:
+    lines: 300
+    statements: 300
+  gocyclo:
+    min-complexity: 40
+  dupl:
+    threshold: 150
+  misspell:
+    locale: US
+  lll:
+    line-length: 190
+  goimports:
+    local-prefixes: github.com/golangci/golangci-lint
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - dupImport # https://github.com/go-critic/go-critic/issues/845
+      - ifElseChain
+      - octalLiteral
+      - whyNoLint
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - dogsled
+    - depguard
+    - dupl
+    - errcheck
+    - exportloopref
+    - exhaustive
+    - funlen
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - nakedret
+    - noctx
+    - nolintlint
+    - rowserrcheck
+    - staticcheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
