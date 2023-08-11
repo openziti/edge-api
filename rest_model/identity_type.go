@@ -65,6 +65,9 @@ const (
 
 	// IdentityTypeRouter captures enum value "Router"
 	IdentityTypeRouter IdentityType = "Router"
+
+	// IdentityTypeDefault captures enum value "Default"
+	IdentityTypeDefault IdentityType = "Default"
 )
 
 // for schema
@@ -72,7 +75,7 @@ var identityTypeEnum []interface{}
 
 func init() {
 	var res []IdentityType
-	if err := json.Unmarshal([]byte(`["User","Device","Service","Router"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["User","Device","Service","Router","Default"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -14845,6 +14845,7 @@ definitions:
     - Device
     - Service
     - Router
+    - Default
   identityTypeDetail:
     type: object
     allOf:
