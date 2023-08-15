@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.15"
+    "version": "0.25.31"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -20749,7 +20749,8 @@ func init() {
         "User",
         "Device",
         "Service",
-        "Router"
+        "Router",
+        "Default"
       ]
     },
     "identityTypeDetail": {
@@ -23923,7 +23924,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.15"
+    "version": "0.25.31"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -44708,7 +44709,8 @@ func init() {
         "User",
         "Device",
         "Service",
-        "Router"
+        "Router",
+        "Default"
       ]
     },
     "identityTypeDetail": {
