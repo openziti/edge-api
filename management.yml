@@ -12896,16 +12896,16 @@ definitions:
     x-nullable: true
   authPolicyPrimaryExtJwt:
     type: object
-    required:
-    - allowed
-    - allowedSigners
     properties:
       allowed:
         type: boolean
+        x-nullable: true
       allowedSigners:
         type: array
         items:
           type: string
+        x-nullable: true
+    x-nullable: true
   authPolicyPrimaryExtJwtPatch:
     type: object
     properties:
