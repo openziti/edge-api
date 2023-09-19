@@ -29,6 +29,7 @@ func WrapErr(err error) error {
 
 		if apiErrEnv != nil && apiErrEnv.Error != nil {
 			return &APIFormattedError{
+				source:   err,
 				APIError: apiErrEnv.Error,
 			}
 		}
@@ -40,7 +41,12 @@ func WrapErr(err error) error {
 // APIFormattedError takes a rest_model.APIError and wraps it so that it can output
 // helpful information rather than pointer addresses for `Data` and `Meta`
 type APIFormattedError struct {
+	source error
 	*rest_model.APIError
+}
+
+func (e *APIFormattedError) Unwrap() error {
+	return e.source
 }
 
 func (e *APIFormattedError) Error() string {

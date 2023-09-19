@@ -52,7 +52,7 @@ func (e *ZitiTokenAuth) AuthenticateRequest(request openApiRuntime.ClientRequest
 // NewHttpClientWithTlsConfig provides a default HTTP client with generous default timeouts.
 func NewHttpClientWithTlsConfig(tlsClientConfig *tls.Config) (*http.Client, error) {
 	httpClientTransport := &http.Transport{
-		Proxy: http.ProxyFromEnvironment,
+		Proxy:                 http.ProxyFromEnvironment,
 		ForceAttemptHTTP2:     true,
 		MaxIdleConns:          10,
 		IdleConnTimeout:       10 * time.Second,
