@@ -65,6 +65,12 @@ func (o *CreateSessionReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewCreateSessionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *CreateSessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *CreateSessionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateSessionNotFound creates a CreateSessionNotFound with default headers values
+func NewCreateSessionNotFound() *CreateSessionNotFound {
+	return &CreateSessionNotFound{}
+}
+
+/* CreateSessionNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type CreateSessionNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateSessionNotFound) Error() string {
+	return fmt.Sprintf("[POST /sessions][%d] createSessionNotFound  %+v", 404, o.Payload)
+}
+func (o *CreateSessionNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateSessionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
