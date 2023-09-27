@@ -168,3 +168,47 @@ func (o *CreateSessionUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 		}
 	}
 }
+
+// CreateSessionNotFoundCode is the HTTP code returned for type CreateSessionNotFound
+const CreateSessionNotFoundCode int = 404
+
+/*CreateSessionNotFound The requested resource does not exist
+
+swagger:response createSessionNotFound
+*/
+type CreateSessionNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateSessionNotFound creates CreateSessionNotFound with default headers values
+func NewCreateSessionNotFound() *CreateSessionNotFound {
+
+	return &CreateSessionNotFound{}
+}
+
+// WithPayload adds the payload to the create session not found response
+func (o *CreateSessionNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateSessionNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create session not found response
+func (o *CreateSessionNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateSessionNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
