@@ -50,6 +50,9 @@ type Version struct {
 	// Example: 2020-02-11 16:09:08
 	BuildDate string `json:"buildDate,omitempty"`
 
+	// capabilities
+	Capabilities []string `json:"capabilities"`
+
 	// revision
 	// Example: ea556fc18740
 	Revision string `json:"revision,omitempty"`

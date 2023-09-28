@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.31"
+    "version": "0.25.32"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -2470,6 +2470,24 @@ func init() {
         }
       ]
     },
+    "/enumerated-capabiities": {
+      "get": {
+        "security": [],
+        "tags": [
+          "Informational"
+        ],
+        "summary": "Returns all capabilities this version of the controller is aware of, enabled or not.",
+        "operationId": "listEnumeratedCapabilities",
+        "responses": {
+          "200": {
+            "description": "A typed and enumerated list of capabilities",
+            "schema": {
+              "$ref": "#/definitions/listEnumeratedCapabilitiesEnvelope"
+            }
+          }
+        }
+      }
+    },
     "/external-jwt-signers": {
       "get": {
         "security": [
@@ -4380,6 +4398,13 @@ func init() {
         }
       }
     },
+    "capabilities": {
+      "type": "string",
+      "enum": [
+        "OIDC_AUTH",
+        "HA_CONTROLLER"
+      ]
+    },
     "clientExternalJwtSignerDetail": {
       "description": "A External JWT Signer resource",
       "type": "object",
@@ -5291,6 +5316,24 @@ func init() {
         }
       }
     },
+    "listEnumeratedCapabilitiesEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capabilities"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "listProtocols": {
       "type": "object",
       "additionalProperties": {
@@ -6152,6 +6195,12 @@ func init() {
           "type": "string",
           "example": "2020-02-11 16:09:08"
         },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "revision": {
           "type": "string",
           "example": "ea556fc18740"
@@ -6208,7 +6257,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.25.31"
+    "version": "0.25.32"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -8614,6 +8663,24 @@ func init() {
         }
       ]
     },
+    "/enumerated-capabiities": {
+      "get": {
+        "security": [],
+        "tags": [
+          "Informational"
+        ],
+        "summary": "Returns all capabilities this version of the controller is aware of, enabled or not.",
+        "operationId": "listEnumeratedCapabilities",
+        "responses": {
+          "200": {
+            "description": "A typed and enumerated list of capabilities",
+            "schema": {
+              "$ref": "#/definitions/listEnumeratedCapabilitiesEnvelope"
+            }
+          }
+        }
+      }
+    },
     "/external-jwt-signers": {
       "get": {
         "security": [
@@ -10606,6 +10673,13 @@ func init() {
         }
       }
     },
+    "capabilities": {
+      "type": "string",
+      "enum": [
+        "OIDC_AUTH",
+        "HA_CONTROLLER"
+      ]
+    },
     "clientExternalJwtSignerDetail": {
       "description": "A External JWT Signer resource",
       "type": "object",
@@ -11518,6 +11592,24 @@ func init() {
         }
       }
     },
+    "listEnumeratedCapabilitiesEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capabilities"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "listProtocols": {
       "type": "object",
       "additionalProperties": {
@@ -12379,6 +12471,12 @@ func init() {
         "buildDate": {
           "type": "string",
           "example": "2020-02-11 16:09:08"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "revision": {
           "type": "string",

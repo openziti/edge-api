@@ -290,6 +290,11 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 			return middleware.NotImplemented("operation current_api_session.ListCurrentIdentityAuthenticators has not yet been implemented")
 		})
 	}
+	if api.InformationalListEnumeratedCapabilitiesHandler == nil {
+		api.InformationalListEnumeratedCapabilitiesHandler = informational.ListEnumeratedCapabilitiesHandlerFunc(func(params informational.ListEnumeratedCapabilitiesParams) middleware.Responder {
+			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
+		})
+	}
 	if api.ExternalJWTSignerListExternalJWTSignersHandler == nil {
 		api.ExternalJWTSignerListExternalJWTSignersHandler = external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")

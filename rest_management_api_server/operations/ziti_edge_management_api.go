@@ -421,6 +421,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		EnrollmentListEnrollmentsHandler: enrollment.ListEnrollmentsHandlerFunc(func(params enrollment.ListEnrollmentsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation enrollment.ListEnrollments has not yet been implemented")
 		}),
+		InformationalListEnumeratedCapabilitiesHandler: informational.ListEnumeratedCapabilitiesHandlerFunc(func(params informational.ListEnumeratedCapabilitiesParams) middleware.Responder {
+			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
+		}),
 		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
 		}),
@@ -933,6 +936,8 @@ type ZitiEdgeManagementAPI struct {
 	EdgeRouterListEdgeRoutersHandler edge_router.ListEdgeRoutersHandler
 	// EnrollmentListEnrollmentsHandler sets the operation handler for the list enrollments operation
 	EnrollmentListEnrollmentsHandler enrollment.ListEnrollmentsHandler
+	// InformationalListEnumeratedCapabilitiesHandler sets the operation handler for the list enumerated capabilities operation
+	InformationalListEnumeratedCapabilitiesHandler informational.ListEnumeratedCapabilitiesHandler
 	// ExternalJWTSignerListExternalJWTSignersHandler sets the operation handler for the list external Jwt signers operation
 	ExternalJWTSignerListExternalJWTSignersHandler external_jwt_signer.ListExternalJWTSignersHandler
 	// IdentityListIdentitiesHandler sets the operation handler for the list identities operation
@@ -1501,6 +1506,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.EnrollmentListEnrollmentsHandler == nil {
 		unregistered = append(unregistered, "enrollment.ListEnrollmentsHandler")
+	}
+	if o.InformationalListEnumeratedCapabilitiesHandler == nil {
+		unregistered = append(unregistered, "informational.ListEnumeratedCapabilitiesHandler")
 	}
 	if o.ExternalJWTSignerListExternalJWTSignersHandler == nil {
 		unregistered = append(unregistered, "external_jwt_signer.ListExternalJWTSignersHandler")
@@ -2264,6 +2272,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/enrollments"] = enrollment.NewListEnrollments(o.context, o.EnrollmentListEnrollmentsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/enumerated-capabiities"] = informational.NewListEnumeratedCapabilities(o.context, o.InformationalListEnumeratedCapabilitiesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
