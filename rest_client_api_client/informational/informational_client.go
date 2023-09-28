@@ -58,6 +58,8 @@ type ClientService interface {
 
 	DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOption) (*DetailSpecBodyOK, error)
 
+	ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesParams, opts ...ClientOption) (*ListEnumeratedCapabilitiesOK, error)
+
 	ListProtocols(params *ListProtocolsParams, opts ...ClientOption) (*ListProtocolsOK, error)
 
 	ListRoot(params *ListRootParams, opts ...ClientOption) (*ListRootOK, error)
@@ -146,6 +148,44 @@ func (a *Client) DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOpti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailSpecBody: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  ListEnumeratedCapabilities returns all capabilities this version of the controller is aware of enabled or not
+*/
+func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesParams, opts ...ClientOption) (*ListEnumeratedCapabilitiesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListEnumeratedCapabilitiesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listEnumeratedCapabilities",
+		Method:             "GET",
+		PathPattern:        "/enumerated-capabiities",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListEnumeratedCapabilitiesReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListEnumeratedCapabilitiesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listEnumeratedCapabilities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

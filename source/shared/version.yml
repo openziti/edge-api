@@ -20,13 +20,39 @@ paths:
       responses:
         '200':
           $ref: '#/responses/listVersion'
+  enumerated-capabilities:
+    get:
+      summary: Returns all capabilities this version of the controller is aware of, enabled or not.
+      security: [ ]
+      tags:
+        - Informational
+      operationId: listEnumeratedCapabilities
+      responses:
+        '200':
+          $ref: '#/responses/listEnumeratedCapabilities'
 responses:
   listVersion:
     description: Version information for the controller
     schema:
       $ref: '#/definitions/listVersionEnvelope'
+  listEnumeratedCapabilities:
+    description: A typed and enumerated list of capabilities
+    schema:
+      $ref: '#/definitions/listEnumeratedCapabilitiesEnvelope'
 
 definitions:
+  listEnumeratedCapabilitiesEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: 'standard-responses.yml#/definitions/meta'
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/capabilities'
   listVersionEnvelope:
     type: object
     required:
@@ -58,6 +84,15 @@ definitions:
           type: object
           additionalProperties:
             $ref: '#/definitions/apiVersion'
+      capabilities:
+        type: array
+        items:
+          type: string
+  capabilities:
+    type: string
+    enum:
+      - OIDC_AUTH
+      - HA_CONTROLLER
   apiVersion:
     type: object
     required:

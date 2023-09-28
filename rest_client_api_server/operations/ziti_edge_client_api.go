@@ -206,6 +206,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		CurrentAPISessionListCurrentIdentityAuthenticatorsHandler: current_api_session.ListCurrentIdentityAuthenticatorsHandlerFunc(func(params current_api_session.ListCurrentIdentityAuthenticatorsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.ListCurrentIdentityAuthenticators has not yet been implemented")
 		}),
+		InformationalListEnumeratedCapabilitiesHandler: informational.ListEnumeratedCapabilitiesHandlerFunc(func(params informational.ListEnumeratedCapabilitiesParams) middleware.Responder {
+			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
+		}),
 		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
 		}),
@@ -404,6 +407,8 @@ type ZitiEdgeClientAPI struct {
 	CurrentAPISessionListCurrentAPISessionCertificatesHandler current_api_session.ListCurrentAPISessionCertificatesHandler
 	// CurrentAPISessionListCurrentIdentityAuthenticatorsHandler sets the operation handler for the list current identity authenticators operation
 	CurrentAPISessionListCurrentIdentityAuthenticatorsHandler current_api_session.ListCurrentIdentityAuthenticatorsHandler
+	// InformationalListEnumeratedCapabilitiesHandler sets the operation handler for the list enumerated capabilities operation
+	InformationalListEnumeratedCapabilitiesHandler informational.ListEnumeratedCapabilitiesHandler
 	// ExternalJWTSignerListExternalJWTSignersHandler sets the operation handler for the list external Jwt signers operation
 	ExternalJWTSignerListExternalJWTSignersHandler external_jwt_signer.ListExternalJWTSignersHandler
 	// InformationalListProtocolsHandler sets the operation handler for the list protocols operation
@@ -649,6 +654,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.CurrentAPISessionListCurrentIdentityAuthenticatorsHandler == nil {
 		unregistered = append(unregistered, "current_api_session.ListCurrentIdentityAuthenticatorsHandler")
+	}
+	if o.InformationalListEnumeratedCapabilitiesHandler == nil {
+		unregistered = append(unregistered, "informational.ListEnumeratedCapabilitiesHandler")
 	}
 	if o.ExternalJWTSignerListExternalJWTSignersHandler == nil {
 		unregistered = append(unregistered, "external_jwt_signer.ListExternalJWTSignersHandler")
@@ -955,6 +963,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/current-identity/authenticators"] = current_api_session.NewListCurrentIdentityAuthenticators(o.context, o.CurrentAPISessionListCurrentIdentityAuthenticatorsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/enumerated-capabiities"] = informational.NewListEnumeratedCapabilities(o.context, o.InformationalListEnumeratedCapabilitiesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
