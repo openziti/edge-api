@@ -53,6 +53,12 @@ func (o *ListConfigsForConfigTypeReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return result, nil
+	case 429:
+		result := NewListConfigsForConfigTypeTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -81,6 +87,38 @@ func (o *ListConfigsForConfigTypeOK) GetPayload() *rest_model.ListConfigsEnvelop
 func (o *ListConfigsForConfigTypeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.ListConfigsEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListConfigsForConfigTypeTooManyRequests creates a ListConfigsForConfigTypeTooManyRequests with default headers values
+func NewListConfigsForConfigTypeTooManyRequests() *ListConfigsForConfigTypeTooManyRequests {
+	return &ListConfigsForConfigTypeTooManyRequests{}
+}
+
+/* ListConfigsForConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListConfigsForConfigTypeTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListConfigsForConfigTypeTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /config-types/{id}/configs][%d] listConfigsForConfigTypeTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListConfigsForConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListConfigsForConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

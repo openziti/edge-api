@@ -6,8 +6,8 @@ paths:
       description: |
         Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: listIdentities
@@ -24,12 +24,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Create an identity resource
       description: Create an identity resource. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: createIdentity
@@ -47,6 +50,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -54,8 +60,8 @@ paths:
       summary: Retrieves a single identity
       description: Retrieves a single identity by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: detailIdentity
@@ -66,12 +72,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     put:
       summary: Update all fields on an identity
       description: Update all fields on an identity by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: updateIdentity
@@ -91,12 +100,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     patch:
       summary: Update the supplied fields on an identity
       description: Update the supplied fields on an identity. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: patchIdentity
@@ -116,12 +128,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete an identity
       description: Delete an identity by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: deleteIdentity
@@ -134,6 +149,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-edge-router-policies:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -141,8 +159,8 @@ paths:
       summary: List the edge router policies that affect an identity
       description: Retrieves a list of edge router policies that apply to the specified identity.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: listIdentitysEdgeRouterPolicies
@@ -153,6 +171,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-service-configs:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -160,8 +181,8 @@ paths:
       summary: List the service configs associated a specific identity
       description: Retrieves a list of service configs associated to a specific identity
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: listIdentitysServiceConfigs
@@ -172,6 +193,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Associate service configs for a specific identity
       description: Associate service configs to a specific identity
@@ -183,8 +207,8 @@ paths:
           schema:
             $ref: 'service-configs.yml#/definitions/serviceConfigsAssignList'
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: associateIdentitysServiceConfigs
@@ -197,6 +221,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Remove associated service configs from a specific identity
       description: Remove service configs from a specific identity
@@ -208,8 +235,8 @@ paths:
           schema:
             $ref: 'service-configs.yml#/definitions/serviceConfigsAssignList'
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: disassociateIdentitysServiceConfigs
@@ -222,6 +249,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-service-policies:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -229,8 +259,8 @@ paths:
       summary: List the service policies that affect an identity
       description: Retrieves a list of service policies that apply to the specified identity.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: listIdentityServicePolicies
@@ -241,6 +271,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   identities-id-edge-routers:
     parameters:
@@ -250,8 +282,8 @@ paths:
       description: |
         Retrieves a list of edge-routers that the given identity may use to access services. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: listIdentityEdgeRouters
@@ -262,6 +294,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   identities-id-services:
     parameters:
@@ -271,8 +305,8 @@ paths:
       description: |
         Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: listIdentityServices
@@ -283,6 +317,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   identities-id-policy-advice-service-id:
     parameters:
@@ -296,8 +332,8 @@ paths:
         to check if the identity and service have access to common edge routers so that a connnection can be made. |
         Will also check if at least one edge router is on-line. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: getIdentityPolicyAdvice
@@ -308,6 +344,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-posture-data:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -317,8 +356,8 @@ paths:
         Returns a nested map data represeting the posture data of the identity.
         This data should be considered volatile.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: getIdentityPostureData
@@ -329,6 +368,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-authenticators:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -337,7 +379,7 @@ paths:
       description: |
         Returns a list of authenticators associated to the identity specified
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
       operationId: getIdentityAuthenticators
@@ -348,6 +390,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-enrollments:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -356,7 +401,7 @@ paths:
       description: |
         Returns a list of enrollments associated to the identity specified
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
       operationId: getIdentityEnrollments
@@ -367,6 +412,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-failed-service-requests:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -377,7 +425,7 @@ paths:
         every policy that was verified against and every failed check in each policy. Each check will include
         the historical posture data and posture check configuration.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
       operationId: getIdentityFailedServiceRequests
@@ -388,6 +436,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-mfa:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -396,7 +447,7 @@ paths:
       description: |
         Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
         - MFA
@@ -408,6 +459,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-trace:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -416,7 +470,7 @@ paths:
       description: |
         Allows an admin to enable/disable data flow tracing for an identity
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
         - Tracing
@@ -437,6 +491,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-enable:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -445,7 +502,7 @@ paths:
       description: |
         Allows an admin to remove disabled statuses from an identity.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
       operationId: enableIdentity
@@ -456,6 +513,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   identities-id-disable:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -464,7 +524,7 @@ paths:
       description: |
         Allows an admin disable an identity for a set amount of time or indefinitely.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Identity
       operationId: disableIdentity
@@ -482,6 +542,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
 responses:
   listIdentities:
     description: A list of identities

@@ -65,6 +65,12 @@ func (o *CreateIdentityReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewCreateIdentityTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *CreateIdentityUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *CreateIdentityUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateIdentityTooManyRequests creates a CreateIdentityTooManyRequests with default headers values
+func NewCreateIdentityTooManyRequests() *CreateIdentityTooManyRequests {
+	return &CreateIdentityTooManyRequests{}
+}
+
+/* CreateIdentityTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type CreateIdentityTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateIdentityTooManyRequests) Error() string {
+	return fmt.Sprintf("[POST /identities][%d] createIdentityTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *CreateIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateIdentityTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

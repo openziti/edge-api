@@ -6,8 +6,8 @@ paths:
       description: |
         Retrieves a list of service edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: listServiceEdgeRouterPolicies
@@ -22,12 +22,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Create a service edge router policy resource
       description: Create a service edge router policy resource. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: createServiceEdgeRouterPolicy
@@ -45,6 +48,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   service-edge-router-policies-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -52,8 +58,8 @@ paths:
       summary: Retrieves a single service edge policy
       description: Retrieves a single service edge policy by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: detailServiceEdgeRouterPolicy
@@ -64,12 +70,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     put:
       summary: Update all fields on a service edge policy
       description: Update all fields on a service edge policy by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: updateServiceEdgeRouterPolicy
@@ -89,12 +98,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     patch:
       summary: Update the supplied fields on a service edge policy
       description: Update the supplied fields on a service edge policy. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: patchServiceEdgeRouterPolicy
@@ -114,12 +126,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete a service edge policy
       description: Delete a service edge policy by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: deleteServiceEdgeRouterPolicy
@@ -132,6 +147,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   service-edge-router-policies-id-edge-routers:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -139,8 +157,8 @@ paths:
       summary: List the edge routers that a service edge router policy applies to
       description: List the edge routers that a service edge router policy applies to
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: listServiceEdgeRouterPolicyEdgeRouters
@@ -151,6 +169,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   service-edge-router-policies-id-services:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -158,8 +179,8 @@ paths:
       summary: List the services that a service edge router policy applies to
       description: List the services that a service edge router policy applies to
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Edge Router Policy
       operationId: listServiceEdgeRouterPolicyServices
@@ -170,6 +191,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listServiceEdgeRouterPolicies:

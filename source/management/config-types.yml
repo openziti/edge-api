@@ -6,8 +6,8 @@ paths:
       description: |
         Retrieves a list of config-type resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Config
       operationId: listConfigTypes
@@ -22,10 +22,13 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Create a config-type. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Config
       operationId: createConfigType
@@ -43,6 +46,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   config-types-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -50,7 +56,7 @@ paths:
       summary: Retrieves a single config-type
       description: Retrieves a single config-type by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Config
       operationId: detailConfigType
@@ -61,11 +67,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     put:
       summary: Update all fields on a config-type
       description: Update all fields on a config-type by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Config
       operationId: updateConfigType
@@ -85,11 +94,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     patch:
       summary: Update the supplied fields on a config-type
       description: Update the supplied fields on a config-type. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Config
       operationId: patchConfigType
@@ -109,11 +121,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete a config-type
       description: Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Config
       operationId: deleteConfigType
@@ -126,6 +141,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   config-types-id-configs:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -133,13 +151,15 @@ paths:
       summary: Lists the configs of a specific config-type
       description: Lists the configs associated to a config-type. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Config
       operationId: listConfigsForConfigType
       responses:
         '200':
           $ref: 'configs.yml#/responses/listConfigs'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listConfigTypes:

@@ -80,3 +80,47 @@ func (o *ListProtocolsOK) WriteResponse(rw http.ResponseWriter, producer runtime
 		}
 	}
 }
+
+// ListProtocolsTooManyRequestsCode is the HTTP code returned for type ListProtocolsTooManyRequests
+const ListProtocolsTooManyRequestsCode int = 429
+
+/*ListProtocolsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listProtocolsTooManyRequests
+*/
+type ListProtocolsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListProtocolsTooManyRequests creates ListProtocolsTooManyRequests with default headers values
+func NewListProtocolsTooManyRequests() *ListProtocolsTooManyRequests {
+
+	return &ListProtocolsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list protocols too many requests response
+func (o *ListProtocolsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListProtocolsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list protocols too many requests response
+func (o *ListProtocolsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListProtocolsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

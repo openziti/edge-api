@@ -212,3 +212,47 @@ func (o *CreateSessionNotFound) WriteResponse(rw http.ResponseWriter, producer r
 		}
 	}
 }
+
+// CreateSessionTooManyRequestsCode is the HTTP code returned for type CreateSessionTooManyRequests
+const CreateSessionTooManyRequestsCode int = 429
+
+/*CreateSessionTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response createSessionTooManyRequests
+*/
+type CreateSessionTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateSessionTooManyRequests creates CreateSessionTooManyRequests with default headers values
+func NewCreateSessionTooManyRequests() *CreateSessionTooManyRequests {
+
+	return &CreateSessionTooManyRequests{}
+}
+
+// WithPayload adds the payload to the create session too many requests response
+func (o *CreateSessionTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateSessionTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create session too many requests response
+func (o *CreateSessionTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateSessionTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

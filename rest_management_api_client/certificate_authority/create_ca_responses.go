@@ -65,6 +65,12 @@ func (o *CreateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewCreateCaTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *CreateCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *CreateCaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateCaTooManyRequests creates a CreateCaTooManyRequests with default headers values
+func NewCreateCaTooManyRequests() *CreateCaTooManyRequests {
+	return &CreateCaTooManyRequests{}
+}
+
+/* CreateCaTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type CreateCaTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateCaTooManyRequests) Error() string {
+	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *CreateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

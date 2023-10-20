@@ -168,3 +168,47 @@ func (o *CreatePostureResponseBulkUnauthorized) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// CreatePostureResponseBulkTooManyRequestsCode is the HTTP code returned for type CreatePostureResponseBulkTooManyRequests
+const CreatePostureResponseBulkTooManyRequestsCode int = 429
+
+/*CreatePostureResponseBulkTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response createPostureResponseBulkTooManyRequests
+*/
+type CreatePostureResponseBulkTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreatePostureResponseBulkTooManyRequests creates CreatePostureResponseBulkTooManyRequests with default headers values
+func NewCreatePostureResponseBulkTooManyRequests() *CreatePostureResponseBulkTooManyRequests {
+
+	return &CreatePostureResponseBulkTooManyRequests{}
+}
+
+// WithPayload adds the payload to the create posture response bulk too many requests response
+func (o *CreatePostureResponseBulkTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *CreatePostureResponseBulkTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create posture response bulk too many requests response
+func (o *CreatePostureResponseBulkTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreatePostureResponseBulkTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

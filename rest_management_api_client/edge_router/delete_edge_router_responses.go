@@ -71,6 +71,12 @@ func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDeleteEdgeRouterTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *DeleteEdgeRouterConflict) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DeleteEdgeRouterConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteEdgeRouterTooManyRequests creates a DeleteEdgeRouterTooManyRequests with default headers values
+func NewDeleteEdgeRouterTooManyRequests() *DeleteEdgeRouterTooManyRequests {
+	return &DeleteEdgeRouterTooManyRequests{}
+}
+
+/* DeleteEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DeleteEdgeRouterTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteEdgeRouterTooManyRequests) Error() string {
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DeleteEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteEdgeRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

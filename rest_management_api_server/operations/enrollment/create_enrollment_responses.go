@@ -212,3 +212,47 @@ func (o *CreateEnrollmentConflict) WriteResponse(rw http.ResponseWriter, produce
 		}
 	}
 }
+
+// CreateEnrollmentTooManyRequestsCode is the HTTP code returned for type CreateEnrollmentTooManyRequests
+const CreateEnrollmentTooManyRequestsCode int = 429
+
+/*CreateEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response createEnrollmentTooManyRequests
+*/
+type CreateEnrollmentTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateEnrollmentTooManyRequests creates CreateEnrollmentTooManyRequests with default headers values
+func NewCreateEnrollmentTooManyRequests() *CreateEnrollmentTooManyRequests {
+
+	return &CreateEnrollmentTooManyRequests{}
+}
+
+// WithPayload adds the payload to the create enrollment too many requests response
+func (o *CreateEnrollmentTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateEnrollmentTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create enrollment too many requests response
+func (o *CreateEnrollmentTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

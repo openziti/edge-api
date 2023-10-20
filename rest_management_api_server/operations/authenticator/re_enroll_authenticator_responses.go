@@ -168,3 +168,47 @@ func (o *ReEnrollAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, pr
 		}
 	}
 }
+
+// ReEnrollAuthenticatorTooManyRequestsCode is the HTTP code returned for type ReEnrollAuthenticatorTooManyRequests
+const ReEnrollAuthenticatorTooManyRequestsCode int = 429
+
+/*ReEnrollAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response reEnrollAuthenticatorTooManyRequests
+*/
+type ReEnrollAuthenticatorTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewReEnrollAuthenticatorTooManyRequests creates ReEnrollAuthenticatorTooManyRequests with default headers values
+func NewReEnrollAuthenticatorTooManyRequests() *ReEnrollAuthenticatorTooManyRequests {
+
+	return &ReEnrollAuthenticatorTooManyRequests{}
+}
+
+// WithPayload adds the payload to the re enroll authenticator too many requests response
+func (o *ReEnrollAuthenticatorTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ReEnrollAuthenticatorTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the re enroll authenticator too many requests response
+func (o *ReEnrollAuthenticatorTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ReEnrollAuthenticatorTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

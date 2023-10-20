@@ -65,6 +65,12 @@ func (o *DetailIdentityTypeReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDetailIdentityTypeTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *DetailIdentityTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DetailIdentityTypeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDetailIdentityTypeTooManyRequests creates a DetailIdentityTypeTooManyRequests with default headers values
+func NewDetailIdentityTypeTooManyRequests() *DetailIdentityTypeTooManyRequests {
+	return &DetailIdentityTypeTooManyRequests{}
+}
+
+/* DetailIdentityTypeTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DetailIdentityTypeTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DetailIdentityTypeTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DetailIdentityTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DetailIdentityTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

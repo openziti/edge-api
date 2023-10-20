@@ -65,6 +65,12 @@ func (o *ListServiceServiceEdgeRouterPoliciesReader) ReadResponse(response runti
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewListServiceServiceEdgeRouterPoliciesTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *ListServiceServiceEdgeRouterPoliciesUnauthorized) GetPayload() *rest_mo
 }
 
 func (o *ListServiceServiceEdgeRouterPoliciesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListServiceServiceEdgeRouterPoliciesTooManyRequests creates a ListServiceServiceEdgeRouterPoliciesTooManyRequests with default headers values
+func NewListServiceServiceEdgeRouterPoliciesTooManyRequests() *ListServiceServiceEdgeRouterPoliciesTooManyRequests {
+	return &ListServiceServiceEdgeRouterPoliciesTooManyRequests{}
+}
+
+/* ListServiceServiceEdgeRouterPoliciesTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListServiceServiceEdgeRouterPoliciesTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListServiceServiceEdgeRouterPoliciesTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /services/{id}/service-edge-router-policies][%d] listServiceServiceEdgeRouterPoliciesTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListServiceServiceEdgeRouterPoliciesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListServiceServiceEdgeRouterPoliciesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

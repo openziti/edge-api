@@ -65,6 +65,12 @@ func (o *DetailCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDetailCaTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *DetailCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DetailCaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDetailCaTooManyRequests creates a DetailCaTooManyRequests with default headers values
+func NewDetailCaTooManyRequests() *DetailCaTooManyRequests {
+	return &DetailCaTooManyRequests{}
+}
+
+/* DetailCaTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DetailCaTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DetailCaTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DetailCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DetailCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

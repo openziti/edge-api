@@ -168,3 +168,47 @@ func (o *ListSessionsUnauthorized) WriteResponse(rw http.ResponseWriter, produce
 		}
 	}
 }
+
+// ListSessionsTooManyRequestsCode is the HTTP code returned for type ListSessionsTooManyRequests
+const ListSessionsTooManyRequestsCode int = 429
+
+/*ListSessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listSessionsTooManyRequests
+*/
+type ListSessionsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListSessionsTooManyRequests creates ListSessionsTooManyRequests with default headers values
+func NewListSessionsTooManyRequests() *ListSessionsTooManyRequests {
+
+	return &ListSessionsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list sessions too many requests response
+func (o *ListSessionsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListSessionsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list sessions too many requests response
+func (o *ListSessionsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListSessionsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

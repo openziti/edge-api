@@ -71,6 +71,12 @@ func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDeleteServicePolicyTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *DeleteServicePolicyConflict) GetPayload() *rest_model.APIErrorEnvelope 
 }
 
 func (o *DeleteServicePolicyConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteServicePolicyTooManyRequests creates a DeleteServicePolicyTooManyRequests with default headers values
+func NewDeleteServicePolicyTooManyRequests() *DeleteServicePolicyTooManyRequests {
+	return &DeleteServicePolicyTooManyRequests{}
+}
+
+/* DeleteServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DeleteServicePolicyTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServicePolicyTooManyRequests) Error() string {
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DeleteServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServicePolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

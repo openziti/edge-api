@@ -65,6 +65,12 @@ func (o *ListEdgeRouterIdentitiesReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewListEdgeRouterIdentitiesTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *ListEdgeRouterIdentitiesNotFound) GetPayload() *rest_model.APIErrorEnve
 }
 
 func (o *ListEdgeRouterIdentitiesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListEdgeRouterIdentitiesTooManyRequests creates a ListEdgeRouterIdentitiesTooManyRequests with default headers values
+func NewListEdgeRouterIdentitiesTooManyRequests() *ListEdgeRouterIdentitiesTooManyRequests {
+	return &ListEdgeRouterIdentitiesTooManyRequests{}
+}
+
+/* ListEdgeRouterIdentitiesTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListEdgeRouterIdentitiesTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListEdgeRouterIdentitiesTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListEdgeRouterIdentitiesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListEdgeRouterIdentitiesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

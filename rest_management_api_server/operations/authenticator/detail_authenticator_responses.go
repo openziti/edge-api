@@ -168,3 +168,47 @@ func (o *DetailAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, prod
 		}
 	}
 }
+
+// DetailAuthenticatorTooManyRequestsCode is the HTTP code returned for type DetailAuthenticatorTooManyRequests
+const DetailAuthenticatorTooManyRequestsCode int = 429
+
+/*DetailAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailAuthenticatorTooManyRequests
+*/
+type DetailAuthenticatorTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailAuthenticatorTooManyRequests creates DetailAuthenticatorTooManyRequests with default headers values
+func NewDetailAuthenticatorTooManyRequests() *DetailAuthenticatorTooManyRequests {
+
+	return &DetailAuthenticatorTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail authenticator too many requests response
+func (o *DetailAuthenticatorTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailAuthenticatorTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail authenticator too many requests response
+func (o *DetailAuthenticatorTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailAuthenticatorTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

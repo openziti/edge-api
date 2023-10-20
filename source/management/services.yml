@@ -6,8 +6,8 @@ paths:
       description: |
         Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServices
@@ -24,12 +24,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Create a services resource
       description: Create a services resource. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: createService
@@ -47,6 +50,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   services-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -54,8 +60,8 @@ paths:
       summary: Retrieves a single service
       description: Retrieves a single service by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: detailService
@@ -66,12 +72,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     put:
       summary: Update all fields on a service
       description: Update all fields on a service by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: updateService
@@ -91,12 +100,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     patch:
       summary: Update the supplied fields on a service
       description: Update the supplied fields on a service. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: patchService
@@ -116,12 +128,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete a service
       description: Delete a service by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: deleteService
@@ -134,6 +149,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   services-id-configs:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -142,8 +160,8 @@ paths:
       description: |
         Retrieves a list of config resources associated to a specific service; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServiceConfig
@@ -158,6 +176,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   services-id-service-edge-router-policies:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -166,8 +187,8 @@ paths:
       description: |
         Retrieves a list of service edge router policy resources that affect a specific service; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServiceServiceEdgeRouterPolicies
@@ -182,6 +203,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   services-id-service-policies:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -190,8 +214,8 @@ paths:
       description: |
         Retrieves a list of service policy resources that affect specific service; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServiceServicePolicies
@@ -206,6 +230,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   services-id-identities:
     parameters:
@@ -215,8 +241,8 @@ paths:
       description: |
         Retrieves a list of identities that have access to this service. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServiceIdentities
@@ -231,6 +257,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   services-id-edge-routers:
     parameters:
@@ -240,8 +268,8 @@ paths:
       description: |
         Retrieves a list of edge-routers that may be used to access the given service. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServiceEdgeRouters
@@ -256,6 +284,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   services-id-terminators:
     parameters:
@@ -265,8 +295,8 @@ paths:
       description: |
         Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service
       operationId: listServiceTerminators
@@ -281,6 +311,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 definitions:
   serviceCreate:

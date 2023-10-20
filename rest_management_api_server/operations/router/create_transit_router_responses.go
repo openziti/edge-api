@@ -168,3 +168,47 @@ func (o *CreateTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// CreateTransitRouterTooManyRequestsCode is the HTTP code returned for type CreateTransitRouterTooManyRequests
+const CreateTransitRouterTooManyRequestsCode int = 429
+
+/*CreateTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response createTransitRouterTooManyRequests
+*/
+type CreateTransitRouterTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateTransitRouterTooManyRequests creates CreateTransitRouterTooManyRequests with default headers values
+func NewCreateTransitRouterTooManyRequests() *CreateTransitRouterTooManyRequests {
+
+	return &CreateTransitRouterTooManyRequests{}
+}
+
+// WithPayload adds the payload to the create transit router too many requests response
+func (o *CreateTransitRouterTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateTransitRouterTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create transit router too many requests response
+func (o *CreateTransitRouterTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

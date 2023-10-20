@@ -212,3 +212,47 @@ func (o *DeleteServicePolicyConflict) WriteResponse(rw http.ResponseWriter, prod
 		}
 	}
 }
+
+// DeleteServicePolicyTooManyRequestsCode is the HTTP code returned for type DeleteServicePolicyTooManyRequests
+const DeleteServicePolicyTooManyRequestsCode int = 429
+
+/*DeleteServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteServicePolicyTooManyRequests
+*/
+type DeleteServicePolicyTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteServicePolicyTooManyRequests creates DeleteServicePolicyTooManyRequests with default headers values
+func NewDeleteServicePolicyTooManyRequests() *DeleteServicePolicyTooManyRequests {
+
+	return &DeleteServicePolicyTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete service policy too many requests response
+func (o *DeleteServicePolicyTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteServicePolicyTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete service policy too many requests response
+func (o *DeleteServicePolicyTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteServicePolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

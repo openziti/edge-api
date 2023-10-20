@@ -71,6 +71,12 @@ func (o *DeleteEdgeRouterPolicyReader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDeleteEdgeRouterPolicyTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *DeleteEdgeRouterPolicyConflict) GetPayload() *rest_model.APIErrorEnvelo
 }
 
 func (o *DeleteEdgeRouterPolicyConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteEdgeRouterPolicyTooManyRequests creates a DeleteEdgeRouterPolicyTooManyRequests with default headers values
+func NewDeleteEdgeRouterPolicyTooManyRequests() *DeleteEdgeRouterPolicyTooManyRequests {
+	return &DeleteEdgeRouterPolicyTooManyRequests{}
+}
+
+/* DeleteEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DeleteEdgeRouterPolicyTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteEdgeRouterPolicyTooManyRequests) Error() string {
+	return fmt.Sprintf("[DELETE /edge-router-policies/{id}][%d] deleteEdgeRouterPolicyTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DeleteEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteEdgeRouterPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -168,3 +168,47 @@ func (o *ListConfigsUnauthorized) WriteResponse(rw http.ResponseWriter, producer
 		}
 	}
 }
+
+// ListConfigsTooManyRequestsCode is the HTTP code returned for type ListConfigsTooManyRequests
+const ListConfigsTooManyRequestsCode int = 429
+
+/*ListConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listConfigsTooManyRequests
+*/
+type ListConfigsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListConfigsTooManyRequests creates ListConfigsTooManyRequests with default headers values
+func NewListConfigsTooManyRequests() *ListConfigsTooManyRequests {
+
+	return &ListConfigsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list configs too many requests response
+func (o *ListConfigsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListConfigsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list configs too many requests response
+func (o *ListConfigsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListConfigsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

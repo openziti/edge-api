@@ -168,3 +168,47 @@ func (o *ListPostureChecksUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 		}
 	}
 }
+
+// ListPostureChecksTooManyRequestsCode is the HTTP code returned for type ListPostureChecksTooManyRequests
+const ListPostureChecksTooManyRequestsCode int = 429
+
+/*ListPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listPostureChecksTooManyRequests
+*/
+type ListPostureChecksTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListPostureChecksTooManyRequests creates ListPostureChecksTooManyRequests with default headers values
+func NewListPostureChecksTooManyRequests() *ListPostureChecksTooManyRequests {
+
+	return &ListPostureChecksTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list posture checks too many requests response
+func (o *ListPostureChecksTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListPostureChecksTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list posture checks too many requests response
+func (o *ListPostureChecksTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListPostureChecksTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

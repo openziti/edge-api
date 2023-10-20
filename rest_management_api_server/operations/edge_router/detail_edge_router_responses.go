@@ -168,3 +168,47 @@ func (o *DetailEdgeRouterNotFound) WriteResponse(rw http.ResponseWriter, produce
 		}
 	}
 }
+
+// DetailEdgeRouterTooManyRequestsCode is the HTTP code returned for type DetailEdgeRouterTooManyRequests
+const DetailEdgeRouterTooManyRequestsCode int = 429
+
+/*DetailEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailEdgeRouterTooManyRequests
+*/
+type DetailEdgeRouterTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailEdgeRouterTooManyRequests creates DetailEdgeRouterTooManyRequests with default headers values
+func NewDetailEdgeRouterTooManyRequests() *DetailEdgeRouterTooManyRequests {
+
+	return &DetailEdgeRouterTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail edge router too many requests response
+func (o *DetailEdgeRouterTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailEdgeRouterTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail edge router too many requests response
+func (o *DetailEdgeRouterTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailEdgeRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

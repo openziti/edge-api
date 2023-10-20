@@ -124,3 +124,47 @@ func (o *ExtendRouterEnrollmentUnauthorized) WriteResponse(rw http.ResponseWrite
 		}
 	}
 }
+
+// ExtendRouterEnrollmentTooManyRequestsCode is the HTTP code returned for type ExtendRouterEnrollmentTooManyRequests
+const ExtendRouterEnrollmentTooManyRequestsCode int = 429
+
+/*ExtendRouterEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response extendRouterEnrollmentTooManyRequests
+*/
+type ExtendRouterEnrollmentTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewExtendRouterEnrollmentTooManyRequests creates ExtendRouterEnrollmentTooManyRequests with default headers values
+func NewExtendRouterEnrollmentTooManyRequests() *ExtendRouterEnrollmentTooManyRequests {
+
+	return &ExtendRouterEnrollmentTooManyRequests{}
+}
+
+// WithPayload adds the payload to the extend router enrollment too many requests response
+func (o *ExtendRouterEnrollmentTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ExtendRouterEnrollmentTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the extend router enrollment too many requests response
+func (o *ExtendRouterEnrollmentTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ExtendRouterEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

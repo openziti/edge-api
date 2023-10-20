@@ -168,3 +168,47 @@ func (o *GetIdentityFailedServiceRequestsNotFound) WriteResponse(rw http.Respons
 		}
 	}
 }
+
+// GetIdentityFailedServiceRequestsTooManyRequestsCode is the HTTP code returned for type GetIdentityFailedServiceRequestsTooManyRequests
+const GetIdentityFailedServiceRequestsTooManyRequestsCode int = 429
+
+/*GetIdentityFailedServiceRequestsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response getIdentityFailedServiceRequestsTooManyRequests
+*/
+type GetIdentityFailedServiceRequestsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityFailedServiceRequestsTooManyRequests creates GetIdentityFailedServiceRequestsTooManyRequests with default headers values
+func NewGetIdentityFailedServiceRequestsTooManyRequests() *GetIdentityFailedServiceRequestsTooManyRequests {
+
+	return &GetIdentityFailedServiceRequestsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the get identity failed service requests too many requests response
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityFailedServiceRequestsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity failed service requests too many requests response
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

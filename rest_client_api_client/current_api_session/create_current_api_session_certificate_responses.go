@@ -65,6 +65,12 @@ func (o *CreateCurrentAPISessionCertificateReader) ReadResponse(response runtime
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewCreateCurrentAPISessionCertificateTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *CreateCurrentAPISessionCertificateUnauthorized) GetPayload() *rest_mode
 }
 
 func (o *CreateCurrentAPISessionCertificateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateCurrentAPISessionCertificateTooManyRequests creates a CreateCurrentAPISessionCertificateTooManyRequests with default headers values
+func NewCreateCurrentAPISessionCertificateTooManyRequests() *CreateCurrentAPISessionCertificateTooManyRequests {
+	return &CreateCurrentAPISessionCertificateTooManyRequests{}
+}
+
+/* CreateCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type CreateCurrentAPISessionCertificateTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) Error() string {
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

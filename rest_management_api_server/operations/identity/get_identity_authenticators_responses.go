@@ -168,3 +168,47 @@ func (o *GetIdentityAuthenticatorsNotFound) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// GetIdentityAuthenticatorsTooManyRequestsCode is the HTTP code returned for type GetIdentityAuthenticatorsTooManyRequests
+const GetIdentityAuthenticatorsTooManyRequestsCode int = 429
+
+/*GetIdentityAuthenticatorsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response getIdentityAuthenticatorsTooManyRequests
+*/
+type GetIdentityAuthenticatorsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityAuthenticatorsTooManyRequests creates GetIdentityAuthenticatorsTooManyRequests with default headers values
+func NewGetIdentityAuthenticatorsTooManyRequests() *GetIdentityAuthenticatorsTooManyRequests {
+
+	return &GetIdentityAuthenticatorsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the get identity authenticators too many requests response
+func (o *GetIdentityAuthenticatorsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityAuthenticatorsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity authenticators too many requests response
+func (o *GetIdentityAuthenticatorsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityAuthenticatorsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

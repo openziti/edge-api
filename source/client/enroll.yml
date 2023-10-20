@@ -24,6 +24,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enroll-ca:
     post:
       summary: Enroll an identity with a pre-exchanged certificate
@@ -41,6 +44,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enroll-ott:
     parameters:
       - $ref: '../shared/parameters.yml#/token'
@@ -62,6 +68,9 @@ paths:
           $ref: '#/responses/zitiSignedCert'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enroll-ottca:
     parameters:
       - $ref: '../shared/parameters.yml#/token'
@@ -80,6 +89,9 @@ paths:
       responses:
         '200':
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enroll-updb:
     parameters:
       - $ref: '../shared/parameters.yml#/token'
@@ -95,6 +107,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enroll-erott:
     parameters:
       - $ref: '../shared/parameters.yml#/token'
@@ -108,6 +123,9 @@ paths:
       responses:
         '200':
           $ref: '#/responses/erottResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enroll-extend-router:
     post:
       summary: Extend the life of a currently enrolled router's certificates
@@ -136,6 +154,8 @@ paths:
           $ref: '#/responses/routerExtendEnrollmentResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   erottResponse:

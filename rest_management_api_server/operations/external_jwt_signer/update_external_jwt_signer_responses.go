@@ -212,3 +212,47 @@ func (o *UpdateExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// UpdateExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type UpdateExternalJWTSignerTooManyRequests
+const UpdateExternalJWTSignerTooManyRequestsCode int = 429
+
+/*UpdateExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response updateExternalJwtSignerTooManyRequests
+*/
+type UpdateExternalJWTSignerTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdateExternalJWTSignerTooManyRequests creates UpdateExternalJWTSignerTooManyRequests with default headers values
+func NewUpdateExternalJWTSignerTooManyRequests() *UpdateExternalJWTSignerTooManyRequests {
+
+	return &UpdateExternalJWTSignerTooManyRequests{}
+}
+
+// WithPayload adds the payload to the update external Jwt signer too many requests response
+func (o *UpdateExternalJWTSignerTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdateExternalJWTSignerTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update external Jwt signer too many requests response
+func (o *UpdateExternalJWTSignerTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdateExternalJWTSignerTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

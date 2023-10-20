@@ -168,3 +168,47 @@ func (o *DisableIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer
 		}
 	}
 }
+
+// DisableIdentityTooManyRequestsCode is the HTTP code returned for type DisableIdentityTooManyRequests
+const DisableIdentityTooManyRequestsCode int = 429
+
+/*DisableIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response disableIdentityTooManyRequests
+*/
+type DisableIdentityTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDisableIdentityTooManyRequests creates DisableIdentityTooManyRequests with default headers values
+func NewDisableIdentityTooManyRequests() *DisableIdentityTooManyRequests {
+
+	return &DisableIdentityTooManyRequests{}
+}
+
+// WithPayload adds the payload to the disable identity too many requests response
+func (o *DisableIdentityTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DisableIdentityTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the disable identity too many requests response
+func (o *DisableIdentityTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DisableIdentityTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

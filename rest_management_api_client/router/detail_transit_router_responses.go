@@ -65,6 +65,12 @@ func (o *DetailTransitRouterReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDetailTransitRouterTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *DetailTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope 
 }
 
 func (o *DetailTransitRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDetailTransitRouterTooManyRequests creates a DetailTransitRouterTooManyRequests with default headers values
+func NewDetailTransitRouterTooManyRequests() *DetailTransitRouterTooManyRequests {
+	return &DetailTransitRouterTooManyRequests{}
+}
+
+/* DetailTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DetailTransitRouterTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DetailTransitRouterTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DetailTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DetailTransitRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

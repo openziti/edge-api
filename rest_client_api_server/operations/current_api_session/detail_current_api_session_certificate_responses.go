@@ -168,3 +168,47 @@ func (o *DetailCurrentAPISessionCertificateNotFound) WriteResponse(rw http.Respo
 		}
 	}
 }
+
+// DetailCurrentAPISessionCertificateTooManyRequestsCode is the HTTP code returned for type DetailCurrentAPISessionCertificateTooManyRequests
+const DetailCurrentAPISessionCertificateTooManyRequestsCode int = 429
+
+/*DetailCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailCurrentApiSessionCertificateTooManyRequests
+*/
+type DetailCurrentAPISessionCertificateTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailCurrentAPISessionCertificateTooManyRequests creates DetailCurrentAPISessionCertificateTooManyRequests with default headers values
+func NewDetailCurrentAPISessionCertificateTooManyRequests() *DetailCurrentAPISessionCertificateTooManyRequests {
+
+	return &DetailCurrentAPISessionCertificateTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail current Api session certificate too many requests response
+func (o *DetailCurrentAPISessionCertificateTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailCurrentAPISessionCertificateTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail current Api session certificate too many requests response
+func (o *DetailCurrentAPISessionCertificateTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

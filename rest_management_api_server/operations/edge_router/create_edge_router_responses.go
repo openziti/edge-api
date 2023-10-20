@@ -168,3 +168,47 @@ func (o *CreateEdgeRouterUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 		}
 	}
 }
+
+// CreateEdgeRouterTooManyRequestsCode is the HTTP code returned for type CreateEdgeRouterTooManyRequests
+const CreateEdgeRouterTooManyRequestsCode int = 429
+
+/*CreateEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response createEdgeRouterTooManyRequests
+*/
+type CreateEdgeRouterTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateEdgeRouterTooManyRequests creates CreateEdgeRouterTooManyRequests with default headers values
+func NewCreateEdgeRouterTooManyRequests() *CreateEdgeRouterTooManyRequests {
+
+	return &CreateEdgeRouterTooManyRequests{}
+}
+
+// WithPayload adds the payload to the create edge router too many requests response
+func (o *CreateEdgeRouterTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateEdgeRouterTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create edge router too many requests response
+func (o *CreateEdgeRouterTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateEdgeRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -5,8 +5,8 @@ paths:
       summary: List the ephemeral certificates available for the current API Session
       description: Retrieves a list of certificate resources for the current API session; supports filtering, sorting, and pagination
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Current API Session
       operationId: listCurrentApiSessionCertificates
@@ -21,14 +21,17 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Creates an ephemeral certificate for the current API Session
       description: Creates an ephemeral certificate for the current API Session. This endpoint
         expects a PEM encoded CSRs to be provided for fulfillment as a property of a JSON payload.
         It is up to the client to manage the private key backing the CSR request.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Current API Session
       operationId: createCurrentApiSessionCertificate
@@ -46,6 +49,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   current-api-session-certificates-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -53,8 +59,8 @@ paths:
       summary: Retrieves an ephemeral certificate
       description: Retrieves a single ephemeral certificate by id
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Current API Session
       operationId: detailCurrentApiSessionCertificate
@@ -65,13 +71,16 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete an ephemeral certificate
       description: |
         Delete an ephemeral certificateby id
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Current API Session
       operationId: deleteCurrentApiSessionCertificate
@@ -82,6 +91,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listCurrentApiSessionCertificates:
