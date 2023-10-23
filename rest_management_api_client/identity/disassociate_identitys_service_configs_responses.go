@@ -71,6 +71,12 @@ func (o *DisassociateIdentitysServiceConfigsReader) ReadResponse(response runtim
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewDisassociateIdentitysServiceConfigsTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *DisassociateIdentitysServiceConfigsNotFound) GetPayload() *rest_model.A
 }
 
 func (o *DisassociateIdentitysServiceConfigsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDisassociateIdentitysServiceConfigsTooManyRequests creates a DisassociateIdentitysServiceConfigsTooManyRequests with default headers values
+func NewDisassociateIdentitysServiceConfigsTooManyRequests() *DisassociateIdentitysServiceConfigsTooManyRequests {
+	return &DisassociateIdentitysServiceConfigsTooManyRequests{}
+}
+
+/* DisassociateIdentitysServiceConfigsTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type DisassociateIdentitysServiceConfigsTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DisassociateIdentitysServiceConfigsTooManyRequests) Error() string {
+	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *DisassociateIdentitysServiceConfigsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DisassociateIdentitysServiceConfigsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

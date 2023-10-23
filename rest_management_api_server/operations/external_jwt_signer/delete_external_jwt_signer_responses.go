@@ -168,3 +168,47 @@ func (o *DeleteExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 		}
 	}
 }
+
+// DeleteExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type DeleteExternalJWTSignerTooManyRequests
+const DeleteExternalJWTSignerTooManyRequestsCode int = 429
+
+/*DeleteExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteExternalJwtSignerTooManyRequests
+*/
+type DeleteExternalJWTSignerTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteExternalJWTSignerTooManyRequests creates DeleteExternalJWTSignerTooManyRequests with default headers values
+func NewDeleteExternalJWTSignerTooManyRequests() *DeleteExternalJWTSignerTooManyRequests {
+
+	return &DeleteExternalJWTSignerTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete external Jwt signer too many requests response
+func (o *DeleteExternalJWTSignerTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteExternalJWTSignerTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete external Jwt signer too many requests response
+func (o *DeleteExternalJWTSignerTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteExternalJWTSignerTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -65,6 +65,12 @@ func (o *GetIdentityFailedServiceRequestsReader) ReadResponse(response runtime.C
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewGetIdentityFailedServiceRequestsTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *GetIdentityFailedServiceRequestsNotFound) GetPayload() *rest_model.APIE
 }
 
 func (o *GetIdentityFailedServiceRequestsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetIdentityFailedServiceRequestsTooManyRequests creates a GetIdentityFailedServiceRequestsTooManyRequests with default headers values
+func NewGetIdentityFailedServiceRequestsTooManyRequests() *GetIdentityFailedServiceRequestsTooManyRequests {
+	return &GetIdentityFailedServiceRequestsTooManyRequests{}
+}
+
+/* GetIdentityFailedServiceRequestsTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type GetIdentityFailedServiceRequestsTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /identities/{id}/failed-service-requests][%d] getIdentityFailedServiceRequestsTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

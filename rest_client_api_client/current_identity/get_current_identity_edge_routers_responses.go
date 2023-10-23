@@ -59,6 +59,12 @@ func (o *GetCurrentIdentityEdgeRoutersReader) ReadResponse(response runtime.Clie
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewGetCurrentIdentityEdgeRoutersTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -117,6 +123,38 @@ func (o *GetCurrentIdentityEdgeRoutersUnauthorized) GetPayload() *rest_model.API
 }
 
 func (o *GetCurrentIdentityEdgeRoutersUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetCurrentIdentityEdgeRoutersTooManyRequests creates a GetCurrentIdentityEdgeRoutersTooManyRequests with default headers values
+func NewGetCurrentIdentityEdgeRoutersTooManyRequests() *GetCurrentIdentityEdgeRoutersTooManyRequests {
+	return &GetCurrentIdentityEdgeRoutersTooManyRequests{}
+}
+
+/* GetCurrentIdentityEdgeRoutersTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type GetCurrentIdentityEdgeRoutersTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /current-identity/edge-routers][%d] getCurrentIdentityEdgeRoutersTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

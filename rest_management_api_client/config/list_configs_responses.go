@@ -65,6 +65,12 @@ func (o *ListConfigsReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewListConfigsTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *ListConfigsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *ListConfigsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListConfigsTooManyRequests creates a ListConfigsTooManyRequests with default headers values
+func NewListConfigsTooManyRequests() *ListConfigsTooManyRequests {
+	return &ListConfigsTooManyRequests{}
+}
+
+/* ListConfigsTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListConfigsTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListConfigsTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /configs][%d] listConfigsTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListConfigsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListConfigsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

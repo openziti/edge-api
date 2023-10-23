@@ -168,3 +168,47 @@ func (o *DeleteAPISessionsNotFound) WriteResponse(rw http.ResponseWriter, produc
 		}
 	}
 }
+
+// DeleteAPISessionsTooManyRequestsCode is the HTTP code returned for type DeleteAPISessionsTooManyRequests
+const DeleteAPISessionsTooManyRequestsCode int = 429
+
+/*DeleteAPISessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteApiSessionsTooManyRequests
+*/
+type DeleteAPISessionsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAPISessionsTooManyRequests creates DeleteAPISessionsTooManyRequests with default headers values
+func NewDeleteAPISessionsTooManyRequests() *DeleteAPISessionsTooManyRequests {
+
+	return &DeleteAPISessionsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete Api sessions too many requests response
+func (o *DeleteAPISessionsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAPISessionsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete Api sessions too many requests response
+func (o *DeleteAPISessionsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAPISessionsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

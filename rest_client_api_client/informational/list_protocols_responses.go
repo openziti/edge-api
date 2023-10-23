@@ -53,6 +53,12 @@ func (o *ListProtocolsReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return result, nil
+	case 429:
+		result := NewListProtocolsTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -81,6 +87,38 @@ func (o *ListProtocolsOK) GetPayload() *rest_model.ListProtocolsEnvelope {
 func (o *ListProtocolsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.ListProtocolsEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListProtocolsTooManyRequests creates a ListProtocolsTooManyRequests with default headers values
+func NewListProtocolsTooManyRequests() *ListProtocolsTooManyRequests {
+	return &ListProtocolsTooManyRequests{}
+}
+
+/* ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListProtocolsTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListProtocolsTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListProtocolsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListProtocolsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

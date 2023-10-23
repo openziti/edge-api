@@ -124,3 +124,47 @@ func (o *GetCurrentIdentityEdgeRoutersUnauthorized) WriteResponse(rw http.Respon
 		}
 	}
 }
+
+// GetCurrentIdentityEdgeRoutersTooManyRequestsCode is the HTTP code returned for type GetCurrentIdentityEdgeRoutersTooManyRequests
+const GetCurrentIdentityEdgeRoutersTooManyRequestsCode int = 429
+
+/*GetCurrentIdentityEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response getCurrentIdentityEdgeRoutersTooManyRequests
+*/
+type GetCurrentIdentityEdgeRoutersTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetCurrentIdentityEdgeRoutersTooManyRequests creates GetCurrentIdentityEdgeRoutersTooManyRequests with default headers values
+func NewGetCurrentIdentityEdgeRoutersTooManyRequests() *GetCurrentIdentityEdgeRoutersTooManyRequests {
+
+	return &GetCurrentIdentityEdgeRoutersTooManyRequests{}
+}
+
+// WithPayload adds the payload to the get current identity edge routers too many requests response
+func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *GetCurrentIdentityEdgeRoutersTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get current identity edge routers too many requests response
+func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

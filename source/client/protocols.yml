@@ -10,6 +10,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/listProtocols'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listProtocols:

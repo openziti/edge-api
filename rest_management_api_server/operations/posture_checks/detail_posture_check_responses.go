@@ -168,3 +168,47 @@ func (o *DetailPostureCheckNotFound) WriteResponse(rw http.ResponseWriter, produ
 		}
 	}
 }
+
+// DetailPostureCheckTooManyRequestsCode is the HTTP code returned for type DetailPostureCheckTooManyRequests
+const DetailPostureCheckTooManyRequestsCode int = 429
+
+/*DetailPostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailPostureCheckTooManyRequests
+*/
+type DetailPostureCheckTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailPostureCheckTooManyRequests creates DetailPostureCheckTooManyRequests with default headers values
+func NewDetailPostureCheckTooManyRequests() *DetailPostureCheckTooManyRequests {
+
+	return &DetailPostureCheckTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail posture check too many requests response
+func (o *DetailPostureCheckTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailPostureCheckTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail posture check too many requests response
+func (o *DetailPostureCheckTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailPostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

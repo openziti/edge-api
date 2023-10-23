@@ -7,8 +7,8 @@ paths:
         Lists the Edge Routers that the current identity has access to via policies. The data returned
         includes their address and online status
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Current Identity
         - Edge Router
@@ -18,6 +18,8 @@ paths:
           $ref: '#/responses/listCurrentIdentityEdgeRouters'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listCurrentIdentityEdgeRouters:

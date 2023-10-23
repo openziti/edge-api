@@ -71,6 +71,12 @@ func (o *UpdateConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewUpdateConfigTypeTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *UpdateConfigTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *UpdateConfigTypeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewUpdateConfigTypeTooManyRequests creates a UpdateConfigTypeTooManyRequests with default headers values
+func NewUpdateConfigTypeTooManyRequests() *UpdateConfigTypeTooManyRequests {
+	return &UpdateConfigTypeTooManyRequests{}
+}
+
+/* UpdateConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type UpdateConfigTypeTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *UpdateConfigTypeTooManyRequests) Error() string {
+	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *UpdateConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *UpdateConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

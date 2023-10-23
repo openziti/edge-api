@@ -168,3 +168,47 @@ func (o *DeletePostureCheckNotFound) WriteResponse(rw http.ResponseWriter, produ
 		}
 	}
 }
+
+// DeletePostureCheckTooManyRequestsCode is the HTTP code returned for type DeletePostureCheckTooManyRequests
+const DeletePostureCheckTooManyRequestsCode int = 429
+
+/*DeletePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deletePostureCheckTooManyRequests
+*/
+type DeletePostureCheckTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeletePostureCheckTooManyRequests creates DeletePostureCheckTooManyRequests with default headers values
+func NewDeletePostureCheckTooManyRequests() *DeletePostureCheckTooManyRequests {
+
+	return &DeletePostureCheckTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete posture check too many requests response
+func (o *DeletePostureCheckTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeletePostureCheckTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete posture check too many requests response
+func (o *DeletePostureCheckTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeletePostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

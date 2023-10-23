@@ -71,6 +71,12 @@ func (o *PatchConfigReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewPatchConfigTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *PatchConfigNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *PatchConfigNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchConfigTooManyRequests creates a PatchConfigTooManyRequests with default headers values
+func NewPatchConfigTooManyRequests() *PatchConfigTooManyRequests {
+	return &PatchConfigTooManyRequests{}
+}
+
+/* PatchConfigTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type PatchConfigTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *PatchConfigTooManyRequests) Error() string {
+	return fmt.Sprintf("[PATCH /configs/{id}][%d] patchConfigTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *PatchConfigTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *PatchConfigTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

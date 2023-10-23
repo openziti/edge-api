@@ -168,3 +168,47 @@ func (o *ListServicePolicyServicesUnauthorized) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// ListServicePolicyServicesTooManyRequestsCode is the HTTP code returned for type ListServicePolicyServicesTooManyRequests
+const ListServicePolicyServicesTooManyRequestsCode int = 429
+
+/*ListServicePolicyServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listServicePolicyServicesTooManyRequests
+*/
+type ListServicePolicyServicesTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServicePolicyServicesTooManyRequests creates ListServicePolicyServicesTooManyRequests with default headers values
+func NewListServicePolicyServicesTooManyRequests() *ListServicePolicyServicesTooManyRequests {
+
+	return &ListServicePolicyServicesTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list service policy services too many requests response
+func (o *ListServicePolicyServicesTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServicePolicyServicesTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list service policy services too many requests response
+func (o *ListServicePolicyServicesTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServicePolicyServicesTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

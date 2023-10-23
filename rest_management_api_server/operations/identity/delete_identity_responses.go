@@ -212,3 +212,47 @@ func (o *DeleteIdentityConflict) WriteResponse(rw http.ResponseWriter, producer 
 		}
 	}
 }
+
+// DeleteIdentityTooManyRequestsCode is the HTTP code returned for type DeleteIdentityTooManyRequests
+const DeleteIdentityTooManyRequestsCode int = 429
+
+/*DeleteIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteIdentityTooManyRequests
+*/
+type DeleteIdentityTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteIdentityTooManyRequests creates DeleteIdentityTooManyRequests with default headers values
+func NewDeleteIdentityTooManyRequests() *DeleteIdentityTooManyRequests {
+
+	return &DeleteIdentityTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete identity too many requests response
+func (o *DeleteIdentityTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteIdentityTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete identity too many requests response
+func (o *DeleteIdentityTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteIdentityTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

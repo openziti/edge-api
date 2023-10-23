@@ -124,3 +124,47 @@ func (o *ErnollUpdbNotFound) WriteResponse(rw http.ResponseWriter, producer runt
 		}
 	}
 }
+
+// ErnollUpdbTooManyRequestsCode is the HTTP code returned for type ErnollUpdbTooManyRequests
+const ErnollUpdbTooManyRequestsCode int = 429
+
+/*ErnollUpdbTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response ernollUpdbTooManyRequests
+*/
+type ErnollUpdbTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewErnollUpdbTooManyRequests creates ErnollUpdbTooManyRequests with default headers values
+func NewErnollUpdbTooManyRequests() *ErnollUpdbTooManyRequests {
+
+	return &ErnollUpdbTooManyRequests{}
+}
+
+// WithPayload adds the payload to the ernoll updb too many requests response
+func (o *ErnollUpdbTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ErnollUpdbTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the ernoll updb too many requests response
+func (o *ErnollUpdbTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ErnollUpdbTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

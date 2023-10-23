@@ -212,3 +212,47 @@ func (o *DeleteConfigTypeConflict) WriteResponse(rw http.ResponseWriter, produce
 		}
 	}
 }
+
+// DeleteConfigTypeTooManyRequestsCode is the HTTP code returned for type DeleteConfigTypeTooManyRequests
+const DeleteConfigTypeTooManyRequestsCode int = 429
+
+/*DeleteConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteConfigTypeTooManyRequests
+*/
+type DeleteConfigTypeTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteConfigTypeTooManyRequests creates DeleteConfigTypeTooManyRequests with default headers values
+func NewDeleteConfigTypeTooManyRequests() *DeleteConfigTypeTooManyRequests {
+
+	return &DeleteConfigTypeTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete config type too many requests response
+func (o *DeleteConfigTypeTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteConfigTypeTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete config type too many requests response
+func (o *DeleteConfigTypeTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

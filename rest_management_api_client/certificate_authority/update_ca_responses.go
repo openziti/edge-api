@@ -71,6 +71,12 @@ func (o *UpdateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewUpdateCaTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *UpdateCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *UpdateCaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewUpdateCaTooManyRequests creates a UpdateCaTooManyRequests with default headers values
+func NewUpdateCaTooManyRequests() *UpdateCaTooManyRequests {
+	return &UpdateCaTooManyRequests{}
+}
+
+/* UpdateCaTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type UpdateCaTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *UpdateCaTooManyRequests) Error() string {
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *UpdateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *UpdateCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

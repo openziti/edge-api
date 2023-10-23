@@ -65,6 +65,12 @@ func (o *ListAPISessionsReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewListAPISessionsTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *ListAPISessionsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope 
 }
 
 func (o *ListAPISessionsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListAPISessionsTooManyRequests creates a ListAPISessionsTooManyRequests with default headers values
+func NewListAPISessionsTooManyRequests() *ListAPISessionsTooManyRequests {
+	return &ListAPISessionsTooManyRequests{}
+}
+
+/* ListAPISessionsTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListAPISessionsTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListAPISessionsTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListAPISessionsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListAPISessionsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -65,6 +65,12 @@ func (o *ListIdentityServicePoliciesReader) ReadResponse(response runtime.Client
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewListIdentityServicePoliciesTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *ListIdentityServicePoliciesNotFound) GetPayload() *rest_model.APIErrorE
 }
 
 func (o *ListIdentityServicePoliciesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListIdentityServicePoliciesTooManyRequests creates a ListIdentityServicePoliciesTooManyRequests with default headers values
+func NewListIdentityServicePoliciesTooManyRequests() *ListIdentityServicePoliciesTooManyRequests {
+	return &ListIdentityServicePoliciesTooManyRequests{}
+}
+
+/* ListIdentityServicePoliciesTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type ListIdentityServicePoliciesTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListIdentityServicePoliciesTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *ListIdentityServicePoliciesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListIdentityServicePoliciesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

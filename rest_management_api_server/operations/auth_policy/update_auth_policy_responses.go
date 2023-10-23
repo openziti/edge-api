@@ -212,3 +212,47 @@ func (o *UpdateAuthPolicyNotFound) WriteResponse(rw http.ResponseWriter, produce
 		}
 	}
 }
+
+// UpdateAuthPolicyTooManyRequestsCode is the HTTP code returned for type UpdateAuthPolicyTooManyRequests
+const UpdateAuthPolicyTooManyRequestsCode int = 429
+
+/*UpdateAuthPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response updateAuthPolicyTooManyRequests
+*/
+type UpdateAuthPolicyTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdateAuthPolicyTooManyRequests creates UpdateAuthPolicyTooManyRequests with default headers values
+func NewUpdateAuthPolicyTooManyRequests() *UpdateAuthPolicyTooManyRequests {
+
+	return &UpdateAuthPolicyTooManyRequests{}
+}
+
+// WithPayload adds the payload to the update auth policy too many requests response
+func (o *UpdateAuthPolicyTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdateAuthPolicyTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update auth policy too many requests response
+func (o *UpdateAuthPolicyTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdateAuthPolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -168,3 +168,47 @@ func (o *DetailConfigNotFound) WriteResponse(rw http.ResponseWriter, producer ru
 		}
 	}
 }
+
+// DetailConfigTooManyRequestsCode is the HTTP code returned for type DetailConfigTooManyRequests
+const DetailConfigTooManyRequestsCode int = 429
+
+/*DetailConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailConfigTooManyRequests
+*/
+type DetailConfigTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailConfigTooManyRequests creates DetailConfigTooManyRequests with default headers values
+func NewDetailConfigTooManyRequests() *DetailConfigTooManyRequests {
+
+	return &DetailConfigTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail config too many requests response
+func (o *DetailConfigTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailConfigTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail config too many requests response
+func (o *DetailConfigTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailConfigTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

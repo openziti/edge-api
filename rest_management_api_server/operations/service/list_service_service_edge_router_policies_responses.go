@@ -168,3 +168,47 @@ func (o *ListServiceServiceEdgeRouterPoliciesUnauthorized) WriteResponse(rw http
 		}
 	}
 }
+
+// ListServiceServiceEdgeRouterPoliciesTooManyRequestsCode is the HTTP code returned for type ListServiceServiceEdgeRouterPoliciesTooManyRequests
+const ListServiceServiceEdgeRouterPoliciesTooManyRequestsCode int = 429
+
+/*ListServiceServiceEdgeRouterPoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listServiceServiceEdgeRouterPoliciesTooManyRequests
+*/
+type ListServiceServiceEdgeRouterPoliciesTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServiceServiceEdgeRouterPoliciesTooManyRequests creates ListServiceServiceEdgeRouterPoliciesTooManyRequests with default headers values
+func NewListServiceServiceEdgeRouterPoliciesTooManyRequests() *ListServiceServiceEdgeRouterPoliciesTooManyRequests {
+
+	return &ListServiceServiceEdgeRouterPoliciesTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list service service edge router policies too many requests response
+func (o *ListServiceServiceEdgeRouterPoliciesTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServiceServiceEdgeRouterPoliciesTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list service service edge router policies too many requests response
+func (o *ListServiceServiceEdgeRouterPoliciesTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServiceServiceEdgeRouterPoliciesTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -168,3 +168,47 @@ func (o *RemoveIdentityMfaNotFound) WriteResponse(rw http.ResponseWriter, produc
 		}
 	}
 }
+
+// RemoveIdentityMfaTooManyRequestsCode is the HTTP code returned for type RemoveIdentityMfaTooManyRequests
+const RemoveIdentityMfaTooManyRequestsCode int = 429
+
+/*RemoveIdentityMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response removeIdentityMfaTooManyRequests
+*/
+type RemoveIdentityMfaTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewRemoveIdentityMfaTooManyRequests creates RemoveIdentityMfaTooManyRequests with default headers values
+func NewRemoveIdentityMfaTooManyRequests() *RemoveIdentityMfaTooManyRequests {
+
+	return &RemoveIdentityMfaTooManyRequests{}
+}
+
+// WithPayload adds the payload to the remove identity mfa too many requests response
+func (o *RemoveIdentityMfaTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *RemoveIdentityMfaTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the remove identity mfa too many requests response
+func (o *RemoveIdentityMfaTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *RemoveIdentityMfaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

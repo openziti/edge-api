@@ -6,7 +6,7 @@ paths:
       description: |
         Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: listServicePolicies
@@ -21,11 +21,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Create a service policy resource
       description: Create a service policy resource. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: createServicePolicy
@@ -43,6 +46,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   service-policies-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -50,7 +56,7 @@ paths:
       summary: Retrieves a single service policy
       description: Retrieves a single service policy by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: detailServicePolicy
@@ -61,11 +67,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     put:
       summary: Update all fields on a service policy
       description: Update all fields on a service policy by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: updateServicePolicy
@@ -85,11 +94,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     patch:
       summary: Update the supplied fields on a service policy
       description: Update the supplied fields on a service policy. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: patchServicePolicy
@@ -109,11 +121,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete a service policy
       description: Delete a service policy by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: deleteServicePolicy
@@ -126,6 +141,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   service-policies-id-identities:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -134,7 +152,7 @@ paths:
       description: |
         Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: listServicePolicyIdentities
@@ -149,6 +167,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   service-policies-id-services:
     parameters:
@@ -158,7 +178,7 @@ paths:
       description: |
         Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: listServicePolicyServices
@@ -173,6 +193,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   service-policies-id-posture-checks:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -181,7 +204,7 @@ paths:
       description: |
         Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Service Policy
       operationId: listServicePolicyPostureChecks
@@ -196,6 +219,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listServicePolicies:

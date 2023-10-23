@@ -212,3 +212,47 @@ func (o *UpdateIdentityTracingNotFound) WriteResponse(rw http.ResponseWriter, pr
 		}
 	}
 }
+
+// UpdateIdentityTracingTooManyRequestsCode is the HTTP code returned for type UpdateIdentityTracingTooManyRequests
+const UpdateIdentityTracingTooManyRequestsCode int = 429
+
+/*UpdateIdentityTracingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response updateIdentityTracingTooManyRequests
+*/
+type UpdateIdentityTracingTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdateIdentityTracingTooManyRequests creates UpdateIdentityTracingTooManyRequests with default headers values
+func NewUpdateIdentityTracingTooManyRequests() *UpdateIdentityTracingTooManyRequests {
+
+	return &UpdateIdentityTracingTooManyRequests{}
+}
+
+// WithPayload adds the payload to the update identity tracing too many requests response
+func (o *UpdateIdentityTracingTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdateIdentityTracingTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update identity tracing too many requests response
+func (o *UpdateIdentityTracingTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdateIdentityTracingTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

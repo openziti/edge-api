@@ -168,3 +168,47 @@ func (o *DetailIdentityTypeNotFound) WriteResponse(rw http.ResponseWriter, produ
 		}
 	}
 }
+
+// DetailIdentityTypeTooManyRequestsCode is the HTTP code returned for type DetailIdentityTypeTooManyRequests
+const DetailIdentityTypeTooManyRequestsCode int = 429
+
+/*DetailIdentityTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailIdentityTypeTooManyRequests
+*/
+type DetailIdentityTypeTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailIdentityTypeTooManyRequests creates DetailIdentityTypeTooManyRequests with default headers values
+func NewDetailIdentityTypeTooManyRequests() *DetailIdentityTypeTooManyRequests {
+
+	return &DetailIdentityTypeTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail identity type too many requests response
+func (o *DetailIdentityTypeTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailIdentityTypeTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail identity type too many requests response
+func (o *DetailIdentityTypeTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailIdentityTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

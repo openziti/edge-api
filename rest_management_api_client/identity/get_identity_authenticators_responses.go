@@ -65,6 +65,12 @@ func (o *GetIdentityAuthenticatorsReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewGetIdentityAuthenticatorsTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *GetIdentityAuthenticatorsNotFound) GetPayload() *rest_model.APIErrorEnv
 }
 
 func (o *GetIdentityAuthenticatorsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetIdentityAuthenticatorsTooManyRequests creates a GetIdentityAuthenticatorsTooManyRequests with default headers values
+func NewGetIdentityAuthenticatorsTooManyRequests() *GetIdentityAuthenticatorsTooManyRequests {
+	return &GetIdentityAuthenticatorsTooManyRequests{}
+}
+
+/* GetIdentityAuthenticatorsTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type GetIdentityAuthenticatorsTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *GetIdentityAuthenticatorsTooManyRequests) Error() string {
+	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *GetIdentityAuthenticatorsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *GetIdentityAuthenticatorsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -168,3 +168,47 @@ func (o *DeleteEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 		}
 	}
 }
+
+// DeleteEnrollmentTooManyRequestsCode is the HTTP code returned for type DeleteEnrollmentTooManyRequests
+const DeleteEnrollmentTooManyRequestsCode int = 429
+
+/*DeleteEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteEnrollmentTooManyRequests
+*/
+type DeleteEnrollmentTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteEnrollmentTooManyRequests creates DeleteEnrollmentTooManyRequests with default headers values
+func NewDeleteEnrollmentTooManyRequests() *DeleteEnrollmentTooManyRequests {
+
+	return &DeleteEnrollmentTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete enrollment too many requests response
+func (o *DeleteEnrollmentTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteEnrollmentTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete enrollment too many requests response
+func (o *DeleteEnrollmentTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

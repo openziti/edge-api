@@ -212,3 +212,47 @@ func (o *DeleteEdgeRouterConflict) WriteResponse(rw http.ResponseWriter, produce
 		}
 	}
 }
+
+// DeleteEdgeRouterTooManyRequestsCode is the HTTP code returned for type DeleteEdgeRouterTooManyRequests
+const DeleteEdgeRouterTooManyRequestsCode int = 429
+
+/*DeleteEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response deleteEdgeRouterTooManyRequests
+*/
+type DeleteEdgeRouterTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteEdgeRouterTooManyRequests creates DeleteEdgeRouterTooManyRequests with default headers values
+func NewDeleteEdgeRouterTooManyRequests() *DeleteEdgeRouterTooManyRequests {
+
+	return &DeleteEdgeRouterTooManyRequests{}
+}
+
+// WithPayload adds the payload to the delete edge router too many requests response
+func (o *DeleteEdgeRouterTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteEdgeRouterTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete edge router too many requests response
+func (o *DeleteEdgeRouterTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteEdgeRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

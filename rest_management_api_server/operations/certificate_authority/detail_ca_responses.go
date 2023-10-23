@@ -168,3 +168,47 @@ func (o *DetailCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 		}
 	}
 }
+
+// DetailCaTooManyRequestsCode is the HTTP code returned for type DetailCaTooManyRequests
+const DetailCaTooManyRequestsCode int = 429
+
+/*DetailCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailCaTooManyRequests
+*/
+type DetailCaTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailCaTooManyRequests creates DetailCaTooManyRequests with default headers values
+func NewDetailCaTooManyRequests() *DetailCaTooManyRequests {
+
+	return &DetailCaTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail ca too many requests response
+func (o *DetailCaTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailCaTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail ca too many requests response
+func (o *DetailCaTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

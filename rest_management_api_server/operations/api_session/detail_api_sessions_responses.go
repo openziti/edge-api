@@ -168,3 +168,47 @@ func (o *DetailAPISessionsNotFound) WriteResponse(rw http.ResponseWriter, produc
 		}
 	}
 }
+
+// DetailAPISessionsTooManyRequestsCode is the HTTP code returned for type DetailAPISessionsTooManyRequests
+const DetailAPISessionsTooManyRequestsCode int = 429
+
+/*DetailAPISessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailApiSessionsTooManyRequests
+*/
+type DetailAPISessionsTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailAPISessionsTooManyRequests creates DetailAPISessionsTooManyRequests with default headers values
+func NewDetailAPISessionsTooManyRequests() *DetailAPISessionsTooManyRequests {
+
+	return &DetailAPISessionsTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail Api sessions too many requests response
+func (o *DetailAPISessionsTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailAPISessionsTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail Api sessions too many requests response
+func (o *DetailAPISessionsTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailAPISessionsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -168,3 +168,47 @@ func (o *DetailSessionRoutePathNotFound) WriteResponse(rw http.ResponseWriter, p
 		}
 	}
 }
+
+// DetailSessionRoutePathTooManyRequestsCode is the HTTP code returned for type DetailSessionRoutePathTooManyRequests
+const DetailSessionRoutePathTooManyRequestsCode int = 429
+
+/*DetailSessionRoutePathTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response detailSessionRoutePathTooManyRequests
+*/
+type DetailSessionRoutePathTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailSessionRoutePathTooManyRequests creates DetailSessionRoutePathTooManyRequests with default headers values
+func NewDetailSessionRoutePathTooManyRequests() *DetailSessionRoutePathTooManyRequests {
+
+	return &DetailSessionRoutePathTooManyRequests{}
+}
+
+// WithPayload adds the payload to the detail session route path too many requests response
+func (o *DetailSessionRoutePathTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailSessionRoutePathTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail session route path too many requests response
+func (o *DetailSessionRoutePathTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailSessionRoutePathTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

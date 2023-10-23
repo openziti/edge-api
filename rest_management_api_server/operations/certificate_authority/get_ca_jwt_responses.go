@@ -166,3 +166,47 @@ func (o *GetCaJWTNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 		}
 	}
 }
+
+// GetCaJWTTooManyRequestsCode is the HTTP code returned for type GetCaJWTTooManyRequests
+const GetCaJWTTooManyRequestsCode int = 429
+
+/*GetCaJWTTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response getCaJwtTooManyRequests
+*/
+type GetCaJWTTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetCaJWTTooManyRequests creates GetCaJWTTooManyRequests with default headers values
+func NewGetCaJWTTooManyRequests() *GetCaJWTTooManyRequests {
+
+	return &GetCaJWTTooManyRequests{}
+}
+
+// WithPayload adds the payload to the get ca Jwt too many requests response
+func (o *GetCaJWTTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *GetCaJWTTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get ca Jwt too many requests response
+func (o *GetCaJWTTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetCaJWTTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

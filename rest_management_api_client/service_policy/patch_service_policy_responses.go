@@ -71,6 +71,12 @@ func (o *PatchServicePolicyReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
+	case 429:
+		result := NewPatchServicePolicyTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *PatchServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *PatchServicePolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchServicePolicyTooManyRequests creates a PatchServicePolicyTooManyRequests with default headers values
+func NewPatchServicePolicyTooManyRequests() *PatchServicePolicyTooManyRequests {
+	return &PatchServicePolicyTooManyRequests{}
+}
+
+/* PatchServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+
+The resource requested is rate limited and the rate limit has been exceeded
+*/
+type PatchServicePolicyTooManyRequests struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *PatchServicePolicyTooManyRequests) Error() string {
+	return fmt.Sprintf("[PATCH /service-policies/{id}][%d] patchServicePolicyTooManyRequests  %+v", 429, o.Payload)
+}
+func (o *PatchServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *PatchServicePolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -5,8 +5,8 @@ paths:
       summary: Submit a posture response to a posture query
       description: Submits posture responses
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Posture Checks
       operationId: createPostureResponse
@@ -24,13 +24,16 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   posture-response-bulk:
     post:
       summary: Submit multiple posture responses
       description: Submits posture responses
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Posture Checks
       operationId: createPostureResponseBulk
@@ -51,6 +54,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
 responses:
   postureResponse:
     description: Contains a list of services that have had their timers altered

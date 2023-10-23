@@ -6,8 +6,8 @@ paths:
       description: |
         Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Enrollment
       operationId: listEnrollments
@@ -22,6 +22,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     post:
       summary: Create an outstanding enrollment for an identity
       description: >-
@@ -29,8 +32,8 @@ paths:
         is already outstanding the request will fail with a 409 conflict. If desired, an existing enrollment
         can be refreshed by `enrollments/:id/refresh` or deleted.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Enrollment
       operationId: createEnrollment
@@ -50,6 +53,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/conflictResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enrollments-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -57,8 +63,8 @@ paths:
       summary: Retrieves an outstanding enrollment
       description: Retrieves a single outstanding enrollment by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Enrollment
       operationId: detailEnrollment
@@ -69,12 +75,15 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
     delete:
       summary: Delete an outstanding enrollment
       description: Delete an outstanding enrollment by id. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Enrollment
       operationId: deleteEnrollment
@@ -85,17 +94,20 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
   enrollments-id-refresh:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
     post:
       summary: Refreshes an enrollment record's expiration window
       description: >-
-          For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated
-          and must be used for the enrollment.
+        For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated
+        and must be used for the enrollment.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Enrollment
       operationId: refreshEnrollment
@@ -113,6 +125,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
 responses:
   listEnrollments:
     description: A list of enrollments

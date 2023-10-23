@@ -5,7 +5,7 @@ paths:
       summary: Returns a list of accessible resource counts
       description: This endpoint is usefull for UIs that wish to display UI elements with counts.
       security:
-        - ztSession: []
+        - ztSession: [ ]
       tags:
         - Informational
       operationId: listSummary
@@ -14,6 +14,8 @@ paths:
           $ref: '#/responses/listSummaryCounts'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   listSummaryCounts:

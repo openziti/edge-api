@@ -212,3 +212,47 @@ func (o *PatchCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtime
 		}
 	}
 }
+
+// PatchCaTooManyRequestsCode is the HTTP code returned for type PatchCaTooManyRequests
+const PatchCaTooManyRequestsCode int = 429
+
+/*PatchCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response patchCaTooManyRequests
+*/
+type PatchCaTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewPatchCaTooManyRequests creates PatchCaTooManyRequests with default headers values
+func NewPatchCaTooManyRequests() *PatchCaTooManyRequests {
+
+	return &PatchCaTooManyRequests{}
+}
+
+// WithPayload adds the payload to the patch ca too many requests response
+func (o *PatchCaTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *PatchCaTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the patch ca too many requests response
+func (o *PatchCaTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PatchCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

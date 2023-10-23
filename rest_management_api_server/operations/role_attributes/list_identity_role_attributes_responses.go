@@ -168,3 +168,47 @@ func (o *ListIdentityRoleAttributesUnauthorized) WriteResponse(rw http.ResponseW
 		}
 	}
 }
+
+// ListIdentityRoleAttributesTooManyRequestsCode is the HTTP code returned for type ListIdentityRoleAttributesTooManyRequests
+const ListIdentityRoleAttributesTooManyRequestsCode int = 429
+
+/*ListIdentityRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response listIdentityRoleAttributesTooManyRequests
+*/
+type ListIdentityRoleAttributesTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListIdentityRoleAttributesTooManyRequests creates ListIdentityRoleAttributesTooManyRequests with default headers values
+func NewListIdentityRoleAttributesTooManyRequests() *ListIdentityRoleAttributesTooManyRequests {
+
+	return &ListIdentityRoleAttributesTooManyRequests{}
+}
+
+// WithPayload adds the payload to the list identity role attributes too many requests response
+func (o *ListIdentityRoleAttributesTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *ListIdentityRoleAttributesTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list identity role attributes too many requests response
+func (o *ListIdentityRoleAttributesTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListIdentityRoleAttributesTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

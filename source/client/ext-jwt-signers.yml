@@ -5,8 +5,8 @@ paths:
       summary: List Client Authentication External JWT
       description: Retrieves a list of external JWT signers for authentication
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - External JWT Signer
       operationId: listExternalJwtSigners
@@ -21,6 +21,9 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
 responses:
   listClientExternalJwtSigners:
     description: A list of External JWT Signers
