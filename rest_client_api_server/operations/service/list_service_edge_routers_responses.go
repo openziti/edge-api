@@ -40,7 +40,7 @@ import (
 // ListServiceEdgeRoutersOKCode is the HTTP code returned for type ListServiceEdgeRoutersOK
 const ListServiceEdgeRoutersOKCode int = 200
 
-/*ListServiceEdgeRoutersOK A list of dial/bind edge routers for the requesting identity for a specific service
+/*ListServiceEdgeRoutersOK A list of edge routers suitable for dialing or binding the specified service by the authenticated identity
 
 swagger:response listServiceEdgeRoutersOK
 */

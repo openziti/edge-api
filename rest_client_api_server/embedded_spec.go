@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.0"
+    "version": "0.26.1"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -3900,11 +3900,11 @@ func init() {
             ]
           }
         ],
-        "description": "Retrieves a list of edge router resources that a specific service can dial or bind.\n",
+        "description": "Retrieves the list of edge routers permitted to handle traffic for the specified service\n",
         "tags": [
           "Service"
         ],
-        "summary": "List of edge routers that a service can be dialed/bound for the current identity",
+        "summary": "List of edge routers permitted to handle traffic for the specified service",
         "operationId": "listServiceEdgeRouters",
         "parameters": [
           {
@@ -3924,14 +3924,14 @@ func init() {
           },
           {
             "type": "string",
-            "description": "an optional JWT token to validate, if provided a not authorized response is returned if the token is not valid",
+            "description": "an optional JWT token use to authenticate the request. If provided, the token must be valid else a not authorized response is returned.",
             "name": "session-token",
             "in": "header"
           }
         ],
         "responses": {
           "200": {
-            "description": "A list of dial/bind edge routers for the requesting identity for a specific service",
+            "description": "A list of edge routers suitable for dialing or binding the specified service by the authenticated identity",
             "schema": {
               "$ref": "#/definitions/listServiceEdgeRoutersEnvelope"
             }
@@ -7051,7 +7051,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.0"
+    "version": "0.26.1"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -10887,11 +10887,11 @@ func init() {
             ]
           }
         ],
-        "description": "Retrieves a list of edge router resources that a specific service can dial or bind.\n",
+        "description": "Retrieves the list of edge routers permitted to handle traffic for the specified service\n",
         "tags": [
           "Service"
         ],
-        "summary": "List of edge routers that a service can be dialed/bound for the current identity",
+        "summary": "List of edge routers permitted to handle traffic for the specified service",
         "operationId": "listServiceEdgeRouters",
         "parameters": [
           {
@@ -10911,14 +10911,14 @@ func init() {
           },
           {
             "type": "string",
-            "description": "an optional JWT token to validate, if provided a not authorized response is returned if the token is not valid",
+            "description": "an optional JWT token use to authenticate the request. If provided, the token must be valid else a not authorized response is returned.",
             "name": "session-token",
             "in": "header"
           }
         ],
         "responses": {
           "200": {
-            "description": "A list of dial/bind edge routers for the requesting identity for a specific service",
+            "description": "A list of edge routers suitable for dialing or binding the specified service by the authenticated identity",
             "schema": {
               "$ref": "#/definitions/listServiceEdgeRoutersEnvelope"
             }

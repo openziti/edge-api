@@ -55,9 +55,9 @@ func NewListServiceEdgeRouters(ctx *middleware.Context, handler ListServiceEdgeR
 
 /* ListServiceEdgeRouters swagger:route GET /services/{id}/edge-routers Service listServiceEdgeRouters
 
-List of edge routers that a service can be dialed/bound for the current identity
+List of edge routers permitted to handle traffic for the specified service
 
-Retrieves a list of edge router resources that a specific service can dial or bind.
+Retrieves the list of edge routers permitted to handle traffic for the specified service
 
 
 */

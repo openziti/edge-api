@@ -2870,11 +2870,11 @@ paths:
       - oauth2:
         - openid
       description: |
-        Retrieves a list of edge router resources that a specific service can dial or bind.
+        Retrieves the list of edge routers permitted to handle traffic for the specified service
       tags:
       - Service
-      summary: List of edge routers that a service can be dialed/bound for the current
-        identity
+      summary: List of edge routers permitted to handle traffic for the specified
+        service
       operationId: listServiceEdgeRouters
       parameters:
       - type: integer
@@ -2887,14 +2887,14 @@ paths:
         name: filter
         in: query
       - type: string
-        description: an optional JWT token to validate, if provided a not authorized
-          response is returned if the token is not valid
+        description: an optional JWT token use to authenticate the request. If provided,
+          the token must be valid else a not authorized response is returned.
         name: session-token
         in: header
       responses:
         "200":
-          description: A list of dial/bind edge routers for the requesting identity
-            for a specific service
+          description: A list of edge routers suitable for dialing or binding the
+            specified service by the authenticated identity
           schema:
             $ref: '#/definitions/listServiceEdgeRoutersEnvelope'
         "400":

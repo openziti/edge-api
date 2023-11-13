@@ -107,7 +107,6 @@ paths:
     $ref: 'management/services.yml#/paths/services-id'
   '/services/{id}/terminators':
     $ref: 'client/services.yml#/paths/services-id-terminators'
-
   '/services/{id}/edge-routers':
     $ref: 'client/services.yml#/paths/services-id-edge-routers'
 

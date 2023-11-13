@@ -154,9 +154,9 @@ func (a *Client) DetailService(params *DetailServiceParams, authInfo runtime.Cli
 }
 
 /*
-  ListServiceEdgeRouters lists of edge routers that a service can be dialed bound for the current identity
+  ListServiceEdgeRouters lists of edge routers permitted to handle traffic for the specified service
 
-  Retrieves a list of edge router resources that a specific service can dial or bind.
+  Retrieves the list of edge routers permitted to handle traffic for the specified service
 
 */
 func (a *Client) ListServiceEdgeRouters(params *ListServiceEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRoutersOK, error) {

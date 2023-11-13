@@ -89,7 +89,7 @@ func NewListServiceEdgeRoutersOK() *ListServiceEdgeRoutersOK {
 
 /* ListServiceEdgeRoutersOK describes a response with status code 200, with default header values.
 
-A list of dial/bind edge routers for the requesting identity for a specific service
+A list of edge routers suitable for dialing or binding the specified service by the authenticated identity
 */
 type ListServiceEdgeRoutersOK struct {
 	Payload *rest_model.ListServiceEdgeRoutersEnvelope

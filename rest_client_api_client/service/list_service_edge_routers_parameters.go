@@ -101,7 +101,7 @@ type ListServiceEdgeRoutersParams struct {
 
 	/* SessionToken.
 
-	   an optional JWT token to validate, if provided a not authorized response is returned if the token is not valid
+	   an optional JWT token use to authenticate the request. If provided, the token must be valid else a not authorized response is returned.
 	*/
 	SessionToken *string
 
