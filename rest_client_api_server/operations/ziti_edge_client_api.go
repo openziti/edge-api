@@ -218,6 +218,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		InformationalListRootHandler: informational.ListRootHandlerFunc(func(params informational.ListRootParams) middleware.Responder {
 			return middleware.NotImplemented("operation informational.ListRoot has not yet been implemented")
 		}),
+		ServiceListServiceEdgeRoutersHandler: service.ListServiceEdgeRoutersHandlerFunc(func(params service.ListServiceEdgeRoutersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation service.ListServiceEdgeRouters has not yet been implemented")
+		}),
 		ServiceListServiceTerminatorsHandler: service.ListServiceTerminatorsHandlerFunc(func(params service.ListServiceTerminatorsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation service.ListServiceTerminators has not yet been implemented")
 		}),
@@ -415,6 +418,8 @@ type ZitiEdgeClientAPI struct {
 	InformationalListProtocolsHandler informational.ListProtocolsHandler
 	// InformationalListRootHandler sets the operation handler for the list root operation
 	InformationalListRootHandler informational.ListRootHandler
+	// ServiceListServiceEdgeRoutersHandler sets the operation handler for the list service edge routers operation
+	ServiceListServiceEdgeRoutersHandler service.ListServiceEdgeRoutersHandler
 	// ServiceListServiceTerminatorsHandler sets the operation handler for the list service terminators operation
 	ServiceListServiceTerminatorsHandler service.ListServiceTerminatorsHandler
 	// CurrentAPISessionListServiceUpdatesHandler sets the operation handler for the list service updates operation
@@ -666,6 +671,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.InformationalListRootHandler == nil {
 		unregistered = append(unregistered, "informational.ListRootHandler")
+	}
+	if o.ServiceListServiceEdgeRoutersHandler == nil {
+		unregistered = append(unregistered, "service.ListServiceEdgeRoutersHandler")
 	}
 	if o.ServiceListServiceTerminatorsHandler == nil {
 		unregistered = append(unregistered, "service.ListServiceTerminatorsHandler")
@@ -979,6 +987,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"][""] = informational.NewListRoot(o.context, o.InformationalListRootHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/services/{id}/edge-routers"] = service.NewListServiceEdgeRouters(o.context, o.ServiceListServiceEdgeRoutersHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

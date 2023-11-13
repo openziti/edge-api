@@ -58,6 +58,8 @@ type ClientService interface {
 
 	DetailService(params *DetailServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailServiceOK, error)
 
+	ListServiceEdgeRouters(params *ListServiceEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRoutersOK, error)
+
 	ListServiceTerminators(params *ListServiceTerminatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceTerminatorsOK, error)
 
 	ListServices(params *ListServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesOK, error)
@@ -148,6 +150,48 @@ func (a *Client) DetailService(params *DetailServiceParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailService: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  ListServiceEdgeRouters lists of edge routers that a service can be dialed bound for the current identity
+
+  Retrieves a list of edge router resources that a specific service can dial or bind.
+
+*/
+func (a *Client) ListServiceEdgeRouters(params *ListServiceEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRoutersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListServiceEdgeRoutersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listServiceEdgeRouters",
+		Method:             "GET",
+		PathPattern:        "/services/{id}/edge-routers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListServiceEdgeRoutersReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListServiceEdgeRoutersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listServiceEdgeRouters: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
