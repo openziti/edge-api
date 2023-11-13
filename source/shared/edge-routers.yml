@@ -1,5 +1,12 @@
 ---
 definitions:
+  serviceEdgeRouters:
+    type: object
+    properties:
+        edgeRouters:
+          type: array
+          items:
+            $ref: '#/definitions/commonEdgeRouterProperties'
   commonEdgeRouterProperties:
     type: object
     required:

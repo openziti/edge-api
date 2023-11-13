@@ -310,6 +310,11 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 			return middleware.NotImplemented("operation informational.ListRoot has not yet been implemented")
 		})
 	}
+	if api.ServiceListServiceEdgeRoutersHandler == nil {
+		api.ServiceListServiceEdgeRoutersHandler = service.ListServiceEdgeRoutersHandlerFunc(func(params service.ListServiceEdgeRoutersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation service.ListServiceEdgeRouters has not yet been implemented")
+		})
+	}
 	if api.ServiceListServiceTerminatorsHandler == nil {
 		api.ServiceListServiceTerminatorsHandler = service.ListServiceTerminatorsHandlerFunc(func(params service.ListServiceTerminatorsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation service.ListServiceTerminators has not yet been implemented")

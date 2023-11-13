@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.0
+  version: 0.26.1
   title: Ziti Edge Client
   description: OpenZiti Edge Client API
   contact:
@@ -107,6 +107,8 @@ paths:
     $ref: 'management/services.yml#/paths/services-id'
   '/services/{id}/terminators':
     $ref: 'client/services.yml#/paths/services-id-terminators'
+  '/services/{id}/edge-routers':
+    $ref: 'client/services.yml#/paths/services-id-edge-routers'
 
   '/sessions':
     $ref: 'client/sessions.yml#/paths/sessions'

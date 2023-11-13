@@ -76,13 +76,62 @@ paths:
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
+  services-id-edge-routers:
+    parameters:
+      - $ref: '../shared/parameters.yml#/id'
+    get:
+      summary: List of edge routers permitted to handle traffic for the specified service
+      description: |
+        Retrieves the list of edge routers permitted to handle traffic for the specified service
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Service
+      operationId: listServiceEdgeRouters
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+        - name: session-token
+          description: an optional JWT token use to authenticate the request. If provided, the token must be valid else a not authorized response is returned.
+          type: string
+          in: header
+      responses:
+        '200':
+          $ref: '#/responses/listServiceEdgeRouters'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+
+
 responses:
   listClientTerminators:
     description: A list of terminators
     schema:
       $ref: '#/definitions/listClientTerminatorsEnvelope'
+  listServiceEdgeRouters:
+    description: A list of edge routers suitable for dialing or binding the specified service by the authenticated identity
+    schema:
+      $ref: '#/definitions/listServiceEdgeRoutersEnvelope'
+
 
 definitions:
+  listServiceEdgeRoutersEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '../shared/edge-routers.yml#/definitions/serviceEdgeRouters'
   listClientTerminatorsEnvelope:
     type: object
     required:
