@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.1"
+    "version": "0.26.2"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -26636,6 +26636,9 @@ func init() {
           "description": "Describes whether connections must support end-to-end encryption on both sides of the connection.",
           "type": "boolean"
         },
+        "maxIdleTimeMillis": {
+          "type": "integer"
+        },
         "name": {
           "type": "string"
         },
@@ -26663,6 +26666,7 @@ func init() {
           "type": "object",
           "required": [
             "name",
+            "maxIdleTimeMillis",
             "terminatorStrategy",
             "roleAttributes",
             "permissions",
@@ -26691,6 +26695,9 @@ func init() {
             "encryptionRequired": {
               "description": "Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.",
               "type": "boolean"
+            },
+            "maxIdleTimeMillis": {
+              "type": "integer"
             },
             "name": {
               "type": "string"
@@ -26845,6 +26852,9 @@ func init() {
         "encryptionRequired": {
           "description": "Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.",
           "type": "boolean"
+        },
+        "maxIdleTimeMillis": {
+          "type": "integer"
         },
         "name": {
           "type": "string"
@@ -27023,6 +27033,9 @@ func init() {
         "encryptionRequired": {
           "description": "Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.",
           "type": "boolean"
+        },
+        "maxIdleTimeMillis": {
+          "type": "integer"
         },
         "name": {
           "type": "string"
@@ -27538,7 +27551,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.1"
+    "version": "0.26.2"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -54214,6 +54227,9 @@ func init() {
           "description": "Describes whether connections must support end-to-end encryption on both sides of the connection.",
           "type": "boolean"
         },
+        "maxIdleTimeMillis": {
+          "type": "integer"
+        },
         "name": {
           "type": "string"
         },
@@ -54241,6 +54257,7 @@ func init() {
           "type": "object",
           "required": [
             "name",
+            "maxIdleTimeMillis",
             "terminatorStrategy",
             "roleAttributes",
             "permissions",
@@ -54269,6 +54286,9 @@ func init() {
             "encryptionRequired": {
               "description": "Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.",
               "type": "boolean"
+            },
+            "maxIdleTimeMillis": {
+              "type": "integer"
             },
             "name": {
               "type": "string"
@@ -54423,6 +54443,9 @@ func init() {
         "encryptionRequired": {
           "description": "Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.",
           "type": "boolean"
+        },
+        "maxIdleTimeMillis": {
+          "type": "integer"
         },
         "name": {
           "type": "string"
@@ -54601,6 +54624,9 @@ func init() {
         "encryptionRequired": {
           "description": "Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.",
           "type": "boolean"
+        },
+        "maxIdleTimeMillis": {
+          "type": "integer"
         },
         "name": {
           "type": "string"

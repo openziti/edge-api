@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.1
+  version: 0.26.2
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -19130,6 +19130,8 @@ definitions:
         description: Describes whether connections must support end-to-end encryption
           on both sides of the connection.
         type: boolean
+      maxIdleTimeMillis:
+        type: integer
       name:
         type: string
       roleAttributes:
@@ -19147,6 +19149,7 @@ definitions:
     - type: object
       required:
       - name
+      - maxIdleTimeMillis
       - terminatorStrategy
       - roleAttributes
       - permissions
@@ -19171,6 +19174,8 @@ definitions:
           description: Describes whether connections must support end-to-end encryption
             on both sides of the connection. Read-only property, set at create.
           type: boolean
+        maxIdleTimeMillis:
+          type: integer
         name:
           type: string
         permissions:
@@ -19272,6 +19277,8 @@ definitions:
         description: Describes whether connections must support end-to-end encryption
           on both sides of the connection. Read-only property, set at create.
         type: boolean
+      maxIdleTimeMillis:
+        type: integer
       name:
         type: string
       roleAttributes:
@@ -19392,6 +19399,8 @@ definitions:
         description: Describes whether connections must support end-to-end encryption
           on both sides of the connection. Read-only property, set at create.
         type: boolean
+      maxIdleTimeMillis:
+        type: integer
       name:
         type: string
       roleAttributes:
