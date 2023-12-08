@@ -42,6 +42,7 @@ definitions:
       - type: object
         required:
           - name
+          - maxIdleTimeMillis
           - terminatorStrategy
           - roleAttributes
           - permissions
@@ -52,6 +53,8 @@ definitions:
         properties:
           name:
             type: string
+          maxIdleTimeMillis:
+            type: integer
           terminatorStrategy:
             type: string
           roleAttributes:

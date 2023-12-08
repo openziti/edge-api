@@ -57,6 +57,10 @@ type ServiceDetail struct {
 	// Required: true
 	EncryptionRequired *bool `json:"encryptionRequired"`
 
+	// max idle time millis
+	// Required: true
+	MaxIdleTimeMillis *int64 `json:"maxIdleTimeMillis"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -95,6 +99,8 @@ func (m *ServiceDetail) UnmarshalJSON(raw []byte) error {
 
 		EncryptionRequired *bool `json:"encryptionRequired"`
 
+		MaxIdleTimeMillis *int64 `json:"maxIdleTimeMillis"`
+
 		Name *string `json:"name"`
 
 		Permissions DialBindArray `json:"permissions"`
@@ -114,6 +120,8 @@ func (m *ServiceDetail) UnmarshalJSON(raw []byte) error {
 	m.Configs = dataAO1.Configs
 
 	m.EncryptionRequired = dataAO1.EncryptionRequired
+
+	m.MaxIdleTimeMillis = dataAO1.MaxIdleTimeMillis
 
 	m.Name = dataAO1.Name
 
@@ -144,6 +152,8 @@ func (m ServiceDetail) MarshalJSON() ([]byte, error) {
 
 		EncryptionRequired *bool `json:"encryptionRequired"`
 
+		MaxIdleTimeMillis *int64 `json:"maxIdleTimeMillis"`
+
 		Name *string `json:"name"`
 
 		Permissions DialBindArray `json:"permissions"`
@@ -160,6 +170,8 @@ func (m ServiceDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.Configs = m.Configs
 
 	dataAO1.EncryptionRequired = m.EncryptionRequired
+
+	dataAO1.MaxIdleTimeMillis = m.MaxIdleTimeMillis
 
 	dataAO1.Name = m.Name
 
@@ -197,6 +209,10 @@ func (m *ServiceDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEncryptionRequired(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMaxIdleTimeMillis(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -267,6 +283,15 @@ func (m *ServiceDetail) validateConfigs(formats strfmt.Registry) error {
 func (m *ServiceDetail) validateEncryptionRequired(formats strfmt.Registry) error {
 
 	if err := validate.Required("encryptionRequired", "body", m.EncryptionRequired); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceDetail) validateMaxIdleTimeMillis(formats strfmt.Registry) error {
+
+	if err := validate.Required("maxIdleTimeMillis", "body", m.MaxIdleTimeMillis); err != nil {
 		return err
 	}
 

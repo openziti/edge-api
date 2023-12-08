@@ -49,6 +49,9 @@ type ServiceUpdate struct {
 	// Describes whether connections must support end-to-end encryption on both sides of the connection. Read-only property, set at create.
 	EncryptionRequired bool `json:"encryptionRequired,omitempty"`
 
+	// max idle time millis
+	MaxIdleTimeMillis int64 `json:"maxIdleTimeMillis,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`

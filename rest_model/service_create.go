@@ -50,6 +50,9 @@ type ServiceCreate struct {
 	// Required: true
 	EncryptionRequired *bool `json:"encryptionRequired"`
 
+	// max idle time millis
+	MaxIdleTimeMillis int64 `json:"maxIdleTimeMillis,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
