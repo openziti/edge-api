@@ -9530,7 +9530,7 @@ func init() {
         }
       ]
     },
-    "/enumerated-capabiities": {
+    "/enumerated-capabilities": {
       "get": {
         "security": [],
         "tags": [
@@ -37017,7 +37017,7 @@ func init() {
         }
       ]
     },
-    "/enumerated-capabiities": {
+    "/enumerated-capabilities": {
       "get": {
         "security": [],
         "tags": [

@@ -974,7 +974,7 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/enumerated-capabiities"] = informational.NewListEnumeratedCapabilities(o.context, o.InformationalListEnumeratedCapabilitiesHandler)
+	o.handlers["GET"]["/enumerated-capabilities"] = informational.NewListEnumeratedCapabilities(o.context, o.InformationalListEnumeratedCapabilitiesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

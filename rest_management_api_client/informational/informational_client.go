@@ -162,7 +162,7 @@ func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesPa
 	op := &runtime.ClientOperation{
 		ID:                 "listEnumeratedCapabilities",
 		Method:             "GET",
-		PathPattern:        "/enumerated-capabiities",
+		PathPattern:        "/enumerated-capabilities",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
