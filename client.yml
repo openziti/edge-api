@@ -2054,7 +2054,7 @@ paths:
       name: token
       in: query
       required: true
-  /enumerated-capabiities:
+  /enumerated-capabilities:
     get:
       security: []
       tags:

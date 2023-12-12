@@ -72,7 +72,7 @@ type ListEnumeratedCapabilitiesOK struct {
 }
 
 func (o *ListEnumeratedCapabilitiesOK) Error() string {
-	return fmt.Sprintf("[GET /enumerated-capabiities][%d] listEnumeratedCapabilitiesOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /enumerated-capabilities][%d] listEnumeratedCapabilitiesOK  %+v", 200, o.Payload)
 }
 func (o *ListEnumeratedCapabilitiesOK) GetPayload() *rest_model.ListEnumeratedCapabilitiesEnvelope {
 	return o.Payload

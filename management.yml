@@ -6991,7 +6991,7 @@ paths:
       name: id
       in: path
       required: true
-  /enumerated-capabiities:
+  /enumerated-capabilities:
     get:
       security: []
       tags:

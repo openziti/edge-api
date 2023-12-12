@@ -125,7 +125,7 @@ paths:
   '/version':
     $ref: 'shared/version.yml#/paths/version'
 
-  '/enumerated-capabiities':
+  '/enumerated-capabilities':
     $ref: 'shared/version.yml#/paths/enumerated-capabilities'
 
 definitions:

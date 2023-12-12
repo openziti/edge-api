@@ -59,7 +59,7 @@ func (o *ListEnumeratedCapabilitiesURL) SetBasePath(bp string) {
 func (o *ListEnumeratedCapabilitiesURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/enumerated-capabiities"
+	var _path = "/enumerated-capabilities"
 
 	_basePath := o._basePath
 	if _basePath == "" {
