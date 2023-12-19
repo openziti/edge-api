@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.2"
+    "version": "0.26.7"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -1301,6 +1301,29 @@ func init() {
                 }
               }
             }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
           }
         }
       },
@@ -1359,6 +1382,29 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           }
         }
@@ -27551,7 +27597,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.2"
+    "version": "0.26.7"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -28788,6 +28834,29 @@ func init() {
                 }
               }
             }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
           }
         }
       },
@@ -28846,6 +28915,29 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           }
         }
