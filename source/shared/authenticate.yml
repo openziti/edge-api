@@ -35,14 +35,16 @@ paths:
           $ref: './standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: './standard-responses.yml#/responses/invalidAuthResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
   authenticate-mfa:
     post:
       summary: Complete MFA authentication
       description: Completes MFA authentication by submitting a MFA time based one time token or backup code.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authentication
         - MFA
@@ -59,6 +61,9 @@ paths:
           $ref: './standard-responses.yml#/responses/emptyResponse'
         '401':
           $ref: './standard-responses.yml#/responses/emptyResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
 responses:
   $ref: 'standard-responses.yml#/responses'
 

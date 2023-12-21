@@ -124,3 +124,47 @@ func (o *AuthenticateMfaUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 		}
 	}
 }
+
+// AuthenticateMfaTooManyRequestsCode is the HTTP code returned for type AuthenticateMfaTooManyRequests
+const AuthenticateMfaTooManyRequestsCode int = 429
+
+/*AuthenticateMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+
+swagger:response authenticateMfaTooManyRequests
+*/
+type AuthenticateMfaTooManyRequests struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewAuthenticateMfaTooManyRequests creates AuthenticateMfaTooManyRequests with default headers values
+func NewAuthenticateMfaTooManyRequests() *AuthenticateMfaTooManyRequests {
+
+	return &AuthenticateMfaTooManyRequests{}
+}
+
+// WithPayload adds the payload to the authenticate mfa too many requests response
+func (o *AuthenticateMfaTooManyRequests) WithPayload(payload *rest_model.APIErrorEnvelope) *AuthenticateMfaTooManyRequests {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the authenticate mfa too many requests response
+func (o *AuthenticateMfaTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *AuthenticateMfaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
