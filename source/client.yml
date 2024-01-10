@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.7
+  version: 0.26.8
   title: Ziti Edge Client
   description: OpenZiti Edge Client API
   contact:
@@ -52,6 +52,9 @@ paths:
     $ref: 'client/current-api-session-certificates.yml#/paths/current-api-session-certificates-id'
   '/current-api-session/service-updates':
     $ref: 'client/current-api-session-service-updates.yml#/paths/current-api-session-service-updates'
+
+  '/controllers':
+    $ref: 'shared/controllers.yml#/paths/controllers'
 
   '/current-identity':
     $ref: 'shared/current-identity.yml#/paths/current-identity'

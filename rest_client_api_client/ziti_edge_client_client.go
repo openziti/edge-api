@@ -35,6 +35,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/openziti/edge-api/rest_client_api_client/authentication"
+	"github.com/openziti/edge-api/rest_client_api_client/controllers"
 	"github.com/openziti/edge-api/rest_client_api_client/current_api_session"
 	"github.com/openziti/edge-api/rest_client_api_client/current_identity"
 	"github.com/openziti/edge-api/rest_client_api_client/enroll"
@@ -89,6 +90,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *ZitiEdgeCl
 	cli := new(ZitiEdgeClient)
 	cli.Transport = transport
 	cli.Authentication = authentication.New(transport, formats)
+	cli.Controllers = controllers.New(transport, formats)
 	cli.CurrentAPISession = current_api_session.New(transport, formats)
 	cli.CurrentIdentity = current_identity.New(transport, formats)
 	cli.Enroll = enroll.New(transport, formats)
@@ -144,6 +146,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type ZitiEdgeClient struct {
 	Authentication authentication.ClientService
 
+	Controllers controllers.ClientService
+
 	CurrentAPISession current_api_session.ClientService
 
 	CurrentIdentity current_identity.ClientService
@@ -169,6 +173,7 @@ type ZitiEdgeClient struct {
 func (c *ZitiEdgeClient) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Authentication.SetTransport(transport)
+	c.Controllers.SetTransport(transport)
 	c.CurrentAPISession.SetTransport(transport)
 	c.CurrentIdentity.SetTransport(transport)
 	c.Enroll.SetTransport(transport)
