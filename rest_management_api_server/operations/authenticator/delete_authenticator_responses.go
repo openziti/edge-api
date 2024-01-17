@@ -128,7 +128,7 @@ func (o *DeleteAuthenticatorBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // DeleteAuthenticatorUnauthorizedCode is the HTTP code returned for type DeleteAuthenticatorUnauthorized
 const DeleteAuthenticatorUnauthorizedCode int = 401
 
-/*DeleteAuthenticatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteAuthenticatorUnauthorized
 */

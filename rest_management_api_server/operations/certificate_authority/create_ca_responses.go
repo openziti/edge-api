@@ -128,7 +128,7 @@ func (o *CreateCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // CreateCaUnauthorizedCode is the HTTP code returned for type CreateCaUnauthorized
 const CreateCaUnauthorizedCode int = 401
 
-/*CreateCaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createCaUnauthorized
 */

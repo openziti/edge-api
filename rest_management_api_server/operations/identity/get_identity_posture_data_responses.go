@@ -84,7 +84,7 @@ func (o *GetIdentityPostureDataOK) WriteResponse(rw http.ResponseWriter, produce
 // GetIdentityPostureDataUnauthorizedCode is the HTTP code returned for type GetIdentityPostureDataUnauthorized
 const GetIdentityPostureDataUnauthorizedCode int = 401
 
-/*GetIdentityPostureDataUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetIdentityPostureDataUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityPostureDataUnauthorized
 */

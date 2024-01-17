@@ -84,7 +84,7 @@ func (o *DetailTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailTerminatorUnauthorizedCode is the HTTP code returned for type DetailTerminatorUnauthorized
 const DetailTerminatorUnauthorizedCode int = 401
 
-/*DetailTerminatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailTerminatorUnauthorized
 */

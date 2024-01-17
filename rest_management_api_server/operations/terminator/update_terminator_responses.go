@@ -128,7 +128,7 @@ func (o *UpdateTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateTerminatorUnauthorizedCode is the HTTP code returned for type UpdateTerminatorUnauthorized
 const UpdateTerminatorUnauthorizedCode int = 401
 
-/*UpdateTerminatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*UpdateTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateTerminatorUnauthorized
 */

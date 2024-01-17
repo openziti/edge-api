@@ -115,7 +115,7 @@ func NewDeleteAPISessionsForbidden() *DeleteAPISessionsForbidden {
 
 /* DeleteAPISessionsForbidden describes a response with status code 403, with default header values.
 
-The currently supplied session does not have the correct access rights to request this resource
+The supplied session does not have the correct access rights to request this resource
 */
 type DeleteAPISessionsForbidden struct {
 	Payload *rest_model.APIErrorEnvelope

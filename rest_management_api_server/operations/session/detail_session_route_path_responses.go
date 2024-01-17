@@ -84,7 +84,7 @@ func (o *DetailSessionRoutePathOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailSessionRoutePathUnauthorizedCode is the HTTP code returned for type DetailSessionRoutePathUnauthorized
 const DetailSessionRoutePathUnauthorizedCode int = 401
 
-/*DetailSessionRoutePathUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailSessionRoutePathUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailSessionRoutePathUnauthorized
 */

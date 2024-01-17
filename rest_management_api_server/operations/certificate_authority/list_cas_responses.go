@@ -128,7 +128,7 @@ func (o *ListCasBadRequest) WriteResponse(rw http.ResponseWriter, producer runti
 // ListCasUnauthorizedCode is the HTTP code returned for type ListCasUnauthorized
 const ListCasUnauthorizedCode int = 401
 
-/*ListCasUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListCasUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listCasUnauthorized
 */

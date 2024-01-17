@@ -128,7 +128,7 @@ func (o *ListServiceTerminatorsBadRequest) WriteResponse(rw http.ResponseWriter,
 // ListServiceTerminatorsUnauthorizedCode is the HTTP code returned for type ListServiceTerminatorsUnauthorized
 const ListServiceTerminatorsUnauthorizedCode int = 401
 
-/*ListServiceTerminatorsUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListServiceTerminatorsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServiceTerminatorsUnauthorized
 */

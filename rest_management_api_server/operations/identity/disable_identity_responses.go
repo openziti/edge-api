@@ -84,7 +84,7 @@ func (o *DisableIdentityOK) WriteResponse(rw http.ResponseWriter, producer runti
 // DisableIdentityUnauthorizedCode is the HTTP code returned for type DisableIdentityUnauthorized
 const DisableIdentityUnauthorizedCode int = 401
 
-/*DisableIdentityUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DisableIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response disableIdentityUnauthorized
 */

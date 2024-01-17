@@ -84,7 +84,7 @@ func (o *CreateDatabaseSnapshotOK) WriteResponse(rw http.ResponseWriter, produce
 // CreateDatabaseSnapshotUnauthorizedCode is the HTTP code returned for type CreateDatabaseSnapshotUnauthorized
 const CreateDatabaseSnapshotUnauthorizedCode int = 401
 
-/*CreateDatabaseSnapshotUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateDatabaseSnapshotUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createDatabaseSnapshotUnauthorized
 */

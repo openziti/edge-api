@@ -84,7 +84,7 @@ func (o *ReEnrollEdgeRouterOK) WriteResponse(rw http.ResponseWriter, producer ru
 // ReEnrollEdgeRouterUnauthorizedCode is the HTTP code returned for type ReEnrollEdgeRouterUnauthorized
 const ReEnrollEdgeRouterUnauthorizedCode int = 401
 
-/*ReEnrollEdgeRouterUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ReEnrollEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response reEnrollEdgeRouterUnauthorized
 */

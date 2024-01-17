@@ -128,7 +128,7 @@ func (o *RefreshEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // RefreshEnrollmentUnauthorizedCode is the HTTP code returned for type RefreshEnrollmentUnauthorized
 const RefreshEnrollmentUnauthorizedCode int = 401
 
-/*RefreshEnrollmentUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*RefreshEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response refreshEnrollmentUnauthorized
 */

@@ -128,7 +128,7 @@ func (o *CreateAuthPolicyBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // CreateAuthPolicyUnauthorizedCode is the HTTP code returned for type CreateAuthPolicyUnauthorized
 const CreateAuthPolicyUnauthorizedCode int = 401
 
-/*CreateAuthPolicyUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createAuthPolicyUnauthorized
 */

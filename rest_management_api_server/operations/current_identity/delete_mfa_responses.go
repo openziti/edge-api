@@ -84,7 +84,7 @@ func (o *DeleteMfaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // DeleteMfaUnauthorizedCode is the HTTP code returned for type DeleteMfaUnauthorized
 const DeleteMfaUnauthorizedCode int = 401
 
-/*DeleteMfaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteMfaUnauthorized
 */

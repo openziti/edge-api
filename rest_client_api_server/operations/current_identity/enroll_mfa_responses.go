@@ -84,7 +84,7 @@ func (o *EnrollMfaCreated) WriteResponse(rw http.ResponseWriter, producer runtim
 // EnrollMfaUnauthorizedCode is the HTTP code returned for type EnrollMfaUnauthorized
 const EnrollMfaUnauthorizedCode int = 401
 
-/*EnrollMfaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*EnrollMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response enrollMfaUnauthorized
 */

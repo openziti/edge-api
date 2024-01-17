@@ -84,7 +84,7 @@ func (o *FixDataIntegrityAccepted) WriteResponse(rw http.ResponseWriter, produce
 // FixDataIntegrityUnauthorizedCode is the HTTP code returned for type FixDataIntegrityUnauthorized
 const FixDataIntegrityUnauthorizedCode int = 401
 
-/*FixDataIntegrityUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*FixDataIntegrityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response fixDataIntegrityUnauthorized
 */

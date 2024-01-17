@@ -84,7 +84,7 @@ func (o *DetailCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // DetailCaUnauthorizedCode is the HTTP code returned for type DetailCaUnauthorized
 const DetailCaUnauthorizedCode int = 401
 
-/*DetailCaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailCaUnauthorized
 */

@@ -420,7 +420,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -531,7 +531,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -580,7 +580,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -686,7 +686,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -807,7 +807,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -882,7 +882,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1018,7 +1018,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1103,7 +1103,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1220,7 +1220,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1326,7 +1326,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1378,7 +1378,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1502,7 +1502,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1626,7 +1626,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1725,7 +1725,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1798,7 +1798,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1860,7 +1860,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -1936,7 +1936,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -2013,7 +2013,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -2093,7 +2093,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -2220,7 +2220,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -2308,7 +2308,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -2398,7 +2398,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -2684,7 +2684,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3042,7 +3042,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3165,7 +3165,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3291,7 +3291,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3475,7 +3475,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3550,7 +3550,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3697,7 +3697,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3833,7 +3833,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -3979,7 +3979,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -4149,7 +4149,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -4313,7 +4313,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -4451,7 +4451,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -4572,7 +4572,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -4673,7 +4673,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -4786,7 +4786,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -7655,7 +7655,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -7766,7 +7766,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -7815,7 +7815,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -7921,7 +7921,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8042,7 +8042,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8117,7 +8117,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8253,7 +8253,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8338,7 +8338,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8455,7 +8455,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8561,7 +8561,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8613,7 +8613,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8737,7 +8737,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8861,7 +8861,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -8960,7 +8960,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9033,7 +9033,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9095,7 +9095,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9171,7 +9171,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9248,7 +9248,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9328,7 +9328,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9455,7 +9455,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9543,7 +9543,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9633,7 +9633,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -9919,7 +9919,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -10277,7 +10277,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -10400,7 +10400,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -10526,7 +10526,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -10710,7 +10710,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -10785,7 +10785,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -10932,7 +10932,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11068,7 +11068,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11214,7 +11214,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11384,7 +11384,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11548,7 +11548,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11686,7 +11686,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11807,7 +11807,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -11908,7 +11908,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
@@ -12021,7 +12021,7 @@ func init() {
             }
           },
           "401": {
-            "description": "The currently supplied session does not have the correct access rights to request this resource",
+            "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },

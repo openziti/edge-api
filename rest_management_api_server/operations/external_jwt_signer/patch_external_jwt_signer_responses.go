@@ -128,7 +128,7 @@ func (o *PatchExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter,
 // PatchExternalJWTSignerUnauthorizedCode is the HTTP code returned for type PatchExternalJWTSignerUnauthorized
 const PatchExternalJWTSignerUnauthorizedCode int = 401
 
-/*PatchExternalJWTSignerUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchExternalJwtSignerUnauthorized
 */

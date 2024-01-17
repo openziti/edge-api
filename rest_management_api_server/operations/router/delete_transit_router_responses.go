@@ -128,7 +128,7 @@ func (o *DeleteTransitRouterBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // DeleteTransitRouterUnauthorizedCode is the HTTP code returned for type DeleteTransitRouterUnauthorized
 const DeleteTransitRouterUnauthorizedCode int = 401
 
-/*DeleteTransitRouterUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteTransitRouterUnauthorized
 */

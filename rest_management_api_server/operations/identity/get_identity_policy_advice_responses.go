@@ -84,7 +84,7 @@ func (o *GetIdentityPolicyAdviceOK) WriteResponse(rw http.ResponseWriter, produc
 // GetIdentityPolicyAdviceUnauthorizedCode is the HTTP code returned for type GetIdentityPolicyAdviceUnauthorized
 const GetIdentityPolicyAdviceUnauthorizedCode int = 401
 
-/*GetIdentityPolicyAdviceUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetIdentityPolicyAdviceUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityPolicyAdviceUnauthorized
 */

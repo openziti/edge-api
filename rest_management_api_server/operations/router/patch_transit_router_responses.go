@@ -128,7 +128,7 @@ func (o *PatchTransitRouterBadRequest) WriteResponse(rw http.ResponseWriter, pro
 // PatchTransitRouterUnauthorizedCode is the HTTP code returned for type PatchTransitRouterUnauthorized
 const PatchTransitRouterUnauthorizedCode int = 401
 
-/*PatchTransitRouterUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchTransitRouterUnauthorized
 */

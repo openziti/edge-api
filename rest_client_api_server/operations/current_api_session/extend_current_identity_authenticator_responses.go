@@ -84,7 +84,7 @@ func (o *ExtendCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // ExtendCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type ExtendCurrentIdentityAuthenticatorUnauthorized
 const ExtendCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*ExtendCurrentIdentityAuthenticatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ExtendCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendCurrentIdentityAuthenticatorUnauthorized
 */

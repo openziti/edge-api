@@ -128,7 +128,7 @@ func (o *UpdateCurrentIdentityAuthenticatorBadRequest) WriteResponse(rw http.Res
 // UpdateCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorUnauthorized
 const UpdateCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*UpdateCurrentIdentityAuthenticatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*UpdateCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateCurrentIdentityAuthenticatorUnauthorized
 */

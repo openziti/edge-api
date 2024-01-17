@@ -336,8 +336,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -413,8 +413,8 @@ paths:
                 updatedAt: "2020-03-09T19:04:21.5600897Z"
               meta: {}
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -446,8 +446,8 @@ paths:
           schema:
             $ref: '#/definitions/empty'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -521,8 +521,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -612,8 +612,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -665,8 +665,8 @@ paths:
           schema:
             $ref: '#/definitions/detailCurrentApiSessionCertificateEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -766,8 +766,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -829,8 +829,8 @@ paths:
           schema:
             $ref: '#/definitions/listCurrentApiSessionServiceUpdatesEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -914,8 +914,8 @@ paths:
                 updatedAt: "2020-01-13T16:38:13.6854788Z"
               meta: {}
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -989,8 +989,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1025,8 +1025,8 @@ paths:
           schema:
             $ref: '#/definitions/detailAuthenticatorEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1116,8 +1116,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1207,8 +1207,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1279,8 +1279,8 @@ paths:
           schema:
             $ref: '#/definitions/identityExtendEnrollmentEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1330,8 +1330,8 @@ paths:
           schema:
             $ref: '#/definitions/empty'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1374,8 +1374,8 @@ paths:
           schema:
             $ref: '#/definitions/listCurrentIdentityEdgeRoutersEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1429,8 +1429,8 @@ paths:
           schema:
             $ref: '#/definitions/detailMfaEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1484,8 +1484,8 @@ paths:
           schema:
             $ref: '#/definitions/createEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1540,8 +1540,8 @@ paths:
           schema:
             $ref: '#/definitions/empty'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1625,8 +1625,8 @@ paths:
           schema:
             $ref: '#/definitions/empty'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1686,8 +1686,8 @@ paths:
           schema:
             $ref: '#/definitions/detailMfaRecoveryCodesEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1748,8 +1748,8 @@ paths:
           schema:
             $ref: '#/definitions/empty'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -1969,8 +1969,8 @@ paths:
           schema:
             $ref: '#/definitions/enrollmentCertsEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2251,8 +2251,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2340,8 +2340,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2431,8 +2431,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2563,8 +2563,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2616,8 +2616,8 @@ paths:
           schema:
             $ref: '#/definitions/detailServiceEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2723,8 +2723,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2823,8 +2823,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -2931,8 +2931,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -3055,8 +3055,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -3172,8 +3172,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -3274,8 +3274,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -3363,8 +3363,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -3434,8 +3434,8 @@ paths:
           schema:
             $ref: '#/definitions/detailSessionEnvelope'
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:
@@ -3516,8 +3516,8 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
         "401":
-          description: The currently supplied session does not have the correct access
-            rights to request this resource
+          description: The supplied session does not have the correct access rights
+            to request this resource
           schema:
             $ref: '#/definitions/apiErrorEnvelope'
           examples:

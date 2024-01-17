@@ -128,7 +128,7 @@ func (o *CreateEdgeRouterPolicyBadRequest) WriteResponse(rw http.ResponseWriter,
 // CreateEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type CreateEdgeRouterPolicyUnauthorized
 const CreateEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*CreateEdgeRouterPolicyUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createEdgeRouterPolicyUnauthorized
 */

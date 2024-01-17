@@ -128,7 +128,7 @@ func (o *CreateConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // CreateConfigTypeUnauthorizedCode is the HTTP code returned for type CreateConfigTypeUnauthorized
 const CreateConfigTypeUnauthorizedCode int = 401
 
-/*CreateConfigTypeUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createConfigTypeUnauthorized
 */

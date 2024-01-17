@@ -84,7 +84,7 @@ func (o *DetailConfigOK) WriteResponse(rw http.ResponseWriter, producer runtime.
 // DetailConfigUnauthorizedCode is the HTTP code returned for type DetailConfigUnauthorized
 const DetailConfigUnauthorizedCode int = 401
 
-/*DetailConfigUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailConfigUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailConfigUnauthorized
 */

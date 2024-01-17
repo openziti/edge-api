@@ -128,7 +128,7 @@ func (o *PatchIdentityBadRequest) WriteResponse(rw http.ResponseWriter, producer
 // PatchIdentityUnauthorizedCode is the HTTP code returned for type PatchIdentityUnauthorized
 const PatchIdentityUnauthorizedCode int = 401
 
-/*PatchIdentityUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchIdentityUnauthorized
 */

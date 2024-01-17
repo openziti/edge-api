@@ -128,7 +128,7 @@ func (o *UpdateAuthPolicyBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateAuthPolicyUnauthorizedCode is the HTTP code returned for type UpdateAuthPolicyUnauthorized
 const UpdateAuthPolicyUnauthorizedCode int = 401
 
-/*UpdateAuthPolicyUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*UpdateAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateAuthPolicyUnauthorized
 */

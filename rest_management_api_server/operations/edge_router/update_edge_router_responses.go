@@ -128,7 +128,7 @@ func (o *UpdateEdgeRouterBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateEdgeRouterUnauthorizedCode is the HTTP code returned for type UpdateEdgeRouterUnauthorized
 const UpdateEdgeRouterUnauthorizedCode int = 401
 
-/*UpdateEdgeRouterUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*UpdateEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateEdgeRouterUnauthorized
 */

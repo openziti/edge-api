@@ -128,7 +128,7 @@ func (o *ListTransitRoutersBadRequest) WriteResponse(rw http.ResponseWriter, pro
 // ListTransitRoutersUnauthorizedCode is the HTTP code returned for type ListTransitRoutersUnauthorized
 const ListTransitRoutersUnauthorizedCode int = 401
 
-/*ListTransitRoutersUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListTransitRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listTransitRoutersUnauthorized
 */

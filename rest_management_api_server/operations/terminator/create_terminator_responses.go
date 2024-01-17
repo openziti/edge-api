@@ -128,7 +128,7 @@ func (o *CreateTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // CreateTerminatorUnauthorizedCode is the HTTP code returned for type CreateTerminatorUnauthorized
 const CreateTerminatorUnauthorizedCode int = 401
 
-/*CreateTerminatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createTerminatorUnauthorized
 */

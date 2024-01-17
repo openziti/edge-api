@@ -84,7 +84,7 @@ func (o *ExtendRouterEnrollmentOK) WriteResponse(rw http.ResponseWriter, produce
 // ExtendRouterEnrollmentUnauthorizedCode is the HTTP code returned for type ExtendRouterEnrollmentUnauthorized
 const ExtendRouterEnrollmentUnauthorizedCode int = 401
 
-/*ExtendRouterEnrollmentUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ExtendRouterEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendRouterEnrollmentUnauthorized
 */
