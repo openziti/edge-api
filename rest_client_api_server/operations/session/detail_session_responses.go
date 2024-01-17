@@ -84,7 +84,7 @@ func (o *DetailSessionOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // DetailSessionUnauthorizedCode is the HTTP code returned for type DetailSessionUnauthorized
 const DetailSessionUnauthorizedCode int = 401
 
-/*DetailSessionUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailSessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailSessionUnauthorized
 */

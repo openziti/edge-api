@@ -84,7 +84,7 @@ func (o *GetIdentityFailedServiceRequestsOK) WriteResponse(rw http.ResponseWrite
 // GetIdentityFailedServiceRequestsUnauthorizedCode is the HTTP code returned for type GetIdentityFailedServiceRequestsUnauthorized
 const GetIdentityFailedServiceRequestsUnauthorizedCode int = 401
 
-/*GetIdentityFailedServiceRequestsUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetIdentityFailedServiceRequestsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityFailedServiceRequestsUnauthorized
 */

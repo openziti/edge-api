@@ -84,7 +84,7 @@ func (o *DetailAuthPolicyOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailAuthPolicyUnauthorizedCode is the HTTP code returned for type DetailAuthPolicyUnauthorized
 const DetailAuthPolicyUnauthorizedCode int = 401
 
-/*DetailAuthPolicyUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailAuthPolicyUnauthorized
 */

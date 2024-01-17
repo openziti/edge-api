@@ -128,7 +128,7 @@ func (o *CreatePostureResponseBadRequest) WriteResponse(rw http.ResponseWriter, 
 // CreatePostureResponseUnauthorizedCode is the HTTP code returned for type CreatePostureResponseUnauthorized
 const CreatePostureResponseUnauthorizedCode int = 401
 
-/*CreatePostureResponseUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreatePostureResponseUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createPostureResponseUnauthorized
 */

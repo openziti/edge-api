@@ -84,7 +84,7 @@ func (o *EnableIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtim
 // EnableIdentityUnauthorizedCode is the HTTP code returned for type EnableIdentityUnauthorized
 const EnableIdentityUnauthorizedCode int = 401
 
-/*EnableIdentityUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*EnableIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response enableIdentityUnauthorized
 */

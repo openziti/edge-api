@@ -84,7 +84,7 @@ func (o *ReEnrollAuthenticatorCreated) WriteResponse(rw http.ResponseWriter, pro
 // ReEnrollAuthenticatorUnauthorizedCode is the HTTP code returned for type ReEnrollAuthenticatorUnauthorized
 const ReEnrollAuthenticatorUnauthorizedCode int = 401
 
-/*ReEnrollAuthenticatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ReEnrollAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response reEnrollAuthenticatorUnauthorized
 */

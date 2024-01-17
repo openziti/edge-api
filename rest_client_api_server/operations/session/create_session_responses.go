@@ -128,7 +128,7 @@ func (o *CreateSessionBadRequest) WriteResponse(rw http.ResponseWriter, producer
 // CreateSessionUnauthorizedCode is the HTTP code returned for type CreateSessionUnauthorized
 const CreateSessionUnauthorizedCode int = 401
 
-/*CreateSessionUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateSessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createSessionUnauthorized
 */

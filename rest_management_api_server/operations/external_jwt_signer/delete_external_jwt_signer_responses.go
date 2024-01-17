@@ -128,7 +128,7 @@ func (o *DeleteExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter
 // DeleteExternalJWTSignerUnauthorizedCode is the HTTP code returned for type DeleteExternalJWTSignerUnauthorized
 const DeleteExternalJWTSignerUnauthorizedCode int = 401
 
-/*DeleteExternalJWTSignerUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteExternalJwtSignerUnauthorized
 */

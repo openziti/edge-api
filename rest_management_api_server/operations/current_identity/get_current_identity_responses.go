@@ -84,7 +84,7 @@ func (o *GetCurrentIdentityOK) WriteResponse(rw http.ResponseWriter, producer ru
 // GetCurrentIdentityUnauthorizedCode is the HTTP code returned for type GetCurrentIdentityUnauthorized
 const GetCurrentIdentityUnauthorizedCode int = 401
 
-/*GetCurrentIdentityUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetCurrentIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCurrentIdentityUnauthorized
 */

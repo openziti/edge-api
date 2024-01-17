@@ -6,6 +6,7 @@ paths:
       description: This endpoint is usefull for UIs that wish to display UI elements with counts.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Informational
       operationId: listSummary

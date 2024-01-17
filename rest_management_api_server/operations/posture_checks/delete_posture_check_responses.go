@@ -84,7 +84,7 @@ func (o *DeletePostureCheckOK) WriteResponse(rw http.ResponseWriter, producer ru
 // DeletePostureCheckForbiddenCode is the HTTP code returned for type DeletePostureCheckForbidden
 const DeletePostureCheckForbiddenCode int = 403
 
-/*DeletePostureCheckForbidden The currently supplied session does not have the correct access rights to request this resource
+/*DeletePostureCheckForbidden The supplied session does not have the correct access rights to request this resource
 
 swagger:response deletePostureCheckForbidden
 */

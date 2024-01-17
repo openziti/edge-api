@@ -84,7 +84,7 @@ func (o *GetCurrentAPISessionOK) WriteResponse(rw http.ResponseWriter, producer 
 // GetCurrentAPISessionUnauthorizedCode is the HTTP code returned for type GetCurrentAPISessionUnauthorized
 const GetCurrentAPISessionUnauthorizedCode int = 401
 
-/*GetCurrentAPISessionUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetCurrentAPISessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCurrentApiSessionUnauthorized
 */

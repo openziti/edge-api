@@ -128,7 +128,7 @@ func (o *PatchPostureCheckBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // PatchPostureCheckUnauthorizedCode is the HTTP code returned for type PatchPostureCheckUnauthorized
 const PatchPostureCheckUnauthorizedCode int = 401
 
-/*PatchPostureCheckUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchPostureCheckUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchPostureCheckUnauthorized
 */

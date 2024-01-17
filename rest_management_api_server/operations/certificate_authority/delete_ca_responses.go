@@ -128,7 +128,7 @@ func (o *DeleteCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteCaUnauthorizedCode is the HTTP code returned for type DeleteCaUnauthorized
 const DeleteCaUnauthorizedCode int = 401
 
-/*DeleteCaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteCaUnauthorized
 */

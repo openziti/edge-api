@@ -84,7 +84,7 @@ func (o *DetailMfaRecoveryCodesOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailMfaRecoveryCodesUnauthorizedCode is the HTTP code returned for type DetailMfaRecoveryCodesUnauthorized
 const DetailMfaRecoveryCodesUnauthorizedCode int = 401
 
-/*DetailMfaRecoveryCodesUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailMfaRecoveryCodesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailMfaRecoveryCodesUnauthorized
 */

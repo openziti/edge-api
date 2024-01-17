@@ -84,7 +84,7 @@ func (o *DetailEnrollmentOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailEnrollmentUnauthorizedCode is the HTTP code returned for type DetailEnrollmentUnauthorized
 const DetailEnrollmentUnauthorizedCode int = 401
 
-/*DetailEnrollmentUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailEnrollmentUnauthorized
 */

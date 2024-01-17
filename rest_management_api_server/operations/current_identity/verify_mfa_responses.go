@@ -84,7 +84,7 @@ func (o *VerifyMfaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // VerifyMfaUnauthorizedCode is the HTTP code returned for type VerifyMfaUnauthorized
 const VerifyMfaUnauthorizedCode int = 401
 
-/*VerifyMfaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*VerifyMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response verifyMfaUnauthorized
 */

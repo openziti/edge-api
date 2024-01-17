@@ -147,7 +147,7 @@ func NewDeleteExternalJWTSignerUnauthorized() *DeleteExternalJWTSignerUnauthoriz
 
 /* DeleteExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
 
-The currently supplied session does not have the correct access rights to request this resource
+The supplied session does not have the correct access rights to request this resource
 */
 type DeleteExternalJWTSignerUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope

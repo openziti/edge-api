@@ -42,6 +42,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authenticator"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/certificate_authority"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/config"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/controllers"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/current_api_session"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/current_identity"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/database"
@@ -588,6 +589,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.ConfigListConfigsForConfigTypeHandler == nil {
 		api.ConfigListConfigsForConfigTypeHandler = config.ListConfigsForConfigTypeHandlerFunc(func(params config.ListConfigsForConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.ListConfigsForConfigType has not yet been implemented")
+		})
+	}
+	if api.ControllersListControllersHandler == nil {
+		api.ControllersListControllersHandler = controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation controllers.ListControllers has not yet been implemented")
 		})
 	}
 	if api.CurrentAPISessionListCurrentIdentityAuthenticatorsHandler == nil {

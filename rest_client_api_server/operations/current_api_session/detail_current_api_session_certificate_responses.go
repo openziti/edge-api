@@ -84,7 +84,7 @@ func (o *DetailCurrentAPISessionCertificateOK) WriteResponse(rw http.ResponseWri
 // DetailCurrentAPISessionCertificateUnauthorizedCode is the HTTP code returned for type DetailCurrentAPISessionCertificateUnauthorized
 const DetailCurrentAPISessionCertificateUnauthorizedCode int = 401
 
-/*DetailCurrentAPISessionCertificateUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailCurrentApiSessionCertificateUnauthorized
 */

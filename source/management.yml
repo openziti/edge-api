@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.7
+  version: 0.26.8
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -81,6 +81,9 @@ paths:
     $ref: 'management/configs.yml#/paths/configs'
   '/configs/{id}':
     $ref: 'management/configs.yml#/paths/configs-id'
+
+  '/controllers':
+    $ref: 'shared/controllers.yml#/paths/controllers'
 
   '/current-api-session':
     $ref: 'shared/current-api-session.yml#/paths/current-api-session'

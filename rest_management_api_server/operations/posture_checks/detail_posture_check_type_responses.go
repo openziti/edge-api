@@ -84,7 +84,7 @@ func (o *DetailPostureCheckTypeOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailPostureCheckTypeUnauthorizedCode is the HTTP code returned for type DetailPostureCheckTypeUnauthorized
 const DetailPostureCheckTypeUnauthorizedCode int = 401
 
-/*DetailPostureCheckTypeUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailPostureCheckTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailPostureCheckTypeUnauthorized
 */

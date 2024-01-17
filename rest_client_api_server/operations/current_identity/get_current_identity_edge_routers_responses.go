@@ -84,7 +84,7 @@ func (o *GetCurrentIdentityEdgeRoutersOK) WriteResponse(rw http.ResponseWriter, 
 // GetCurrentIdentityEdgeRoutersUnauthorizedCode is the HTTP code returned for type GetCurrentIdentityEdgeRoutersUnauthorized
 const GetCurrentIdentityEdgeRoutersUnauthorizedCode int = 401
 
-/*GetCurrentIdentityEdgeRoutersUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetCurrentIdentityEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCurrentIdentityEdgeRoutersUnauthorized
 */

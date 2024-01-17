@@ -84,7 +84,7 @@ func (o *DataIntegrityResultsOK) WriteResponse(rw http.ResponseWriter, producer 
 // DataIntegrityResultsUnauthorizedCode is the HTTP code returned for type DataIntegrityResultsUnauthorized
 const DataIntegrityResultsUnauthorizedCode int = 401
 
-/*DataIntegrityResultsUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DataIntegrityResultsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response dataIntegrityResultsUnauthorized
 */

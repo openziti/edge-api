@@ -84,7 +84,7 @@ func (o *CheckDataIntegrityAccepted) WriteResponse(rw http.ResponseWriter, produ
 // CheckDataIntegrityUnauthorizedCode is the HTTP code returned for type CheckDataIntegrityUnauthorized
 const CheckDataIntegrityUnauthorizedCode int = 401
 
-/*CheckDataIntegrityUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CheckDataIntegrityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response checkDataIntegrityUnauthorized
 */

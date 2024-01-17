@@ -45,6 +45,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_client_api_server/operations/authentication"
+	"github.com/openziti/edge-api/rest_client_api_server/operations/controllers"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/current_api_session"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/current_identity"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/enroll"
@@ -199,6 +200,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		}),
 		CurrentIdentityGetCurrentIdentityEdgeRoutersHandler: current_identity.GetCurrentIdentityEdgeRoutersHandlerFunc(func(params current_identity.GetCurrentIdentityEdgeRoutersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_identity.GetCurrentIdentityEdgeRouters has not yet been implemented")
+		}),
+		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation controllers.ListControllers has not yet been implemented")
 		}),
 		CurrentAPISessionListCurrentAPISessionCertificatesHandler: current_api_session.ListCurrentAPISessionCertificatesHandlerFunc(func(params current_api_session.ListCurrentAPISessionCertificatesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.ListCurrentAPISessionCertificates has not yet been implemented")
@@ -406,6 +410,8 @@ type ZitiEdgeClientAPI struct {
 	CurrentIdentityGetCurrentIdentityHandler current_identity.GetCurrentIdentityHandler
 	// CurrentIdentityGetCurrentIdentityEdgeRoutersHandler sets the operation handler for the get current identity edge routers operation
 	CurrentIdentityGetCurrentIdentityEdgeRoutersHandler current_identity.GetCurrentIdentityEdgeRoutersHandler
+	// ControllersListControllersHandler sets the operation handler for the list controllers operation
+	ControllersListControllersHandler controllers.ListControllersHandler
 	// CurrentAPISessionListCurrentAPISessionCertificatesHandler sets the operation handler for the list current Api session certificates operation
 	CurrentAPISessionListCurrentAPISessionCertificatesHandler current_api_session.ListCurrentAPISessionCertificatesHandler
 	// CurrentAPISessionListCurrentIdentityAuthenticatorsHandler sets the operation handler for the list current identity authenticators operation
@@ -653,6 +659,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.CurrentIdentityGetCurrentIdentityEdgeRoutersHandler == nil {
 		unregistered = append(unregistered, "current_identity.GetCurrentIdentityEdgeRoutersHandler")
+	}
+	if o.ControllersListControllersHandler == nil {
+		unregistered = append(unregistered, "controllers.ListControllersHandler")
 	}
 	if o.CurrentAPISessionListCurrentAPISessionCertificatesHandler == nil {
 		unregistered = append(unregistered, "current_api_session.ListCurrentAPISessionCertificatesHandler")
@@ -963,6 +972,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/current-identity/edge-routers"] = current_identity.NewGetCurrentIdentityEdgeRouters(o.context, o.CurrentIdentityGetCurrentIdentityEdgeRoutersHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/controllers"] = controllers.NewListControllers(o.context, o.ControllersListControllersHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

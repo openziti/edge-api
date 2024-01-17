@@ -128,7 +128,7 @@ func (o *CreateRouterBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 // CreateRouterUnauthorizedCode is the HTTP code returned for type CreateRouterUnauthorized
 const CreateRouterUnauthorizedCode int = 401
 
-/*CreateRouterUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*CreateRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createRouterUnauthorized
 */

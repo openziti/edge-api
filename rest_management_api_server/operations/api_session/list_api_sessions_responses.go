@@ -128,7 +128,7 @@ func (o *ListAPISessionsBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // ListAPISessionsUnauthorizedCode is the HTTP code returned for type ListAPISessionsUnauthorized
 const ListAPISessionsUnauthorizedCode int = 401
 
-/*ListAPISessionsUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListAPISessionsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listApiSessionsUnauthorized
 */

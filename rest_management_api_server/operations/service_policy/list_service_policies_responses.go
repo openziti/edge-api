@@ -128,7 +128,7 @@ func (o *ListServicePoliciesBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // ListServicePoliciesUnauthorizedCode is the HTTP code returned for type ListServicePoliciesUnauthorized
 const ListServicePoliciesUnauthorizedCode int = 401
 
-/*ListServicePoliciesUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListServicePoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServicePoliciesUnauthorized
 */

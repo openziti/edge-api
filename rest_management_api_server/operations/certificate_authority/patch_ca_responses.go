@@ -128,7 +128,7 @@ func (o *PatchCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runti
 // PatchCaUnauthorizedCode is the HTTP code returned for type PatchCaUnauthorized
 const PatchCaUnauthorizedCode int = 401
 
-/*PatchCaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchCaUnauthorized
 */

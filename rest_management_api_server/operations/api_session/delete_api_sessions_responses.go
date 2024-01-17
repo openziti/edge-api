@@ -84,7 +84,7 @@ func (o *DeleteAPISessionsOK) WriteResponse(rw http.ResponseWriter, producer run
 // DeleteAPISessionsForbiddenCode is the HTTP code returned for type DeleteAPISessionsForbidden
 const DeleteAPISessionsForbiddenCode int = 403
 
-/*DeleteAPISessionsForbidden The currently supplied session does not have the correct access rights to request this resource
+/*DeleteAPISessionsForbidden The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteApiSessionsForbidden
 */

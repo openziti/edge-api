@@ -128,7 +128,7 @@ func (o *UpdateCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateCaUnauthorizedCode is the HTTP code returned for type UpdateCaUnauthorized
 const UpdateCaUnauthorizedCode int = 401
 
-/*UpdateCaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*UpdateCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateCaUnauthorized
 */

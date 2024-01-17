@@ -128,7 +128,7 @@ func (o *DeleteCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.Res
 // DeleteCurrentAPISessionCertificateUnauthorizedCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateUnauthorized
 const DeleteCurrentAPISessionCertificateUnauthorizedCode int = 401
 
-/*DeleteCurrentAPISessionCertificateUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteCurrentApiSessionCertificateUnauthorized
 */

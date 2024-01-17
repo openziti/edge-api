@@ -128,7 +128,7 @@ func (o *PatchTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // PatchTerminatorUnauthorizedCode is the HTTP code returned for type PatchTerminatorUnauthorized
 const PatchTerminatorUnauthorizedCode int = 401
 
-/*PatchTerminatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchTerminatorUnauthorized
 */

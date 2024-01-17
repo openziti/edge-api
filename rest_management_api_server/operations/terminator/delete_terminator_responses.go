@@ -128,7 +128,7 @@ func (o *DeleteTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // DeleteTerminatorUnauthorizedCode is the HTTP code returned for type DeleteTerminatorUnauthorized
 const DeleteTerminatorUnauthorizedCode int = 401
 
-/*DeleteTerminatorUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DeleteTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteTerminatorUnauthorized
 */

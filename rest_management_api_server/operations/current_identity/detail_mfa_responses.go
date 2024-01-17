@@ -84,7 +84,7 @@ func (o *DetailMfaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // DetailMfaUnauthorizedCode is the HTTP code returned for type DetailMfaUnauthorized
 const DetailMfaUnauthorizedCode int = 401
 
-/*DetailMfaUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*DetailMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailMfaUnauthorized
 */

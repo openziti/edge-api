@@ -84,7 +84,7 @@ func (o *ListSummaryOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // ListSummaryUnauthorizedCode is the HTTP code returned for type ListSummaryUnauthorized
 const ListSummaryUnauthorizedCode int = 401
 
-/*ListSummaryUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListSummaryUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listSummaryUnauthorized
 */

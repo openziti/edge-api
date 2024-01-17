@@ -82,7 +82,7 @@ func (o *GetCaJWTOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // GetCaJWTUnauthorizedCode is the HTTP code returned for type GetCaJWTUnauthorized
 const GetCaJWTUnauthorizedCode int = 401
 
-/*GetCaJWTUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*GetCaJWTUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCaJwtUnauthorized
 */

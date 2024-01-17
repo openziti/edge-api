@@ -84,7 +84,7 @@ func (o *ListIdentityEdgeRoutersOK) WriteResponse(rw http.ResponseWriter, produc
 // ListIdentityEdgeRoutersUnauthorizedCode is the HTTP code returned for type ListIdentityEdgeRoutersUnauthorized
 const ListIdentityEdgeRoutersUnauthorizedCode int = 401
 
-/*ListIdentityEdgeRoutersUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*ListIdentityEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listIdentityEdgeRoutersUnauthorized
 */

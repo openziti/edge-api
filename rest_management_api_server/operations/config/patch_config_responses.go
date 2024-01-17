@@ -128,7 +128,7 @@ func (o *PatchConfigBadRequest) WriteResponse(rw http.ResponseWriter, producer r
 // PatchConfigUnauthorizedCode is the HTTP code returned for type PatchConfigUnauthorized
 const PatchConfigUnauthorizedCode int = 401
 
-/*PatchConfigUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchConfigUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchConfigUnauthorized
 */

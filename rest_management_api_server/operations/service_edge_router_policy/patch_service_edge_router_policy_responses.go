@@ -128,7 +128,7 @@ func (o *PatchServiceEdgeRouterPolicyBadRequest) WriteResponse(rw http.ResponseW
 // PatchServiceEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type PatchServiceEdgeRouterPolicyUnauthorized
 const PatchServiceEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*PatchServiceEdgeRouterPolicyUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*PatchServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchServiceEdgeRouterPolicyUnauthorized
 */

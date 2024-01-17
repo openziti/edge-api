@@ -128,7 +128,7 @@ func (o *AssociateIdentitysServiceConfigsBadRequest) WriteResponse(rw http.Respo
 // AssociateIdentitysServiceConfigsUnauthorizedCode is the HTTP code returned for type AssociateIdentitysServiceConfigsUnauthorized
 const AssociateIdentitysServiceConfigsUnauthorizedCode int = 401
 
-/*AssociateIdentitysServiceConfigsUnauthorized The currently supplied session does not have the correct access rights to request this resource
+/*AssociateIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response associateIdentitysServiceConfigsUnauthorized
 */
