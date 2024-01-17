@@ -7,6 +7,7 @@ paths:
         Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: listServicePolicies

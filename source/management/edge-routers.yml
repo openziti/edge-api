@@ -33,6 +33,7 @@ paths:
       description: Create a edge router resource. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: createEdgeRouter
@@ -61,6 +62,7 @@ paths:
       description: Retrieves a single edge router by id. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: detailEdgeRouter

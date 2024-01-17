@@ -247,6 +247,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single API Session by id. Requires admin access.",
@@ -573,6 +578,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates an Auth Policy. Requires admin access.",
@@ -691,6 +701,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single Auth Policy by id. Requires admin access.",
@@ -785,6 +800,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an Auth Policy by id. Requires admin access.",
@@ -927,6 +947,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an Auth Policy by id. Requires admin access.\n",
@@ -1032,6 +1057,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update only the supplied fields on an Auth Policy by id. Requires admin access.",
@@ -7940,6 +7970,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Create a edge router resource. Requires admin access.",
@@ -8058,6 +8093,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single edge router by id. Requires admin access.",
@@ -13161,6 +13201,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of role attributes in use by identities; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -16334,6 +16379,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -17459,6 +17509,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -19777,6 +19832,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "This endpoint is usefull for UIs that wish to display UI elements with counts.",
@@ -27972,6 +28032,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single API Session by id. Requires admin access.",
@@ -28298,6 +28363,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates an Auth Policy. Requires admin access.",
@@ -28416,6 +28486,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single Auth Policy by id. Requires admin access.",
@@ -28510,6 +28585,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an Auth Policy by id. Requires admin access.",
@@ -28652,6 +28732,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an Auth Policy by id. Requires admin access.\n",
@@ -28757,6 +28842,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update only the supplied fields on an Auth Policy by id. Requires admin access.",
@@ -35665,6 +35755,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Create a edge router resource. Requires admin access.",
@@ -35783,6 +35878,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single edge router by id. Requires admin access.",
@@ -40886,6 +40986,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of role attributes in use by identities; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -44059,6 +44164,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -45184,6 +45294,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -47502,6 +47617,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "This endpoint is usefull for UIs that wish to display UI elements with counts.",
