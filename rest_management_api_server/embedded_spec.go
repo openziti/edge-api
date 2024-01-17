@@ -4924,7 +4924,7 @@ func init() {
         "tags": [
           "Controllers"
         ],
-        "summary": "List CAs",
+        "summary": "List controllers",
         "operationId": "listControllers",
         "parameters": [
           {
@@ -32709,7 +32709,7 @@ func init() {
         "tags": [
           "Controllers"
         ],
-        "summary": "List CAs",
+        "summary": "List controllers",
         "operationId": "listControllers",
         "parameters": [
           {

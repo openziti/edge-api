@@ -60,7 +60,7 @@ type ClientService interface {
 }
 
 /*
-  ListControllers lists c as
+  ListControllers lists controllers
 
   Retrieves a list of controllers
 */

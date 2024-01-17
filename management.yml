@@ -3650,7 +3650,7 @@ paths:
       description: Retrieves a list of controllers
       tags:
       - Controllers
-      summary: List CAs
+      summary: List controllers
       operationId: listControllers
       parameters:
       - type: integer

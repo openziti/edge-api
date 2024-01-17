@@ -2,7 +2,7 @@
 paths:
   controllers:
     get:
-      summary: List CAs
+      summary: List controllers
       description: Retrieves a list of controllers
       security:
         - ztSession: [ ]

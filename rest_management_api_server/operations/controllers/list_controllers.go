@@ -55,7 +55,7 @@ func NewListControllers(ctx *middleware.Context, handler ListControllersHandler)
 
 /* ListControllers swagger:route GET /controllers Controllers listControllers
 
-List CAs
+List controllers
 
 Retrieves a list of controllers
 
