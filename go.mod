@@ -10,7 +10,7 @@ require (
 	github.com/go-openapi/spec v0.20.14
 	github.com/go-openapi/strfmt v0.22.0
 	github.com/go-openapi/swag v0.22.9
-	github.com/go-openapi/validate v0.22.6
+	github.com/go-openapi/validate v0.23.0
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.3
