@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.8
+  version: 0.26.9
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -4277,12 +4277,22 @@ definitions:
     properties:
       arch:
         type: string
+        maxLength: 255
+      domain:
+        type: string
+        maxLength: 253
+      hostname:
+        type: string
+        maxLength: 253
       os:
         type: string
+        maxLength: 255
       osRelease:
         type: string
+        maxLength: 255
       osVersion:
         type: string
+        maxLength: 255
   identityAuthenticators:
     type: object
     properties:
@@ -4878,16 +4888,22 @@ definitions:
     properties:
       appId:
         type: string
+        maxLength: 255
       appVersion:
         type: string
+        maxLength: 255
       branch:
         type: string
+        maxLength: 255
       revision:
         type: string
+        maxLength: 255
       type:
         type: string
+        maxLength: 255
       version:
         type: string
+        maxLength: 255
   serviceDetail:
     type: object
     allOf:
