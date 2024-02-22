@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.8"
+    "version": "0.26.9"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5930,16 +5930,28 @@ func init() {
       "type": "object",
       "properties": {
         "arch": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
+        },
+        "domain": {
+          "type": "string",
+          "maxLength": 253
+        },
+        "hostname": {
+          "type": "string",
+          "maxLength": 253
         },
         "os": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "osRelease": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "osVersion": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         }
       }
     },
@@ -6834,22 +6846,28 @@ func init() {
       "type": "object",
       "properties": {
         "appId": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "appVersion": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "branch": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "revision": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         }
       }
     },
@@ -7299,7 +7317,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.8"
+    "version": "0.26.9"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -13248,16 +13266,28 @@ func init() {
       "type": "object",
       "properties": {
         "arch": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
+        },
+        "domain": {
+          "type": "string",
+          "maxLength": 253
+        },
+        "hostname": {
+          "type": "string",
+          "maxLength": 253
         },
         "os": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "osRelease": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "osVersion": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         }
       }
     },
@@ -14152,22 +14182,28 @@ func init() {
       "type": "object",
       "properties": {
         "appId": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "appVersion": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "branch": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "revision": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         }
       }
     },

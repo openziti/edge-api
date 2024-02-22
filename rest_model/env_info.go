@@ -32,8 +32,10 @@ package rest_model
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // EnvInfo Environment information an authenticating client may provide
@@ -42,20 +44,133 @@ import (
 type EnvInfo struct {
 
 	// arch
+	// Max Length: 255
 	Arch string `json:"arch,omitempty"`
 
+	// domain
+	// Max Length: 253
+	Domain string `json:"domain,omitempty"`
+
+	// hostname
+	// Max Length: 253
+	Hostname string `json:"hostname,omitempty"`
+
 	// os
+	// Max Length: 255
 	Os string `json:"os,omitempty"`
 
 	// os release
+	// Max Length: 255
 	OsRelease string `json:"osRelease,omitempty"`
 
 	// os version
+	// Max Length: 255
 	OsVersion string `json:"osVersion,omitempty"`
 }
 
 // Validate validates this env info
 func (m *EnvInfo) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateArch(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDomain(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHostname(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOsRelease(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOsVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EnvInfo) validateArch(formats strfmt.Registry) error {
+	if swag.IsZero(m.Arch) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("arch", "body", m.Arch, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EnvInfo) validateDomain(formats strfmt.Registry) error {
+	if swag.IsZero(m.Domain) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("domain", "body", m.Domain, 253); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EnvInfo) validateHostname(formats strfmt.Registry) error {
+	if swag.IsZero(m.Hostname) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("hostname", "body", m.Hostname, 253); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EnvInfo) validateOs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Os) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("os", "body", m.Os, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EnvInfo) validateOsRelease(formats strfmt.Registry) error {
+	if swag.IsZero(m.OsRelease) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("osRelease", "body", m.OsRelease, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EnvInfo) validateOsVersion(formats strfmt.Registry) error {
+	if swag.IsZero(m.OsVersion) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("osVersion", "body", m.OsVersion, 255); err != nil {
+		return err
+	}
+
 	return nil
 }
 

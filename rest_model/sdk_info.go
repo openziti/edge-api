@@ -32,8 +32,10 @@ package rest_model
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // SdkInfo SDK information an authenticating client may provide
@@ -42,26 +44,133 @@ import (
 type SdkInfo struct {
 
 	// app Id
+	// Max Length: 255
 	AppID string `json:"appId,omitempty"`
 
 	// app version
+	// Max Length: 255
 	AppVersion string `json:"appVersion,omitempty"`
 
 	// branch
+	// Max Length: 255
 	Branch string `json:"branch,omitempty"`
 
 	// revision
+	// Max Length: 255
 	Revision string `json:"revision,omitempty"`
 
 	// type
+	// Max Length: 255
 	Type string `json:"type,omitempty"`
 
 	// version
+	// Max Length: 255
 	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this sdk info
 func (m *SdkInfo) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAppID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAppVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRevision(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SdkInfo) validateAppID(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppID) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("appId", "body", m.AppID, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SdkInfo) validateAppVersion(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppVersion) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("appVersion", "body", m.AppVersion, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SdkInfo) validateBranch(formats strfmt.Registry) error {
+	if swag.IsZero(m.Branch) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("branch", "body", m.Branch, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SdkInfo) validateRevision(formats strfmt.Registry) error {
+	if swag.IsZero(m.Revision) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("revision", "body", m.Revision, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SdkInfo) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("type", "body", m.Type, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SdkInfo) validateVersion(formats strfmt.Registry) error {
+	if swag.IsZero(m.Version) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("version", "body", m.Version, 255); err != nil {
+		return err
+	}
+
 	return nil
 }
 
