@@ -9454,11 +9454,21 @@ paths:
       - Identity
       summary: List accessible services
       operationId: listIdentityServices
+      parameters:
+      - type: string
+        name: filter
+        in: query
+      - enum:
+        - dial
+        - bind
+        type: string
+        name: policyType
+        in: query
       responses:
         "200":
-          description: A list of edge routers
+          description: A list of services
           schema:
-            $ref: '#/definitions/listEdgeRoutersEnvelope'
+            $ref: '#/definitions/listServicesEnvelope'
         "401":
           description: The supplied session does not have the correct access rights
             to request this resource
@@ -13646,6 +13656,12 @@ paths:
         in: query
       - type: string
         name: filter
+        in: query
+      - enum:
+        - dial
+        - bind
+        type: string
+        name: policyType
         in: query
       responses:
         "200":

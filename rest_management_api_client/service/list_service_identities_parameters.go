@@ -99,6 +99,9 @@ type ListServiceIdentitiesParams struct {
 	// Offset.
 	Offset *int64
 
+	// PolicyType.
+	PolicyType *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -196,6 +199,17 @@ func (o *ListServiceIdentitiesParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPolicyType adds the policyType to the list service identities params
+func (o *ListServiceIdentitiesParams) WithPolicyType(policyType *string) *ListServiceIdentitiesParams {
+	o.SetPolicyType(policyType)
+	return o
+}
+
+// SetPolicyType adds the policyType to the list service identities params
+func (o *ListServiceIdentitiesParams) SetPolicyType(policyType *string) {
+	o.PolicyType = policyType
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListServiceIdentitiesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -255,6 +269,23 @@ func (o *ListServiceIdentitiesParams) WriteToRequest(r runtime.ClientRequest, re
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PolicyType != nil {
+
+		// query param policyType
+		var qrPolicyType string
+
+		if o.PolicyType != nil {
+			qrPolicyType = *o.PolicyType
+		}
+		qPolicyType := qrPolicyType
+		if qPolicyType != "" {
+
+			if err := r.SetQueryParam("policyType", qPolicyType); err != nil {
 				return err
 			}
 		}

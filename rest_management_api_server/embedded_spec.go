@@ -12950,11 +12950,27 @@ func init() {
         ],
         "summary": "List accessible services",
         "operationId": "listIdentityServices",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "dial",
+              "bind"
+            ],
+            "type": "string",
+            "name": "policyType",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of edge routers",
+            "description": "A list of services",
             "schema": {
-              "$ref": "#/definitions/listEdgeRoutersEnvelope"
+              "$ref": "#/definitions/listServicesEnvelope"
             }
           },
           "401": {
@@ -18744,6 +18760,15 @@ func init() {
           {
             "type": "string",
             "name": "filter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "dial",
+              "bind"
+            ],
+            "type": "string",
+            "name": "policyType",
             "in": "query"
           }
         ],
@@ -40753,11 +40778,27 @@ func init() {
         ],
         "summary": "List accessible services",
         "operationId": "listIdentityServices",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "dial",
+              "bind"
+            ],
+            "type": "string",
+            "name": "policyType",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of edge routers",
+            "description": "A list of services",
             "schema": {
-              "$ref": "#/definitions/listEdgeRoutersEnvelope"
+              "$ref": "#/definitions/listServicesEnvelope"
             }
           },
           "401": {
@@ -46547,6 +46588,15 @@ func init() {
           {
             "type": "string",
             "name": "filter",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "dial",
+              "bind"
+            ],
+            "type": "string",
+            "name": "policyType",
             "in": "query"
           }
         ],

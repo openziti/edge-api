@@ -42,9 +42,10 @@ import (
 type ListServiceIdentitiesURL struct {
 	ID string
 
-	Filter *string
-	Limit  *int64
-	Offset *int64
+	Filter     *string
+	Limit      *int64
+	Offset     *int64
+	PolicyType *string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -109,6 +110,14 @@ func (o *ListServiceIdentitiesURL) Build() (*url.URL, error) {
 	}
 	if offsetQ != "" {
 		qs.Set("offset", offsetQ)
+	}
+
+	var policyTypeQ string
+	if o.PolicyType != nil {
+		policyTypeQ = *o.PolicyType
+	}
+	if policyTypeQ != "" {
+		qs.Set("policyType", policyTypeQ)
 	}
 
 	_result.RawQuery = qs.Encode()

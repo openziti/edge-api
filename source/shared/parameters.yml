@@ -57,3 +57,10 @@ roleSemantic:
   name: roleSemantic
   type: string
   in: query
+policyType:
+  name: policyType
+  type: string
+  in: query
+  enum:
+    - dial
+    - bind

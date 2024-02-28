@@ -83,11 +83,17 @@ func NewListIdentityServicesParamsWithHTTPClient(client *http.Client) *ListIdent
 */
 type ListIdentityServicesParams struct {
 
+	// Filter.
+	Filter *string
+
 	/* ID.
 
 	   The id of the requested resource
 	*/
 	ID string
+
+	// PolicyType.
+	PolicyType *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -142,6 +148,17 @@ func (o *ListIdentityServicesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithFilter adds the filter to the list identity services params
+func (o *ListIdentityServicesParams) WithFilter(filter *string) *ListIdentityServicesParams {
+	o.SetFilter(filter)
+	return o
+}
+
+// SetFilter adds the filter to the list identity services params
+func (o *ListIdentityServicesParams) SetFilter(filter *string) {
+	o.Filter = filter
+}
+
 // WithID adds the id to the list identity services params
 func (o *ListIdentityServicesParams) WithID(id string) *ListIdentityServicesParams {
 	o.SetID(id)
@@ -153,6 +170,17 @@ func (o *ListIdentityServicesParams) SetID(id string) {
 	o.ID = id
 }
 
+// WithPolicyType adds the policyType to the list identity services params
+func (o *ListIdentityServicesParams) WithPolicyType(policyType *string) *ListIdentityServicesParams {
+	o.SetPolicyType(policyType)
+	return o
+}
+
+// SetPolicyType adds the policyType to the list identity services params
+func (o *ListIdentityServicesParams) SetPolicyType(policyType *string) {
+	o.PolicyType = policyType
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListIdentityServicesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -161,9 +189,43 @@ func (o *ListIdentityServicesParams) WriteToRequest(r runtime.ClientRequest, reg
 	}
 	var res []error
 
+	if o.Filter != nil {
+
+		// query param filter
+		var qrFilter string
+
+		if o.Filter != nil {
+			qrFilter = *o.Filter
+		}
+		qFilter := qrFilter
+		if qFilter != "" {
+
+			if err := r.SetQueryParam("filter", qFilter); err != nil {
+				return err
+			}
+		}
+	}
+
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
+	}
+
+	if o.PolicyType != nil {
+
+		// query param policyType
+		var qrPolicyType string
+
+		if o.PolicyType != nil {
+			qrPolicyType = *o.PolicyType
+		}
+		qPolicyType := qrPolicyType
+		if qPolicyType != "" {
+
+			if err := r.SetQueryParam("policyType", qPolicyType); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {
