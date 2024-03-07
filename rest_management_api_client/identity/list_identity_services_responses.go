@@ -83,22 +83,22 @@ func NewListIdentityServicesOK() *ListIdentityServicesOK {
 
 /* ListIdentityServicesOK describes a response with status code 200, with default header values.
 
-A list of edge routers
+A list of services
 */
 type ListIdentityServicesOK struct {
-	Payload *rest_model.ListEdgeRoutersEnvelope
+	Payload *rest_model.ListServicesEnvelope
 }
 
 func (o *ListIdentityServicesOK) Error() string {
 	return fmt.Sprintf("[GET /identities/{id}/services][%d] listIdentityServicesOK  %+v", 200, o.Payload)
 }
-func (o *ListIdentityServicesOK) GetPayload() *rest_model.ListEdgeRoutersEnvelope {
+func (o *ListIdentityServicesOK) GetPayload() *rest_model.ListServicesEnvelope {
 	return o.Payload
 }
 
 func (o *ListIdentityServicesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(rest_model.ListEdgeRoutersEnvelope)
+	o.Payload = new(rest_model.ListServicesEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

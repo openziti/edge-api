@@ -40,7 +40,7 @@ import (
 // ListIdentityServicesOKCode is the HTTP code returned for type ListIdentityServicesOK
 const ListIdentityServicesOKCode int = 200
 
-/*ListIdentityServicesOK A list of edge routers
+/*ListIdentityServicesOK A list of services
 
 swagger:response listIdentityServicesOK
 */
@@ -49,7 +49,7 @@ type ListIdentityServicesOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *rest_model.ListEdgeRoutersEnvelope `json:"body,omitempty"`
+	Payload *rest_model.ListServicesEnvelope `json:"body,omitempty"`
 }
 
 // NewListIdentityServicesOK creates ListIdentityServicesOK with default headers values
@@ -59,13 +59,13 @@ func NewListIdentityServicesOK() *ListIdentityServicesOK {
 }
 
 // WithPayload adds the payload to the list identity services o k response
-func (o *ListIdentityServicesOK) WithPayload(payload *rest_model.ListEdgeRoutersEnvelope) *ListIdentityServicesOK {
+func (o *ListIdentityServicesOK) WithPayload(payload *rest_model.ListServicesEnvelope) *ListIdentityServicesOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the list identity services o k response
-func (o *ListIdentityServicesOK) SetPayload(payload *rest_model.ListEdgeRoutersEnvelope) {
+func (o *ListIdentityServicesOK) SetPayload(payload *rest_model.ListServicesEnvelope) {
 	o.Payload = payload
 }
 

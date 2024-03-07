@@ -33,8 +33,10 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/validate"
 )
 
 // NewListIdentityServicesParams creates a new ListIdentityServicesParams object
@@ -54,11 +56,19 @@ type ListIdentityServicesParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
+	/*
+	  In: query
+	*/
+	Filter *string
 	/*The id of the requested resource
 	  Required: true
 	  In: path
 	*/
 	ID string
+	/*
+	  In: query
+	*/
+	PolicyType *string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -70,13 +80,43 @@ func (o *ListIdentityServicesParams) BindRequest(r *http.Request, route *middlew
 
 	o.HTTPRequest = r
 
+	qs := runtime.Values(r.URL.Query())
+
+	qFilter, qhkFilter, _ := qs.GetOK("filter")
+	if err := o.bindFilter(qFilter, qhkFilter, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	rID, rhkID, _ := route.Params.GetOK("id")
 	if err := o.bindID(rID, rhkID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qPolicyType, qhkPolicyType, _ := qs.GetOK("policyType")
+	if err := o.bindPolicyType(qPolicyType, qhkPolicyType, route.Formats); err != nil {
 		res = append(res, err)
 	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindFilter binds and validates parameter Filter from query.
+func (o *ListIdentityServicesParams) bindFilter(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.Filter = &raw
+
 	return nil
 }
 
@@ -90,6 +130,38 @@ func (o *ListIdentityServicesParams) bindID(rawData []string, hasKey bool, forma
 	// Required: true
 	// Parameter is provided by construction from the route
 	o.ID = raw
+
+	return nil
+}
+
+// bindPolicyType binds and validates parameter PolicyType from query.
+func (o *ListIdentityServicesParams) bindPolicyType(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.PolicyType = &raw
+
+	if err := o.validatePolicyType(formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// validatePolicyType carries on validations for parameter PolicyType
+func (o *ListIdentityServicesParams) validatePolicyType(formats strfmt.Registry) error {
+
+	if err := validate.EnumCase("policyType", "query", *o.PolicyType, []interface{}{"dial", "bind"}, true); err != nil {
+		return err
+	}
 
 	return nil
 }

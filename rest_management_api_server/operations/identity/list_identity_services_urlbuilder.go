@@ -40,6 +40,9 @@ import (
 type ListIdentityServicesURL struct {
 	ID string
 
+	Filter     *string
+	PolicyType *string
+
 	_basePath string
 	// avoid unkeyed usage
 	_ struct{}
@@ -78,6 +81,26 @@ func (o *ListIdentityServicesURL) Build() (*url.URL, error) {
 		_basePath = "/edge/management/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
+
+	qs := make(url.Values)
+
+	var filterQ string
+	if o.Filter != nil {
+		filterQ = *o.Filter
+	}
+	if filterQ != "" {
+		qs.Set("filter", filterQ)
+	}
+
+	var policyTypeQ string
+	if o.PolicyType != nil {
+		policyTypeQ = *o.PolicyType
+	}
+	if policyTypeQ != "" {
+		qs.Set("policyType", policyTypeQ)
+	}
+
+	_result.RawQuery = qs.Encode()
 
 	return &_result, nil
 }

@@ -37,6 +37,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // NewListServiceIdentitiesParams creates a new ListServiceIdentitiesParams object
@@ -73,6 +74,10 @@ type ListServiceIdentitiesParams struct {
 	  In: query
 	*/
 	Offset *int64
+	/*
+	  In: query
+	*/
+	PolicyType *string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -103,6 +108,11 @@ func (o *ListServiceIdentitiesParams) BindRequest(r *http.Request, route *middle
 
 	qOffset, qhkOffset, _ := qs.GetOK("offset")
 	if err := o.bindOffset(qOffset, qhkOffset, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qPolicyType, qhkPolicyType, _ := qs.GetOK("policyType")
+	if err := o.bindPolicyType(qPolicyType, qhkPolicyType, route.Formats); err != nil {
 		res = append(res, err)
 	}
 	if len(res) > 0 {
@@ -185,6 +195,38 @@ func (o *ListServiceIdentitiesParams) bindOffset(rawData []string, hasKey bool, 
 		return errors.InvalidType("offset", "query", "int64", raw)
 	}
 	o.Offset = &value
+
+	return nil
+}
+
+// bindPolicyType binds and validates parameter PolicyType from query.
+func (o *ListServiceIdentitiesParams) bindPolicyType(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.PolicyType = &raw
+
+	if err := o.validatePolicyType(formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// validatePolicyType carries on validations for parameter PolicyType
+func (o *ListServiceIdentitiesParams) validatePolicyType(formats strfmt.Registry) error {
+
+	if err := validate.EnumCase("policyType", "query", *o.PolicyType, []interface{}{"dial", "bind"}, true); err != nil {
+		return err
+	}
 
 	return nil
 }

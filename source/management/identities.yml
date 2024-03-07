@@ -310,9 +310,12 @@ paths:
       tags:
         - Identity
       operationId: listIdentityServices
+      parameters:
+        - $ref: '../shared/parameters.yml#/filter'
+        - $ref: '../shared/parameters.yml#/policyType'
       responses:
         '200':
-          $ref: 'edge-routers.yml#/responses/listEdgeRouters'
+          $ref: '../shared/services.yml#/responses/listServices'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '401':
