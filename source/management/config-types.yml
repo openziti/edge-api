@@ -158,6 +158,8 @@ paths:
       responses:
         '200':
           $ref: 'configs.yml#/responses/listConfigs'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
