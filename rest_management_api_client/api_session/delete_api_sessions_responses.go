@@ -53,6 +53,12 @@ func (o *DeleteAPISessionsReader) ReadResponse(response runtime.ClientResponse, 
 			return nil, err
 		}
 		return result, nil
+	case 401:
+		result := NewDeleteAPISessionsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 403:
 		result := NewDeleteAPISessionsForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -99,6 +105,38 @@ func (o *DeleteAPISessionsOK) GetPayload() *rest_model.Empty {
 func (o *DeleteAPISessionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.Empty)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteAPISessionsUnauthorized creates a DeleteAPISessionsUnauthorized with default headers values
+func NewDeleteAPISessionsUnauthorized() *DeleteAPISessionsUnauthorized {
+	return &DeleteAPISessionsUnauthorized{}
+}
+
+/* DeleteAPISessionsUnauthorized describes a response with status code 401, with default header values.
+
+The supplied session does not have the correct access rights to request this resource
+*/
+type DeleteAPISessionsUnauthorized struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteAPISessionsUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsUnauthorized  %+v", 401, o.Payload)
+}
+func (o *DeleteAPISessionsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteAPISessionsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

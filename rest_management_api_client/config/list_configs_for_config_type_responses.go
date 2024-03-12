@@ -53,6 +53,12 @@ func (o *ListConfigsForConfigTypeReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return result, nil
+	case 401:
+		result := NewListConfigsForConfigTypeUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewListConfigsForConfigTypeTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -87,6 +93,38 @@ func (o *ListConfigsForConfigTypeOK) GetPayload() *rest_model.ListConfigsEnvelop
 func (o *ListConfigsForConfigTypeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.ListConfigsEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListConfigsForConfigTypeUnauthorized creates a ListConfigsForConfigTypeUnauthorized with default headers values
+func NewListConfigsForConfigTypeUnauthorized() *ListConfigsForConfigTypeUnauthorized {
+	return &ListConfigsForConfigTypeUnauthorized{}
+}
+
+/* ListConfigsForConfigTypeUnauthorized describes a response with status code 401, with default header values.
+
+The supplied session does not have the correct access rights to request this resource
+*/
+type ListConfigsForConfigTypeUnauthorized struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListConfigsForConfigTypeUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /config-types/{id}/configs][%d] listConfigsForConfigTypeUnauthorized  %+v", 401, o.Payload)
+}
+func (o *ListConfigsForConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListConfigsForConfigTypeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

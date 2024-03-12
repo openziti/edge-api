@@ -81,6 +81,50 @@ func (o *ListConfigsForConfigTypeOK) WriteResponse(rw http.ResponseWriter, produ
 	}
 }
 
+// ListConfigsForConfigTypeUnauthorizedCode is the HTTP code returned for type ListConfigsForConfigTypeUnauthorized
+const ListConfigsForConfigTypeUnauthorizedCode int = 401
+
+/*ListConfigsForConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+
+swagger:response listConfigsForConfigTypeUnauthorized
+*/
+type ListConfigsForConfigTypeUnauthorized struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListConfigsForConfigTypeUnauthorized creates ListConfigsForConfigTypeUnauthorized with default headers values
+func NewListConfigsForConfigTypeUnauthorized() *ListConfigsForConfigTypeUnauthorized {
+
+	return &ListConfigsForConfigTypeUnauthorized{}
+}
+
+// WithPayload adds the payload to the list configs for config type unauthorized response
+func (o *ListConfigsForConfigTypeUnauthorized) WithPayload(payload *rest_model.APIErrorEnvelope) *ListConfigsForConfigTypeUnauthorized {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list configs for config type unauthorized response
+func (o *ListConfigsForConfigTypeUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListConfigsForConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(401)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // ListConfigsForConfigTypeTooManyRequestsCode is the HTTP code returned for type ListConfigsForConfigTypeTooManyRequests
 const ListConfigsForConfigTypeTooManyRequestsCode int = 429
 

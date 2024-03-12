@@ -62,6 +62,8 @@ paths:
       responses:
         '200':
           $ref: '../shared/standard-responses.yml#/responses/deleteResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '403':

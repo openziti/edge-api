@@ -81,6 +81,50 @@ func (o *DeleteAPISessionsOK) WriteResponse(rw http.ResponseWriter, producer run
 	}
 }
 
+// DeleteAPISessionsUnauthorizedCode is the HTTP code returned for type DeleteAPISessionsUnauthorized
+const DeleteAPISessionsUnauthorizedCode int = 401
+
+/*DeleteAPISessionsUnauthorized The supplied session does not have the correct access rights to request this resource
+
+swagger:response deleteApiSessionsUnauthorized
+*/
+type DeleteAPISessionsUnauthorized struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAPISessionsUnauthorized creates DeleteAPISessionsUnauthorized with default headers values
+func NewDeleteAPISessionsUnauthorized() *DeleteAPISessionsUnauthorized {
+
+	return &DeleteAPISessionsUnauthorized{}
+}
+
+// WithPayload adds the payload to the delete Api sessions unauthorized response
+func (o *DeleteAPISessionsUnauthorized) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAPISessionsUnauthorized {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete Api sessions unauthorized response
+func (o *DeleteAPISessionsUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAPISessionsUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(401)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteAPISessionsForbiddenCode is the HTTP code returned for type DeleteAPISessionsForbidden
 const DeleteAPISessionsForbiddenCode int = 403
 
