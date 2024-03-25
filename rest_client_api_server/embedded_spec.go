@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.12"
+    "version": "0.26.14"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -4968,6 +4968,29 @@ func init() {
     }
   },
   "definitions": {
+    "apiAddress": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "apiAddressArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/apiAddress"
+      }
+    },
+    "apiAddressList": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/apiAddressArray"
+      }
+    },
     "apiError": {
       "type": "object",
       "properties": {
@@ -5447,18 +5470,21 @@ func init() {
           "type": "object",
           "required": [
             "name",
-            "address",
             "certPem",
             "fingerprint",
             "isOnline",
             "lastJoinedAt"
           ],
           "properties": {
-            "address": {
-              "type": "string"
+            "apiAddresses": {
+              "$ref": "#/definitions/apiAddressList"
             },
             "certPem": {
               "type": "string"
+            },
+            "ctrlAddress": {
+              "type": "string",
+              "x-nullable": true
             },
             "fingerprint": {
               "type": "string"
@@ -7317,7 +7343,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.12"
+    "version": "0.26.14"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -12303,6 +12329,29 @@ func init() {
         }
       }
     },
+    "apiAddress": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "apiAddressArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/apiAddress"
+      }
+    },
+    "apiAddressList": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/apiAddressArray"
+      }
+    },
     "apiError": {
       "type": "object",
       "properties": {
@@ -12783,18 +12832,21 @@ func init() {
           "type": "object",
           "required": [
             "name",
-            "address",
             "certPem",
             "fingerprint",
             "isOnline",
             "lastJoinedAt"
           ],
           "properties": {
-            "address": {
-              "type": "string"
+            "apiAddresses": {
+              "$ref": "#/definitions/apiAddressList"
             },
             "certPem": {
               "type": "string"
+            },
+            "ctrlAddress": {
+              "type": "string",
+              "x-nullable": true
             },
             "fingerprint": {
               "type": "string"

@@ -46,6 +46,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/controllerDetail'
+
+  apiAddress:
+    type: object
+    properties:
+      url:
+        type: string
+      version:
+        type: string
+  apiAddressArray:
+    type: array
+    items:
+      $ref: '#/definitions/apiAddress'
+
+  apiAddressList:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/apiAddressArray'
+
   controllerDetail:
     description: A controller resource
     type: object
@@ -54,7 +72,6 @@ definitions:
       - type: object
         required:
           - name
-          - address
           - certPem
           - fingerprint
           - isOnline
@@ -62,8 +79,11 @@ definitions:
         properties:
           name:
             type: string
-          address:
+          ctrlAddress:
             type: string
+            x-nullable: true
+          apiAddresses:
+              $ref: '#/definitions/apiAddressList'
           certPem:
             type: string
           fingerprint:

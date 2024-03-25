@@ -44,13 +44,15 @@ import (
 type ControllerDetail struct {
 	BaseEntity
 
-	// address
-	// Required: true
-	Address *string `json:"address"`
+	// api addresses
+	APIAddresses APIAddressList `json:"apiAddresses,omitempty"`
 
 	// cert pem
 	// Required: true
 	CertPem *string `json:"certPem"`
+
+	// ctrl address
+	CtrlAddress *string `json:"ctrlAddress,omitempty"`
 
 	// fingerprint
 	// Required: true
@@ -81,9 +83,11 @@ func (m *ControllerDetail) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
-		Address *string `json:"address"`
+		APIAddresses APIAddressList `json:"apiAddresses,omitempty"`
 
 		CertPem *string `json:"certPem"`
+
+		CtrlAddress *string `json:"ctrlAddress,omitempty"`
 
 		Fingerprint *string `json:"fingerprint"`
 
@@ -97,9 +101,11 @@ func (m *ControllerDetail) UnmarshalJSON(raw []byte) error {
 		return err
 	}
 
-	m.Address = dataAO1.Address
+	m.APIAddresses = dataAO1.APIAddresses
 
 	m.CertPem = dataAO1.CertPem
+
+	m.CtrlAddress = dataAO1.CtrlAddress
 
 	m.Fingerprint = dataAO1.Fingerprint
 
@@ -122,9 +128,11 @@ func (m ControllerDetail) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO0)
 	var dataAO1 struct {
-		Address *string `json:"address"`
+		APIAddresses APIAddressList `json:"apiAddresses,omitempty"`
 
 		CertPem *string `json:"certPem"`
+
+		CtrlAddress *string `json:"ctrlAddress,omitempty"`
 
 		Fingerprint *string `json:"fingerprint"`
 
@@ -135,9 +143,11 @@ func (m ControllerDetail) MarshalJSON() ([]byte, error) {
 		Name *string `json:"name"`
 	}
 
-	dataAO1.Address = m.Address
+	dataAO1.APIAddresses = m.APIAddresses
 
 	dataAO1.CertPem = m.CertPem
+
+	dataAO1.CtrlAddress = m.CtrlAddress
 
 	dataAO1.Fingerprint = m.Fingerprint
 
@@ -164,7 +174,7 @@ func (m *ControllerDetail) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateAddress(formats); err != nil {
+	if err := m.validateAPIAddresses(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -194,10 +204,21 @@ func (m *ControllerDetail) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ControllerDetail) validateAddress(formats strfmt.Registry) error {
+func (m *ControllerDetail) validateAPIAddresses(formats strfmt.Registry) error {
 
-	if err := validate.Required("address", "body", m.Address); err != nil {
-		return err
+	if swag.IsZero(m.APIAddresses) { // not required
+		return nil
+	}
+
+	if m.APIAddresses != nil {
+		if err := m.APIAddresses.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("apiAddresses")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("apiAddresses")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -261,9 +282,27 @@ func (m *ControllerDetail) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAPIAddresses(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ControllerDetail) contextValidateAPIAddresses(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.APIAddresses.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("apiAddresses")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("apiAddresses")
+		}
+		return err
+	}
+
 	return nil
 }
 
