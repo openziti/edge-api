@@ -39,6 +39,7 @@ import (
 
 // ListServicesURL generates an URL for the list services operation
 type ListServicesURL struct {
+	ConfigTypes  []string
 	Filter       *string
 	Limit        *int64
 	Offset       *int64
@@ -78,6 +79,20 @@ func (o *ListServicesURL) Build() (*url.URL, error) {
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
+
+	var configTypesIR []string
+	for _, configTypesI := range o.ConfigTypes {
+		configTypesIS := configTypesI
+		if configTypesIS != "" {
+			configTypesIR = append(configTypesIR, configTypesIS)
+		}
+	}
+
+	configTypes := swag.JoinByFormat(configTypesIR, "multi")
+
+	for _, qsv := range configTypes {
+		qs.Add("configTypes", qsv)
+	}
 
 	var filterQ string
 	if o.Filter != nil {

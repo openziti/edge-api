@@ -84,6 +84,9 @@ func NewListServicesParamsWithHTTPClient(client *http.Client) *ListServicesParam
 */
 type ListServicesParams struct {
 
+	// ConfigTypes.
+	ConfigTypes []string
+
 	// Filter.
 	Filter *string
 
@@ -152,6 +155,17 @@ func (o *ListServicesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithConfigTypes adds the configTypes to the list services params
+func (o *ListServicesParams) WithConfigTypes(configTypes []string) *ListServicesParams {
+	o.SetConfigTypes(configTypes)
+	return o
+}
+
+// SetConfigTypes adds the configTypes to the list services params
+func (o *ListServicesParams) SetConfigTypes(configTypes []string) {
+	o.ConfigTypes = configTypes
+}
+
 // WithFilter adds the filter to the list services params
 func (o *ListServicesParams) WithFilter(filter *string) *ListServicesParams {
 	o.SetFilter(filter)
@@ -214,6 +228,17 @@ func (o *ListServicesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.ConfigTypes != nil {
+
+		// binding items for configTypes
+		joinedConfigTypes := o.bindParamConfigTypes(reg)
+
+		// query array param configTypes
+		if err := r.SetQueryParam("configTypes", joinedConfigTypes...); err != nil {
+			return err
+		}
+	}
 
 	if o.Filter != nil {
 
@@ -298,6 +323,23 @@ func (o *ListServicesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamListServices binds the parameter configTypes
+func (o *ListServicesParams) bindParamConfigTypes(formats strfmt.Registry) []string {
+	configTypesIR := o.ConfigTypes
+
+	var configTypesIC []string
+	for _, configTypesIIR := range configTypesIR { // explode []string
+
+		configTypesIIV := configTypesIIR // string as string
+		configTypesIC = append(configTypesIC, configTypesIIV)
+	}
+
+	// items.CollectionFormat: "multi"
+	configTypesIS := swag.JoinByFormat(configTypesIC, "multi")
+
+	return configTypesIS
 }
 
 // bindParamListServices binds the parameter roleFilter

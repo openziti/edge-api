@@ -58,6 +58,11 @@ type ListServicesParams struct {
 
 	/*
 	  In: query
+	  Collection Format: multi
+	*/
+	ConfigTypes []string
+	/*
+	  In: query
 	*/
 	Filter *string
 	/*
@@ -90,6 +95,11 @@ func (o *ListServicesParams) BindRequest(r *http.Request, route *middleware.Matc
 
 	qs := runtime.Values(r.URL.Query())
 
+	qConfigTypes, qhkConfigTypes, _ := qs.GetOK("configTypes")
+	if err := o.bindConfigTypes(qConfigTypes, qhkConfigTypes, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qFilter, qhkFilter, _ := qs.GetOK("filter")
 	if err := o.bindFilter(qFilter, qhkFilter, route.Formats); err != nil {
 		res = append(res, err)
@@ -117,6 +127,28 @@ func (o *ListServicesParams) BindRequest(r *http.Request, route *middleware.Matc
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindConfigTypes binds and validates array parameter ConfigTypes from query.
+//
+// Arrays are parsed according to CollectionFormat: "multi" (defaults to "csv" when empty).
+func (o *ListServicesParams) bindConfigTypes(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	// CollectionFormat: multi
+	configTypesIC := rawData
+	if len(configTypesIC) == 0 {
+		return nil
+	}
+
+	var configTypesIR []string
+	for _, configTypesIV := range configTypesIC {
+		configTypesI := configTypesIV
+
+		configTypesIR = append(configTypesIR, configTypesI)
+	}
+
+	o.ConfigTypes = configTypesIR
+
 	return nil
 }
 

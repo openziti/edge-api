@@ -12918,6 +12918,12 @@ paths:
         items:
           type: string
         collectionFormat: multi
+        name: configTypes
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
         name: roleFilter
         in: query
       - type: string
