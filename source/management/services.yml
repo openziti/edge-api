@@ -15,6 +15,7 @@ paths:
         - $ref: '../shared/parameters.yml#/limit'
         - $ref: '../shared/parameters.yml#/offset'
         - $ref: '../shared/parameters.yml#/filter'
+        - $ref: '../shared/parameters.yml#/configTypes'
         - $ref: '../shared/parameters.yml#/roleFilter'
         - $ref: '../shared/parameters.yml#/roleSemantic'
       responses:

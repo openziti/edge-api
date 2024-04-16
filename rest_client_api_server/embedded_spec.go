@@ -3421,6 +3421,15 @@ func init() {
               "type": "string"
             },
             "collectionFormat": "multi",
+            "name": "configTypes",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
             "name": "roleFilter",
             "in": "query"
           },
@@ -10692,6 +10701,15 @@ func init() {
           {
             "type": "string",
             "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "configTypes",
             "in": "query"
           },
           {

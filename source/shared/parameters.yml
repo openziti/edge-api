@@ -64,3 +64,10 @@ policyType:
   enum:
     - dial
     - bind
+configTypes:
+  name: configTypes
+  type: array
+  in: query
+  collectionFormat: multi
+  items:
+    type: string
