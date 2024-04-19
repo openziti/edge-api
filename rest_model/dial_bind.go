@@ -59,6 +59,9 @@ const (
 
 	// DialBindBind captures enum value "Bind"
 	DialBindBind DialBind = "Bind"
+
+	// DialBindInvalid captures enum value "Invalid"
+	DialBindInvalid DialBind = "Invalid"
 )
 
 // for schema
@@ -66,7 +69,7 @@ var dialBindEnum []interface{}
 
 func init() {
 	var res []DialBind
-	if err := json.Unmarshal([]byte(`["Dial","Bind"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["Dial","Bind","Invalid"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.14"
+    "version": "0.26.18"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5889,7 +5889,8 @@ func init() {
       "type": "string",
       "enum": [
         "Dial",
-        "Bind"
+        "Bind",
+        "Invalid"
       ]
     },
     "dialBindArray": {
@@ -7352,7 +7353,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.14"
+    "version": "0.26.18"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -13260,7 +13261,8 @@ func init() {
       "type": "string",
       "enum": [
         "Dial",
-        "Bind"
+        "Bind",
+        "Invalid"
       ]
     },
     "dialBindArray": {
