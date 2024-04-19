@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.14
+  version: 0.26.17
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -4248,6 +4248,7 @@ definitions:
     enum:
     - Dial
     - Bind
+    - Invalid
   dialBindArray:
     type: array
     items:
