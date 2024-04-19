@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.17"
+    "version": "0.26.18"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -27976,7 +27976,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.17"
+    "version": "0.26.18"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
