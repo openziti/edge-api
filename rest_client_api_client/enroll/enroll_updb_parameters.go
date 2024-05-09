@@ -40,120 +40,134 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewErnollUpdbParams creates a new ErnollUpdbParams object,
+// NewEnrollUpdbParams creates a new EnrollUpdbParams object,
 // with the default timeout for this client.
 //
 // Default values are not hydrated, since defaults are normally applied by the API server side.
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
-func NewErnollUpdbParams() *ErnollUpdbParams {
-	return &ErnollUpdbParams{
+func NewEnrollUpdbParams() *EnrollUpdbParams {
+	return &EnrollUpdbParams{
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewErnollUpdbParamsWithTimeout creates a new ErnollUpdbParams object
+// NewEnrollUpdbParamsWithTimeout creates a new EnrollUpdbParams object
 // with the ability to set a timeout on a request.
-func NewErnollUpdbParamsWithTimeout(timeout time.Duration) *ErnollUpdbParams {
-	return &ErnollUpdbParams{
+func NewEnrollUpdbParamsWithTimeout(timeout time.Duration) *EnrollUpdbParams {
+	return &EnrollUpdbParams{
 		timeout: timeout,
 	}
 }
 
-// NewErnollUpdbParamsWithContext creates a new ErnollUpdbParams object
+// NewEnrollUpdbParamsWithContext creates a new EnrollUpdbParams object
 // with the ability to set a context for a request.
-func NewErnollUpdbParamsWithContext(ctx context.Context) *ErnollUpdbParams {
-	return &ErnollUpdbParams{
+func NewEnrollUpdbParamsWithContext(ctx context.Context) *EnrollUpdbParams {
+	return &EnrollUpdbParams{
 		Context: ctx,
 	}
 }
 
-// NewErnollUpdbParamsWithHTTPClient creates a new ErnollUpdbParams object
+// NewEnrollUpdbParamsWithHTTPClient creates a new EnrollUpdbParams object
 // with the ability to set a custom HTTPClient for a request.
-func NewErnollUpdbParamsWithHTTPClient(client *http.Client) *ErnollUpdbParams {
-	return &ErnollUpdbParams{
+func NewEnrollUpdbParamsWithHTTPClient(client *http.Client) *EnrollUpdbParams {
+	return &EnrollUpdbParams{
 		HTTPClient: client,
 	}
 }
 
-/* ErnollUpdbParams contains all the parameters to send to the API endpoint
-   for the ernoll updb operation.
+/* EnrollUpdbParams contains all the parameters to send to the API endpoint
+   for the enroll updb operation.
 
    Typically these are written to a http.Request.
 */
-type ErnollUpdbParams struct {
+type EnrollUpdbParams struct {
 
 	// Token.
 	//
 	// Format: uuid
 	Token strfmt.UUID
 
+	// UpdbCredentials.
+	UpdbCredentials EnrollUpdbBody
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
 }
 
-// WithDefaults hydrates default values in the ernoll updb params (not the query body).
+// WithDefaults hydrates default values in the enroll updb params (not the query body).
 //
 // All values with no default are reset to their zero value.
-func (o *ErnollUpdbParams) WithDefaults() *ErnollUpdbParams {
+func (o *EnrollUpdbParams) WithDefaults() *EnrollUpdbParams {
 	o.SetDefaults()
 	return o
 }
 
-// SetDefaults hydrates default values in the ernoll updb params (not the query body).
+// SetDefaults hydrates default values in the enroll updb params (not the query body).
 //
 // All values with no default are reset to their zero value.
-func (o *ErnollUpdbParams) SetDefaults() {
+func (o *EnrollUpdbParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the ernoll updb params
-func (o *ErnollUpdbParams) WithTimeout(timeout time.Duration) *ErnollUpdbParams {
+// WithTimeout adds the timeout to the enroll updb params
+func (o *EnrollUpdbParams) WithTimeout(timeout time.Duration) *EnrollUpdbParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the ernoll updb params
-func (o *ErnollUpdbParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the enroll updb params
+func (o *EnrollUpdbParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the ernoll updb params
-func (o *ErnollUpdbParams) WithContext(ctx context.Context) *ErnollUpdbParams {
+// WithContext adds the context to the enroll updb params
+func (o *EnrollUpdbParams) WithContext(ctx context.Context) *EnrollUpdbParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the ernoll updb params
-func (o *ErnollUpdbParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the enroll updb params
+func (o *EnrollUpdbParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the ernoll updb params
-func (o *ErnollUpdbParams) WithHTTPClient(client *http.Client) *ErnollUpdbParams {
+// WithHTTPClient adds the HTTPClient to the enroll updb params
+func (o *EnrollUpdbParams) WithHTTPClient(client *http.Client) *EnrollUpdbParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the ernoll updb params
-func (o *ErnollUpdbParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the enroll updb params
+func (o *EnrollUpdbParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithToken adds the token to the ernoll updb params
-func (o *ErnollUpdbParams) WithToken(token strfmt.UUID) *ErnollUpdbParams {
+// WithToken adds the token to the enroll updb params
+func (o *EnrollUpdbParams) WithToken(token strfmt.UUID) *EnrollUpdbParams {
 	o.SetToken(token)
 	return o
 }
 
-// SetToken adds the token to the ernoll updb params
-func (o *ErnollUpdbParams) SetToken(token strfmt.UUID) {
+// SetToken adds the token to the enroll updb params
+func (o *EnrollUpdbParams) SetToken(token strfmt.UUID) {
 	o.Token = token
 }
 
+// WithUpdbCredentials adds the updbCredentials to the enroll updb params
+func (o *EnrollUpdbParams) WithUpdbCredentials(updbCredentials EnrollUpdbBody) *EnrollUpdbParams {
+	o.SetUpdbCredentials(updbCredentials)
+	return o
+}
+
+// SetUpdbCredentials adds the updbCredentials to the enroll updb params
+func (o *EnrollUpdbParams) SetUpdbCredentials(updbCredentials EnrollUpdbBody) {
+	o.UpdbCredentials = updbCredentials
+}
+
 // WriteToRequest writes these params to a swagger request
-func (o *ErnollUpdbParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *EnrollUpdbParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err
@@ -168,6 +182,9 @@ func (o *ErnollUpdbParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		if err := r.SetQueryParam("token", qToken); err != nil {
 			return err
 		}
+	}
+	if err := r.SetBodyParam(o.UpdbCredentials); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

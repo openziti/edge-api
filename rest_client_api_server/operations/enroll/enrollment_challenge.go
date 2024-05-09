@@ -35,43 +35,45 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 )
 
-// ErnollUpdbHandlerFunc turns a function with the right signature into a ernoll updb handler
-type ErnollUpdbHandlerFunc func(ErnollUpdbParams) middleware.Responder
+// EnrollmentChallengeHandlerFunc turns a function with the right signature into a enrollment challenge handler
+type EnrollmentChallengeHandlerFunc func(EnrollmentChallengeParams) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ErnollUpdbHandlerFunc) Handle(params ErnollUpdbParams) middleware.Responder {
+func (fn EnrollmentChallengeHandlerFunc) Handle(params EnrollmentChallengeParams) middleware.Responder {
 	return fn(params)
 }
 
-// ErnollUpdbHandler interface for that can handle valid ernoll updb params
-type ErnollUpdbHandler interface {
-	Handle(ErnollUpdbParams) middleware.Responder
+// EnrollmentChallengeHandler interface for that can handle valid enrollment challenge params
+type EnrollmentChallengeHandler interface {
+	Handle(EnrollmentChallengeParams) middleware.Responder
 }
 
-// NewErnollUpdb creates a new http.Handler for the ernoll updb operation
-func NewErnollUpdb(ctx *middleware.Context, handler ErnollUpdbHandler) *ErnollUpdb {
-	return &ErnollUpdb{Context: ctx, Handler: handler}
+// NewEnrollmentChallenge creates a new http.Handler for the enrollment challenge operation
+func NewEnrollmentChallenge(ctx *middleware.Context, handler EnrollmentChallengeHandler) *EnrollmentChallenge {
+	return &EnrollmentChallenge{Context: ctx, Handler: handler}
 }
 
-/* ErnollUpdb swagger:route POST /enroll/updb Enroll ernollUpdb
+/* EnrollmentChallenge swagger:route POST /enroll/challenge Enroll enrollmentChallenge
 
-Enroll an identity via one-time-token
+Allows verification of a controller or cluster of controllers as being the valid target for enrollment.
 
-Enrolls an identity via a one-time-token to establish an initial username and password combination
+A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will
+be used to sign the nonce. The resulting signature may be validated with the associated public key in order
+to verify a networks identity during enrollment. The nonce must be a valid formatted UUID.
 
 
 */
-type ErnollUpdb struct {
+type EnrollmentChallenge struct {
 	Context *middleware.Context
-	Handler ErnollUpdbHandler
+	Handler EnrollmentChallengeHandler
 }
 
-func (o *ErnollUpdb) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *EnrollmentChallenge) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewErnollUpdbParams()
+	var Params = NewEnrollmentChallengeParams()
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return

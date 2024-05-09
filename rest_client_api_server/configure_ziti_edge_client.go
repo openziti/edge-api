@@ -84,9 +84,6 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 	api.ApplicationXPemFileProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 		return errors.NotImplemented("applicationXPemFile producer has not yet been implemented")
 	})
-	api.ApplicationXX509UserCertProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
-		return errors.NotImplemented("applicationXX509UserCert producer has not yet been implemented")
-	})
 	api.BinProducer = runtime.ByteStreamProducer()
 	api.JSONProducer = runtime.JSONProducer()
 	api.TextYamlProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
@@ -246,9 +243,14 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 			return middleware.NotImplemented("operation enroll.EnrollOttCa has not yet been implemented")
 		})
 	}
-	if api.EnrollErnollUpdbHandler == nil {
-		api.EnrollErnollUpdbHandler = enroll.ErnollUpdbHandlerFunc(func(params enroll.ErnollUpdbParams) middleware.Responder {
-			return middleware.NotImplemented("operation enroll.ErnollUpdb has not yet been implemented")
+	if api.EnrollEnrollUpdbHandler == nil {
+		api.EnrollEnrollUpdbHandler = enroll.EnrollUpdbHandlerFunc(func(params enroll.EnrollUpdbParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.EnrollUpdb has not yet been implemented")
+		})
+	}
+	if api.EnrollEnrollmentChallengeHandler == nil {
+		api.EnrollEnrollmentChallengeHandler = enroll.EnrollmentChallengeHandlerFunc(func(params enroll.EnrollmentChallengeParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.EnrollmentChallenge has not yet been implemented")
 		})
 	}
 	if api.CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler == nil {
@@ -279,6 +281,11 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 	if api.CurrentIdentityGetCurrentIdentityEdgeRoutersHandler == nil {
 		api.CurrentIdentityGetCurrentIdentityEdgeRoutersHandler = current_identity.GetCurrentIdentityEdgeRoutersHandlerFunc(func(params current_identity.GetCurrentIdentityEdgeRoutersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_identity.GetCurrentIdentityEdgeRouters has not yet been implemented")
+		})
+	}
+	if api.EnrollGetEnrollmentJwksHandler == nil {
+		api.EnrollGetEnrollmentJwksHandler = enroll.GetEnrollmentJwksHandlerFunc(func(params enroll.GetEnrollmentJwksParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.GetEnrollmentJwks has not yet been implemented")
 		})
 	}
 	if api.ControllersListControllersHandler == nil {

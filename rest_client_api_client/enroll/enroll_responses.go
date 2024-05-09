@@ -77,25 +77,23 @@ func NewEnrollOK() *EnrollOK {
 
 /* EnrollOK describes a response with status code 200, with default header values.
 
-Base empty response
+A response for multi-format legacy enrollment.
 */
 type EnrollOK struct {
-	Payload *rest_model.Empty
+	Payload string
 }
 
 func (o *EnrollOK) Error() string {
 	return fmt.Sprintf("[POST /enroll][%d] enrollOK  %+v", 200, o.Payload)
 }
-func (o *EnrollOK) GetPayload() *rest_model.Empty {
+func (o *EnrollOK) GetPayload() string {
 	return o.Payload
 }
 
 func (o *EnrollOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(rest_model.Empty)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

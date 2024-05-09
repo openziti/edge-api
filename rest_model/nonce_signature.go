@@ -32,37 +32,58 @@ package rest_model
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// EnrollmentCerts enrollment certs
+// NonceSignature nonce signature
 //
-// swagger:model enrollmentCerts
-type EnrollmentCerts struct {
+// swagger:model nonceSignature
+type NonceSignature struct {
 
-	// A PEM encoded set of CA certificates to trust
-	Ca string `json:"ca,omitempty"`
+	// algorithm
+	Algorithm string `json:"algorithm,omitempty"`
 
-	// A PEM encoded set of certificates to use as the client chain
-	Cert string `json:"cert,omitempty"`
+	// kid
+	Kid string `json:"kid,omitempty"`
 
-	// A PEM encoded set of certificates to use as the servers chain
-	ServerCert string `json:"serverCert,omitempty"`
+	// signature
+	// Required: true
+	Signature *string `json:"signature"`
 }
 
-// Validate validates this enrollment certs
-func (m *EnrollmentCerts) Validate(formats strfmt.Registry) error {
+// Validate validates this nonce signature
+func (m *NonceSignature) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSignature(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this enrollment certs based on context it is used
-func (m *EnrollmentCerts) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *NonceSignature) validateSignature(formats strfmt.Registry) error {
+
+	if err := validate.Required("signature", "body", m.Signature); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this nonce signature based on context it is used
+func (m *NonceSignature) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
+func (m *NonceSignature) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -70,8 +91,8 @@ func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *EnrollmentCerts) UnmarshalBinary(b []byte) error {
-	var res EnrollmentCerts
+func (m *NonceSignature) UnmarshalBinary(b []byte) error {
+	var res NonceSignature
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

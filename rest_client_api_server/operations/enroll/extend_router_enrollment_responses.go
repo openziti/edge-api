@@ -40,7 +40,7 @@ import (
 // ExtendRouterEnrollmentOKCode is the HTTP code returned for type ExtendRouterEnrollmentOK
 const ExtendRouterEnrollmentOKCode int = 200
 
-/*ExtendRouterEnrollmentOK A response containg the edge routers new signed certificates (server chain, server cert, CAs).
+/*ExtendRouterEnrollmentOK A response containing the edge routers new signed certificates (server chain, server cert, CAs).
 
 swagger:response extendRouterEnrollmentOK
 */

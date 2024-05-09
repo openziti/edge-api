@@ -2470,9 +2470,9 @@ func init() {
         "operationId": "enroll",
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "A response for multi-format legacy enrollment.",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "type": "string"
             }
           },
           "404": {
@@ -2607,6 +2607,94 @@ func init() {
         }
       }
     },
+    "/enroll/challenge": {
+      "post": {
+        "description": "A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will\nbe used to sign the nonce. The resulting signature may be validated with the associated public key in order\nto verify a networks identity during enrollment. The nonce must be a valid formatted UUID.\n",
+        "tags": [
+          "Enroll"
+        ],
+        "summary": "Allows verification of a controller or cluster of controllers as being the valid target for enrollment.",
+        "operationId": "enrollmentChallenge",
+        "parameters": [
+          {
+            "name": "nonce",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/nonceChallenge"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.",
+            "schema": {
+              "$ref": "#/definitions/nonceSignature"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/enroll/erott": {
       "post": {
         "description": "Enrolls an edge-router via a one-time-token to establish a certificate based identity.\n",
@@ -2678,7 +2766,7 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "A response containg the edge routers new signed certificates (server chain, server cert, CAs).",
+            "description": "A response containing the edge routers new signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
             }
@@ -2733,15 +2821,27 @@ func init() {
         }
       }
     },
+    "/enroll/jwks": {
+      "get": {
+        "description": "Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used\nto sign and co-sign enrollment JWTs. They can be verified through a challenge endpoint, using the public keys\nfrom this endpoint to verify the target machine has possession of the related private key.\n",
+        "tags": [
+          "Enroll"
+        ],
+        "summary": "List JSON Web Keys associated with enrollment",
+        "operationId": "getEnrollmentJwks",
+        "responses": {
+          "200": {
+            "description": "A JWKS response for enrollment.",
+            "schema": {
+              "$ref": "#/definitions/jwks"
+            }
+          }
+        }
+      }
+    },
     "/enroll/ott": {
       "post": {
         "description": "Enroll an identity via a one-time-token which is supplied via a query string parameter. This enrollment method\nexpects a PEM encoded CSRs to be provided for fulfillment. It is up to the enrolling identity to manage the\nprivate key backing the CSR request.\n",
-        "consumes": [
-          "application/pkcs10"
-        ],
-        "produces": [
-          "application/x-x509-user-cert"
-        ],
         "tags": [
           "Enroll"
         ],
@@ -2749,12 +2849,9 @@ func init() {
         "operationId": "enrollOtt",
         "responses": {
           "200": {
-            "description": "A PEM encoded certificate signed by the internal Ziti CA",
+            "description": "A response containing and identities client certificate chains",
             "schema": {
-              "type": "string"
-            },
-            "examples": {
-              "application/x-x509-user-cert": "-----BEGIN CERTIFICATE-----\nMIICzDCCAlGgAwIBAgIRAPkVg1jVKqnNGFpSB3lPbaIwCgYIKoZIzj0EAwIwXjEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgMAk5DMRMwEQYDVQQKDApOZXRGb3VuZHJ5MS0w\nKwYDVQQDDCROZXRGb3VuZHJ5IFppdGkgRXh0ZXJuYWwgQVBJIFJvb3QgQ0EwHhcN\nMTgxMTE1MTI1NzE3WhcNMTkxMTI1MTI1NzE3WjBrMQswCQYDVQQGEwJVUzELMAkG\nA1UECAwCTkMxEjAQBgNVBAcMCUNoYXJsb3R0ZTETMBEGA1UECgwKTmV0Rm91bmRy\neTEPMA0GA1UECwwGQWR2RGV2MRUwEwYDVQQDDAxaaXRpQ2xpZW50MDEwdjAQBgcq\nhkjOPQIBBgUrgQQAIgNiAATTl2ft+/K9RvDgki9gSr9udNcV2bxD4LrWEdCdXNzF\niVUiEcEte9z/M0JRt8lgo17OjFvS+ecrAmLtIZNmQnH3+9YeafjeNPpvQsMKxlTN\nMnU7Hka11GHc6swQZSyHvlKjgcUwgcIwCQYDVR0TBAIwADARBglghkgBhvhCAQEE\nBAMCBaAwMwYJYIZIAYb4QgENBCYWJE9wZW5TU0wgR2VuZXJhdGVkIENsaWVudCBD\nZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUtx+Tej6lSYdjb8Jbc2QuvoEsI/swHwYDVR0j\nBBgwFoAUcdTlRrnP43ZbQ3PGAbZMPE26+H4wDgYDVR0PAQH/BAQDAgXgMB0GA1Ud\nJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAKBggqhkjOPQQDAgNpADBmAjEAuXDS\nH7KKMr+la+Yuh8d8Q9cLtXzdS0j6a8e7iOyPJmdWq2WuzNdbCfAfLgKXuxhSAjEA\nsadZrXl1OBv11RGAKdYBIyRmfYUotCFAtCNKcfgBUxci0TDaKDA7r3jnjKT1d7Fs\n-----END CERTIFICATE-----\n"
+              "$ref": "#/definitions/enrollmentCertsEnvelope"
             }
           },
           "404": {
@@ -2875,7 +2972,7 @@ func init() {
           "Enroll"
         ],
         "summary": "Enroll an identity via one-time-token",
-        "operationId": "ernollUpdb",
+        "operationId": "enrollUpdb",
         "responses": {
           "200": {
             "description": "Base empty response",
@@ -2941,6 +3038,22 @@ func init() {
           "name": "token",
           "in": "query",
           "required": true
+        },
+        {
+          "name": "updbCredentials",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "password": {
+                "$ref": "#/definitions/password"
+              },
+              "username": {
+                "$ref": "#/definitions/username"
+              }
+            }
+          }
         }
       ]
     },
@@ -5923,7 +6036,7 @@ func init() {
           "type": "string"
         },
         "cert": {
-          "description": "A PEM encoded cert for the server",
+          "description": "A PEM encoded set of certificates to use as the client chain",
           "type": "string"
         },
         "serverCert": {
@@ -6243,6 +6356,118 @@ func init() {
         }
       }
     },
+    "jwk": {
+      "type": "object",
+      "required": [
+        "kty"
+      ],
+      "properties": {
+        "alg": {
+          "description": "Algorithm intended for use with the key.",
+          "type": "string"
+        },
+        "crv": {
+          "description": "Curve for ECC Public Keys.",
+          "type": "string"
+        },
+        "d": {
+          "description": "ECC Private Key or RSA Private Exponent.",
+          "type": "string"
+        },
+        "dp": {
+          "description": "First Factor CRT Exponent for RSA.",
+          "type": "string"
+        },
+        "dq": {
+          "description": "Second Factor CRT Exponent for RSA.",
+          "type": "string"
+        },
+        "e": {
+          "description": "Exponent for RSA Public Key.",
+          "type": "string"
+        },
+        "key_ops": {
+          "description": "Intended key operations, e.g., sign, verify.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kid": {
+          "description": "Key ID.",
+          "type": "string"
+        },
+        "kty": {
+          "description": "Key Type.",
+          "type": "string"
+        },
+        "n": {
+          "description": "Modulus for RSA Public Key.",
+          "type": "string"
+        },
+        "oth": {
+          "description": "Other Primes Info not represented by the first two primes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/otherPrime"
+          }
+        },
+        "p": {
+          "description": "First Prime Factor for RSA.",
+          "type": "string"
+        },
+        "q": {
+          "description": "Second Prime Factor for RSA.",
+          "type": "string"
+        },
+        "qi": {
+          "description": "First CRT Coefficient for RSA.",
+          "type": "string"
+        },
+        "use": {
+          "description": "Public key use, e.g., sig (signature) or enc (encryption).",
+          "type": "string"
+        },
+        "x": {
+          "description": "X Coordinate for ECC Public Keys.",
+          "type": "string"
+        },
+        "x5c": {
+          "description": "X.509 Certificate Chain.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "x5t": {
+          "description": "X.509 Certificate SHA-1 Thumbprint.",
+          "type": "string"
+        },
+        "x5t#S256": {
+          "description": "X.509 Certificate SHA-256 Thumbprint.",
+          "type": "string"
+        },
+        "x5u": {
+          "description": "X.509 URL.",
+          "type": "string"
+        },
+        "y": {
+          "description": "Y Coordinate for ECC Public Keys.",
+          "type": "string"
+        }
+      }
+    },
+    "jwks": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/jwk"
+          }
+        }
+      }
+    },
     "link": {
       "description": "A link to another resource",
       "type": "object",
@@ -6531,6 +6756,43 @@ func init() {
         "url"
       ]
     },
+    "nonceChallenge": {
+      "type": "object",
+      "required": [
+        "nonce",
+        "keyId",
+        "algorithm"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "keyId": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "nonceSignature": {
+      "type": "object",
+      "required": [
+        "signature"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "kid": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
     "osType": {
       "type": "string",
       "enum": [
@@ -6541,6 +6803,23 @@ func init() {
         "Linux",
         "macOS"
       ]
+    },
+    "otherPrime": {
+      "type": "object",
+      "properties": {
+        "d": {
+          "description": "Factor CRT exponent.",
+          "type": "string"
+        },
+        "r": {
+          "description": "Prime factor.",
+          "type": "string"
+        },
+        "t": {
+          "description": "Factor CRT coefficient.",
+          "type": "string"
+        }
+      }
     },
     "pagination": {
       "type": "object",
@@ -9759,9 +10038,9 @@ func init() {
         "operationId": "enroll",
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "A response for multi-format legacy enrollment.",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "type": "string"
             }
           },
           "404": {
@@ -9896,6 +10175,94 @@ func init() {
         }
       }
     },
+    "/enroll/challenge": {
+      "post": {
+        "description": "A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will\nbe used to sign the nonce. The resulting signature may be validated with the associated public key in order\nto verify a networks identity during enrollment. The nonce must be a valid formatted UUID.\n",
+        "tags": [
+          "Enroll"
+        ],
+        "summary": "Allows verification of a controller or cluster of controllers as being the valid target for enrollment.",
+        "operationId": "enrollmentChallenge",
+        "parameters": [
+          {
+            "name": "nonce",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/nonceChallenge"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.",
+            "schema": {
+              "$ref": "#/definitions/nonceSignature"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/enroll/erott": {
       "post": {
         "description": "Enrolls an edge-router via a one-time-token to establish a certificate based identity.\n",
@@ -9967,7 +10334,7 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "A response containg the edge routers new signed certificates (server chain, server cert, CAs).",
+            "description": "A response containing the edge routers new signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
             }
@@ -10022,15 +10389,27 @@ func init() {
         }
       }
     },
+    "/enroll/jwks": {
+      "get": {
+        "description": "Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used\nto sign and co-sign enrollment JWTs. They can be verified through a challenge endpoint, using the public keys\nfrom this endpoint to verify the target machine has possession of the related private key.\n",
+        "tags": [
+          "Enroll"
+        ],
+        "summary": "List JSON Web Keys associated with enrollment",
+        "operationId": "getEnrollmentJwks",
+        "responses": {
+          "200": {
+            "description": "A JWKS response for enrollment.",
+            "schema": {
+              "$ref": "#/definitions/jwks"
+            }
+          }
+        }
+      }
+    },
     "/enroll/ott": {
       "post": {
         "description": "Enroll an identity via a one-time-token which is supplied via a query string parameter. This enrollment method\nexpects a PEM encoded CSRs to be provided for fulfillment. It is up to the enrolling identity to manage the\nprivate key backing the CSR request.\n",
-        "consumes": [
-          "application/pkcs10"
-        ],
-        "produces": [
-          "application/x-x509-user-cert"
-        ],
         "tags": [
           "Enroll"
         ],
@@ -10038,12 +10417,9 @@ func init() {
         "operationId": "enrollOtt",
         "responses": {
           "200": {
-            "description": "A PEM encoded certificate signed by the internal Ziti CA",
+            "description": "A response containing and identities client certificate chains",
             "schema": {
-              "type": "string"
-            },
-            "examples": {
-              "application/x-x509-user-cert": "-----BEGIN CERTIFICATE-----\nMIICzDCCAlGgAwIBAgIRAPkVg1jVKqnNGFpSB3lPbaIwCgYIKoZIzj0EAwIwXjEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgMAk5DMRMwEQYDVQQKDApOZXRGb3VuZHJ5MS0w\nKwYDVQQDDCROZXRGb3VuZHJ5IFppdGkgRXh0ZXJuYWwgQVBJIFJvb3QgQ0EwHhcN\nMTgxMTE1MTI1NzE3WhcNMTkxMTI1MTI1NzE3WjBrMQswCQYDVQQGEwJVUzELMAkG\nA1UECAwCTkMxEjAQBgNVBAcMCUNoYXJsb3R0ZTETMBEGA1UECgwKTmV0Rm91bmRy\neTEPMA0GA1UECwwGQWR2RGV2MRUwEwYDVQQDDAxaaXRpQ2xpZW50MDEwdjAQBgcq\nhkjOPQIBBgUrgQQAIgNiAATTl2ft+/K9RvDgki9gSr9udNcV2bxD4LrWEdCdXNzF\niVUiEcEte9z/M0JRt8lgo17OjFvS+ecrAmLtIZNmQnH3+9YeafjeNPpvQsMKxlTN\nMnU7Hka11GHc6swQZSyHvlKjgcUwgcIwCQYDVR0TBAIwADARBglghkgBhvhCAQEE\nBAMCBaAwMwYJYIZIAYb4QgENBCYWJE9wZW5TU0wgR2VuZXJhdGVkIENsaWVudCBD\nZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUtx+Tej6lSYdjb8Jbc2QuvoEsI/swHwYDVR0j\nBBgwFoAUcdTlRrnP43ZbQ3PGAbZMPE26+H4wDgYDVR0PAQH/BAQDAgXgMB0GA1Ud\nJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAKBggqhkjOPQQDAgNpADBmAjEAuXDS\nH7KKMr+la+Yuh8d8Q9cLtXzdS0j6a8e7iOyPJmdWq2WuzNdbCfAfLgKXuxhSAjEA\nsadZrXl1OBv11RGAKdYBIyRmfYUotCFAtCNKcfgBUxci0TDaKDA7r3jnjKT1d7Fs\n-----END CERTIFICATE-----\n"
+              "$ref": "#/definitions/enrollmentCertsEnvelope"
             }
           },
           "404": {
@@ -10164,7 +10540,7 @@ func init() {
           "Enroll"
         ],
         "summary": "Enroll an identity via one-time-token",
-        "operationId": "ernollUpdb",
+        "operationId": "enrollUpdb",
         "responses": {
           "200": {
             "description": "Base empty response",
@@ -10230,6 +10606,22 @@ func init() {
           "name": "token",
           "in": "query",
           "required": true
+        },
+        {
+          "name": "updbCredentials",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "password": {
+                "$ref": "#/definitions/password"
+              },
+              "username": {
+                "$ref": "#/definitions/username"
+              }
+            }
+          }
         }
       ]
     },
@@ -13295,7 +13687,7 @@ func init() {
           "type": "string"
         },
         "cert": {
-          "description": "A PEM encoded cert for the server",
+          "description": "A PEM encoded set of certificates to use as the client chain",
           "type": "string"
         },
         "serverCert": {
@@ -13615,6 +14007,118 @@ func init() {
         }
       }
     },
+    "jwk": {
+      "type": "object",
+      "required": [
+        "kty"
+      ],
+      "properties": {
+        "alg": {
+          "description": "Algorithm intended for use with the key.",
+          "type": "string"
+        },
+        "crv": {
+          "description": "Curve for ECC Public Keys.",
+          "type": "string"
+        },
+        "d": {
+          "description": "ECC Private Key or RSA Private Exponent.",
+          "type": "string"
+        },
+        "dp": {
+          "description": "First Factor CRT Exponent for RSA.",
+          "type": "string"
+        },
+        "dq": {
+          "description": "Second Factor CRT Exponent for RSA.",
+          "type": "string"
+        },
+        "e": {
+          "description": "Exponent for RSA Public Key.",
+          "type": "string"
+        },
+        "key_ops": {
+          "description": "Intended key operations, e.g., sign, verify.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kid": {
+          "description": "Key ID.",
+          "type": "string"
+        },
+        "kty": {
+          "description": "Key Type.",
+          "type": "string"
+        },
+        "n": {
+          "description": "Modulus for RSA Public Key.",
+          "type": "string"
+        },
+        "oth": {
+          "description": "Other Primes Info not represented by the first two primes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/otherPrime"
+          }
+        },
+        "p": {
+          "description": "First Prime Factor for RSA.",
+          "type": "string"
+        },
+        "q": {
+          "description": "Second Prime Factor for RSA.",
+          "type": "string"
+        },
+        "qi": {
+          "description": "First CRT Coefficient for RSA.",
+          "type": "string"
+        },
+        "use": {
+          "description": "Public key use, e.g., sig (signature) or enc (encryption).",
+          "type": "string"
+        },
+        "x": {
+          "description": "X Coordinate for ECC Public Keys.",
+          "type": "string"
+        },
+        "x5c": {
+          "description": "X.509 Certificate Chain.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "x5t": {
+          "description": "X.509 Certificate SHA-1 Thumbprint.",
+          "type": "string"
+        },
+        "x5t#S256": {
+          "description": "X.509 Certificate SHA-256 Thumbprint.",
+          "type": "string"
+        },
+        "x5u": {
+          "description": "X.509 URL.",
+          "type": "string"
+        },
+        "y": {
+          "description": "Y Coordinate for ECC Public Keys.",
+          "type": "string"
+        }
+      }
+    },
+    "jwks": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/jwk"
+          }
+        }
+      }
+    },
     "link": {
       "description": "A link to another resource",
       "type": "object",
@@ -13903,6 +14407,43 @@ func init() {
         "url"
       ]
     },
+    "nonceChallenge": {
+      "type": "object",
+      "required": [
+        "nonce",
+        "keyId",
+        "algorithm"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "keyId": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "nonceSignature": {
+      "type": "object",
+      "required": [
+        "signature"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "kid": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
     "osType": {
       "type": "string",
       "enum": [
@@ -13913,6 +14454,23 @@ func init() {
         "Linux",
         "macOS"
       ]
+    },
+    "otherPrime": {
+      "type": "object",
+      "properties": {
+        "d": {
+          "description": "Factor CRT exponent.",
+          "type": "string"
+        },
+        "r": {
+          "description": "Prime factor.",
+          "type": "string"
+        },
+        "t": {
+          "description": "Factor CRT coefficient.",
+          "type": "string"
+        }
+      }
     },
     "pagination": {
       "type": "object",

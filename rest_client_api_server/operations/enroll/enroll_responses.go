@@ -40,7 +40,7 @@ import (
 // EnrollOKCode is the HTTP code returned for type EnrollOK
 const EnrollOKCode int = 200
 
-/*EnrollOK Base empty response
+/*EnrollOK A response for multi-format legacy enrollment.
 
 swagger:response enrollOK
 */
@@ -49,7 +49,7 @@ type EnrollOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *rest_model.Empty `json:"body,omitempty"`
+	Payload string `json:"body,omitempty"`
 }
 
 // NewEnrollOK creates EnrollOK with default headers values
@@ -59,13 +59,13 @@ func NewEnrollOK() *EnrollOK {
 }
 
 // WithPayload adds the payload to the enroll o k response
-func (o *EnrollOK) WithPayload(payload *rest_model.Empty) *EnrollOK {
+func (o *EnrollOK) WithPayload(payload string) *EnrollOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the enroll o k response
-func (o *EnrollOK) SetPayload(payload *rest_model.Empty) {
+func (o *EnrollOK) SetPayload(payload string) {
 	o.Payload = payload
 }
 
@@ -73,11 +73,9 @@ func (o *EnrollOK) SetPayload(payload *rest_model.Empty) {
 func (o *EnrollOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(200)
-	if o.Payload != nil {
-		payload := o.Payload
-		if err := producer.Produce(rw, payload); err != nil {
-			panic(err) // let the recovery middleware deal with this
-		}
+	payload := o.Payload
+	if err := producer.Produce(rw, payload); err != nil {
+		panic(err) // let the recovery middleware deal with this
 	}
 }
 

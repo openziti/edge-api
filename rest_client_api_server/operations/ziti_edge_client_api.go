@@ -90,9 +90,6 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		ApplicationXPemFileProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 			return errors.NotImplemented("applicationXPemFile producer has not yet been implemented")
 		}),
-		ApplicationXX509UserCertProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
-			return errors.NotImplemented("applicationXX509UserCert producer has not yet been implemented")
-		}),
 		BinProducer:  runtime.ByteStreamProducer(),
 		JSONProducer: runtime.JSONProducer(),
 		TextYamlProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
@@ -180,8 +177,11 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		EnrollEnrollOttCaHandler: enroll.EnrollOttCaHandlerFunc(func(params enroll.EnrollOttCaParams) middleware.Responder {
 			return middleware.NotImplemented("operation enroll.EnrollOttCa has not yet been implemented")
 		}),
-		EnrollErnollUpdbHandler: enroll.ErnollUpdbHandlerFunc(func(params enroll.ErnollUpdbParams) middleware.Responder {
-			return middleware.NotImplemented("operation enroll.ErnollUpdb has not yet been implemented")
+		EnrollEnrollUpdbHandler: enroll.EnrollUpdbHandlerFunc(func(params enroll.EnrollUpdbParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.EnrollUpdb has not yet been implemented")
+		}),
+		EnrollEnrollmentChallengeHandler: enroll.EnrollmentChallengeHandlerFunc(func(params enroll.EnrollmentChallengeParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.EnrollmentChallenge has not yet been implemented")
 		}),
 		CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler: current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.ExtendCurrentIdentityAuthenticator has not yet been implemented")
@@ -200,6 +200,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		}),
 		CurrentIdentityGetCurrentIdentityEdgeRoutersHandler: current_identity.GetCurrentIdentityEdgeRoutersHandlerFunc(func(params current_identity.GetCurrentIdentityEdgeRoutersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_identity.GetCurrentIdentityEdgeRouters has not yet been implemented")
+		}),
+		EnrollGetEnrollmentJwksHandler: enroll.GetEnrollmentJwksHandlerFunc(func(params enroll.GetEnrollmentJwksParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.GetEnrollmentJwks has not yet been implemented")
 		}),
 		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation controllers.ListControllers has not yet been implemented")
@@ -318,9 +321,6 @@ type ZitiEdgeClientAPI struct {
 	// ApplicationXPemFileProducer registers a producer for the following mime types:
 	//   - application/x-pem-file
 	ApplicationXPemFileProducer runtime.Producer
-	// ApplicationXX509UserCertProducer registers a producer for the following mime types:
-	//   - application/x-x509-user-cert
-	ApplicationXX509UserCertProducer runtime.Producer
 	// BinProducer registers a producer for the following mime types:
 	//   - image/png
 	BinProducer runtime.Producer
@@ -396,8 +396,10 @@ type ZitiEdgeClientAPI struct {
 	EnrollEnrollOttHandler enroll.EnrollOttHandler
 	// EnrollEnrollOttCaHandler sets the operation handler for the enroll ott ca operation
 	EnrollEnrollOttCaHandler enroll.EnrollOttCaHandler
-	// EnrollErnollUpdbHandler sets the operation handler for the ernoll updb operation
-	EnrollErnollUpdbHandler enroll.ErnollUpdbHandler
+	// EnrollEnrollUpdbHandler sets the operation handler for the enroll updb operation
+	EnrollEnrollUpdbHandler enroll.EnrollUpdbHandler
+	// EnrollEnrollmentChallengeHandler sets the operation handler for the enrollment challenge operation
+	EnrollEnrollmentChallengeHandler enroll.EnrollmentChallengeHandler
 	// CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler sets the operation handler for the extend current identity authenticator operation
 	CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler current_api_session.ExtendCurrentIdentityAuthenticatorHandler
 	// EnrollExtendRouterEnrollmentHandler sets the operation handler for the extend router enrollment operation
@@ -410,6 +412,8 @@ type ZitiEdgeClientAPI struct {
 	CurrentIdentityGetCurrentIdentityHandler current_identity.GetCurrentIdentityHandler
 	// CurrentIdentityGetCurrentIdentityEdgeRoutersHandler sets the operation handler for the get current identity edge routers operation
 	CurrentIdentityGetCurrentIdentityEdgeRoutersHandler current_identity.GetCurrentIdentityEdgeRoutersHandler
+	// EnrollGetEnrollmentJwksHandler sets the operation handler for the get enrollment jwks operation
+	EnrollGetEnrollmentJwksHandler enroll.GetEnrollmentJwksHandler
 	// ControllersListControllersHandler sets the operation handler for the list controllers operation
 	ControllersListControllersHandler controllers.ListControllersHandler
 	// CurrentAPISessionListCurrentAPISessionCertificatesHandler sets the operation handler for the list current Api session certificates operation
@@ -538,9 +542,6 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	if o.ApplicationXPemFileProducer == nil {
 		unregistered = append(unregistered, "ApplicationXPemFileProducer")
 	}
-	if o.ApplicationXX509UserCertProducer == nil {
-		unregistered = append(unregistered, "ApplicationXX509UserCertProducer")
-	}
 	if o.BinProducer == nil {
 		unregistered = append(unregistered, "BinProducer")
 	}
@@ -639,8 +640,11 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	if o.EnrollEnrollOttCaHandler == nil {
 		unregistered = append(unregistered, "enroll.EnrollOttCaHandler")
 	}
-	if o.EnrollErnollUpdbHandler == nil {
-		unregistered = append(unregistered, "enroll.ErnollUpdbHandler")
+	if o.EnrollEnrollUpdbHandler == nil {
+		unregistered = append(unregistered, "enroll.EnrollUpdbHandler")
+	}
+	if o.EnrollEnrollmentChallengeHandler == nil {
+		unregistered = append(unregistered, "enroll.EnrollmentChallengeHandler")
 	}
 	if o.CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler == nil {
 		unregistered = append(unregistered, "current_api_session.ExtendCurrentIdentityAuthenticatorHandler")
@@ -659,6 +663,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.CurrentIdentityGetCurrentIdentityEdgeRoutersHandler == nil {
 		unregistered = append(unregistered, "current_identity.GetCurrentIdentityEdgeRoutersHandler")
+	}
+	if o.EnrollGetEnrollmentJwksHandler == nil {
+		unregistered = append(unregistered, "enroll.GetEnrollmentJwksHandler")
 	}
 	if o.ControllersListControllersHandler == nil {
 		unregistered = append(unregistered, "controllers.ListControllersHandler")
@@ -788,8 +795,6 @@ func (o *ZitiEdgeClientAPI) ProducersFor(mediaTypes []string) map[string]runtime
 			result["application/pkcs7-mime"] = o.ApplicationPkcs7MimeProducer
 		case "application/x-pem-file":
 			result["application/x-pem-file"] = o.ApplicationXPemFileProducer
-		case "application/x-x509-user-cert":
-			result["application/x-x509-user-cert"] = o.ApplicationXX509UserCertProducer
 		case "image/png":
 			result["image/png"] = o.BinProducer
 		case "application/json":
@@ -947,7 +952,11 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/enroll/updb"] = enroll.NewErnollUpdb(o.context, o.EnrollErnollUpdbHandler)
+	o.handlers["POST"]["/enroll/updb"] = enroll.NewEnrollUpdb(o.context, o.EnrollEnrollUpdbHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/enroll/challenge"] = enroll.NewEnrollmentChallenge(o.context, o.EnrollEnrollmentChallengeHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -972,6 +981,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/current-identity/edge-routers"] = current_identity.NewGetCurrentIdentityEdgeRouters(o.context, o.CurrentIdentityGetCurrentIdentityEdgeRoutersHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/enroll/jwks"] = enroll.NewGetEnrollmentJwks(o.context, o.EnrollGetEnrollmentJwksHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

@@ -77,7 +77,7 @@ func NewExtendRouterEnrollmentOK() *ExtendRouterEnrollmentOK {
 
 /* ExtendRouterEnrollmentOK describes a response with status code 200, with default header values.
 
-A response containg the edge routers new signed certificates (server chain, server cert, CAs).
+A response containing the edge routers new signed certificates (server chain, server cert, CAs).
 */
 type ExtendRouterEnrollmentOK struct {
 	Payload *rest_model.EnrollmentCertsEnvelope

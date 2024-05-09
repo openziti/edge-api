@@ -43,7 +43,6 @@
 //  Produces:
 //    - application/pkcs7-mime
 //    - application/x-pem-file
-//    - application/x-x509-user-cert
 //    - image/png
 //    - application/json
 //    - text/yaml
