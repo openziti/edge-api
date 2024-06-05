@@ -32,74 +32,34 @@ package rest_model
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
-// NonceChallenge nonce challenge
+// OttEnrollmentRequest ott enrollment request
 //
-// swagger:model nonceChallenge
-type NonceChallenge struct {
+// swagger:model ottEnrollmentRequest
+type OttEnrollmentRequest struct {
 
-	// key Id
-	// Required: true
-	KeyID *string `json:"keyId"`
+	// client csr
+	ClientCsr string `json:"clientCsr,omitempty"`
 
-	// nonce
-	// Required: true
-	// Format: uuid
-	Nonce *strfmt.UUID `json:"nonce"`
+	// token
+	Token string `json:"token,omitempty"`
 }
 
-// Validate validates this nonce challenge
-func (m *NonceChallenge) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateKeyID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateNonce(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
+// Validate validates this ott enrollment request
+func (m *OttEnrollmentRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *NonceChallenge) validateKeyID(formats strfmt.Registry) error {
-
-	if err := validate.Required("keyId", "body", m.KeyID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *NonceChallenge) validateNonce(formats strfmt.Registry) error {
-
-	if err := validate.Required("nonce", "body", m.Nonce); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("nonce", "body", "uuid", m.Nonce.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validates this nonce challenge based on context it is used
-func (m *NonceChallenge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this ott enrollment request based on context it is used
+func (m *OttEnrollmentRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *NonceChallenge) MarshalBinary() ([]byte, error) {
+func (m *OttEnrollmentRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -107,8 +67,8 @@ func (m *NonceChallenge) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *NonceChallenge) UnmarshalBinary(b []byte) error {
-	var res NonceChallenge
+func (m *OttEnrollmentRequest) UnmarshalBinary(b []byte) error {
+	var res OttEnrollmentRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

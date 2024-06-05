@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.18
+  version: 0.26.20
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -1621,9 +1621,9 @@ paths:
         in: header
       responses:
         "200":
-          description: Base empty response
+          description: The recovery codes of an MFA enrollment
           schema:
-            $ref: '#/definitions/empty'
+            $ref: '#/definitions/detailMfaRecoveryCodesEnvelope'
         "401":
           description: The supplied session does not have the correct access rights
             to request this resource
@@ -1682,9 +1682,9 @@ paths:
           $ref: '#/definitions/mfaCode'
       responses:
         "200":
-          description: The recovery codes of an MFA enrollment
+          description: Base empty response
           schema:
-            $ref: '#/definitions/detailMfaRecoveryCodesEnvelope'
+            $ref: '#/definitions/empty'
         "401":
           description: The supplied session does not have the correct access rights
             to request this resource
@@ -2004,11 +2004,12 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
     parameters:
-    - type: string
-      format: uuid
-      name: token
-      in: query
+    - description: An OTT enrollment request
+      name: erOttEnrollmentRequest
+      in: body
       required: true
+      schema:
+        $ref: '#/definitions/erOttEnrollmentRequest'
   /enroll/extend/router:
     post:
       description: |
@@ -2142,11 +2143,12 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
     parameters:
-    - type: string
-      format: uuid
-      name: token
-      in: query
+    - description: An OTT enrollment request
+      name: ottEnrollmentRequest
+      in: body
       required: true
+      schema:
+        $ref: '#/definitions/ottEnrollmentRequest'
   /enroll/ottca:
     post:
       description: |
@@ -2184,11 +2186,12 @@ paths:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
     parameters:
-    - type: string
-      format: uuid
-      name: token
-      in: query
+    - description: An OTT enrollment request
+      name: ottEnrollmentRequest
+      in: body
       required: true
+      schema:
+        $ref: '#/definitions/ottEnrollmentRequest'
   /enroll/updb:
     post:
       description: |
@@ -4269,9 +4272,9 @@ definitions:
     type: object
     required:
     - meta
-    - error
+    - data
     properties:
-      error:
+      data:
         $ref: '#/definitions/detailMfaRecoveryCodes'
       meta:
         $ref: '#/definitions/meta'
@@ -4389,6 +4392,15 @@ definitions:
       osVersion:
         type: string
         maxLength: 255
+  erOttEnrollmentRequest:
+    type: object
+    properties:
+      clientCsr:
+        type: string
+      serverCsr:
+        type: string
+      token:
+        type: string
   identityAuthenticators:
     type: object
     properties:
@@ -4841,10 +4853,7 @@ definitions:
     required:
     - nonce
     - keyId
-    - algorithm
     properties:
-      algorithm:
-        type: string
       keyId:
         type: string
       nonce:
@@ -4854,8 +4863,13 @@ definitions:
     type: object
     required:
     - signature
+    - algorithm
+    - kid
+    - caPool
     properties:
       algorithm:
+        type: string
+      caPool:
         type: string
       kid:
         type: string
@@ -4881,6 +4895,13 @@ definitions:
         type: string
       t:
         description: Factor CRT coefficient.
+        type: string
+  ottEnrollmentRequest:
+    type: object
+    properties:
+      clientCsr:
+        type: string
+      token:
         type: string
   pagination:
     type: object

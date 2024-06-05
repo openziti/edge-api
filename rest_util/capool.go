@@ -17,6 +17,7 @@
 package rest_util
 
 import (
+	"crypto/tls"
 	"crypto/x509"
 	"encoding/base64"
 	"fmt"
@@ -50,16 +51,9 @@ func VerifyController(controllerAddr string, caPool *x509.CertPool) (bool, error
 	return true, nil
 }
 
-// GetControllerWellKnownCas will attempt to connect to a controller and retrieve its PKCS11 well-known CA bundle.
-func GetControllerWellKnownCas(controllerAddr string) ([]*x509.Certificate, error) {
-	tlsConfig, err := NewTlsConfig()
-
-	if err != nil {
-		return nil, err
-	}
-
-	tlsConfig.InsecureSkipVerify = true
-
+// GetControllerWellKnownCasWithTlsConfig will attempt to connect to a controller and retrieve its PKCS11 well-known CA
+// bundle with a specific TLS config.
+func GetControllerWellKnownCasWithTlsConfig(controllerAddr string, tlsConfig *tls.Config) ([]*x509.Certificate, error) {
 	httpClient, err := NewHttpClientWithTlsConfig(tlsConfig)
 
 	if err != nil {
@@ -87,8 +81,39 @@ func GetControllerWellKnownCas(controllerAddr string) ([]*x509.Certificate, erro
 	return certs.Certificates, nil
 }
 
+// GetControllerWellKnownCas will attempt to connect to a controller and retrieve its PKCS11 well-known CA bundle.
+func GetControllerWellKnownCas(controllerAddr string) ([]*x509.Certificate, error) {
+	tlsConfig, err := NewTlsConfig()
+
+	if err != nil {
+		return nil, err
+	}
+
+	tlsConfig.InsecureSkipVerify = true
+
+	return GetControllerWellKnownCasWithTlsConfig(controllerAddr, tlsConfig)
+}
+
+// GetControllerWellKnownCaPoolWithTlsConfig will attempt to connect to a controller and retrieve its PKCS11 well-known
+// CA bundle as an x509.CertPool using a pre-configured TLS config.
+func GetControllerWellKnownCaPoolWithTlsConfig(controllerAddr string, tlsConfig *tls.Config) (*x509.CertPool, error) {
+	certs, err := GetControllerWellKnownCasWithTlsConfig(controllerAddr, tlsConfig)
+
+	if err != nil {
+		return nil, err
+	}
+
+	pool := x509.NewCertPool()
+
+	for _, cert := range certs {
+		pool.AddCert(cert)
+	}
+
+	return pool, nil
+}
+
 // GetControllerWellKnownCaPool will attempt to connect to a controller and retrieve its PKCS11 well-known CA bundle as
-// an x509.CertPool
+// an x509.CertPool.
 func GetControllerWellKnownCaPool(controllerAddr string) (*x509.CertPool, error) {
 	certs, err := GetControllerWellKnownCas(controllerAddr)
 

@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.18"
+    "version": "0.26.20"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -6208,9 +6208,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "The recovery codes of an MFA enrollment",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
             }
           },
           "401": {
@@ -6296,9 +6296,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "The recovery codes of an MFA enrollment",
+            "description": "Base empty response",
             "schema": {
-              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
+              "$ref": "#/definitions/empty"
             }
           },
           "401": {
@@ -23212,10 +23212,10 @@ func init() {
       "type": "object",
       "required": [
         "meta",
-        "error"
+        "data"
       ],
       "properties": {
-        "error": {
+        "data": {
           "$ref": "#/definitions/detailMfaRecoveryCodes"
         },
         "meta": {
@@ -27976,7 +27976,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.18"
+    "version": "0.26.20"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -34120,9 +34120,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "The recovery codes of an MFA enrollment",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
             }
           },
           "401": {
@@ -34208,9 +34208,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "The recovery codes of an MFA enrollment",
+            "description": "Base empty response",
             "schema": {
-              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
+              "$ref": "#/definitions/empty"
             }
           },
           "401": {
@@ -51221,10 +51221,10 @@ func init() {
       "type": "object",
       "required": [
         "meta",
-        "error"
+        "data"
       ],
       "properties": {
-        "error": {
+        "data": {
           "$ref": "#/definitions/detailMfaRecoveryCodes"
         },
         "meta": {

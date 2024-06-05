@@ -44,10 +44,16 @@ import (
 type NonceSignature struct {
 
 	// algorithm
-	Algorithm string `json:"algorithm,omitempty"`
+	// Required: true
+	Algorithm *string `json:"algorithm"`
+
+	// ca pool
+	// Required: true
+	CaPool *string `json:"caPool"`
 
 	// kid
-	Kid string `json:"kid,omitempty"`
+	// Required: true
+	Kid *string `json:"kid"`
 
 	// signature
 	// Required: true
@@ -58,6 +64,18 @@ type NonceSignature struct {
 func (m *NonceSignature) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAlgorithm(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCaPool(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKid(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSignature(formats); err != nil {
 		res = append(res, err)
 	}
@@ -65,6 +83,33 @@ func (m *NonceSignature) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *NonceSignature) validateAlgorithm(formats strfmt.Registry) error {
+
+	if err := validate.Required("algorithm", "body", m.Algorithm); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NonceSignature) validateCaPool(formats strfmt.Registry) error {
+
+	if err := validate.Required("caPool", "body", m.CaPool); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NonceSignature) validateKid(formats strfmt.Registry) error {
+
+	if err := validate.Required("kid", "body", m.Kid); err != nil {
+		return err
+	}
+
 	return nil
 }
 

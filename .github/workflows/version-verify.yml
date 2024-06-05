@@ -1,0 +1,64 @@
+name: Check Version
+
+on: [push, pull_request]
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          python -m pip install pyyaml packaging
+
+      - name: Fetch tags
+        run: git fetch --tags
+
+      - name: Get latest version tag
+        id: get_latest_tag
+        run: echo "::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)"
+
+      - name: Check YAML version
+        env:
+          LATEST_TAG: ${{ steps.get_latest_tag.outputs.tag }}
+        run: |
+          python -c "
+  import yaml
+  import re
+  from packaging.version import Version
+
+def parse_version(tag):
+  match = re.match(r'v(\d+\.\d+\.\d+)', tag)
+  if match:
+    return Version(match.group(1))
+  return None
+  
+  latest_tag = '${LATEST_TAG}'
+  latest_version = parse_version(latest_tag)
+
+if not latest_version:
+  print(f'Invalid latest tag format: {latest_tag}')
+    exit(1)
+
+with open('path/to/yourfile.yaml', 'r') as f:  # Replace with the actual path to your YAML file
+  data = yaml.safe_load(f)
+  
+  yaml_version_str = data.get('info', {}).get('version')
+if not yaml_version_str:
+  print('No version found in YAML file')
+  exit(1)
+  
+  yaml_version = Version(yaml_version_str)
+
+if yaml_version <= latest_version:
+  print(f'YAML version ({yaml_version}) is not greater than the latest tag version ({latest_version})')
+  exit(1)
+  print(f'YAML version ({yaml_version}) is greater than the latest tag version ({latest_version})')
+  "

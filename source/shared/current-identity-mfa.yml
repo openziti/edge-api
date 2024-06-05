@@ -139,7 +139,7 @@ paths:
           type: string
       responses:
         '200':
-          $ref: 'standard-responses.yml#/responses/emptyResponse'
+          $ref: '#/responses/detailMfaRecoveryCodes'
         '401':
           $ref: 'standard-responses.yml#/responses/unauthorizedResponse'
         '404':
@@ -166,7 +166,7 @@ paths:
             $ref: 'authenticate.yml#/definitions/mfaCode'
       responses:
         '200':
-          $ref: '#/responses/detailMfaRecoveryCodes'
+          $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
         '401':
           $ref: 'standard-responses.yml#/responses/unauthorizedResponse'
         '404':
@@ -257,11 +257,11 @@ definitions:
     type: object
     required:
       - meta
-      - error
+      - data
     properties:
       meta:
         $ref: 'standard-responses.yml#/definitions/meta'
-      error:
+      data:
         $ref: '#/definitions/detailMfaRecoveryCodes'
   detailMfaRecoveryCodes:
     type: object

@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.18"
+    "version": "0.26.20"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -2214,9 +2214,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "The recovery codes of an MFA enrollment",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
             }
           },
           "401": {
@@ -2302,9 +2302,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "The recovery codes of an MFA enrollment",
+            "description": "Base empty response",
             "schema": {
-              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
+              "$ref": "#/definitions/empty"
             }
           },
           "401": {
@@ -2737,11 +2737,13 @@ func init() {
       },
       "parameters": [
         {
-          "type": "string",
-          "format": "uuid",
-          "name": "token",
-          "in": "query",
-          "required": true
+          "description": "An OTT enrollment request",
+          "name": "erOttEnrollmentRequest",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/erOttEnrollmentRequest"
+          }
         }
       ]
     },
@@ -2907,11 +2909,13 @@ func init() {
       },
       "parameters": [
         {
-          "type": "string",
-          "format": "uuid",
-          "name": "token",
-          "in": "query",
-          "required": true
+          "description": "An OTT enrollment request",
+          "name": "ottEnrollmentRequest",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ottEnrollmentRequest"
+          }
         }
       ]
     },
@@ -2957,11 +2961,13 @@ func init() {
       },
       "parameters": [
         {
-          "type": "string",
-          "format": "uuid",
-          "name": "token",
-          "in": "query",
-          "required": true
+          "description": "An OTT enrollment request",
+          "name": "ottEnrollmentRequest",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ottEnrollmentRequest"
+          }
         }
       ]
     },
@@ -5927,10 +5933,10 @@ func init() {
       "type": "object",
       "required": [
         "meta",
-        "error"
+        "data"
       ],
       "properties": {
-        "error": {
+        "data": {
           "$ref": "#/definitions/detailMfaRecoveryCodes"
         },
         "meta": {
@@ -6101,6 +6107,20 @@ func init() {
         "osVersion": {
           "type": "string",
           "maxLength": 255
+        }
+      }
+    },
+    "erOttEnrollmentRequest": {
+      "type": "object",
+      "properties": {
+        "clientCsr": {
+          "type": "string"
+        },
+        "serverCsr": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
         }
       }
     },
@@ -6760,13 +6780,9 @@ func init() {
       "type": "object",
       "required": [
         "nonce",
-        "keyId",
-        "algorithm"
+        "keyId"
       ],
       "properties": {
-        "algorithm": {
-          "type": "string"
-        },
         "keyId": {
           "type": "string"
         },
@@ -6779,10 +6795,16 @@ func init() {
     "nonceSignature": {
       "type": "object",
       "required": [
-        "signature"
+        "signature",
+        "algorithm",
+        "kid",
+        "caPool"
       ],
       "properties": {
         "algorithm": {
+          "type": "string"
+        },
+        "caPool": {
           "type": "string"
         },
         "kid": {
@@ -6817,6 +6839,17 @@ func init() {
         },
         "t": {
           "description": "Factor CRT coefficient.",
+          "type": "string"
+        }
+      }
+    },
+    "ottEnrollmentRequest": {
+      "type": "object",
+      "properties": {
+        "clientCsr": {
+          "type": "string"
+        },
+        "token": {
           "type": "string"
         }
       }
@@ -7632,7 +7665,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.18"
+    "version": "0.26.20"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -9782,9 +9815,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "The recovery codes of an MFA enrollment",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
             }
           },
           "401": {
@@ -9870,9 +9903,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "The recovery codes of an MFA enrollment",
+            "description": "Base empty response",
             "schema": {
-              "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
+              "$ref": "#/definitions/empty"
             }
           },
           "401": {
@@ -10305,11 +10338,13 @@ func init() {
       },
       "parameters": [
         {
-          "type": "string",
-          "format": "uuid",
-          "name": "token",
-          "in": "query",
-          "required": true
+          "description": "An OTT enrollment request",
+          "name": "erOttEnrollmentRequest",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/erOttEnrollmentRequest"
+          }
         }
       ]
     },
@@ -10475,11 +10510,13 @@ func init() {
       },
       "parameters": [
         {
-          "type": "string",
-          "format": "uuid",
-          "name": "token",
-          "in": "query",
-          "required": true
+          "description": "An OTT enrollment request",
+          "name": "ottEnrollmentRequest",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ottEnrollmentRequest"
+          }
         }
       ]
     },
@@ -10525,11 +10562,13 @@ func init() {
       },
       "parameters": [
         {
-          "type": "string",
-          "format": "uuid",
-          "name": "token",
-          "in": "query",
-          "required": true
+          "description": "An OTT enrollment request",
+          "name": "ottEnrollmentRequest",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ottEnrollmentRequest"
+          }
         }
       ]
     },
@@ -13578,10 +13617,10 @@ func init() {
       "type": "object",
       "required": [
         "meta",
-        "error"
+        "data"
       ],
       "properties": {
-        "error": {
+        "data": {
           "$ref": "#/definitions/detailMfaRecoveryCodes"
         },
         "meta": {
@@ -13752,6 +13791,20 @@ func init() {
         "osVersion": {
           "type": "string",
           "maxLength": 255
+        }
+      }
+    },
+    "erOttEnrollmentRequest": {
+      "type": "object",
+      "properties": {
+        "clientCsr": {
+          "type": "string"
+        },
+        "serverCsr": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
         }
       }
     },
@@ -14411,13 +14464,9 @@ func init() {
       "type": "object",
       "required": [
         "nonce",
-        "keyId",
-        "algorithm"
+        "keyId"
       ],
       "properties": {
-        "algorithm": {
-          "type": "string"
-        },
         "keyId": {
           "type": "string"
         },
@@ -14430,10 +14479,16 @@ func init() {
     "nonceSignature": {
       "type": "object",
       "required": [
-        "signature"
+        "signature",
+        "algorithm",
+        "kid",
+        "caPool"
       ],
       "properties": {
         "algorithm": {
+          "type": "string"
+        },
+        "caPool": {
           "type": "string"
         },
         "kid": {
@@ -14468,6 +14523,17 @@ func init() {
         },
         "t": {
           "description": "Factor CRT coefficient.",
+          "type": "string"
+        }
+      }
+    },
+    "ottEnrollmentRequest": {
+      "type": "object",
+      "properties": {
+        "clientCsr": {
+          "type": "string"
+        },
+        "token": {
           "type": "string"
         }
       }

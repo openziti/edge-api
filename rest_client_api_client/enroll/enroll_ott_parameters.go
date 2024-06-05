@@ -38,6 +38,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/openziti/edge-api/rest_model"
 )
 
 // NewEnrollOttParams creates a new EnrollOttParams object,
@@ -83,10 +85,11 @@ func NewEnrollOttParamsWithHTTPClient(client *http.Client) *EnrollOttParams {
 */
 type EnrollOttParams struct {
 
-	// Token.
-	//
-	// Format: uuid
-	Token strfmt.UUID
+	/* OttEnrollmentRequest.
+
+	   An OTT enrollment request
+	*/
+	OttEnrollmentRequest *rest_model.OttEnrollmentRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,15 +144,15 @@ func (o *EnrollOttParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithToken adds the token to the enroll ott params
-func (o *EnrollOttParams) WithToken(token strfmt.UUID) *EnrollOttParams {
-	o.SetToken(token)
+// WithOttEnrollmentRequest adds the ottEnrollmentRequest to the enroll ott params
+func (o *EnrollOttParams) WithOttEnrollmentRequest(ottEnrollmentRequest *rest_model.OttEnrollmentRequest) *EnrollOttParams {
+	o.SetOttEnrollmentRequest(ottEnrollmentRequest)
 	return o
 }
 
-// SetToken adds the token to the enroll ott params
-func (o *EnrollOttParams) SetToken(token strfmt.UUID) {
-	o.Token = token
+// SetOttEnrollmentRequest adds the ottEnrollmentRequest to the enroll ott params
+func (o *EnrollOttParams) SetOttEnrollmentRequest(ottEnrollmentRequest *rest_model.OttEnrollmentRequest) {
+	o.OttEnrollmentRequest = ottEnrollmentRequest
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -159,13 +162,8 @@ func (o *EnrollOttParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-
-	// query param token
-	qrToken := o.Token
-	qToken := qrToken.String()
-	if qToken != "" {
-
-		if err := r.SetQueryParam("token", qToken); err != nil {
+	if o.OttEnrollmentRequest != nil {
+		if err := r.SetBodyParam(o.OttEnrollmentRequest); err != nil {
 			return err
 		}
 	}

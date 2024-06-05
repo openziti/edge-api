@@ -49,7 +49,13 @@ paths:
 
   enroll-ott:
     parameters:
-      - $ref: '../shared/parameters.yml#/token'
+      - name: ottEnrollmentRequest
+        in: body
+        required: true
+        description: An OTT enrollment request
+        schema:
+          $ref: '#/definitions/ottEnrollmentRequest'
+
     post:
       summary: Enroll an identity via one-time-token
       description: |
@@ -69,7 +75,12 @@ paths:
 
   enroll-ottca:
     parameters:
-      - $ref: '../shared/parameters.yml#/token'
+      - name: ottEnrollmentRequest
+        in: body
+        required: true
+        description: An OTT enrollment request
+        schema:
+          $ref: '#/definitions/ottEnrollmentRequest'
     post:
       summary: Enroll an identity via one-time-token with a pre-exchanged client certificate
       description: |
@@ -118,7 +129,12 @@ paths:
 
   enroll-erott:
     parameters:
-      - $ref: '../shared/parameters.yml#/token'
+      - name: erOttEnrollmentRequest
+        in: body
+        required: true
+        description: An OTT enrollment request
+        schema:
+          $ref: '#/definitions/erOttEnrollmentRequest'
     post:
       summary: Enroll an edge-router
       description: |
@@ -226,6 +242,22 @@ responses:
       $ref: '#/definitions/nonceSignature'
 
 definitions:
+  ottEnrollmentRequest:
+    type: object
+    properties:
+        token:
+          type: string
+        clientCsr:
+          type: string
+  erOttEnrollmentRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      clientCsr:
+        type: string
+      serverCsr:
+        type: string
   enrollmentCertsEnvelope:
     type: object
     properties:
@@ -259,6 +291,9 @@ definitions:
     type: object
     required:
       - signature
+      - algorithm
+      - kid
+      - caPool
     properties:
       signature:
         type: string
@@ -266,17 +301,16 @@ definitions:
         type: string
       kid:
         type: string
+      caPool:
+        type: string
   nonceChallenge:
     type: object
     required:
       - nonce
       - keyId
-      - algorithm
     properties:
       nonce:
         type: string
         format: uuid
       keyId:
-        type: string
-      algorithm:
         type: string
