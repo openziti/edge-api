@@ -35,15 +35,15 @@ import (
 	golangswaggerpaths "path"
 )
 
-// EnrollErOttURL generates an URL for the enroll er ott operation
-type EnrollErOttURL struct {
+// GetEnrollmentJwksURL generates an URL for the get enrollment jwks operation
+type GetEnrollmentJwksURL struct {
 	_basePath string
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *EnrollErOttURL) WithBasePath(bp string) *EnrollErOttURL {
+func (o *GetEnrollmentJwksURL) WithBasePath(bp string) *GetEnrollmentJwksURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -51,15 +51,15 @@ func (o *EnrollErOttURL) WithBasePath(bp string) *EnrollErOttURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *EnrollErOttURL) SetBasePath(bp string) {
+func (o *GetEnrollmentJwksURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *EnrollErOttURL) Build() (*url.URL, error) {
+func (o *GetEnrollmentJwksURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/enroll/erott"
+	var _path = "/enroll/jwks"
 
 	_basePath := o._basePath
 	if _basePath == "" {
@@ -71,7 +71,7 @@ func (o *EnrollErOttURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *EnrollErOttURL) Must(u *url.URL, err error) *url.URL {
+func (o *GetEnrollmentJwksURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -82,17 +82,17 @@ func (o *EnrollErOttURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *EnrollErOttURL) String() string {
+func (o *GetEnrollmentJwksURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *EnrollErOttURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *GetEnrollmentJwksURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on EnrollErOttURL")
+		return nil, errors.New("scheme is required for a full url on GetEnrollmentJwksURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on EnrollErOttURL")
+		return nil, errors.New("host is required for a full url on GetEnrollmentJwksURL")
 	}
 
 	base, err := o.Build()
@@ -106,6 +106,6 @@ func (o *EnrollErOttURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *EnrollErOttURL) StringFull(scheme, host string) string {
+func (o *GetEnrollmentJwksURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

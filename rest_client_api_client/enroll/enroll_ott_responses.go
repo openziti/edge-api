@@ -77,23 +77,25 @@ func NewEnrollOttOK() *EnrollOttOK {
 
 /* EnrollOttOK describes a response with status code 200, with default header values.
 
-A PEM encoded certificate signed by the internal Ziti CA
+A response containing and identities client certificate chains
 */
 type EnrollOttOK struct {
-	Payload string
+	Payload *rest_model.EnrollmentCertsEnvelope
 }
 
 func (o *EnrollOttOK) Error() string {
 	return fmt.Sprintf("[POST /enroll/ott][%d] enrollOttOK  %+v", 200, o.Payload)
 }
-func (o *EnrollOttOK) GetPayload() string {
+func (o *EnrollOttOK) GetPayload() *rest_model.EnrollmentCertsEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollOttOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(rest_model.EnrollmentCertsEnvelope)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

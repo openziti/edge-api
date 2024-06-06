@@ -38,6 +38,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/openziti/edge-api/rest_model"
 )
 
 // NewEnrollErOttParams creates a new EnrollErOttParams object,
@@ -83,10 +85,11 @@ func NewEnrollErOttParamsWithHTTPClient(client *http.Client) *EnrollErOttParams 
 */
 type EnrollErOttParams struct {
 
-	// Token.
-	//
-	// Format: uuid
-	Token strfmt.UUID
+	/* ErOttEnrollmentRequest.
+
+	   An OTT enrollment request
+	*/
+	ErOttEnrollmentRequest *rest_model.ErOttEnrollmentRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,15 +144,15 @@ func (o *EnrollErOttParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithToken adds the token to the enroll er ott params
-func (o *EnrollErOttParams) WithToken(token strfmt.UUID) *EnrollErOttParams {
-	o.SetToken(token)
+// WithErOttEnrollmentRequest adds the erOttEnrollmentRequest to the enroll er ott params
+func (o *EnrollErOttParams) WithErOttEnrollmentRequest(erOttEnrollmentRequest *rest_model.ErOttEnrollmentRequest) *EnrollErOttParams {
+	o.SetErOttEnrollmentRequest(erOttEnrollmentRequest)
 	return o
 }
 
-// SetToken adds the token to the enroll er ott params
-func (o *EnrollErOttParams) SetToken(token strfmt.UUID) {
-	o.Token = token
+// SetErOttEnrollmentRequest adds the erOttEnrollmentRequest to the enroll er ott params
+func (o *EnrollErOttParams) SetErOttEnrollmentRequest(erOttEnrollmentRequest *rest_model.ErOttEnrollmentRequest) {
+	o.ErOttEnrollmentRequest = erOttEnrollmentRequest
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -159,13 +162,8 @@ func (o *EnrollErOttParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
-
-	// query param token
-	qrToken := o.Token
-	qToken := qrToken.String()
-	if qToken != "" {
-
-		if err := r.SetQueryParam("token", qToken); err != nil {
+	if o.ErOttEnrollmentRequest != nil {
+		if err := r.SetBodyParam(o.ErOttEnrollmentRequest); err != nil {
 			return err
 		}
 	}

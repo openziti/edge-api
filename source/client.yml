@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.18
+  version: 0.26.20
   title: Ziti Edge Client
   description: OpenZiti Edge Client API
   contact:
@@ -92,6 +92,10 @@ paths:
     $ref: 'client/enroll.yml#/paths/enroll-erott'
   '/enroll/extend/router':
     $ref: 'client/enroll.yml#/paths/enroll-extend-router'
+  '/enroll/jwks':
+    $ref: 'client/enroll.yml#/paths/enroll-jwks'
+  '/enroll/challenge':
+    $ref: 'client/enroll.yml#/paths/enroll-challenge'
 
   '/external-jwt-signers':
     $ref: 'client/ext-jwt-signers.yml#/paths/external-jwt-signers'

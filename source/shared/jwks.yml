@@ -1,0 +1,94 @@
+definitions:
+  jwks:
+    type: object
+    properties:
+      keys:
+        type: array
+        items:
+          $ref: '#/definitions/jwk'
+  jwk:
+    type: object
+    required:
+      - kty
+    properties:
+      kty:
+        type: string
+        description: 'Key Type.'
+      use:
+        type: string
+        description: 'Public key use, e.g., sig (signature) or enc (encryption).'
+      key_ops:
+        type: array
+        items:
+          type: string
+        description: 'Intended key operations, e.g., sign, verify.'
+      alg:
+        type: string
+        description: 'Algorithm intended for use with the key.'
+      kid:
+        type: string
+        description: 'Key ID.'
+      x5u:
+        type: string
+        description: 'X.509 URL.'
+      x5c:
+        type: array
+        items:
+          type: string
+        description: 'X.509 Certificate Chain.'
+      x5t:
+        type: string
+        description: 'X.509 Certificate SHA-1 Thumbprint.'
+      x5t#S256:
+        type: string
+        description: 'X.509 Certificate SHA-256 Thumbprint.'
+      'n':
+        type: string
+        description: 'Modulus for RSA Public Key.'
+      'e':
+        type: string
+        description: 'Exponent for RSA Public Key.'
+      'p':
+        type: string
+        description: 'First Prime Factor for RSA.'
+      'q':
+        type: string
+        description: 'Second Prime Factor for RSA.'
+      dp:
+        type: string
+        description: 'First Factor CRT Exponent for RSA.'
+      dq:
+        type: string
+        description: 'Second Factor CRT Exponent for RSA.'
+      qi:
+        type: string
+        description: 'First CRT Coefficient for RSA.'
+      oth:
+        type: array
+        description: 'Other Primes Info not represented by the first two primes.'
+        items:
+          $ref: '#/definitions/otherPrime'
+      crv:
+        type: string
+        description: 'Curve for ECC Public Keys.'
+      'x':
+        type: string
+        description: 'X Coordinate for ECC Public Keys.'
+      'y':
+        type: string
+        description: 'Y Coordinate for ECC Public Keys.'
+      'd':
+        type: string
+        description: 'ECC Private Key or RSA Private Exponent.'
+  otherPrime:
+    type: object
+    properties:
+      r:
+        type: string
+        description: 'Prime factor.'
+      d:
+        type: string
+        description: 'Factor CRT exponent.'
+      t:
+        type: string
+        description: 'Factor CRT coefficient.'

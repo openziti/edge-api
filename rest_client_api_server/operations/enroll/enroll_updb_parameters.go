@@ -30,6 +30,8 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+	"io"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -39,19 +41,19 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// NewErnollUpdbParams creates a new ErnollUpdbParams object
+// NewEnrollUpdbParams creates a new EnrollUpdbParams object
 //
 // There are no default values defined in the spec.
-func NewErnollUpdbParams() ErnollUpdbParams {
+func NewEnrollUpdbParams() EnrollUpdbParams {
 
-	return ErnollUpdbParams{}
+	return EnrollUpdbParams{}
 }
 
-// ErnollUpdbParams contains all the bound params for the ernoll updb operation
+// EnrollUpdbParams contains all the bound params for the enroll updb operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters ernollUpdb
-type ErnollUpdbParams struct {
+// swagger:parameters enrollUpdb
+type EnrollUpdbParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -61,13 +63,18 @@ type ErnollUpdbParams struct {
 	  In: query
 	*/
 	Token strfmt.UUID
+	/*
+	  Required: true
+	  In: body
+	*/
+	UpdbCredentials EnrollUpdbBody
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewErnollUpdbParams() beforehand.
-func (o *ErnollUpdbParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewEnrollUpdbParams() beforehand.
+func (o *EnrollUpdbParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
@@ -78,6 +85,34 @@ func (o *ErnollUpdbParams) BindRequest(r *http.Request, route *middleware.Matche
 	if err := o.bindToken(qToken, qhkToken, route.Formats); err != nil {
 		res = append(res, err)
 	}
+
+	if runtime.HasBody(r) {
+		defer r.Body.Close()
+		var body EnrollUpdbBody
+		if err := route.Consumer.Consume(r.Body, &body); err != nil {
+			if err == io.EOF {
+				res = append(res, errors.Required("updbCredentials", "body", ""))
+			} else {
+				res = append(res, errors.NewParseError("updbCredentials", "body", "", err))
+			}
+		} else {
+			// validate body object
+			if err := body.Validate(route.Formats); err != nil {
+				res = append(res, err)
+			}
+
+			ctx := validate.WithOperationRequest(context.Background())
+			if err := body.ContextValidate(ctx, route.Formats); err != nil {
+				res = append(res, err)
+			}
+
+			if len(res) == 0 {
+				o.UpdbCredentials = body
+			}
+		}
+	} else {
+		res = append(res, errors.Required("updbCredentials", "body", ""))
+	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -85,7 +120,7 @@ func (o *ErnollUpdbParams) BindRequest(r *http.Request, route *middleware.Matche
 }
 
 // bindToken binds and validates parameter Token from query.
-func (o *ErnollUpdbParams) bindToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *EnrollUpdbParams) bindToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
 		return errors.Required("token", "query", rawData)
 	}
@@ -116,7 +151,7 @@ func (o *ErnollUpdbParams) bindToken(rawData []string, hasKey bool, formats strf
 }
 
 // validateToken carries on validations for parameter Token
-func (o *ErnollUpdbParams) validateToken(formats strfmt.Registry) error {
+func (o *EnrollUpdbParams) validateToken(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("token", "query", "uuid", o.Token.String(), formats); err != nil {
 		return err

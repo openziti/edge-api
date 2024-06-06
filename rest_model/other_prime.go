@@ -36,33 +36,33 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnrollmentCerts enrollment certs
+// OtherPrime other prime
 //
-// swagger:model enrollmentCerts
-type EnrollmentCerts struct {
+// swagger:model otherPrime
+type OtherPrime struct {
 
-	// A PEM encoded set of CA certificates to trust
-	Ca string `json:"ca,omitempty"`
+	// Factor CRT exponent.
+	D string `json:"d,omitempty"`
 
-	// A PEM encoded set of certificates to use as the client chain
-	Cert string `json:"cert,omitempty"`
+	// Prime factor.
+	R string `json:"r,omitempty"`
 
-	// A PEM encoded set of certificates to use as the servers chain
-	ServerCert string `json:"serverCert,omitempty"`
+	// Factor CRT coefficient.
+	T string `json:"t,omitempty"`
 }
 
-// Validate validates this enrollment certs
-func (m *EnrollmentCerts) Validate(formats strfmt.Registry) error {
+// Validate validates this other prime
+func (m *OtherPrime) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this enrollment certs based on context it is used
-func (m *EnrollmentCerts) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this other prime based on context it is used
+func (m *OtherPrime) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
+func (m *OtherPrime) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -70,8 +70,8 @@ func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *EnrollmentCerts) UnmarshalBinary(b []byte) error {
-	var res EnrollmentCerts
+func (m *OtherPrime) UnmarshalBinary(b []byte) error {
+	var res OtherPrime
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

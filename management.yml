@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.18
+  version: 0.26.20
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -4563,9 +4563,9 @@ paths:
         in: header
       responses:
         "200":
-          description: Base empty response
+          description: The recovery codes of an MFA enrollment
           schema:
-            $ref: '#/definitions/empty'
+            $ref: '#/definitions/detailMfaRecoveryCodesEnvelope'
         "401":
           description: The supplied session does not have the correct access rights
             to request this resource
@@ -4624,9 +4624,9 @@ paths:
           $ref: '#/definitions/mfaCode'
       responses:
         "200":
-          description: The recovery codes of an MFA enrollment
+          description: Base empty response
           schema:
-            $ref: '#/definitions/detailMfaRecoveryCodesEnvelope'
+            $ref: '#/definitions/empty'
         "401":
           description: The supplied session does not have the correct access rights
             to request this resource
@@ -16840,9 +16840,9 @@ definitions:
     type: object
     required:
     - meta
-    - error
+    - data
     properties:
-      error:
+      data:
         $ref: '#/definitions/detailMfaRecoveryCodes'
       meta:
         $ref: '#/definitions/meta'

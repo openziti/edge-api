@@ -30,13 +30,16 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+	"io"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
+
+	"github.com/openziti/edge-api/rest_model"
 )
 
 // NewEnrollOttParams creates a new EnrollOttParams object
@@ -56,11 +59,11 @@ type EnrollOttParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*
+	/*An OTT enrollment request
 	  Required: true
-	  In: query
+	  In: body
 	*/
-	Token strfmt.UUID
+	OttEnrollmentRequest *rest_model.OttEnrollmentRequest
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -72,54 +75,35 @@ func (o *EnrollOttParams) BindRequest(r *http.Request, route *middleware.Matched
 
 	o.HTTPRequest = r
 
-	qs := runtime.Values(r.URL.Query())
+	if runtime.HasBody(r) {
+		defer r.Body.Close()
+		var body rest_model.OttEnrollmentRequest
+		if err := route.Consumer.Consume(r.Body, &body); err != nil {
+			if err == io.EOF {
+				res = append(res, errors.Required("ottEnrollmentRequest", "body", ""))
+			} else {
+				res = append(res, errors.NewParseError("ottEnrollmentRequest", "body", "", err))
+			}
+		} else {
+			// validate body object
+			if err := body.Validate(route.Formats); err != nil {
+				res = append(res, err)
+			}
 
-	qToken, qhkToken, _ := qs.GetOK("token")
-	if err := o.bindToken(qToken, qhkToken, route.Formats); err != nil {
-		res = append(res, err)
+			ctx := validate.WithOperationRequest(context.Background())
+			if err := body.ContextValidate(ctx, route.Formats); err != nil {
+				res = append(res, err)
+			}
+
+			if len(res) == 0 {
+				o.OttEnrollmentRequest = &body
+			}
+		}
+	} else {
+		res = append(res, errors.Required("ottEnrollmentRequest", "body", ""))
 	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-// bindToken binds and validates parameter Token from query.
-func (o *EnrollOttParams) bindToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	if !hasKey {
-		return errors.Required("token", "query", rawData)
-	}
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: true
-	// AllowEmptyValue: false
-
-	if err := validate.RequiredString("token", "query", raw); err != nil {
-		return err
-	}
-
-	// Format: uuid
-	value, err := formats.Parse("uuid", raw)
-	if err != nil {
-		return errors.InvalidType("token", "query", "strfmt.UUID", raw)
-	}
-	o.Token = *(value.(*strfmt.UUID))
-
-	if err := o.validateToken(formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// validateToken carries on validations for parameter Token
-func (o *EnrollOttParams) validateToken(formats strfmt.Registry) error {
-
-	if err := validate.FormatOf("token", "query", "uuid", o.Token.String(), formats); err != nil {
-		return err
 	}
 	return nil
 }

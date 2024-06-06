@@ -40,7 +40,7 @@ import (
 // EnrollOttOKCode is the HTTP code returned for type EnrollOttOK
 const EnrollOttOKCode int = 200
 
-/*EnrollOttOK A PEM encoded certificate signed by the internal Ziti CA
+/*EnrollOttOK A response containing and identities client certificate chains
 
 swagger:response enrollOttOK
 */
@@ -49,7 +49,7 @@ type EnrollOttOK struct {
 	/*
 	  In: Body
 	*/
-	Payload string `json:"body,omitempty"`
+	Payload *rest_model.EnrollmentCertsEnvelope `json:"body,omitempty"`
 }
 
 // NewEnrollOttOK creates EnrollOttOK with default headers values
@@ -59,13 +59,13 @@ func NewEnrollOttOK() *EnrollOttOK {
 }
 
 // WithPayload adds the payload to the enroll ott o k response
-func (o *EnrollOttOK) WithPayload(payload string) *EnrollOttOK {
+func (o *EnrollOttOK) WithPayload(payload *rest_model.EnrollmentCertsEnvelope) *EnrollOttOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the enroll ott o k response
-func (o *EnrollOttOK) SetPayload(payload string) {
+func (o *EnrollOttOK) SetPayload(payload *rest_model.EnrollmentCertsEnvelope) {
 	o.Payload = payload
 }
 
@@ -73,9 +73,11 @@ func (o *EnrollOttOK) SetPayload(payload string) {
 func (o *EnrollOttOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(200)
-	payload := o.Payload
-	if err := producer.Produce(rw, payload); err != nil {
-		panic(err) // let the recovery middleware deal with this
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
 	}
 }
 

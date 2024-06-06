@@ -21,7 +21,7 @@ paths:
         - application/json
       responses:
         '200':
-          $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+          $ref: '#/responses/stringResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
@@ -49,7 +49,13 @@ paths:
 
   enroll-ott:
     parameters:
-      - $ref: '../shared/parameters.yml#/token'
+      - name: ottEnrollmentRequest
+        in: body
+        required: true
+        description: An OTT enrollment request
+        schema:
+          $ref: '#/definitions/ottEnrollmentRequest'
+
     post:
       summary: Enroll an identity via one-time-token
       description: |
@@ -59,13 +65,9 @@ paths:
       operationId: enrollOtt
       tags:
         - Enroll
-      consumes:
-        - application/pkcs10
-      produces:
-        - application/x-x509-user-cert
       responses:
         '200':
-          $ref: '#/responses/zitiSignedCert'
+          $ref: '#/responses/enrollmentCerts'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
@@ -73,7 +75,12 @@ paths:
 
   enroll-ottca:
     parameters:
-      - $ref: '../shared/parameters.yml#/token'
+      - name: ottEnrollmentRequest
+        in: body
+        required: true
+        description: An OTT enrollment request
+        schema:
+          $ref: '#/definitions/ottEnrollmentRequest'
     post:
       summary: Enroll an identity via one-time-token with a pre-exchanged client certificate
       description: |
@@ -95,11 +102,21 @@ paths:
   enroll-updb:
     parameters:
       - $ref: '../shared/parameters.yml#/token'
+      - name: updbCredentials
+        in: body
+        required: true
+        schema:
+            type: object
+            properties:
+              username:
+                $ref: 'shared/authenticate.yml#/definitions/username'
+              password:
+                $ref: 'shared/authenticate.yml#/definitions/password'
     post:
       summary: Enroll an identity via one-time-token
       description: |
         Enrolls an identity via a one-time-token to establish an initial username and password combination
-      operationId: ernollUpdb
+      operationId: enrollUpdb
       tags:
         - Enroll
       responses:
@@ -112,7 +129,12 @@ paths:
 
   enroll-erott:
     parameters:
-      - $ref: '../shared/parameters.yml#/token'
+      - name: erOttEnrollmentRequest
+        in: body
+        required: true
+        description: An OTT enrollment request
+        schema:
+          $ref: '#/definitions/erOttEnrollmentRequest'
     post:
       summary: Enroll an edge-router
       description: |
@@ -122,7 +144,7 @@ paths:
         - Enroll
       responses:
         '200':
-          $ref: '#/responses/erottResponse'
+          $ref: '#/responses/erOttResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
@@ -156,41 +178,86 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+  enroll-jwks:
+    get:
+      summary: List JSON Web Keys associated with enrollment
+      description: |
+        Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used
+        to sign and co-sign enrollment JWTs. They can be verified through a challenge endpoint, using the public keys
+        from this endpoint to verify the target machine has possession of the related private key.
+      operationId: getEnrollmentJwks
+      tags:
+        - Enroll
+      responses:
+        '200':
+          $ref: '#/responses/getJwksResponse'
+  enroll-challenge:
+    post:
+      summary: Allows verification of a controller or cluster of controllers as being the valid target for enrollment.
+      description: |
+        A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will
+        be used to sign the nonce. The resulting signature may be validated with the associated public key in order
+        to verify a networks identity during enrollment. The nonce must be a valid formatted UUID.
+      operationId: enrollmentChallenge
+      parameters:
+        - name: nonce
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/nonceChallenge'
+      tags:
+        - Enroll
+      responses:
+          '200':
+            $ref: '#/responses/nonceChallengeResponse'
+          '400':
+            $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+          '429':
+            $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
-  erottResponse:
+  erOttResponse:
     description: A response containing the edge routers signed certificates (server chain, server cert, CAs).
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
   routerExtendEnrollmentResponse:
-    description: A response containg the edge routers new signed certificates (server chain, server cert, CAs).
+    description: A response containing the edge routers new signed certificates (server chain, server cert, CAs).
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
-  zitiSignedCert:
-    description: A PEM encoded certificate signed by the internal Ziti CA
+  enrollmentCerts:
+    description: A response containing and identities client certificate chains
+    schema:
+      $ref: '#/definitions/enrollmentCertsEnvelope'
+  stringResponse:
+    description: A response for multi-format legacy enrollment.
     schema:
       type: string
-    examples:
-      application/x-x509-user-cert: |
-        -----BEGIN CERTIFICATE-----
-        MIICzDCCAlGgAwIBAgIRAPkVg1jVKqnNGFpSB3lPbaIwCgYIKoZIzj0EAwIwXjEL
-        MAkGA1UEBhMCVVMxCzAJBgNVBAgMAk5DMRMwEQYDVQQKDApOZXRGb3VuZHJ5MS0w
-        KwYDVQQDDCROZXRGb3VuZHJ5IFppdGkgRXh0ZXJuYWwgQVBJIFJvb3QgQ0EwHhcN
-        MTgxMTE1MTI1NzE3WhcNMTkxMTI1MTI1NzE3WjBrMQswCQYDVQQGEwJVUzELMAkG
-        A1UECAwCTkMxEjAQBgNVBAcMCUNoYXJsb3R0ZTETMBEGA1UECgwKTmV0Rm91bmRy
-        eTEPMA0GA1UECwwGQWR2RGV2MRUwEwYDVQQDDAxaaXRpQ2xpZW50MDEwdjAQBgcq
-        hkjOPQIBBgUrgQQAIgNiAATTl2ft+/K9RvDgki9gSr9udNcV2bxD4LrWEdCdXNzF
-        iVUiEcEte9z/M0JRt8lgo17OjFvS+ecrAmLtIZNmQnH3+9YeafjeNPpvQsMKxlTN
-        MnU7Hka11GHc6swQZSyHvlKjgcUwgcIwCQYDVR0TBAIwADARBglghkgBhvhCAQEE
-        BAMCBaAwMwYJYIZIAYb4QgENBCYWJE9wZW5TU0wgR2VuZXJhdGVkIENsaWVudCBD
-        ZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQUtx+Tej6lSYdjb8Jbc2QuvoEsI/swHwYDVR0j
-        BBgwFoAUcdTlRrnP43ZbQ3PGAbZMPE26+H4wDgYDVR0PAQH/BAQDAgXgMB0GA1Ud
-        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAKBggqhkjOPQQDAgNpADBmAjEAuXDS
-        H7KKMr+la+Yuh8d8Q9cLtXzdS0j6a8e7iOyPJmdWq2WuzNdbCfAfLgKXuxhSAjEA
-        sadZrXl1OBv11RGAKdYBIyRmfYUotCFAtCNKcfgBUxci0TDaKDA7r3jnjKT1d7Fs
-        -----END CERTIFICATE-----
+  getJwksResponse:
+    description: A JWKS response for enrollment.
+    schema:
+      $ref: '../shared/jwks.yml#/definitions/jwks'
+  nonceChallengeResponse:
+    description: A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.
+    schema:
+      $ref: '#/definitions/nonceSignature'
 
 definitions:
+  ottEnrollmentRequest:
+    type: object
+    properties:
+        token:
+          type: string
+        clientCsr:
+          type: string
+  erOttEnrollmentRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      clientCsr:
+        type: string
+      serverCsr:
+        type: string
   enrollmentCertsEnvelope:
     type: object
     properties:
@@ -206,7 +273,7 @@ definitions:
         description: A PEM encoded set of certificates to use as the servers chain
       cert:
         type: string
-        description: A PEM encoded cert for the server
+        description: A PEM encoded set of certificates to use as the client chain
       ca:
         type: string
         description: A PEM encoded set of CA certificates to trust
@@ -219,4 +286,31 @@ definitions:
       serverCertCsr:
         type: string
       certCsr:
+        type: string
+  nonceSignature:
+    type: object
+    required:
+      - signature
+      - algorithm
+      - kid
+      - caPool
+    properties:
+      signature:
+        type: string
+      algorithm:
+        type: string
+      kid:
+        type: string
+      caPool:
+        type: string
+  nonceChallenge:
+    type: object
+    required:
+      - nonce
+      - keyId
+    properties:
+      nonce:
+        type: string
+        format: uuid
+      keyId:
         type: string

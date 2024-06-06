@@ -40,7 +40,7 @@ import (
 // CreateMfaRecoveryCodesOKCode is the HTTP code returned for type CreateMfaRecoveryCodesOK
 const CreateMfaRecoveryCodesOKCode int = 200
 
-/*CreateMfaRecoveryCodesOK The recovery codes of an MFA enrollment
+/*CreateMfaRecoveryCodesOK Base empty response
 
 swagger:response createMfaRecoveryCodesOK
 */
@@ -49,7 +49,7 @@ type CreateMfaRecoveryCodesOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *rest_model.DetailMfaRecoveryCodesEnvelope `json:"body,omitempty"`
+	Payload *rest_model.Empty `json:"body,omitempty"`
 }
 
 // NewCreateMfaRecoveryCodesOK creates CreateMfaRecoveryCodesOK with default headers values
@@ -59,13 +59,13 @@ func NewCreateMfaRecoveryCodesOK() *CreateMfaRecoveryCodesOK {
 }
 
 // WithPayload adds the payload to the create mfa recovery codes o k response
-func (o *CreateMfaRecoveryCodesOK) WithPayload(payload *rest_model.DetailMfaRecoveryCodesEnvelope) *CreateMfaRecoveryCodesOK {
+func (o *CreateMfaRecoveryCodesOK) WithPayload(payload *rest_model.Empty) *CreateMfaRecoveryCodesOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the create mfa recovery codes o k response
-func (o *CreateMfaRecoveryCodesOK) SetPayload(payload *rest_model.DetailMfaRecoveryCodesEnvelope) {
+func (o *CreateMfaRecoveryCodesOK) SetPayload(payload *rest_model.Empty) {
 	o.Payload = payload
 }
 

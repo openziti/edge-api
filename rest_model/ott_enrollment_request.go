@@ -36,33 +36,30 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnrollmentCerts enrollment certs
+// OttEnrollmentRequest ott enrollment request
 //
-// swagger:model enrollmentCerts
-type EnrollmentCerts struct {
+// swagger:model ottEnrollmentRequest
+type OttEnrollmentRequest struct {
 
-	// A PEM encoded set of CA certificates to trust
-	Ca string `json:"ca,omitempty"`
+	// client csr
+	ClientCsr string `json:"clientCsr,omitempty"`
 
-	// A PEM encoded set of certificates to use as the client chain
-	Cert string `json:"cert,omitempty"`
-
-	// A PEM encoded set of certificates to use as the servers chain
-	ServerCert string `json:"serverCert,omitempty"`
+	// token
+	Token string `json:"token,omitempty"`
 }
 
-// Validate validates this enrollment certs
-func (m *EnrollmentCerts) Validate(formats strfmt.Registry) error {
+// Validate validates this ott enrollment request
+func (m *OttEnrollmentRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this enrollment certs based on context it is used
-func (m *EnrollmentCerts) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this ott enrollment request based on context it is used
+func (m *OttEnrollmentRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
+func (m *OttEnrollmentRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -70,8 +67,8 @@ func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *EnrollmentCerts) UnmarshalBinary(b []byte) error {
-	var res EnrollmentCerts
+func (m *OttEnrollmentRequest) UnmarshalBinary(b []byte) error {
+	var res OttEnrollmentRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

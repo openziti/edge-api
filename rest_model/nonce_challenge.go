@@ -32,37 +32,74 @@ package rest_model
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// EnrollmentCerts enrollment certs
+// NonceChallenge nonce challenge
 //
-// swagger:model enrollmentCerts
-type EnrollmentCerts struct {
+// swagger:model nonceChallenge
+type NonceChallenge struct {
 
-	// A PEM encoded set of CA certificates to trust
-	Ca string `json:"ca,omitempty"`
+	// key Id
+	// Required: true
+	KeyID *string `json:"keyId"`
 
-	// A PEM encoded set of certificates to use as the client chain
-	Cert string `json:"cert,omitempty"`
-
-	// A PEM encoded set of certificates to use as the servers chain
-	ServerCert string `json:"serverCert,omitempty"`
+	// nonce
+	// Required: true
+	// Format: uuid
+	Nonce *strfmt.UUID `json:"nonce"`
 }
 
-// Validate validates this enrollment certs
-func (m *EnrollmentCerts) Validate(formats strfmt.Registry) error {
+// Validate validates this nonce challenge
+func (m *NonceChallenge) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateKeyID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNonce(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this enrollment certs based on context it is used
-func (m *EnrollmentCerts) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *NonceChallenge) validateKeyID(formats strfmt.Registry) error {
+
+	if err := validate.Required("keyId", "body", m.KeyID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NonceChallenge) validateNonce(formats strfmt.Registry) error {
+
+	if err := validate.Required("nonce", "body", m.Nonce); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("nonce", "body", "uuid", m.Nonce.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this nonce challenge based on context it is used
+func (m *NonceChallenge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
+func (m *NonceChallenge) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -70,8 +107,8 @@ func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *EnrollmentCerts) UnmarshalBinary(b []byte) error {
-	var res EnrollmentCerts
+func (m *NonceChallenge) UnmarshalBinary(b []byte) error {
+	var res NonceChallenge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

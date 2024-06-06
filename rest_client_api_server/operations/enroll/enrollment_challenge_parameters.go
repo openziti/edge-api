@@ -42,47 +42,47 @@ import (
 	"github.com/openziti/edge-api/rest_model"
 )
 
-// NewEnrollOttCaParams creates a new EnrollOttCaParams object
+// NewEnrollmentChallengeParams creates a new EnrollmentChallengeParams object
 //
 // There are no default values defined in the spec.
-func NewEnrollOttCaParams() EnrollOttCaParams {
+func NewEnrollmentChallengeParams() EnrollmentChallengeParams {
 
-	return EnrollOttCaParams{}
+	return EnrollmentChallengeParams{}
 }
 
-// EnrollOttCaParams contains all the bound params for the enroll ott ca operation
+// EnrollmentChallengeParams contains all the bound params for the enrollment challenge operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters enrollOttCa
-type EnrollOttCaParams struct {
+// swagger:parameters enrollmentChallenge
+type EnrollmentChallengeParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*An OTT enrollment request
+	/*
 	  Required: true
 	  In: body
 	*/
-	OttEnrollmentRequest *rest_model.OttEnrollmentRequest
+	Nonce *rest_model.NonceChallenge
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewEnrollOttCaParams() beforehand.
-func (o *EnrollOttCaParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewEnrollmentChallengeParams() beforehand.
+func (o *EnrollmentChallengeParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
-		var body rest_model.OttEnrollmentRequest
+		var body rest_model.NonceChallenge
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			if err == io.EOF {
-				res = append(res, errors.Required("ottEnrollmentRequest", "body", ""))
+				res = append(res, errors.Required("nonce", "body", ""))
 			} else {
-				res = append(res, errors.NewParseError("ottEnrollmentRequest", "body", "", err))
+				res = append(res, errors.NewParseError("nonce", "body", "", err))
 			}
 		} else {
 			// validate body object
@@ -96,11 +96,11 @@ func (o *EnrollOttCaParams) BindRequest(r *http.Request, route *middleware.Match
 			}
 
 			if len(res) == 0 {
-				o.OttEnrollmentRequest = &body
+				o.Nonce = &body
 			}
 		}
 	} else {
-		res = append(res, errors.Required("ottEnrollmentRequest", "body", ""))
+		res = append(res, errors.Required("nonce", "body", ""))
 	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

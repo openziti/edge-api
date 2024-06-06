@@ -77,22 +77,22 @@ func NewDetailMfaRecoveryCodesOK() *DetailMfaRecoveryCodesOK {
 
 /* DetailMfaRecoveryCodesOK describes a response with status code 200, with default header values.
 
-Base empty response
+The recovery codes of an MFA enrollment
 */
 type DetailMfaRecoveryCodesOK struct {
-	Payload *rest_model.Empty
+	Payload *rest_model.DetailMfaRecoveryCodesEnvelope
 }
 
 func (o *DetailMfaRecoveryCodesOK) Error() string {
 	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesOK  %+v", 200, o.Payload)
 }
-func (o *DetailMfaRecoveryCodesOK) GetPayload() *rest_model.Empty {
+func (o *DetailMfaRecoveryCodesOK) GetPayload() *rest_model.DetailMfaRecoveryCodesEnvelope {
 	return o.Payload
 }
 
 func (o *DetailMfaRecoveryCodesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(rest_model.Empty)
+	o.Payload = new(rest_model.DetailMfaRecoveryCodesEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

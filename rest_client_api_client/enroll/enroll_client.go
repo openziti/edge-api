@@ -64,9 +64,13 @@ type ClientService interface {
 
 	EnrollOttCa(params *EnrollOttCaParams, opts ...ClientOption) (*EnrollOttCaOK, error)
 
-	ErnollUpdb(params *ErnollUpdbParams, opts ...ClientOption) (*ErnollUpdbOK, error)
+	EnrollUpdb(params *EnrollUpdbParams, opts ...ClientOption) (*EnrollUpdbOK, error)
+
+	EnrollmentChallenge(params *EnrollmentChallengeParams, opts ...ClientOption) (*EnrollmentChallengeOK, error)
 
 	ExtendRouterEnrollment(params *ExtendRouterEnrollmentParams, opts ...ClientOption) (*ExtendRouterEnrollmentOK, error)
+
+	GetEnrollmentJwks(params *GetEnrollmentJwksParams, opts ...ClientOption) (*GetEnrollmentJwksOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -214,8 +218,8 @@ func (a *Client) EnrollOtt(params *EnrollOttParams, opts ...ClientOption) (*Enro
 		ID:                 "enrollOtt",
 		Method:             "POST",
 		PathPattern:        "/enroll/ott",
-		ProducesMediaTypes: []string{"application/x-x509-user-cert"},
-		ConsumesMediaTypes: []string{"application/pkcs10"},
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &EnrollOttReader{formats: a.formats},
@@ -287,25 +291,25 @@ func (a *Client) EnrollOttCa(params *EnrollOttCaParams, opts ...ClientOption) (*
 }
 
 /*
-  ErnollUpdb enrolls an identity via one time token
+  EnrollUpdb enrolls an identity via one time token
 
   Enrolls an identity via a one-time-token to establish an initial username and password combination
 
 */
-func (a *Client) ErnollUpdb(params *ErnollUpdbParams, opts ...ClientOption) (*ErnollUpdbOK, error) {
+func (a *Client) EnrollUpdb(params *EnrollUpdbParams, opts ...ClientOption) (*EnrollUpdbOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewErnollUpdbParams()
+		params = NewEnrollUpdbParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "ernollUpdb",
+		ID:                 "enrollUpdb",
 		Method:             "POST",
 		PathPattern:        "/enroll/updb",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &ErnollUpdbReader{formats: a.formats},
+		Reader:             &EnrollUpdbReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -317,13 +321,56 @@ func (a *Client) ErnollUpdb(params *ErnollUpdbParams, opts ...ClientOption) (*Er
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ErnollUpdbOK)
+	success, ok := result.(*EnrollUpdbOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ernollUpdb: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for enrollUpdb: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  EnrollmentChallenge allows verification of a controller or cluster of controllers as being the valid target for enrollment
+
+  A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will
+be used to sign the nonce. The resulting signature may be validated with the associated public key in order
+to verify a networks identity during enrollment. The nonce must be a valid formatted UUID.
+
+*/
+func (a *Client) EnrollmentChallenge(params *EnrollmentChallengeParams, opts ...ClientOption) (*EnrollmentChallengeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEnrollmentChallengeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "enrollmentChallenge",
+		Method:             "POST",
+		PathPattern:        "/enroll/challenge",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &EnrollmentChallengeReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EnrollmentChallengeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for enrollmentChallenge: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -373,6 +420,49 @@ func (a *Client) ExtendRouterEnrollment(params *ExtendRouterEnrollmentParams, op
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for extendRouterEnrollment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  GetEnrollmentJwks lists JSON web keys associated with enrollment
+
+  Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used
+to sign and co-sign enrollment JWTs. They can be verified through a challenge endpoint, using the public keys
+from this endpoint to verify the target machine has possession of the related private key.
+
+*/
+func (a *Client) GetEnrollmentJwks(params *GetEnrollmentJwksParams, opts ...ClientOption) (*GetEnrollmentJwksOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetEnrollmentJwksParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getEnrollmentJwks",
+		Method:             "GET",
+		PathPattern:        "/enroll/jwks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetEnrollmentJwksReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetEnrollmentJwksOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getEnrollmentJwks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

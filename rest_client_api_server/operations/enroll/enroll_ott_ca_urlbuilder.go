@@ -33,17 +33,11 @@ import (
 	"errors"
 	"net/url"
 	golangswaggerpaths "path"
-
-	"github.com/go-openapi/strfmt"
 )
 
 // EnrollOttCaURL generates an URL for the enroll ott ca operation
 type EnrollOttCaURL struct {
-	Token strfmt.UUID
-
 	_basePath string
-	// avoid unkeyed usage
-	_ struct{}
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
@@ -72,15 +66,6 @@ func (o *EnrollOttCaURL) Build() (*url.URL, error) {
 		_basePath = "/edge/client/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
-
-	qs := make(url.Values)
-
-	tokenQ := o.Token.String()
-	if tokenQ != "" {
-		qs.Set("token", tokenQ)
-	}
-
-	_result.RawQuery = qs.Encode()
 
 	return &_result, nil
 }

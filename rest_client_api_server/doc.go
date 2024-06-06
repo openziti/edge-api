@@ -30,7 +30,7 @@
 //    https
 //  Host: demo.ziti.dev
 //  BasePath: /edge/client/v1
-//  Version: 0.26.18
+//  Version: 0.26.20
 //  License: Apache 2.0 https://www.apache.org/licenses/LICENSE-2.0.html
 //  Contact: OpenZiti<help@openziti.org> https://openziti.discourse.group
 //
@@ -43,7 +43,6 @@
 //  Produces:
 //    - application/pkcs7-mime
 //    - application/x-pem-file
-//    - application/x-x509-user-cert
 //    - image/png
 //    - application/json
 //    - text/yaml
