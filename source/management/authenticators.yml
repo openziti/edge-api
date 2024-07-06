@@ -33,6 +33,7 @@ paths:
         Creates an authenticator for a specific identity. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authenticator
       operationId: createAuthenticator
@@ -63,6 +64,7 @@ paths:
       description: Retrieves a single authenticator by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authenticator
       operationId: detailAuthenticator
@@ -81,6 +83,7 @@ paths:
       description: Update all fields on an authenticator by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authenticator
       operationId: updateAuthenticator
@@ -108,6 +111,7 @@ paths:
       description: Update the supplied fields on an authenticator by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authenticator
       operationId: patchAuthenticator
@@ -137,6 +141,7 @@ paths:
         Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authenticator
       operationId: deleteAuthenticator
@@ -162,6 +167,7 @@ paths:
         authenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Authenticator
       operationId: reEnrollAuthenticator

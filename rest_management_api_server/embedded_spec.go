@@ -1596,6 +1596,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates an authenticator for a specific identity. Requires admin access.\n",
@@ -1714,6 +1719,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single authenticator by id. Requires admin access.",
@@ -1808,6 +1818,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an authenticator by id. Requires admin access.",
@@ -1950,6 +1965,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.\nRequires admin access.\n",
@@ -2055,6 +2075,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on an authenticator by id. Requires admin access.",
@@ -2208,6 +2233,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the \ncreated enrollment record response is provided and the source authenticator record will be deleted. The \nenrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT\nauthenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.\n",
@@ -2451,6 +2481,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates a CA in an unverified state. Requires admin access.",
@@ -3457,6 +3492,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "tags": [
@@ -3574,6 +3614,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single config-type by id. Requires admin access.",
@@ -6594,6 +6639,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Runs a data integrity scan on the datastore, attempts to fix any issues it can, and returns any found issues. Requires admin access. Only once instance may run at a time, including runs of checkDataIntegrity.",
@@ -29508,6 +29558,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates an authenticator for a specific identity. Requires admin access.\n",
@@ -29626,6 +29681,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single authenticator by id. Requires admin access.",
@@ -29720,6 +29780,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an authenticator by id. Requires admin access.",
@@ -29862,6 +29927,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.\nRequires admin access.\n",
@@ -29967,6 +30037,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on an authenticator by id. Requires admin access.",
@@ -30120,6 +30195,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the \ncreated enrollment record response is provided and the source authenticator record will be deleted. The \nenrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT\nauthenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.\n",
@@ -30363,6 +30443,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Creates a CA in an unverified state. Requires admin access.",
@@ -31369,6 +31454,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "tags": [
@@ -31486,6 +31576,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single config-type by id. Requires admin access.",
@@ -34506,6 +34601,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Runs a data integrity scan on the datastore, attempts to fix any issues it can, and returns any found issues. Requires admin access. Only once instance may run at a time, including runs of checkDataIntegrity.",
