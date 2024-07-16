@@ -83,22 +83,22 @@ func NewCreateAuthenticatorCreated() *CreateAuthenticatorCreated {
 
 /* CreateAuthenticatorCreated describes a response with status code 201, with default header values.
 
-The create was successful
+The create request was successful and the resource has been added at the following location
 */
 type CreateAuthenticatorCreated struct {
-	Payload *rest_model.AuthenticatorCreate
+	Payload *rest_model.CreateEnvelope
 }
 
 func (o *CreateAuthenticatorCreated) Error() string {
 	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorCreated  %+v", 201, o.Payload)
 }
-func (o *CreateAuthenticatorCreated) GetPayload() *rest_model.AuthenticatorCreate {
+func (o *CreateAuthenticatorCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
 
 func (o *CreateAuthenticatorCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(rest_model.AuthenticatorCreate)
+	o.Payload = new(rest_model.CreateEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

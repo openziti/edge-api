@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.20
+  version: 0.26.21
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -1211,9 +1211,10 @@ paths:
           $ref: '#/definitions/authenticatorCreate'
       responses:
         "201":
-          description: The create was successful
+          description: The create request was successful and the resource has been
+            added at the following location
           schema:
-            $ref: '#/definitions/authenticatorCreate'
+            $ref: '#/definitions/createEnvelope'
         "400":
           description: The supplied request contains invalid fields or could not be
             parsed (json and non-json bodies). The error's code, message, and cause

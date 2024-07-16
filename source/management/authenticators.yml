@@ -46,9 +46,7 @@ paths:
             $ref: '../shared/authenticators.yml#/definitions/authenticatorCreate'
       responses:
         '201':
-          description: The create was successful
-          schema:
-            $ref: '../shared/authenticators.yml#/definitions/authenticatorCreate'
+          $ref: '../shared/standard-responses.yml#/responses/createResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':

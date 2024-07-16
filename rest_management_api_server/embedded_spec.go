@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.20"
+    "version": "0.26.21"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -1622,9 +1622,9 @@ func init() {
         ],
         "responses": {
           "201": {
-            "description": "The create was successful",
+            "description": "The create request was successful and the resource has been added at the following location",
             "schema": {
-              "$ref": "#/definitions/authenticatorCreate"
+              "$ref": "#/definitions/createEnvelope"
             }
           },
           "400": {
@@ -28026,7 +28026,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.20"
+    "version": "0.26.21"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -29584,9 +29584,9 @@ func init() {
         ],
         "responses": {
           "201": {
-            "description": "The create was successful",
+            "description": "The create request was successful and the resource has been added at the following location",
             "schema": {
-              "$ref": "#/definitions/authenticatorCreate"
+              "$ref": "#/definitions/createEnvelope"
             }
           },
           "400": {

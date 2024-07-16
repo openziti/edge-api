@@ -40,7 +40,7 @@ import (
 // CreateAuthenticatorCreatedCode is the HTTP code returned for type CreateAuthenticatorCreated
 const CreateAuthenticatorCreatedCode int = 201
 
-/*CreateAuthenticatorCreated The create was successful
+/*CreateAuthenticatorCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createAuthenticatorCreated
 */
@@ -49,7 +49,7 @@ type CreateAuthenticatorCreated struct {
 	/*
 	  In: Body
 	*/
-	Payload *rest_model.AuthenticatorCreate `json:"body,omitempty"`
+	Payload *rest_model.CreateEnvelope `json:"body,omitempty"`
 }
 
 // NewCreateAuthenticatorCreated creates CreateAuthenticatorCreated with default headers values
@@ -59,13 +59,13 @@ func NewCreateAuthenticatorCreated() *CreateAuthenticatorCreated {
 }
 
 // WithPayload adds the payload to the create authenticator created response
-func (o *CreateAuthenticatorCreated) WithPayload(payload *rest_model.AuthenticatorCreate) *CreateAuthenticatorCreated {
+func (o *CreateAuthenticatorCreated) WithPayload(payload *rest_model.CreateEnvelope) *CreateAuthenticatorCreated {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the create authenticator created response
-func (o *CreateAuthenticatorCreated) SetPayload(payload *rest_model.AuthenticatorCreate) {
+func (o *CreateAuthenticatorCreated) SetPayload(payload *rest_model.CreateEnvelope) {
 	o.Payload = payload
 }
 
