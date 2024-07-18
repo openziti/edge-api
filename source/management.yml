@@ -81,6 +81,8 @@ paths:
     $ref: 'management/configs.yml#/paths/configs'
   '/configs/{id}':
     $ref: 'management/configs.yml#/paths/configs-id'
+  '/configs/{id}/services':
+    $ref: 'management/configs.yml#/paths/configs-id-services'
 
   '/controllers':
     $ref: 'shared/controllers.yml#/paths/controllers'
@@ -200,6 +202,9 @@ paths:
     $ref: 'management/posture-checks.yml#/paths/posture-checks'
   '/posture-checks/{id}':
     $ref: 'management/posture-checks.yml#/paths/posture-checks-id'
+
+  '/posture-check-role-attributes':
+    $ref: 'management/role-attributes.yml#/paths/posture-check-role-attributes'
 
   '/posture-check-types':
     $ref: 'management/posture-check-types.yml#/paths/posture-check-types'

@@ -66,6 +66,8 @@ type ClientService interface {
 
 	DetailConfigType(params *DetailConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailConfigTypeOK, error)
 
+	ListConfigServices(params *ListConfigServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigServicesOK, error)
+
 	ListConfigTypes(params *ListConfigTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigTypesOK, error)
 
 	ListConfigs(params *ListConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigsOK, error)
@@ -324,6 +326,48 @@ func (a *Client) DetailConfigType(params *DetailConfigTypeParams, authInfo runti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  ListConfigServices lists services referenced by a config
+
+  Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
+
+*/
+func (a *Client) ListConfigServices(params *ListConfigServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigServicesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListConfigServicesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listConfigServices",
+		Method:             "GET",
+		PathPattern:        "/configs/{id}/services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListConfigServicesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListConfigServicesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listConfigServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

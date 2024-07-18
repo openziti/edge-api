@@ -58,6 +58,8 @@ type ClientService interface {
 
 	ListIdentityRoleAttributes(params *ListIdentityRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityRoleAttributesOK, error)
 
+	ListPostureCheckRoleAttributes(params *ListPostureCheckRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckRoleAttributesOK, error)
+
 	ListServiceRoleAttributes(params *ListServiceRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceRoleAttributesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -144,6 +146,48 @@ func (a *Client) ListIdentityRoleAttributes(params *ListIdentityRoleAttributesPa
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentityRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  ListPostureCheckRoleAttributes lists role attributes in use by posture checks
+
+  Retrieves a list of role attributes in use by posture checks; supports filtering, sorting, and pagination. Requires admin access.
+
+*/
+func (a *Client) ListPostureCheckRoleAttributes(params *ListPostureCheckRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckRoleAttributesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPostureCheckRoleAttributesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listPostureCheckRoleAttributes",
+		Method:             "GET",
+		PathPattern:        "/posture-check-role-attributes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListPostureCheckRoleAttributesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPostureCheckRoleAttributesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listPostureCheckRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

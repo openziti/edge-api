@@ -576,6 +576,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation certificate_authority.ListCas has not yet been implemented")
 		})
 	}
+	if api.ConfigListConfigServicesHandler == nil {
+		api.ConfigListConfigServicesHandler = config.ListConfigServicesHandlerFunc(func(params config.ListConfigServicesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation config.ListConfigServices has not yet been implemented")
+		})
+	}
 	if api.ConfigListConfigTypesHandler == nil {
 		api.ConfigListConfigTypesHandler = config.ListConfigTypesHandlerFunc(func(params config.ListConfigTypesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.ListConfigTypes has not yet been implemented")
@@ -699,6 +704,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.IdentityListIdentitysServiceConfigsHandler == nil {
 		api.IdentityListIdentitysServiceConfigsHandler = identity.ListIdentitysServiceConfigsHandlerFunc(func(params identity.ListIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation identity.ListIdentitysServiceConfigs has not yet been implemented")
+		})
+	}
+	if api.RoleAttributesListPostureCheckRoleAttributesHandler == nil {
+		api.RoleAttributesListPostureCheckRoleAttributesHandler = role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributes has not yet been implemented")
 		})
 	}
 	if api.PostureChecksListPostureCheckTypesHandler == nil {

@@ -380,6 +380,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		CertificateAuthorityListCasHandler: certificate_authority.ListCasHandlerFunc(func(params certificate_authority.ListCasParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation certificate_authority.ListCas has not yet been implemented")
 		}),
+		ConfigListConfigServicesHandler: config.ListConfigServicesHandlerFunc(func(params config.ListConfigServicesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation config.ListConfigServices has not yet been implemented")
+		}),
 		ConfigListConfigTypesHandler: config.ListConfigTypesHandlerFunc(func(params config.ListConfigTypesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.ListConfigTypes has not yet been implemented")
 		}),
@@ -454,6 +457,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		}),
 		IdentityListIdentitysServiceConfigsHandler: identity.ListIdentitysServiceConfigsHandlerFunc(func(params identity.ListIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation identity.ListIdentitysServiceConfigs has not yet been implemented")
+		}),
+		RoleAttributesListPostureCheckRoleAttributesHandler: role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributes has not yet been implemented")
 		}),
 		PostureChecksListPostureCheckTypesHandler: posture_checks.ListPostureCheckTypesHandlerFunc(func(params posture_checks.ListPostureCheckTypesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posture_checks.ListPostureCheckTypes has not yet been implemented")
@@ -912,6 +918,8 @@ type ZitiEdgeManagementAPI struct {
 	AuthenticatorListAuthenticatorsHandler authenticator.ListAuthenticatorsHandler
 	// CertificateAuthorityListCasHandler sets the operation handler for the list cas operation
 	CertificateAuthorityListCasHandler certificate_authority.ListCasHandler
+	// ConfigListConfigServicesHandler sets the operation handler for the list config services operation
+	ConfigListConfigServicesHandler config.ListConfigServicesHandler
 	// ConfigListConfigTypesHandler sets the operation handler for the list config types operation
 	ConfigListConfigTypesHandler config.ListConfigTypesHandler
 	// ConfigListConfigsHandler sets the operation handler for the list configs operation
@@ -962,6 +970,8 @@ type ZitiEdgeManagementAPI struct {
 	IdentityListIdentitysEdgeRouterPoliciesHandler identity.ListIdentitysEdgeRouterPoliciesHandler
 	// IdentityListIdentitysServiceConfigsHandler sets the operation handler for the list identitys service configs operation
 	IdentityListIdentitysServiceConfigsHandler identity.ListIdentitysServiceConfigsHandler
+	// RoleAttributesListPostureCheckRoleAttributesHandler sets the operation handler for the list posture check role attributes operation
+	RoleAttributesListPostureCheckRoleAttributesHandler role_attributes.ListPostureCheckRoleAttributesHandler
 	// PostureChecksListPostureCheckTypesHandler sets the operation handler for the list posture check types operation
 	PostureChecksListPostureCheckTypesHandler posture_checks.ListPostureCheckTypesHandler
 	// PostureChecksListPostureChecksHandler sets the operation handler for the list posture checks operation
@@ -1471,6 +1481,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.CertificateAuthorityListCasHandler == nil {
 		unregistered = append(unregistered, "certificate_authority.ListCasHandler")
 	}
+	if o.ConfigListConfigServicesHandler == nil {
+		unregistered = append(unregistered, "config.ListConfigServicesHandler")
+	}
 	if o.ConfigListConfigTypesHandler == nil {
 		unregistered = append(unregistered, "config.ListConfigTypesHandler")
 	}
@@ -1545,6 +1558,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.IdentityListIdentitysServiceConfigsHandler == nil {
 		unregistered = append(unregistered, "identity.ListIdentitysServiceConfigsHandler")
+	}
+	if o.RoleAttributesListPostureCheckRoleAttributesHandler == nil {
+		unregistered = append(unregistered, "role_attributes.ListPostureCheckRoleAttributesHandler")
 	}
 	if o.PostureChecksListPostureCheckTypesHandler == nil {
 		unregistered = append(unregistered, "posture_checks.ListPostureCheckTypesHandler")
@@ -2228,6 +2244,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/configs/{id}/services"] = config.NewListConfigServices(o.context, o.ConfigListConfigServicesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/config-types"] = config.NewListConfigTypes(o.context, o.ConfigListConfigTypesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -2325,6 +2345,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/identities/{id}/service-configs"] = identity.NewListIdentitysServiceConfigs(o.context, o.IdentityListIdentitysServiceConfigsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/posture-check-role-attributes"] = role_attributes.NewListPostureCheckRoleAttributes(o.context, o.RoleAttributesListPostureCheckRoleAttributesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
