@@ -216,7 +216,7 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		InformationalListEnumeratedCapabilitiesHandler: informational.ListEnumeratedCapabilitiesHandlerFunc(func(params informational.ListEnumeratedCapabilitiesParams) middleware.Responder {
 			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
 		}),
-		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
+		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
 		}),
 		InformationalListProtocolsHandler: informational.ListProtocolsHandlerFunc(func(params informational.ListProtocolsParams) middleware.Responder {

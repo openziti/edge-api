@@ -54,7 +54,7 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ListExternalJWTSigners(params *ListExternalJWTSignersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalJWTSignersOK, error)
+	ListExternalJWTSigners(params *ListExternalJWTSignersParams, opts ...ClientOption) (*ListExternalJWTSignersOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -64,7 +64,7 @@ type ClientService interface {
 
   Retrieves a list of external JWT signers for authentication
 */
-func (a *Client) ListExternalJWTSigners(params *ListExternalJWTSignersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalJWTSignersOK, error) {
+func (a *Client) ListExternalJWTSigners(params *ListExternalJWTSignersParams, opts ...ClientOption) (*ListExternalJWTSignersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListExternalJWTSignersParams()
@@ -78,7 +78,6 @@ func (a *Client) ListExternalJWTSigners(params *ListExternalJWTSignersParams, au
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ListExternalJWTSignersReader{formats: a.formats},
-		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}

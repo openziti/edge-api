@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.21"
+    "version": "0.26.22"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -3083,16 +3083,6 @@ func init() {
     },
     "/external-jwt-signers": {
       "get": {
-        "security": [
-          {
-            "ztSession": []
-          },
-          {
-            "oauth2": [
-              "openid"
-            ]
-          }
-        ],
         "description": "Retrieves a list of external JWT signers for authentication",
         "tags": [
           "External JWT Signer"
@@ -7665,7 +7655,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.21"
+    "version": "0.26.22"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -10684,16 +10674,6 @@ func init() {
     },
     "/external-jwt-signers": {
       "get": {
-        "security": [
-          {
-            "ztSession": []
-          },
-          {
-            "oauth2": [
-              "openid"
-            ]
-          }
-        ],
         "description": "Retrieves a list of external JWT signers for authentication",
         "tags": [
           "External JWT Signer"

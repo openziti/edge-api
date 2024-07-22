@@ -36,16 +36,16 @@ import (
 )
 
 // ListExternalJWTSignersHandlerFunc turns a function with the right signature into a list external Jwt signers handler
-type ListExternalJWTSignersHandlerFunc func(ListExternalJWTSignersParams, interface{}) middleware.Responder
+type ListExternalJWTSignersHandlerFunc func(ListExternalJWTSignersParams) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListExternalJWTSignersHandlerFunc) Handle(params ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
-	return fn(params, principal)
+func (fn ListExternalJWTSignersHandlerFunc) Handle(params ListExternalJWTSignersParams) middleware.Responder {
+	return fn(params)
 }
 
 // ListExternalJWTSignersHandler interface for that can handle valid list external Jwt signers params
 type ListExternalJWTSignersHandler interface {
-	Handle(ListExternalJWTSignersParams, interface{}) middleware.Responder
+	Handle(ListExternalJWTSignersParams) middleware.Responder
 }
 
 // NewListExternalJWTSigners creates a new http.Handler for the list external Jwt signers operation
@@ -71,25 +71,12 @@ func (o *ListExternalJWTSigners) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 		*r = *rCtx
 	}
 	var Params = NewListExternalJWTSignersParams()
-	uprinc, aCtx, err := o.Context.Authorize(r, route)
-	if err != nil {
-		o.Context.Respond(rw, r, route.Produces, route, err)
-		return
-	}
-	if aCtx != nil {
-		*r = *aCtx
-	}
-	var principal interface{}
-	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
-	}
-
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return
 	}
 
-	res := o.Handler.Handle(Params, principal) // actually handle the request
+	res := o.Handler.Handle(Params) // actually handle the request
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }
