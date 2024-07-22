@@ -309,7 +309,7 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 		})
 	}
 	if api.ExternalJWTSignerListExternalJWTSignersHandler == nil {
-		api.ExternalJWTSignerListExternalJWTSignersHandler = external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
+		api.ExternalJWTSignerListExternalJWTSignersHandler = external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
 		})
 	}
