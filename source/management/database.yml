@@ -58,6 +58,7 @@ paths:
       description: Returns any results found from in-progress integrity checks. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Database
       operationId: dataIntegrityResults

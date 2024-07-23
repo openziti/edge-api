@@ -81,6 +81,7 @@ paths:
       description: Update all fields on an edge router by id. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: updateEdgeRouter
@@ -108,6 +109,7 @@ paths:
       description: Update the supplied fields on an edge router. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: patchEdgeRouter
@@ -135,6 +137,7 @@ paths:
       description: Delete an edge router by id. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: deleteEdgeRouter
@@ -158,6 +161,7 @@ paths:
       description: Retrieves a list of edge router policies that apply to the specified edge router.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: listEdgeRouterEdgeRouterPolicies
@@ -180,6 +184,7 @@ paths:
         Retrieves a list of identities that may access services via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: listEdgeRouterIdentities
@@ -201,6 +206,7 @@ paths:
       description: Retrieves a list of service policies policies that apply to the specified edge router.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: listEdgeRouterServiceEdgeRouterPolicies
@@ -223,6 +229,7 @@ paths:
         Retrieves a list of services that may be accessed via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: listEdgeRouterServices
@@ -250,6 +257,7 @@ paths:
         complete the enrollment process.
       security:
         - ztSession: []
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: reEnrollEdgeRouter

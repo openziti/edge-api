@@ -78,6 +78,7 @@ paths:
       description: Update all fields on a terminator by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Terminator
       operationId: updateTerminator
@@ -105,6 +106,7 @@ paths:
       description: Update the supplied fields on a terminator. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Terminator
       operationId: patchTerminator
@@ -132,6 +134,7 @@ paths:
       description: Delete a terminator by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Terminator
       operationId: deleteTerminator

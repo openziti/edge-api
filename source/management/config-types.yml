@@ -77,6 +77,7 @@ paths:
       description: Update all fields on a config-type by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Config
       operationId: updateConfigType
@@ -104,6 +105,7 @@ paths:
       description: Update the supplied fields on a config-type. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Config
       operationId: patchConfigType
@@ -131,6 +133,7 @@ paths:
       description: Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Config
       operationId: deleteConfigType
@@ -154,6 +157,7 @@ paths:
       description: Lists the configs associated to a config-type. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Config
       operationId: listConfigsForConfigType

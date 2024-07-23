@@ -30,6 +30,7 @@ paths:
       description: Create a service policy resource. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: createServicePolicy
@@ -58,6 +59,7 @@ paths:
       description: Retrieves a single service policy by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: detailServicePolicy
@@ -76,6 +78,7 @@ paths:
       description: Update all fields on a service policy by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: updateServicePolicy
@@ -103,6 +106,7 @@ paths:
       description: Update the supplied fields on a service policy. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: patchServicePolicy
@@ -130,6 +134,7 @@ paths:
       description: Delete a service policy by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: deleteServicePolicy
@@ -154,6 +159,7 @@ paths:
         Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: listServicePolicyIdentities
@@ -180,6 +186,7 @@ paths:
         Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: listServicePolicyServices
@@ -206,6 +213,7 @@ paths:
         Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Service Policy
       operationId: listServicePolicyPostureChecks

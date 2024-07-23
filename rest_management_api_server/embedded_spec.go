@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.22"
+    "version": "0.26.23"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -2604,6 +2604,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single CA by id. Requires admin access.",
@@ -2698,6 +2703,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a CA by id. Requires admin access.",
@@ -2840,6 +2850,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it\nimpossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.\n",
@@ -2945,6 +2960,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update only the supplied fields on a CA by id. Requires admin access.",
@@ -3098,6 +3118,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides\nthe jwt as a text response.\n",
@@ -3209,6 +3234,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows a CA to become verified by submitting a certificate in PEM format that has been signed by the target CA.\nThe common name on the certificate must match the verificationToken property of the CA. Unverfieid CAs can not\nbe used for enrollment/authentication. Requires admin access.\n",
@@ -3713,6 +3743,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a config-type by id. Requires admin access.",
@@ -3855,6 +3890,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.",
@@ -3985,6 +4025,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a config-type. Requires admin access.",
@@ -4138,6 +4183,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Lists the configs associated to a config-type. Requires admin access.",
@@ -5006,6 +5056,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -6691,6 +6746,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns any results found from in-progress integrity checks. Requires admin access.",
@@ -8412,6 +8472,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an edge router by id. Requires admin access.",
@@ -8554,6 +8619,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an edge router by id. Requires admin access.",
@@ -8684,6 +8754,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on an edge router. Requires admin access.",
@@ -8837,6 +8912,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of edge router policies that apply to the specified edge router.",
@@ -8942,6 +9022,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of identities that may access services via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -9047,6 +9132,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Removes current certificate based authentication mechanisms and reverts the edge router into a state where enrollment must be performed.\nThe router retains all other properties and associations. If the router is currently connected, it will be disconnected and any\nattemps to reconnect will fail until the enrollment process is completed with the newly generated JWT.\n\nIf the edge router has an existing outstanding enrollment JWT it will be replaced. The previous JWT will no longer be usable to\ncomplete the enrollment process.\n",
@@ -9152,6 +9242,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service policies policies that apply to the specified edge router.",
@@ -9257,6 +9352,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of services that may be accessed via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -11555,6 +11655,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns a list of authenticators associated to the identity specified\n",
@@ -11660,6 +11765,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin disable an identity for a set amount of time or indefinitely.\n",
@@ -11996,6 +12106,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin to remove disabled statuses from an identity.\n",
@@ -12101,6 +12216,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns a list of enrollments associated to the identity specified\n",
@@ -12206,6 +12326,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns a list of service session requests that failed due to posture checks. The entries will contain\nevery policy that was verified against and every failed check in each policy. Each check will include\nthe historical posture data and posture check configuration.\n",
@@ -12311,6 +12436,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin to remove MFA enrollment from a specific identity. Requires admin.\n",
@@ -13283,6 +13413,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin to enable/disable data flow tracing for an identity\n",
@@ -16871,6 +17006,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Create a service policy resource. Requires admin access.",
@@ -16989,6 +17129,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single service policy by id. Requires admin access.",
@@ -17083,6 +17228,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a service policy by id. Requires admin access.",
@@ -17225,6 +17375,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a service policy by id. Requires admin access.",
@@ -17355,6 +17510,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a service policy. Requires admin access.",
@@ -17508,6 +17668,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -17630,6 +17795,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -17752,6 +17922,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -20639,6 +20814,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a terminator by id. Requires admin access.",
@@ -20781,6 +20961,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a terminator by id. Requires admin access.",
@@ -20911,6 +21096,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a terminator. Requires admin access.",
@@ -28277,7 +28467,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.22"
+    "version": "0.26.23"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -30817,6 +31007,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single CA by id. Requires admin access.",
@@ -30911,6 +31106,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a CA by id. Requires admin access.",
@@ -31053,6 +31253,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it\nimpossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.\n",
@@ -31158,6 +31363,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update only the supplied fields on a CA by id. Requires admin access.",
@@ -31311,6 +31521,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides\nthe jwt as a text response.\n",
@@ -31422,6 +31637,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows a CA to become verified by submitting a certificate in PEM format that has been signed by the target CA.\nThe common name on the certificate must match the verificationToken property of the CA. Unverfieid CAs can not\nbe used for enrollment/authentication. Requires admin access.\n",
@@ -31926,6 +32146,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a config-type by id. Requires admin access.",
@@ -32068,6 +32293,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.",
@@ -32198,6 +32428,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a config-type. Requires admin access.",
@@ -32351,6 +32586,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Lists the configs associated to a config-type. Requires admin access.",
@@ -33219,6 +33459,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -34904,6 +35149,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns any results found from in-progress integrity checks. Requires admin access.",
@@ -36625,6 +36875,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on an edge router by id. Requires admin access.",
@@ -36767,6 +37022,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete an edge router by id. Requires admin access.",
@@ -36897,6 +37157,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on an edge router. Requires admin access.",
@@ -37050,6 +37315,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of edge router policies that apply to the specified edge router.",
@@ -37155,6 +37425,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of identities that may access services via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -37260,6 +37535,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Removes current certificate based authentication mechanisms and reverts the edge router into a state where enrollment must be performed.\nThe router retains all other properties and associations. If the router is currently connected, it will be disconnected and any\nattemps to reconnect will fail until the enrollment process is completed with the newly generated JWT.\n\nIf the edge router has an existing outstanding enrollment JWT it will be replaced. The previous JWT will no longer be usable to\ncomplete the enrollment process.\n",
@@ -37365,6 +37645,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service policies policies that apply to the specified edge router.",
@@ -37470,6 +37755,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of services that may be accessed via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -39768,6 +40058,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns a list of authenticators associated to the identity specified\n",
@@ -39873,6 +40168,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin disable an identity for a set amount of time or indefinitely.\n",
@@ -40209,6 +40509,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin to remove disabled statuses from an identity.\n",
@@ -40314,6 +40619,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns a list of enrollments associated to the identity specified\n",
@@ -40419,6 +40729,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Returns a list of service session requests that failed due to posture checks. The entries will contain\nevery policy that was verified against and every failed check in each policy. Each check will include\nthe historical posture data and posture check configuration.\n",
@@ -40524,6 +40839,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin to remove MFA enrollment from a specific identity. Requires admin.\n",
@@ -41496,6 +41816,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Allows an admin to enable/disable data flow tracing for an identity\n",
@@ -45084,6 +45409,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Create a service policy resource. Requires admin access.",
@@ -45202,6 +45532,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a single service policy by id. Requires admin access.",
@@ -45296,6 +45631,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a service policy by id. Requires admin access.",
@@ -45438,6 +45778,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a service policy by id. Requires admin access.",
@@ -45568,6 +45913,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a service policy. Requires admin access.",
@@ -45721,6 +46071,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -45843,6 +46198,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -45965,6 +46325,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.\n",
@@ -48852,6 +49217,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update all fields on a terminator by id. Requires admin access.",
@@ -48994,6 +49364,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Delete a terminator by id. Requires admin access.",
@@ -49124,6 +49499,11 @@ func init() {
         "security": [
           {
             "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
           }
         ],
         "description": "Update the supplied fields on a terminator. Requires admin access.",
