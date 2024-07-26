@@ -59,6 +59,7 @@ paths:
       description: Retrieves a single CA by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Certificate Authority
       operationId: detailCa
@@ -77,6 +78,7 @@ paths:
       description: Update all fields on a CA by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Certificate Authority
       operationId: updateCa
@@ -104,6 +106,7 @@ paths:
       description: Update only the supplied fields on a CA by id. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Certificate Authority
       operationId: patchCa
@@ -133,6 +136,7 @@ paths:
         impossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Certificate Authority
       operationId: deleteCa
@@ -156,6 +160,7 @@ paths:
         the jwt as a text response.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Certificate Authority
       operationId: getCaJwt
@@ -190,6 +195,7 @@ paths:
         be used for enrollment/authentication. Requires admin access.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Certificate Authority
       operationId: verifyCa

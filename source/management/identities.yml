@@ -383,6 +383,7 @@ paths:
         Returns a list of authenticators associated to the identity specified
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: getIdentityAuthenticators
@@ -405,6 +406,7 @@ paths:
         Returns a list of enrollments associated to the identity specified
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: getIdentityEnrollments
@@ -429,6 +431,7 @@ paths:
         the historical posture data and posture check configuration.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: getIdentityFailedServiceRequests
@@ -451,6 +454,7 @@ paths:
         Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
         - MFA
@@ -474,6 +478,7 @@ paths:
         Allows an admin to enable/disable data flow tracing for an identity
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
         - Tracing
@@ -506,6 +511,7 @@ paths:
         Allows an admin to remove disabled statuses from an identity.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: enableIdentity
@@ -528,6 +534,7 @@ paths:
         Allows an admin disable an identity for a set amount of time or indefinitely.
       security:
         - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Identity
       operationId: disableIdentity

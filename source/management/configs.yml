@@ -150,6 +150,33 @@ paths:
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
+  configs-id-services:
+    parameters:
+      - $ref: '../shared/parameters.yml#/id'
+    get:
+      summary: List services referenced by a config
+      description: |
+        Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Config
+      operationId: listConfigServices
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+      responses:
+        '200':
+          $ref: '../shared/services.yml#/responses/listServices'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
 responses:
   listConfigs:
     description: A list of configs
