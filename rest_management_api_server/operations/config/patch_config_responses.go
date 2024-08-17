@@ -40,7 +40,8 @@ import (
 // PatchConfigOKCode is the HTTP code returned for type PatchConfigOK
 const PatchConfigOKCode int = 200
 
-/*PatchConfigOK The patch request was successful and the resource has been altered
+/*
+PatchConfigOK The patch request was successful and the resource has been altered
 
 swagger:response patchConfigOK
 */
@@ -84,7 +85,8 @@ func (o *PatchConfigOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // PatchConfigBadRequestCode is the HTTP code returned for type PatchConfigBadRequest
 const PatchConfigBadRequestCode int = 400
 
-/*PatchConfigBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+PatchConfigBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchConfigBadRequest
 */
@@ -128,7 +130,8 @@ func (o *PatchConfigBadRequest) WriteResponse(rw http.ResponseWriter, producer r
 // PatchConfigUnauthorizedCode is the HTTP code returned for type PatchConfigUnauthorized
 const PatchConfigUnauthorizedCode int = 401
 
-/*PatchConfigUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+PatchConfigUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchConfigUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *PatchConfigUnauthorized) WriteResponse(rw http.ResponseWriter, producer
 // PatchConfigNotFoundCode is the HTTP code returned for type PatchConfigNotFound
 const PatchConfigNotFoundCode int = 404
 
-/*PatchConfigNotFound The requested resource does not exist
+/*
+PatchConfigNotFound The requested resource does not exist
 
 swagger:response patchConfigNotFound
 */
@@ -216,7 +220,8 @@ func (o *PatchConfigNotFound) WriteResponse(rw http.ResponseWriter, producer run
 // PatchConfigTooManyRequestsCode is the HTTP code returned for type PatchConfigTooManyRequests
 const PatchConfigTooManyRequestsCode int = 429
 
-/*PatchConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+PatchConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchConfigTooManyRequests
 */

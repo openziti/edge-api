@@ -53,13 +53,12 @@ func NewDeleteExternalJWTSigner(ctx *middleware.Context, handler DeleteExternalJ
 	return &DeleteExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* DeleteExternalJWTSigner swagger:route DELETE /external-jwt-signers/{id} External JWT Signer deleteExternalJwtSigner
+/*
+	DeleteExternalJWTSigner swagger:route DELETE /external-jwt-signers/{id} External JWT Signer deleteExternalJwtSigner
 
-Delete an External JWT Signer
+# Delete an External JWT Signer
 
 Delete an External JWT Signer by id. Requires admin access.
-
-
 */
 type DeleteExternalJWTSigner struct {
 	Context *middleware.Context

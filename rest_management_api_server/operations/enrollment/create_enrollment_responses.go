@@ -40,7 +40,8 @@ import (
 // CreateEnrollmentCreatedCode is the HTTP code returned for type CreateEnrollmentCreated
 const CreateEnrollmentCreatedCode int = 201
 
-/*CreateEnrollmentCreated The create request was successful and the resource has been added at the following location
+/*
+CreateEnrollmentCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createEnrollmentCreated
 */
@@ -84,7 +85,8 @@ func (o *CreateEnrollmentCreated) WriteResponse(rw http.ResponseWriter, producer
 // CreateEnrollmentBadRequestCode is the HTTP code returned for type CreateEnrollmentBadRequest
 const CreateEnrollmentBadRequestCode int = 400
 
-/*CreateEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createEnrollmentBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreateEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // CreateEnrollmentUnauthorizedCode is the HTTP code returned for type CreateEnrollmentUnauthorized
 const CreateEnrollmentUnauthorizedCode int = 401
 
-/*CreateEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createEnrollmentUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreateEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // CreateEnrollmentConflictCode is the HTTP code returned for type CreateEnrollmentConflict
 const CreateEnrollmentConflictCode int = 409
 
-/*CreateEnrollmentConflict The request could not be completed due to a conflict of configuration or state
+/*
+CreateEnrollmentConflict The request could not be completed due to a conflict of configuration or state
 
 swagger:response createEnrollmentConflict
 */
@@ -216,7 +220,8 @@ func (o *CreateEnrollmentConflict) WriteResponse(rw http.ResponseWriter, produce
 // CreateEnrollmentTooManyRequestsCode is the HTTP code returned for type CreateEnrollmentTooManyRequests
 const CreateEnrollmentTooManyRequestsCode int = 429
 
-/*CreateEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createEnrollmentTooManyRequests
 */

@@ -30,6 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -54,7 +55,7 @@ func (o *GetEnrollmentJwksReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /enroll/jwks] getEnrollmentJwks", response, response.Code())
 	}
 }
 
@@ -63,7 +64,8 @@ func NewGetEnrollmentJwksOK() *GetEnrollmentJwksOK {
 	return &GetEnrollmentJwksOK{}
 }
 
-/* GetEnrollmentJwksOK describes a response with status code 200, with default header values.
+/*
+GetEnrollmentJwksOK describes a response with status code 200, with default header values.
 
 A JWKS response for enrollment.
 */
@@ -71,9 +73,46 @@ type GetEnrollmentJwksOK struct {
 	Payload *rest_model.Jwks
 }
 
-func (o *GetEnrollmentJwksOK) Error() string {
-	return fmt.Sprintf("[GET /enroll/jwks][%d] getEnrollmentJwksOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this get enrollment jwks o k response has a 2xx status code
+func (o *GetEnrollmentJwksOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this get enrollment jwks o k response has a 3xx status code
+func (o *GetEnrollmentJwksOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get enrollment jwks o k response has a 4xx status code
+func (o *GetEnrollmentJwksOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get enrollment jwks o k response has a 5xx status code
+func (o *GetEnrollmentJwksOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get enrollment jwks o k response a status code equal to that given
+func (o *GetEnrollmentJwksOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get enrollment jwks o k response
+func (o *GetEnrollmentJwksOK) Code() int {
+	return 200
+}
+
+func (o *GetEnrollmentJwksOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enroll/jwks][%d] getEnrollmentJwksOK %s", 200, payload)
+}
+
+func (o *GetEnrollmentJwksOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enroll/jwks][%d] getEnrollmentJwksOK %s", 200, payload)
+}
+
 func (o *GetEnrollmentJwksOK) GetPayload() *rest_model.Jwks {
 	return o.Payload
 }

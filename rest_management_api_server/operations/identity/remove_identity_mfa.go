@@ -53,13 +53,12 @@ func NewRemoveIdentityMfa(ctx *middleware.Context, handler RemoveIdentityMfaHand
 	return &RemoveIdentityMfa{Context: ctx, Handler: handler}
 }
 
-/* RemoveIdentityMfa swagger:route DELETE /identities/{id}/mfa Identity MFA removeIdentityMfa
+/*
+	RemoveIdentityMfa swagger:route DELETE /identities/{id}/mfa Identity MFA removeIdentityMfa
 
-Remove MFA from an identitity
+# Remove MFA from an identitity
 
 Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
-
-
 */
 type RemoveIdentityMfa struct {
 	Context *middleware.Context

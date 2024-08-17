@@ -53,13 +53,12 @@ func NewListIdentityTypes(ctx *middleware.Context, handler ListIdentityTypesHand
 	return &ListIdentityTypes{Context: ctx, Handler: handler}
 }
 
-/* ListIdentityTypes swagger:route GET /identity-types Identity listIdentityTypes
+/*
+	ListIdentityTypes swagger:route GET /identity-types Identity listIdentityTypes
 
-List available identity types
+# List available identity types
 
 Retrieves a list of identity types; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentityTypes struct {
 	Context *middleware.Context

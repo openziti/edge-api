@@ -30,6 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *ListIdentityServicePoliciesReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /identities/{id}/service-policies] listIdentityServicePolicies", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewListIdentityServicePoliciesOK() *ListIdentityServicePoliciesOK {
 	return &ListIdentityServicePoliciesOK{}
 }
 
-/* ListIdentityServicePoliciesOK describes a response with status code 200, with default header values.
+/*
+ListIdentityServicePoliciesOK describes a response with status code 200, with default header values.
 
 A list of service policies
 */
@@ -89,9 +91,46 @@ type ListIdentityServicePoliciesOK struct {
 	Payload *rest_model.ListServicePoliciesEnvelope
 }
 
-func (o *ListIdentityServicePoliciesOK) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list identity service policies o k response has a 2xx status code
+func (o *ListIdentityServicePoliciesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list identity service policies o k response has a 3xx status code
+func (o *ListIdentityServicePoliciesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity service policies o k response has a 4xx status code
+func (o *ListIdentityServicePoliciesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list identity service policies o k response has a 5xx status code
+func (o *ListIdentityServicePoliciesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity service policies o k response a status code equal to that given
+func (o *ListIdentityServicePoliciesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list identity service policies o k response
+func (o *ListIdentityServicePoliciesOK) Code() int {
+	return 200
+}
+
+func (o *ListIdentityServicePoliciesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesOK %s", 200, payload)
+}
+
+func (o *ListIdentityServicePoliciesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesOK %s", 200, payload)
+}
+
 func (o *ListIdentityServicePoliciesOK) GetPayload() *rest_model.ListServicePoliciesEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewListIdentityServicePoliciesUnauthorized() *ListIdentityServicePoliciesUn
 	return &ListIdentityServicePoliciesUnauthorized{}
 }
 
-/* ListIdentityServicePoliciesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListIdentityServicePoliciesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type ListIdentityServicePoliciesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityServicePoliciesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list identity service policies unauthorized response has a 2xx status code
+func (o *ListIdentityServicePoliciesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity service policies unauthorized response has a 3xx status code
+func (o *ListIdentityServicePoliciesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity service policies unauthorized response has a 4xx status code
+func (o *ListIdentityServicePoliciesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list identity service policies unauthorized response has a 5xx status code
+func (o *ListIdentityServicePoliciesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity service policies unauthorized response a status code equal to that given
+func (o *ListIdentityServicePoliciesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list identity service policies unauthorized response
+func (o *ListIdentityServicePoliciesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListIdentityServicePoliciesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesUnauthorized %s", 401, payload)
+}
+
+func (o *ListIdentityServicePoliciesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesUnauthorized %s", 401, payload)
+}
+
 func (o *ListIdentityServicePoliciesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewListIdentityServicePoliciesNotFound() *ListIdentityServicePoliciesNotFou
 	return &ListIdentityServicePoliciesNotFound{}
 }
 
-/* ListIdentityServicePoliciesNotFound describes a response with status code 404, with default header values.
+/*
+ListIdentityServicePoliciesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type ListIdentityServicePoliciesNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityServicePoliciesNotFound) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this list identity service policies not found response has a 2xx status code
+func (o *ListIdentityServicePoliciesNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity service policies not found response has a 3xx status code
+func (o *ListIdentityServicePoliciesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity service policies not found response has a 4xx status code
+func (o *ListIdentityServicePoliciesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list identity service policies not found response has a 5xx status code
+func (o *ListIdentityServicePoliciesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity service policies not found response a status code equal to that given
+func (o *ListIdentityServicePoliciesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list identity service policies not found response
+func (o *ListIdentityServicePoliciesNotFound) Code() int {
+	return 404
+}
+
+func (o *ListIdentityServicePoliciesNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesNotFound %s", 404, payload)
+}
+
+func (o *ListIdentityServicePoliciesNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesNotFound %s", 404, payload)
+}
+
 func (o *ListIdentityServicePoliciesNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewListIdentityServicePoliciesTooManyRequests() *ListIdentityServicePolicie
 	return &ListIdentityServicePoliciesTooManyRequests{}
 }
 
-/* ListIdentityServicePoliciesTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListIdentityServicePoliciesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type ListIdentityServicePoliciesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityServicePoliciesTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list identity service policies too many requests response has a 2xx status code
+func (o *ListIdentityServicePoliciesTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity service policies too many requests response has a 3xx status code
+func (o *ListIdentityServicePoliciesTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity service policies too many requests response has a 4xx status code
+func (o *ListIdentityServicePoliciesTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list identity service policies too many requests response has a 5xx status code
+func (o *ListIdentityServicePoliciesTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity service policies too many requests response a status code equal to that given
+func (o *ListIdentityServicePoliciesTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list identity service policies too many requests response
+func (o *ListIdentityServicePoliciesTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListIdentityServicePoliciesTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesTooManyRequests %s", 429, payload)
+}
+
+func (o *ListIdentityServicePoliciesTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-policies][%d] listIdentityServicePoliciesTooManyRequests %s", 429, payload)
+}
+
 func (o *ListIdentityServicePoliciesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

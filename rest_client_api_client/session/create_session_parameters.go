@@ -78,10 +78,12 @@ func NewCreateSessionParamsWithHTTPClient(client *http.Client) *CreateSessionPar
 	}
 }
 
-/* CreateSessionParams contains all the parameters to send to the API endpoint
-   for the create session operation.
+/*
+CreateSessionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create session operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateSessionParams struct {
 

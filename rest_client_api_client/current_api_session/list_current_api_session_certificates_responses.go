@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *ListCurrentAPISessionCertificatesReader) ReadResponse(response runtime.
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-api-session/certificates] listCurrentApiSessionCertificates", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewListCurrentAPISessionCertificatesOK() *ListCurrentAPISessionCertificates
 	return &ListCurrentAPISessionCertificatesOK{}
 }
 
-/* ListCurrentAPISessionCertificatesOK describes a response with status code 200, with default header values.
+/*
+ListCurrentAPISessionCertificatesOK describes a response with status code 200, with default header values.
 
 A list of the current API Session's certificate
 */
@@ -89,9 +91,46 @@ type ListCurrentAPISessionCertificatesOK struct {
 	Payload *rest_model.ListCurrentAPISessionCertificatesEnvelope
 }
 
-func (o *ListCurrentAPISessionCertificatesOK) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list current Api session certificates o k response has a 2xx status code
+func (o *ListCurrentAPISessionCertificatesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list current Api session certificates o k response has a 3xx status code
+func (o *ListCurrentAPISessionCertificatesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current Api session certificates o k response has a 4xx status code
+func (o *ListCurrentAPISessionCertificatesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list current Api session certificates o k response has a 5xx status code
+func (o *ListCurrentAPISessionCertificatesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current Api session certificates o k response a status code equal to that given
+func (o *ListCurrentAPISessionCertificatesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list current Api session certificates o k response
+func (o *ListCurrentAPISessionCertificatesOK) Code() int {
+	return 200
+}
+
+func (o *ListCurrentAPISessionCertificatesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesOK %s", 200, payload)
+}
+
+func (o *ListCurrentAPISessionCertificatesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesOK %s", 200, payload)
+}
+
 func (o *ListCurrentAPISessionCertificatesOK) GetPayload() *rest_model.ListCurrentAPISessionCertificatesEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewListCurrentAPISessionCertificatesBadRequest() *ListCurrentAPISessionCert
 	return &ListCurrentAPISessionCertificatesBadRequest{}
 }
 
-/* ListCurrentAPISessionCertificatesBadRequest describes a response with status code 400, with default header values.
+/*
+ListCurrentAPISessionCertificatesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type ListCurrentAPISessionCertificatesBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCurrentAPISessionCertificatesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list current Api session certificates bad request response has a 2xx status code
+func (o *ListCurrentAPISessionCertificatesBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list current Api session certificates bad request response has a 3xx status code
+func (o *ListCurrentAPISessionCertificatesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current Api session certificates bad request response has a 4xx status code
+func (o *ListCurrentAPISessionCertificatesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list current Api session certificates bad request response has a 5xx status code
+func (o *ListCurrentAPISessionCertificatesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current Api session certificates bad request response a status code equal to that given
+func (o *ListCurrentAPISessionCertificatesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list current Api session certificates bad request response
+func (o *ListCurrentAPISessionCertificatesBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListCurrentAPISessionCertificatesBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesBadRequest %s", 400, payload)
+}
+
+func (o *ListCurrentAPISessionCertificatesBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesBadRequest %s", 400, payload)
+}
+
 func (o *ListCurrentAPISessionCertificatesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewListCurrentAPISessionCertificatesUnauthorized() *ListCurrentAPISessionCe
 	return &ListCurrentAPISessionCertificatesUnauthorized{}
 }
 
-/* ListCurrentAPISessionCertificatesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListCurrentAPISessionCertificatesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type ListCurrentAPISessionCertificatesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCurrentAPISessionCertificatesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list current Api session certificates unauthorized response has a 2xx status code
+func (o *ListCurrentAPISessionCertificatesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list current Api session certificates unauthorized response has a 3xx status code
+func (o *ListCurrentAPISessionCertificatesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current Api session certificates unauthorized response has a 4xx status code
+func (o *ListCurrentAPISessionCertificatesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list current Api session certificates unauthorized response has a 5xx status code
+func (o *ListCurrentAPISessionCertificatesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current Api session certificates unauthorized response a status code equal to that given
+func (o *ListCurrentAPISessionCertificatesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list current Api session certificates unauthorized response
+func (o *ListCurrentAPISessionCertificatesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListCurrentAPISessionCertificatesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesUnauthorized %s", 401, payload)
+}
+
+func (o *ListCurrentAPISessionCertificatesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesUnauthorized %s", 401, payload)
+}
+
 func (o *ListCurrentAPISessionCertificatesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewListCurrentAPISessionCertificatesTooManyRequests() *ListCurrentAPISessio
 	return &ListCurrentAPISessionCertificatesTooManyRequests{}
 }
 
-/* ListCurrentAPISessionCertificatesTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListCurrentAPISessionCertificatesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type ListCurrentAPISessionCertificatesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCurrentAPISessionCertificatesTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list current Api session certificates too many requests response has a 2xx status code
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list current Api session certificates too many requests response has a 3xx status code
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current Api session certificates too many requests response has a 4xx status code
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list current Api session certificates too many requests response has a 5xx status code
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current Api session certificates too many requests response a status code equal to that given
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list current Api session certificates too many requests response
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesTooManyRequests %s", 429, payload)
+}
+
+func (o *ListCurrentAPISessionCertificatesTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/certificates][%d] listCurrentApiSessionCertificatesTooManyRequests %s", 429, payload)
+}
+
 func (o *ListCurrentAPISessionCertificatesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

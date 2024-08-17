@@ -40,7 +40,8 @@ import (
 // ListEdgeRouterPolicyIdentitiesOKCode is the HTTP code returned for type ListEdgeRouterPolicyIdentitiesOK
 const ListEdgeRouterPolicyIdentitiesOKCode int = 200
 
-/*ListEdgeRouterPolicyIdentitiesOK A list of identities
+/*
+ListEdgeRouterPolicyIdentitiesOK A list of identities
 
 swagger:response listEdgeRouterPolicyIdentitiesOK
 */
@@ -84,7 +85,8 @@ func (o *ListEdgeRouterPolicyIdentitiesOK) WriteResponse(rw http.ResponseWriter,
 // ListEdgeRouterPolicyIdentitiesUnauthorizedCode is the HTTP code returned for type ListEdgeRouterPolicyIdentitiesUnauthorized
 const ListEdgeRouterPolicyIdentitiesUnauthorizedCode int = 401
 
-/*ListEdgeRouterPolicyIdentitiesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListEdgeRouterPolicyIdentitiesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEdgeRouterPolicyIdentitiesUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) WriteResponse(rw http.Respo
 // ListEdgeRouterPolicyIdentitiesNotFoundCode is the HTTP code returned for type ListEdgeRouterPolicyIdentitiesNotFound
 const ListEdgeRouterPolicyIdentitiesNotFoundCode int = 404
 
-/*ListEdgeRouterPolicyIdentitiesNotFound The requested resource does not exist
+/*
+ListEdgeRouterPolicyIdentitiesNotFound The requested resource does not exist
 
 swagger:response listEdgeRouterPolicyIdentitiesNotFound
 */
@@ -172,7 +175,8 @@ func (o *ListEdgeRouterPolicyIdentitiesNotFound) WriteResponse(rw http.ResponseW
 // ListEdgeRouterPolicyIdentitiesTooManyRequestsCode is the HTTP code returned for type ListEdgeRouterPolicyIdentitiesTooManyRequests
 const ListEdgeRouterPolicyIdentitiesTooManyRequestsCode int = 429
 
-/*ListEdgeRouterPolicyIdentitiesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListEdgeRouterPolicyIdentitiesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEdgeRouterPolicyIdentitiesTooManyRequests
 */

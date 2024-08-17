@@ -30,6 +30,7 @@ package api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *ListAPISessionsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api-sessions] listAPISessions", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewListAPISessionsOK() *ListAPISessionsOK {
 	return &ListAPISessionsOK{}
 }
 
-/* ListAPISessionsOK describes a response with status code 200, with default header values.
+/*
+ListAPISessionsOK describes a response with status code 200, with default header values.
 
 A list of active API Sessions
 */
@@ -89,9 +91,46 @@ type ListAPISessionsOK struct {
 	Payload *rest_model.ListAPISessionsEnvelope
 }
 
-func (o *ListAPISessionsOK) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list Api sessions o k response has a 2xx status code
+func (o *ListAPISessionsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list Api sessions o k response has a 3xx status code
+func (o *ListAPISessionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions o k response has a 4xx status code
+func (o *ListAPISessionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list Api sessions o k response has a 5xx status code
+func (o *ListAPISessionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions o k response a status code equal to that given
+func (o *ListAPISessionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list Api sessions o k response
+func (o *ListAPISessionsOK) Code() int {
+	return 200
+}
+
+func (o *ListAPISessionsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsOK %s", 200, payload)
+}
+
+func (o *ListAPISessionsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsOK %s", 200, payload)
+}
+
 func (o *ListAPISessionsOK) GetPayload() *rest_model.ListAPISessionsEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewListAPISessionsBadRequest() *ListAPISessionsBadRequest {
 	return &ListAPISessionsBadRequest{}
 }
 
-/* ListAPISessionsBadRequest describes a response with status code 400, with default header values.
+/*
+ListAPISessionsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type ListAPISessionsBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list Api sessions bad request response has a 2xx status code
+func (o *ListAPISessionsBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions bad request response has a 3xx status code
+func (o *ListAPISessionsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions bad request response has a 4xx status code
+func (o *ListAPISessionsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list Api sessions bad request response has a 5xx status code
+func (o *ListAPISessionsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions bad request response a status code equal to that given
+func (o *ListAPISessionsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list Api sessions bad request response
+func (o *ListAPISessionsBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListAPISessionsBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsBadRequest %s", 400, payload)
+}
+
+func (o *ListAPISessionsBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsBadRequest %s", 400, payload)
+}
+
 func (o *ListAPISessionsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewListAPISessionsUnauthorized() *ListAPISessionsUnauthorized {
 	return &ListAPISessionsUnauthorized{}
 }
 
-/* ListAPISessionsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListAPISessionsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type ListAPISessionsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list Api sessions unauthorized response has a 2xx status code
+func (o *ListAPISessionsUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions unauthorized response has a 3xx status code
+func (o *ListAPISessionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions unauthorized response has a 4xx status code
+func (o *ListAPISessionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list Api sessions unauthorized response has a 5xx status code
+func (o *ListAPISessionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions unauthorized response a status code equal to that given
+func (o *ListAPISessionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list Api sessions unauthorized response
+func (o *ListAPISessionsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListAPISessionsUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsUnauthorized %s", 401, payload)
+}
+
+func (o *ListAPISessionsUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsUnauthorized %s", 401, payload)
+}
+
 func (o *ListAPISessionsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewListAPISessionsTooManyRequests() *ListAPISessionsTooManyRequests {
 	return &ListAPISessionsTooManyRequests{}
 }
 
-/* ListAPISessionsTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListAPISessionsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type ListAPISessionsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list Api sessions too many requests response has a 2xx status code
+func (o *ListAPISessionsTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions too many requests response has a 3xx status code
+func (o *ListAPISessionsTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions too many requests response has a 4xx status code
+func (o *ListAPISessionsTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list Api sessions too many requests response has a 5xx status code
+func (o *ListAPISessionsTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions too many requests response a status code equal to that given
+func (o *ListAPISessionsTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list Api sessions too many requests response
+func (o *ListAPISessionsTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListAPISessionsTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests %s", 429, payload)
+}
+
+func (o *ListAPISessionsTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests %s", 429, payload)
+}
+
 func (o *ListAPISessionsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

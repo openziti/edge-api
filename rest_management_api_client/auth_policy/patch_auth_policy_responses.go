@@ -30,6 +30,7 @@ package auth_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *PatchAuthPolicyReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /auth-policies/{id}] patchAuthPolicy", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewPatchAuthPolicyOK() *PatchAuthPolicyOK {
 	return &PatchAuthPolicyOK{}
 }
 
-/* PatchAuthPolicyOK describes a response with status code 200, with default header values.
+/*
+PatchAuthPolicyOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type PatchAuthPolicyOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *PatchAuthPolicyOK) Error() string {
-	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch auth policy o k response has a 2xx status code
+func (o *PatchAuthPolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch auth policy o k response has a 3xx status code
+func (o *PatchAuthPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch auth policy o k response has a 4xx status code
+func (o *PatchAuthPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch auth policy o k response has a 5xx status code
+func (o *PatchAuthPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch auth policy o k response a status code equal to that given
+func (o *PatchAuthPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch auth policy o k response
+func (o *PatchAuthPolicyOK) Code() int {
+	return 200
+}
+
+func (o *PatchAuthPolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyOK %s", 200, payload)
+}
+
+func (o *PatchAuthPolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyOK %s", 200, payload)
+}
+
 func (o *PatchAuthPolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewPatchAuthPolicyBadRequest() *PatchAuthPolicyBadRequest {
 	return &PatchAuthPolicyBadRequest{}
 }
 
-/* PatchAuthPolicyBadRequest describes a response with status code 400, with default header values.
+/*
+PatchAuthPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type PatchAuthPolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchAuthPolicyBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch auth policy bad request response has a 2xx status code
+func (o *PatchAuthPolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch auth policy bad request response has a 3xx status code
+func (o *PatchAuthPolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch auth policy bad request response has a 4xx status code
+func (o *PatchAuthPolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch auth policy bad request response has a 5xx status code
+func (o *PatchAuthPolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch auth policy bad request response a status code equal to that given
+func (o *PatchAuthPolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch auth policy bad request response
+func (o *PatchAuthPolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchAuthPolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyBadRequest %s", 400, payload)
+}
+
+func (o *PatchAuthPolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyBadRequest %s", 400, payload)
+}
+
 func (o *PatchAuthPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewPatchAuthPolicyUnauthorized() *PatchAuthPolicyUnauthorized {
 	return &PatchAuthPolicyUnauthorized{}
 }
 
-/* PatchAuthPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchAuthPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type PatchAuthPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchAuthPolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch auth policy unauthorized response has a 2xx status code
+func (o *PatchAuthPolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch auth policy unauthorized response has a 3xx status code
+func (o *PatchAuthPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch auth policy unauthorized response has a 4xx status code
+func (o *PatchAuthPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch auth policy unauthorized response has a 5xx status code
+func (o *PatchAuthPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch auth policy unauthorized response a status code equal to that given
+func (o *PatchAuthPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch auth policy unauthorized response
+func (o *PatchAuthPolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchAuthPolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyUnauthorized %s", 401, payload)
+}
+
+func (o *PatchAuthPolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyUnauthorized %s", 401, payload)
+}
+
 func (o *PatchAuthPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewPatchAuthPolicyNotFound() *PatchAuthPolicyNotFound {
 	return &PatchAuthPolicyNotFound{}
 }
 
-/* PatchAuthPolicyNotFound describes a response with status code 404, with default header values.
+/*
+PatchAuthPolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type PatchAuthPolicyNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchAuthPolicyNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch auth policy not found response has a 2xx status code
+func (o *PatchAuthPolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch auth policy not found response has a 3xx status code
+func (o *PatchAuthPolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch auth policy not found response has a 4xx status code
+func (o *PatchAuthPolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch auth policy not found response has a 5xx status code
+func (o *PatchAuthPolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch auth policy not found response a status code equal to that given
+func (o *PatchAuthPolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch auth policy not found response
+func (o *PatchAuthPolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchAuthPolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyNotFound %s", 404, payload)
+}
+
+func (o *PatchAuthPolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyNotFound %s", 404, payload)
+}
+
 func (o *PatchAuthPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewPatchAuthPolicyTooManyRequests() *PatchAuthPolicyTooManyRequests {
 	return &PatchAuthPolicyTooManyRequests{}
 }
 
-/* PatchAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type PatchAuthPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchAuthPolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch auth policy too many requests response has a 2xx status code
+func (o *PatchAuthPolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch auth policy too many requests response has a 3xx status code
+func (o *PatchAuthPolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch auth policy too many requests response has a 4xx status code
+func (o *PatchAuthPolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch auth policy too many requests response has a 5xx status code
+func (o *PatchAuthPolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch auth policy too many requests response a status code equal to that given
+func (o *PatchAuthPolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch auth policy too many requests response
+func (o *PatchAuthPolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchAuthPolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchAuthPolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /auth-policies/{id}][%d] patchAuthPolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchAuthPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

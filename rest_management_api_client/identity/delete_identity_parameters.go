@@ -76,10 +76,12 @@ func NewDeleteIdentityParamsWithHTTPClient(client *http.Client) *DeleteIdentityP
 	}
 }
 
-/* DeleteIdentityParams contains all the parameters to send to the API endpoint
-   for the delete identity operation.
+/*
+DeleteIdentityParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete identity operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteIdentityParams struct {
 

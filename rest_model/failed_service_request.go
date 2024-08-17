@@ -164,6 +164,11 @@ func (m *FailedServiceRequest) contextValidatePolicyFailures(ctx context.Context
 	for i := 0; i < len(m.PolicyFailures); i++ {
 
 		if m.PolicyFailures[i] != nil {
+
+			if swag.IsZero(m.PolicyFailures[i]) { // not required
+				return nil
+			}
+
 			if err := m.PolicyFailures[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("policyFailures" + "." + strconv.Itoa(i))
@@ -180,6 +185,10 @@ func (m *FailedServiceRequest) contextValidatePolicyFailures(ctx context.Context
 }
 
 func (m *FailedServiceRequest) contextValidateSessionType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SessionType) { // not required
+		return nil
+	}
 
 	if err := m.SessionType.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

@@ -40,7 +40,8 @@ import (
 // DetailMfaRecoveryCodesOKCode is the HTTP code returned for type DetailMfaRecoveryCodesOK
 const DetailMfaRecoveryCodesOKCode int = 200
 
-/*DetailMfaRecoveryCodesOK The recovery codes of an MFA enrollment
+/*
+DetailMfaRecoveryCodesOK The recovery codes of an MFA enrollment
 
 swagger:response detailMfaRecoveryCodesOK
 */
@@ -84,7 +85,8 @@ func (o *DetailMfaRecoveryCodesOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailMfaRecoveryCodesUnauthorizedCode is the HTTP code returned for type DetailMfaRecoveryCodesUnauthorized
 const DetailMfaRecoveryCodesUnauthorizedCode int = 401
 
-/*DetailMfaRecoveryCodesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailMfaRecoveryCodesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailMfaRecoveryCodesUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailMfaRecoveryCodesUnauthorized) WriteResponse(rw http.ResponseWrite
 // DetailMfaRecoveryCodesNotFoundCode is the HTTP code returned for type DetailMfaRecoveryCodesNotFound
 const DetailMfaRecoveryCodesNotFoundCode int = 404
 
-/*DetailMfaRecoveryCodesNotFound The requested resource does not exist
+/*
+DetailMfaRecoveryCodesNotFound The requested resource does not exist
 
 swagger:response detailMfaRecoveryCodesNotFound
 */

@@ -53,12 +53,12 @@ func NewPatchServicePolicy(ctx *middleware.Context, handler PatchServicePolicyHa
 	return &PatchServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* PatchServicePolicy swagger:route PATCH /service-policies/{id} Service Policy patchServicePolicy
+/*
+	PatchServicePolicy swagger:route PATCH /service-policies/{id} Service Policy patchServicePolicy
 
-Update the supplied fields on a service policy
+# Update the supplied fields on a service policy
 
 Update the supplied fields on a service policy. Requires admin access.
-
 */
 type PatchServicePolicy struct {
 	Context *middleware.Context

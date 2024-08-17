@@ -53,15 +53,14 @@ func NewEnrollOtt(ctx *middleware.Context, handler EnrollOttHandler) *EnrollOtt 
 	return &EnrollOtt{Context: ctx, Handler: handler}
 }
 
-/* EnrollOtt swagger:route POST /enroll/ott Enroll enrollOtt
+/*
+	EnrollOtt swagger:route POST /enroll/ott Enroll enrollOtt
 
-Enroll an identity via one-time-token
+# Enroll an identity via one-time-token
 
 Enroll an identity via a one-time-token which is supplied via a query string parameter. This enrollment method
 expects a PEM encoded CSRs to be provided for fulfillment. It is up to the enrolling identity to manage the
 private key backing the CSR request.
-
-
 */
 type EnrollOtt struct {
 	Context *middleware.Context

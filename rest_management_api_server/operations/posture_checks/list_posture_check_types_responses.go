@@ -40,7 +40,8 @@ import (
 // ListPostureCheckTypesOKCode is the HTTP code returned for type ListPostureCheckTypesOK
 const ListPostureCheckTypesOKCode int = 200
 
-/*ListPostureCheckTypesOK A list of posture check types
+/*
+ListPostureCheckTypesOK A list of posture check types
 
 swagger:response listPostureCheckTypesOK
 */
@@ -84,7 +85,8 @@ func (o *ListPostureCheckTypesOK) WriteResponse(rw http.ResponseWriter, producer
 // ListPostureCheckTypesBadRequestCode is the HTTP code returned for type ListPostureCheckTypesBadRequest
 const ListPostureCheckTypesBadRequestCode int = 400
 
-/*ListPostureCheckTypesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListPostureCheckTypesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listPostureCheckTypesBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListPostureCheckTypesBadRequest) WriteResponse(rw http.ResponseWriter, 
 // ListPostureCheckTypesUnauthorizedCode is the HTTP code returned for type ListPostureCheckTypesUnauthorized
 const ListPostureCheckTypesUnauthorizedCode int = 401
 
-/*ListPostureCheckTypesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListPostureCheckTypesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listPostureCheckTypesUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListPostureCheckTypesUnauthorized) WriteResponse(rw http.ResponseWriter
 // ListPostureCheckTypesTooManyRequestsCode is the HTTP code returned for type ListPostureCheckTypesTooManyRequests
 const ListPostureCheckTypesTooManyRequestsCode int = 429
 
-/*ListPostureCheckTypesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListPostureCheckTypesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listPostureCheckTypesTooManyRequests
 */

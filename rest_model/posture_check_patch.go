@@ -34,7 +34,6 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"io/ioutil"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -141,7 +140,7 @@ func UnmarshalPostureCheckPatchSlice(reader io.Reader, consumer runtime.Consumer
 // UnmarshalPostureCheckPatch unmarshals polymorphic PostureCheckPatch
 func UnmarshalPostureCheckPatch(reader io.Reader, consumer runtime.Consumer) (PostureCheckPatch, error) {
 	// we need to read this twice, so first into a buffer
-	data, err := ioutil.ReadAll(reader)
+	data, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, err
 	}
@@ -309,6 +308,11 @@ func (m *postureCheckPatch) contextValidateRoleAttributes(ctx context.Context, f
 func (m *postureCheckPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
+
+		if swag.IsZero(m.Tags()) { // not required
+			return nil
+		}
+
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

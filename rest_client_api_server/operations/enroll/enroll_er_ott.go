@@ -53,13 +53,12 @@ func NewEnrollErOtt(ctx *middleware.Context, handler EnrollErOttHandler) *Enroll
 	return &EnrollErOtt{Context: ctx, Handler: handler}
 }
 
-/* EnrollErOtt swagger:route POST /enroll/erott Enroll enrollErOtt
+/*
+	EnrollErOtt swagger:route POST /enroll/erott Enroll enrollErOtt
 
-Enroll an edge-router
+# Enroll an edge-router
 
 Enrolls an edge-router via a one-time-token to establish a certificate based identity.
-
-
 */
 type EnrollErOtt struct {
 	Context *middleware.Context

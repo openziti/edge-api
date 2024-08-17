@@ -365,6 +365,11 @@ func (m *PostureCheckProcessMultiPatch) contextValidateRoleAttributes(ctx contex
 func (m *PostureCheckProcessMultiPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
+
+		if swag.IsZero(m.Tags()) { // not required
+			return nil
+		}
+
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -397,6 +402,11 @@ func (m *PostureCheckProcessMultiPatch) contextValidateProcesses(ctx context.Con
 	for i := 0; i < len(m.Processes); i++ {
 
 		if m.Processes[i] != nil {
+
+			if swag.IsZero(m.Processes[i]) { // not required
+				return nil
+			}
+
 			if err := m.Processes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))
@@ -413,6 +423,10 @@ func (m *PostureCheckProcessMultiPatch) contextValidateProcesses(ctx context.Con
 }
 
 func (m *PostureCheckProcessMultiPatch) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Semantic) { // not required
+		return nil
+	}
 
 	if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

@@ -40,7 +40,8 @@ import (
 // ExtendVerifyCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type ExtendVerifyCurrentIdentityAuthenticatorOK
 const ExtendVerifyCurrentIdentityAuthenticatorOKCode int = 200
 
-/*ExtendVerifyCurrentIdentityAuthenticatorOK Base empty response
+/*
+ExtendVerifyCurrentIdentityAuthenticatorOK Base empty response
 
 swagger:response extendVerifyCurrentIdentityAuthenticatorOK
 */
@@ -84,7 +85,8 @@ func (o *ExtendVerifyCurrentIdentityAuthenticatorOK) WriteResponse(rw http.Respo
 // ExtendVerifyCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type ExtendVerifyCurrentIdentityAuthenticatorUnauthorized
 const ExtendVerifyCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*ExtendVerifyCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ExtendVerifyCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendVerifyCurrentIdentityAuthenticatorUnauthorized
 */

@@ -40,7 +40,8 @@ import (
 // PatchCaOKCode is the HTTP code returned for type PatchCaOK
 const PatchCaOKCode int = 200
 
-/*PatchCaOK The patch request was successful and the resource has been altered
+/*
+PatchCaOK The patch request was successful and the resource has been altered
 
 swagger:response patchCaOK
 */
@@ -84,7 +85,8 @@ func (o *PatchCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produ
 // PatchCaBadRequestCode is the HTTP code returned for type PatchCaBadRequest
 const PatchCaBadRequestCode int = 400
 
-/*PatchCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+PatchCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchCaBadRequest
 */
@@ -128,7 +130,8 @@ func (o *PatchCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runti
 // PatchCaUnauthorizedCode is the HTTP code returned for type PatchCaUnauthorized
 const PatchCaUnauthorizedCode int = 401
 
-/*PatchCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+PatchCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchCaUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *PatchCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer run
 // PatchCaNotFoundCode is the HTTP code returned for type PatchCaNotFound
 const PatchCaNotFoundCode int = 404
 
-/*PatchCaNotFound The requested resource does not exist
+/*
+PatchCaNotFound The requested resource does not exist
 
 swagger:response patchCaNotFound
 */
@@ -216,7 +220,8 @@ func (o *PatchCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtime
 // PatchCaTooManyRequestsCode is the HTTP code returned for type PatchCaTooManyRequests
 const PatchCaTooManyRequestsCode int = 429
 
-/*PatchCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+PatchCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchCaTooManyRequests
 */

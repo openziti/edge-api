@@ -53,12 +53,12 @@ func NewDetailPostureCheckType(ctx *middleware.Context, handler DetailPostureChe
 	return &DetailPostureCheckType{Context: ctx, Handler: handler}
 }
 
-/* DetailPostureCheckType swagger:route GET /posture-check-types/{id} Posture Checks detailPostureCheckType
+/*
+	DetailPostureCheckType swagger:route GET /posture-check-types/{id} Posture Checks detailPostureCheckType
 
-Retrieves a single posture check type
+# Retrieves a single posture check type
 
 Retrieves a single posture check type by id
-
 */
 type DetailPostureCheckType struct {
 	Context *middleware.Context

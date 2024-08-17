@@ -53,12 +53,12 @@ func NewListIdentitysServiceConfigs(ctx *middleware.Context, handler ListIdentit
 	return &ListIdentitysServiceConfigs{Context: ctx, Handler: handler}
 }
 
-/* ListIdentitysServiceConfigs swagger:route GET /identities/{id}/service-configs Identity listIdentitysServiceConfigs
+/*
+	ListIdentitysServiceConfigs swagger:route GET /identities/{id}/service-configs Identity listIdentitysServiceConfigs
 
-List the service configs associated a specific identity
+# List the service configs associated a specific identity
 
 Retrieves a list of service configs associated to a specific identity
-
 */
 type ListIdentitysServiceConfigs struct {
 	Context *middleware.Context

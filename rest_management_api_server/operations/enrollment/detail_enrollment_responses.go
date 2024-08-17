@@ -40,7 +40,8 @@ import (
 // DetailEnrollmentOKCode is the HTTP code returned for type DetailEnrollmentOK
 const DetailEnrollmentOKCode int = 200
 
-/*DetailEnrollmentOK A singular enrollment resource
+/*
+DetailEnrollmentOK A singular enrollment resource
 
 swagger:response detailEnrollmentOK
 */
@@ -84,7 +85,8 @@ func (o *DetailEnrollmentOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailEnrollmentUnauthorizedCode is the HTTP code returned for type DetailEnrollmentUnauthorized
 const DetailEnrollmentUnauthorizedCode int = 401
 
-/*DetailEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailEnrollmentUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DetailEnrollmentNotFoundCode is the HTTP code returned for type DetailEnrollmentNotFound
 const DetailEnrollmentNotFoundCode int = 404
 
-/*DetailEnrollmentNotFound The requested resource does not exist
+/*
+DetailEnrollmentNotFound The requested resource does not exist
 
 swagger:response detailEnrollmentNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailEnrollmentNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DetailEnrollmentTooManyRequestsCode is the HTTP code returned for type DetailEnrollmentTooManyRequests
 const DetailEnrollmentTooManyRequestsCode int = 429
 
-/*DetailEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailEnrollmentTooManyRequests
 */

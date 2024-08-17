@@ -53,16 +53,15 @@ func NewListSessions(ctx *middleware.Context, handler ListSessionsHandler) *List
 	return &ListSessions{Context: ctx, Handler: handler}
 }
 
-/* ListSessions swagger:route GET /sessions Session listSessions
+/*
+	ListSessions swagger:route GET /sessions Session listSessions
 
-List sessions
+# List sessions
 
 Retrieves a list of active sessions resources; supports filtering, sorting, and pagination. Requires admin access.
 
 Sessions are tied to an API session and are moved when an API session times out or logs out. Active sessions
 (i.e. Ziti SDK connected to an edge router) will keep the session and API session marked as active.
-
-
 */
 type ListSessions struct {
 	Context *middleware.Context

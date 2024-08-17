@@ -30,6 +30,7 @@ package session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DetailSessionRoutePathReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sessions/{id}/route-path] detailSessionRoutePath", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDetailSessionRoutePathOK() *DetailSessionRoutePathOK {
 	return &DetailSessionRoutePathOK{}
 }
 
-/* DetailSessionRoutePathOK describes a response with status code 200, with default header values.
+/*
+DetailSessionRoutePathOK describes a response with status code 200, with default header values.
 
 A single session's route path
 */
@@ -89,9 +91,46 @@ type DetailSessionRoutePathOK struct {
 	Payload *rest_model.DetailSessionRoutePathEnvelope
 }
 
-func (o *DetailSessionRoutePathOK) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail session route path o k response has a 2xx status code
+func (o *DetailSessionRoutePathOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail session route path o k response has a 3xx status code
+func (o *DetailSessionRoutePathOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path o k response has a 4xx status code
+func (o *DetailSessionRoutePathOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail session route path o k response has a 5xx status code
+func (o *DetailSessionRoutePathOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path o k response a status code equal to that given
+func (o *DetailSessionRoutePathOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail session route path o k response
+func (o *DetailSessionRoutePathOK) Code() int {
+	return 200
+}
+
+func (o *DetailSessionRoutePathOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathOK %s", 200, payload)
+}
+
+func (o *DetailSessionRoutePathOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathOK %s", 200, payload)
+}
+
 func (o *DetailSessionRoutePathOK) GetPayload() *rest_model.DetailSessionRoutePathEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDetailSessionRoutePathUnauthorized() *DetailSessionRoutePathUnauthorized
 	return &DetailSessionRoutePathUnauthorized{}
 }
 
-/* DetailSessionRoutePathUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailSessionRoutePathUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type DetailSessionRoutePathUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail session route path unauthorized response has a 2xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path unauthorized response has a 3xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path unauthorized response has a 4xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session route path unauthorized response has a 5xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path unauthorized response a status code equal to that given
+func (o *DetailSessionRoutePathUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail session route path unauthorized response
+func (o *DetailSessionRoutePathUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailSessionRoutePathUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathUnauthorized %s", 401, payload)
+}
+
+func (o *DetailSessionRoutePathUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathUnauthorized %s", 401, payload)
+}
+
 func (o *DetailSessionRoutePathUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDetailSessionRoutePathNotFound() *DetailSessionRoutePathNotFound {
 	return &DetailSessionRoutePathNotFound{}
 }
 
-/* DetailSessionRoutePathNotFound describes a response with status code 404, with default header values.
+/*
+DetailSessionRoutePathNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type DetailSessionRoutePathNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathNotFound) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail session route path not found response has a 2xx status code
+func (o *DetailSessionRoutePathNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path not found response has a 3xx status code
+func (o *DetailSessionRoutePathNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path not found response has a 4xx status code
+func (o *DetailSessionRoutePathNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session route path not found response has a 5xx status code
+func (o *DetailSessionRoutePathNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path not found response a status code equal to that given
+func (o *DetailSessionRoutePathNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail session route path not found response
+func (o *DetailSessionRoutePathNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailSessionRoutePathNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathNotFound %s", 404, payload)
+}
+
+func (o *DetailSessionRoutePathNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathNotFound %s", 404, payload)
+}
+
 func (o *DetailSessionRoutePathNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDetailSessionRoutePathTooManyRequests() *DetailSessionRoutePathTooManyRe
 	return &DetailSessionRoutePathTooManyRequests{}
 }
 
-/* DetailSessionRoutePathTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailSessionRoutePathTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DetailSessionRoutePathTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail session route path too many requests response has a 2xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path too many requests response has a 3xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path too many requests response has a 4xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session route path too many requests response has a 5xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path too many requests response a status code equal to that given
+func (o *DetailSessionRoutePathTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail session route path too many requests response
+func (o *DetailSessionRoutePathTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailSessionRoutePathTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailSessionRoutePathTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailSessionRoutePathTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

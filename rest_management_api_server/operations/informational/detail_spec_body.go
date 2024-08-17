@@ -53,12 +53,12 @@ func NewDetailSpecBody(ctx *middleware.Context, handler DetailSpecBodyHandler) *
 	return &DetailSpecBody{Context: ctx, Handler: handler}
 }
 
-/* DetailSpecBody swagger:route GET /specs/{id}/spec Informational detailSpecBody
+/*
+	DetailSpecBody swagger:route GET /specs/{id}/spec Informational detailSpecBody
 
-Returns the spec's file
+# Returns the spec's file
 
 Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).
-
 */
 type DetailSpecBody struct {
 	Context *middleware.Context

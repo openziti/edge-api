@@ -78,10 +78,12 @@ func NewCreateCaParamsWithHTTPClient(client *http.Client) *CreateCaParams {
 	}
 }
 
-/* CreateCaParams contains all the parameters to send to the API endpoint
-   for the create ca operation.
+/*
+CreateCaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create ca operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateCaParams struct {
 

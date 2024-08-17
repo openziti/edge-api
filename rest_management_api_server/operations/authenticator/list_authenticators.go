@@ -53,14 +53,13 @@ func NewListAuthenticators(ctx *middleware.Context, handler ListAuthenticatorsHa
 	return &ListAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* ListAuthenticators swagger:route GET /authenticators Authenticator listAuthenticators
+/*
+	ListAuthenticators swagger:route GET /authenticators Authenticator listAuthenticators
 
-List authenticators
+# List authenticators
 
 Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
 This endpoint requires admin access.
-
-
 */
 type ListAuthenticators struct {
 	Context *middleware.Context

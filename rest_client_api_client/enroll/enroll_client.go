@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new enroll API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new enroll API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new enroll API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,8 +75,62 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeApplicationPkcs10 sets the Content-Type header to "application/pkcs10".
+func WithContentTypeApplicationPkcs10(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/pkcs10"}
+}
+
+// WithContentTypeApplicationxPemFile sets the Content-Type header to "application/x-pem-file".
+func WithContentTypeApplicationxPemFile(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/x-pem-file"}
+}
+
+// WithContentTypeTextPlain sets the Content-Type header to "text/plain".
+func WithContentTypeTextPlain(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"text/plain"}
+}
+
+// WithAccept allows the client to force the Accept header
+// to negotiate a specific Producer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithAccept(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ProducesMediaTypes = []string{mime}
+	}
+}
+
+// WithAcceptApplicationJSON sets the Accept header to "application/json".
+func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json"}
+}
+
+// WithAcceptApplicationxPemFile sets the Accept header to "application/x-pem-file".
+func WithAcceptApplicationxPemFile(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/x-pem-file"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -76,9 +156,9 @@ type ClientService interface {
 }
 
 /*
-  Enroll enrolls an identity via one time token
+Enroll enrolls an identity via one time token
 
-  present a OTT and CSR to receive a long-lived client certificate
+present a OTT and CSR to receive a long-lived client certificate
 */
 func (a *Client) Enroll(params *EnrollParams, opts ...ClientOption) (*EnrollOK, error) {
 	// TODO: Validate the params before sending
@@ -89,8 +169,8 @@ func (a *Client) Enroll(params *EnrollParams, opts ...ClientOption) (*EnrollOK, 
 		ID:                 "enroll",
 		Method:             "POST",
 		PathPattern:        "/enroll",
-		ProducesMediaTypes: []string{"application/json", "application/x-pem-file"},
-		ConsumesMediaTypes: []string{"application/json", "application/pkcs10", "application/x-pem-file", "text/plain"},
+		ProducesMediaTypes: []string{"application/x-pem-file", "application/json"},
+		ConsumesMediaTypes: []string{"application/pkcs10", "application/json", "application/x-pem-file", "text/plain"},
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &EnrollReader{formats: a.formats},
@@ -116,14 +196,14 @@ func (a *Client) Enroll(params *EnrollParams, opts ...ClientOption) (*EnrollOK, 
 }
 
 /*
-  EnrollCa enrolls an identity with a pre exchanged certificate
+	EnrollCa enrolls an identity with a pre exchanged certificate
 
-  For CA auto enrollment, an identity is not created beforehand.
+	For CA auto enrollment, an identity is not created beforehand.
+
 Instead one will be created during enrollment. The client will present a client certificate that is signed by a
 Certificate Authority that has been added and verified (See POST /cas and POST /cas/{id}/verify).
 
 During this process no CSRs are requires as the client should already be in possession of a valid certificate.
-
 */
 func (a *Client) EnrollCa(params *EnrollCaParams, opts ...ClientOption) (*EnrollCaOK, error) {
 	// TODO: Validate the params before sending
@@ -161,10 +241,9 @@ func (a *Client) EnrollCa(params *EnrollCaParams, opts ...ClientOption) (*Enroll
 }
 
 /*
-  EnrollErOtt enrolls an edge router
+EnrollErOtt enrolls an edge router
 
-  Enrolls an edge-router via a one-time-token to establish a certificate based identity.
-
+Enrolls an edge-router via a one-time-token to establish a certificate based identity.
 */
 func (a *Client) EnrollErOtt(params *EnrollErOttParams, opts ...ClientOption) (*EnrollErOttOK, error) {
 	// TODO: Validate the params before sending
@@ -202,12 +281,12 @@ func (a *Client) EnrollErOtt(params *EnrollErOttParams, opts ...ClientOption) (*
 }
 
 /*
-  EnrollOtt enrolls an identity via one time token
+	EnrollOtt enrolls an identity via one time token
 
-  Enroll an identity via a one-time-token which is supplied via a query string parameter. This enrollment method
+	Enroll an identity via a one-time-token which is supplied via a query string parameter. This enrollment method
+
 expects a PEM encoded CSRs to be provided for fulfillment. It is up to the enrolling identity to manage the
 private key backing the CSR request.
-
 */
 func (a *Client) EnrollOtt(params *EnrollOttParams, opts ...ClientOption) (*EnrollOttOK, error) {
 	// TODO: Validate the params before sending
@@ -245,15 +324,15 @@ func (a *Client) EnrollOtt(params *EnrollOttParams, opts ...ClientOption) (*Enro
 }
 
 /*
-  EnrollOttCa enrolls an identity via one time token with a pre exchanged client certificate
+	EnrollOttCa enrolls an identity via one time token with a pre exchanged client certificate
 
-  Enroll an identity via a one-time-token that also requires a pre-exchanged client certificate to match a
+	Enroll an identity via a one-time-token that also requires a pre-exchanged client certificate to match a
+
 Certificate Authority that has been added and verified (See POST /cas and POST /cas{id}/verify). The client
 must present a client certificate signed by CA associated with the enrollment. This enrollment is similar to
 CA auto enrollment except that is required the identity to be pre-created.
 
 As the client certificate has been pre-exchanged there is no CSR input to this enrollment method.
-
 */
 func (a *Client) EnrollOttCa(params *EnrollOttCaParams, opts ...ClientOption) (*EnrollOttCaOK, error) {
 	// TODO: Validate the params before sending
@@ -291,10 +370,9 @@ func (a *Client) EnrollOttCa(params *EnrollOttCaParams, opts ...ClientOption) (*
 }
 
 /*
-  EnrollUpdb enrolls an identity via one time token
+EnrollUpdb enrolls an identity via one time token
 
-  Enrolls an identity via a one-time-token to establish an initial username and password combination
-
+Enrolls an identity via a one-time-token to establish an initial username and password combination
 */
 func (a *Client) EnrollUpdb(params *EnrollUpdbParams, opts ...ClientOption) (*EnrollUpdbOK, error) {
 	// TODO: Validate the params before sending
@@ -332,12 +410,12 @@ func (a *Client) EnrollUpdb(params *EnrollUpdbParams, opts ...ClientOption) (*En
 }
 
 /*
-  EnrollmentChallenge allows verification of a controller or cluster of controllers as being the valid target for enrollment
+	EnrollmentChallenge allows verification of a controller or cluster of controllers as being the valid target for enrollment
 
-  A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will
+	A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will
+
 be used to sign the nonce. The resulting signature may be validated with the associated public key in order
 to verify a networks identity during enrollment. The nonce must be a valid formatted UUID.
-
 */
 func (a *Client) EnrollmentChallenge(params *EnrollmentChallengeParams, opts ...ClientOption) (*EnrollmentChallengeOK, error) {
 	// TODO: Validate the params before sending
@@ -375,9 +453,10 @@ func (a *Client) EnrollmentChallenge(params *EnrollmentChallengeParams, opts ...
 }
 
 /*
-  ExtendRouterEnrollment extends the life of a currently enrolled router s certificates
+	ExtendRouterEnrollment extends the life of a currently enrolled router s certificates
 
-  Allows a router to extend its certificates' expiration date by
+	Allows a router to extend its certificates' expiration date by
+
 using its current and valid client certificate to submit a CSR. This CSR may
 be passed in using a new private key, thus allowing private key rotation or swapping.
 
@@ -386,7 +465,6 @@ response. The previous client certificate is rendered invalid for use with the c
 has not expired.
 
 This request must be made using the existing, valid, client certificate.
-
 */
 func (a *Client) ExtendRouterEnrollment(params *ExtendRouterEnrollmentParams, opts ...ClientOption) (*ExtendRouterEnrollmentOK, error) {
 	// TODO: Validate the params before sending
@@ -424,12 +502,12 @@ func (a *Client) ExtendRouterEnrollment(params *ExtendRouterEnrollmentParams, op
 }
 
 /*
-  GetEnrollmentJwks lists JSON web keys associated with enrollment
+	GetEnrollmentJwks lists JSON web keys associated with enrollment
 
-  Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used
+	Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used
+
 to sign and co-sign enrollment JWTs. They can be verified through a challenge endpoint, using the public keys
 from this endpoint to verify the target machine has possession of the related private key.
-
 */
 func (a *Client) GetEnrollmentJwks(params *GetEnrollmentJwksParams, opts ...ClientOption) (*GetEnrollmentJwksOK, error) {
 	// TODO: Validate the params before sending

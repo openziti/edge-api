@@ -30,6 +30,7 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *CreateConfigReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /configs] createConfig", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewCreateConfigCreated() *CreateConfigCreated {
 	return &CreateConfigCreated{}
 }
 
-/* CreateConfigCreated describes a response with status code 201, with default header values.
+/*
+CreateConfigCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -89,9 +91,46 @@ type CreateConfigCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /configs][%d] createConfigCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create config created response has a 2xx status code
+func (o *CreateConfigCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create config created response has a 3xx status code
+func (o *CreateConfigCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config created response has a 4xx status code
+func (o *CreateConfigCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create config created response has a 5xx status code
+func (o *CreateConfigCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config created response a status code equal to that given
+func (o *CreateConfigCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create config created response
+func (o *CreateConfigCreated) Code() int {
+	return 201
+}
+
+func (o *CreateConfigCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigCreated %s", 201, payload)
+}
+
+func (o *CreateConfigCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigCreated %s", 201, payload)
+}
+
 func (o *CreateConfigCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewCreateConfigBadRequest() *CreateConfigBadRequest {
 	return &CreateConfigBadRequest{}
 }
 
-/* CreateConfigBadRequest describes a response with status code 400, with default header values.
+/*
+CreateConfigBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type CreateConfigBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /configs][%d] createConfigBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create config bad request response has a 2xx status code
+func (o *CreateConfigBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config bad request response has a 3xx status code
+func (o *CreateConfigBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config bad request response has a 4xx status code
+func (o *CreateConfigBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create config bad request response has a 5xx status code
+func (o *CreateConfigBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config bad request response a status code equal to that given
+func (o *CreateConfigBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create config bad request response
+func (o *CreateConfigBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateConfigBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigBadRequest %s", 400, payload)
+}
+
+func (o *CreateConfigBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigBadRequest %s", 400, payload)
+}
+
 func (o *CreateConfigBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewCreateConfigUnauthorized() *CreateConfigUnauthorized {
 	return &CreateConfigUnauthorized{}
 }
 
-/* CreateConfigUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateConfigUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type CreateConfigUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /configs][%d] createConfigUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create config unauthorized response has a 2xx status code
+func (o *CreateConfigUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config unauthorized response has a 3xx status code
+func (o *CreateConfigUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config unauthorized response has a 4xx status code
+func (o *CreateConfigUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create config unauthorized response has a 5xx status code
+func (o *CreateConfigUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config unauthorized response a status code equal to that given
+func (o *CreateConfigUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create config unauthorized response
+func (o *CreateConfigUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateConfigUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigUnauthorized %s", 401, payload)
+}
+
+func (o *CreateConfigUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigUnauthorized %s", 401, payload)
+}
+
 func (o *CreateConfigUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewCreateConfigTooManyRequests() *CreateConfigTooManyRequests {
 	return &CreateConfigTooManyRequests{}
 }
 
-/* CreateConfigTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateConfigTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type CreateConfigTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /configs][%d] createConfigTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create config too many requests response has a 2xx status code
+func (o *CreateConfigTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config too many requests response has a 3xx status code
+func (o *CreateConfigTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config too many requests response has a 4xx status code
+func (o *CreateConfigTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create config too many requests response has a 5xx status code
+func (o *CreateConfigTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config too many requests response a status code equal to that given
+func (o *CreateConfigTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create config too many requests response
+func (o *CreateConfigTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateConfigTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateConfigTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /configs][%d] createConfigTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateConfigTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -53,12 +53,12 @@ func NewPatchConfig(ctx *middleware.Context, handler PatchConfigHandler) *PatchC
 	return &PatchConfig{Context: ctx, Handler: handler}
 }
 
-/* PatchConfig swagger:route PATCH /configs/{id} Config patchConfig
+/*
+	PatchConfig swagger:route PATCH /configs/{id} Config patchConfig
 
-Update the supplied fields on a config
+# Update the supplied fields on a config
 
 Update the supplied fields on a config. Requires admin access.
-
 */
 type PatchConfig struct {
 	Context *middleware.Context

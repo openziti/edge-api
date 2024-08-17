@@ -181,6 +181,11 @@ func (m *Jwk) contextValidateOth(ctx context.Context, formats strfmt.Registry) e
 	for i := 0; i < len(m.Oth); i++ {
 
 		if m.Oth[i] != nil {
+
+			if swag.IsZero(m.Oth[i]) { // not required
+				return nil
+			}
+
 			if err := m.Oth[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("oth" + "." + strconv.Itoa(i))

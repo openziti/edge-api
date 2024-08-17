@@ -30,6 +30,7 @@ package edge_router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge-routers/{id}] deleteEdgeRouter", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewDeleteEdgeRouterOK() *DeleteEdgeRouterOK {
 	return &DeleteEdgeRouterOK{}
 }
 
-/* DeleteEdgeRouterOK describes a response with status code 200, with default header values.
+/*
+DeleteEdgeRouterOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -95,9 +97,46 @@ type DeleteEdgeRouterOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteEdgeRouterOK) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete edge router o k response has a 2xx status code
+func (o *DeleteEdgeRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete edge router o k response has a 3xx status code
+func (o *DeleteEdgeRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router o k response has a 4xx status code
+func (o *DeleteEdgeRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete edge router o k response has a 5xx status code
+func (o *DeleteEdgeRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router o k response a status code equal to that given
+func (o *DeleteEdgeRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete edge router o k response
+func (o *DeleteEdgeRouterOK) Code() int {
+	return 200
+}
+
+func (o *DeleteEdgeRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterOK %s", 200, payload)
+}
+
+func (o *DeleteEdgeRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterOK %s", 200, payload)
+}
+
 func (o *DeleteEdgeRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewDeleteEdgeRouterBadRequest() *DeleteEdgeRouterBadRequest {
 	return &DeleteEdgeRouterBadRequest{}
 }
 
-/* DeleteEdgeRouterBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteEdgeRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type DeleteEdgeRouterBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete edge router bad request response has a 2xx status code
+func (o *DeleteEdgeRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router bad request response has a 3xx status code
+func (o *DeleteEdgeRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router bad request response has a 4xx status code
+func (o *DeleteEdgeRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router bad request response has a 5xx status code
+func (o *DeleteEdgeRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router bad request response a status code equal to that given
+func (o *DeleteEdgeRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete edge router bad request response
+func (o *DeleteEdgeRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteEdgeRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterBadRequest %s", 400, payload)
+}
+
+func (o *DeleteEdgeRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterBadRequest %s", 400, payload)
+}
+
 func (o *DeleteEdgeRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewDeleteEdgeRouterUnauthorized() *DeleteEdgeRouterUnauthorized {
 	return &DeleteEdgeRouterUnauthorized{}
 }
 
-/* DeleteEdgeRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteEdgeRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type DeleteEdgeRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete edge router unauthorized response has a 2xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router unauthorized response has a 3xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router unauthorized response has a 4xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router unauthorized response has a 5xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router unauthorized response a status code equal to that given
+func (o *DeleteEdgeRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete edge router unauthorized response
+func (o *DeleteEdgeRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteEdgeRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteEdgeRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteEdgeRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewDeleteEdgeRouterConflict() *DeleteEdgeRouterConflict {
 	return &DeleteEdgeRouterConflict{}
 }
 
-/* DeleteEdgeRouterConflict describes a response with status code 409, with default header values.
+/*
+DeleteEdgeRouterConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
@@ -191,9 +307,46 @@ type DeleteEdgeRouterConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterConflict) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete edge router conflict response has a 2xx status code
+func (o *DeleteEdgeRouterConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router conflict response has a 3xx status code
+func (o *DeleteEdgeRouterConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router conflict response has a 4xx status code
+func (o *DeleteEdgeRouterConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router conflict response has a 5xx status code
+func (o *DeleteEdgeRouterConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router conflict response a status code equal to that given
+func (o *DeleteEdgeRouterConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete edge router conflict response
+func (o *DeleteEdgeRouterConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteEdgeRouterConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterConflict %s", 409, payload)
+}
+
+func (o *DeleteEdgeRouterConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterConflict %s", 409, payload)
+}
+
 func (o *DeleteEdgeRouterConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewDeleteEdgeRouterTooManyRequests() *DeleteEdgeRouterTooManyRequests {
 	return &DeleteEdgeRouterTooManyRequests{}
 }
 
-/* DeleteEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type DeleteEdgeRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete edge router too many requests response has a 2xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router too many requests response has a 3xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router too many requests response has a 4xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router too many requests response has a 5xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router too many requests response a status code equal to that given
+func (o *DeleteEdgeRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete edge router too many requests response
+func (o *DeleteEdgeRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteEdgeRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteEdgeRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

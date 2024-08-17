@@ -40,7 +40,8 @@ import (
 // PatchServiceEdgeRouterPolicyOKCode is the HTTP code returned for type PatchServiceEdgeRouterPolicyOK
 const PatchServiceEdgeRouterPolicyOKCode int = 200
 
-/*PatchServiceEdgeRouterPolicyOK The patch request was successful and the resource has been altered
+/*
+PatchServiceEdgeRouterPolicyOK The patch request was successful and the resource has been altered
 
 swagger:response patchServiceEdgeRouterPolicyOK
 */
@@ -84,7 +85,8 @@ func (o *PatchServiceEdgeRouterPolicyOK) WriteResponse(rw http.ResponseWriter, p
 // PatchServiceEdgeRouterPolicyBadRequestCode is the HTTP code returned for type PatchServiceEdgeRouterPolicyBadRequest
 const PatchServiceEdgeRouterPolicyBadRequestCode int = 400
 
-/*PatchServiceEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+PatchServiceEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchServiceEdgeRouterPolicyBadRequest
 */
@@ -128,7 +130,8 @@ func (o *PatchServiceEdgeRouterPolicyBadRequest) WriteResponse(rw http.ResponseW
 // PatchServiceEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type PatchServiceEdgeRouterPolicyUnauthorized
 const PatchServiceEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*PatchServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+PatchServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchServiceEdgeRouterPolicyUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *PatchServiceEdgeRouterPolicyUnauthorized) WriteResponse(rw http.Respons
 // PatchServiceEdgeRouterPolicyNotFoundCode is the HTTP code returned for type PatchServiceEdgeRouterPolicyNotFound
 const PatchServiceEdgeRouterPolicyNotFoundCode int = 404
 
-/*PatchServiceEdgeRouterPolicyNotFound The requested resource does not exist
+/*
+PatchServiceEdgeRouterPolicyNotFound The requested resource does not exist
 
 swagger:response patchServiceEdgeRouterPolicyNotFound
 */
@@ -216,7 +220,8 @@ func (o *PatchServiceEdgeRouterPolicyNotFound) WriteResponse(rw http.ResponseWri
 // PatchServiceEdgeRouterPolicyTooManyRequestsCode is the HTTP code returned for type PatchServiceEdgeRouterPolicyTooManyRequests
 const PatchServiceEdgeRouterPolicyTooManyRequestsCode int = 429
 
-/*PatchServiceEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+PatchServiceEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchServiceEdgeRouterPolicyTooManyRequests
 */

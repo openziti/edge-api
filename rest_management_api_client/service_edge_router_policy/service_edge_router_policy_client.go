@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new service edge router policy API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new service edge router policy API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new service edge router policy API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -74,9 +100,9 @@ type ClientService interface {
 }
 
 /*
-  CreateServiceEdgeRouterPolicy creates a service edge router policy resource
+CreateServiceEdgeRouterPolicy creates a service edge router policy resource
 
-  Create a service edge router policy resource. Requires admin access.
+Create a service edge router policy resource. Requires admin access.
 */
 func (a *Client) CreateServiceEdgeRouterPolicy(params *CreateServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateServiceEdgeRouterPolicyCreated, error) {
 	// TODO: Validate the params before sending
@@ -115,9 +141,9 @@ func (a *Client) CreateServiceEdgeRouterPolicy(params *CreateServiceEdgeRouterPo
 }
 
 /*
-  DeleteServiceEdgeRouterPolicy deletes a service edge policy
+DeleteServiceEdgeRouterPolicy deletes a service edge policy
 
-  Delete a service edge policy by id. Requires admin access.
+Delete a service edge policy by id. Requires admin access.
 */
 func (a *Client) DeleteServiceEdgeRouterPolicy(params *DeleteServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServiceEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -156,9 +182,9 @@ func (a *Client) DeleteServiceEdgeRouterPolicy(params *DeleteServiceEdgeRouterPo
 }
 
 /*
-  DetailServiceEdgeRouterPolicy retrieves a single service edge policy
+DetailServiceEdgeRouterPolicy retrieves a single service edge policy
 
-  Retrieves a single service edge policy by id. Requires admin access.
+Retrieves a single service edge policy by id. Requires admin access.
 */
 func (a *Client) DetailServiceEdgeRouterPolicy(params *DetailServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailServiceEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -197,10 +223,9 @@ func (a *Client) DetailServiceEdgeRouterPolicy(params *DetailServiceEdgeRouterPo
 }
 
 /*
-  ListServiceEdgeRouterPolicies lists service edge router policies
+ListServiceEdgeRouterPolicies lists service edge router policies
 
-  Retrieves a list of service edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of service edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServiceEdgeRouterPolicies(params *ListServiceEdgeRouterPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRouterPoliciesOK, error) {
 	// TODO: Validate the params before sending
@@ -239,9 +264,9 @@ func (a *Client) ListServiceEdgeRouterPolicies(params *ListServiceEdgeRouterPoli
 }
 
 /*
-  ListServiceEdgeRouterPolicyEdgeRouters lists the edge routers that a service edge router policy applies to
+ListServiceEdgeRouterPolicyEdgeRouters lists the edge routers that a service edge router policy applies to
 
-  List the edge routers that a service edge router policy applies to
+List the edge routers that a service edge router policy applies to
 */
 func (a *Client) ListServiceEdgeRouterPolicyEdgeRouters(params *ListServiceEdgeRouterPolicyEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRouterPolicyEdgeRoutersOK, error) {
 	// TODO: Validate the params before sending
@@ -280,9 +305,9 @@ func (a *Client) ListServiceEdgeRouterPolicyEdgeRouters(params *ListServiceEdgeR
 }
 
 /*
-  ListServiceEdgeRouterPolicyServices lists the services that a service edge router policy applies to
+ListServiceEdgeRouterPolicyServices lists the services that a service edge router policy applies to
 
-  List the services that a service edge router policy applies to
+List the services that a service edge router policy applies to
 */
 func (a *Client) ListServiceEdgeRouterPolicyServices(params *ListServiceEdgeRouterPolicyServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRouterPolicyServicesOK, error) {
 	// TODO: Validate the params before sending
@@ -321,9 +346,9 @@ func (a *Client) ListServiceEdgeRouterPolicyServices(params *ListServiceEdgeRout
 }
 
 /*
-  PatchServiceEdgeRouterPolicy updates the supplied fields on a service edge policy
+PatchServiceEdgeRouterPolicy updates the supplied fields on a service edge policy
 
-  Update the supplied fields on a service edge policy. Requires admin access.
+Update the supplied fields on a service edge policy. Requires admin access.
 */
 func (a *Client) PatchServiceEdgeRouterPolicy(params *PatchServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServiceEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -362,9 +387,9 @@ func (a *Client) PatchServiceEdgeRouterPolicy(params *PatchServiceEdgeRouterPoli
 }
 
 /*
-  UpdateServiceEdgeRouterPolicy updates all fields on a service edge policy
+UpdateServiceEdgeRouterPolicy updates all fields on a service edge policy
 
-  Update all fields on a service edge policy by id. Requires admin access.
+Update all fields on a service edge policy by id. Requires admin access.
 */
 func (a *Client) UpdateServiceEdgeRouterPolicy(params *UpdateServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateServiceEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending

@@ -30,6 +30,7 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *UpdateTransitRouterReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /transit-routers/{id}] updateTransitRouter", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewUpdateTransitRouterOK() *UpdateTransitRouterOK {
 	return &UpdateTransitRouterOK{}
 }
 
-/* UpdateTransitRouterOK describes a response with status code 200, with default header values.
+/*
+UpdateTransitRouterOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type UpdateTransitRouterOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateTransitRouterOK) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update transit router o k response has a 2xx status code
+func (o *UpdateTransitRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update transit router o k response has a 3xx status code
+func (o *UpdateTransitRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router o k response has a 4xx status code
+func (o *UpdateTransitRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update transit router o k response has a 5xx status code
+func (o *UpdateTransitRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router o k response a status code equal to that given
+func (o *UpdateTransitRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update transit router o k response
+func (o *UpdateTransitRouterOK) Code() int {
+	return 200
+}
+
+func (o *UpdateTransitRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterOK %s", 200, payload)
+}
+
+func (o *UpdateTransitRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterOK %s", 200, payload)
+}
+
 func (o *UpdateTransitRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewUpdateTransitRouterBadRequest() *UpdateTransitRouterBadRequest {
 	return &UpdateTransitRouterBadRequest{}
 }
 
-/* UpdateTransitRouterBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateTransitRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type UpdateTransitRouterBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update transit router bad request response has a 2xx status code
+func (o *UpdateTransitRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router bad request response has a 3xx status code
+func (o *UpdateTransitRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router bad request response has a 4xx status code
+func (o *UpdateTransitRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router bad request response has a 5xx status code
+func (o *UpdateTransitRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router bad request response a status code equal to that given
+func (o *UpdateTransitRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update transit router bad request response
+func (o *UpdateTransitRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateTransitRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterBadRequest %s", 400, payload)
+}
+
+func (o *UpdateTransitRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterBadRequest %s", 400, payload)
+}
+
 func (o *UpdateTransitRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewUpdateTransitRouterUnauthorized() *UpdateTransitRouterUnauthorized {
 	return &UpdateTransitRouterUnauthorized{}
 }
 
-/* UpdateTransitRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateTransitRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type UpdateTransitRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update transit router unauthorized response has a 2xx status code
+func (o *UpdateTransitRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router unauthorized response has a 3xx status code
+func (o *UpdateTransitRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router unauthorized response has a 4xx status code
+func (o *UpdateTransitRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router unauthorized response has a 5xx status code
+func (o *UpdateTransitRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router unauthorized response a status code equal to that given
+func (o *UpdateTransitRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update transit router unauthorized response
+func (o *UpdateTransitRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateTransitRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateTransitRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewUpdateTransitRouterNotFound() *UpdateTransitRouterNotFound {
 	return &UpdateTransitRouterNotFound{}
 }
 
-/* UpdateTransitRouterNotFound describes a response with status code 404, with default header values.
+/*
+UpdateTransitRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type UpdateTransitRouterNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterNotFound) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update transit router not found response has a 2xx status code
+func (o *UpdateTransitRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router not found response has a 3xx status code
+func (o *UpdateTransitRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router not found response has a 4xx status code
+func (o *UpdateTransitRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router not found response has a 5xx status code
+func (o *UpdateTransitRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router not found response a status code equal to that given
+func (o *UpdateTransitRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update transit router not found response
+func (o *UpdateTransitRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateTransitRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterNotFound %s", 404, payload)
+}
+
+func (o *UpdateTransitRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterNotFound %s", 404, payload)
+}
+
 func (o *UpdateTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewUpdateTransitRouterTooManyRequests() *UpdateTransitRouterTooManyRequests
 	return &UpdateTransitRouterTooManyRequests{}
 }
 
-/* UpdateTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateTransitRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type UpdateTransitRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update transit router too many requests response has a 2xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router too many requests response has a 3xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router too many requests response has a 4xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router too many requests response has a 5xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router too many requests response a status code equal to that given
+func (o *UpdateTransitRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update transit router too many requests response
+func (o *UpdateTransitRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateTransitRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateTransitRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

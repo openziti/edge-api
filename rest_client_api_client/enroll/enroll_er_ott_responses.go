@@ -30,6 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -60,7 +61,7 @@ func (o *EnrollErOttReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enroll/erott] enrollErOtt", response, response.Code())
 	}
 }
 
@@ -69,7 +70,8 @@ func NewEnrollErOttOK() *EnrollErOttOK {
 	return &EnrollErOttOK{}
 }
 
-/* EnrollErOttOK describes a response with status code 200, with default header values.
+/*
+EnrollErOttOK describes a response with status code 200, with default header values.
 
 A response containing the edge routers signed certificates (server chain, server cert, CAs).
 */
@@ -77,9 +79,46 @@ type EnrollErOttOK struct {
 	Payload *rest_model.EnrollmentCertsEnvelope
 }
 
-func (o *EnrollErOttOK) Error() string {
-	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this enroll er ott o k response has a 2xx status code
+func (o *EnrollErOttOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this enroll er ott o k response has a 3xx status code
+func (o *EnrollErOttOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll er ott o k response has a 4xx status code
+func (o *EnrollErOttOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll er ott o k response has a 5xx status code
+func (o *EnrollErOttOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll er ott o k response a status code equal to that given
+func (o *EnrollErOttOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the enroll er ott o k response
+func (o *EnrollErOttOK) Code() int {
+	return 200
+}
+
+func (o *EnrollErOttOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttOK %s", 200, payload)
+}
+
+func (o *EnrollErOttOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttOK %s", 200, payload)
+}
+
 func (o *EnrollErOttOK) GetPayload() *rest_model.EnrollmentCertsEnvelope {
 	return o.Payload
 }
@@ -101,7 +140,8 @@ func NewEnrollErOttTooManyRequests() *EnrollErOttTooManyRequests {
 	return &EnrollErOttTooManyRequests{}
 }
 
-/* EnrollErOttTooManyRequests describes a response with status code 429, with default header values.
+/*
+EnrollErOttTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -109,9 +149,46 @@ type EnrollErOttTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollErOttTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this enroll er ott too many requests response has a 2xx status code
+func (o *EnrollErOttTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll er ott too many requests response has a 3xx status code
+func (o *EnrollErOttTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll er ott too many requests response has a 4xx status code
+func (o *EnrollErOttTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll er ott too many requests response has a 5xx status code
+func (o *EnrollErOttTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll er ott too many requests response a status code equal to that given
+func (o *EnrollErOttTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the enroll er ott too many requests response
+func (o *EnrollErOttTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *EnrollErOttTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttTooManyRequests %s", 429, payload)
+}
+
+func (o *EnrollErOttTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttTooManyRequests %s", 429, payload)
+}
+
 func (o *EnrollErOttTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

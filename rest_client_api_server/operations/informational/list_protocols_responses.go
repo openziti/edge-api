@@ -40,7 +40,8 @@ import (
 // ListProtocolsOKCode is the HTTP code returned for type ListProtocolsOK
 const ListProtocolsOKCode int = 200
 
-/*ListProtocolsOK A list of supported Edge protocols
+/*
+ListProtocolsOK A list of supported Edge protocols
 
 swagger:response listProtocolsOK
 */
@@ -84,7 +85,8 @@ func (o *ListProtocolsOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // ListProtocolsTooManyRequestsCode is the HTTP code returned for type ListProtocolsTooManyRequests
 const ListProtocolsTooManyRequestsCode int = 429
 
-/*ListProtocolsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListProtocolsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listProtocolsTooManyRequests
 */

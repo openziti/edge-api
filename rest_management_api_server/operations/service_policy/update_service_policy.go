@@ -53,12 +53,12 @@ func NewUpdateServicePolicy(ctx *middleware.Context, handler UpdateServicePolicy
 	return &UpdateServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* UpdateServicePolicy swagger:route PUT /service-policies/{id} Service Policy updateServicePolicy
+/*
+	UpdateServicePolicy swagger:route PUT /service-policies/{id} Service Policy updateServicePolicy
 
-Update all fields on a service policy
+# Update all fields on a service policy
 
 Update all fields on a service policy by id. Requires admin access.
-
 */
 type UpdateServicePolicy struct {
 	Context *middleware.Context

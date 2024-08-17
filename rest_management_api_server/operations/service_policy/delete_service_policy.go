@@ -53,12 +53,12 @@ func NewDeleteServicePolicy(ctx *middleware.Context, handler DeleteServicePolicy
 	return &DeleteServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* DeleteServicePolicy swagger:route DELETE /service-policies/{id} Service Policy deleteServicePolicy
+/*
+	DeleteServicePolicy swagger:route DELETE /service-policies/{id} Service Policy deleteServicePolicy
 
-Delete a service policy
+# Delete a service policy
 
 Delete a service policy by id. Requires admin access.
-
 */
 type DeleteServicePolicy struct {
 	Context *middleware.Context

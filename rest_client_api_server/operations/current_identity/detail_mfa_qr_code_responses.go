@@ -38,7 +38,8 @@ import (
 // DetailMfaQrCodeOKCode is the HTTP code returned for type DetailMfaQrCodeOK
 const DetailMfaQrCodeOKCode int = 200
 
-/*DetailMfaQrCodeOK OK
+/*
+DetailMfaQrCodeOK OK
 
 swagger:response detailMfaQrCodeOK
 */
@@ -62,7 +63,8 @@ func (o *DetailMfaQrCodeOK) WriteResponse(rw http.ResponseWriter, producer runti
 // DetailMfaQrCodeNotFoundCode is the HTTP code returned for type DetailMfaQrCodeNotFound
 const DetailMfaQrCodeNotFoundCode int = 404
 
-/*DetailMfaQrCodeNotFound No MFA enrollment or MFA enrollment is completed
+/*
+DetailMfaQrCodeNotFound No MFA enrollment or MFA enrollment is completed
 
 swagger:response detailMfaQrCodeNotFound
 */

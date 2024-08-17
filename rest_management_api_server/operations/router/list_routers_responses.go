@@ -40,7 +40,8 @@ import (
 // ListRoutersOKCode is the HTTP code returned for type ListRoutersOK
 const ListRoutersOKCode int = 200
 
-/*ListRoutersOK A list of specifications
+/*
+ListRoutersOK A list of specifications
 
 swagger:response listRoutersOK
 */
@@ -84,7 +85,8 @@ func (o *ListRoutersOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // ListRoutersBadRequestCode is the HTTP code returned for type ListRoutersBadRequest
 const ListRoutersBadRequestCode int = 400
 
-/*ListRoutersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListRoutersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listRoutersBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListRoutersBadRequest) WriteResponse(rw http.ResponseWriter, producer r
 // ListRoutersUnauthorizedCode is the HTTP code returned for type ListRoutersUnauthorized
 const ListRoutersUnauthorizedCode int = 401
 
-/*ListRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listRoutersUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListRoutersUnauthorized) WriteResponse(rw http.ResponseWriter, producer
 // ListRoutersTooManyRequestsCode is the HTTP code returned for type ListRoutersTooManyRequests
 const ListRoutersTooManyRequestsCode int = 429
 
-/*ListRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listRoutersTooManyRequests
 */

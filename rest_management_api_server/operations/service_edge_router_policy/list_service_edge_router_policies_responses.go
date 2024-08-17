@@ -40,7 +40,8 @@ import (
 // ListServiceEdgeRouterPoliciesOKCode is the HTTP code returned for type ListServiceEdgeRouterPoliciesOK
 const ListServiceEdgeRouterPoliciesOKCode int = 200
 
-/*ListServiceEdgeRouterPoliciesOK A list of service edge router policies
+/*
+ListServiceEdgeRouterPoliciesOK A list of service edge router policies
 
 swagger:response listServiceEdgeRouterPoliciesOK
 */
@@ -84,7 +85,8 @@ func (o *ListServiceEdgeRouterPoliciesOK) WriteResponse(rw http.ResponseWriter, 
 // ListServiceEdgeRouterPoliciesBadRequestCode is the HTTP code returned for type ListServiceEdgeRouterPoliciesBadRequest
 const ListServiceEdgeRouterPoliciesBadRequestCode int = 400
 
-/*ListServiceEdgeRouterPoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListServiceEdgeRouterPoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServiceEdgeRouterPoliciesBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListServiceEdgeRouterPoliciesBadRequest) WriteResponse(rw http.Response
 // ListServiceEdgeRouterPoliciesUnauthorizedCode is the HTTP code returned for type ListServiceEdgeRouterPoliciesUnauthorized
 const ListServiceEdgeRouterPoliciesUnauthorizedCode int = 401
 
-/*ListServiceEdgeRouterPoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServiceEdgeRouterPoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServiceEdgeRouterPoliciesUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListServiceEdgeRouterPoliciesUnauthorized) WriteResponse(rw http.Respon
 // ListServiceEdgeRouterPoliciesTooManyRequestsCode is the HTTP code returned for type ListServiceEdgeRouterPoliciesTooManyRequests
 const ListServiceEdgeRouterPoliciesTooManyRequestsCode int = 429
 
-/*ListServiceEdgeRouterPoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServiceEdgeRouterPoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServiceEdgeRouterPoliciesTooManyRequests
 */

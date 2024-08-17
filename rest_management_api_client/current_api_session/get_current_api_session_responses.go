@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -60,7 +61,7 @@ func (o *GetCurrentAPISessionReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-api-session] getCurrentAPISession", response, response.Code())
 	}
 }
 
@@ -69,7 +70,8 @@ func NewGetCurrentAPISessionOK() *GetCurrentAPISessionOK {
 	return &GetCurrentAPISessionOK{}
 }
 
-/* GetCurrentAPISessionOK describes a response with status code 200, with default header values.
+/*
+GetCurrentAPISessionOK describes a response with status code 200, with default header values.
 
 The API session associated with the session used to issue the request
 */
@@ -77,9 +79,46 @@ type GetCurrentAPISessionOK struct {
 	Payload *rest_model.CurrentAPISessionDetailEnvelope
 }
 
-func (o *GetCurrentAPISessionOK) Error() string {
-	return fmt.Sprintf("[GET /current-api-session][%d] getCurrentApiSessionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this get current Api session o k response has a 2xx status code
+func (o *GetCurrentAPISessionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this get current Api session o k response has a 3xx status code
+func (o *GetCurrentAPISessionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current Api session o k response has a 4xx status code
+func (o *GetCurrentAPISessionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current Api session o k response has a 5xx status code
+func (o *GetCurrentAPISessionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current Api session o k response a status code equal to that given
+func (o *GetCurrentAPISessionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get current Api session o k response
+func (o *GetCurrentAPISessionOK) Code() int {
+	return 200
+}
+
+func (o *GetCurrentAPISessionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session][%d] getCurrentApiSessionOK %s", 200, payload)
+}
+
+func (o *GetCurrentAPISessionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session][%d] getCurrentApiSessionOK %s", 200, payload)
+}
+
 func (o *GetCurrentAPISessionOK) GetPayload() *rest_model.CurrentAPISessionDetailEnvelope {
 	return o.Payload
 }
@@ -101,7 +140,8 @@ func NewGetCurrentAPISessionUnauthorized() *GetCurrentAPISessionUnauthorized {
 	return &GetCurrentAPISessionUnauthorized{}
 }
 
-/* GetCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
+/*
+GetCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -109,9 +149,46 @@ type GetCurrentAPISessionUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *GetCurrentAPISessionUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-api-session][%d] getCurrentApiSessionUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this get current Api session unauthorized response has a 2xx status code
+func (o *GetCurrentAPISessionUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this get current Api session unauthorized response has a 3xx status code
+func (o *GetCurrentAPISessionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current Api session unauthorized response has a 4xx status code
+func (o *GetCurrentAPISessionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get current Api session unauthorized response has a 5xx status code
+func (o *GetCurrentAPISessionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current Api session unauthorized response a status code equal to that given
+func (o *GetCurrentAPISessionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get current Api session unauthorized response
+func (o *GetCurrentAPISessionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetCurrentAPISessionUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session][%d] getCurrentApiSessionUnauthorized %s", 401, payload)
+}
+
+func (o *GetCurrentAPISessionUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session][%d] getCurrentApiSessionUnauthorized %s", 401, payload)
+}
+
 func (o *GetCurrentAPISessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -40,7 +40,8 @@ import (
 // DetailAuthenticatorOKCode is the HTTP code returned for type DetailAuthenticatorOK
 const DetailAuthenticatorOKCode int = 200
 
-/*DetailAuthenticatorOK A singular authenticator resource
+/*
+DetailAuthenticatorOK A singular authenticator resource
 
 swagger:response detailAuthenticatorOK
 */
@@ -84,7 +85,8 @@ func (o *DetailAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer r
 // DetailAuthenticatorUnauthorizedCode is the HTTP code returned for type DetailAuthenticatorUnauthorized
 const DetailAuthenticatorUnauthorizedCode int = 401
 
-/*DetailAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailAuthenticatorUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // DetailAuthenticatorNotFoundCode is the HTTP code returned for type DetailAuthenticatorNotFound
 const DetailAuthenticatorNotFoundCode int = 404
 
-/*DetailAuthenticatorNotFound The requested resource does not exist
+/*
+DetailAuthenticatorNotFound The requested resource does not exist
 
 swagger:response detailAuthenticatorNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, prod
 // DetailAuthenticatorTooManyRequestsCode is the HTTP code returned for type DetailAuthenticatorTooManyRequests
 const DetailAuthenticatorTooManyRequestsCode int = 429
 
-/*DetailAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailAuthenticatorTooManyRequests
 */

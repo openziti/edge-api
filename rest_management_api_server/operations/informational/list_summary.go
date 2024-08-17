@@ -53,12 +53,12 @@ func NewListSummary(ctx *middleware.Context, handler ListSummaryHandler) *ListSu
 	return &ListSummary{Context: ctx, Handler: handler}
 }
 
-/* ListSummary swagger:route GET /summary Informational listSummary
+/*
+	ListSummary swagger:route GET /summary Informational listSummary
 
-Returns a list of accessible resource counts
+# Returns a list of accessible resource counts
 
 This endpoint is usefull for UIs that wish to display UI elements with counts.
-
 */
 type ListSummary struct {
 	Context *middleware.Context

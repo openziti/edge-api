@@ -30,6 +30,7 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *DetailMfaRecoveryCodesReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-identity/mfa/recovery-codes] detailMfaRecoveryCodes", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewDetailMfaRecoveryCodesOK() *DetailMfaRecoveryCodesOK {
 	return &DetailMfaRecoveryCodesOK{}
 }
 
-/* DetailMfaRecoveryCodesOK describes a response with status code 200, with default header values.
+/*
+DetailMfaRecoveryCodesOK describes a response with status code 200, with default header values.
 
 The recovery codes of an MFA enrollment
 */
@@ -83,9 +85,46 @@ type DetailMfaRecoveryCodesOK struct {
 	Payload *rest_model.DetailMfaRecoveryCodesEnvelope
 }
 
-func (o *DetailMfaRecoveryCodesOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail mfa recovery codes o k response has a 2xx status code
+func (o *DetailMfaRecoveryCodesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail mfa recovery codes o k response has a 3xx status code
+func (o *DetailMfaRecoveryCodesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail mfa recovery codes o k response has a 4xx status code
+func (o *DetailMfaRecoveryCodesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail mfa recovery codes o k response has a 5xx status code
+func (o *DetailMfaRecoveryCodesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail mfa recovery codes o k response a status code equal to that given
+func (o *DetailMfaRecoveryCodesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail mfa recovery codes o k response
+func (o *DetailMfaRecoveryCodesOK) Code() int {
+	return 200
+}
+
+func (o *DetailMfaRecoveryCodesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesOK %s", 200, payload)
+}
+
+func (o *DetailMfaRecoveryCodesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesOK %s", 200, payload)
+}
+
 func (o *DetailMfaRecoveryCodesOK) GetPayload() *rest_model.DetailMfaRecoveryCodesEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewDetailMfaRecoveryCodesUnauthorized() *DetailMfaRecoveryCodesUnauthorized
 	return &DetailMfaRecoveryCodesUnauthorized{}
 }
 
-/* DetailMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -115,9 +155,46 @@ type DetailMfaRecoveryCodesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailMfaRecoveryCodesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail mfa recovery codes unauthorized response has a 2xx status code
+func (o *DetailMfaRecoveryCodesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail mfa recovery codes unauthorized response has a 3xx status code
+func (o *DetailMfaRecoveryCodesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail mfa recovery codes unauthorized response has a 4xx status code
+func (o *DetailMfaRecoveryCodesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail mfa recovery codes unauthorized response has a 5xx status code
+func (o *DetailMfaRecoveryCodesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail mfa recovery codes unauthorized response a status code equal to that given
+func (o *DetailMfaRecoveryCodesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail mfa recovery codes unauthorized response
+func (o *DetailMfaRecoveryCodesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailMfaRecoveryCodesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesUnauthorized %s", 401, payload)
+}
+
+func (o *DetailMfaRecoveryCodesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesUnauthorized %s", 401, payload)
+}
+
 func (o *DetailMfaRecoveryCodesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewDetailMfaRecoveryCodesNotFound() *DetailMfaRecoveryCodesNotFound {
 	return &DetailMfaRecoveryCodesNotFound{}
 }
 
-/* DetailMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
+/*
+DetailMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -147,9 +225,46 @@ type DetailMfaRecoveryCodesNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailMfaRecoveryCodesNotFound) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail mfa recovery codes not found response has a 2xx status code
+func (o *DetailMfaRecoveryCodesNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail mfa recovery codes not found response has a 3xx status code
+func (o *DetailMfaRecoveryCodesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail mfa recovery codes not found response has a 4xx status code
+func (o *DetailMfaRecoveryCodesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail mfa recovery codes not found response has a 5xx status code
+func (o *DetailMfaRecoveryCodesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail mfa recovery codes not found response a status code equal to that given
+func (o *DetailMfaRecoveryCodesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail mfa recovery codes not found response
+func (o *DetailMfaRecoveryCodesNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailMfaRecoveryCodesNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesNotFound %s", 404, payload)
+}
+
+func (o *DetailMfaRecoveryCodesNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa/recovery-codes][%d] detailMfaRecoveryCodesNotFound %s", 404, payload)
+}
+
 func (o *DetailMfaRecoveryCodesNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

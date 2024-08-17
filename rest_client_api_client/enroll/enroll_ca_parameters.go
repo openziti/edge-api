@@ -76,10 +76,12 @@ func NewEnrollCaParamsWithHTTPClient(client *http.Client) *EnrollCaParams {
 	}
 }
 
-/* EnrollCaParams contains all the parameters to send to the API endpoint
-   for the enroll ca operation.
+/*
+EnrollCaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the enroll ca operation.
+
+	Typically these are written to a http.Request.
 */
 type EnrollCaParams struct {
 	timeout    time.Duration

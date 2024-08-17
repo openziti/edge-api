@@ -53,13 +53,12 @@ func NewEnableIdentity(ctx *middleware.Context, handler EnableIdentityHandler) *
 	return &EnableIdentity{Context: ctx, Handler: handler}
 }
 
-/* EnableIdentity swagger:route POST /identities/{id}/enable Identity enableIdentity
+/*
+	EnableIdentity swagger:route POST /identities/{id}/enable Identity enableIdentity
 
-Clears all disabled state from an identity
+# Clears all disabled state from an identity
 
 Allows an admin to remove disabled statuses from an identity.
-
-
 */
 type EnableIdentity struct {
 	Context *middleware.Context

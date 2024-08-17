@@ -40,7 +40,8 @@ import (
 // ReEnrollAuthenticatorCreatedCode is the HTTP code returned for type ReEnrollAuthenticatorCreated
 const ReEnrollAuthenticatorCreatedCode int = 201
 
-/*ReEnrollAuthenticatorCreated The create request was successful and the resource has been added at the following location
+/*
+ReEnrollAuthenticatorCreated The create request was successful and the resource has been added at the following location
 
 swagger:response reEnrollAuthenticatorCreated
 */
@@ -84,7 +85,8 @@ func (o *ReEnrollAuthenticatorCreated) WriteResponse(rw http.ResponseWriter, pro
 // ReEnrollAuthenticatorUnauthorizedCode is the HTTP code returned for type ReEnrollAuthenticatorUnauthorized
 const ReEnrollAuthenticatorUnauthorizedCode int = 401
 
-/*ReEnrollAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ReEnrollAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response reEnrollAuthenticatorUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *ReEnrollAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter
 // ReEnrollAuthenticatorNotFoundCode is the HTTP code returned for type ReEnrollAuthenticatorNotFound
 const ReEnrollAuthenticatorNotFoundCode int = 404
 
-/*ReEnrollAuthenticatorNotFound The requested resource does not exist
+/*
+ReEnrollAuthenticatorNotFound The requested resource does not exist
 
 swagger:response reEnrollAuthenticatorNotFound
 */
@@ -172,7 +175,8 @@ func (o *ReEnrollAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, pr
 // ReEnrollAuthenticatorTooManyRequestsCode is the HTTP code returned for type ReEnrollAuthenticatorTooManyRequests
 const ReEnrollAuthenticatorTooManyRequestsCode int = 429
 
-/*ReEnrollAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ReEnrollAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response reEnrollAuthenticatorTooManyRequests
 */

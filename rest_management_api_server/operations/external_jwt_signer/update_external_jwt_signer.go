@@ -53,12 +53,12 @@ func NewUpdateExternalJWTSigner(ctx *middleware.Context, handler UpdateExternalJ
 	return &UpdateExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* UpdateExternalJWTSigner swagger:route PUT /external-jwt-signers/{id} External JWT Signer updateExternalJwtSigner
+/*
+	UpdateExternalJWTSigner swagger:route PUT /external-jwt-signers/{id} External JWT Signer updateExternalJwtSigner
 
-Update all fields on an External JWT Signer
+# Update all fields on an External JWT Signer
 
 Update all fields on an External JWT Signer by id. Requires admin access.
-
 */
 type UpdateExternalJWTSigner struct {
 	Context *middleware.Context

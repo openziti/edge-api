@@ -173,6 +173,11 @@ func (m *CaPatch) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *CaPatch) contextValidateExternalIDClaim(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExternalIDClaim != nil {
+
+		if swag.IsZero(m.ExternalIDClaim) { // not required
+			return nil
+		}
+
 		if err := m.ExternalIDClaim.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("externalIdClaim")
@@ -203,6 +208,11 @@ func (m *CaPatch) contextValidateIdentityRoles(ctx context.Context, formats strf
 func (m *CaPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

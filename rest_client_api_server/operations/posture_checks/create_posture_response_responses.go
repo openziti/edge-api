@@ -40,7 +40,8 @@ import (
 // CreatePostureResponseCreatedCode is the HTTP code returned for type CreatePostureResponseCreated
 const CreatePostureResponseCreatedCode int = 201
 
-/*CreatePostureResponseCreated Contains a list of services that have had their timers altered
+/*
+CreatePostureResponseCreated Contains a list of services that have had their timers altered
 
 swagger:response createPostureResponseCreated
 */
@@ -84,7 +85,8 @@ func (o *CreatePostureResponseCreated) WriteResponse(rw http.ResponseWriter, pro
 // CreatePostureResponseBadRequestCode is the HTTP code returned for type CreatePostureResponseBadRequest
 const CreatePostureResponseBadRequestCode int = 400
 
-/*CreatePostureResponseBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreatePostureResponseBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createPostureResponseBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreatePostureResponseBadRequest) WriteResponse(rw http.ResponseWriter, 
 // CreatePostureResponseUnauthorizedCode is the HTTP code returned for type CreatePostureResponseUnauthorized
 const CreatePostureResponseUnauthorizedCode int = 401
 
-/*CreatePostureResponseUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreatePostureResponseUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createPostureResponseUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreatePostureResponseUnauthorized) WriteResponse(rw http.ResponseWriter
 // CreatePostureResponseTooManyRequestsCode is the HTTP code returned for type CreatePostureResponseTooManyRequests
 const CreatePostureResponseTooManyRequestsCode int = 429
 
-/*CreatePostureResponseTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreatePostureResponseTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createPostureResponseTooManyRequests
 */

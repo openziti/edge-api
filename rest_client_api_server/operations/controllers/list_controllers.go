@@ -53,12 +53,12 @@ func NewListControllers(ctx *middleware.Context, handler ListControllersHandler)
 	return &ListControllers{Context: ctx, Handler: handler}
 }
 
-/* ListControllers swagger:route GET /controllers Controllers listControllers
+/*
+	ListControllers swagger:route GET /controllers Controllers listControllers
 
-List controllers
+# List controllers
 
 Retrieves a list of controllers
-
 */
 type ListControllers struct {
 	Context *middleware.Context

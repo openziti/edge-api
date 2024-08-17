@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DeleteCurrentAPISessionCertificateReader) ReadResponse(response runtime
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /current-api-session/certificates/{id}] deleteCurrentApiSessionCertificate", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDeleteCurrentAPISessionCertificateOK() *DeleteCurrentAPISessionCertifica
 	return &DeleteCurrentAPISessionCertificateOK{}
 }
 
-/* DeleteCurrentAPISessionCertificateOK describes a response with status code 200, with default header values.
+/*
+DeleteCurrentAPISessionCertificateOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -89,9 +91,46 @@ type DeleteCurrentAPISessionCertificateOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteCurrentAPISessionCertificateOK) Error() string {
-	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete current Api session certificate o k response has a 2xx status code
+func (o *DeleteCurrentAPISessionCertificateOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete current Api session certificate o k response has a 3xx status code
+func (o *DeleteCurrentAPISessionCertificateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete current Api session certificate o k response has a 4xx status code
+func (o *DeleteCurrentAPISessionCertificateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete current Api session certificate o k response has a 5xx status code
+func (o *DeleteCurrentAPISessionCertificateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete current Api session certificate o k response a status code equal to that given
+func (o *DeleteCurrentAPISessionCertificateOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete current Api session certificate o k response
+func (o *DeleteCurrentAPISessionCertificateOK) Code() int {
+	return 200
+}
+
+func (o *DeleteCurrentAPISessionCertificateOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateOK %s", 200, payload)
+}
+
+func (o *DeleteCurrentAPISessionCertificateOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateOK %s", 200, payload)
+}
+
 func (o *DeleteCurrentAPISessionCertificateOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDeleteCurrentAPISessionCertificateBadRequest() *DeleteCurrentAPISessionC
 	return &DeleteCurrentAPISessionCertificateBadRequest{}
 }
 
-/* DeleteCurrentAPISessionCertificateBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteCurrentAPISessionCertificateBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type DeleteCurrentAPISessionCertificateBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteCurrentAPISessionCertificateBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete current Api session certificate bad request response has a 2xx status code
+func (o *DeleteCurrentAPISessionCertificateBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete current Api session certificate bad request response has a 3xx status code
+func (o *DeleteCurrentAPISessionCertificateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete current Api session certificate bad request response has a 4xx status code
+func (o *DeleteCurrentAPISessionCertificateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete current Api session certificate bad request response has a 5xx status code
+func (o *DeleteCurrentAPISessionCertificateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete current Api session certificate bad request response a status code equal to that given
+func (o *DeleteCurrentAPISessionCertificateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete current Api session certificate bad request response
+func (o *DeleteCurrentAPISessionCertificateBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteCurrentAPISessionCertificateBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateBadRequest %s", 400, payload)
+}
+
+func (o *DeleteCurrentAPISessionCertificateBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateBadRequest %s", 400, payload)
+}
+
 func (o *DeleteCurrentAPISessionCertificateBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDeleteCurrentAPISessionCertificateUnauthorized() *DeleteCurrentAPISessio
 	return &DeleteCurrentAPISessionCertificateUnauthorized{}
 }
 
-/* DeleteCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type DeleteCurrentAPISessionCertificateUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteCurrentAPISessionCertificateUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete current Api session certificate unauthorized response has a 2xx status code
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete current Api session certificate unauthorized response has a 3xx status code
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete current Api session certificate unauthorized response has a 4xx status code
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete current Api session certificate unauthorized response has a 5xx status code
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete current Api session certificate unauthorized response a status code equal to that given
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete current Api session certificate unauthorized response
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteCurrentAPISessionCertificateUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDeleteCurrentAPISessionCertificateTooManyRequests() *DeleteCurrentAPISes
 	return &DeleteCurrentAPISessionCertificateTooManyRequests{}
 }
 
-/* DeleteCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DeleteCurrentAPISessionCertificateTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteCurrentAPISessionCertificateTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete current Api session certificate too many requests response has a 2xx status code
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete current Api session certificate too many requests response has a 3xx status code
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete current Api session certificate too many requests response has a 4xx status code
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete current Api session certificate too many requests response has a 5xx status code
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete current Api session certificate too many requests response a status code equal to that given
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete current Api session certificate too many requests response
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session/certificates/{id}][%d] deleteCurrentApiSessionCertificateTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteCurrentAPISessionCertificateTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

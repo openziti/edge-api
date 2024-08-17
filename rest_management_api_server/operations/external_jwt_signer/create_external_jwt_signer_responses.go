@@ -40,7 +40,8 @@ import (
 // CreateExternalJWTSignerCreatedCode is the HTTP code returned for type CreateExternalJWTSignerCreated
 const CreateExternalJWTSignerCreatedCode int = 201
 
-/*CreateExternalJWTSignerCreated The create request was successful and the resource has been added at the following location
+/*
+CreateExternalJWTSignerCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createExternalJwtSignerCreated
 */
@@ -84,7 +85,8 @@ func (o *CreateExternalJWTSignerCreated) WriteResponse(rw http.ResponseWriter, p
 // CreateExternalJWTSignerBadRequestCode is the HTTP code returned for type CreateExternalJWTSignerBadRequest
 const CreateExternalJWTSignerBadRequestCode int = 400
 
-/*CreateExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createExternalJwtSignerBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreateExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter
 // CreateExternalJWTSignerUnauthorizedCode is the HTTP code returned for type CreateExternalJWTSignerUnauthorized
 const CreateExternalJWTSignerUnauthorizedCode int = 401
 
-/*CreateExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createExternalJwtSignerUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreateExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 // CreateExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type CreateExternalJWTSignerTooManyRequests
 const CreateExternalJWTSignerTooManyRequestsCode int = 429
 
-/*CreateExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createExternalJwtSignerTooManyRequests
 */

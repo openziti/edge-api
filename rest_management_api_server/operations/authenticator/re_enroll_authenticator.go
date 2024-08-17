@@ -53,16 +53,15 @@ func NewReEnrollAuthenticator(ctx *middleware.Context, handler ReEnrollAuthentic
 	return &ReEnrollAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* ReEnrollAuthenticator swagger:route POST /authenticators/{id}/re-enroll Authenticator reEnrollAuthenticator
+/*
+	ReEnrollAuthenticator swagger:route POST /authenticators/{id}/re-enroll Authenticator reEnrollAuthenticator
 
-Reverts an authenticator to an enrollment
+# Reverts an authenticator to an enrollment
 
 Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the
 created enrollment record response is provided and the source authenticator record will be deleted. The
 enrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT
 authenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.
-
-
 */
 type ReEnrollAuthenticator struct {
 	Context *middleware.Context

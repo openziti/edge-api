@@ -53,13 +53,12 @@ func NewListIdentityEdgeRouters(ctx *middleware.Context, handler ListIdentityEdg
 	return &ListIdentityEdgeRouters{Context: ctx, Handler: handler}
 }
 
-/* ListIdentityEdgeRouters swagger:route GET /identities/{id}/edge-routers Identity listIdentityEdgeRouters
+/*
+	ListIdentityEdgeRouters swagger:route GET /identities/{id}/edge-routers Identity listIdentityEdgeRouters
 
-List accessible edge-routers
+# List accessible edge-routers
 
 Retrieves a list of edge-routers that the given identity may use to access services. Supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentityEdgeRouters struct {
 	Context *middleware.Context

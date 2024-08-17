@@ -190,6 +190,10 @@ func (m *PolicyFailure) contextValidateChecks(ctx context.Context, formats strfm
 
 	for i := 0; i < len(m.Checks()); i++ {
 
+		if swag.IsZero(m.checksField[i]) { // not required
+			return nil
+		}
+
 		if err := m.checksField[i].ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("checks" + "." + strconv.Itoa(i))

@@ -53,12 +53,12 @@ func NewDeleteSession(ctx *middleware.Context, handler DeleteSessionHandler) *De
 	return &DeleteSession{Context: ctx, Handler: handler}
 }
 
-/* DeleteSession swagger:route DELETE /sessions/{id} Session deleteSession
+/*
+	DeleteSession swagger:route DELETE /sessions/{id} Session deleteSession
 
-Delete a session
+# Delete a session
 
 Delete a session by id. Requires admin access.
-
 */
 type DeleteSession struct {
 	Context *middleware.Context

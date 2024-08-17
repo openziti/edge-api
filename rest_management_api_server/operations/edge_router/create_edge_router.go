@@ -53,12 +53,12 @@ func NewCreateEdgeRouter(ctx *middleware.Context, handler CreateEdgeRouterHandle
 	return &CreateEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/* CreateEdgeRouter swagger:route POST /edge-routers Edge Router createEdgeRouter
+/*
+	CreateEdgeRouter swagger:route POST /edge-routers Edge Router createEdgeRouter
 
-Create an edge router
+# Create an edge router
 
 Create a edge router resource. Requires admin access.
-
 */
 type CreateEdgeRouter struct {
 	Context *middleware.Context

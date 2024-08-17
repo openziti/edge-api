@@ -40,7 +40,8 @@ import (
 // DetailSessionRoutePathOKCode is the HTTP code returned for type DetailSessionRoutePathOK
 const DetailSessionRoutePathOKCode int = 200
 
-/*DetailSessionRoutePathOK A single session's route path
+/*
+DetailSessionRoutePathOK A single session's route path
 
 swagger:response detailSessionRoutePathOK
 */
@@ -84,7 +85,8 @@ func (o *DetailSessionRoutePathOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailSessionRoutePathUnauthorizedCode is the HTTP code returned for type DetailSessionRoutePathUnauthorized
 const DetailSessionRoutePathUnauthorizedCode int = 401
 
-/*DetailSessionRoutePathUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailSessionRoutePathUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailSessionRoutePathUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailSessionRoutePathUnauthorized) WriteResponse(rw http.ResponseWrite
 // DetailSessionRoutePathNotFoundCode is the HTTP code returned for type DetailSessionRoutePathNotFound
 const DetailSessionRoutePathNotFoundCode int = 404
 
-/*DetailSessionRoutePathNotFound The requested resource does not exist
+/*
+DetailSessionRoutePathNotFound The requested resource does not exist
 
 swagger:response detailSessionRoutePathNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailSessionRoutePathNotFound) WriteResponse(rw http.ResponseWriter, p
 // DetailSessionRoutePathTooManyRequestsCode is the HTTP code returned for type DetailSessionRoutePathTooManyRequests
 const DetailSessionRoutePathTooManyRequestsCode int = 429
 
-/*DetailSessionRoutePathTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailSessionRoutePathTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailSessionRoutePathTooManyRequests
 */

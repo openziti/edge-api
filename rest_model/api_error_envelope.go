@@ -131,6 +131,7 @@ func (m *APIErrorEnvelope) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *APIErrorEnvelope) contextValidateError(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Error != nil {
+
 		if err := m.Error.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("error")
@@ -147,6 +148,7 @@ func (m *APIErrorEnvelope) contextValidateError(ctx context.Context, formats str
 func (m *APIErrorEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

@@ -40,7 +40,8 @@ import (
 // DetailAPISessionsOKCode is the HTTP code returned for type DetailAPISessionsOK
 const DetailAPISessionsOKCode int = 200
 
-/*DetailAPISessionsOK Retrieves a singular API Session by id
+/*
+DetailAPISessionsOK Retrieves a singular API Session by id
 
 swagger:response detailApiSessionsOK
 */
@@ -84,7 +85,8 @@ func (o *DetailAPISessionsOK) WriteResponse(rw http.ResponseWriter, producer run
 // DetailAPISessionsUnauthorizedCode is the HTTP code returned for type DetailAPISessionsUnauthorized
 const DetailAPISessionsUnauthorizedCode int = 401
 
-/*DetailAPISessionsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailAPISessionsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailApiSessionsUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailAPISessionsUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // DetailAPISessionsNotFoundCode is the HTTP code returned for type DetailAPISessionsNotFound
 const DetailAPISessionsNotFoundCode int = 404
 
-/*DetailAPISessionsNotFound The requested resource does not exist
+/*
+DetailAPISessionsNotFound The requested resource does not exist
 
 swagger:response detailApiSessionsNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailAPISessionsNotFound) WriteResponse(rw http.ResponseWriter, produc
 // DetailAPISessionsTooManyRequestsCode is the HTTP code returned for type DetailAPISessionsTooManyRequests
 const DetailAPISessionsTooManyRequestsCode int = 429
 
-/*DetailAPISessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailAPISessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailApiSessionsTooManyRequests
 */

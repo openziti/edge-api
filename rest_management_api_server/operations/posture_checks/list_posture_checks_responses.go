@@ -40,7 +40,8 @@ import (
 // ListPostureChecksOKCode is the HTTP code returned for type ListPostureChecksOK
 const ListPostureChecksOKCode int = 200
 
-/*ListPostureChecksOK A list of posture checks
+/*
+ListPostureChecksOK A list of posture checks
 
 swagger:response listPostureChecksOK
 */
@@ -84,7 +85,8 @@ func (o *ListPostureChecksOK) WriteResponse(rw http.ResponseWriter, producer run
 // ListPostureChecksBadRequestCode is the HTTP code returned for type ListPostureChecksBadRequest
 const ListPostureChecksBadRequestCode int = 400
 
-/*ListPostureChecksBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListPostureChecksBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listPostureChecksBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListPostureChecksBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // ListPostureChecksUnauthorizedCode is the HTTP code returned for type ListPostureChecksUnauthorized
 const ListPostureChecksUnauthorizedCode int = 401
 
-/*ListPostureChecksUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListPostureChecksUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listPostureChecksUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListPostureChecksUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // ListPostureChecksTooManyRequestsCode is the HTTP code returned for type ListPostureChecksTooManyRequests
 const ListPostureChecksTooManyRequestsCode int = 429
 
-/*ListPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listPostureChecksTooManyRequests
 */

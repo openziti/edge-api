@@ -320,6 +320,11 @@ func (m *PostureCheckDomainUpdate) contextValidateRoleAttributes(ctx context.Con
 func (m *PostureCheckDomainUpdate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
+
+		if swag.IsZero(m.Tags()) { // not required
+			return nil
+		}
+
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -334,6 +339,10 @@ func (m *PostureCheckDomainUpdate) contextValidateTags(ctx context.Context, form
 }
 
 func (m *PostureCheckDomainUpdate) contextValidateTypeID(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TypeID()) { // not required
+		return nil
+	}
 
 	if err := m.TypeID().ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

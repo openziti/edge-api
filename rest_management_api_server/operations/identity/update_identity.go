@@ -53,12 +53,12 @@ func NewUpdateIdentity(ctx *middleware.Context, handler UpdateIdentityHandler) *
 	return &UpdateIdentity{Context: ctx, Handler: handler}
 }
 
-/* UpdateIdentity swagger:route PUT /identities/{id} Identity updateIdentity
+/*
+	UpdateIdentity swagger:route PUT /identities/{id} Identity updateIdentity
 
-Update all fields on an identity
+# Update all fields on an identity
 
 Update all fields on an identity by id. Requires admin access.
-
 */
 type UpdateIdentity struct {
 	Context *middleware.Context

@@ -30,6 +30,7 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /service-policies/{id}] deleteServicePolicy", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewDeleteServicePolicyOK() *DeleteServicePolicyOK {
 	return &DeleteServicePolicyOK{}
 }
 
-/* DeleteServicePolicyOK describes a response with status code 200, with default header values.
+/*
+DeleteServicePolicyOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -95,9 +97,46 @@ type DeleteServicePolicyOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteServicePolicyOK) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete service policy o k response has a 2xx status code
+func (o *DeleteServicePolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete service policy o k response has a 3xx status code
+func (o *DeleteServicePolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy o k response has a 4xx status code
+func (o *DeleteServicePolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete service policy o k response has a 5xx status code
+func (o *DeleteServicePolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy o k response a status code equal to that given
+func (o *DeleteServicePolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete service policy o k response
+func (o *DeleteServicePolicyOK) Code() int {
+	return 200
+}
+
+func (o *DeleteServicePolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyOK %s", 200, payload)
+}
+
+func (o *DeleteServicePolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyOK %s", 200, payload)
+}
+
 func (o *DeleteServicePolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewDeleteServicePolicyBadRequest() *DeleteServicePolicyBadRequest {
 	return &DeleteServicePolicyBadRequest{}
 }
 
-/* DeleteServicePolicyBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteServicePolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type DeleteServicePolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete service policy bad request response has a 2xx status code
+func (o *DeleteServicePolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy bad request response has a 3xx status code
+func (o *DeleteServicePolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy bad request response has a 4xx status code
+func (o *DeleteServicePolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy bad request response has a 5xx status code
+func (o *DeleteServicePolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy bad request response a status code equal to that given
+func (o *DeleteServicePolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete service policy bad request response
+func (o *DeleteServicePolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteServicePolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyBadRequest %s", 400, payload)
+}
+
+func (o *DeleteServicePolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyBadRequest %s", 400, payload)
+}
+
 func (o *DeleteServicePolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewDeleteServicePolicyUnauthorized() *DeleteServicePolicyUnauthorized {
 	return &DeleteServicePolicyUnauthorized{}
 }
 
-/* DeleteServicePolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteServicePolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type DeleteServicePolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete service policy unauthorized response has a 2xx status code
+func (o *DeleteServicePolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy unauthorized response has a 3xx status code
+func (o *DeleteServicePolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy unauthorized response has a 4xx status code
+func (o *DeleteServicePolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy unauthorized response has a 5xx status code
+func (o *DeleteServicePolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy unauthorized response a status code equal to that given
+func (o *DeleteServicePolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete service policy unauthorized response
+func (o *DeleteServicePolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteServicePolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteServicePolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewDeleteServicePolicyConflict() *DeleteServicePolicyConflict {
 	return &DeleteServicePolicyConflict{}
 }
 
-/* DeleteServicePolicyConflict describes a response with status code 409, with default header values.
+/*
+DeleteServicePolicyConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
@@ -191,9 +307,46 @@ type DeleteServicePolicyConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyConflict) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete service policy conflict response has a 2xx status code
+func (o *DeleteServicePolicyConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy conflict response has a 3xx status code
+func (o *DeleteServicePolicyConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy conflict response has a 4xx status code
+func (o *DeleteServicePolicyConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy conflict response has a 5xx status code
+func (o *DeleteServicePolicyConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy conflict response a status code equal to that given
+func (o *DeleteServicePolicyConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete service policy conflict response
+func (o *DeleteServicePolicyConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteServicePolicyConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyConflict %s", 409, payload)
+}
+
+func (o *DeleteServicePolicyConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyConflict %s", 409, payload)
+}
+
 func (o *DeleteServicePolicyConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewDeleteServicePolicyTooManyRequests() *DeleteServicePolicyTooManyRequests
 	return &DeleteServicePolicyTooManyRequests{}
 }
 
-/* DeleteServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteServicePolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type DeleteServicePolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete service policy too many requests response has a 2xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy too many requests response has a 3xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy too many requests response has a 4xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy too many requests response has a 5xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy too many requests response a status code equal to that given
+func (o *DeleteServicePolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete service policy too many requests response
+func (o *DeleteServicePolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteServicePolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteServicePolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

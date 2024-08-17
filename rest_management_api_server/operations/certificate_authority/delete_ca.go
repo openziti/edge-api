@@ -53,14 +53,13 @@ func NewDeleteCa(ctx *middleware.Context, handler DeleteCaHandler) *DeleteCa {
 	return &DeleteCa{Context: ctx, Handler: handler}
 }
 
-/* DeleteCa swagger:route DELETE /cas/{id} Certificate Authority deleteCa
+/*
+	DeleteCa swagger:route DELETE /cas/{id} Certificate Authority deleteCa
 
-Delete a CA
+# Delete a CA
 
 Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it
 impossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.
-
-
 */
 type DeleteCa struct {
 	Context *middleware.Context

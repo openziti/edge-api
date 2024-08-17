@@ -40,7 +40,8 @@ import (
 // DeleteCurrentAPISessionCertificateOKCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateOK
 const DeleteCurrentAPISessionCertificateOKCode int = 200
 
-/*DeleteCurrentAPISessionCertificateOK The delete request was successful and the resource has been removed
+/*
+DeleteCurrentAPISessionCertificateOK The delete request was successful and the resource has been removed
 
 swagger:response deleteCurrentApiSessionCertificateOK
 */
@@ -84,7 +85,8 @@ func (o *DeleteCurrentAPISessionCertificateOK) WriteResponse(rw http.ResponseWri
 // DeleteCurrentAPISessionCertificateBadRequestCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateBadRequest
 const DeleteCurrentAPISessionCertificateBadRequestCode int = 400
 
-/*DeleteCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteCurrentApiSessionCertificateBadRequest
 */
@@ -128,7 +130,8 @@ func (o *DeleteCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.Res
 // DeleteCurrentAPISessionCertificateUnauthorizedCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateUnauthorized
 const DeleteCurrentAPISessionCertificateUnauthorizedCode int = 401
 
-/*DeleteCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteCurrentApiSessionCertificateUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *DeleteCurrentAPISessionCertificateUnauthorized) WriteResponse(rw http.R
 // DeleteCurrentAPISessionCertificateTooManyRequestsCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateTooManyRequests
 const DeleteCurrentAPISessionCertificateTooManyRequestsCode int = 429
 
-/*DeleteCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteCurrentApiSessionCertificateTooManyRequests
 */

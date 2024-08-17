@@ -53,10 +53,10 @@ func NewListProtocols(ctx *middleware.Context, handler ListProtocolsHandler) *Li
 	return &ListProtocols{Context: ctx, Handler: handler}
 }
 
-/* ListProtocols swagger:route GET /protocols Informational listProtocols
+/*
+	ListProtocols swagger:route GET /protocols Informational listProtocols
 
 Return a list of the listening Edge protocols
-
 */
 type ListProtocols struct {
 	Context *middleware.Context

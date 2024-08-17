@@ -53,12 +53,12 @@ func NewListCurrentIdentityAuthenticators(ctx *middleware.Context, handler ListC
 	return &ListCurrentIdentityAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* ListCurrentIdentityAuthenticators swagger:route GET /current-identity/authenticators Current API Session listCurrentIdentityAuthenticators
+/*
+	ListCurrentIdentityAuthenticators swagger:route GET /current-identity/authenticators Current API Session listCurrentIdentityAuthenticators
 
-List authenticators for the current identity
+# List authenticators for the current identity
 
 Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.
-
 */
 type ListCurrentIdentityAuthenticators struct {
 	Context *middleware.Context

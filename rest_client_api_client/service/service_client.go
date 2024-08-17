@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new service API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new service API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new service API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -72,9 +98,9 @@ type ClientService interface {
 }
 
 /*
-  DeleteService deletes a service
+DeleteService deletes a service
 
-  Delete a service by id. Requires admin access.
+Delete a service by id. Requires admin access.
 */
 func (a *Client) DeleteService(params *DeleteServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServiceOK, error) {
 	// TODO: Validate the params before sending
@@ -113,9 +139,9 @@ func (a *Client) DeleteService(params *DeleteServiceParams, authInfo runtime.Cli
 }
 
 /*
-  DetailService retrieves a single service
+DetailService retrieves a single service
 
-  Retrieves a single service by id. Requires admin access.
+Retrieves a single service by id. Requires admin access.
 */
 func (a *Client) DetailService(params *DetailServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailServiceOK, error) {
 	// TODO: Validate the params before sending
@@ -154,10 +180,9 @@ func (a *Client) DetailService(params *DetailServiceParams, authInfo runtime.Cli
 }
 
 /*
-  ListServiceEdgeRouters lists of edge routers permitted to handle traffic for the specified service
+ListServiceEdgeRouters lists of edge routers permitted to handle traffic for the specified service
 
-  Retrieves the list of edge routers permitted to handle traffic for the specified service
-
+Retrieves the list of edge routers permitted to handle traffic for the specified service
 */
 func (a *Client) ListServiceEdgeRouters(params *ListServiceEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRoutersOK, error) {
 	// TODO: Validate the params before sending
@@ -196,10 +221,9 @@ func (a *Client) ListServiceEdgeRouters(params *ListServiceEdgeRoutersParams, au
 }
 
 /*
-  ListServiceTerminators lists of terminators assigned to a service
+ListServiceTerminators lists of terminators assigned to a service
 
-  Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
-
+Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
 */
 func (a *Client) ListServiceTerminators(params *ListServiceTerminatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceTerminatorsOK, error) {
 	// TODO: Validate the params before sending
@@ -238,10 +262,9 @@ func (a *Client) ListServiceTerminators(params *ListServiceTerminatorsParams, au
 }
 
 /*
-  ListServices lists services
+ListServices lists services
 
-  Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServices(params *ListServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesOK, error) {
 	// TODO: Validate the params before sending
@@ -280,9 +303,9 @@ func (a *Client) ListServices(params *ListServicesParams, authInfo runtime.Clien
 }
 
 /*
-  PatchService updates the supplied fields on a service
+PatchService updates the supplied fields on a service
 
-  Update the supplied fields on a service. Requires admin access.
+Update the supplied fields on a service. Requires admin access.
 */
 func (a *Client) PatchService(params *PatchServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServiceOK, error) {
 	// TODO: Validate the params before sending
@@ -321,9 +344,9 @@ func (a *Client) PatchService(params *PatchServiceParams, authInfo runtime.Clien
 }
 
 /*
-  UpdateService updates all fields on a service
+UpdateService updates all fields on a service
 
-  Update all fields on a service by id. Requires admin access.
+Update all fields on a service by id. Requires admin access.
 */
 func (a *Client) UpdateService(params *UpdateServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateServiceOK, error) {
 	// TODO: Validate the params before sending

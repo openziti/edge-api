@@ -40,7 +40,8 @@ import (
 // UpdateConfigTypeOKCode is the HTTP code returned for type UpdateConfigTypeOK
 const UpdateConfigTypeOKCode int = 200
 
-/*UpdateConfigTypeOK The update request was successful and the resource has been altered
+/*
+UpdateConfigTypeOK The update request was successful and the resource has been altered
 
 swagger:response updateConfigTypeOK
 */
@@ -84,7 +85,8 @@ func (o *UpdateConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateConfigTypeBadRequestCode is the HTTP code returned for type UpdateConfigTypeBadRequest
 const UpdateConfigTypeBadRequestCode int = 400
 
-/*UpdateConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateConfigTypeBadRequest
 */
@@ -128,7 +130,8 @@ func (o *UpdateConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateConfigTypeUnauthorizedCode is the HTTP code returned for type UpdateConfigTypeUnauthorized
 const UpdateConfigTypeUnauthorizedCode int = 401
 
-/*UpdateConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateConfigTypeUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *UpdateConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // UpdateConfigTypeNotFoundCode is the HTTP code returned for type UpdateConfigTypeNotFound
 const UpdateConfigTypeNotFoundCode int = 404
 
-/*UpdateConfigTypeNotFound The requested resource does not exist
+/*
+UpdateConfigTypeNotFound The requested resource does not exist
 
 swagger:response updateConfigTypeNotFound
 */
@@ -216,7 +220,8 @@ func (o *UpdateConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, produce
 // UpdateConfigTypeTooManyRequestsCode is the HTTP code returned for type UpdateConfigTypeTooManyRequests
 const UpdateConfigTypeTooManyRequestsCode int = 429
 
-/*UpdateConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateConfigTypeTooManyRequests
 */

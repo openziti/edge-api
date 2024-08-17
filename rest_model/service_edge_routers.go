@@ -106,6 +106,11 @@ func (m *ServiceEdgeRouters) contextValidateEdgeRouters(ctx context.Context, for
 	for i := 0; i < len(m.EdgeRouters); i++ {
 
 		if m.EdgeRouters[i] != nil {
+
+			if swag.IsZero(m.EdgeRouters[i]) { // not required
+				return nil
+			}
+
 			if err := m.EdgeRouters[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("edgeRouters" + "." + strconv.Itoa(i))

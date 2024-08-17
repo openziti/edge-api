@@ -40,7 +40,8 @@ import (
 // ListSessionsOKCode is the HTTP code returned for type ListSessionsOK
 const ListSessionsOKCode int = 200
 
-/*ListSessionsOK A list of sessions
+/*
+ListSessionsOK A list of sessions
 
 swagger:response listSessionsOK
 */
@@ -84,7 +85,8 @@ func (o *ListSessionsOK) WriteResponse(rw http.ResponseWriter, producer runtime.
 // ListSessionsBadRequestCode is the HTTP code returned for type ListSessionsBadRequest
 const ListSessionsBadRequestCode int = 400
 
-/*ListSessionsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListSessionsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listSessionsBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListSessionsBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 // ListSessionsUnauthorizedCode is the HTTP code returned for type ListSessionsUnauthorized
 const ListSessionsUnauthorizedCode int = 401
 
-/*ListSessionsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListSessionsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listSessionsUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListSessionsUnauthorized) WriteResponse(rw http.ResponseWriter, produce
 // ListSessionsTooManyRequestsCode is the HTTP code returned for type ListSessionsTooManyRequests
 const ListSessionsTooManyRequestsCode int = 429
 
-/*ListSessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListSessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listSessionsTooManyRequests
 */

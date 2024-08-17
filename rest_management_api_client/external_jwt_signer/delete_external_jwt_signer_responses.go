@@ -30,6 +30,7 @@ package external_jwt_signer
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DeleteExternalJWTSignerReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /external-jwt-signers/{id}] deleteExternalJwtSigner", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDeleteExternalJWTSignerOK() *DeleteExternalJWTSignerOK {
 	return &DeleteExternalJWTSignerOK{}
 }
 
-/* DeleteExternalJWTSignerOK describes a response with status code 200, with default header values.
+/*
+DeleteExternalJWTSignerOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -89,9 +91,46 @@ type DeleteExternalJWTSignerOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteExternalJWTSignerOK) Error() string {
-	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete external Jwt signer o k response has a 2xx status code
+func (o *DeleteExternalJWTSignerOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete external Jwt signer o k response has a 3xx status code
+func (o *DeleteExternalJWTSignerOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete external Jwt signer o k response has a 4xx status code
+func (o *DeleteExternalJWTSignerOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete external Jwt signer o k response has a 5xx status code
+func (o *DeleteExternalJWTSignerOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete external Jwt signer o k response a status code equal to that given
+func (o *DeleteExternalJWTSignerOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete external Jwt signer o k response
+func (o *DeleteExternalJWTSignerOK) Code() int {
+	return 200
+}
+
+func (o *DeleteExternalJWTSignerOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerOK %s", 200, payload)
+}
+
+func (o *DeleteExternalJWTSignerOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerOK %s", 200, payload)
+}
+
 func (o *DeleteExternalJWTSignerOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDeleteExternalJWTSignerBadRequest() *DeleteExternalJWTSignerBadRequest {
 	return &DeleteExternalJWTSignerBadRequest{}
 }
 
-/* DeleteExternalJWTSignerBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteExternalJWTSignerBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type DeleteExternalJWTSignerBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteExternalJWTSignerBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete external Jwt signer bad request response has a 2xx status code
+func (o *DeleteExternalJWTSignerBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete external Jwt signer bad request response has a 3xx status code
+func (o *DeleteExternalJWTSignerBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete external Jwt signer bad request response has a 4xx status code
+func (o *DeleteExternalJWTSignerBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete external Jwt signer bad request response has a 5xx status code
+func (o *DeleteExternalJWTSignerBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete external Jwt signer bad request response a status code equal to that given
+func (o *DeleteExternalJWTSignerBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete external Jwt signer bad request response
+func (o *DeleteExternalJWTSignerBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteExternalJWTSignerBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerBadRequest %s", 400, payload)
+}
+
+func (o *DeleteExternalJWTSignerBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerBadRequest %s", 400, payload)
+}
+
 func (o *DeleteExternalJWTSignerBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDeleteExternalJWTSignerUnauthorized() *DeleteExternalJWTSignerUnauthoriz
 	return &DeleteExternalJWTSignerUnauthorized{}
 }
 
-/* DeleteExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type DeleteExternalJWTSignerUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteExternalJWTSignerUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete external Jwt signer unauthorized response has a 2xx status code
+func (o *DeleteExternalJWTSignerUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete external Jwt signer unauthorized response has a 3xx status code
+func (o *DeleteExternalJWTSignerUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete external Jwt signer unauthorized response has a 4xx status code
+func (o *DeleteExternalJWTSignerUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete external Jwt signer unauthorized response has a 5xx status code
+func (o *DeleteExternalJWTSignerUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete external Jwt signer unauthorized response a status code equal to that given
+func (o *DeleteExternalJWTSignerUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete external Jwt signer unauthorized response
+func (o *DeleteExternalJWTSignerUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteExternalJWTSignerUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteExternalJWTSignerUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteExternalJWTSignerUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDeleteExternalJWTSignerTooManyRequests() *DeleteExternalJWTSignerTooMany
 	return &DeleteExternalJWTSignerTooManyRequests{}
 }
 
-/* DeleteExternalJWTSignerTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteExternalJWTSignerTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DeleteExternalJWTSignerTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteExternalJWTSignerTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete external Jwt signer too many requests response has a 2xx status code
+func (o *DeleteExternalJWTSignerTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete external Jwt signer too many requests response has a 3xx status code
+func (o *DeleteExternalJWTSignerTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete external Jwt signer too many requests response has a 4xx status code
+func (o *DeleteExternalJWTSignerTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete external Jwt signer too many requests response has a 5xx status code
+func (o *DeleteExternalJWTSignerTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete external Jwt signer too many requests response a status code equal to that given
+func (o *DeleteExternalJWTSignerTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete external Jwt signer too many requests response
+func (o *DeleteExternalJWTSignerTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteExternalJWTSignerTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteExternalJWTSignerTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteExternalJWTSignerTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

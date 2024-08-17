@@ -53,12 +53,12 @@ func NewAuthenticateMfa(ctx *middleware.Context, handler AuthenticateMfaHandler)
 	return &AuthenticateMfa{Context: ctx, Handler: handler}
 }
 
-/* AuthenticateMfa swagger:route POST /authenticate/mfa Authentication MFA authenticateMfa
+/*
+	AuthenticateMfa swagger:route POST /authenticate/mfa Authentication MFA authenticateMfa
 
-Complete MFA authentication
+# Complete MFA authentication
 
 Completes MFA authentication by submitting a MFA time based one time token or backup code.
-
 */
 type AuthenticateMfa struct {
 	Context *middleware.Context

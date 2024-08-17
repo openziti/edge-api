@@ -215,6 +215,11 @@ func (m *PostureCheckTypeDetail) contextValidateOperatingSystems(ctx context.Con
 	for i := 0; i < len(m.OperatingSystems); i++ {
 
 		if m.OperatingSystems[i] != nil {
+
+			if swag.IsZero(m.OperatingSystems[i]) { // not required
+				return nil
+			}
+
 			if err := m.OperatingSystems[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("operatingSystems" + "." + strconv.Itoa(i))

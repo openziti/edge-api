@@ -184,6 +184,11 @@ func (m *PolicyAdvice) contextValidateCommonRouters(ctx context.Context, formats
 	for i := 0; i < len(m.CommonRouters); i++ {
 
 		if m.CommonRouters[i] != nil {
+
+			if swag.IsZero(m.CommonRouters[i]) { // not required
+				return nil
+			}
+
 			if err := m.CommonRouters[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("commonRouters" + "." + strconv.Itoa(i))
@@ -202,6 +207,11 @@ func (m *PolicyAdvice) contextValidateCommonRouters(ctx context.Context, formats
 func (m *PolicyAdvice) contextValidateIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Identity != nil {
+
+		if swag.IsZero(m.Identity) { // not required
+			return nil
+		}
+
 		if err := m.Identity.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("identity")
@@ -218,6 +228,11 @@ func (m *PolicyAdvice) contextValidateIdentity(ctx context.Context, formats strf
 func (m *PolicyAdvice) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
+
+		if swag.IsZero(m.Service) { // not required
+			return nil
+		}
+
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service")

@@ -40,7 +40,8 @@ import (
 // ListIdentitysServiceConfigsOKCode is the HTTP code returned for type ListIdentitysServiceConfigsOK
 const ListIdentitysServiceConfigsOKCode int = 200
 
-/*ListIdentitysServiceConfigsOK A list of service configs
+/*
+ListIdentitysServiceConfigsOK A list of service configs
 
 swagger:response listIdentitysServiceConfigsOK
 */
@@ -84,7 +85,8 @@ func (o *ListIdentitysServiceConfigsOK) WriteResponse(rw http.ResponseWriter, pr
 // ListIdentitysServiceConfigsUnauthorizedCode is the HTTP code returned for type ListIdentitysServiceConfigsUnauthorized
 const ListIdentitysServiceConfigsUnauthorizedCode int = 401
 
-/*ListIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listIdentitysServiceConfigsUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *ListIdentitysServiceConfigsUnauthorized) WriteResponse(rw http.Response
 // ListIdentitysServiceConfigsNotFoundCode is the HTTP code returned for type ListIdentitysServiceConfigsNotFound
 const ListIdentitysServiceConfigsNotFoundCode int = 404
 
-/*ListIdentitysServiceConfigsNotFound The requested resource does not exist
+/*
+ListIdentitysServiceConfigsNotFound The requested resource does not exist
 
 swagger:response listIdentitysServiceConfigsNotFound
 */
@@ -172,7 +175,8 @@ func (o *ListIdentitysServiceConfigsNotFound) WriteResponse(rw http.ResponseWrit
 // ListIdentitysServiceConfigsTooManyRequestsCode is the HTTP code returned for type ListIdentitysServiceConfigsTooManyRequests
 const ListIdentitysServiceConfigsTooManyRequestsCode int = 429
 
-/*ListIdentitysServiceConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListIdentitysServiceConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listIdentitysServiceConfigsTooManyRequests
 */

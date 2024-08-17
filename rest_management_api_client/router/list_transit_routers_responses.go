@@ -30,6 +30,7 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *ListTransitRoutersReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /transit-routers] listTransitRouters", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewListTransitRoutersOK() *ListTransitRoutersOK {
 	return &ListTransitRoutersOK{}
 }
 
-/* ListTransitRoutersOK describes a response with status code 200, with default header values.
+/*
+ListTransitRoutersOK describes a response with status code 200, with default header values.
 
 A list of specifications
 */
@@ -89,9 +91,46 @@ type ListTransitRoutersOK struct {
 	Payload *rest_model.ListRoutersEnvelope
 }
 
-func (o *ListTransitRoutersOK) Error() string {
-	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list transit routers o k response has a 2xx status code
+func (o *ListTransitRoutersOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list transit routers o k response has a 3xx status code
+func (o *ListTransitRoutersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transit routers o k response has a 4xx status code
+func (o *ListTransitRoutersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list transit routers o k response has a 5xx status code
+func (o *ListTransitRoutersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transit routers o k response a status code equal to that given
+func (o *ListTransitRoutersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list transit routers o k response
+func (o *ListTransitRoutersOK) Code() int {
+	return 200
+}
+
+func (o *ListTransitRoutersOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersOK %s", 200, payload)
+}
+
+func (o *ListTransitRoutersOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersOK %s", 200, payload)
+}
+
 func (o *ListTransitRoutersOK) GetPayload() *rest_model.ListRoutersEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewListTransitRoutersBadRequest() *ListTransitRoutersBadRequest {
 	return &ListTransitRoutersBadRequest{}
 }
 
-/* ListTransitRoutersBadRequest describes a response with status code 400, with default header values.
+/*
+ListTransitRoutersBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type ListTransitRoutersBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListTransitRoutersBadRequest) Error() string {
-	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list transit routers bad request response has a 2xx status code
+func (o *ListTransitRoutersBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list transit routers bad request response has a 3xx status code
+func (o *ListTransitRoutersBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transit routers bad request response has a 4xx status code
+func (o *ListTransitRoutersBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list transit routers bad request response has a 5xx status code
+func (o *ListTransitRoutersBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transit routers bad request response a status code equal to that given
+func (o *ListTransitRoutersBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list transit routers bad request response
+func (o *ListTransitRoutersBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListTransitRoutersBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersBadRequest %s", 400, payload)
+}
+
+func (o *ListTransitRoutersBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersBadRequest %s", 400, payload)
+}
+
 func (o *ListTransitRoutersBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewListTransitRoutersUnauthorized() *ListTransitRoutersUnauthorized {
 	return &ListTransitRoutersUnauthorized{}
 }
 
-/* ListTransitRoutersUnauthorized describes a response with status code 401, with default header values.
+/*
+ListTransitRoutersUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type ListTransitRoutersUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListTransitRoutersUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list transit routers unauthorized response has a 2xx status code
+func (o *ListTransitRoutersUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list transit routers unauthorized response has a 3xx status code
+func (o *ListTransitRoutersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transit routers unauthorized response has a 4xx status code
+func (o *ListTransitRoutersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list transit routers unauthorized response has a 5xx status code
+func (o *ListTransitRoutersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transit routers unauthorized response a status code equal to that given
+func (o *ListTransitRoutersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list transit routers unauthorized response
+func (o *ListTransitRoutersUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListTransitRoutersUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersUnauthorized %s", 401, payload)
+}
+
+func (o *ListTransitRoutersUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersUnauthorized %s", 401, payload)
+}
+
 func (o *ListTransitRoutersUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewListTransitRoutersTooManyRequests() *ListTransitRoutersTooManyRequests {
 	return &ListTransitRoutersTooManyRequests{}
 }
 
-/* ListTransitRoutersTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListTransitRoutersTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type ListTransitRoutersTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListTransitRoutersTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list transit routers too many requests response has a 2xx status code
+func (o *ListTransitRoutersTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list transit routers too many requests response has a 3xx status code
+func (o *ListTransitRoutersTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transit routers too many requests response has a 4xx status code
+func (o *ListTransitRoutersTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list transit routers too many requests response has a 5xx status code
+func (o *ListTransitRoutersTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transit routers too many requests response a status code equal to that given
+func (o *ListTransitRoutersTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list transit routers too many requests response
+func (o *ListTransitRoutersTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListTransitRoutersTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersTooManyRequests %s", 429, payload)
+}
+
+func (o *ListTransitRoutersTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers][%d] listTransitRoutersTooManyRequests %s", 429, payload)
+}
+
 func (o *ListTransitRoutersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

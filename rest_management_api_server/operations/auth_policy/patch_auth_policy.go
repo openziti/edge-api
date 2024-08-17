@@ -53,12 +53,12 @@ func NewPatchAuthPolicy(ctx *middleware.Context, handler PatchAuthPolicyHandler)
 	return &PatchAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/* PatchAuthPolicy swagger:route PATCH /auth-policies/{id} Auth Policy patchAuthPolicy
+/*
+	PatchAuthPolicy swagger:route PATCH /auth-policies/{id} Auth Policy patchAuthPolicy
 
-Update the supplied fields on an Auth Policy
+# Update the supplied fields on an Auth Policy
 
 Update only the supplied fields on an Auth Policy by id. Requires admin access.
-
 */
 type PatchAuthPolicy struct {
 	Context *middleware.Context

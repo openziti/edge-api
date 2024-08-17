@@ -53,13 +53,12 @@ func NewVerifyMfa(ctx *middleware.Context, handler VerifyMfaHandler) *VerifyMfa 
 	return &VerifyMfa{Context: ctx, Handler: handler}
 }
 
-/* VerifyMfa swagger:route POST /current-identity/mfa/verify Current Identity MFA verifyMfa
+/*
+	VerifyMfa swagger:route POST /current-identity/mfa/verify Current Identity MFA verifyMfa
 
-Complete MFA enrollment by verifying a time based one time token
+# Complete MFA enrollment by verifying a time based one time token
 
 Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via `POST /current-identity/mfa`.
-
-
 */
 type VerifyMfa struct {
 	Context *middleware.Context

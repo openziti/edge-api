@@ -76,10 +76,12 @@ func NewGetIdentityPostureDataParamsWithHTTPClient(client *http.Client) *GetIden
 	}
 }
 
-/* GetIdentityPostureDataParams contains all the parameters to send to the API endpoint
-   for the get identity posture data operation.
+/*
+GetIdentityPostureDataParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get identity posture data operation.
+
+	Typically these are written to a http.Request.
 */
 type GetIdentityPostureDataParams struct {
 

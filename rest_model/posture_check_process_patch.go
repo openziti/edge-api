@@ -309,6 +309,11 @@ func (m *PostureCheckProcessPatch) contextValidateRoleAttributes(ctx context.Con
 func (m *PostureCheckProcessPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
+
+		if swag.IsZero(m.Tags()) { // not required
+			return nil
+		}
+
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -339,6 +344,11 @@ func (m *PostureCheckProcessPatch) contextValidateTypeID(ctx context.Context, fo
 func (m *PostureCheckProcessPatch) contextValidateProcess(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Process != nil {
+
+		if swag.IsZero(m.Process) { // not required
+			return nil
+		}
+
 		if err := m.Process.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("process")

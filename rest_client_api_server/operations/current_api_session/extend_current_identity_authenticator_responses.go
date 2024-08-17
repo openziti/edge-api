@@ -40,7 +40,8 @@ import (
 // ExtendCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type ExtendCurrentIdentityAuthenticatorOK
 const ExtendCurrentIdentityAuthenticatorOKCode int = 200
 
-/*ExtendCurrentIdentityAuthenticatorOK A response containg the identity's new certificate
+/*
+ExtendCurrentIdentityAuthenticatorOK A response containg the identity's new certificate
 
 swagger:response extendCurrentIdentityAuthenticatorOK
 */
@@ -84,7 +85,8 @@ func (o *ExtendCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // ExtendCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type ExtendCurrentIdentityAuthenticatorUnauthorized
 const ExtendCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*ExtendCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ExtendCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendCurrentIdentityAuthenticatorUnauthorized
 */

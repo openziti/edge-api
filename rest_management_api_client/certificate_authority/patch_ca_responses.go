@@ -30,6 +30,7 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *PatchCaReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /cas/{id}] patchCa", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewPatchCaOK() *PatchCaOK {
 	return &PatchCaOK{}
 }
 
-/* PatchCaOK describes a response with status code 200, with default header values.
+/*
+PatchCaOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type PatchCaOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *PatchCaOK) Error() string {
-	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch ca o k response has a 2xx status code
+func (o *PatchCaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch ca o k response has a 3xx status code
+func (o *PatchCaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch ca o k response has a 4xx status code
+func (o *PatchCaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch ca o k response has a 5xx status code
+func (o *PatchCaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch ca o k response a status code equal to that given
+func (o *PatchCaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch ca o k response
+func (o *PatchCaOK) Code() int {
+	return 200
+}
+
+func (o *PatchCaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaOK %s", 200, payload)
+}
+
+func (o *PatchCaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaOK %s", 200, payload)
+}
+
 func (o *PatchCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewPatchCaBadRequest() *PatchCaBadRequest {
 	return &PatchCaBadRequest{}
 }
 
-/* PatchCaBadRequest describes a response with status code 400, with default header values.
+/*
+PatchCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type PatchCaBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCaBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch ca bad request response has a 2xx status code
+func (o *PatchCaBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch ca bad request response has a 3xx status code
+func (o *PatchCaBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch ca bad request response has a 4xx status code
+func (o *PatchCaBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch ca bad request response has a 5xx status code
+func (o *PatchCaBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch ca bad request response a status code equal to that given
+func (o *PatchCaBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch ca bad request response
+func (o *PatchCaBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchCaBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaBadRequest %s", 400, payload)
+}
+
+func (o *PatchCaBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaBadRequest %s", 400, payload)
+}
+
 func (o *PatchCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewPatchCaUnauthorized() *PatchCaUnauthorized {
 	return &PatchCaUnauthorized{}
 }
 
-/* PatchCaUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type PatchCaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCaUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch ca unauthorized response has a 2xx status code
+func (o *PatchCaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch ca unauthorized response has a 3xx status code
+func (o *PatchCaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch ca unauthorized response has a 4xx status code
+func (o *PatchCaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch ca unauthorized response has a 5xx status code
+func (o *PatchCaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch ca unauthorized response a status code equal to that given
+func (o *PatchCaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch ca unauthorized response
+func (o *PatchCaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchCaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaUnauthorized %s", 401, payload)
+}
+
+func (o *PatchCaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaUnauthorized %s", 401, payload)
+}
+
 func (o *PatchCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewPatchCaNotFound() *PatchCaNotFound {
 	return &PatchCaNotFound{}
 }
 
-/* PatchCaNotFound describes a response with status code 404, with default header values.
+/*
+PatchCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type PatchCaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCaNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch ca not found response has a 2xx status code
+func (o *PatchCaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch ca not found response has a 3xx status code
+func (o *PatchCaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch ca not found response has a 4xx status code
+func (o *PatchCaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch ca not found response has a 5xx status code
+func (o *PatchCaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch ca not found response a status code equal to that given
+func (o *PatchCaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch ca not found response
+func (o *PatchCaNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchCaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaNotFound %s", 404, payload)
+}
+
+func (o *PatchCaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaNotFound %s", 404, payload)
+}
+
 func (o *PatchCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewPatchCaTooManyRequests() *PatchCaTooManyRequests {
 	return &PatchCaTooManyRequests{}
 }
 
-/* PatchCaTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type PatchCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCaTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch ca too many requests response has a 2xx status code
+func (o *PatchCaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch ca too many requests response has a 3xx status code
+func (o *PatchCaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch ca too many requests response has a 4xx status code
+func (o *PatchCaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch ca too many requests response has a 5xx status code
+func (o *PatchCaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch ca too many requests response a status code equal to that given
+func (o *PatchCaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch ca too many requests response
+func (o *PatchCaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchCaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchCaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /cas/{id}][%d] patchCaTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

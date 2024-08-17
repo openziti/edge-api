@@ -40,7 +40,8 @@ import (
 // UpdateExternalJWTSignerOKCode is the HTTP code returned for type UpdateExternalJWTSignerOK
 const UpdateExternalJWTSignerOKCode int = 200
 
-/*UpdateExternalJWTSignerOK The update request was successful and the resource has been altered
+/*
+UpdateExternalJWTSignerOK The update request was successful and the resource has been altered
 
 swagger:response updateExternalJwtSignerOK
 */
@@ -84,7 +85,8 @@ func (o *UpdateExternalJWTSignerOK) WriteResponse(rw http.ResponseWriter, produc
 // UpdateExternalJWTSignerBadRequestCode is the HTTP code returned for type UpdateExternalJWTSignerBadRequest
 const UpdateExternalJWTSignerBadRequestCode int = 400
 
-/*UpdateExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateExternalJwtSignerBadRequest
 */
@@ -128,7 +130,8 @@ func (o *UpdateExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter
 // UpdateExternalJWTSignerUnauthorizedCode is the HTTP code returned for type UpdateExternalJWTSignerUnauthorized
 const UpdateExternalJWTSignerUnauthorizedCode int = 401
 
-/*UpdateExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateExternalJwtSignerUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *UpdateExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 // UpdateExternalJWTSignerNotFoundCode is the HTTP code returned for type UpdateExternalJWTSignerNotFound
 const UpdateExternalJWTSignerNotFoundCode int = 404
 
-/*UpdateExternalJWTSignerNotFound The requested resource does not exist
+/*
+UpdateExternalJWTSignerNotFound The requested resource does not exist
 
 swagger:response updateExternalJwtSignerNotFound
 */
@@ -216,7 +220,8 @@ func (o *UpdateExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, 
 // UpdateExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type UpdateExternalJWTSignerTooManyRequests
 const UpdateExternalJWTSignerTooManyRequestsCode int = 429
 
-/*UpdateExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateExternalJwtSignerTooManyRequests
 */

@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new enrollment API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new enrollment API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new enrollment API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -68,9 +94,9 @@ type ClientService interface {
 }
 
 /*
-  CreateEnrollment creates an outstanding enrollment for an identity
+CreateEnrollment creates an outstanding enrollment for an identity
 
-  Creates a new OTT, OTTCA, or UPDB enrollment for a specific identity. If an enrollment of the same type is already outstanding the request will fail with a 409 conflict. If desired, an existing enrollment can be refreshed by `enrollments/:id/refresh` or deleted.
+Creates a new OTT, OTTCA, or UPDB enrollment for a specific identity. If an enrollment of the same type is already outstanding the request will fail with a 409 conflict. If desired, an existing enrollment can be refreshed by `enrollments/:id/refresh` or deleted.
 */
 func (a *Client) CreateEnrollment(params *CreateEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateEnrollmentCreated, error) {
 	// TODO: Validate the params before sending
@@ -109,9 +135,9 @@ func (a *Client) CreateEnrollment(params *CreateEnrollmentParams, authInfo runti
 }
 
 /*
-  DeleteEnrollment deletes an outstanding enrollment
+DeleteEnrollment deletes an outstanding enrollment
 
-  Delete an outstanding enrollment by id. Requires admin access.
+Delete an outstanding enrollment by id. Requires admin access.
 */
 func (a *Client) DeleteEnrollment(params *DeleteEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEnrollmentOK, error) {
 	// TODO: Validate the params before sending
@@ -150,9 +176,9 @@ func (a *Client) DeleteEnrollment(params *DeleteEnrollmentParams, authInfo runti
 }
 
 /*
-  DetailEnrollment retrieves an outstanding enrollment
+DetailEnrollment retrieves an outstanding enrollment
 
-  Retrieves a single outstanding enrollment by id. Requires admin access.
+Retrieves a single outstanding enrollment by id. Requires admin access.
 */
 func (a *Client) DetailEnrollment(params *DetailEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailEnrollmentOK, error) {
 	// TODO: Validate the params before sending
@@ -191,10 +217,9 @@ func (a *Client) DetailEnrollment(params *DetailEnrollmentParams, authInfo runti
 }
 
 /*
-  ListEnrollments lists outstanding enrollments
+ListEnrollments lists outstanding enrollments
 
-  Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListEnrollments(params *ListEnrollmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEnrollmentsOK, error) {
 	// TODO: Validate the params before sending
@@ -233,9 +258,9 @@ func (a *Client) ListEnrollments(params *ListEnrollmentsParams, authInfo runtime
 }
 
 /*
-  RefreshEnrollment refreshes an enrollment record s expiration window
+RefreshEnrollment refreshes an enrollment record s expiration window
 
-  For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated and must be used for the enrollment.
+For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated and must be used for the enrollment.
 */
 func (a *Client) RefreshEnrollment(params *RefreshEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RefreshEnrollmentOK, error) {
 	// TODO: Validate the params before sending

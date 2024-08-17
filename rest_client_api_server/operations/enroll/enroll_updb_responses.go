@@ -40,7 +40,8 @@ import (
 // EnrollUpdbOKCode is the HTTP code returned for type EnrollUpdbOK
 const EnrollUpdbOKCode int = 200
 
-/*EnrollUpdbOK Base empty response
+/*
+EnrollUpdbOK Base empty response
 
 swagger:response enrollUpdbOK
 */
@@ -84,7 +85,8 @@ func (o *EnrollUpdbOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pr
 // EnrollUpdbNotFoundCode is the HTTP code returned for type EnrollUpdbNotFound
 const EnrollUpdbNotFoundCode int = 404
 
-/*EnrollUpdbNotFound The requested resource does not exist
+/*
+EnrollUpdbNotFound The requested resource does not exist
 
 swagger:response enrollUpdbNotFound
 */
@@ -128,7 +130,8 @@ func (o *EnrollUpdbNotFound) WriteResponse(rw http.ResponseWriter, producer runt
 // EnrollUpdbTooManyRequestsCode is the HTTP code returned for type EnrollUpdbTooManyRequests
 const EnrollUpdbTooManyRequestsCode int = 429
 
-/*EnrollUpdbTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+EnrollUpdbTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollUpdbTooManyRequests
 */

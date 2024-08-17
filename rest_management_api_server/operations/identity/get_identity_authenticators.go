@@ -53,13 +53,12 @@ func NewGetIdentityAuthenticators(ctx *middleware.Context, handler GetIdentityAu
 	return &GetIdentityAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityAuthenticators swagger:route GET /identities/{id}/authenticators Identity getIdentityAuthenticators
+/*
+	GetIdentityAuthenticators swagger:route GET /identities/{id}/authenticators Identity getIdentityAuthenticators
 
-Retrieve the current authenticators of a specific identity
+# Retrieve the current authenticators of a specific identity
 
 Returns a list of authenticators associated to the identity specified
-
-
 */
 type GetIdentityAuthenticators struct {
 	Context *middleware.Context

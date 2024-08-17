@@ -30,6 +30,7 @@ package session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *DeleteSessionReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /sessions/{id}] deleteSession", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewDeleteSessionOK() *DeleteSessionOK {
 	return &DeleteSessionOK{}
 }
 
-/* DeleteSessionOK describes a response with status code 200, with default header values.
+/*
+DeleteSessionOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -95,9 +97,46 @@ type DeleteSessionOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteSessionOK) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete session o k response has a 2xx status code
+func (o *DeleteSessionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete session o k response has a 3xx status code
+func (o *DeleteSessionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session o k response has a 4xx status code
+func (o *DeleteSessionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete session o k response has a 5xx status code
+func (o *DeleteSessionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session o k response a status code equal to that given
+func (o *DeleteSessionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete session o k response
+func (o *DeleteSessionOK) Code() int {
+	return 200
+}
+
+func (o *DeleteSessionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionOK %s", 200, payload)
+}
+
+func (o *DeleteSessionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionOK %s", 200, payload)
+}
+
 func (o *DeleteSessionOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewDeleteSessionBadRequest() *DeleteSessionBadRequest {
 	return &DeleteSessionBadRequest{}
 }
 
-/* DeleteSessionBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteSessionBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type DeleteSessionBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete session bad request response has a 2xx status code
+func (o *DeleteSessionBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session bad request response has a 3xx status code
+func (o *DeleteSessionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session bad request response has a 4xx status code
+func (o *DeleteSessionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session bad request response has a 5xx status code
+func (o *DeleteSessionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session bad request response a status code equal to that given
+func (o *DeleteSessionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete session bad request response
+func (o *DeleteSessionBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteSessionBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionBadRequest %s", 400, payload)
+}
+
+func (o *DeleteSessionBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionBadRequest %s", 400, payload)
+}
+
 func (o *DeleteSessionBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewDeleteSessionUnauthorized() *DeleteSessionUnauthorized {
 	return &DeleteSessionUnauthorized{}
 }
 
-/* DeleteSessionUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteSessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type DeleteSessionUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete session unauthorized response has a 2xx status code
+func (o *DeleteSessionUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session unauthorized response has a 3xx status code
+func (o *DeleteSessionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session unauthorized response has a 4xx status code
+func (o *DeleteSessionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session unauthorized response has a 5xx status code
+func (o *DeleteSessionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session unauthorized response a status code equal to that given
+func (o *DeleteSessionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete session unauthorized response
+func (o *DeleteSessionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteSessionUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteSessionUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteSessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewDeleteSessionConflict() *DeleteSessionConflict {
 	return &DeleteSessionConflict{}
 }
 
-/* DeleteSessionConflict describes a response with status code 409, with default header values.
+/*
+DeleteSessionConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
@@ -191,9 +307,46 @@ type DeleteSessionConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionConflict) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete session conflict response has a 2xx status code
+func (o *DeleteSessionConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session conflict response has a 3xx status code
+func (o *DeleteSessionConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session conflict response has a 4xx status code
+func (o *DeleteSessionConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session conflict response has a 5xx status code
+func (o *DeleteSessionConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session conflict response a status code equal to that given
+func (o *DeleteSessionConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete session conflict response
+func (o *DeleteSessionConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteSessionConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionConflict %s", 409, payload)
+}
+
+func (o *DeleteSessionConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionConflict %s", 409, payload)
+}
+
 func (o *DeleteSessionConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewDeleteSessionTooManyRequests() *DeleteSessionTooManyRequests {
 	return &DeleteSessionTooManyRequests{}
 }
 
-/* DeleteSessionTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteSessionTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type DeleteSessionTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete session too many requests response has a 2xx status code
+func (o *DeleteSessionTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session too many requests response has a 3xx status code
+func (o *DeleteSessionTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session too many requests response has a 4xx status code
+func (o *DeleteSessionTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session too many requests response has a 5xx status code
+func (o *DeleteSessionTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session too many requests response a status code equal to that given
+func (o *DeleteSessionTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete session too many requests response
+func (o *DeleteSessionTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteSessionTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteSessionTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteSessionTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

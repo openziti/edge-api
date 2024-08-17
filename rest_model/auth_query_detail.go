@@ -145,6 +145,10 @@ func (m *AuthQueryDetail) ContextValidate(ctx context.Context, formats strfmt.Re
 
 func (m *AuthQueryDetail) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Format) { // not required
+		return nil
+	}
+
 	if err := m.Format.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("format")
@@ -160,6 +164,7 @@ func (m *AuthQueryDetail) contextValidateFormat(ctx context.Context, formats str
 func (m *AuthQueryDetail) contextValidateProvider(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Provider != nil {
+
 		if err := m.Provider.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("provider")

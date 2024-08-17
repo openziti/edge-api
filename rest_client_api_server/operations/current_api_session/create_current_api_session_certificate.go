@@ -53,12 +53,12 @@ func NewCreateCurrentAPISessionCertificate(ctx *middleware.Context, handler Crea
 	return &CreateCurrentAPISessionCertificate{Context: ctx, Handler: handler}
 }
 
-/* CreateCurrentAPISessionCertificate swagger:route POST /current-api-session/certificates Current API Session createCurrentApiSessionCertificate
+/*
+	CreateCurrentAPISessionCertificate swagger:route POST /current-api-session/certificates Current API Session createCurrentApiSessionCertificate
 
-Creates an ephemeral certificate for the current API Session
+# Creates an ephemeral certificate for the current API Session
 
 Creates an ephemeral certificate for the current API Session. This endpoint expects a PEM encoded CSRs to be provided for fulfillment as a property of a JSON payload. It is up to the client to manage the private key backing the CSR request.
-
 */
 type CreateCurrentAPISessionCertificate struct {
 	Context *middleware.Context

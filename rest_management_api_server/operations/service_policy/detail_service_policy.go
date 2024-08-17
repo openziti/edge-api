@@ -53,12 +53,12 @@ func NewDetailServicePolicy(ctx *middleware.Context, handler DetailServicePolicy
 	return &DetailServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* DetailServicePolicy swagger:route GET /service-policies/{id} Service Policy detailServicePolicy
+/*
+	DetailServicePolicy swagger:route GET /service-policies/{id} Service Policy detailServicePolicy
 
-Retrieves a single service policy
+# Retrieves a single service policy
 
 Retrieves a single service policy by id. Requires admin access.
-
 */
 type DetailServicePolicy struct {
 	Context *middleware.Context

@@ -53,13 +53,12 @@ func NewDetailMfaQrCode(ctx *middleware.Context, handler DetailMfaQrCodeHandler)
 	return &DetailMfaQrCode{Context: ctx, Handler: handler}
 }
 
-/* DetailMfaQrCode swagger:route GET /current-identity/mfa/qr-code Current Identity MFA detailMfaQrCode
+/*
+	DetailMfaQrCode swagger:route GET /current-identity/mfa/qr-code Current Identity MFA detailMfaQrCode
 
-Show a QR code for unverified MFA enrollments
+# Show a QR code for unverified MFA enrollments
 
 Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.
-
-
 */
 type DetailMfaQrCode struct {
 	Context *middleware.Context

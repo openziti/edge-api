@@ -131,6 +131,7 @@ func (m *DetailConfigTypeEnvelope) ContextValidate(ctx context.Context, formats 
 func (m *DetailConfigTypeEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
+
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")
@@ -147,6 +148,7 @@ func (m *DetailConfigTypeEnvelope) contextValidateData(ctx context.Context, form
 func (m *DetailConfigTypeEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

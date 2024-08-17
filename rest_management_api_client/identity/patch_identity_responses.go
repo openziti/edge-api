@@ -30,6 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *PatchIdentityReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /identities/{id}] patchIdentity", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewPatchIdentityOK() *PatchIdentityOK {
 	return &PatchIdentityOK{}
 }
 
-/* PatchIdentityOK describes a response with status code 200, with default header values.
+/*
+PatchIdentityOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type PatchIdentityOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *PatchIdentityOK) Error() string {
-	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch identity o k response has a 2xx status code
+func (o *PatchIdentityOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch identity o k response has a 3xx status code
+func (o *PatchIdentityOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch identity o k response has a 4xx status code
+func (o *PatchIdentityOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch identity o k response has a 5xx status code
+func (o *PatchIdentityOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch identity o k response a status code equal to that given
+func (o *PatchIdentityOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch identity o k response
+func (o *PatchIdentityOK) Code() int {
+	return 200
+}
+
+func (o *PatchIdentityOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityOK %s", 200, payload)
+}
+
+func (o *PatchIdentityOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityOK %s", 200, payload)
+}
+
 func (o *PatchIdentityOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewPatchIdentityBadRequest() *PatchIdentityBadRequest {
 	return &PatchIdentityBadRequest{}
 }
 
-/* PatchIdentityBadRequest describes a response with status code 400, with default header values.
+/*
+PatchIdentityBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type PatchIdentityBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchIdentityBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch identity bad request response has a 2xx status code
+func (o *PatchIdentityBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch identity bad request response has a 3xx status code
+func (o *PatchIdentityBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch identity bad request response has a 4xx status code
+func (o *PatchIdentityBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch identity bad request response has a 5xx status code
+func (o *PatchIdentityBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch identity bad request response a status code equal to that given
+func (o *PatchIdentityBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch identity bad request response
+func (o *PatchIdentityBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchIdentityBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityBadRequest %s", 400, payload)
+}
+
+func (o *PatchIdentityBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityBadRequest %s", 400, payload)
+}
+
 func (o *PatchIdentityBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewPatchIdentityUnauthorized() *PatchIdentityUnauthorized {
 	return &PatchIdentityUnauthorized{}
 }
 
-/* PatchIdentityUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type PatchIdentityUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchIdentityUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch identity unauthorized response has a 2xx status code
+func (o *PatchIdentityUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch identity unauthorized response has a 3xx status code
+func (o *PatchIdentityUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch identity unauthorized response has a 4xx status code
+func (o *PatchIdentityUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch identity unauthorized response has a 5xx status code
+func (o *PatchIdentityUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch identity unauthorized response a status code equal to that given
+func (o *PatchIdentityUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch identity unauthorized response
+func (o *PatchIdentityUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchIdentityUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityUnauthorized %s", 401, payload)
+}
+
+func (o *PatchIdentityUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityUnauthorized %s", 401, payload)
+}
+
 func (o *PatchIdentityUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewPatchIdentityNotFound() *PatchIdentityNotFound {
 	return &PatchIdentityNotFound{}
 }
 
-/* PatchIdentityNotFound describes a response with status code 404, with default header values.
+/*
+PatchIdentityNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type PatchIdentityNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchIdentityNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch identity not found response has a 2xx status code
+func (o *PatchIdentityNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch identity not found response has a 3xx status code
+func (o *PatchIdentityNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch identity not found response has a 4xx status code
+func (o *PatchIdentityNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch identity not found response has a 5xx status code
+func (o *PatchIdentityNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch identity not found response a status code equal to that given
+func (o *PatchIdentityNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch identity not found response
+func (o *PatchIdentityNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchIdentityNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityNotFound %s", 404, payload)
+}
+
+func (o *PatchIdentityNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityNotFound %s", 404, payload)
+}
+
 func (o *PatchIdentityNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewPatchIdentityTooManyRequests() *PatchIdentityTooManyRequests {
 	return &PatchIdentityTooManyRequests{}
 }
 
-/* PatchIdentityTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchIdentityTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type PatchIdentityTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchIdentityTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch identity too many requests response has a 2xx status code
+func (o *PatchIdentityTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch identity too many requests response has a 3xx status code
+func (o *PatchIdentityTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch identity too many requests response has a 4xx status code
+func (o *PatchIdentityTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch identity too many requests response has a 5xx status code
+func (o *PatchIdentityTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch identity too many requests response a status code equal to that given
+func (o *PatchIdentityTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch identity too many requests response
+func (o *PatchIdentityTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchIdentityTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchIdentityTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

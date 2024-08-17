@@ -48,18 +48,18 @@ type ExternalIDClaimPatch struct {
 	Index *int64 `json:"index,omitempty"`
 
 	// location
-	// Enum: [COMMON_NAME SAN_URI SAN_EMAIL]
+	// Enum: ["COMMON_NAME","SAN_URI","SAN_EMAIL"]
 	Location *string `json:"location,omitempty"`
 
 	// matcher
-	// Enum: [ALL PREFIX SUFFIX SCHEME]
+	// Enum: ["ALL","PREFIX","SUFFIX","SCHEME"]
 	Matcher *string `json:"matcher,omitempty"`
 
 	// matcher criteria
 	MatcherCriteria *string `json:"matcherCriteria,omitempty"`
 
 	// parser
-	// Enum: [NONE SPLIT]
+	// Enum: ["NONE","SPLIT"]
 	Parser *string `json:"parser,omitempty"`
 
 	// parser criteria

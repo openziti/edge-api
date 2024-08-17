@@ -40,7 +40,8 @@ import (
 // UpdateIdentityTracingOKCode is the HTTP code returned for type UpdateIdentityTracingOK
 const UpdateIdentityTracingOKCode int = 200
 
-/*UpdateIdentityTracingOK Returns the document that represents the trace state
+/*
+UpdateIdentityTracingOK Returns the document that represents the trace state
 
 swagger:response updateIdentityTracingOK
 */
@@ -84,7 +85,8 @@ func (o *UpdateIdentityTracingOK) WriteResponse(rw http.ResponseWriter, producer
 // UpdateIdentityTracingBadRequestCode is the HTTP code returned for type UpdateIdentityTracingBadRequest
 const UpdateIdentityTracingBadRequestCode int = 400
 
-/*UpdateIdentityTracingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateIdentityTracingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateIdentityTracingBadRequest
 */
@@ -128,7 +130,8 @@ func (o *UpdateIdentityTracingBadRequest) WriteResponse(rw http.ResponseWriter, 
 // UpdateIdentityTracingUnauthorizedCode is the HTTP code returned for type UpdateIdentityTracingUnauthorized
 const UpdateIdentityTracingUnauthorizedCode int = 401
 
-/*UpdateIdentityTracingUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateIdentityTracingUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateIdentityTracingUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *UpdateIdentityTracingUnauthorized) WriteResponse(rw http.ResponseWriter
 // UpdateIdentityTracingNotFoundCode is the HTTP code returned for type UpdateIdentityTracingNotFound
 const UpdateIdentityTracingNotFoundCode int = 404
 
-/*UpdateIdentityTracingNotFound The requested resource does not exist
+/*
+UpdateIdentityTracingNotFound The requested resource does not exist
 
 swagger:response updateIdentityTracingNotFound
 */
@@ -216,7 +220,8 @@ func (o *UpdateIdentityTracingNotFound) WriteResponse(rw http.ResponseWriter, pr
 // UpdateIdentityTracingTooManyRequestsCode is the HTTP code returned for type UpdateIdentityTracingTooManyRequests
 const UpdateIdentityTracingTooManyRequestsCode int = 429
 
-/*UpdateIdentityTracingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateIdentityTracingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateIdentityTracingTooManyRequests
 */

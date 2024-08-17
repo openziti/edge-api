@@ -30,6 +30,7 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -54,7 +55,7 @@ func (o *ListSpecsReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /specs] listSpecs", response, response.Code())
 	}
 }
 
@@ -63,7 +64,8 @@ func NewListSpecsOK() *ListSpecsOK {
 	return &ListSpecsOK{}
 }
 
-/* ListSpecsOK describes a response with status code 200, with default header values.
+/*
+ListSpecsOK describes a response with status code 200, with default header values.
 
 A list of specifications
 */
@@ -71,9 +73,46 @@ type ListSpecsOK struct {
 	Payload *rest_model.ListSpecsEnvelope
 }
 
-func (o *ListSpecsOK) Error() string {
-	return fmt.Sprintf("[GET /specs][%d] listSpecsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list specs o k response has a 2xx status code
+func (o *ListSpecsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list specs o k response has a 3xx status code
+func (o *ListSpecsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list specs o k response has a 4xx status code
+func (o *ListSpecsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list specs o k response has a 5xx status code
+func (o *ListSpecsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list specs o k response a status code equal to that given
+func (o *ListSpecsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list specs o k response
+func (o *ListSpecsOK) Code() int {
+	return 200
+}
+
+func (o *ListSpecsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /specs][%d] listSpecsOK %s", 200, payload)
+}
+
+func (o *ListSpecsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /specs][%d] listSpecsOK %s", 200, payload)
+}
+
 func (o *ListSpecsOK) GetPayload() *rest_model.ListSpecsEnvelope {
 	return o.Payload
 }

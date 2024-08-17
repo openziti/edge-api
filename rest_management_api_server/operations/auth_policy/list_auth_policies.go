@@ -53,12 +53,12 @@ func NewListAuthPolicies(ctx *middleware.Context, handler ListAuthPoliciesHandle
 	return &ListAuthPolicies{Context: ctx, Handler: handler}
 }
 
-/* ListAuthPolicies swagger:route GET /auth-policies Auth Policy listAuthPolicies
+/*
+	ListAuthPolicies swagger:route GET /auth-policies Auth Policy listAuthPolicies
 
-List Auth Policies
+# List Auth Policies
 
 Retrieves a list of Auth Policies
-
 */
 type ListAuthPolicies struct {
 	Context *middleware.Context

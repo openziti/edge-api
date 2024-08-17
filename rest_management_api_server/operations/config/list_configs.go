@@ -53,13 +53,12 @@ func NewListConfigs(ctx *middleware.Context, handler ListConfigsHandler) *ListCo
 	return &ListConfigs{Context: ctx, Handler: handler}
 }
 
-/* ListConfigs swagger:route GET /configs Config listConfigs
+/*
+	ListConfigs swagger:route GET /configs Config listConfigs
 
-List configs
+# List configs
 
 Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListConfigs struct {
 	Context *middleware.Context

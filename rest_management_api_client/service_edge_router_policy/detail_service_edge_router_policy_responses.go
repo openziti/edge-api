@@ -30,6 +30,7 @@ package service_edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DetailServiceEdgeRouterPolicyReader) ReadResponse(response runtime.Clie
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /service-edge-router-policies/{id}] detailServiceEdgeRouterPolicy", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDetailServiceEdgeRouterPolicyOK() *DetailServiceEdgeRouterPolicyOK {
 	return &DetailServiceEdgeRouterPolicyOK{}
 }
 
-/* DetailServiceEdgeRouterPolicyOK describes a response with status code 200, with default header values.
+/*
+DetailServiceEdgeRouterPolicyOK describes a response with status code 200, with default header values.
 
 A single service edge router policy
 */
@@ -89,9 +91,46 @@ type DetailServiceEdgeRouterPolicyOK struct {
 	Payload *rest_model.DetailServiceEdgePolicyEnvelope
 }
 
-func (o *DetailServiceEdgeRouterPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail service edge router policy o k response has a 2xx status code
+func (o *DetailServiceEdgeRouterPolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail service edge router policy o k response has a 3xx status code
+func (o *DetailServiceEdgeRouterPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service edge router policy o k response has a 4xx status code
+func (o *DetailServiceEdgeRouterPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail service edge router policy o k response has a 5xx status code
+func (o *DetailServiceEdgeRouterPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service edge router policy o k response a status code equal to that given
+func (o *DetailServiceEdgeRouterPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail service edge router policy o k response
+func (o *DetailServiceEdgeRouterPolicyOK) Code() int {
+	return 200
+}
+
+func (o *DetailServiceEdgeRouterPolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyOK %s", 200, payload)
+}
+
+func (o *DetailServiceEdgeRouterPolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyOK %s", 200, payload)
+}
+
 func (o *DetailServiceEdgeRouterPolicyOK) GetPayload() *rest_model.DetailServiceEdgePolicyEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDetailServiceEdgeRouterPolicyUnauthorized() *DetailServiceEdgeRouterPoli
 	return &DetailServiceEdgeRouterPolicyUnauthorized{}
 }
 
-/* DetailServiceEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailServiceEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type DetailServiceEdgeRouterPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServiceEdgeRouterPolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail service edge router policy unauthorized response has a 2xx status code
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service edge router policy unauthorized response has a 3xx status code
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service edge router policy unauthorized response has a 4xx status code
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail service edge router policy unauthorized response has a 5xx status code
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service edge router policy unauthorized response a status code equal to that given
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail service edge router policy unauthorized response
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DetailServiceEdgeRouterPolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DetailServiceEdgeRouterPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDetailServiceEdgeRouterPolicyNotFound() *DetailServiceEdgeRouterPolicyNo
 	return &DetailServiceEdgeRouterPolicyNotFound{}
 }
 
-/* DetailServiceEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
+/*
+DetailServiceEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type DetailServiceEdgeRouterPolicyNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServiceEdgeRouterPolicyNotFound) Error() string {
-	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail service edge router policy not found response has a 2xx status code
+func (o *DetailServiceEdgeRouterPolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service edge router policy not found response has a 3xx status code
+func (o *DetailServiceEdgeRouterPolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service edge router policy not found response has a 4xx status code
+func (o *DetailServiceEdgeRouterPolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail service edge router policy not found response has a 5xx status code
+func (o *DetailServiceEdgeRouterPolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service edge router policy not found response a status code equal to that given
+func (o *DetailServiceEdgeRouterPolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail service edge router policy not found response
+func (o *DetailServiceEdgeRouterPolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailServiceEdgeRouterPolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyNotFound %s", 404, payload)
+}
+
+func (o *DetailServiceEdgeRouterPolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyNotFound %s", 404, payload)
+}
+
 func (o *DetailServiceEdgeRouterPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDetailServiceEdgeRouterPolicyTooManyRequests() *DetailServiceEdgeRouterP
 	return &DetailServiceEdgeRouterPolicyTooManyRequests{}
 }
 
-/* DetailServiceEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailServiceEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DetailServiceEdgeRouterPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServiceEdgeRouterPolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail service edge router policy too many requests response has a 2xx status code
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service edge router policy too many requests response has a 3xx status code
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service edge router policy too many requests response has a 4xx status code
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail service edge router policy too many requests response has a 5xx status code
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service edge router policy too many requests response a status code equal to that given
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail service edge router policy too many requests response
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailServiceEdgeRouterPolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}][%d] detailServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailServiceEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

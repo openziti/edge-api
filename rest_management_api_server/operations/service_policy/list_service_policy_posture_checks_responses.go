@@ -40,7 +40,8 @@ import (
 // ListServicePolicyPostureChecksOKCode is the HTTP code returned for type ListServicePolicyPostureChecksOK
 const ListServicePolicyPostureChecksOKCode int = 200
 
-/*ListServicePolicyPostureChecksOK A list of posture checks
+/*
+ListServicePolicyPostureChecksOK A list of posture checks
 
 swagger:response listServicePolicyPostureChecksOK
 */
@@ -84,7 +85,8 @@ func (o *ListServicePolicyPostureChecksOK) WriteResponse(rw http.ResponseWriter,
 // ListServicePolicyPostureChecksBadRequestCode is the HTTP code returned for type ListServicePolicyPostureChecksBadRequest
 const ListServicePolicyPostureChecksBadRequestCode int = 400
 
-/*ListServicePolicyPostureChecksBadRequest The requested resource does not exist
+/*
+ListServicePolicyPostureChecksBadRequest The requested resource does not exist
 
 swagger:response listServicePolicyPostureChecksBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListServicePolicyPostureChecksBadRequest) WriteResponse(rw http.Respons
 // ListServicePolicyPostureChecksUnauthorizedCode is the HTTP code returned for type ListServicePolicyPostureChecksUnauthorized
 const ListServicePolicyPostureChecksUnauthorizedCode int = 401
 
-/*ListServicePolicyPostureChecksUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServicePolicyPostureChecksUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServicePolicyPostureChecksUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListServicePolicyPostureChecksUnauthorized) WriteResponse(rw http.Respo
 // ListServicePolicyPostureChecksTooManyRequestsCode is the HTTP code returned for type ListServicePolicyPostureChecksTooManyRequests
 const ListServicePolicyPostureChecksTooManyRequestsCode int = 429
 
-/*ListServicePolicyPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServicePolicyPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServicePolicyPostureChecksTooManyRequests
 */

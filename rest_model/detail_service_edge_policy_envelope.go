@@ -131,6 +131,7 @@ func (m *DetailServiceEdgePolicyEnvelope) ContextValidate(ctx context.Context, f
 func (m *DetailServiceEdgePolicyEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
+
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")
@@ -147,6 +148,7 @@ func (m *DetailServiceEdgePolicyEnvelope) contextValidateData(ctx context.Contex
 func (m *DetailServiceEdgePolicyEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *PatchCurrentIdentityAuthenticatorReader) ReadResponse(response runtime.
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /current-identity/authenticators/{id}] patchCurrentIdentityAuthenticator", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewPatchCurrentIdentityAuthenticatorOK() *PatchCurrentIdentityAuthenticator
 	return &PatchCurrentIdentityAuthenticatorOK{}
 }
 
-/* PatchCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/*
+PatchCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -89,9 +91,46 @@ type PatchCurrentIdentityAuthenticatorOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *PatchCurrentIdentityAuthenticatorOK) Error() string {
-	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch current identity authenticator o k response has a 2xx status code
+func (o *PatchCurrentIdentityAuthenticatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch current identity authenticator o k response has a 3xx status code
+func (o *PatchCurrentIdentityAuthenticatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch current identity authenticator o k response has a 4xx status code
+func (o *PatchCurrentIdentityAuthenticatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch current identity authenticator o k response has a 5xx status code
+func (o *PatchCurrentIdentityAuthenticatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch current identity authenticator o k response a status code equal to that given
+func (o *PatchCurrentIdentityAuthenticatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch current identity authenticator o k response
+func (o *PatchCurrentIdentityAuthenticatorOK) Code() int {
+	return 200
+}
+
+func (o *PatchCurrentIdentityAuthenticatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorOK %s", 200, payload)
+}
+
+func (o *PatchCurrentIdentityAuthenticatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorOK %s", 200, payload)
+}
+
 func (o *PatchCurrentIdentityAuthenticatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewPatchCurrentIdentityAuthenticatorBadRequest() *PatchCurrentIdentityAuthe
 	return &PatchCurrentIdentityAuthenticatorBadRequest{}
 }
 
-/* PatchCurrentIdentityAuthenticatorBadRequest describes a response with status code 400, with default header values.
+/*
+PatchCurrentIdentityAuthenticatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type PatchCurrentIdentityAuthenticatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCurrentIdentityAuthenticatorBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch current identity authenticator bad request response has a 2xx status code
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch current identity authenticator bad request response has a 3xx status code
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch current identity authenticator bad request response has a 4xx status code
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch current identity authenticator bad request response has a 5xx status code
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch current identity authenticator bad request response a status code equal to that given
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch current identity authenticator bad request response
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorBadRequest %s", 400, payload)
+}
+
+func (o *PatchCurrentIdentityAuthenticatorBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorBadRequest %s", 400, payload)
+}
+
 func (o *PatchCurrentIdentityAuthenticatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewPatchCurrentIdentityAuthenticatorUnauthorized() *PatchCurrentIdentityAut
 	return &PatchCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/* PatchCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type PatchCurrentIdentityAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCurrentIdentityAuthenticatorUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch current identity authenticator unauthorized response has a 2xx status code
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch current identity authenticator unauthorized response has a 3xx status code
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch current identity authenticator unauthorized response has a 4xx status code
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch current identity authenticator unauthorized response has a 5xx status code
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch current identity authenticator unauthorized response a status code equal to that given
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch current identity authenticator unauthorized response
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+}
+
+func (o *PatchCurrentIdentityAuthenticatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+}
+
 func (o *PatchCurrentIdentityAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewPatchCurrentIdentityAuthenticatorNotFound() *PatchCurrentIdentityAuthent
 	return &PatchCurrentIdentityAuthenticatorNotFound{}
 }
 
-/* PatchCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
+/*
+PatchCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -185,9 +301,46 @@ type PatchCurrentIdentityAuthenticatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchCurrentIdentityAuthenticatorNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch current identity authenticator not found response has a 2xx status code
+func (o *PatchCurrentIdentityAuthenticatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch current identity authenticator not found response has a 3xx status code
+func (o *PatchCurrentIdentityAuthenticatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch current identity authenticator not found response has a 4xx status code
+func (o *PatchCurrentIdentityAuthenticatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch current identity authenticator not found response has a 5xx status code
+func (o *PatchCurrentIdentityAuthenticatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch current identity authenticator not found response a status code equal to that given
+func (o *PatchCurrentIdentityAuthenticatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch current identity authenticator not found response
+func (o *PatchCurrentIdentityAuthenticatorNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchCurrentIdentityAuthenticatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorNotFound %s", 404, payload)
+}
+
+func (o *PatchCurrentIdentityAuthenticatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /current-identity/authenticators/{id}][%d] patchCurrentIdentityAuthenticatorNotFound %s", 404, payload)
+}
+
 func (o *PatchCurrentIdentityAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

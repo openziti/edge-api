@@ -53,12 +53,12 @@ func NewDeleteEdgeRouter(ctx *middleware.Context, handler DeleteEdgeRouterHandle
 	return &DeleteEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/* DeleteEdgeRouter swagger:route DELETE /edge-routers/{id} Edge Router deleteEdgeRouter
+/*
+	DeleteEdgeRouter swagger:route DELETE /edge-routers/{id} Edge Router deleteEdgeRouter
 
-Delete an edge router
+# Delete an edge router
 
 Delete an edge router by id. Requires admin access.
-
 */
 type DeleteEdgeRouter struct {
 	Context *middleware.Context

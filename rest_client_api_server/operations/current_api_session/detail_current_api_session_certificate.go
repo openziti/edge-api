@@ -53,12 +53,12 @@ func NewDetailCurrentAPISessionCertificate(ctx *middleware.Context, handler Deta
 	return &DetailCurrentAPISessionCertificate{Context: ctx, Handler: handler}
 }
 
-/* DetailCurrentAPISessionCertificate swagger:route GET /current-api-session/certificates/{id} Current API Session detailCurrentApiSessionCertificate
+/*
+	DetailCurrentAPISessionCertificate swagger:route GET /current-api-session/certificates/{id} Current API Session detailCurrentApiSessionCertificate
 
-Retrieves an ephemeral certificate
+# Retrieves an ephemeral certificate
 
 Retrieves a single ephemeral certificate by id
-
 */
 type DetailCurrentAPISessionCertificate struct {
 	Context *middleware.Context

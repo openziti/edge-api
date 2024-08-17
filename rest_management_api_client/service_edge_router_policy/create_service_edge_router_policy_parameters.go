@@ -78,10 +78,12 @@ func NewCreateServiceEdgeRouterPolicyParamsWithHTTPClient(client *http.Client) *
 	}
 }
 
-/* CreateServiceEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
-   for the create service edge router policy operation.
+/*
+CreateServiceEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create service edge router policy operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateServiceEdgeRouterPolicyParams struct {
 

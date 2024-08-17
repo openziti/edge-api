@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *ListServiceUpdatesReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-api-session/service-updates] listServiceUpdates", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewListServiceUpdatesOK() *ListServiceUpdatesOK {
 	return &ListServiceUpdatesOK{}
 }
 
-/* ListServiceUpdatesOK describes a response with status code 200, with default header values.
+/*
+ListServiceUpdatesOK describes a response with status code 200, with default header values.
 
 Data indicating necessary service updates
 */
@@ -83,9 +85,46 @@ type ListServiceUpdatesOK struct {
 	Payload *rest_model.ListCurrentAPISessionServiceUpdatesEnvelope
 }
 
-func (o *ListServiceUpdatesOK) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list service updates o k response has a 2xx status code
+func (o *ListServiceUpdatesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list service updates o k response has a 3xx status code
+func (o *ListServiceUpdatesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service updates o k response has a 4xx status code
+func (o *ListServiceUpdatesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list service updates o k response has a 5xx status code
+func (o *ListServiceUpdatesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service updates o k response a status code equal to that given
+func (o *ListServiceUpdatesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list service updates o k response
+func (o *ListServiceUpdatesOK) Code() int {
+	return 200
+}
+
+func (o *ListServiceUpdatesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesOK %s", 200, payload)
+}
+
+func (o *ListServiceUpdatesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesOK %s", 200, payload)
+}
+
 func (o *ListServiceUpdatesOK) GetPayload() *rest_model.ListCurrentAPISessionServiceUpdatesEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewListServiceUpdatesUnauthorized() *ListServiceUpdatesUnauthorized {
 	return &ListServiceUpdatesUnauthorized{}
 }
 
-/* ListServiceUpdatesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListServiceUpdatesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -115,9 +155,46 @@ type ListServiceUpdatesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListServiceUpdatesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list service updates unauthorized response has a 2xx status code
+func (o *ListServiceUpdatesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list service updates unauthorized response has a 3xx status code
+func (o *ListServiceUpdatesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service updates unauthorized response has a 4xx status code
+func (o *ListServiceUpdatesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list service updates unauthorized response has a 5xx status code
+func (o *ListServiceUpdatesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service updates unauthorized response a status code equal to that given
+func (o *ListServiceUpdatesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list service updates unauthorized response
+func (o *ListServiceUpdatesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListServiceUpdatesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesUnauthorized %s", 401, payload)
+}
+
+func (o *ListServiceUpdatesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesUnauthorized %s", 401, payload)
+}
+
 func (o *ListServiceUpdatesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewListServiceUpdatesTooManyRequests() *ListServiceUpdatesTooManyRequests {
 	return &ListServiceUpdatesTooManyRequests{}
 }
 
-/* ListServiceUpdatesTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListServiceUpdatesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -147,9 +225,46 @@ type ListServiceUpdatesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListServiceUpdatesTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list service updates too many requests response has a 2xx status code
+func (o *ListServiceUpdatesTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list service updates too many requests response has a 3xx status code
+func (o *ListServiceUpdatesTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service updates too many requests response has a 4xx status code
+func (o *ListServiceUpdatesTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list service updates too many requests response has a 5xx status code
+func (o *ListServiceUpdatesTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service updates too many requests response a status code equal to that given
+func (o *ListServiceUpdatesTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list service updates too many requests response
+func (o *ListServiceUpdatesTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListServiceUpdatesTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesTooManyRequests %s", 429, payload)
+}
+
+func (o *ListServiceUpdatesTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-api-session/service-updates][%d] listServiceUpdatesTooManyRequests %s", 429, payload)
+}
+
 func (o *ListServiceUpdatesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

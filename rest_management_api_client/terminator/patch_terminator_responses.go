@@ -30,6 +30,7 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *PatchTerminatorReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /terminators/{id}] patchTerminator", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewPatchTerminatorOK() *PatchTerminatorOK {
 	return &PatchTerminatorOK{}
 }
 
-/* PatchTerminatorOK describes a response with status code 200, with default header values.
+/*
+PatchTerminatorOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type PatchTerminatorOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *PatchTerminatorOK) Error() string {
-	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch terminator o k response has a 2xx status code
+func (o *PatchTerminatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch terminator o k response has a 3xx status code
+func (o *PatchTerminatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch terminator o k response has a 4xx status code
+func (o *PatchTerminatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch terminator o k response has a 5xx status code
+func (o *PatchTerminatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch terminator o k response a status code equal to that given
+func (o *PatchTerminatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch terminator o k response
+func (o *PatchTerminatorOK) Code() int {
+	return 200
+}
+
+func (o *PatchTerminatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorOK %s", 200, payload)
+}
+
+func (o *PatchTerminatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorOK %s", 200, payload)
+}
+
 func (o *PatchTerminatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewPatchTerminatorBadRequest() *PatchTerminatorBadRequest {
 	return &PatchTerminatorBadRequest{}
 }
 
-/* PatchTerminatorBadRequest describes a response with status code 400, with default header values.
+/*
+PatchTerminatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type PatchTerminatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTerminatorBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch terminator bad request response has a 2xx status code
+func (o *PatchTerminatorBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch terminator bad request response has a 3xx status code
+func (o *PatchTerminatorBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch terminator bad request response has a 4xx status code
+func (o *PatchTerminatorBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch terminator bad request response has a 5xx status code
+func (o *PatchTerminatorBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch terminator bad request response a status code equal to that given
+func (o *PatchTerminatorBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch terminator bad request response
+func (o *PatchTerminatorBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchTerminatorBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorBadRequest %s", 400, payload)
+}
+
+func (o *PatchTerminatorBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorBadRequest %s", 400, payload)
+}
+
 func (o *PatchTerminatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewPatchTerminatorUnauthorized() *PatchTerminatorUnauthorized {
 	return &PatchTerminatorUnauthorized{}
 }
 
-/* PatchTerminatorUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchTerminatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type PatchTerminatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTerminatorUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch terminator unauthorized response has a 2xx status code
+func (o *PatchTerminatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch terminator unauthorized response has a 3xx status code
+func (o *PatchTerminatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch terminator unauthorized response has a 4xx status code
+func (o *PatchTerminatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch terminator unauthorized response has a 5xx status code
+func (o *PatchTerminatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch terminator unauthorized response a status code equal to that given
+func (o *PatchTerminatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch terminator unauthorized response
+func (o *PatchTerminatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchTerminatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorUnauthorized %s", 401, payload)
+}
+
+func (o *PatchTerminatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorUnauthorized %s", 401, payload)
+}
+
 func (o *PatchTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewPatchTerminatorNotFound() *PatchTerminatorNotFound {
 	return &PatchTerminatorNotFound{}
 }
 
-/* PatchTerminatorNotFound describes a response with status code 404, with default header values.
+/*
+PatchTerminatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type PatchTerminatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTerminatorNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch terminator not found response has a 2xx status code
+func (o *PatchTerminatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch terminator not found response has a 3xx status code
+func (o *PatchTerminatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch terminator not found response has a 4xx status code
+func (o *PatchTerminatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch terminator not found response has a 5xx status code
+func (o *PatchTerminatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch terminator not found response a status code equal to that given
+func (o *PatchTerminatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch terminator not found response
+func (o *PatchTerminatorNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchTerminatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorNotFound %s", 404, payload)
+}
+
+func (o *PatchTerminatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorNotFound %s", 404, payload)
+}
+
 func (o *PatchTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewPatchTerminatorTooManyRequests() *PatchTerminatorTooManyRequests {
 	return &PatchTerminatorTooManyRequests{}
 }
 
-/* PatchTerminatorTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchTerminatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type PatchTerminatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTerminatorTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch terminator too many requests response has a 2xx status code
+func (o *PatchTerminatorTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch terminator too many requests response has a 3xx status code
+func (o *PatchTerminatorTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch terminator too many requests response has a 4xx status code
+func (o *PatchTerminatorTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch terminator too many requests response has a 5xx status code
+func (o *PatchTerminatorTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch terminator too many requests response a status code equal to that given
+func (o *PatchTerminatorTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch terminator too many requests response
+func (o *PatchTerminatorTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchTerminatorTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchTerminatorTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /terminators/{id}][%d] patchTerminatorTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

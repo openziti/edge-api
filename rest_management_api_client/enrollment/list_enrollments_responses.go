@@ -30,6 +30,7 @@ package enrollment
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *ListEnrollmentsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /enrollments] listEnrollments", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewListEnrollmentsOK() *ListEnrollmentsOK {
 	return &ListEnrollmentsOK{}
 }
 
-/* ListEnrollmentsOK describes a response with status code 200, with default header values.
+/*
+ListEnrollmentsOK describes a response with status code 200, with default header values.
 
 A list of enrollments
 */
@@ -89,9 +91,46 @@ type ListEnrollmentsOK struct {
 	Payload *rest_model.ListEnrollmentsEnvelope
 }
 
-func (o *ListEnrollmentsOK) Error() string {
-	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list enrollments o k response has a 2xx status code
+func (o *ListEnrollmentsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list enrollments o k response has a 3xx status code
+func (o *ListEnrollmentsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list enrollments o k response has a 4xx status code
+func (o *ListEnrollmentsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list enrollments o k response has a 5xx status code
+func (o *ListEnrollmentsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list enrollments o k response a status code equal to that given
+func (o *ListEnrollmentsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list enrollments o k response
+func (o *ListEnrollmentsOK) Code() int {
+	return 200
+}
+
+func (o *ListEnrollmentsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsOK %s", 200, payload)
+}
+
+func (o *ListEnrollmentsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsOK %s", 200, payload)
+}
+
 func (o *ListEnrollmentsOK) GetPayload() *rest_model.ListEnrollmentsEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewListEnrollmentsBadRequest() *ListEnrollmentsBadRequest {
 	return &ListEnrollmentsBadRequest{}
 }
 
-/* ListEnrollmentsBadRequest describes a response with status code 400, with default header values.
+/*
+ListEnrollmentsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type ListEnrollmentsBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEnrollmentsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list enrollments bad request response has a 2xx status code
+func (o *ListEnrollmentsBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list enrollments bad request response has a 3xx status code
+func (o *ListEnrollmentsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list enrollments bad request response has a 4xx status code
+func (o *ListEnrollmentsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list enrollments bad request response has a 5xx status code
+func (o *ListEnrollmentsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list enrollments bad request response a status code equal to that given
+func (o *ListEnrollmentsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list enrollments bad request response
+func (o *ListEnrollmentsBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListEnrollmentsBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsBadRequest %s", 400, payload)
+}
+
+func (o *ListEnrollmentsBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsBadRequest %s", 400, payload)
+}
+
 func (o *ListEnrollmentsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewListEnrollmentsUnauthorized() *ListEnrollmentsUnauthorized {
 	return &ListEnrollmentsUnauthorized{}
 }
 
-/* ListEnrollmentsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListEnrollmentsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type ListEnrollmentsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEnrollmentsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list enrollments unauthorized response has a 2xx status code
+func (o *ListEnrollmentsUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list enrollments unauthorized response has a 3xx status code
+func (o *ListEnrollmentsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list enrollments unauthorized response has a 4xx status code
+func (o *ListEnrollmentsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list enrollments unauthorized response has a 5xx status code
+func (o *ListEnrollmentsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list enrollments unauthorized response a status code equal to that given
+func (o *ListEnrollmentsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list enrollments unauthorized response
+func (o *ListEnrollmentsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListEnrollmentsUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsUnauthorized %s", 401, payload)
+}
+
+func (o *ListEnrollmentsUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsUnauthorized %s", 401, payload)
+}
+
 func (o *ListEnrollmentsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewListEnrollmentsTooManyRequests() *ListEnrollmentsTooManyRequests {
 	return &ListEnrollmentsTooManyRequests{}
 }
 
-/* ListEnrollmentsTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListEnrollmentsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type ListEnrollmentsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEnrollmentsTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list enrollments too many requests response has a 2xx status code
+func (o *ListEnrollmentsTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list enrollments too many requests response has a 3xx status code
+func (o *ListEnrollmentsTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list enrollments too many requests response has a 4xx status code
+func (o *ListEnrollmentsTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list enrollments too many requests response has a 5xx status code
+func (o *ListEnrollmentsTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list enrollments too many requests response a status code equal to that given
+func (o *ListEnrollmentsTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list enrollments too many requests response
+func (o *ListEnrollmentsTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListEnrollmentsTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsTooManyRequests %s", 429, payload)
+}
+
+func (o *ListEnrollmentsTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enrollments][%d] listEnrollmentsTooManyRequests %s", 429, payload)
+}
+
 func (o *ListEnrollmentsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

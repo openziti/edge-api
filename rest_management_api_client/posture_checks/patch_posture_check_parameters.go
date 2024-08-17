@@ -78,10 +78,12 @@ func NewPatchPostureCheckParamsWithHTTPClient(client *http.Client) *PatchPosture
 	}
 }
 
-/* PatchPostureCheckParams contains all the parameters to send to the API endpoint
-   for the patch posture check operation.
+/*
+PatchPostureCheckParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the patch posture check operation.
+
+	Typically these are written to a http.Request.
 */
 type PatchPostureCheckParams struct {
 

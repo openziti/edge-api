@@ -53,14 +53,13 @@ func NewGetIdentityPostureData(ctx *middleware.Context, handler GetIdentityPostu
 	return &GetIdentityPostureData{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityPostureData swagger:route GET /identities/{id}/posture-data Identity getIdentityPostureData
+/*
+	GetIdentityPostureData swagger:route GET /identities/{id}/posture-data Identity getIdentityPostureData
 
 Retrieve the curent posture data for a specific identity.
 
 Returns a nested map data represeting the posture data of the identity.
 This data should be considered volatile.
-
-
 */
 type GetIdentityPostureData struct {
 	Context *middleware.Context

@@ -166,6 +166,7 @@ func (m *ServiceConfigDetail) ContextValidate(ctx context.Context, formats strfm
 func (m *ServiceConfigDetail) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Config != nil {
+
 		if err := m.Config.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("config")
@@ -182,6 +183,7 @@ func (m *ServiceConfigDetail) contextValidateConfig(ctx context.Context, formats
 func (m *ServiceConfigDetail) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
+
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service")

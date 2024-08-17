@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *DetailCurrentIdentityAuthenticatorReader) ReadResponse(response runtime
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-identity/authenticators/{id}] detailCurrentIdentityAuthenticator", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewDetailCurrentIdentityAuthenticatorOK() *DetailCurrentIdentityAuthenticat
 	return &DetailCurrentIdentityAuthenticatorOK{}
 }
 
-/* DetailCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/*
+DetailCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 A singular authenticator resource
 */
@@ -83,9 +85,46 @@ type DetailCurrentIdentityAuthenticatorOK struct {
 	Payload *rest_model.DetailAuthenticatorEnvelope
 }
 
-func (o *DetailCurrentIdentityAuthenticatorOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail current identity authenticator o k response has a 2xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail current identity authenticator o k response has a 3xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail current identity authenticator o k response has a 4xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail current identity authenticator o k response has a 5xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail current identity authenticator o k response a status code equal to that given
+func (o *DetailCurrentIdentityAuthenticatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail current identity authenticator o k response
+func (o *DetailCurrentIdentityAuthenticatorOK) Code() int {
+	return 200
+}
+
+func (o *DetailCurrentIdentityAuthenticatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorOK %s", 200, payload)
+}
+
+func (o *DetailCurrentIdentityAuthenticatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorOK %s", 200, payload)
+}
+
 func (o *DetailCurrentIdentityAuthenticatorOK) GetPayload() *rest_model.DetailAuthenticatorEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewDetailCurrentIdentityAuthenticatorUnauthorized() *DetailCurrentIdentityA
 	return &DetailCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/* DetailCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -115,9 +155,46 @@ type DetailCurrentIdentityAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailCurrentIdentityAuthenticatorUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail current identity authenticator unauthorized response has a 2xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail current identity authenticator unauthorized response has a 3xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail current identity authenticator unauthorized response has a 4xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail current identity authenticator unauthorized response has a 5xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail current identity authenticator unauthorized response a status code equal to that given
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail current identity authenticator unauthorized response
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+}
+
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+}
+
 func (o *DetailCurrentIdentityAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewDetailCurrentIdentityAuthenticatorNotFound() *DetailCurrentIdentityAuthe
 	return &DetailCurrentIdentityAuthenticatorNotFound{}
 }
 
-/* DetailCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
+/*
+DetailCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -147,9 +225,46 @@ type DetailCurrentIdentityAuthenticatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailCurrentIdentityAuthenticatorNotFound) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail current identity authenticator not found response has a 2xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail current identity authenticator not found response has a 3xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail current identity authenticator not found response has a 4xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail current identity authenticator not found response has a 5xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail current identity authenticator not found response a status code equal to that given
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail current identity authenticator not found response
+func (o *DetailCurrentIdentityAuthenticatorNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailCurrentIdentityAuthenticatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorNotFound %s", 404, payload)
+}
+
+func (o *DetailCurrentIdentityAuthenticatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorNotFound %s", 404, payload)
+}
+
 func (o *DetailCurrentIdentityAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

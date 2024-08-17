@@ -30,6 +30,7 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *EnrollMfaReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /current-identity/mfa] enrollMfa", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewEnrollMfaCreated() *EnrollMfaCreated {
 	return &EnrollMfaCreated{}
 }
 
-/* EnrollMfaCreated describes a response with status code 201, with default header values.
+/*
+EnrollMfaCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -83,9 +85,46 @@ type EnrollMfaCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *EnrollMfaCreated) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this enroll mfa created response has a 2xx status code
+func (o *EnrollMfaCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this enroll mfa created response has a 3xx status code
+func (o *EnrollMfaCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll mfa created response has a 4xx status code
+func (o *EnrollMfaCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll mfa created response has a 5xx status code
+func (o *EnrollMfaCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll mfa created response a status code equal to that given
+func (o *EnrollMfaCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the enroll mfa created response
+func (o *EnrollMfaCreated) Code() int {
+	return 201
+}
+
+func (o *EnrollMfaCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaCreated %s", 201, payload)
+}
+
+func (o *EnrollMfaCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaCreated %s", 201, payload)
+}
+
 func (o *EnrollMfaCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewEnrollMfaUnauthorized() *EnrollMfaUnauthorized {
 	return &EnrollMfaUnauthorized{}
 }
 
-/* EnrollMfaUnauthorized describes a response with status code 401, with default header values.
+/*
+EnrollMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -115,9 +155,46 @@ type EnrollMfaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollMfaUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this enroll mfa unauthorized response has a 2xx status code
+func (o *EnrollMfaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll mfa unauthorized response has a 3xx status code
+func (o *EnrollMfaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll mfa unauthorized response has a 4xx status code
+func (o *EnrollMfaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll mfa unauthorized response has a 5xx status code
+func (o *EnrollMfaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll mfa unauthorized response a status code equal to that given
+func (o *EnrollMfaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the enroll mfa unauthorized response
+func (o *EnrollMfaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *EnrollMfaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaUnauthorized %s", 401, payload)
+}
+
+func (o *EnrollMfaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaUnauthorized %s", 401, payload)
+}
+
 func (o *EnrollMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewEnrollMfaConflict() *EnrollMfaConflict {
 	return &EnrollMfaConflict{}
 }
 
-/* EnrollMfaConflict describes a response with status code 409, with default header values.
+/*
+EnrollMfaConflict describes a response with status code 409, with default header values.
 
 The identity is already enrolled in MFA
 */
@@ -147,9 +225,46 @@ type EnrollMfaConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollMfaConflict) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this enroll mfa conflict response has a 2xx status code
+func (o *EnrollMfaConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll mfa conflict response has a 3xx status code
+func (o *EnrollMfaConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll mfa conflict response has a 4xx status code
+func (o *EnrollMfaConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll mfa conflict response has a 5xx status code
+func (o *EnrollMfaConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll mfa conflict response a status code equal to that given
+func (o *EnrollMfaConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the enroll mfa conflict response
+func (o *EnrollMfaConflict) Code() int {
+	return 409
+}
+
+func (o *EnrollMfaConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaConflict %s", 409, payload)
+}
+
+func (o *EnrollMfaConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa][%d] enrollMfaConflict %s", 409, payload)
+}
+
 func (o *EnrollMfaConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

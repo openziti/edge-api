@@ -53,13 +53,12 @@ func NewListIdentityServices(ctx *middleware.Context, handler ListIdentityServic
 	return &ListIdentityServices{Context: ctx, Handler: handler}
 }
 
-/* ListIdentityServices swagger:route GET /identities/{id}/services Identity listIdentityServices
+/*
+	ListIdentityServices swagger:route GET /identities/{id}/services Identity listIdentityServices
 
-List accessible services
+# List accessible services
 
 Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentityServices struct {
 	Context *middleware.Context

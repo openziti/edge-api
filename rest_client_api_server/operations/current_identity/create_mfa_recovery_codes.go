@@ -53,13 +53,12 @@ func NewCreateMfaRecoveryCodes(ctx *middleware.Context, handler CreateMfaRecover
 	return &CreateMfaRecoveryCodes{Context: ctx, Handler: handler}
 }
 
-/* CreateMfaRecoveryCodes swagger:route POST /current-identity/mfa/recovery-codes Current Identity MFA createMfaRecoveryCodes
+/*
+	CreateMfaRecoveryCodes swagger:route POST /current-identity/mfa/recovery-codes Current Identity MFA createMfaRecoveryCodes
 
-For a completed MFA enrollment regenerate the recovery codes
+# For a completed MFA enrollment regenerate the recovery codes
 
 Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.
-
-
 */
 type CreateMfaRecoveryCodes struct {
 	Context *middleware.Context

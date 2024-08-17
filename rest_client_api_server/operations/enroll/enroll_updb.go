@@ -59,13 +59,12 @@ func NewEnrollUpdb(ctx *middleware.Context, handler EnrollUpdbHandler) *EnrollUp
 	return &EnrollUpdb{Context: ctx, Handler: handler}
 }
 
-/* EnrollUpdb swagger:route POST /enroll/updb Enroll enrollUpdb
+/*
+	EnrollUpdb swagger:route POST /enroll/updb Enroll enrollUpdb
 
-Enroll an identity via one-time-token
+# Enroll an identity via one-time-token
 
 Enrolls an identity via a one-time-token to establish an initial username and password combination
-
-
 */
 type EnrollUpdb struct {
 	Context *middleware.Context
@@ -172,6 +171,10 @@ func (o *EnrollUpdbBody) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(o.Password) { // not required
+		return nil
+	}
+
 	if err := o.Password.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("updbCredentials" + "." + "password")
@@ -185,6 +188,10 @@ func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats st
 }
 
 func (o *EnrollUpdbBody) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(o.Username) { // not required
+		return nil
+	}
 
 	if err := o.Username.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

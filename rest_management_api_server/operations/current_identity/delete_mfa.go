@@ -53,13 +53,12 @@ func NewDeleteMfa(ctx *middleware.Context, handler DeleteMfaHandler) *DeleteMfa 
 	return &DeleteMfa{Context: ctx, Handler: handler}
 }
 
-/* DeleteMfa swagger:route DELETE /current-identity/mfa Current Identity MFA deleteMfa
+/*
+	DeleteMfa swagger:route DELETE /current-identity/mfa Current Identity MFA deleteMfa
 
-Disable MFA for the current identity
+# Disable MFA for the current identity
 
 Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
-
-
 */
 type DeleteMfa struct {
 	Context *middleware.Context

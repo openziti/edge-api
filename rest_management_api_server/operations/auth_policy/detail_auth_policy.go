@@ -53,12 +53,12 @@ func NewDetailAuthPolicy(ctx *middleware.Context, handler DetailAuthPolicyHandle
 	return &DetailAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/* DetailAuthPolicy swagger:route GET /auth-policies/{id} Auth Policy detailAuthPolicy
+/*
+	DetailAuthPolicy swagger:route GET /auth-policies/{id} Auth Policy detailAuthPolicy
 
-Retrieves a single Auth Policy
+# Retrieves a single Auth Policy
 
 Retrieves a single Auth Policy by id. Requires admin access.
-
 */
 type DetailAuthPolicy struct {
 	Context *middleware.Context

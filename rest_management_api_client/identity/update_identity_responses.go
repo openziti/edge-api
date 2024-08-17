@@ -30,6 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *UpdateIdentityReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /identities/{id}] updateIdentity", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewUpdateIdentityOK() *UpdateIdentityOK {
 	return &UpdateIdentityOK{}
 }
 
-/* UpdateIdentityOK describes a response with status code 200, with default header values.
+/*
+UpdateIdentityOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type UpdateIdentityOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateIdentityOK) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update identity o k response has a 2xx status code
+func (o *UpdateIdentityOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update identity o k response has a 3xx status code
+func (o *UpdateIdentityOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity o k response has a 4xx status code
+func (o *UpdateIdentityOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update identity o k response has a 5xx status code
+func (o *UpdateIdentityOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity o k response a status code equal to that given
+func (o *UpdateIdentityOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update identity o k response
+func (o *UpdateIdentityOK) Code() int {
+	return 200
+}
+
+func (o *UpdateIdentityOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityOK %s", 200, payload)
+}
+
+func (o *UpdateIdentityOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityOK %s", 200, payload)
+}
+
 func (o *UpdateIdentityOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewUpdateIdentityBadRequest() *UpdateIdentityBadRequest {
 	return &UpdateIdentityBadRequest{}
 }
 
-/* UpdateIdentityBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateIdentityBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type UpdateIdentityBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update identity bad request response has a 2xx status code
+func (o *UpdateIdentityBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity bad request response has a 3xx status code
+func (o *UpdateIdentityBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity bad request response has a 4xx status code
+func (o *UpdateIdentityBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity bad request response has a 5xx status code
+func (o *UpdateIdentityBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity bad request response a status code equal to that given
+func (o *UpdateIdentityBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update identity bad request response
+func (o *UpdateIdentityBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateIdentityBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityBadRequest %s", 400, payload)
+}
+
+func (o *UpdateIdentityBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityBadRequest %s", 400, payload)
+}
+
 func (o *UpdateIdentityBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewUpdateIdentityUnauthorized() *UpdateIdentityUnauthorized {
 	return &UpdateIdentityUnauthorized{}
 }
 
-/* UpdateIdentityUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type UpdateIdentityUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update identity unauthorized response has a 2xx status code
+func (o *UpdateIdentityUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity unauthorized response has a 3xx status code
+func (o *UpdateIdentityUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity unauthorized response has a 4xx status code
+func (o *UpdateIdentityUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity unauthorized response has a 5xx status code
+func (o *UpdateIdentityUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity unauthorized response a status code equal to that given
+func (o *UpdateIdentityUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update identity unauthorized response
+func (o *UpdateIdentityUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateIdentityUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateIdentityUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateIdentityUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewUpdateIdentityNotFound() *UpdateIdentityNotFound {
 	return &UpdateIdentityNotFound{}
 }
 
-/* UpdateIdentityNotFound describes a response with status code 404, with default header values.
+/*
+UpdateIdentityNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type UpdateIdentityNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityNotFound) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update identity not found response has a 2xx status code
+func (o *UpdateIdentityNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity not found response has a 3xx status code
+func (o *UpdateIdentityNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity not found response has a 4xx status code
+func (o *UpdateIdentityNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity not found response has a 5xx status code
+func (o *UpdateIdentityNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity not found response a status code equal to that given
+func (o *UpdateIdentityNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update identity not found response
+func (o *UpdateIdentityNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateIdentityNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityNotFound %s", 404, payload)
+}
+
+func (o *UpdateIdentityNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityNotFound %s", 404, payload)
+}
+
 func (o *UpdateIdentityNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewUpdateIdentityTooManyRequests() *UpdateIdentityTooManyRequests {
 	return &UpdateIdentityTooManyRequests{}
 }
 
-/* UpdateIdentityTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateIdentityTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type UpdateIdentityTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update identity too many requests response has a 2xx status code
+func (o *UpdateIdentityTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity too many requests response has a 3xx status code
+func (o *UpdateIdentityTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity too many requests response has a 4xx status code
+func (o *UpdateIdentityTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity too many requests response has a 5xx status code
+func (o *UpdateIdentityTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity too many requests response a status code equal to that given
+func (o *UpdateIdentityTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update identity too many requests response
+func (o *UpdateIdentityTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateIdentityTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateIdentityTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}][%d] updateIdentityTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

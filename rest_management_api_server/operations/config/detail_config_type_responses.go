@@ -40,7 +40,8 @@ import (
 // DetailConfigTypeOKCode is the HTTP code returned for type DetailConfigTypeOK
 const DetailConfigTypeOKCode int = 200
 
-/*DetailConfigTypeOK A singular config-type resource
+/*
+DetailConfigTypeOK A singular config-type resource
 
 swagger:response detailConfigTypeOK
 */
@@ -84,7 +85,8 @@ func (o *DetailConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailConfigTypeUnauthorizedCode is the HTTP code returned for type DetailConfigTypeUnauthorized
 const DetailConfigTypeUnauthorizedCode int = 401
 
-/*DetailConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailConfigTypeUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DetailConfigTypeNotFoundCode is the HTTP code returned for type DetailConfigTypeNotFound
 const DetailConfigTypeNotFoundCode int = 404
 
-/*DetailConfigTypeNotFound The requested resource does not exist
+/*
+DetailConfigTypeNotFound The requested resource does not exist
 
 swagger:response detailConfigTypeNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DetailConfigTypeTooManyRequestsCode is the HTTP code returned for type DetailConfigTypeTooManyRequests
 const DetailConfigTypeTooManyRequestsCode int = 429
 
-/*DetailConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailConfigTypeTooManyRequests
 */

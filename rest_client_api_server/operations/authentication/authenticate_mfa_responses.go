@@ -40,7 +40,8 @@ import (
 // AuthenticateMfaOKCode is the HTTP code returned for type AuthenticateMfaOK
 const AuthenticateMfaOKCode int = 200
 
-/*AuthenticateMfaOK Base empty response
+/*
+AuthenticateMfaOK Base empty response
 
 swagger:response authenticateMfaOK
 */
@@ -84,7 +85,8 @@ func (o *AuthenticateMfaOK) WriteResponse(rw http.ResponseWriter, producer runti
 // AuthenticateMfaUnauthorizedCode is the HTTP code returned for type AuthenticateMfaUnauthorized
 const AuthenticateMfaUnauthorizedCode int = 401
 
-/*AuthenticateMfaUnauthorized Base empty response
+/*
+AuthenticateMfaUnauthorized Base empty response
 
 swagger:response authenticateMfaUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *AuthenticateMfaUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // AuthenticateMfaTooManyRequestsCode is the HTTP code returned for type AuthenticateMfaTooManyRequests
 const AuthenticateMfaTooManyRequestsCode int = 429
 
-/*AuthenticateMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+AuthenticateMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response authenticateMfaTooManyRequests
 */

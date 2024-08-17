@@ -53,12 +53,12 @@ func NewCreateAuthPolicy(ctx *middleware.Context, handler CreateAuthPolicyHandle
 	return &CreateAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/* CreateAuthPolicy swagger:route POST /auth-policies Auth Policy createAuthPolicy
+/*
+	CreateAuthPolicy swagger:route POST /auth-policies Auth Policy createAuthPolicy
 
-Creates an Auth Policy
+# Creates an Auth Policy
 
 Creates an Auth Policy. Requires admin access.
-
 */
 type CreateAuthPolicy struct {
 	Context *middleware.Context

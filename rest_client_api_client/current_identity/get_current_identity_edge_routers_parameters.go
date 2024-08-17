@@ -76,10 +76,12 @@ func NewGetCurrentIdentityEdgeRoutersParamsWithHTTPClient(client *http.Client) *
 	}
 }
 
-/* GetCurrentIdentityEdgeRoutersParams contains all the parameters to send to the API endpoint
-   for the get current identity edge routers operation.
+/*
+GetCurrentIdentityEdgeRoutersParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get current identity edge routers operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCurrentIdentityEdgeRoutersParams struct {
 	timeout    time.Duration

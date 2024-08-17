@@ -40,7 +40,8 @@ import (
 // ReEnrollEdgeRouterOKCode is the HTTP code returned for type ReEnrollEdgeRouterOK
 const ReEnrollEdgeRouterOKCode int = 200
 
-/*ReEnrollEdgeRouterOK Base empty response
+/*
+ReEnrollEdgeRouterOK Base empty response
 
 swagger:response reEnrollEdgeRouterOK
 */
@@ -84,7 +85,8 @@ func (o *ReEnrollEdgeRouterOK) WriteResponse(rw http.ResponseWriter, producer ru
 // ReEnrollEdgeRouterUnauthorizedCode is the HTTP code returned for type ReEnrollEdgeRouterUnauthorized
 const ReEnrollEdgeRouterUnauthorizedCode int = 401
 
-/*ReEnrollEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ReEnrollEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response reEnrollEdgeRouterUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *ReEnrollEdgeRouterUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // ReEnrollEdgeRouterNotFoundCode is the HTTP code returned for type ReEnrollEdgeRouterNotFound
 const ReEnrollEdgeRouterNotFoundCode int = 404
 
-/*ReEnrollEdgeRouterNotFound The requested resource does not exist
+/*
+ReEnrollEdgeRouterNotFound The requested resource does not exist
 
 swagger:response reEnrollEdgeRouterNotFound
 */
@@ -172,7 +175,8 @@ func (o *ReEnrollEdgeRouterNotFound) WriteResponse(rw http.ResponseWriter, produ
 // ReEnrollEdgeRouterTooManyRequestsCode is the HTTP code returned for type ReEnrollEdgeRouterTooManyRequests
 const ReEnrollEdgeRouterTooManyRequestsCode int = 429
 
-/*ReEnrollEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ReEnrollEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response reEnrollEdgeRouterTooManyRequests
 */

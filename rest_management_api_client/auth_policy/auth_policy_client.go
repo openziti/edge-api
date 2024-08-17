@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new auth policy API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new auth policy API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new auth policy API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -70,9 +96,9 @@ type ClientService interface {
 }
 
 /*
-  CreateAuthPolicy creates an auth policy
+CreateAuthPolicy creates an auth policy
 
-  Creates an Auth Policy. Requires admin access.
+Creates an Auth Policy. Requires admin access.
 */
 func (a *Client) CreateAuthPolicy(params *CreateAuthPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAuthPolicyCreated, error) {
 	// TODO: Validate the params before sending
@@ -111,10 +137,9 @@ func (a *Client) CreateAuthPolicy(params *CreateAuthPolicyParams, authInfo runti
 }
 
 /*
-  DeleteAuthPolicy deletes an auth policy
+DeleteAuthPolicy deletes an auth policy
 
-  Delete an Auth Policy by id. Requires admin access.
-
+Delete an Auth Policy by id. Requires admin access.
 */
 func (a *Client) DeleteAuthPolicy(params *DeleteAuthPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAuthPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -153,9 +178,9 @@ func (a *Client) DeleteAuthPolicy(params *DeleteAuthPolicyParams, authInfo runti
 }
 
 /*
-  DetailAuthPolicy retrieves a single auth policy
+DetailAuthPolicy retrieves a single auth policy
 
-  Retrieves a single Auth Policy by id. Requires admin access.
+Retrieves a single Auth Policy by id. Requires admin access.
 */
 func (a *Client) DetailAuthPolicy(params *DetailAuthPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailAuthPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -194,9 +219,9 @@ func (a *Client) DetailAuthPolicy(params *DetailAuthPolicyParams, authInfo runti
 }
 
 /*
-  ListAuthPolicies lists auth policies
+ListAuthPolicies lists auth policies
 
-  Retrieves a list of Auth Policies
+Retrieves a list of Auth Policies
 */
 func (a *Client) ListAuthPolicies(params *ListAuthPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAuthPoliciesOK, error) {
 	// TODO: Validate the params before sending
@@ -235,9 +260,9 @@ func (a *Client) ListAuthPolicies(params *ListAuthPoliciesParams, authInfo runti
 }
 
 /*
-  PatchAuthPolicy updates the supplied fields on an auth policy
+PatchAuthPolicy updates the supplied fields on an auth policy
 
-  Update only the supplied fields on an Auth Policy by id. Requires admin access.
+Update only the supplied fields on an Auth Policy by id. Requires admin access.
 */
 func (a *Client) PatchAuthPolicy(params *PatchAuthPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchAuthPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -276,9 +301,9 @@ func (a *Client) PatchAuthPolicy(params *PatchAuthPolicyParams, authInfo runtime
 }
 
 /*
-  UpdateAuthPolicy updates all fields on an auth policy
+UpdateAuthPolicy updates all fields on an auth policy
 
-  Update all fields on an Auth Policy by id. Requires admin access.
+Update all fields on an Auth Policy by id. Requires admin access.
 */
 func (a *Client) UpdateAuthPolicy(params *UpdateAuthPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAuthPolicyOK, error) {
 	// TODO: Validate the params before sending

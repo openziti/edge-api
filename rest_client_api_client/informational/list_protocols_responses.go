@@ -30,6 +30,7 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -60,7 +61,7 @@ func (o *ListProtocolsReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /protocols] listProtocols", response, response.Code())
 	}
 }
 
@@ -69,7 +70,8 @@ func NewListProtocolsOK() *ListProtocolsOK {
 	return &ListProtocolsOK{}
 }
 
-/* ListProtocolsOK describes a response with status code 200, with default header values.
+/*
+ListProtocolsOK describes a response with status code 200, with default header values.
 
 A list of supported Edge protocols
 */
@@ -77,9 +79,46 @@ type ListProtocolsOK struct {
 	Payload *rest_model.ListProtocolsEnvelope
 }
 
-func (o *ListProtocolsOK) Error() string {
-	return fmt.Sprintf("[GET /protocols][%d] listProtocolsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list protocols o k response has a 2xx status code
+func (o *ListProtocolsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list protocols o k response has a 3xx status code
+func (o *ListProtocolsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list protocols o k response has a 4xx status code
+func (o *ListProtocolsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list protocols o k response has a 5xx status code
+func (o *ListProtocolsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list protocols o k response a status code equal to that given
+func (o *ListProtocolsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list protocols o k response
+func (o *ListProtocolsOK) Code() int {
+	return 200
+}
+
+func (o *ListProtocolsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsOK %s", 200, payload)
+}
+
+func (o *ListProtocolsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsOK %s", 200, payload)
+}
+
 func (o *ListProtocolsOK) GetPayload() *rest_model.ListProtocolsEnvelope {
 	return o.Payload
 }
@@ -101,7 +140,8 @@ func NewListProtocolsTooManyRequests() *ListProtocolsTooManyRequests {
 	return &ListProtocolsTooManyRequests{}
 }
 
-/* ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -109,9 +149,46 @@ type ListProtocolsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListProtocolsTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list protocols too many requests response has a 2xx status code
+func (o *ListProtocolsTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list protocols too many requests response has a 3xx status code
+func (o *ListProtocolsTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list protocols too many requests response has a 4xx status code
+func (o *ListProtocolsTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list protocols too many requests response has a 5xx status code
+func (o *ListProtocolsTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list protocols too many requests response a status code equal to that given
+func (o *ListProtocolsTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list protocols too many requests response
+func (o *ListProtocolsTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListProtocolsTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests %s", 429, payload)
+}
+
+func (o *ListProtocolsTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests %s", 429, payload)
+}
+
 func (o *ListProtocolsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

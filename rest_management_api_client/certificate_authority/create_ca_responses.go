@@ -30,6 +30,7 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *CreateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cas] createCa", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewCreateCaCreated() *CreateCaCreated {
 	return &CreateCaCreated{}
 }
 
-/* CreateCaCreated describes a response with status code 201, with default header values.
+/*
+CreateCaCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -89,9 +91,46 @@ type CreateCaCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateCaCreated) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create ca created response has a 2xx status code
+func (o *CreateCaCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create ca created response has a 3xx status code
+func (o *CreateCaCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca created response has a 4xx status code
+func (o *CreateCaCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create ca created response has a 5xx status code
+func (o *CreateCaCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca created response a status code equal to that given
+func (o *CreateCaCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create ca created response
+func (o *CreateCaCreated) Code() int {
+	return 201
+}
+
+func (o *CreateCaCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaCreated %s", 201, payload)
+}
+
+func (o *CreateCaCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaCreated %s", 201, payload)
+}
+
 func (o *CreateCaCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewCreateCaBadRequest() *CreateCaBadRequest {
 	return &CreateCaBadRequest{}
 }
 
-/* CreateCaBadRequest describes a response with status code 400, with default header values.
+/*
+CreateCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type CreateCaBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create ca bad request response has a 2xx status code
+func (o *CreateCaBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca bad request response has a 3xx status code
+func (o *CreateCaBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca bad request response has a 4xx status code
+func (o *CreateCaBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ca bad request response has a 5xx status code
+func (o *CreateCaBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca bad request response a status code equal to that given
+func (o *CreateCaBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create ca bad request response
+func (o *CreateCaBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateCaBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaBadRequest %s", 400, payload)
+}
+
+func (o *CreateCaBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaBadRequest %s", 400, payload)
+}
+
 func (o *CreateCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewCreateCaUnauthorized() *CreateCaUnauthorized {
 	return &CreateCaUnauthorized{}
 }
 
-/* CreateCaUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type CreateCaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create ca unauthorized response has a 2xx status code
+func (o *CreateCaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca unauthorized response has a 3xx status code
+func (o *CreateCaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca unauthorized response has a 4xx status code
+func (o *CreateCaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ca unauthorized response has a 5xx status code
+func (o *CreateCaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca unauthorized response a status code equal to that given
+func (o *CreateCaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create ca unauthorized response
+func (o *CreateCaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateCaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaUnauthorized %s", 401, payload)
+}
+
+func (o *CreateCaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaUnauthorized %s", 401, payload)
+}
+
 func (o *CreateCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewCreateCaTooManyRequests() *CreateCaTooManyRequests {
 	return &CreateCaTooManyRequests{}
 }
 
-/* CreateCaTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type CreateCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create ca too many requests response has a 2xx status code
+func (o *CreateCaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca too many requests response has a 3xx status code
+func (o *CreateCaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca too many requests response has a 4xx status code
+func (o *CreateCaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ca too many requests response has a 5xx status code
+func (o *CreateCaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca too many requests response a status code equal to that given
+func (o *CreateCaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create ca too many requests response
+func (o *CreateCaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateCaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateCaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

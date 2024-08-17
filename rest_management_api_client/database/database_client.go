@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new database API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new database API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new database API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -66,9 +92,9 @@ type ClientService interface {
 }
 
 /*
-  CheckDataIntegrity starts a data integrity scan on the datastore
+CheckDataIntegrity starts a data integrity scan on the datastore
 
-  Starts a data integrity scan on the datastore. Requires admin access. Only once instance may run at a time, including runs of fixDataIntegrity.
+Starts a data integrity scan on the datastore. Requires admin access. Only once instance may run at a time, including runs of fixDataIntegrity.
 */
 func (a *Client) CheckDataIntegrity(params *CheckDataIntegrityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CheckDataIntegrityAccepted, error) {
 	// TODO: Validate the params before sending
@@ -107,9 +133,9 @@ func (a *Client) CheckDataIntegrity(params *CheckDataIntegrityParams, authInfo r
 }
 
 /*
-  CreateDatabaseSnapshot creates a new database snapshot
+CreateDatabaseSnapshot creates a new database snapshot
 
-  Create a new database snapshot. Requires admin access.
+Create a new database snapshot. Requires admin access.
 */
 func (a *Client) CreateDatabaseSnapshot(params *CreateDatabaseSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateDatabaseSnapshotOK, error) {
 	// TODO: Validate the params before sending
@@ -148,9 +174,9 @@ func (a *Client) CreateDatabaseSnapshot(params *CreateDatabaseSnapshotParams, au
 }
 
 /*
-  DataIntegrityResults returns any results found from in progress integrity checks
+DataIntegrityResults returns any results found from in progress integrity checks
 
-  Returns any results found from in-progress integrity checks. Requires admin access.
+Returns any results found from in-progress integrity checks. Requires admin access.
 */
 func (a *Client) DataIntegrityResults(params *DataIntegrityResultsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DataIntegrityResultsOK, error) {
 	// TODO: Validate the params before sending
@@ -189,9 +215,9 @@ func (a *Client) DataIntegrityResults(params *DataIntegrityResultsParams, authIn
 }
 
 /*
-  FixDataIntegrity runs a data integrity scan on the datastore attempts to fix any issues it can and returns any found issues
+FixDataIntegrity runs a data integrity scan on the datastore attempts to fix any issues it can and returns any found issues
 
-  Runs a data integrity scan on the datastore, attempts to fix any issues it can, and returns any found issues. Requires admin access. Only once instance may run at a time, including runs of checkDataIntegrity.
+Runs a data integrity scan on the datastore, attempts to fix any issues it can, and returns any found issues. Requires admin access. Only once instance may run at a time, including runs of checkDataIntegrity.
 */
 func (a *Client) FixDataIntegrity(params *FixDataIntegrityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FixDataIntegrityAccepted, error) {
 	// TODO: Validate the params before sending

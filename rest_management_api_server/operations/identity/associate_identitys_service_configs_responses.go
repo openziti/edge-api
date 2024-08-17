@@ -40,7 +40,8 @@ import (
 // AssociateIdentitysServiceConfigsOKCode is the HTTP code returned for type AssociateIdentitysServiceConfigsOK
 const AssociateIdentitysServiceConfigsOKCode int = 200
 
-/*AssociateIdentitysServiceConfigsOK Base empty response
+/*
+AssociateIdentitysServiceConfigsOK Base empty response
 
 swagger:response associateIdentitysServiceConfigsOK
 */
@@ -84,7 +85,8 @@ func (o *AssociateIdentitysServiceConfigsOK) WriteResponse(rw http.ResponseWrite
 // AssociateIdentitysServiceConfigsBadRequestCode is the HTTP code returned for type AssociateIdentitysServiceConfigsBadRequest
 const AssociateIdentitysServiceConfigsBadRequestCode int = 400
 
-/*AssociateIdentitysServiceConfigsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+AssociateIdentitysServiceConfigsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response associateIdentitysServiceConfigsBadRequest
 */
@@ -128,7 +130,8 @@ func (o *AssociateIdentitysServiceConfigsBadRequest) WriteResponse(rw http.Respo
 // AssociateIdentitysServiceConfigsUnauthorizedCode is the HTTP code returned for type AssociateIdentitysServiceConfigsUnauthorized
 const AssociateIdentitysServiceConfigsUnauthorizedCode int = 401
 
-/*AssociateIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+AssociateIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response associateIdentitysServiceConfigsUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *AssociateIdentitysServiceConfigsUnauthorized) WriteResponse(rw http.Res
 // AssociateIdentitysServiceConfigsNotFoundCode is the HTTP code returned for type AssociateIdentitysServiceConfigsNotFound
 const AssociateIdentitysServiceConfigsNotFoundCode int = 404
 
-/*AssociateIdentitysServiceConfigsNotFound The requested resource does not exist
+/*
+AssociateIdentitysServiceConfigsNotFound The requested resource does not exist
 
 swagger:response associateIdentitysServiceConfigsNotFound
 */
@@ -216,7 +220,8 @@ func (o *AssociateIdentitysServiceConfigsNotFound) WriteResponse(rw http.Respons
 // AssociateIdentitysServiceConfigsTooManyRequestsCode is the HTTP code returned for type AssociateIdentitysServiceConfigsTooManyRequests
 const AssociateIdentitysServiceConfigsTooManyRequestsCode int = 429
 
-/*AssociateIdentitysServiceConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+AssociateIdentitysServiceConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response associateIdentitysServiceConfigsTooManyRequests
 */

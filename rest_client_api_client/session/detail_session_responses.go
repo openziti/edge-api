@@ -30,6 +30,7 @@ package session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *DetailSessionReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sessions/{id}] detailSession", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewDetailSessionOK() *DetailSessionOK {
 	return &DetailSessionOK{}
 }
 
-/* DetailSessionOK describes a response with status code 200, with default header values.
+/*
+DetailSessionOK describes a response with status code 200, with default header values.
 
 A single session
 */
@@ -83,9 +85,46 @@ type DetailSessionOK struct {
 	Payload *rest_model.DetailSessionEnvelope
 }
 
-func (o *DetailSessionOK) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail session o k response has a 2xx status code
+func (o *DetailSessionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail session o k response has a 3xx status code
+func (o *DetailSessionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session o k response has a 4xx status code
+func (o *DetailSessionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail session o k response has a 5xx status code
+func (o *DetailSessionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session o k response a status code equal to that given
+func (o *DetailSessionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail session o k response
+func (o *DetailSessionOK) Code() int {
+	return 200
+}
+
+func (o *DetailSessionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionOK %s", 200, payload)
+}
+
+func (o *DetailSessionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionOK %s", 200, payload)
+}
+
 func (o *DetailSessionOK) GetPayload() *rest_model.DetailSessionEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewDetailSessionUnauthorized() *DetailSessionUnauthorized {
 	return &DetailSessionUnauthorized{}
 }
 
-/* DetailSessionUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailSessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -115,9 +155,46 @@ type DetailSessionUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail session unauthorized response has a 2xx status code
+func (o *DetailSessionUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session unauthorized response has a 3xx status code
+func (o *DetailSessionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session unauthorized response has a 4xx status code
+func (o *DetailSessionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session unauthorized response has a 5xx status code
+func (o *DetailSessionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session unauthorized response a status code equal to that given
+func (o *DetailSessionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail session unauthorized response
+func (o *DetailSessionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailSessionUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionUnauthorized %s", 401, payload)
+}
+
+func (o *DetailSessionUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionUnauthorized %s", 401, payload)
+}
+
 func (o *DetailSessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewDetailSessionNotFound() *DetailSessionNotFound {
 	return &DetailSessionNotFound{}
 }
 
-/* DetailSessionNotFound describes a response with status code 404, with default header values.
+/*
+DetailSessionNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -147,9 +225,46 @@ type DetailSessionNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionNotFound) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail session not found response has a 2xx status code
+func (o *DetailSessionNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session not found response has a 3xx status code
+func (o *DetailSessionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session not found response has a 4xx status code
+func (o *DetailSessionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session not found response has a 5xx status code
+func (o *DetailSessionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session not found response a status code equal to that given
+func (o *DetailSessionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail session not found response
+func (o *DetailSessionNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailSessionNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionNotFound %s", 404, payload)
+}
+
+func (o *DetailSessionNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionNotFound %s", 404, payload)
+}
+
 func (o *DetailSessionNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

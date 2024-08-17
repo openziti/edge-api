@@ -40,7 +40,8 @@ import (
 // PatchConfigTypeOKCode is the HTTP code returned for type PatchConfigTypeOK
 const PatchConfigTypeOKCode int = 200
 
-/*PatchConfigTypeOK The patch request was successful and the resource has been altered
+/*
+PatchConfigTypeOK The patch request was successful and the resource has been altered
 
 swagger:response patchConfigTypeOK
 */
@@ -84,7 +85,8 @@ func (o *PatchConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runti
 // PatchConfigTypeBadRequestCode is the HTTP code returned for type PatchConfigTypeBadRequest
 const PatchConfigTypeBadRequestCode int = 400
 
-/*PatchConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+PatchConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchConfigTypeBadRequest
 */
@@ -128,7 +130,8 @@ func (o *PatchConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // PatchConfigTypeUnauthorizedCode is the HTTP code returned for type PatchConfigTypeUnauthorized
 const PatchConfigTypeUnauthorizedCode int = 401
 
-/*PatchConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+PatchConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchConfigTypeUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *PatchConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // PatchConfigTypeNotFoundCode is the HTTP code returned for type PatchConfigTypeNotFound
 const PatchConfigTypeNotFoundCode int = 404
 
-/*PatchConfigTypeNotFound The requested resource does not exist
+/*
+PatchConfigTypeNotFound The requested resource does not exist
 
 swagger:response patchConfigTypeNotFound
 */
@@ -216,7 +220,8 @@ func (o *PatchConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, producer
 // PatchConfigTypeTooManyRequestsCode is the HTTP code returned for type PatchConfigTypeTooManyRequests
 const PatchConfigTypeTooManyRequestsCode int = 429
 
-/*PatchConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+PatchConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchConfigTypeTooManyRequests
 */

@@ -30,6 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *EnrollCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enroll/ca] enrollCa", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewEnrollCaOK() *EnrollCaOK {
 	return &EnrollCaOK{}
 }
 
-/* EnrollCaOK describes a response with status code 200, with default header values.
+/*
+EnrollCaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -83,9 +85,46 @@ type EnrollCaOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *EnrollCaOK) Error() string {
-	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this enroll ca o k response has a 2xx status code
+func (o *EnrollCaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this enroll ca o k response has a 3xx status code
+func (o *EnrollCaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll ca o k response has a 4xx status code
+func (o *EnrollCaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll ca o k response has a 5xx status code
+func (o *EnrollCaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll ca o k response a status code equal to that given
+func (o *EnrollCaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the enroll ca o k response
+func (o *EnrollCaOK) Code() int {
+	return 200
+}
+
+func (o *EnrollCaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaOK %s", 200, payload)
+}
+
+func (o *EnrollCaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaOK %s", 200, payload)
+}
+
 func (o *EnrollCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewEnrollCaNotFound() *EnrollCaNotFound {
 	return &EnrollCaNotFound{}
 }
 
-/* EnrollCaNotFound describes a response with status code 404, with default header values.
+/*
+EnrollCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -115,9 +155,46 @@ type EnrollCaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollCaNotFound) Error() string {
-	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this enroll ca not found response has a 2xx status code
+func (o *EnrollCaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll ca not found response has a 3xx status code
+func (o *EnrollCaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll ca not found response has a 4xx status code
+func (o *EnrollCaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll ca not found response has a 5xx status code
+func (o *EnrollCaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll ca not found response a status code equal to that given
+func (o *EnrollCaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the enroll ca not found response
+func (o *EnrollCaNotFound) Code() int {
+	return 404
+}
+
+func (o *EnrollCaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaNotFound %s", 404, payload)
+}
+
+func (o *EnrollCaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaNotFound %s", 404, payload)
+}
+
 func (o *EnrollCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewEnrollCaTooManyRequests() *EnrollCaTooManyRequests {
 	return &EnrollCaTooManyRequests{}
 }
 
-/* EnrollCaTooManyRequests describes a response with status code 429, with default header values.
+/*
+EnrollCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -147,9 +225,46 @@ type EnrollCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollCaTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this enroll ca too many requests response has a 2xx status code
+func (o *EnrollCaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll ca too many requests response has a 3xx status code
+func (o *EnrollCaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll ca too many requests response has a 4xx status code
+func (o *EnrollCaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll ca too many requests response has a 5xx status code
+func (o *EnrollCaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll ca too many requests response a status code equal to that given
+func (o *EnrollCaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the enroll ca too many requests response
+func (o *EnrollCaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *EnrollCaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaTooManyRequests %s", 429, payload)
+}
+
+func (o *EnrollCaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/ca][%d] enrollCaTooManyRequests %s", 429, payload)
+}
+
 func (o *EnrollCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

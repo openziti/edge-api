@@ -40,7 +40,8 @@ import (
 // GetIdentityPolicyAdviceOKCode is the HTTP code returned for type GetIdentityPolicyAdviceOK
 const GetIdentityPolicyAdviceOKCode int = 200
 
-/*GetIdentityPolicyAdviceOK Returns the document that represents the policy advice
+/*
+GetIdentityPolicyAdviceOK Returns the document that represents the policy advice
 
 swagger:response getIdentityPolicyAdviceOK
 */
@@ -84,7 +85,8 @@ func (o *GetIdentityPolicyAdviceOK) WriteResponse(rw http.ResponseWriter, produc
 // GetIdentityPolicyAdviceUnauthorizedCode is the HTTP code returned for type GetIdentityPolicyAdviceUnauthorized
 const GetIdentityPolicyAdviceUnauthorizedCode int = 401
 
-/*GetIdentityPolicyAdviceUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetIdentityPolicyAdviceUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityPolicyAdviceUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *GetIdentityPolicyAdviceUnauthorized) WriteResponse(rw http.ResponseWrit
 // GetIdentityPolicyAdviceNotFoundCode is the HTTP code returned for type GetIdentityPolicyAdviceNotFound
 const GetIdentityPolicyAdviceNotFoundCode int = 404
 
-/*GetIdentityPolicyAdviceNotFound The requested resource does not exist
+/*
+GetIdentityPolicyAdviceNotFound The requested resource does not exist
 
 swagger:response getIdentityPolicyAdviceNotFound
 */
@@ -172,7 +175,8 @@ func (o *GetIdentityPolicyAdviceNotFound) WriteResponse(rw http.ResponseWriter, 
 // GetIdentityPolicyAdviceTooManyRequestsCode is the HTTP code returned for type GetIdentityPolicyAdviceTooManyRequests
 const GetIdentityPolicyAdviceTooManyRequestsCode int = 429
 
-/*GetIdentityPolicyAdviceTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetIdentityPolicyAdviceTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityPolicyAdviceTooManyRequests
 */

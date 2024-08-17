@@ -30,6 +30,7 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *UpdateServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /service-policies/{id}] updateServicePolicy", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewUpdateServicePolicyOK() *UpdateServicePolicyOK {
 	return &UpdateServicePolicyOK{}
 }
 
-/* UpdateServicePolicyOK describes a response with status code 200, with default header values.
+/*
+UpdateServicePolicyOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -95,9 +97,46 @@ type UpdateServicePolicyOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateServicePolicyOK) Error() string {
-	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update service policy o k response has a 2xx status code
+func (o *UpdateServicePolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update service policy o k response has a 3xx status code
+func (o *UpdateServicePolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update service policy o k response has a 4xx status code
+func (o *UpdateServicePolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update service policy o k response has a 5xx status code
+func (o *UpdateServicePolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update service policy o k response a status code equal to that given
+func (o *UpdateServicePolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update service policy o k response
+func (o *UpdateServicePolicyOK) Code() int {
+	return 200
+}
+
+func (o *UpdateServicePolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyOK %s", 200, payload)
+}
+
+func (o *UpdateServicePolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyOK %s", 200, payload)
+}
+
 func (o *UpdateServicePolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewUpdateServicePolicyBadRequest() *UpdateServicePolicyBadRequest {
 	return &UpdateServicePolicyBadRequest{}
 }
 
-/* UpdateServicePolicyBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateServicePolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type UpdateServicePolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateServicePolicyBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update service policy bad request response has a 2xx status code
+func (o *UpdateServicePolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update service policy bad request response has a 3xx status code
+func (o *UpdateServicePolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update service policy bad request response has a 4xx status code
+func (o *UpdateServicePolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update service policy bad request response has a 5xx status code
+func (o *UpdateServicePolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update service policy bad request response a status code equal to that given
+func (o *UpdateServicePolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update service policy bad request response
+func (o *UpdateServicePolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateServicePolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyBadRequest %s", 400, payload)
+}
+
+func (o *UpdateServicePolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyBadRequest %s", 400, payload)
+}
+
 func (o *UpdateServicePolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewUpdateServicePolicyUnauthorized() *UpdateServicePolicyUnauthorized {
 	return &UpdateServicePolicyUnauthorized{}
 }
 
-/* UpdateServicePolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateServicePolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type UpdateServicePolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateServicePolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update service policy unauthorized response has a 2xx status code
+func (o *UpdateServicePolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update service policy unauthorized response has a 3xx status code
+func (o *UpdateServicePolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update service policy unauthorized response has a 4xx status code
+func (o *UpdateServicePolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update service policy unauthorized response has a 5xx status code
+func (o *UpdateServicePolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update service policy unauthorized response a status code equal to that given
+func (o *UpdateServicePolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update service policy unauthorized response
+func (o *UpdateServicePolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateServicePolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateServicePolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewUpdateServicePolicyNotFound() *UpdateServicePolicyNotFound {
 	return &UpdateServicePolicyNotFound{}
 }
 
-/* UpdateServicePolicyNotFound describes a response with status code 404, with default header values.
+/*
+UpdateServicePolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -191,9 +307,46 @@ type UpdateServicePolicyNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateServicePolicyNotFound) Error() string {
-	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update service policy not found response has a 2xx status code
+func (o *UpdateServicePolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update service policy not found response has a 3xx status code
+func (o *UpdateServicePolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update service policy not found response has a 4xx status code
+func (o *UpdateServicePolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update service policy not found response has a 5xx status code
+func (o *UpdateServicePolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update service policy not found response a status code equal to that given
+func (o *UpdateServicePolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update service policy not found response
+func (o *UpdateServicePolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateServicePolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyNotFound %s", 404, payload)
+}
+
+func (o *UpdateServicePolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyNotFound %s", 404, payload)
+}
+
 func (o *UpdateServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewUpdateServicePolicyTooManyRequests() *UpdateServicePolicyTooManyRequests
 	return &UpdateServicePolicyTooManyRequests{}
 }
 
-/* UpdateServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateServicePolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type UpdateServicePolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateServicePolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update service policy too many requests response has a 2xx status code
+func (o *UpdateServicePolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update service policy too many requests response has a 3xx status code
+func (o *UpdateServicePolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update service policy too many requests response has a 4xx status code
+func (o *UpdateServicePolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update service policy too many requests response has a 5xx status code
+func (o *UpdateServicePolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update service policy too many requests response a status code equal to that given
+func (o *UpdateServicePolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update service policy too many requests response
+func (o *UpdateServicePolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateServicePolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateServicePolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /service-policies/{id}][%d] updateServicePolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

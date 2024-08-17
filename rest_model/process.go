@@ -126,6 +126,7 @@ func (m *Process) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Process) contextValidateOsType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OsType != nil {
+
 		if err := m.OsType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("osType")

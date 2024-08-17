@@ -53,12 +53,12 @@ func NewPatchAuthenticator(ctx *middleware.Context, handler PatchAuthenticatorHa
 	return &PatchAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* PatchAuthenticator swagger:route PATCH /authenticators/{id} Authenticator patchAuthenticator
+/*
+	PatchAuthenticator swagger:route PATCH /authenticators/{id} Authenticator patchAuthenticator
 
-Update the supplied fields on an authenticator
+# Update the supplied fields on an authenticator
 
 Update the supplied fields on an authenticator by id. Requires admin access.
-
 */
 type PatchAuthenticator struct {
 	Context *middleware.Context

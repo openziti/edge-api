@@ -30,6 +30,7 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *ListCasReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /cas] listCas", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewListCasOK() *ListCasOK {
 	return &ListCasOK{}
 }
 
-/* ListCasOK describes a response with status code 200, with default header values.
+/*
+ListCasOK describes a response with status code 200, with default header values.
 
 A list of Certificate Authorities (CAs)
 */
@@ -89,9 +91,46 @@ type ListCasOK struct {
 	Payload *rest_model.ListCasEnvelope
 }
 
-func (o *ListCasOK) Error() string {
-	return fmt.Sprintf("[GET /cas][%d] listCasOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list cas o k response has a 2xx status code
+func (o *ListCasOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list cas o k response has a 3xx status code
+func (o *ListCasOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list cas o k response has a 4xx status code
+func (o *ListCasOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list cas o k response has a 5xx status code
+func (o *ListCasOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list cas o k response a status code equal to that given
+func (o *ListCasOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list cas o k response
+func (o *ListCasOK) Code() int {
+	return 200
+}
+
+func (o *ListCasOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasOK %s", 200, payload)
+}
+
+func (o *ListCasOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasOK %s", 200, payload)
+}
+
 func (o *ListCasOK) GetPayload() *rest_model.ListCasEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewListCasBadRequest() *ListCasBadRequest {
 	return &ListCasBadRequest{}
 }
 
-/* ListCasBadRequest describes a response with status code 400, with default header values.
+/*
+ListCasBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type ListCasBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCasBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cas][%d] listCasBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list cas bad request response has a 2xx status code
+func (o *ListCasBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list cas bad request response has a 3xx status code
+func (o *ListCasBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list cas bad request response has a 4xx status code
+func (o *ListCasBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list cas bad request response has a 5xx status code
+func (o *ListCasBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list cas bad request response a status code equal to that given
+func (o *ListCasBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list cas bad request response
+func (o *ListCasBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListCasBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasBadRequest %s", 400, payload)
+}
+
+func (o *ListCasBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasBadRequest %s", 400, payload)
+}
+
 func (o *ListCasBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewListCasUnauthorized() *ListCasUnauthorized {
 	return &ListCasUnauthorized{}
 }
 
-/* ListCasUnauthorized describes a response with status code 401, with default header values.
+/*
+ListCasUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type ListCasUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCasUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /cas][%d] listCasUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list cas unauthorized response has a 2xx status code
+func (o *ListCasUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list cas unauthorized response has a 3xx status code
+func (o *ListCasUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list cas unauthorized response has a 4xx status code
+func (o *ListCasUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list cas unauthorized response has a 5xx status code
+func (o *ListCasUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list cas unauthorized response a status code equal to that given
+func (o *ListCasUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list cas unauthorized response
+func (o *ListCasUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListCasUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasUnauthorized %s", 401, payload)
+}
+
+func (o *ListCasUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasUnauthorized %s", 401, payload)
+}
+
 func (o *ListCasUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewListCasTooManyRequests() *ListCasTooManyRequests {
 	return &ListCasTooManyRequests{}
 }
 
-/* ListCasTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListCasTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type ListCasTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCasTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /cas][%d] listCasTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list cas too many requests response has a 2xx status code
+func (o *ListCasTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list cas too many requests response has a 3xx status code
+func (o *ListCasTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list cas too many requests response has a 4xx status code
+func (o *ListCasTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list cas too many requests response has a 5xx status code
+func (o *ListCasTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list cas too many requests response a status code equal to that given
+func (o *ListCasTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list cas too many requests response
+func (o *ListCasTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListCasTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasTooManyRequests %s", 429, payload)
+}
+
+func (o *ListCasTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cas][%d] listCasTooManyRequests %s", 429, payload)
+}
+
 func (o *ListCasTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

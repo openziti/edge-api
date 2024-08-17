@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new informational API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new informational API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new informational API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,8 +75,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithAccept allows the client to force the Accept header
+// to negotiate a specific Producer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithAccept(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ProducesMediaTypes = []string{mime}
+	}
+}
+
+// WithAcceptApplicationJSON sets the Accept header to "application/json".
+func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json"}
+}
+
+// WithAcceptTextYaml sets the Accept header to "text/yaml".
+func WithAcceptTextYaml(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"text/yaml"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -72,9 +122,9 @@ type ClientService interface {
 }
 
 /*
-  DetailSpec returns a single spec resource
+DetailSpec returns a single spec resource
 
-  Returns single spec resource embedded within the controller for consumption/documentation/code geneartion
+Returns single spec resource embedded within the controller for consumption/documentation/code geneartion
 */
 func (a *Client) DetailSpec(params *DetailSpecParams, opts ...ClientOption) (*DetailSpecOK, error) {
 	// TODO: Validate the params before sending
@@ -112,9 +162,9 @@ func (a *Client) DetailSpec(params *DetailSpecParams, opts ...ClientOption) (*De
 }
 
 /*
-  DetailSpecBody returns the spec s file
+DetailSpecBody returns the spec s file
 
-  Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).
+Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).
 */
 func (a *Client) DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOption) (*DetailSpecBodyOK, error) {
 	// TODO: Validate the params before sending
@@ -125,7 +175,7 @@ func (a *Client) DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOpti
 		ID:                 "detailSpecBody",
 		Method:             "GET",
 		PathPattern:        "/specs/{id}/spec",
-		ProducesMediaTypes: []string{"application/json", "text/yaml"},
+		ProducesMediaTypes: []string{"text/yaml", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
@@ -152,7 +202,7 @@ func (a *Client) DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOpti
 }
 
 /*
-  ListEnumeratedCapabilities returns all capabilities this version of the controller is aware of enabled or not
+ListEnumeratedCapabilities returns all capabilities this version of the controller is aware of enabled or not
 */
 func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesParams, opts ...ClientOption) (*ListEnumeratedCapabilitiesOK, error) {
 	// TODO: Validate the params before sending
@@ -190,7 +240,7 @@ func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesPa
 }
 
 /*
-  ListRoot returns version information
+ListRoot returns version information
 */
 func (a *Client) ListRoot(params *ListRootParams, opts ...ClientOption) (*ListRootOK, error) {
 	// TODO: Validate the params before sending
@@ -228,9 +278,9 @@ func (a *Client) ListRoot(params *ListRootParams, opts ...ClientOption) (*ListRo
 }
 
 /*
-  ListSpecs returns a list of API specs
+ListSpecs returns a list of API specs
 
-  Returns a list of spec files embedded within the controller for consumption/documentation/code geneartion
+Returns a list of spec files embedded within the controller for consumption/documentation/code geneartion
 */
 func (a *Client) ListSpecs(params *ListSpecsParams, opts ...ClientOption) (*ListSpecsOK, error) {
 	// TODO: Validate the params before sending
@@ -268,9 +318,9 @@ func (a *Client) ListSpecs(params *ListSpecsParams, opts ...ClientOption) (*List
 }
 
 /*
-  ListSummary returns a list of accessible resource counts
+ListSummary returns a list of accessible resource counts
 
-  This endpoint is usefull for UIs that wish to display UI elements with counts.
+This endpoint is usefull for UIs that wish to display UI elements with counts.
 */
 func (a *Client) ListSummary(params *ListSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSummaryOK, error) {
 	// TODO: Validate the params before sending
@@ -309,7 +359,7 @@ func (a *Client) ListSummary(params *ListSummaryParams, authInfo runtime.ClientA
 }
 
 /*
-  ListVersion returns version information
+ListVersion returns version information
 */
 func (a *Client) ListVersion(params *ListVersionParams, opts ...ClientOption) (*ListVersionOK, error) {
 	// TODO: Validate the params before sending

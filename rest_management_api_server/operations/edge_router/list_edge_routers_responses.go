@@ -40,7 +40,8 @@ import (
 // ListEdgeRoutersOKCode is the HTTP code returned for type ListEdgeRoutersOK
 const ListEdgeRoutersOKCode int = 200
 
-/*ListEdgeRoutersOK A list of edge routers
+/*
+ListEdgeRoutersOK A list of edge routers
 
 swagger:response listEdgeRoutersOK
 */
@@ -84,7 +85,8 @@ func (o *ListEdgeRoutersOK) WriteResponse(rw http.ResponseWriter, producer runti
 // ListEdgeRoutersBadRequestCode is the HTTP code returned for type ListEdgeRoutersBadRequest
 const ListEdgeRoutersBadRequestCode int = 400
 
-/*ListEdgeRoutersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListEdgeRoutersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listEdgeRoutersBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListEdgeRoutersBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // ListEdgeRoutersUnauthorizedCode is the HTTP code returned for type ListEdgeRoutersUnauthorized
 const ListEdgeRoutersUnauthorizedCode int = 401
 
-/*ListEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEdgeRoutersUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListEdgeRoutersUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // ListEdgeRoutersTooManyRequestsCode is the HTTP code returned for type ListEdgeRoutersTooManyRequests
 const ListEdgeRoutersTooManyRequestsCode int = 429
 
-/*ListEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEdgeRoutersTooManyRequests
 */

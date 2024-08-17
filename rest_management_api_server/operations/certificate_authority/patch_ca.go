@@ -53,12 +53,12 @@ func NewPatchCa(ctx *middleware.Context, handler PatchCaHandler) *PatchCa {
 	return &PatchCa{Context: ctx, Handler: handler}
 }
 
-/* PatchCa swagger:route PATCH /cas/{id} Certificate Authority patchCa
+/*
+	PatchCa swagger:route PATCH /cas/{id} Certificate Authority patchCa
 
-Update the supplied fields on a CA
+# Update the supplied fields on a CA
 
 Update only the supplied fields on a CA by id. Requires admin access.
-
 */
 type PatchCa struct {
 	Context *middleware.Context

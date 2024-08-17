@@ -40,7 +40,8 @@ import (
 // EnrollOttCaOKCode is the HTTP code returned for type EnrollOttCaOK
 const EnrollOttCaOKCode int = 200
 
-/*EnrollOttCaOK Base empty response
+/*
+EnrollOttCaOK Base empty response
 
 swagger:response enrollOttCaOK
 */
@@ -84,7 +85,8 @@ func (o *EnrollOttCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // EnrollOttCaTooManyRequestsCode is the HTTP code returned for type EnrollOttCaTooManyRequests
 const EnrollOttCaTooManyRequestsCode int = 429
 
-/*EnrollOttCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+EnrollOttCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollOttCaTooManyRequests
 */

@@ -40,7 +40,8 @@ import (
 // EnrollOKCode is the HTTP code returned for type EnrollOK
 const EnrollOKCode int = 200
 
-/*EnrollOK A response for multi-format legacy enrollment.
+/*
+EnrollOK A response for multi-format legacy enrollment.
 
 swagger:response enrollOK
 */
@@ -82,7 +83,8 @@ func (o *EnrollOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produc
 // EnrollNotFoundCode is the HTTP code returned for type EnrollNotFound
 const EnrollNotFoundCode int = 404
 
-/*EnrollNotFound The requested resource does not exist
+/*
+EnrollNotFound The requested resource does not exist
 
 swagger:response enrollNotFound
 */
@@ -126,7 +128,8 @@ func (o *EnrollNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.
 // EnrollTooManyRequestsCode is the HTTP code returned for type EnrollTooManyRequests
 const EnrollTooManyRequestsCode int = 429
 
-/*EnrollTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+EnrollTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollTooManyRequests
 */

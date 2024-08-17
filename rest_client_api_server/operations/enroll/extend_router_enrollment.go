@@ -53,9 +53,10 @@ func NewExtendRouterEnrollment(ctx *middleware.Context, handler ExtendRouterEnro
 	return &ExtendRouterEnrollment{Context: ctx, Handler: handler}
 }
 
-/* ExtendRouterEnrollment swagger:route POST /enroll/extend/router Enroll Extend Enrollment extendRouterEnrollment
+/*
+	ExtendRouterEnrollment swagger:route POST /enroll/extend/router Enroll Extend Enrollment extendRouterEnrollment
 
-Extend the life of a currently enrolled router's certificates
+# Extend the life of a currently enrolled router's certificates
 
 Allows a router to extend its certificates' expiration date by
 using its current and valid client certificate to submit a CSR. This CSR may
@@ -66,8 +67,6 @@ response. The previous client certificate is rendered invalid for use with the c
 has not expired.
 
 This request must be made using the existing, valid, client certificate.
-
-
 */
 type ExtendRouterEnrollment struct {
 	Context *middleware.Context

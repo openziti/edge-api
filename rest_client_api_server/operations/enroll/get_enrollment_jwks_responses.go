@@ -40,7 +40,8 @@ import (
 // GetEnrollmentJwksOKCode is the HTTP code returned for type GetEnrollmentJwksOK
 const GetEnrollmentJwksOKCode int = 200
 
-/*GetEnrollmentJwksOK A JWKS response for enrollment.
+/*
+GetEnrollmentJwksOK A JWKS response for enrollment.
 
 swagger:response getEnrollmentJwksOK
 */

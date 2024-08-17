@@ -53,12 +53,12 @@ func NewUpdateConfigType(ctx *middleware.Context, handler UpdateConfigTypeHandle
 	return &UpdateConfigType{Context: ctx, Handler: handler}
 }
 
-/* UpdateConfigType swagger:route PUT /config-types/{id} Config updateConfigType
+/*
+	UpdateConfigType swagger:route PUT /config-types/{id} Config updateConfigType
 
-Update all fields on a config-type
+# Update all fields on a config-type
 
 Update all fields on a config-type by id. Requires admin access.
-
 */
 type UpdateConfigType struct {
 	Context *middleware.Context

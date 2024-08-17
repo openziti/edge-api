@@ -53,12 +53,12 @@ func NewCreateExternalJWTSigner(ctx *middleware.Context, handler CreateExternalJ
 	return &CreateExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* CreateExternalJWTSigner swagger:route POST /external-jwt-signers External JWT Signer createExternalJwtSigner
+/*
+	CreateExternalJWTSigner swagger:route POST /external-jwt-signers External JWT Signer createExternalJwtSigner
 
-Creates an External JWT Signer
+# Creates an External JWT Signer
 
 Creates an External JWT Signer. Requires admin access.
-
 */
 type CreateExternalJWTSigner struct {
 	Context *middleware.Context

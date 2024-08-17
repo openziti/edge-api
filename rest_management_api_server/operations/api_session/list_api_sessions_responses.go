@@ -40,7 +40,8 @@ import (
 // ListAPISessionsOKCode is the HTTP code returned for type ListAPISessionsOK
 const ListAPISessionsOKCode int = 200
 
-/*ListAPISessionsOK A list of active API Sessions
+/*
+ListAPISessionsOK A list of active API Sessions
 
 swagger:response listApiSessionsOK
 */
@@ -84,7 +85,8 @@ func (o *ListAPISessionsOK) WriteResponse(rw http.ResponseWriter, producer runti
 // ListAPISessionsBadRequestCode is the HTTP code returned for type ListAPISessionsBadRequest
 const ListAPISessionsBadRequestCode int = 400
 
-/*ListAPISessionsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListAPISessionsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listApiSessionsBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListAPISessionsBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // ListAPISessionsUnauthorizedCode is the HTTP code returned for type ListAPISessionsUnauthorized
 const ListAPISessionsUnauthorizedCode int = 401
 
-/*ListAPISessionsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListAPISessionsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listApiSessionsUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListAPISessionsUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // ListAPISessionsTooManyRequestsCode is the HTTP code returned for type ListAPISessionsTooManyRequests
 const ListAPISessionsTooManyRequestsCode int = 429
 
-/*ListAPISessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListAPISessionsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listApiSessionsTooManyRequests
 */

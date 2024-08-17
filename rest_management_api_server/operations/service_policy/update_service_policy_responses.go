@@ -40,7 +40,8 @@ import (
 // UpdateServicePolicyOKCode is the HTTP code returned for type UpdateServicePolicyOK
 const UpdateServicePolicyOKCode int = 200
 
-/*UpdateServicePolicyOK The update request was successful and the resource has been altered
+/*
+UpdateServicePolicyOK The update request was successful and the resource has been altered
 
 swagger:response updateServicePolicyOK
 */
@@ -84,7 +85,8 @@ func (o *UpdateServicePolicyOK) WriteResponse(rw http.ResponseWriter, producer r
 // UpdateServicePolicyBadRequestCode is the HTTP code returned for type UpdateServicePolicyBadRequest
 const UpdateServicePolicyBadRequestCode int = 400
 
-/*UpdateServicePolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateServicePolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateServicePolicyBadRequest
 */
@@ -128,7 +130,8 @@ func (o *UpdateServicePolicyBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // UpdateServicePolicyUnauthorizedCode is the HTTP code returned for type UpdateServicePolicyUnauthorized
 const UpdateServicePolicyUnauthorizedCode int = 401
 
-/*UpdateServicePolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateServicePolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateServicePolicyUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *UpdateServicePolicyUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // UpdateServicePolicyNotFoundCode is the HTTP code returned for type UpdateServicePolicyNotFound
 const UpdateServicePolicyNotFoundCode int = 404
 
-/*UpdateServicePolicyNotFound The requested resource does not exist
+/*
+UpdateServicePolicyNotFound The requested resource does not exist
 
 swagger:response updateServicePolicyNotFound
 */
@@ -216,7 +220,8 @@ func (o *UpdateServicePolicyNotFound) WriteResponse(rw http.ResponseWriter, prod
 // UpdateServicePolicyTooManyRequestsCode is the HTTP code returned for type UpdateServicePolicyTooManyRequests
 const UpdateServicePolicyTooManyRequestsCode int = 429
 
-/*UpdateServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateServicePolicyTooManyRequests
 */

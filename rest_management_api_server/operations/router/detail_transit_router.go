@@ -53,12 +53,12 @@ func NewDetailTransitRouter(ctx *middleware.Context, handler DetailTransitRouter
 	return &DetailTransitRouter{Context: ctx, Handler: handler}
 }
 
-/* DetailTransitRouter swagger:route GET /transit-routers/{id} Router detailTransitRouter
+/*
+	DetailTransitRouter swagger:route GET /transit-routers/{id} Router detailTransitRouter
 
-Retrieves a single router
+# Retrieves a single router
 
 Retrieves a single router by id. Requires admin access.
-
 */
 type DetailTransitRouter struct {
 	Context *middleware.Context

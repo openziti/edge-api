@@ -53,13 +53,12 @@ func NewListIdentities(ctx *middleware.Context, handler ListIdentitiesHandler) *
 	return &ListIdentities{Context: ctx, Handler: handler}
 }
 
-/* ListIdentities swagger:route GET /identities Identity listIdentities
+/*
+	ListIdentities swagger:route GET /identities Identity listIdentities
 
-List identities
+# List identities
 
 Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentities struct {
 	Context *middleware.Context

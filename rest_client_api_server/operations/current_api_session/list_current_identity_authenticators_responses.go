@@ -40,7 +40,8 @@ import (
 // ListCurrentIdentityAuthenticatorsOKCode is the HTTP code returned for type ListCurrentIdentityAuthenticatorsOK
 const ListCurrentIdentityAuthenticatorsOKCode int = 200
 
-/*ListCurrentIdentityAuthenticatorsOK A list of authenticators
+/*
+ListCurrentIdentityAuthenticatorsOK A list of authenticators
 
 swagger:response listCurrentIdentityAuthenticatorsOK
 */
@@ -84,7 +85,8 @@ func (o *ListCurrentIdentityAuthenticatorsOK) WriteResponse(rw http.ResponseWrit
 // ListCurrentIdentityAuthenticatorsBadRequestCode is the HTTP code returned for type ListCurrentIdentityAuthenticatorsBadRequest
 const ListCurrentIdentityAuthenticatorsBadRequestCode int = 400
 
-/*ListCurrentIdentityAuthenticatorsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListCurrentIdentityAuthenticatorsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listCurrentIdentityAuthenticatorsBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListCurrentIdentityAuthenticatorsBadRequest) WriteResponse(rw http.Resp
 // ListCurrentIdentityAuthenticatorsUnauthorizedCode is the HTTP code returned for type ListCurrentIdentityAuthenticatorsUnauthorized
 const ListCurrentIdentityAuthenticatorsUnauthorizedCode int = 401
 
-/*ListCurrentIdentityAuthenticatorsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListCurrentIdentityAuthenticatorsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listCurrentIdentityAuthenticatorsUnauthorized
 */

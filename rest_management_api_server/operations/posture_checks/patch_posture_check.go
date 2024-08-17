@@ -53,12 +53,12 @@ func NewPatchPostureCheck(ctx *middleware.Context, handler PatchPostureCheckHand
 	return &PatchPostureCheck{Context: ctx, Handler: handler}
 }
 
-/* PatchPostureCheck swagger:route PATCH /posture-checks/{id} Posture Checks patchPostureCheck
+/*
+	PatchPostureCheck swagger:route PATCH /posture-checks/{id} Posture Checks patchPostureCheck
 
-Update the supplied fields on a Posture Checks
+# Update the supplied fields on a Posture Checks
 
 Update only the supplied fields on a Posture Checks by id
-
 */
 type PatchPostureCheck struct {
 	Context *middleware.Context

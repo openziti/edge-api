@@ -53,12 +53,12 @@ func NewCreateConfig(ctx *middleware.Context, handler CreateConfigHandler) *Crea
 	return &CreateConfig{Context: ctx, Handler: handler}
 }
 
-/* CreateConfig swagger:route POST /configs Config createConfig
+/*
+	CreateConfig swagger:route POST /configs Config createConfig
 
-Create a config resource
+# Create a config resource
 
 Create a config resource. Requires admin access.
-
 */
 type CreateConfig struct {
 	Context *middleware.Context

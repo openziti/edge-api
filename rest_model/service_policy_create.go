@@ -298,6 +298,7 @@ func (m *ServicePolicyCreate) contextValidatePostureCheckRoles(ctx context.Conte
 func (m *ServicePolicyCreate) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
+
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("semantic")
@@ -328,6 +329,11 @@ func (m *ServicePolicyCreate) contextValidateServiceRoles(ctx context.Context, f
 func (m *ServicePolicyCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -344,6 +350,7 @@ func (m *ServicePolicyCreate) contextValidateTags(ctx context.Context, formats s
 func (m *ServicePolicyCreate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")

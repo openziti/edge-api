@@ -53,12 +53,12 @@ func NewCreatePostureResponseBulk(ctx *middleware.Context, handler CreatePosture
 	return &CreatePostureResponseBulk{Context: ctx, Handler: handler}
 }
 
-/* CreatePostureResponseBulk swagger:route POST /posture-response-bulk Posture Checks createPostureResponseBulk
+/*
+	CreatePostureResponseBulk swagger:route POST /posture-response-bulk Posture Checks createPostureResponseBulk
 
-Submit multiple posture responses
+# Submit multiple posture responses
 
 Submits posture responses
-
 */
 type CreatePostureResponseBulk struct {
 	Context *middleware.Context

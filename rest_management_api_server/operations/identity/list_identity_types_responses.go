@@ -40,7 +40,8 @@ import (
 // ListIdentityTypesOKCode is the HTTP code returned for type ListIdentityTypesOK
 const ListIdentityTypesOKCode int = 200
 
-/*ListIdentityTypesOK A list of identity types
+/*
+ListIdentityTypesOK A list of identity types
 
 swagger:response listIdentityTypesOK
 */
@@ -84,7 +85,8 @@ func (o *ListIdentityTypesOK) WriteResponse(rw http.ResponseWriter, producer run
 // ListIdentityTypesBadRequestCode is the HTTP code returned for type ListIdentityTypesBadRequest
 const ListIdentityTypesBadRequestCode int = 400
 
-/*ListIdentityTypesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListIdentityTypesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listIdentityTypesBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListIdentityTypesBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // ListIdentityTypesUnauthorizedCode is the HTTP code returned for type ListIdentityTypesUnauthorized
 const ListIdentityTypesUnauthorizedCode int = 401
 
-/*ListIdentityTypesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListIdentityTypesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listIdentityTypesUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListIdentityTypesUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // ListIdentityTypesTooManyRequestsCode is the HTTP code returned for type ListIdentityTypesTooManyRequests
 const ListIdentityTypesTooManyRequestsCode int = 429
 
-/*ListIdentityTypesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListIdentityTypesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listIdentityTypesTooManyRequests
 */

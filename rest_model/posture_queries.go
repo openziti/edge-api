@@ -168,6 +168,10 @@ func (m *PostureQueries) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (m *PostureQueries) contextValidatePolicyType(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.PolicyType) { // not required
+		return nil
+	}
+
 	if err := m.PolicyType.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("policyType")
@@ -185,6 +189,11 @@ func (m *PostureQueries) contextValidatePostureQueries(ctx context.Context, form
 	for i := 0; i < len(m.PostureQueries); i++ {
 
 		if m.PostureQueries[i] != nil {
+
+			if swag.IsZero(m.PostureQueries[i]) { // not required
+				return nil
+			}
+
 			if err := m.PostureQueries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("postureQueries" + "." + strconv.Itoa(i))

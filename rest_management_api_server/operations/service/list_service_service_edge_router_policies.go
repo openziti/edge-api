@@ -53,13 +53,12 @@ func NewListServiceServiceEdgeRouterPolicies(ctx *middleware.Context, handler Li
 	return &ListServiceServiceEdgeRouterPolicies{Context: ctx, Handler: handler}
 }
 
-/* ListServiceServiceEdgeRouterPolicies swagger:route GET /services/{id}/service-edge-router-policies Service listServiceServiceEdgeRouterPolicies
+/*
+	ListServiceServiceEdgeRouterPolicies swagger:route GET /services/{id}/service-edge-router-policies Service listServiceServiceEdgeRouterPolicies
 
-List service edge router policies that affect a specific service
+# List service edge router policies that affect a specific service
 
 Retrieves a list of service edge router policy resources that affect a specific service; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServiceServiceEdgeRouterPolicies struct {
 	Context *middleware.Context

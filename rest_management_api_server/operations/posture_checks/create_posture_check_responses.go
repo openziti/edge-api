@@ -40,7 +40,8 @@ import (
 // CreatePostureCheckCreatedCode is the HTTP code returned for type CreatePostureCheckCreated
 const CreatePostureCheckCreatedCode int = 201
 
-/*CreatePostureCheckCreated The create request was successful and the resource has been added at the following location
+/*
+CreatePostureCheckCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createPostureCheckCreated
 */
@@ -84,7 +85,8 @@ func (o *CreatePostureCheckCreated) WriteResponse(rw http.ResponseWriter, produc
 // CreatePostureCheckBadRequestCode is the HTTP code returned for type CreatePostureCheckBadRequest
 const CreatePostureCheckBadRequestCode int = 400
 
-/*CreatePostureCheckBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreatePostureCheckBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createPostureCheckBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreatePostureCheckBadRequest) WriteResponse(rw http.ResponseWriter, pro
 // CreatePostureCheckUnauthorizedCode is the HTTP code returned for type CreatePostureCheckUnauthorized
 const CreatePostureCheckUnauthorizedCode int = 401
 
-/*CreatePostureCheckUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreatePostureCheckUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createPostureCheckUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreatePostureCheckUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // CreatePostureCheckTooManyRequestsCode is the HTTP code returned for type CreatePostureCheckTooManyRequests
 const CreatePostureCheckTooManyRequestsCode int = 429
 
-/*CreatePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreatePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createPostureCheckTooManyRequests
 */

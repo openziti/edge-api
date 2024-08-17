@@ -408,6 +408,11 @@ func (m *EdgeRouterDetail) contextValidateRoleAttributes(ctx context.Context, fo
 func (m *EdgeRouterDetail) contextValidateVersionInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VersionInfo != nil {
+
+		if swag.IsZero(m.VersionInfo) { // not required
+			return nil
+		}
+
 		if err := m.VersionInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("versionInfo")

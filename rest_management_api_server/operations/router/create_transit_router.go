@@ -53,12 +53,12 @@ func NewCreateTransitRouter(ctx *middleware.Context, handler CreateTransitRouter
 	return &CreateTransitRouter{Context: ctx, Handler: handler}
 }
 
-/* CreateTransitRouter swagger:route POST /transit-routers Router createTransitRouter
+/*
+	CreateTransitRouter swagger:route POST /transit-routers Router createTransitRouter
 
-Create a router resource
+# Create a router resource
 
 Create a router resource. Requires admin access.
-
 */
 type CreateTransitRouter struct {
 	Context *middleware.Context

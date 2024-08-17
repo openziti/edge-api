@@ -78,10 +78,12 @@ func NewPatchServicePolicyParamsWithHTTPClient(client *http.Client) *PatchServic
 	}
 }
 
-/* PatchServicePolicyParams contains all the parameters to send to the API endpoint
-   for the patch service policy operation.
+/*
+PatchServicePolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the patch service policy operation.
+
+	Typically these are written to a http.Request.
 */
 type PatchServicePolicyParams struct {
 

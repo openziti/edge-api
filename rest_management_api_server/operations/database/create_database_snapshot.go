@@ -53,12 +53,12 @@ func NewCreateDatabaseSnapshot(ctx *middleware.Context, handler CreateDatabaseSn
 	return &CreateDatabaseSnapshot{Context: ctx, Handler: handler}
 }
 
-/* CreateDatabaseSnapshot swagger:route POST /database/snapshot Database createDatabaseSnapshot
+/*
+	CreateDatabaseSnapshot swagger:route POST /database/snapshot Database createDatabaseSnapshot
 
-Create a new database snapshot
+# Create a new database snapshot
 
 Create a new database snapshot. Requires admin access.
-
 */
 type CreateDatabaseSnapshot struct {
 	Context *middleware.Context

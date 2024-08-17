@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new authenticator API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new authenticator API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new authenticator API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -72,10 +98,9 @@ type ClientService interface {
 }
 
 /*
-  CreateAuthenticator creates an authenticator
+CreateAuthenticator creates an authenticator
 
-  Creates an authenticator for a specific identity. Requires admin access.
-
+Creates an authenticator for a specific identity. Requires admin access.
 */
 func (a *Client) CreateAuthenticator(params *CreateAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAuthenticatorCreated, error) {
 	// TODO: Validate the params before sending
@@ -114,11 +139,11 @@ func (a *Client) CreateAuthenticator(params *CreateAuthenticatorParams, authInfo
 }
 
 /*
-  DeleteAuthenticator deletes an authenticator
+	DeleteAuthenticator deletes an authenticator
 
-  Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
+	Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
+
 Requires admin access.
-
 */
 func (a *Client) DeleteAuthenticator(params *DeleteAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAuthenticatorOK, error) {
 	// TODO: Validate the params before sending
@@ -157,9 +182,9 @@ func (a *Client) DeleteAuthenticator(params *DeleteAuthenticatorParams, authInfo
 }
 
 /*
-  DetailAuthenticator retrieves a single authenticator
+DetailAuthenticator retrieves a single authenticator
 
-  Retrieves a single authenticator by id. Requires admin access.
+Retrieves a single authenticator by id. Requires admin access.
 */
 func (a *Client) DetailAuthenticator(params *DetailAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailAuthenticatorOK, error) {
 	// TODO: Validate the params before sending
@@ -198,11 +223,11 @@ func (a *Client) DetailAuthenticator(params *DetailAuthenticatorParams, authInfo
 }
 
 /*
-  ListAuthenticators lists authenticators
+	ListAuthenticators lists authenticators
 
-  Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
+	Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
+
 This endpoint requires admin access.
-
 */
 func (a *Client) ListAuthenticators(params *ListAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAuthenticatorsOK, error) {
 	// TODO: Validate the params before sending
@@ -241,9 +266,9 @@ func (a *Client) ListAuthenticators(params *ListAuthenticatorsParams, authInfo r
 }
 
 /*
-  PatchAuthenticator updates the supplied fields on an authenticator
+PatchAuthenticator updates the supplied fields on an authenticator
 
-  Update the supplied fields on an authenticator by id. Requires admin access.
+Update the supplied fields on an authenticator by id. Requires admin access.
 */
 func (a *Client) PatchAuthenticator(params *PatchAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchAuthenticatorOK, error) {
 	// TODO: Validate the params before sending
@@ -282,13 +307,13 @@ func (a *Client) PatchAuthenticator(params *PatchAuthenticatorParams, authInfo r
 }
 
 /*
-  ReEnrollAuthenticator reverts an authenticator to an enrollment
+	ReEnrollAuthenticator reverts an authenticator to an enrollment
 
-  Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the
+	Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the
+
 created enrollment record response is provided and the source authenticator record will be deleted. The
 enrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT
 authenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.
-
 */
 func (a *Client) ReEnrollAuthenticator(params *ReEnrollAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReEnrollAuthenticatorCreated, error) {
 	// TODO: Validate the params before sending
@@ -327,9 +352,9 @@ func (a *Client) ReEnrollAuthenticator(params *ReEnrollAuthenticatorParams, auth
 }
 
 /*
-  UpdateAuthenticator updates all fields on an authenticator
+UpdateAuthenticator updates all fields on an authenticator
 
-  Update all fields on an authenticator by id. Requires admin access.
+Update all fields on an authenticator by id. Requires admin access.
 */
 func (a *Client) UpdateAuthenticator(params *UpdateAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAuthenticatorOK, error) {
 	// TODO: Validate the params before sending

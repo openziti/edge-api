@@ -30,6 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *ExtendRouterEnrollmentReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enroll/extend/router] extendRouterEnrollment", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewExtendRouterEnrollmentOK() *ExtendRouterEnrollmentOK {
 	return &ExtendRouterEnrollmentOK{}
 }
 
-/* ExtendRouterEnrollmentOK describes a response with status code 200, with default header values.
+/*
+ExtendRouterEnrollmentOK describes a response with status code 200, with default header values.
 
 A response containing the edge routers new signed certificates (server chain, server cert, CAs).
 */
@@ -83,9 +85,46 @@ type ExtendRouterEnrollmentOK struct {
 	Payload *rest_model.EnrollmentCertsEnvelope
 }
 
-func (o *ExtendRouterEnrollmentOK) Error() string {
-	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this extend router enrollment o k response has a 2xx status code
+func (o *ExtendRouterEnrollmentOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this extend router enrollment o k response has a 3xx status code
+func (o *ExtendRouterEnrollmentOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extend router enrollment o k response has a 4xx status code
+func (o *ExtendRouterEnrollmentOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extend router enrollment o k response has a 5xx status code
+func (o *ExtendRouterEnrollmentOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extend router enrollment o k response a status code equal to that given
+func (o *ExtendRouterEnrollmentOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the extend router enrollment o k response
+func (o *ExtendRouterEnrollmentOK) Code() int {
+	return 200
+}
+
+func (o *ExtendRouterEnrollmentOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentOK %s", 200, payload)
+}
+
+func (o *ExtendRouterEnrollmentOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentOK %s", 200, payload)
+}
+
 func (o *ExtendRouterEnrollmentOK) GetPayload() *rest_model.EnrollmentCertsEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewExtendRouterEnrollmentUnauthorized() *ExtendRouterEnrollmentUnauthorized
 	return &ExtendRouterEnrollmentUnauthorized{}
 }
 
-/* ExtendRouterEnrollmentUnauthorized describes a response with status code 401, with default header values.
+/*
+ExtendRouterEnrollmentUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -115,9 +155,46 @@ type ExtendRouterEnrollmentUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ExtendRouterEnrollmentUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this extend router enrollment unauthorized response has a 2xx status code
+func (o *ExtendRouterEnrollmentUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this extend router enrollment unauthorized response has a 3xx status code
+func (o *ExtendRouterEnrollmentUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extend router enrollment unauthorized response has a 4xx status code
+func (o *ExtendRouterEnrollmentUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this extend router enrollment unauthorized response has a 5xx status code
+func (o *ExtendRouterEnrollmentUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extend router enrollment unauthorized response a status code equal to that given
+func (o *ExtendRouterEnrollmentUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the extend router enrollment unauthorized response
+func (o *ExtendRouterEnrollmentUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ExtendRouterEnrollmentUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentUnauthorized %s", 401, payload)
+}
+
+func (o *ExtendRouterEnrollmentUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentUnauthorized %s", 401, payload)
+}
+
 func (o *ExtendRouterEnrollmentUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewExtendRouterEnrollmentTooManyRequests() *ExtendRouterEnrollmentTooManyRe
 	return &ExtendRouterEnrollmentTooManyRequests{}
 }
 
-/* ExtendRouterEnrollmentTooManyRequests describes a response with status code 429, with default header values.
+/*
+ExtendRouterEnrollmentTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -147,9 +225,46 @@ type ExtendRouterEnrollmentTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ExtendRouterEnrollmentTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this extend router enrollment too many requests response has a 2xx status code
+func (o *ExtendRouterEnrollmentTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this extend router enrollment too many requests response has a 3xx status code
+func (o *ExtendRouterEnrollmentTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extend router enrollment too many requests response has a 4xx status code
+func (o *ExtendRouterEnrollmentTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this extend router enrollment too many requests response has a 5xx status code
+func (o *ExtendRouterEnrollmentTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extend router enrollment too many requests response a status code equal to that given
+func (o *ExtendRouterEnrollmentTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the extend router enrollment too many requests response
+func (o *ExtendRouterEnrollmentTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ExtendRouterEnrollmentTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentTooManyRequests %s", 429, payload)
+}
+
+func (o *ExtendRouterEnrollmentTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/extend/router][%d] extendRouterEnrollmentTooManyRequests %s", 429, payload)
+}
+
 func (o *ExtendRouterEnrollmentTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

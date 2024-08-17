@@ -53,13 +53,12 @@ func NewListEnrollments(ctx *middleware.Context, handler ListEnrollmentsHandler)
 	return &ListEnrollments{Context: ctx, Handler: handler}
 }
 
-/* ListEnrollments swagger:route GET /enrollments Enrollment listEnrollments
+/*
+	ListEnrollments swagger:route GET /enrollments Enrollment listEnrollments
 
-List outstanding enrollments
+# List outstanding enrollments
 
 Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListEnrollments struct {
 	Context *middleware.Context

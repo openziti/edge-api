@@ -76,10 +76,12 @@ func NewRemoveIdentityMfaParamsWithHTTPClient(client *http.Client) *RemoveIdenti
 	}
 }
 
-/* RemoveIdentityMfaParams contains all the parameters to send to the API endpoint
-   for the remove identity mfa operation.
+/*
+RemoveIdentityMfaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the remove identity mfa operation.
+
+	Typically these are written to a http.Request.
 */
 type RemoveIdentityMfaParams struct {
 

@@ -53,12 +53,12 @@ func NewDetailAPISessions(ctx *middleware.Context, handler DetailAPISessionsHand
 	return &DetailAPISessions{Context: ctx, Handler: handler}
 }
 
-/* DetailAPISessions swagger:route GET /api-sessions/{id} API Session detailApiSessions
+/*
+	DetailAPISessions swagger:route GET /api-sessions/{id} API Session detailApiSessions
 
-Retrieves a single API Session
+# Retrieves a single API Session
 
 Retrieves a single API Session by id. Requires admin access.
-
 */
 type DetailAPISessions struct {
 	Context *middleware.Context

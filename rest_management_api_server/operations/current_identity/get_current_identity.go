@@ -53,12 +53,12 @@ func NewGetCurrentIdentity(ctx *middleware.Context, handler GetCurrentIdentityHa
 	return &GetCurrentIdentity{Context: ctx, Handler: handler}
 }
 
-/* GetCurrentIdentity swagger:route GET /current-identity Current Identity getCurrentIdentity
+/*
+	GetCurrentIdentity swagger:route GET /current-identity Current Identity getCurrentIdentity
 
-Return the current identity
+# Return the current identity
 
 Returns the identity associated with the API sessions used to issue the current request
-
 */
 type GetCurrentIdentity struct {
 	Context *middleware.Context

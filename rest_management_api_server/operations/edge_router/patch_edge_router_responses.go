@@ -40,7 +40,8 @@ import (
 // PatchEdgeRouterOKCode is the HTTP code returned for type PatchEdgeRouterOK
 const PatchEdgeRouterOKCode int = 200
 
-/*PatchEdgeRouterOK The patch request was successful and the resource has been altered
+/*
+PatchEdgeRouterOK The patch request was successful and the resource has been altered
 
 swagger:response patchEdgeRouterOK
 */
@@ -84,7 +85,8 @@ func (o *PatchEdgeRouterOK) WriteResponse(rw http.ResponseWriter, producer runti
 // PatchEdgeRouterBadRequestCode is the HTTP code returned for type PatchEdgeRouterBadRequest
 const PatchEdgeRouterBadRequestCode int = 400
 
-/*PatchEdgeRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+PatchEdgeRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchEdgeRouterBadRequest
 */
@@ -128,7 +130,8 @@ func (o *PatchEdgeRouterBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // PatchEdgeRouterUnauthorizedCode is the HTTP code returned for type PatchEdgeRouterUnauthorized
 const PatchEdgeRouterUnauthorizedCode int = 401
 
-/*PatchEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+PatchEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchEdgeRouterUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *PatchEdgeRouterUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // PatchEdgeRouterNotFoundCode is the HTTP code returned for type PatchEdgeRouterNotFound
 const PatchEdgeRouterNotFoundCode int = 404
 
-/*PatchEdgeRouterNotFound The requested resource does not exist
+/*
+PatchEdgeRouterNotFound The requested resource does not exist
 
 swagger:response patchEdgeRouterNotFound
 */
@@ -216,7 +220,8 @@ func (o *PatchEdgeRouterNotFound) WriteResponse(rw http.ResponseWriter, producer
 // PatchEdgeRouterTooManyRequestsCode is the HTTP code returned for type PatchEdgeRouterTooManyRequests
 const PatchEdgeRouterTooManyRequestsCode int = 429
 
-/*PatchEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+PatchEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchEdgeRouterTooManyRequests
 */

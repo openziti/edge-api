@@ -40,7 +40,8 @@ import (
 // DeleteIdentityOKCode is the HTTP code returned for type DeleteIdentityOK
 const DeleteIdentityOKCode int = 200
 
-/*DeleteIdentityOK The delete request was successful and the resource has been removed
+/*
+DeleteIdentityOK The delete request was successful and the resource has been removed
 
 swagger:response deleteIdentityOK
 */
@@ -84,7 +85,8 @@ func (o *DeleteIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtim
 // DeleteIdentityBadRequestCode is the HTTP code returned for type DeleteIdentityBadRequest
 const DeleteIdentityBadRequestCode int = 400
 
-/*DeleteIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteIdentityBadRequest
 */
@@ -128,7 +130,8 @@ func (o *DeleteIdentityBadRequest) WriteResponse(rw http.ResponseWriter, produce
 // DeleteIdentityUnauthorizedCode is the HTTP code returned for type DeleteIdentityUnauthorized
 const DeleteIdentityUnauthorizedCode int = 401
 
-/*DeleteIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteIdentityUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *DeleteIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, produ
 // DeleteIdentityConflictCode is the HTTP code returned for type DeleteIdentityConflict
 const DeleteIdentityConflictCode int = 409
 
-/*DeleteIdentityConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*
+DeleteIdentityConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteIdentityConflict
 */
@@ -216,7 +220,8 @@ func (o *DeleteIdentityConflict) WriteResponse(rw http.ResponseWriter, producer 
 // DeleteIdentityTooManyRequestsCode is the HTTP code returned for type DeleteIdentityTooManyRequests
 const DeleteIdentityTooManyRequestsCode int = 429
 
-/*DeleteIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteIdentityTooManyRequests
 */

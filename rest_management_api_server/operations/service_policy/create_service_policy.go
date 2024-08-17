@@ -53,12 +53,12 @@ func NewCreateServicePolicy(ctx *middleware.Context, handler CreateServicePolicy
 	return &CreateServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* CreateServicePolicy swagger:route POST /service-policies Service Policy createServicePolicy
+/*
+	CreateServicePolicy swagger:route POST /service-policies Service Policy createServicePolicy
 
-Create a service policy resource
+# Create a service policy resource
 
 Create a service policy resource. Requires admin access.
-
 */
 type CreateServicePolicy struct {
 	Context *middleware.Context

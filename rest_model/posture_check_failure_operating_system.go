@@ -307,6 +307,7 @@ func (m *PostureCheckFailureOperatingSystem) ContextValidate(ctx context.Context
 func (m *PostureCheckFailureOperatingSystem) contextValidateActualValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ActualValue != nil {
+
 		if err := m.ActualValue.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("actualValue")
@@ -325,6 +326,11 @@ func (m *PostureCheckFailureOperatingSystem) contextValidateExpectedValue(ctx co
 	for i := 0; i < len(m.ExpectedValue); i++ {
 
 		if m.ExpectedValue[i] != nil {
+
+			if swag.IsZero(m.ExpectedValue[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExpectedValue[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("expectedValue" + "." + strconv.Itoa(i))

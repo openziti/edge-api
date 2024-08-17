@@ -53,12 +53,12 @@ func NewDetailEdgeRouter(ctx *middleware.Context, handler DetailEdgeRouterHandle
 	return &DetailEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/* DetailEdgeRouter swagger:route GET /edge-routers/{id} Edge Router detailEdgeRouter
+/*
+	DetailEdgeRouter swagger:route GET /edge-routers/{id} Edge Router detailEdgeRouter
 
-Retrieves a single edge router
+# Retrieves a single edge router
 
 Retrieves a single edge router by id. Requires admin access.
-
 */
 type DetailEdgeRouter struct {
 	Context *middleware.Context

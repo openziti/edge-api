@@ -40,7 +40,8 @@ import (
 // DetailServiceEdgeRouterPolicyOKCode is the HTTP code returned for type DetailServiceEdgeRouterPolicyOK
 const DetailServiceEdgeRouterPolicyOKCode int = 200
 
-/*DetailServiceEdgeRouterPolicyOK A single service edge router policy
+/*
+DetailServiceEdgeRouterPolicyOK A single service edge router policy
 
 swagger:response detailServiceEdgeRouterPolicyOK
 */
@@ -84,7 +85,8 @@ func (o *DetailServiceEdgeRouterPolicyOK) WriteResponse(rw http.ResponseWriter, 
 // DetailServiceEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type DetailServiceEdgeRouterPolicyUnauthorized
 const DetailServiceEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*DetailServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailServiceEdgeRouterPolicyUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailServiceEdgeRouterPolicyUnauthorized) WriteResponse(rw http.Respon
 // DetailServiceEdgeRouterPolicyNotFoundCode is the HTTP code returned for type DetailServiceEdgeRouterPolicyNotFound
 const DetailServiceEdgeRouterPolicyNotFoundCode int = 404
 
-/*DetailServiceEdgeRouterPolicyNotFound The requested resource does not exist
+/*
+DetailServiceEdgeRouterPolicyNotFound The requested resource does not exist
 
 swagger:response detailServiceEdgeRouterPolicyNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailServiceEdgeRouterPolicyNotFound) WriteResponse(rw http.ResponseWr
 // DetailServiceEdgeRouterPolicyTooManyRequestsCode is the HTTP code returned for type DetailServiceEdgeRouterPolicyTooManyRequests
 const DetailServiceEdgeRouterPolicyTooManyRequestsCode int = 429
 
-/*DetailServiceEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailServiceEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailServiceEdgeRouterPolicyTooManyRequests
 */

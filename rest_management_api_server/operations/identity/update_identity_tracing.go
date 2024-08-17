@@ -53,13 +53,12 @@ func NewUpdateIdentityTracing(ctx *middleware.Context, handler UpdateIdentityTra
 	return &UpdateIdentityTracing{Context: ctx, Handler: handler}
 }
 
-/* UpdateIdentityTracing swagger:route PUT /identities/{id}/trace Identity Tracing updateIdentityTracing
+/*
+	UpdateIdentityTracing swagger:route PUT /identities/{id}/trace Identity Tracing updateIdentityTracing
 
 Enable/disable data flow tracing for an identity
 
 Allows an admin to enable/disable data flow tracing for an identity
-
-
 */
 type UpdateIdentityTracing struct {
 	Context *middleware.Context

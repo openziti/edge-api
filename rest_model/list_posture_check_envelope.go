@@ -205,6 +205,10 @@ func (m *ListPostureCheckEnvelope) contextValidateData(ctx context.Context, form
 
 	for i := 0; i < len(m.Data()); i++ {
 
+		if swag.IsZero(m.dataField[i]) { // not required
+			return nil
+		}
+
 		if err := m.dataField[i].ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data" + "." + strconv.Itoa(i))
@@ -222,6 +226,7 @@ func (m *ListPostureCheckEnvelope) contextValidateData(ctx context.Context, form
 func (m *ListPostureCheckEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

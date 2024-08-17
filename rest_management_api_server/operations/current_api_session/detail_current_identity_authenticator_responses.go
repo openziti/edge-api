@@ -40,7 +40,8 @@ import (
 // DetailCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type DetailCurrentIdentityAuthenticatorOK
 const DetailCurrentIdentityAuthenticatorOKCode int = 200
 
-/*DetailCurrentIdentityAuthenticatorOK A singular authenticator resource
+/*
+DetailCurrentIdentityAuthenticatorOK A singular authenticator resource
 
 swagger:response detailCurrentIdentityAuthenticatorOK
 */
@@ -84,7 +85,8 @@ func (o *DetailCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // DetailCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type DetailCurrentIdentityAuthenticatorUnauthorized
 const DetailCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*DetailCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailCurrentIdentityAuthenticatorUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.R
 // DetailCurrentIdentityAuthenticatorNotFoundCode is the HTTP code returned for type DetailCurrentIdentityAuthenticatorNotFound
 const DetailCurrentIdentityAuthenticatorNotFoundCode int = 404
 
-/*DetailCurrentIdentityAuthenticatorNotFound The requested resource does not exist
+/*
+DetailCurrentIdentityAuthenticatorNotFound The requested resource does not exist
 
 swagger:response detailCurrentIdentityAuthenticatorNotFound
 */

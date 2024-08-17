@@ -53,12 +53,12 @@ func NewCreateServiceEdgeRouterPolicy(ctx *middleware.Context, handler CreateSer
 	return &CreateServiceEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* CreateServiceEdgeRouterPolicy swagger:route POST /service-edge-router-policies Service Edge Router Policy createServiceEdgeRouterPolicy
+/*
+	CreateServiceEdgeRouterPolicy swagger:route POST /service-edge-router-policies Service Edge Router Policy createServiceEdgeRouterPolicy
 
-Create a service edge router policy resource
+# Create a service edge router policy resource
 
 Create a service edge router policy resource. Requires admin access.
-
 */
 type CreateServiceEdgeRouterPolicy struct {
 	Context *middleware.Context

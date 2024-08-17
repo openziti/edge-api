@@ -53,13 +53,12 @@ func NewListPostureCheckRoleAttributes(ctx *middleware.Context, handler ListPost
 	return &ListPostureCheckRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/* ListPostureCheckRoleAttributes swagger:route GET /posture-check-role-attributes Role Attributes listPostureCheckRoleAttributes
+/*
+	ListPostureCheckRoleAttributes swagger:route GET /posture-check-role-attributes Role Attributes listPostureCheckRoleAttributes
 
-List role attributes in use by posture checks
+# List role attributes in use by posture checks
 
 Retrieves a list of role attributes in use by posture checks; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListPostureCheckRoleAttributes struct {
 	Context *middleware.Context

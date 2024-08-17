@@ -40,7 +40,8 @@ import (
 // GetCurrentAPISessionOKCode is the HTTP code returned for type GetCurrentAPISessionOK
 const GetCurrentAPISessionOKCode int = 200
 
-/*GetCurrentAPISessionOK The API session associated with the session used to issue the request
+/*
+GetCurrentAPISessionOK The API session associated with the session used to issue the request
 
 swagger:response getCurrentApiSessionOK
 */
@@ -84,7 +85,8 @@ func (o *GetCurrentAPISessionOK) WriteResponse(rw http.ResponseWriter, producer 
 // GetCurrentAPISessionUnauthorizedCode is the HTTP code returned for type GetCurrentAPISessionUnauthorized
 const GetCurrentAPISessionUnauthorizedCode int = 401
 
-/*GetCurrentAPISessionUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetCurrentAPISessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCurrentApiSessionUnauthorized
 */

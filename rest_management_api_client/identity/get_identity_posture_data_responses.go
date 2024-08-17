@@ -30,6 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *GetIdentityPostureDataReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /identities/{id}/posture-data] getIdentityPostureData", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewGetIdentityPostureDataOK() *GetIdentityPostureDataOK {
 	return &GetIdentityPostureDataOK{}
 }
 
-/* GetIdentityPostureDataOK describes a response with status code 200, with default header values.
+/*
+GetIdentityPostureDataOK describes a response with status code 200, with default header values.
 
 Returns the document that represents posture data
 */
@@ -89,9 +91,46 @@ type GetIdentityPostureDataOK struct {
 	Payload *rest_model.PostureDataEnvelope
 }
 
-func (o *GetIdentityPostureDataOK) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this get identity posture data o k response has a 2xx status code
+func (o *GetIdentityPostureDataOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this get identity posture data o k response has a 3xx status code
+func (o *GetIdentityPostureDataOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get identity posture data o k response has a 4xx status code
+func (o *GetIdentityPostureDataOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get identity posture data o k response has a 5xx status code
+func (o *GetIdentityPostureDataOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get identity posture data o k response a status code equal to that given
+func (o *GetIdentityPostureDataOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get identity posture data o k response
+func (o *GetIdentityPostureDataOK) Code() int {
+	return 200
+}
+
+func (o *GetIdentityPostureDataOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataOK %s", 200, payload)
+}
+
+func (o *GetIdentityPostureDataOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataOK %s", 200, payload)
+}
+
 func (o *GetIdentityPostureDataOK) GetPayload() *rest_model.PostureDataEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewGetIdentityPostureDataUnauthorized() *GetIdentityPostureDataUnauthorized
 	return &GetIdentityPostureDataUnauthorized{}
 }
 
-/* GetIdentityPostureDataUnauthorized describes a response with status code 401, with default header values.
+/*
+GetIdentityPostureDataUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type GetIdentityPostureDataUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *GetIdentityPostureDataUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this get identity posture data unauthorized response has a 2xx status code
+func (o *GetIdentityPostureDataUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this get identity posture data unauthorized response has a 3xx status code
+func (o *GetIdentityPostureDataUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get identity posture data unauthorized response has a 4xx status code
+func (o *GetIdentityPostureDataUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get identity posture data unauthorized response has a 5xx status code
+func (o *GetIdentityPostureDataUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get identity posture data unauthorized response a status code equal to that given
+func (o *GetIdentityPostureDataUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get identity posture data unauthorized response
+func (o *GetIdentityPostureDataUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetIdentityPostureDataUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataUnauthorized %s", 401, payload)
+}
+
+func (o *GetIdentityPostureDataUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataUnauthorized %s", 401, payload)
+}
+
 func (o *GetIdentityPostureDataUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewGetIdentityPostureDataNotFound() *GetIdentityPostureDataNotFound {
 	return &GetIdentityPostureDataNotFound{}
 }
 
-/* GetIdentityPostureDataNotFound describes a response with status code 404, with default header values.
+/*
+GetIdentityPostureDataNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type GetIdentityPostureDataNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *GetIdentityPostureDataNotFound) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this get identity posture data not found response has a 2xx status code
+func (o *GetIdentityPostureDataNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this get identity posture data not found response has a 3xx status code
+func (o *GetIdentityPostureDataNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get identity posture data not found response has a 4xx status code
+func (o *GetIdentityPostureDataNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get identity posture data not found response has a 5xx status code
+func (o *GetIdentityPostureDataNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get identity posture data not found response a status code equal to that given
+func (o *GetIdentityPostureDataNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get identity posture data not found response
+func (o *GetIdentityPostureDataNotFound) Code() int {
+	return 404
+}
+
+func (o *GetIdentityPostureDataNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataNotFound %s", 404, payload)
+}
+
+func (o *GetIdentityPostureDataNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataNotFound %s", 404, payload)
+}
+
 func (o *GetIdentityPostureDataNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewGetIdentityPostureDataTooManyRequests() *GetIdentityPostureDataTooManyRe
 	return &GetIdentityPostureDataTooManyRequests{}
 }
 
-/* GetIdentityPostureDataTooManyRequests describes a response with status code 429, with default header values.
+/*
+GetIdentityPostureDataTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type GetIdentityPostureDataTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *GetIdentityPostureDataTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this get identity posture data too many requests response has a 2xx status code
+func (o *GetIdentityPostureDataTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this get identity posture data too many requests response has a 3xx status code
+func (o *GetIdentityPostureDataTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get identity posture data too many requests response has a 4xx status code
+func (o *GetIdentityPostureDataTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get identity posture data too many requests response has a 5xx status code
+func (o *GetIdentityPostureDataTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get identity posture data too many requests response a status code equal to that given
+func (o *GetIdentityPostureDataTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the get identity posture data too many requests response
+func (o *GetIdentityPostureDataTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *GetIdentityPostureDataTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataTooManyRequests %s", 429, payload)
+}
+
+func (o *GetIdentityPostureDataTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}/posture-data][%d] getIdentityPostureDataTooManyRequests %s", 429, payload)
+}
+
 func (o *GetIdentityPostureDataTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

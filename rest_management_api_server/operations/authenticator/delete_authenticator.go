@@ -53,14 +53,13 @@ func NewDeleteAuthenticator(ctx *middleware.Context, handler DeleteAuthenticator
 	return &DeleteAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* DeleteAuthenticator swagger:route DELETE /authenticators/{id} Authenticator deleteAuthenticator
+/*
+	DeleteAuthenticator swagger:route DELETE /authenticators/{id} Authenticator deleteAuthenticator
 
-Delete an Authenticator
+# Delete an Authenticator
 
 Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
 Requires admin access.
-
-
 */
 type DeleteAuthenticator struct {
 	Context *middleware.Context

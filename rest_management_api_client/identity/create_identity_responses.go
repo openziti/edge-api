@@ -30,6 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *CreateIdentityReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /identities] createIdentity", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewCreateIdentityCreated() *CreateIdentityCreated {
 	return &CreateIdentityCreated{}
 }
 
-/* CreateIdentityCreated describes a response with status code 201, with default header values.
+/*
+CreateIdentityCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -89,9 +91,46 @@ type CreateIdentityCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateIdentityCreated) Error() string {
-	return fmt.Sprintf("[POST /identities][%d] createIdentityCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create identity created response has a 2xx status code
+func (o *CreateIdentityCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create identity created response has a 3xx status code
+func (o *CreateIdentityCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create identity created response has a 4xx status code
+func (o *CreateIdentityCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create identity created response has a 5xx status code
+func (o *CreateIdentityCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create identity created response a status code equal to that given
+func (o *CreateIdentityCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create identity created response
+func (o *CreateIdentityCreated) Code() int {
+	return 201
+}
+
+func (o *CreateIdentityCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityCreated %s", 201, payload)
+}
+
+func (o *CreateIdentityCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityCreated %s", 201, payload)
+}
+
 func (o *CreateIdentityCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewCreateIdentityBadRequest() *CreateIdentityBadRequest {
 	return &CreateIdentityBadRequest{}
 }
 
-/* CreateIdentityBadRequest describes a response with status code 400, with default header values.
+/*
+CreateIdentityBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type CreateIdentityBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateIdentityBadRequest) Error() string {
-	return fmt.Sprintf("[POST /identities][%d] createIdentityBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create identity bad request response has a 2xx status code
+func (o *CreateIdentityBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create identity bad request response has a 3xx status code
+func (o *CreateIdentityBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create identity bad request response has a 4xx status code
+func (o *CreateIdentityBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create identity bad request response has a 5xx status code
+func (o *CreateIdentityBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create identity bad request response a status code equal to that given
+func (o *CreateIdentityBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create identity bad request response
+func (o *CreateIdentityBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateIdentityBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityBadRequest %s", 400, payload)
+}
+
+func (o *CreateIdentityBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityBadRequest %s", 400, payload)
+}
+
 func (o *CreateIdentityBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewCreateIdentityUnauthorized() *CreateIdentityUnauthorized {
 	return &CreateIdentityUnauthorized{}
 }
 
-/* CreateIdentityUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type CreateIdentityUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateIdentityUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /identities][%d] createIdentityUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create identity unauthorized response has a 2xx status code
+func (o *CreateIdentityUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create identity unauthorized response has a 3xx status code
+func (o *CreateIdentityUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create identity unauthorized response has a 4xx status code
+func (o *CreateIdentityUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create identity unauthorized response has a 5xx status code
+func (o *CreateIdentityUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create identity unauthorized response a status code equal to that given
+func (o *CreateIdentityUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create identity unauthorized response
+func (o *CreateIdentityUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateIdentityUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityUnauthorized %s", 401, payload)
+}
+
+func (o *CreateIdentityUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityUnauthorized %s", 401, payload)
+}
+
 func (o *CreateIdentityUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewCreateIdentityTooManyRequests() *CreateIdentityTooManyRequests {
 	return &CreateIdentityTooManyRequests{}
 }
 
-/* CreateIdentityTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateIdentityTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type CreateIdentityTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateIdentityTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /identities][%d] createIdentityTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create identity too many requests response has a 2xx status code
+func (o *CreateIdentityTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create identity too many requests response has a 3xx status code
+func (o *CreateIdentityTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create identity too many requests response has a 4xx status code
+func (o *CreateIdentityTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create identity too many requests response has a 5xx status code
+func (o *CreateIdentityTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create identity too many requests response a status code equal to that given
+func (o *CreateIdentityTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create identity too many requests response
+func (o *CreateIdentityTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateIdentityTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateIdentityTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /identities][%d] createIdentityTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

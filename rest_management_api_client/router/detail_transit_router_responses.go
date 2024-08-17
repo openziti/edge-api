@@ -30,6 +30,7 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DetailTransitRouterReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /transit-routers/{id}] detailTransitRouter", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDetailTransitRouterOK() *DetailTransitRouterOK {
 	return &DetailTransitRouterOK{}
 }
 
-/* DetailTransitRouterOK describes a response with status code 200, with default header values.
+/*
+DetailTransitRouterOK describes a response with status code 200, with default header values.
 
 A single router
 */
@@ -89,9 +91,46 @@ type DetailTransitRouterOK struct {
 	Payload *rest_model.DetailRouterEnvelope
 }
 
-func (o *DetailTransitRouterOK) Error() string {
-	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail transit router o k response has a 2xx status code
+func (o *DetailTransitRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail transit router o k response has a 3xx status code
+func (o *DetailTransitRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail transit router o k response has a 4xx status code
+func (o *DetailTransitRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail transit router o k response has a 5xx status code
+func (o *DetailTransitRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail transit router o k response a status code equal to that given
+func (o *DetailTransitRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail transit router o k response
+func (o *DetailTransitRouterOK) Code() int {
+	return 200
+}
+
+func (o *DetailTransitRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterOK %s", 200, payload)
+}
+
+func (o *DetailTransitRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterOK %s", 200, payload)
+}
+
 func (o *DetailTransitRouterOK) GetPayload() *rest_model.DetailRouterEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDetailTransitRouterUnauthorized() *DetailTransitRouterUnauthorized {
 	return &DetailTransitRouterUnauthorized{}
 }
 
-/* DetailTransitRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailTransitRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type DetailTransitRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailTransitRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail transit router unauthorized response has a 2xx status code
+func (o *DetailTransitRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail transit router unauthorized response has a 3xx status code
+func (o *DetailTransitRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail transit router unauthorized response has a 4xx status code
+func (o *DetailTransitRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail transit router unauthorized response has a 5xx status code
+func (o *DetailTransitRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail transit router unauthorized response a status code equal to that given
+func (o *DetailTransitRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail transit router unauthorized response
+func (o *DetailTransitRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailTransitRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterUnauthorized %s", 401, payload)
+}
+
+func (o *DetailTransitRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterUnauthorized %s", 401, payload)
+}
+
 func (o *DetailTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDetailTransitRouterNotFound() *DetailTransitRouterNotFound {
 	return &DetailTransitRouterNotFound{}
 }
 
-/* DetailTransitRouterNotFound describes a response with status code 404, with default header values.
+/*
+DetailTransitRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type DetailTransitRouterNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailTransitRouterNotFound) Error() string {
-	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail transit router not found response has a 2xx status code
+func (o *DetailTransitRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail transit router not found response has a 3xx status code
+func (o *DetailTransitRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail transit router not found response has a 4xx status code
+func (o *DetailTransitRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail transit router not found response has a 5xx status code
+func (o *DetailTransitRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail transit router not found response a status code equal to that given
+func (o *DetailTransitRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail transit router not found response
+func (o *DetailTransitRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailTransitRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterNotFound %s", 404, payload)
+}
+
+func (o *DetailTransitRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterNotFound %s", 404, payload)
+}
+
 func (o *DetailTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDetailTransitRouterTooManyRequests() *DetailTransitRouterTooManyRequests
 	return &DetailTransitRouterTooManyRequests{}
 }
 
-/* DetailTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailTransitRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DetailTransitRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailTransitRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail transit router too many requests response has a 2xx status code
+func (o *DetailTransitRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail transit router too many requests response has a 3xx status code
+func (o *DetailTransitRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail transit router too many requests response has a 4xx status code
+func (o *DetailTransitRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail transit router too many requests response has a 5xx status code
+func (o *DetailTransitRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail transit router too many requests response a status code equal to that given
+func (o *DetailTransitRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail transit router too many requests response
+func (o *DetailTransitRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailTransitRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailTransitRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /transit-routers/{id}][%d] detailTransitRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

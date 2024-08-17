@@ -40,7 +40,8 @@ import (
 // EnrollmentChallengeOKCode is the HTTP code returned for type EnrollmentChallengeOK
 const EnrollmentChallengeOKCode int = 200
 
-/*EnrollmentChallengeOK A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.
+/*
+EnrollmentChallengeOK A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.
 
 swagger:response enrollmentChallengeOK
 */
@@ -84,7 +85,8 @@ func (o *EnrollmentChallengeOK) WriteResponse(rw http.ResponseWriter, producer r
 // EnrollmentChallengeBadRequestCode is the HTTP code returned for type EnrollmentChallengeBadRequest
 const EnrollmentChallengeBadRequestCode int = 400
 
-/*EnrollmentChallengeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+EnrollmentChallengeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response enrollmentChallengeBadRequest
 */
@@ -128,7 +130,8 @@ func (o *EnrollmentChallengeBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // EnrollmentChallengeTooManyRequestsCode is the HTTP code returned for type EnrollmentChallengeTooManyRequests
 const EnrollmentChallengeTooManyRequestsCode int = 429
 
-/*EnrollmentChallengeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+EnrollmentChallengeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollmentChallengeTooManyRequests
 */

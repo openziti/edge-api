@@ -30,6 +30,7 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -60,7 +61,7 @@ func (o *GetCurrentIdentityReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-identity] getCurrentIdentity", response, response.Code())
 	}
 }
 
@@ -69,7 +70,8 @@ func NewGetCurrentIdentityOK() *GetCurrentIdentityOK {
 	return &GetCurrentIdentityOK{}
 }
 
-/* GetCurrentIdentityOK describes a response with status code 200, with default header values.
+/*
+GetCurrentIdentityOK describes a response with status code 200, with default header values.
 
 The identity associated with the API Session used to issue the request
 */
@@ -77,9 +79,46 @@ type GetCurrentIdentityOK struct {
 	Payload *rest_model.CurrentIdentityDetailEnvelope
 }
 
-func (o *GetCurrentIdentityOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity][%d] getCurrentIdentityOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this get current identity o k response has a 2xx status code
+func (o *GetCurrentIdentityOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this get current identity o k response has a 3xx status code
+func (o *GetCurrentIdentityOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current identity o k response has a 4xx status code
+func (o *GetCurrentIdentityOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current identity o k response has a 5xx status code
+func (o *GetCurrentIdentityOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current identity o k response a status code equal to that given
+func (o *GetCurrentIdentityOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get current identity o k response
+func (o *GetCurrentIdentityOK) Code() int {
+	return 200
+}
+
+func (o *GetCurrentIdentityOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity][%d] getCurrentIdentityOK %s", 200, payload)
+}
+
+func (o *GetCurrentIdentityOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity][%d] getCurrentIdentityOK %s", 200, payload)
+}
+
 func (o *GetCurrentIdentityOK) GetPayload() *rest_model.CurrentIdentityDetailEnvelope {
 	return o.Payload
 }
@@ -101,7 +140,8 @@ func NewGetCurrentIdentityUnauthorized() *GetCurrentIdentityUnauthorized {
 	return &GetCurrentIdentityUnauthorized{}
 }
 
-/* GetCurrentIdentityUnauthorized describes a response with status code 401, with default header values.
+/*
+GetCurrentIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -109,9 +149,46 @@ type GetCurrentIdentityUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *GetCurrentIdentityUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-identity][%d] getCurrentIdentityUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this get current identity unauthorized response has a 2xx status code
+func (o *GetCurrentIdentityUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this get current identity unauthorized response has a 3xx status code
+func (o *GetCurrentIdentityUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current identity unauthorized response has a 4xx status code
+func (o *GetCurrentIdentityUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get current identity unauthorized response has a 5xx status code
+func (o *GetCurrentIdentityUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current identity unauthorized response a status code equal to that given
+func (o *GetCurrentIdentityUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get current identity unauthorized response
+func (o *GetCurrentIdentityUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetCurrentIdentityUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity][%d] getCurrentIdentityUnauthorized %s", 401, payload)
+}
+
+func (o *GetCurrentIdentityUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity][%d] getCurrentIdentityUnauthorized %s", 401, payload)
+}
+
 func (o *GetCurrentIdentityUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

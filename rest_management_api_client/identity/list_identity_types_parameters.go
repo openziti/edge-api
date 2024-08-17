@@ -77,10 +77,12 @@ func NewListIdentityTypesParamsWithHTTPClient(client *http.Client) *ListIdentity
 	}
 }
 
-/* ListIdentityTypesParams contains all the parameters to send to the API endpoint
-   for the list identity types operation.
+/*
+ListIdentityTypesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list identity types operation.
+
+	Typically these are written to a http.Request.
 */
 type ListIdentityTypesParams struct {
 

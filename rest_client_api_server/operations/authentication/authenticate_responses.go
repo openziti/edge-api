@@ -40,7 +40,8 @@ import (
 // AuthenticateOKCode is the HTTP code returned for type AuthenticateOK
 const AuthenticateOKCode int = 200
 
-/*AuthenticateOK The API session associated with the session used to issue the request
+/*
+AuthenticateOK The API session associated with the session used to issue the request
 
 swagger:response authenticateOK
 */
@@ -84,7 +85,8 @@ func (o *AuthenticateOK) WriteResponse(rw http.ResponseWriter, producer runtime.
 // AuthenticateBadRequestCode is the HTTP code returned for type AuthenticateBadRequest
 const AuthenticateBadRequestCode int = 400
 
-/*AuthenticateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+AuthenticateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response authenticateBadRequest
 */
@@ -128,7 +130,8 @@ func (o *AuthenticateBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 // AuthenticateUnauthorizedCode is the HTTP code returned for type AuthenticateUnauthorized
 const AuthenticateUnauthorizedCode int = 401
 
-/*AuthenticateUnauthorized The authentication request could not be processed as the credentials are invalid
+/*
+AuthenticateUnauthorized The authentication request could not be processed as the credentials are invalid
 
 swagger:response authenticateUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *AuthenticateUnauthorized) WriteResponse(rw http.ResponseWriter, produce
 // AuthenticateTooManyRequestsCode is the HTTP code returned for type AuthenticateTooManyRequests
 const AuthenticateTooManyRequestsCode int = 429
 
-/*AuthenticateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+AuthenticateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response authenticateTooManyRequests
 */

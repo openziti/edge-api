@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new config API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new config API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new config API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -86,9 +112,9 @@ type ClientService interface {
 }
 
 /*
-  CreateConfig creates a config resource
+CreateConfig creates a config resource
 
-  Create a config resource. Requires admin access.
+Create a config resource. Requires admin access.
 */
 func (a *Client) CreateConfig(params *CreateConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfigCreated, error) {
 	// TODO: Validate the params before sending
@@ -127,7 +153,7 @@ func (a *Client) CreateConfig(params *CreateConfigParams, authInfo runtime.Clien
 }
 
 /*
-  CreateConfigType creates a config type requires admin access
+CreateConfigType creates a config type requires admin access
 */
 func (a *Client) CreateConfigType(params *CreateConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfigTypeCreated, error) {
 	// TODO: Validate the params before sending
@@ -166,9 +192,9 @@ func (a *Client) CreateConfigType(params *CreateConfigTypeParams, authInfo runti
 }
 
 /*
-  DeleteConfig deletes a config
+DeleteConfig deletes a config
 
-  Delete a config by id. Requires admin access.
+Delete a config by id. Requires admin access.
 */
 func (a *Client) DeleteConfig(params *DeleteConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -207,9 +233,9 @@ func (a *Client) DeleteConfig(params *DeleteConfigParams, authInfo runtime.Clien
 }
 
 /*
-  DeleteConfigType deletes a config type
+DeleteConfigType deletes a config type
 
-  Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
+Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
 */
 func (a *Client) DeleteConfigType(params *DeleteConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteConfigTypeOK, error) {
 	// TODO: Validate the params before sending
@@ -248,9 +274,9 @@ func (a *Client) DeleteConfigType(params *DeleteConfigTypeParams, authInfo runti
 }
 
 /*
-  DetailConfig retrieves a single config
+DetailConfig retrieves a single config
 
-  Retrieves a single config by id. Requires admin access.
+Retrieves a single config by id. Requires admin access.
 */
 func (a *Client) DetailConfig(params *DetailConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -289,9 +315,9 @@ func (a *Client) DetailConfig(params *DetailConfigParams, authInfo runtime.Clien
 }
 
 /*
-  DetailConfigType retrieves a single config type
+DetailConfigType retrieves a single config type
 
-  Retrieves a single config-type by id. Requires admin access.
+Retrieves a single config-type by id. Requires admin access.
 */
 func (a *Client) DetailConfigType(params *DetailConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailConfigTypeOK, error) {
 	// TODO: Validate the params before sending
@@ -330,10 +356,9 @@ func (a *Client) DetailConfigType(params *DetailConfigTypeParams, authInfo runti
 }
 
 /*
-  ListConfigServices lists services referenced by a config
+ListConfigServices lists services referenced by a config
 
-  Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListConfigServices(params *ListConfigServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigServicesOK, error) {
 	// TODO: Validate the params before sending
@@ -372,10 +397,9 @@ func (a *Client) ListConfigServices(params *ListConfigServicesParams, authInfo r
 }
 
 /*
-  ListConfigTypes lists config types
+ListConfigTypes lists config types
 
-  Retrieves a list of config-type resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of config-type resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListConfigTypes(params *ListConfigTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigTypesOK, error) {
 	// TODO: Validate the params before sending
@@ -414,10 +438,9 @@ func (a *Client) ListConfigTypes(params *ListConfigTypesParams, authInfo runtime
 }
 
 /*
-  ListConfigs lists configs
+ListConfigs lists configs
 
-  Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListConfigs(params *ListConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigsOK, error) {
 	// TODO: Validate the params before sending
@@ -456,9 +479,9 @@ func (a *Client) ListConfigs(params *ListConfigsParams, authInfo runtime.ClientA
 }
 
 /*
-  ListConfigsForConfigType lists the configs of a specific config type
+ListConfigsForConfigType lists the configs of a specific config type
 
-  Lists the configs associated to a config-type. Requires admin access.
+Lists the configs associated to a config-type. Requires admin access.
 */
 func (a *Client) ListConfigsForConfigType(params *ListConfigsForConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigsForConfigTypeOK, error) {
 	// TODO: Validate the params before sending
@@ -497,9 +520,9 @@ func (a *Client) ListConfigsForConfigType(params *ListConfigsForConfigTypeParams
 }
 
 /*
-  PatchConfig updates the supplied fields on a config
+PatchConfig updates the supplied fields on a config
 
-  Update the supplied fields on a config. Requires admin access.
+Update the supplied fields on a config. Requires admin access.
 */
 func (a *Client) PatchConfig(params *PatchConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -538,9 +561,9 @@ func (a *Client) PatchConfig(params *PatchConfigParams, authInfo runtime.ClientA
 }
 
 /*
-  PatchConfigType updates the supplied fields on a config type
+PatchConfigType updates the supplied fields on a config type
 
-  Update the supplied fields on a config-type. Requires admin access.
+Update the supplied fields on a config-type. Requires admin access.
 */
 func (a *Client) PatchConfigType(params *PatchConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchConfigTypeOK, error) {
 	// TODO: Validate the params before sending
@@ -579,9 +602,9 @@ func (a *Client) PatchConfigType(params *PatchConfigTypeParams, authInfo runtime
 }
 
 /*
-  UpdateConfig updates all fields on a config
+UpdateConfig updates all fields on a config
 
-  Update all fields on a config by id. Requires admin access.
+Update all fields on a config by id. Requires admin access.
 */
 func (a *Client) UpdateConfig(params *UpdateConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -620,9 +643,9 @@ func (a *Client) UpdateConfig(params *UpdateConfigParams, authInfo runtime.Clien
 }
 
 /*
-  UpdateConfigType updates all fields on a config type
+UpdateConfigType updates all fields on a config type
 
-  Update all fields on a config-type by id. Requires admin access.
+Update all fields on a config-type by id. Requires admin access.
 */
 func (a *Client) UpdateConfigType(params *UpdateConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfigTypeOK, error) {
 	// TODO: Validate the params before sending

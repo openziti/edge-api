@@ -53,13 +53,12 @@ func NewListEdgeRouterServices(ctx *middleware.Context, handler ListEdgeRouterSe
 	return &ListEdgeRouterServices{Context: ctx, Handler: handler}
 }
 
-/* ListEdgeRouterServices swagger:route GET /edge-routers/{id}/services Edge Router listEdgeRouterServices
+/*
+	ListEdgeRouterServices swagger:route GET /edge-routers/{id}/services Edge Router listEdgeRouterServices
 
-List associated services
+# List associated services
 
 Retrieves a list of services that may be accessed via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListEdgeRouterServices struct {
 	Context *middleware.Context

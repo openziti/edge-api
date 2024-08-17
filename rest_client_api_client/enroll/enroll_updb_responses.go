@@ -31,6 +31,7 @@ package enroll
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -69,7 +70,7 @@ func (o *EnrollUpdbReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enroll/updb] enrollUpdb", response, response.Code())
 	}
 }
 
@@ -78,7 +79,8 @@ func NewEnrollUpdbOK() *EnrollUpdbOK {
 	return &EnrollUpdbOK{}
 }
 
-/* EnrollUpdbOK describes a response with status code 200, with default header values.
+/*
+EnrollUpdbOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -86,9 +88,46 @@ type EnrollUpdbOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *EnrollUpdbOK) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this enroll updb o k response has a 2xx status code
+func (o *EnrollUpdbOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this enroll updb o k response has a 3xx status code
+func (o *EnrollUpdbOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb o k response has a 4xx status code
+func (o *EnrollUpdbOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll updb o k response has a 5xx status code
+func (o *EnrollUpdbOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb o k response a status code equal to that given
+func (o *EnrollUpdbOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the enroll updb o k response
+func (o *EnrollUpdbOK) Code() int {
+	return 200
+}
+
+func (o *EnrollUpdbOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK %s", 200, payload)
+}
+
+func (o *EnrollUpdbOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK %s", 200, payload)
+}
+
 func (o *EnrollUpdbOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -110,7 +149,8 @@ func NewEnrollUpdbNotFound() *EnrollUpdbNotFound {
 	return &EnrollUpdbNotFound{}
 }
 
-/* EnrollUpdbNotFound describes a response with status code 404, with default header values.
+/*
+EnrollUpdbNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -118,9 +158,46 @@ type EnrollUpdbNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollUpdbNotFound) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this enroll updb not found response has a 2xx status code
+func (o *EnrollUpdbNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll updb not found response has a 3xx status code
+func (o *EnrollUpdbNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb not found response has a 4xx status code
+func (o *EnrollUpdbNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll updb not found response has a 5xx status code
+func (o *EnrollUpdbNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb not found response a status code equal to that given
+func (o *EnrollUpdbNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the enroll updb not found response
+func (o *EnrollUpdbNotFound) Code() int {
+	return 404
+}
+
+func (o *EnrollUpdbNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbNotFound %s", 404, payload)
+}
+
+func (o *EnrollUpdbNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbNotFound %s", 404, payload)
+}
+
 func (o *EnrollUpdbNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -142,7 +219,8 @@ func NewEnrollUpdbTooManyRequests() *EnrollUpdbTooManyRequests {
 	return &EnrollUpdbTooManyRequests{}
 }
 
-/* EnrollUpdbTooManyRequests describes a response with status code 429, with default header values.
+/*
+EnrollUpdbTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -150,9 +228,46 @@ type EnrollUpdbTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollUpdbTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this enroll updb too many requests response has a 2xx status code
+func (o *EnrollUpdbTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll updb too many requests response has a 3xx status code
+func (o *EnrollUpdbTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb too many requests response has a 4xx status code
+func (o *EnrollUpdbTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll updb too many requests response has a 5xx status code
+func (o *EnrollUpdbTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb too many requests response a status code equal to that given
+func (o *EnrollUpdbTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the enroll updb too many requests response
+func (o *EnrollUpdbTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *EnrollUpdbTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbTooManyRequests %s", 429, payload)
+}
+
+func (o *EnrollUpdbTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbTooManyRequests %s", 429, payload)
+}
+
 func (o *EnrollUpdbTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -169,7 +284,8 @@ func (o *EnrollUpdbTooManyRequests) readResponse(response runtime.ClientResponse
 	return nil
 }
 
-/*EnrollUpdbBody enroll updb body
+/*
+EnrollUpdbBody enroll updb body
 swagger:model EnrollUpdbBody
 */
 type EnrollUpdbBody struct {
@@ -253,6 +369,10 @@ func (o *EnrollUpdbBody) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(o.Password) { // not required
+		return nil
+	}
+
 	if err := o.Password.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("updbCredentials" + "." + "password")
@@ -266,6 +386,10 @@ func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats st
 }
 
 func (o *EnrollUpdbBody) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(o.Username) { // not required
+		return nil
+	}
 
 	if err := o.Username.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

@@ -40,7 +40,8 @@ import (
 // CreateConfigCreatedCode is the HTTP code returned for type CreateConfigCreated
 const CreateConfigCreatedCode int = 201
 
-/*CreateConfigCreated The create request was successful and the resource has been added at the following location
+/*
+CreateConfigCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createConfigCreated
 */
@@ -84,7 +85,8 @@ func (o *CreateConfigCreated) WriteResponse(rw http.ResponseWriter, producer run
 // CreateConfigBadRequestCode is the HTTP code returned for type CreateConfigBadRequest
 const CreateConfigBadRequestCode int = 400
 
-/*CreateConfigBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateConfigBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createConfigBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreateConfigBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 // CreateConfigUnauthorizedCode is the HTTP code returned for type CreateConfigUnauthorized
 const CreateConfigUnauthorizedCode int = 401
 
-/*CreateConfigUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateConfigUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createConfigUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreateConfigUnauthorized) WriteResponse(rw http.ResponseWriter, produce
 // CreateConfigTooManyRequestsCode is the HTTP code returned for type CreateConfigTooManyRequests
 const CreateConfigTooManyRequestsCode int = 429
 
-/*CreateConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createConfigTooManyRequests
 */

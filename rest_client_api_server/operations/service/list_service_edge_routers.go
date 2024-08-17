@@ -53,13 +53,12 @@ func NewListServiceEdgeRouters(ctx *middleware.Context, handler ListServiceEdgeR
 	return &ListServiceEdgeRouters{Context: ctx, Handler: handler}
 }
 
-/* ListServiceEdgeRouters swagger:route GET /services/{id}/edge-routers Service listServiceEdgeRouters
+/*
+	ListServiceEdgeRouters swagger:route GET /services/{id}/edge-routers Service listServiceEdgeRouters
 
-List of edge routers permitted to handle traffic for the specified service
+# List of edge routers permitted to handle traffic for the specified service
 
 Retrieves the list of edge routers permitted to handle traffic for the specified service
-
-
 */
 type ListServiceEdgeRouters struct {
 	Context *middleware.Context

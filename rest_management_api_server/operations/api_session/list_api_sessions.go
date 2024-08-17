@@ -53,14 +53,13 @@ func NewListAPISessions(ctx *middleware.Context, handler ListAPISessionsHandler)
 	return &ListAPISessions{Context: ctx, Handler: handler}
 }
 
-/* ListAPISessions swagger:route GET /api-sessions API Session listApiSessions
+/*
+	ListAPISessions swagger:route GET /api-sessions API Session listApiSessions
 
-List active API sessions
+# List active API sessions
 
 Returns a list of active API sessions. The resources can be sorted, filtered, and paginated. This endpoint
 requires admin access.
-
-
 */
 type ListAPISessions struct {
 	Context *middleware.Context

@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new authentication API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new authentication API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new authentication API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -62,10 +88,9 @@ type ClientService interface {
 }
 
 /*
-  Authenticate authenticates via a method supplied via a query string parameter
+Authenticate authenticates via a method supplied via a query string parameter
 
-  Allowed authentication methods include "password", "cert", and "ext-jwt"
-
+Allowed authentication methods include "password", "cert", and "ext-jwt"
 */
 func (a *Client) Authenticate(params *AuthenticateParams, opts ...ClientOption) (*AuthenticateOK, error) {
 	// TODO: Validate the params before sending
@@ -103,9 +128,9 @@ func (a *Client) Authenticate(params *AuthenticateParams, opts ...ClientOption) 
 }
 
 /*
-  AuthenticateMfa completes m f a authentication
+AuthenticateMfa completes m f a authentication
 
-  Completes MFA authentication by submitting a MFA time based one time token or backup code.
+Completes MFA authentication by submitting a MFA time based one time token or backup code.
 */
 func (a *Client) AuthenticateMfa(params *AuthenticateMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthenticateMfaOK, error) {
 	// TODO: Validate the params before sending

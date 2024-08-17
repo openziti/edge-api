@@ -53,12 +53,12 @@ func NewListConfigsForConfigType(ctx *middleware.Context, handler ListConfigsFor
 	return &ListConfigsForConfigType{Context: ctx, Handler: handler}
 }
 
-/* ListConfigsForConfigType swagger:route GET /config-types/{id}/configs Config listConfigsForConfigType
+/*
+	ListConfigsForConfigType swagger:route GET /config-types/{id}/configs Config listConfigsForConfigType
 
-Lists the configs of a specific config-type
+# Lists the configs of a specific config-type
 
 Lists the configs associated to a config-type. Requires admin access.
-
 */
 type ListConfigsForConfigType struct {
 	Context *middleware.Context

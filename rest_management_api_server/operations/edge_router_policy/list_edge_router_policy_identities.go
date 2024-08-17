@@ -53,13 +53,12 @@ func NewListEdgeRouterPolicyIdentities(ctx *middleware.Context, handler ListEdge
 	return &ListEdgeRouterPolicyIdentities{Context: ctx, Handler: handler}
 }
 
-/* ListEdgeRouterPolicyIdentities swagger:route GET /edge-router-policies/{id}/identities Edge Router Policy listEdgeRouterPolicyIdentities
+/*
+	ListEdgeRouterPolicyIdentities swagger:route GET /edge-router-policies/{id}/identities Edge Router Policy listEdgeRouterPolicyIdentities
 
-List identities an edge router policy affects
+# List identities an edge router policy affects
 
 Retrieves a list of identities an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListEdgeRouterPolicyIdentities struct {
 	Context *middleware.Context

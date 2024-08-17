@@ -351,6 +351,11 @@ func (m *IdentityUpdate) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *IdentityUpdate) contextValidateAppData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppData != nil {
+
+		if swag.IsZero(m.AppData) { // not required
+			return nil
+		}
+
 		if err := m.AppData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("appData")
@@ -367,6 +372,11 @@ func (m *IdentityUpdate) contextValidateAppData(ctx context.Context, formats str
 func (m *IdentityUpdate) contextValidateDefaultHostingCost(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DefaultHostingCost != nil {
+
+		if swag.IsZero(m.DefaultHostingCost) { // not required
+			return nil
+		}
+
 		if err := m.DefaultHostingCost.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("defaultHostingCost")
@@ -381,6 +391,10 @@ func (m *IdentityUpdate) contextValidateDefaultHostingCost(ctx context.Context, 
 }
 
 func (m *IdentityUpdate) contextValidateDefaultHostingPrecedence(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DefaultHostingPrecedence) { // not required
+		return nil
+	}
 
 	if err := m.DefaultHostingPrecedence.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -412,6 +426,10 @@ func (m *IdentityUpdate) contextValidateRoleAttributes(ctx context.Context, form
 
 func (m *IdentityUpdate) contextValidateServiceHostingCosts(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.ServiceHostingCosts) { // not required
+		return nil
+	}
+
 	if err := m.ServiceHostingCosts.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("serviceHostingCosts")
@@ -425,6 +443,10 @@ func (m *IdentityUpdate) contextValidateServiceHostingCosts(ctx context.Context,
 }
 
 func (m *IdentityUpdate) contextValidateServiceHostingPrecedences(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ServiceHostingPrecedences) { // not required
+		return nil
+	}
 
 	if err := m.ServiceHostingPrecedences.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -441,6 +463,11 @@ func (m *IdentityUpdate) contextValidateServiceHostingPrecedences(ctx context.Co
 func (m *IdentityUpdate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -457,6 +484,7 @@ func (m *IdentityUpdate) contextValidateTags(ctx context.Context, formats strfmt
 func (m *IdentityUpdate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")

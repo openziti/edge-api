@@ -53,15 +53,14 @@ func NewGetIdentityFailedServiceRequests(ctx *middleware.Context, handler GetIde
 	return &GetIdentityFailedServiceRequests{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityFailedServiceRequests swagger:route GET /identities/{id}/failed-service-requests Identity getIdentityFailedServiceRequests
+/*
+	GetIdentityFailedServiceRequests swagger:route GET /identities/{id}/failed-service-requests Identity getIdentityFailedServiceRequests
 
-Retrieve a list of the most recent service failure requests due to posture checks
+# Retrieve a list of the most recent service failure requests due to posture checks
 
 Returns a list of service session requests that failed due to posture checks. The entries will contain
 every policy that was verified against and every failed check in each policy. Each check will include
 the historical posture data and posture check configuration.
-
-
 */
 type GetIdentityFailedServiceRequests struct {
 	Context *middleware.Context

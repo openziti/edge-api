@@ -53,13 +53,12 @@ func NewListServicePolicyIdentities(ctx *middleware.Context, handler ListService
 	return &ListServicePolicyIdentities{Context: ctx, Handler: handler}
 }
 
-/* ListServicePolicyIdentities swagger:route GET /service-policies/{id}/identities Service Policy listServicePolicyIdentities
+/*
+	ListServicePolicyIdentities swagger:route GET /service-policies/{id}/identities Service Policy listServicePolicyIdentities
 
-List identities a service policy affects
+# List identities a service policy affects
 
 Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServicePolicyIdentities struct {
 	Context *middleware.Context

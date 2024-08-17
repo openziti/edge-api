@@ -53,9 +53,10 @@ func NewReEnrollEdgeRouter(ctx *middleware.Context, handler ReEnrollEdgeRouterHa
 	return &ReEnrollEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/* ReEnrollEdgeRouter swagger:route POST /edge-routers/{id}/re-enroll Edge Router reEnrollEdgeRouter
+/*
+	ReEnrollEdgeRouter swagger:route POST /edge-routers/{id}/re-enroll Edge Router reEnrollEdgeRouter
 
-Re-enroll an edge router
+# Re-enroll an edge router
 
 Removes current certificate based authentication mechanisms and reverts the edge router into a state where enrollment must be performed.
 The router retains all other properties and associations. If the router is currently connected, it will be disconnected and any
@@ -63,8 +64,6 @@ attemps to reconnect will fail until the enrollment process is completed with th
 
 If the edge router has an existing outstanding enrollment JWT it will be replaced. The previous JWT will no longer be usable to
 complete the enrollment process.
-
-
 */
 type ReEnrollEdgeRouter struct {
 	Context *middleware.Context

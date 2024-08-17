@@ -40,7 +40,8 @@ import (
 // DeleteAuthenticatorOKCode is the HTTP code returned for type DeleteAuthenticatorOK
 const DeleteAuthenticatorOKCode int = 200
 
-/*DeleteAuthenticatorOK The delete request was successful and the resource has been removed
+/*
+DeleteAuthenticatorOK The delete request was successful and the resource has been removed
 
 swagger:response deleteAuthenticatorOK
 */
@@ -84,7 +85,8 @@ func (o *DeleteAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer r
 // DeleteAuthenticatorBadRequestCode is the HTTP code returned for type DeleteAuthenticatorBadRequest
 const DeleteAuthenticatorBadRequestCode int = 400
 
-/*DeleteAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteAuthenticatorBadRequest
 */
@@ -128,7 +130,8 @@ func (o *DeleteAuthenticatorBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // DeleteAuthenticatorUnauthorizedCode is the HTTP code returned for type DeleteAuthenticatorUnauthorized
 const DeleteAuthenticatorUnauthorizedCode int = 401
 
-/*DeleteAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteAuthenticatorUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *DeleteAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // DeleteAuthenticatorTooManyRequestsCode is the HTTP code returned for type DeleteAuthenticatorTooManyRequests
 const DeleteAuthenticatorTooManyRequestsCode int = 429
 
-/*DeleteAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteAuthenticatorTooManyRequests
 */

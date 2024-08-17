@@ -452,6 +452,7 @@ func (m *TerminatorDetail) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *TerminatorDetail) contextValidateCost(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cost != nil {
+
 		if err := m.Cost.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cost")
@@ -468,6 +469,7 @@ func (m *TerminatorDetail) contextValidateCost(ctx context.Context, formats strf
 func (m *TerminatorDetail) contextValidateDynamicCost(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DynamicCost != nil {
+
 		if err := m.DynamicCost.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dynamicCost")
@@ -484,6 +486,7 @@ func (m *TerminatorDetail) contextValidateDynamicCost(ctx context.Context, forma
 func (m *TerminatorDetail) contextValidatePrecedence(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Precedence != nil {
+
 		if err := m.Precedence.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("precedence")
@@ -500,6 +503,7 @@ func (m *TerminatorDetail) contextValidatePrecedence(ctx context.Context, format
 func (m *TerminatorDetail) contextValidateRouter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Router != nil {
+
 		if err := m.Router.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("router")
@@ -516,6 +520,7 @@ func (m *TerminatorDetail) contextValidateRouter(ctx context.Context, formats st
 func (m *TerminatorDetail) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
+
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service")

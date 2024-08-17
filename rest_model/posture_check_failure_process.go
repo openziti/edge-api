@@ -290,6 +290,7 @@ func (m *PostureCheckFailureProcess) ContextValidate(ctx context.Context, format
 func (m *PostureCheckFailureProcess) contextValidateActualValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ActualValue != nil {
+
 		if err := m.ActualValue.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("actualValue")
@@ -306,6 +307,7 @@ func (m *PostureCheckFailureProcess) contextValidateActualValue(ctx context.Cont
 func (m *PostureCheckFailureProcess) contextValidateExpectedValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExpectedValue != nil {
+
 		if err := m.ExpectedValue.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("expectedValue")

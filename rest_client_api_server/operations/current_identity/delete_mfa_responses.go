@@ -40,7 +40,8 @@ import (
 // DeleteMfaOKCode is the HTTP code returned for type DeleteMfaOK
 const DeleteMfaOKCode int = 200
 
-/*DeleteMfaOK Base empty response
+/*
+DeleteMfaOK Base empty response
 
 swagger:response deleteMfaOK
 */
@@ -84,7 +85,8 @@ func (o *DeleteMfaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // DeleteMfaUnauthorizedCode is the HTTP code returned for type DeleteMfaUnauthorized
 const DeleteMfaUnauthorizedCode int = 401
 
-/*DeleteMfaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteMfaUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DeleteMfaUnauthorized) WriteResponse(rw http.ResponseWriter, producer r
 // DeleteMfaNotFoundCode is the HTTP code returned for type DeleteMfaNotFound
 const DeleteMfaNotFoundCode int = 404
 
-/*DeleteMfaNotFound The requested resource does not exist
+/*
+DeleteMfaNotFound The requested resource does not exist
 
 swagger:response deleteMfaNotFound
 */

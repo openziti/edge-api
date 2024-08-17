@@ -53,12 +53,12 @@ func NewCreatePostureResponse(ctx *middleware.Context, handler CreatePostureResp
 	return &CreatePostureResponse{Context: ctx, Handler: handler}
 }
 
-/* CreatePostureResponse swagger:route POST /posture-response Posture Checks createPostureResponse
+/*
+	CreatePostureResponse swagger:route POST /posture-response Posture Checks createPostureResponse
 
-Submit a posture response to a posture query
+# Submit a posture response to a posture query
 
 Submits posture responses
-
 */
 type CreatePostureResponse struct {
 	Context *middleware.Context

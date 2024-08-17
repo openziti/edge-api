@@ -40,7 +40,8 @@ import (
 // ListCasOKCode is the HTTP code returned for type ListCasOK
 const ListCasOKCode int = 200
 
-/*ListCasOK A list of Certificate Authorities (CAs)
+/*
+ListCasOK A list of Certificate Authorities (CAs)
 
 swagger:response listCasOK
 */
@@ -84,7 +85,8 @@ func (o *ListCasOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produ
 // ListCasBadRequestCode is the HTTP code returned for type ListCasBadRequest
 const ListCasBadRequestCode int = 400
 
-/*ListCasBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListCasBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listCasBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListCasBadRequest) WriteResponse(rw http.ResponseWriter, producer runti
 // ListCasUnauthorizedCode is the HTTP code returned for type ListCasUnauthorized
 const ListCasUnauthorizedCode int = 401
 
-/*ListCasUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListCasUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listCasUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListCasUnauthorized) WriteResponse(rw http.ResponseWriter, producer run
 // ListCasTooManyRequestsCode is the HTTP code returned for type ListCasTooManyRequests
 const ListCasTooManyRequestsCode int = 429
 
-/*ListCasTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListCasTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listCasTooManyRequests
 */

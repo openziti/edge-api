@@ -76,10 +76,12 @@ func NewDetailPostureCheckParamsWithHTTPClient(client *http.Client) *DetailPostu
 	}
 }
 
-/* DetailPostureCheckParams contains all the parameters to send to the API endpoint
-   for the detail posture check operation.
+/*
+DetailPostureCheckParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail posture check operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailPostureCheckParams struct {
 

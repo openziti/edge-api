@@ -53,15 +53,15 @@ func NewExtendCurrentIdentityAuthenticator(ctx *middleware.Context, handler Exte
 	return &ExtendCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* ExtendCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend Current API Session Enroll Extend Enrollment extendCurrentIdentityAuthenticator
+/*
+	ExtendCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend Current API Session Enroll Extend Enrollment extendCurrentIdentityAuthenticator
 
-Allows the current identity to recieve a new certificate associated with a certificate based authenticator
+# Allows the current identity to recieve a new certificate associated with a certificate based authenticator
 
 This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.
 Allows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.
 The response from this endpoint is a new client certificate which the client must  be verified via the /authenticators/{id}/extend-verify endpoint.
 After verification is completion any new connections must be made with new certificate. Prior to verification the old client certificate remains active.
-
 */
 type ExtendCurrentIdentityAuthenticator struct {
 	Context *middleware.Context

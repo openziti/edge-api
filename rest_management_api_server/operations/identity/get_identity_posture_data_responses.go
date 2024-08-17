@@ -40,7 +40,8 @@ import (
 // GetIdentityPostureDataOKCode is the HTTP code returned for type GetIdentityPostureDataOK
 const GetIdentityPostureDataOKCode int = 200
 
-/*GetIdentityPostureDataOK Returns the document that represents posture data
+/*
+GetIdentityPostureDataOK Returns the document that represents posture data
 
 swagger:response getIdentityPostureDataOK
 */
@@ -84,7 +85,8 @@ func (o *GetIdentityPostureDataOK) WriteResponse(rw http.ResponseWriter, produce
 // GetIdentityPostureDataUnauthorizedCode is the HTTP code returned for type GetIdentityPostureDataUnauthorized
 const GetIdentityPostureDataUnauthorizedCode int = 401
 
-/*GetIdentityPostureDataUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetIdentityPostureDataUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityPostureDataUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *GetIdentityPostureDataUnauthorized) WriteResponse(rw http.ResponseWrite
 // GetIdentityPostureDataNotFoundCode is the HTTP code returned for type GetIdentityPostureDataNotFound
 const GetIdentityPostureDataNotFoundCode int = 404
 
-/*GetIdentityPostureDataNotFound The requested resource does not exist
+/*
+GetIdentityPostureDataNotFound The requested resource does not exist
 
 swagger:response getIdentityPostureDataNotFound
 */
@@ -172,7 +175,8 @@ func (o *GetIdentityPostureDataNotFound) WriteResponse(rw http.ResponseWriter, p
 // GetIdentityPostureDataTooManyRequestsCode is the HTTP code returned for type GetIdentityPostureDataTooManyRequests
 const GetIdentityPostureDataTooManyRequestsCode int = 429
 
-/*GetIdentityPostureDataTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetIdentityPostureDataTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityPostureDataTooManyRequests
 */

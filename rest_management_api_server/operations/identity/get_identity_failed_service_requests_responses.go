@@ -40,7 +40,8 @@ import (
 // GetIdentityFailedServiceRequestsOKCode is the HTTP code returned for type GetIdentityFailedServiceRequestsOK
 const GetIdentityFailedServiceRequestsOKCode int = 200
 
-/*GetIdentityFailedServiceRequestsOK Returns a list of service request failures
+/*
+GetIdentityFailedServiceRequestsOK Returns a list of service request failures
 
 swagger:response getIdentityFailedServiceRequestsOK
 */
@@ -84,7 +85,8 @@ func (o *GetIdentityFailedServiceRequestsOK) WriteResponse(rw http.ResponseWrite
 // GetIdentityFailedServiceRequestsUnauthorizedCode is the HTTP code returned for type GetIdentityFailedServiceRequestsUnauthorized
 const GetIdentityFailedServiceRequestsUnauthorizedCode int = 401
 
-/*GetIdentityFailedServiceRequestsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetIdentityFailedServiceRequestsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityFailedServiceRequestsUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *GetIdentityFailedServiceRequestsUnauthorized) WriteResponse(rw http.Res
 // GetIdentityFailedServiceRequestsNotFoundCode is the HTTP code returned for type GetIdentityFailedServiceRequestsNotFound
 const GetIdentityFailedServiceRequestsNotFoundCode int = 404
 
-/*GetIdentityFailedServiceRequestsNotFound The requested resource does not exist
+/*
+GetIdentityFailedServiceRequestsNotFound The requested resource does not exist
 
 swagger:response getIdentityFailedServiceRequestsNotFound
 */
@@ -172,7 +175,8 @@ func (o *GetIdentityFailedServiceRequestsNotFound) WriteResponse(rw http.Respons
 // GetIdentityFailedServiceRequestsTooManyRequestsCode is the HTTP code returned for type GetIdentityFailedServiceRequestsTooManyRequests
 const GetIdentityFailedServiceRequestsTooManyRequestsCode int = 429
 
-/*GetIdentityFailedServiceRequestsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetIdentityFailedServiceRequestsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityFailedServiceRequestsTooManyRequests
 */

@@ -40,7 +40,8 @@ import (
 // UpdateEdgeRouterOKCode is the HTTP code returned for type UpdateEdgeRouterOK
 const UpdateEdgeRouterOKCode int = 200
 
-/*UpdateEdgeRouterOK The update request was successful and the resource has been altered
+/*
+UpdateEdgeRouterOK The update request was successful and the resource has been altered
 
 swagger:response updateEdgeRouterOK
 */
@@ -84,7 +85,8 @@ func (o *UpdateEdgeRouterOK) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateEdgeRouterBadRequestCode is the HTTP code returned for type UpdateEdgeRouterBadRequest
 const UpdateEdgeRouterBadRequestCode int = 400
 
-/*UpdateEdgeRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateEdgeRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateEdgeRouterBadRequest
 */
@@ -128,7 +130,8 @@ func (o *UpdateEdgeRouterBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateEdgeRouterUnauthorizedCode is the HTTP code returned for type UpdateEdgeRouterUnauthorized
 const UpdateEdgeRouterUnauthorizedCode int = 401
 
-/*UpdateEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateEdgeRouterUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *UpdateEdgeRouterUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // UpdateEdgeRouterNotFoundCode is the HTTP code returned for type UpdateEdgeRouterNotFound
 const UpdateEdgeRouterNotFoundCode int = 404
 
-/*UpdateEdgeRouterNotFound The requested resource does not exist
+/*
+UpdateEdgeRouterNotFound The requested resource does not exist
 
 swagger:response updateEdgeRouterNotFound
 */
@@ -216,7 +220,8 @@ func (o *UpdateEdgeRouterNotFound) WriteResponse(rw http.ResponseWriter, produce
 // UpdateEdgeRouterTooManyRequestsCode is the HTTP code returned for type UpdateEdgeRouterTooManyRequests
 const UpdateEdgeRouterTooManyRequestsCode int = 429
 
-/*UpdateEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateEdgeRouterTooManyRequests
 */

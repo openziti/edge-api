@@ -40,7 +40,8 @@ import (
 // ListServicesOKCode is the HTTP code returned for type ListServicesOK
 const ListServicesOKCode int = 200
 
-/*ListServicesOK A list of services
+/*
+ListServicesOK A list of services
 
 swagger:response listServicesOK
 */
@@ -84,7 +85,8 @@ func (o *ListServicesOK) WriteResponse(rw http.ResponseWriter, producer runtime.
 // ListServicesBadRequestCode is the HTTP code returned for type ListServicesBadRequest
 const ListServicesBadRequestCode int = 400
 
-/*ListServicesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListServicesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServicesBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListServicesBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 // ListServicesUnauthorizedCode is the HTTP code returned for type ListServicesUnauthorized
 const ListServicesUnauthorizedCode int = 401
 
-/*ListServicesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServicesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServicesUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListServicesUnauthorized) WriteResponse(rw http.ResponseWriter, produce
 // ListServicesTooManyRequestsCode is the HTTP code returned for type ListServicesTooManyRequests
 const ListServicesTooManyRequestsCode int = 429
 
-/*ListServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServicesTooManyRequests
 */

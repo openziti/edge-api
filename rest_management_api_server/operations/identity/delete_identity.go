@@ -53,12 +53,12 @@ func NewDeleteIdentity(ctx *middleware.Context, handler DeleteIdentityHandler) *
 	return &DeleteIdentity{Context: ctx, Handler: handler}
 }
 
-/* DeleteIdentity swagger:route DELETE /identities/{id} Identity deleteIdentity
+/*
+	DeleteIdentity swagger:route DELETE /identities/{id} Identity deleteIdentity
 
-Delete an identity
+# Delete an identity
 
 Delete an identity by id. Requires admin access.
-
 */
 type DeleteIdentity struct {
 	Context *middleware.Context

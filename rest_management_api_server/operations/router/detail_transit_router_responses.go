@@ -40,7 +40,8 @@ import (
 // DetailTransitRouterOKCode is the HTTP code returned for type DetailTransitRouterOK
 const DetailTransitRouterOKCode int = 200
 
-/*DetailTransitRouterOK A single router
+/*
+DetailTransitRouterOK A single router
 
 swagger:response detailTransitRouterOK
 */
@@ -84,7 +85,8 @@ func (o *DetailTransitRouterOK) WriteResponse(rw http.ResponseWriter, producer r
 // DetailTransitRouterUnauthorizedCode is the HTTP code returned for type DetailTransitRouterUnauthorized
 const DetailTransitRouterUnauthorizedCode int = 401
 
-/*DetailTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailTransitRouterUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // DetailTransitRouterNotFoundCode is the HTTP code returned for type DetailTransitRouterNotFound
 const DetailTransitRouterNotFoundCode int = 404
 
-/*DetailTransitRouterNotFound The requested resource does not exist
+/*
+DetailTransitRouterNotFound The requested resource does not exist
 
 swagger:response detailTransitRouterNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailTransitRouterNotFound) WriteResponse(rw http.ResponseWriter, prod
 // DetailTransitRouterTooManyRequestsCode is the HTTP code returned for type DetailTransitRouterTooManyRequests
 const DetailTransitRouterTooManyRequestsCode int = 429
 
-/*DetailTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailTransitRouterTooManyRequests
 */

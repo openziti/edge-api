@@ -53,12 +53,12 @@ func NewDetailExternalJWTSigner(ctx *middleware.Context, handler DetailExternalJ
 	return &DetailExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* DetailExternalJWTSigner swagger:route GET /external-jwt-signers/{id} External JWT Signer detailExternalJwtSigner
+/*
+	DetailExternalJWTSigner swagger:route GET /external-jwt-signers/{id} External JWT Signer detailExternalJwtSigner
 
-Retrieves a single External JWT Signer
+# Retrieves a single External JWT Signer
 
 Retrieves a single External JWT Signer by id. Requires admin access.
-
 */
 type DetailExternalJWTSigner struct {
 	Context *middleware.Context

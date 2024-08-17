@@ -30,6 +30,7 @@ package enrollment
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -78,7 +79,7 @@ func (o *CreateEnrollmentReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enrollments] createEnrollment", response, response.Code())
 	}
 }
 
@@ -87,7 +88,8 @@ func NewCreateEnrollmentCreated() *CreateEnrollmentCreated {
 	return &CreateEnrollmentCreated{}
 }
 
-/* CreateEnrollmentCreated describes a response with status code 201, with default header values.
+/*
+CreateEnrollmentCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -95,9 +97,46 @@ type CreateEnrollmentCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateEnrollmentCreated) Error() string {
-	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create enrollment created response has a 2xx status code
+func (o *CreateEnrollmentCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create enrollment created response has a 3xx status code
+func (o *CreateEnrollmentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create enrollment created response has a 4xx status code
+func (o *CreateEnrollmentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create enrollment created response has a 5xx status code
+func (o *CreateEnrollmentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create enrollment created response a status code equal to that given
+func (o *CreateEnrollmentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create enrollment created response
+func (o *CreateEnrollmentCreated) Code() int {
+	return 201
+}
+
+func (o *CreateEnrollmentCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentCreated %s", 201, payload)
+}
+
+func (o *CreateEnrollmentCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentCreated %s", 201, payload)
+}
+
 func (o *CreateEnrollmentCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -119,7 +158,8 @@ func NewCreateEnrollmentBadRequest() *CreateEnrollmentBadRequest {
 	return &CreateEnrollmentBadRequest{}
 }
 
-/* CreateEnrollmentBadRequest describes a response with status code 400, with default header values.
+/*
+CreateEnrollmentBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -127,9 +167,46 @@ type CreateEnrollmentBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateEnrollmentBadRequest) Error() string {
-	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create enrollment bad request response has a 2xx status code
+func (o *CreateEnrollmentBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create enrollment bad request response has a 3xx status code
+func (o *CreateEnrollmentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create enrollment bad request response has a 4xx status code
+func (o *CreateEnrollmentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create enrollment bad request response has a 5xx status code
+func (o *CreateEnrollmentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create enrollment bad request response a status code equal to that given
+func (o *CreateEnrollmentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create enrollment bad request response
+func (o *CreateEnrollmentBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateEnrollmentBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentBadRequest %s", 400, payload)
+}
+
+func (o *CreateEnrollmentBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentBadRequest %s", 400, payload)
+}
+
 func (o *CreateEnrollmentBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -151,7 +228,8 @@ func NewCreateEnrollmentUnauthorized() *CreateEnrollmentUnauthorized {
 	return &CreateEnrollmentUnauthorized{}
 }
 
-/* CreateEnrollmentUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateEnrollmentUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -159,9 +237,46 @@ type CreateEnrollmentUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateEnrollmentUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create enrollment unauthorized response has a 2xx status code
+func (o *CreateEnrollmentUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create enrollment unauthorized response has a 3xx status code
+func (o *CreateEnrollmentUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create enrollment unauthorized response has a 4xx status code
+func (o *CreateEnrollmentUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create enrollment unauthorized response has a 5xx status code
+func (o *CreateEnrollmentUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create enrollment unauthorized response a status code equal to that given
+func (o *CreateEnrollmentUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create enrollment unauthorized response
+func (o *CreateEnrollmentUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateEnrollmentUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentUnauthorized %s", 401, payload)
+}
+
+func (o *CreateEnrollmentUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentUnauthorized %s", 401, payload)
+}
+
 func (o *CreateEnrollmentUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -183,7 +298,8 @@ func NewCreateEnrollmentConflict() *CreateEnrollmentConflict {
 	return &CreateEnrollmentConflict{}
 }
 
-/* CreateEnrollmentConflict describes a response with status code 409, with default header values.
+/*
+CreateEnrollmentConflict describes a response with status code 409, with default header values.
 
 The request could not be completed due to a conflict of configuration or state
 */
@@ -191,9 +307,46 @@ type CreateEnrollmentConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateEnrollmentConflict) Error() string {
-	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this create enrollment conflict response has a 2xx status code
+func (o *CreateEnrollmentConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create enrollment conflict response has a 3xx status code
+func (o *CreateEnrollmentConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create enrollment conflict response has a 4xx status code
+func (o *CreateEnrollmentConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create enrollment conflict response has a 5xx status code
+func (o *CreateEnrollmentConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create enrollment conflict response a status code equal to that given
+func (o *CreateEnrollmentConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create enrollment conflict response
+func (o *CreateEnrollmentConflict) Code() int {
+	return 409
+}
+
+func (o *CreateEnrollmentConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentConflict %s", 409, payload)
+}
+
+func (o *CreateEnrollmentConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentConflict %s", 409, payload)
+}
+
 func (o *CreateEnrollmentConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -215,7 +368,8 @@ func NewCreateEnrollmentTooManyRequests() *CreateEnrollmentTooManyRequests {
 	return &CreateEnrollmentTooManyRequests{}
 }
 
-/* CreateEnrollmentTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateEnrollmentTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -223,9 +377,46 @@ type CreateEnrollmentTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateEnrollmentTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create enrollment too many requests response has a 2xx status code
+func (o *CreateEnrollmentTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create enrollment too many requests response has a 3xx status code
+func (o *CreateEnrollmentTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create enrollment too many requests response has a 4xx status code
+func (o *CreateEnrollmentTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create enrollment too many requests response has a 5xx status code
+func (o *CreateEnrollmentTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create enrollment too many requests response a status code equal to that given
+func (o *CreateEnrollmentTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create enrollment too many requests response
+func (o *CreateEnrollmentTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateEnrollmentTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateEnrollmentTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments][%d] createEnrollmentTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateEnrollmentTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

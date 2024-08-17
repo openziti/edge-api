@@ -53,12 +53,12 @@ func NewDeletePostureCheck(ctx *middleware.Context, handler DeletePostureCheckHa
 	return &DeletePostureCheck{Context: ctx, Handler: handler}
 }
 
-/* DeletePostureCheck swagger:route DELETE /posture-checks/{id} Posture Checks deletePostureCheck
+/*
+	DeletePostureCheck swagger:route DELETE /posture-checks/{id} Posture Checks deletePostureCheck
 
-Deletes an Posture Checks
+# Deletes an Posture Checks
 
 Deletes and Posture Checks by id
-
 */
 type DeletePostureCheck struct {
 	Context *middleware.Context

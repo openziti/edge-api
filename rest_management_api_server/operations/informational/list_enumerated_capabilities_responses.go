@@ -40,7 +40,8 @@ import (
 // ListEnumeratedCapabilitiesOKCode is the HTTP code returned for type ListEnumeratedCapabilitiesOK
 const ListEnumeratedCapabilitiesOKCode int = 200
 
-/*ListEnumeratedCapabilitiesOK A typed and enumerated list of capabilities
+/*
+ListEnumeratedCapabilitiesOK A typed and enumerated list of capabilities
 
 swagger:response listEnumeratedCapabilitiesOK
 */

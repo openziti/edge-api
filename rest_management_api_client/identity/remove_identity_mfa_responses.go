@@ -30,6 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *RemoveIdentityMfaReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /identities/{id}/mfa] removeIdentityMfa", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewRemoveIdentityMfaOK() *RemoveIdentityMfaOK {
 	return &RemoveIdentityMfaOK{}
 }
 
-/* RemoveIdentityMfaOK describes a response with status code 200, with default header values.
+/*
+RemoveIdentityMfaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -89,9 +91,46 @@ type RemoveIdentityMfaOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *RemoveIdentityMfaOK) Error() string {
-	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this remove identity mfa o k response has a 2xx status code
+func (o *RemoveIdentityMfaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this remove identity mfa o k response has a 3xx status code
+func (o *RemoveIdentityMfaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove identity mfa o k response has a 4xx status code
+func (o *RemoveIdentityMfaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this remove identity mfa o k response has a 5xx status code
+func (o *RemoveIdentityMfaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove identity mfa o k response a status code equal to that given
+func (o *RemoveIdentityMfaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the remove identity mfa o k response
+func (o *RemoveIdentityMfaOK) Code() int {
+	return 200
+}
+
+func (o *RemoveIdentityMfaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaOK %s", 200, payload)
+}
+
+func (o *RemoveIdentityMfaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaOK %s", 200, payload)
+}
+
 func (o *RemoveIdentityMfaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewRemoveIdentityMfaUnauthorized() *RemoveIdentityMfaUnauthorized {
 	return &RemoveIdentityMfaUnauthorized{}
 }
 
-/* RemoveIdentityMfaUnauthorized describes a response with status code 401, with default header values.
+/*
+RemoveIdentityMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type RemoveIdentityMfaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RemoveIdentityMfaUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this remove identity mfa unauthorized response has a 2xx status code
+func (o *RemoveIdentityMfaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this remove identity mfa unauthorized response has a 3xx status code
+func (o *RemoveIdentityMfaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove identity mfa unauthorized response has a 4xx status code
+func (o *RemoveIdentityMfaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove identity mfa unauthorized response has a 5xx status code
+func (o *RemoveIdentityMfaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove identity mfa unauthorized response a status code equal to that given
+func (o *RemoveIdentityMfaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the remove identity mfa unauthorized response
+func (o *RemoveIdentityMfaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *RemoveIdentityMfaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaUnauthorized %s", 401, payload)
+}
+
+func (o *RemoveIdentityMfaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaUnauthorized %s", 401, payload)
+}
+
 func (o *RemoveIdentityMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewRemoveIdentityMfaNotFound() *RemoveIdentityMfaNotFound {
 	return &RemoveIdentityMfaNotFound{}
 }
 
-/* RemoveIdentityMfaNotFound describes a response with status code 404, with default header values.
+/*
+RemoveIdentityMfaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type RemoveIdentityMfaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RemoveIdentityMfaNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this remove identity mfa not found response has a 2xx status code
+func (o *RemoveIdentityMfaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this remove identity mfa not found response has a 3xx status code
+func (o *RemoveIdentityMfaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove identity mfa not found response has a 4xx status code
+func (o *RemoveIdentityMfaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove identity mfa not found response has a 5xx status code
+func (o *RemoveIdentityMfaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove identity mfa not found response a status code equal to that given
+func (o *RemoveIdentityMfaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the remove identity mfa not found response
+func (o *RemoveIdentityMfaNotFound) Code() int {
+	return 404
+}
+
+func (o *RemoveIdentityMfaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaNotFound %s", 404, payload)
+}
+
+func (o *RemoveIdentityMfaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaNotFound %s", 404, payload)
+}
+
 func (o *RemoveIdentityMfaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewRemoveIdentityMfaTooManyRequests() *RemoveIdentityMfaTooManyRequests {
 	return &RemoveIdentityMfaTooManyRequests{}
 }
 
-/* RemoveIdentityMfaTooManyRequests describes a response with status code 429, with default header values.
+/*
+RemoveIdentityMfaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type RemoveIdentityMfaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RemoveIdentityMfaTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this remove identity mfa too many requests response has a 2xx status code
+func (o *RemoveIdentityMfaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this remove identity mfa too many requests response has a 3xx status code
+func (o *RemoveIdentityMfaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove identity mfa too many requests response has a 4xx status code
+func (o *RemoveIdentityMfaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove identity mfa too many requests response has a 5xx status code
+func (o *RemoveIdentityMfaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove identity mfa too many requests response a status code equal to that given
+func (o *RemoveIdentityMfaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the remove identity mfa too many requests response
+func (o *RemoveIdentityMfaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *RemoveIdentityMfaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaTooManyRequests %s", 429, payload)
+}
+
+func (o *RemoveIdentityMfaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaTooManyRequests %s", 429, payload)
+}
+
 func (o *RemoveIdentityMfaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

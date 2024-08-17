@@ -53,12 +53,12 @@ func NewPatchIdentity(ctx *middleware.Context, handler PatchIdentityHandler) *Pa
 	return &PatchIdentity{Context: ctx, Handler: handler}
 }
 
-/* PatchIdentity swagger:route PATCH /identities/{id} Identity patchIdentity
+/*
+	PatchIdentity swagger:route PATCH /identities/{id} Identity patchIdentity
 
-Update the supplied fields on an identity
+# Update the supplied fields on an identity
 
 Update the supplied fields on an identity. Requires admin access.
-
 */
 type PatchIdentity struct {
 	Context *middleware.Context

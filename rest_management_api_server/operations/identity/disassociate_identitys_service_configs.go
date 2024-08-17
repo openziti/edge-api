@@ -53,12 +53,12 @@ func NewDisassociateIdentitysServiceConfigs(ctx *middleware.Context, handler Dis
 	return &DisassociateIdentitysServiceConfigs{Context: ctx, Handler: handler}
 }
 
-/* DisassociateIdentitysServiceConfigs swagger:route DELETE /identities/{id}/service-configs Identity disassociateIdentitysServiceConfigs
+/*
+	DisassociateIdentitysServiceConfigs swagger:route DELETE /identities/{id}/service-configs Identity disassociateIdentitysServiceConfigs
 
-Remove associated service configs from a specific identity
+# Remove associated service configs from a specific identity
 
 Remove service configs from a specific identity
-
 */
 type DisassociateIdentitysServiceConfigs struct {
 	Context *middleware.Context

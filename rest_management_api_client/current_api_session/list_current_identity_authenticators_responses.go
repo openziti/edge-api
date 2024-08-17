@@ -30,6 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -66,7 +67,7 @@ func (o *ListCurrentIdentityAuthenticatorsReader) ReadResponse(response runtime.
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-identity/authenticators] listCurrentIdentityAuthenticators", response, response.Code())
 	}
 }
 
@@ -75,7 +76,8 @@ func NewListCurrentIdentityAuthenticatorsOK() *ListCurrentIdentityAuthenticators
 	return &ListCurrentIdentityAuthenticatorsOK{}
 }
 
-/* ListCurrentIdentityAuthenticatorsOK describes a response with status code 200, with default header values.
+/*
+ListCurrentIdentityAuthenticatorsOK describes a response with status code 200, with default header values.
 
 A list of authenticators
 */
@@ -83,9 +85,46 @@ type ListCurrentIdentityAuthenticatorsOK struct {
 	Payload *rest_model.ListAuthenticatorsEnvelope
 }
 
-func (o *ListCurrentIdentityAuthenticatorsOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list current identity authenticators o k response has a 2xx status code
+func (o *ListCurrentIdentityAuthenticatorsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list current identity authenticators o k response has a 3xx status code
+func (o *ListCurrentIdentityAuthenticatorsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current identity authenticators o k response has a 4xx status code
+func (o *ListCurrentIdentityAuthenticatorsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list current identity authenticators o k response has a 5xx status code
+func (o *ListCurrentIdentityAuthenticatorsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current identity authenticators o k response a status code equal to that given
+func (o *ListCurrentIdentityAuthenticatorsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list current identity authenticators o k response
+func (o *ListCurrentIdentityAuthenticatorsOK) Code() int {
+	return 200
+}
+
+func (o *ListCurrentIdentityAuthenticatorsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsOK %s", 200, payload)
+}
+
+func (o *ListCurrentIdentityAuthenticatorsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsOK %s", 200, payload)
+}
+
 func (o *ListCurrentIdentityAuthenticatorsOK) GetPayload() *rest_model.ListAuthenticatorsEnvelope {
 	return o.Payload
 }
@@ -107,7 +146,8 @@ func NewListCurrentIdentityAuthenticatorsBadRequest() *ListCurrentIdentityAuthen
 	return &ListCurrentIdentityAuthenticatorsBadRequest{}
 }
 
-/* ListCurrentIdentityAuthenticatorsBadRequest describes a response with status code 400, with default header values.
+/*
+ListCurrentIdentityAuthenticatorsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -115,9 +155,46 @@ type ListCurrentIdentityAuthenticatorsBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCurrentIdentityAuthenticatorsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list current identity authenticators bad request response has a 2xx status code
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list current identity authenticators bad request response has a 3xx status code
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current identity authenticators bad request response has a 4xx status code
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list current identity authenticators bad request response has a 5xx status code
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current identity authenticators bad request response a status code equal to that given
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list current identity authenticators bad request response
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsBadRequest %s", 400, payload)
+}
+
+func (o *ListCurrentIdentityAuthenticatorsBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsBadRequest %s", 400, payload)
+}
+
 func (o *ListCurrentIdentityAuthenticatorsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -139,7 +216,8 @@ func NewListCurrentIdentityAuthenticatorsUnauthorized() *ListCurrentIdentityAuth
 	return &ListCurrentIdentityAuthenticatorsUnauthorized{}
 }
 
-/* ListCurrentIdentityAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListCurrentIdentityAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,9 +225,46 @@ type ListCurrentIdentityAuthenticatorsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListCurrentIdentityAuthenticatorsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list current identity authenticators unauthorized response has a 2xx status code
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list current identity authenticators unauthorized response has a 3xx status code
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list current identity authenticators unauthorized response has a 4xx status code
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list current identity authenticators unauthorized response has a 5xx status code
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list current identity authenticators unauthorized response a status code equal to that given
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list current identity authenticators unauthorized response
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsUnauthorized %s", 401, payload)
+}
+
+func (o *ListCurrentIdentityAuthenticatorsUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators][%d] listCurrentIdentityAuthenticatorsUnauthorized %s", 401, payload)
+}
+
 func (o *ListCurrentIdentityAuthenticatorsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

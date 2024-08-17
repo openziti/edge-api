@@ -53,13 +53,12 @@ func NewListServiceRoleAttributes(ctx *middleware.Context, handler ListServiceRo
 	return &ListServiceRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/* ListServiceRoleAttributes swagger:route GET /service-role-attributes Role Attributes listServiceRoleAttributes
+/*
+	ListServiceRoleAttributes swagger:route GET /service-role-attributes Role Attributes listServiceRoleAttributes
 
-List role attributes in use by services
+# List role attributes in use by services
 
 Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServiceRoleAttributes struct {
 	Context *middleware.Context

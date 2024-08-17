@@ -30,6 +30,7 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DetailAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /authenticators/{id}] detailAuthenticator", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDetailAuthenticatorOK() *DetailAuthenticatorOK {
 	return &DetailAuthenticatorOK{}
 }
 
-/* DetailAuthenticatorOK describes a response with status code 200, with default header values.
+/*
+DetailAuthenticatorOK describes a response with status code 200, with default header values.
 
 A singular authenticator resource
 */
@@ -89,9 +91,46 @@ type DetailAuthenticatorOK struct {
 	Payload *rest_model.DetailAuthenticatorEnvelope
 }
 
-func (o *DetailAuthenticatorOK) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail authenticator o k response has a 2xx status code
+func (o *DetailAuthenticatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail authenticator o k response has a 3xx status code
+func (o *DetailAuthenticatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator o k response has a 4xx status code
+func (o *DetailAuthenticatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail authenticator o k response has a 5xx status code
+func (o *DetailAuthenticatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator o k response a status code equal to that given
+func (o *DetailAuthenticatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail authenticator o k response
+func (o *DetailAuthenticatorOK) Code() int {
+	return 200
+}
+
+func (o *DetailAuthenticatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK %s", 200, payload)
+}
+
+func (o *DetailAuthenticatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK %s", 200, payload)
+}
+
 func (o *DetailAuthenticatorOK) GetPayload() *rest_model.DetailAuthenticatorEnvelope {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDetailAuthenticatorUnauthorized() *DetailAuthenticatorUnauthorized {
 	return &DetailAuthenticatorUnauthorized{}
 }
 
-/* DetailAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -121,9 +161,46 @@ type DetailAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail authenticator unauthorized response has a 2xx status code
+func (o *DetailAuthenticatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator unauthorized response has a 3xx status code
+func (o *DetailAuthenticatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator unauthorized response has a 4xx status code
+func (o *DetailAuthenticatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail authenticator unauthorized response has a 5xx status code
+func (o *DetailAuthenticatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator unauthorized response a status code equal to that given
+func (o *DetailAuthenticatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail authenticator unauthorized response
+func (o *DetailAuthenticatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailAuthenticatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized %s", 401, payload)
+}
+
+func (o *DetailAuthenticatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized %s", 401, payload)
+}
+
 func (o *DetailAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDetailAuthenticatorNotFound() *DetailAuthenticatorNotFound {
 	return &DetailAuthenticatorNotFound{}
 }
 
-/* DetailAuthenticatorNotFound describes a response with status code 404, with default header values.
+/*
+DetailAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -153,9 +231,46 @@ type DetailAuthenticatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorNotFound) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail authenticator not found response has a 2xx status code
+func (o *DetailAuthenticatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator not found response has a 3xx status code
+func (o *DetailAuthenticatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator not found response has a 4xx status code
+func (o *DetailAuthenticatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail authenticator not found response has a 5xx status code
+func (o *DetailAuthenticatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator not found response a status code equal to that given
+func (o *DetailAuthenticatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail authenticator not found response
+func (o *DetailAuthenticatorNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailAuthenticatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound %s", 404, payload)
+}
+
+func (o *DetailAuthenticatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound %s", 404, payload)
+}
+
 func (o *DetailAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDetailAuthenticatorTooManyRequests() *DetailAuthenticatorTooManyRequests
 	return &DetailAuthenticatorTooManyRequests{}
 }
 
-/* DetailAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DetailAuthenticatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail authenticator too many requests response has a 2xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator too many requests response has a 3xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator too many requests response has a 4xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail authenticator too many requests response has a 5xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator too many requests response a status code equal to that given
+func (o *DetailAuthenticatorTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail authenticator too many requests response
+func (o *DetailAuthenticatorTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailAuthenticatorTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailAuthenticatorTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

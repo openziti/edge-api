@@ -53,13 +53,12 @@ func NewDetailMfaRecoveryCodes(ctx *middleware.Context, handler DetailMfaRecover
 	return &DetailMfaRecoveryCodes{Context: ctx, Handler: handler}
 }
 
-/* DetailMfaRecoveryCodes swagger:route GET /current-identity/mfa/recovery-codes Current Identity MFA detailMfaRecoveryCodes
+/*
+	DetailMfaRecoveryCodes swagger:route GET /current-identity/mfa/recovery-codes Current Identity MFA detailMfaRecoveryCodes
 
-For a completed MFA enrollment view the current recovery codes
+# For a completed MFA enrollment view the current recovery codes
 
 Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.
-
-
 */
 type DetailMfaRecoveryCodes struct {
 	Context *middleware.Context

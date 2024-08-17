@@ -40,7 +40,8 @@ import (
 // ListServiceRoleAttributesOKCode is the HTTP code returned for type ListServiceRoleAttributesOK
 const ListServiceRoleAttributesOKCode int = 200
 
-/*ListServiceRoleAttributesOK A list of role attributes
+/*
+ListServiceRoleAttributesOK A list of role attributes
 
 swagger:response listServiceRoleAttributesOK
 */
@@ -84,7 +85,8 @@ func (o *ListServiceRoleAttributesOK) WriteResponse(rw http.ResponseWriter, prod
 // ListServiceRoleAttributesBadRequestCode is the HTTP code returned for type ListServiceRoleAttributesBadRequest
 const ListServiceRoleAttributesBadRequestCode int = 400
 
-/*ListServiceRoleAttributesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListServiceRoleAttributesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServiceRoleAttributesBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListServiceRoleAttributesBadRequest) WriteResponse(rw http.ResponseWrit
 // ListServiceRoleAttributesUnauthorizedCode is the HTTP code returned for type ListServiceRoleAttributesUnauthorized
 const ListServiceRoleAttributesUnauthorizedCode int = 401
 
-/*ListServiceRoleAttributesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServiceRoleAttributesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServiceRoleAttributesUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListServiceRoleAttributesUnauthorized) WriteResponse(rw http.ResponseWr
 // ListServiceRoleAttributesTooManyRequestsCode is the HTTP code returned for type ListServiceRoleAttributesTooManyRequests
 const ListServiceRoleAttributesTooManyRequestsCode int = 429
 
-/*ListServiceRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServiceRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServiceRoleAttributesTooManyRequests
 */

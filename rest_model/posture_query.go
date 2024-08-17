@@ -320,6 +320,11 @@ func (m *PostureQuery) ContextValidate(ctx context.Context, formats strfmt.Regis
 func (m *PostureQuery) contextValidateProcess(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Process != nil {
+
+		if swag.IsZero(m.Process) { // not required
+			return nil
+		}
+
 		if err := m.Process.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("process")
@@ -338,6 +343,11 @@ func (m *PostureQuery) contextValidateProcesses(ctx context.Context, formats str
 	for i := 0; i < len(m.Processes); i++ {
 
 		if m.Processes[i] != nil {
+
+			if swag.IsZero(m.Processes[i]) { // not required
+				return nil
+			}
+
 			if err := m.Processes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))
@@ -356,6 +366,7 @@ func (m *PostureQuery) contextValidateProcesses(ctx context.Context, formats str
 func (m *PostureQuery) contextValidateQueryType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.QueryType != nil {
+
 		if err := m.QueryType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("queryType")

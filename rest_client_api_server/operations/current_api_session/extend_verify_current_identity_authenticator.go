@@ -53,13 +53,13 @@ func NewExtendVerifyCurrentIdentityAuthenticator(ctx *middleware.Context, handle
 	return &ExtendVerifyCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* ExtendVerifyCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend-verify Current API Session Enroll Extend Enrollment extendVerifyCurrentIdentityAuthenticator
+/*
+	ExtendVerifyCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend-verify Current API Session Enroll Extend Enrollment extendVerifyCurrentIdentityAuthenticator
 
-Allows the current identity to validate reciept of a new client certificate
+# Allows the current identity to validate reciept of a new client certificate
 
 After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.
 After receipt, the new client certificate must be used for new authentication requests.
-
 */
 type ExtendVerifyCurrentIdentityAuthenticator struct {
 	Context *middleware.Context

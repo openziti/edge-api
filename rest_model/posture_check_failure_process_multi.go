@@ -354,6 +354,11 @@ func (m *PostureCheckFailureProcessMulti) contextValidateActualValue(ctx context
 	for i := 0; i < len(m.ActualValue); i++ {
 
 		if m.ActualValue[i] != nil {
+
+			if swag.IsZero(m.ActualValue[i]) { // not required
+				return nil
+			}
+
 			if err := m.ActualValue[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("actualValue" + "." + strconv.Itoa(i))
@@ -374,6 +379,11 @@ func (m *PostureCheckFailureProcessMulti) contextValidateExpectedValue(ctx conte
 	for i := 0; i < len(m.ExpectedValue); i++ {
 
 		if m.ExpectedValue[i] != nil {
+
+			if swag.IsZero(m.ExpectedValue[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExpectedValue[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("expectedValue" + "." + strconv.Itoa(i))
@@ -392,6 +402,7 @@ func (m *PostureCheckFailureProcessMulti) contextValidateExpectedValue(ctx conte
 func (m *PostureCheckFailureProcessMulti) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
+
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("semantic")

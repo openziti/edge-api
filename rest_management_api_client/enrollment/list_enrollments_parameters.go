@@ -77,10 +77,12 @@ func NewListEnrollmentsParamsWithHTTPClient(client *http.Client) *ListEnrollment
 	}
 }
 
-/* ListEnrollmentsParams contains all the parameters to send to the API endpoint
-   for the list enrollments operation.
+/*
+ListEnrollmentsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list enrollments operation.
+
+	Typically these are written to a http.Request.
 */
 type ListEnrollmentsParams struct {
 

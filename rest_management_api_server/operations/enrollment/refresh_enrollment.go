@@ -53,12 +53,12 @@ func NewRefreshEnrollment(ctx *middleware.Context, handler RefreshEnrollmentHand
 	return &RefreshEnrollment{Context: ctx, Handler: handler}
 }
 
-/* RefreshEnrollment swagger:route POST /enrollments/{id}/refresh Enrollment refreshEnrollment
+/*
+	RefreshEnrollment swagger:route POST /enrollments/{id}/refresh Enrollment refreshEnrollment
 
-Refreshes an enrollment record's expiration window
+# Refreshes an enrollment record's expiration window
 
 For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated and must be used for the enrollment.
-
 */
 type RefreshEnrollment struct {
 	Context *middleware.Context

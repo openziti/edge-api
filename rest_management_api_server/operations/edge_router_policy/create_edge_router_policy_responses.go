@@ -40,7 +40,8 @@ import (
 // CreateEdgeRouterPolicyCreatedCode is the HTTP code returned for type CreateEdgeRouterPolicyCreated
 const CreateEdgeRouterPolicyCreatedCode int = 201
 
-/*CreateEdgeRouterPolicyCreated The create request was successful and the resource has been added at the following location
+/*
+CreateEdgeRouterPolicyCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createEdgeRouterPolicyCreated
 */
@@ -84,7 +85,8 @@ func (o *CreateEdgeRouterPolicyCreated) WriteResponse(rw http.ResponseWriter, pr
 // CreateEdgeRouterPolicyBadRequestCode is the HTTP code returned for type CreateEdgeRouterPolicyBadRequest
 const CreateEdgeRouterPolicyBadRequestCode int = 400
 
-/*CreateEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createEdgeRouterPolicyBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreateEdgeRouterPolicyBadRequest) WriteResponse(rw http.ResponseWriter,
 // CreateEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type CreateEdgeRouterPolicyUnauthorized
 const CreateEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*CreateEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createEdgeRouterPolicyUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreateEdgeRouterPolicyUnauthorized) WriteResponse(rw http.ResponseWrite
 // CreateEdgeRouterPolicyTooManyRequestsCode is the HTTP code returned for type CreateEdgeRouterPolicyTooManyRequests
 const CreateEdgeRouterPolicyTooManyRequestsCode int = 429
 
-/*CreateEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createEdgeRouterPolicyTooManyRequests
 */

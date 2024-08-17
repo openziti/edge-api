@@ -261,6 +261,7 @@ func (m *PostureData) contextValidateAPISessionPostureData(ctx context.Context, 
 func (m *PostureData) contextValidateDomain(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Domain != nil {
+
 		if err := m.Domain.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("domain")
@@ -277,6 +278,7 @@ func (m *PostureData) contextValidateDomain(ctx context.Context, formats strfmt.
 func (m *PostureData) contextValidateMac(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mac != nil {
+
 		if err := m.Mac.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mac")
@@ -293,6 +295,7 @@ func (m *PostureData) contextValidateMac(ctx context.Context, formats strfmt.Reg
 func (m *PostureData) contextValidateOs(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Os != nil {
+
 		if err := m.Os.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("os")
@@ -311,6 +314,11 @@ func (m *PostureData) contextValidateProcesses(ctx context.Context, formats strf
 	for i := 0; i < len(m.Processes); i++ {
 
 		if m.Processes[i] != nil {
+
+			if swag.IsZero(m.Processes[i]) { // not required
+				return nil
+			}
+
 			if err := m.Processes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))

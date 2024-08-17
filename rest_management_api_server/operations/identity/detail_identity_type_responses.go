@@ -40,7 +40,8 @@ import (
 // DetailIdentityTypeOKCode is the HTTP code returned for type DetailIdentityTypeOK
 const DetailIdentityTypeOKCode int = 200
 
-/*DetailIdentityTypeOK A single identity type
+/*
+DetailIdentityTypeOK A single identity type
 
 swagger:response detailIdentityTypeOK
 */
@@ -84,7 +85,8 @@ func (o *DetailIdentityTypeOK) WriteResponse(rw http.ResponseWriter, producer ru
 // DetailIdentityTypeUnauthorizedCode is the HTTP code returned for type DetailIdentityTypeUnauthorized
 const DetailIdentityTypeUnauthorizedCode int = 401
 
-/*DetailIdentityTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailIdentityTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailIdentityTypeUnauthorized
 */
@@ -128,7 +130,8 @@ func (o *DetailIdentityTypeUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // DetailIdentityTypeNotFoundCode is the HTTP code returned for type DetailIdentityTypeNotFound
 const DetailIdentityTypeNotFoundCode int = 404
 
-/*DetailIdentityTypeNotFound The requested resource does not exist
+/*
+DetailIdentityTypeNotFound The requested resource does not exist
 
 swagger:response detailIdentityTypeNotFound
 */
@@ -172,7 +175,8 @@ func (o *DetailIdentityTypeNotFound) WriteResponse(rw http.ResponseWriter, produ
 // DetailIdentityTypeTooManyRequestsCode is the HTTP code returned for type DetailIdentityTypeTooManyRequests
 const DetailIdentityTypeTooManyRequestsCode int = 429
 
-/*DetailIdentityTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailIdentityTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailIdentityTypeTooManyRequests
 */

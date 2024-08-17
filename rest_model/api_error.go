@@ -141,6 +141,11 @@ func (m *APIError) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *APIError) contextValidateArgs(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Args != nil {
+
+		if swag.IsZero(m.Args) { // not required
+			return nil
+		}
+
 		if err := m.Args.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("args")
@@ -157,6 +162,11 @@ func (m *APIError) contextValidateArgs(ctx context.Context, formats strfmt.Regis
 func (m *APIError) contextValidateCause(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cause != nil {
+
+		if swag.IsZero(m.Cause) { // not required
+			return nil
+		}
+
 		if err := m.Cause.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cause")

@@ -53,12 +53,12 @@ func NewCreateEnrollment(ctx *middleware.Context, handler CreateEnrollmentHandle
 	return &CreateEnrollment{Context: ctx, Handler: handler}
 }
 
-/* CreateEnrollment swagger:route POST /enrollments Enrollment createEnrollment
+/*
+	CreateEnrollment swagger:route POST /enrollments Enrollment createEnrollment
 
-Create an outstanding enrollment for an identity
+# Create an outstanding enrollment for an identity
 
 Creates a new OTT, OTTCA, or UPDB enrollment for a specific identity. If an enrollment of the same type is already outstanding the request will fail with a 409 conflict. If desired, an existing enrollment can be refreshed by `enrollments/:id/refresh` or deleted.
-
 */
 type CreateEnrollment struct {
 	Context *middleware.Context

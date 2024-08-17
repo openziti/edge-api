@@ -40,7 +40,8 @@ import (
 // CreateCaCreatedCode is the HTTP code returned for type CreateCaCreated
 const CreateCaCreatedCode int = 201
 
-/*CreateCaCreated The create request was successful and the resource has been added at the following location
+/*
+CreateCaCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createCaCreated
 */
@@ -84,7 +85,8 @@ func (o *CreateCaCreated) WriteResponse(rw http.ResponseWriter, producer runtime
 // CreateCaBadRequestCode is the HTTP code returned for type CreateCaBadRequest
 const CreateCaBadRequestCode int = 400
 
-/*CreateCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createCaBadRequest
 */
@@ -128,7 +130,8 @@ func (o *CreateCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // CreateCaUnauthorizedCode is the HTTP code returned for type CreateCaUnauthorized
 const CreateCaUnauthorizedCode int = 401
 
-/*CreateCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createCaUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *CreateCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // CreateCaTooManyRequestsCode is the HTTP code returned for type CreateCaTooManyRequests
 const CreateCaTooManyRequestsCode int = 429
 
-/*CreateCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createCaTooManyRequests
 */

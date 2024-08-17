@@ -40,7 +40,8 @@ import (
 // ListSpecsOKCode is the HTTP code returned for type ListSpecsOK
 const ListSpecsOKCode int = 200
 
-/*ListSpecsOK A list of specifications
+/*
+ListSpecsOK A list of specifications
 
 swagger:response listSpecsOK
 */

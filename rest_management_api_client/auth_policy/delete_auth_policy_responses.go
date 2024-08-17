@@ -30,6 +30,7 @@ package auth_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -72,7 +73,7 @@ func (o *DeleteAuthPolicyReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /auth-policies/{id}] deleteAuthPolicy", response, response.Code())
 	}
 }
 
@@ -81,7 +82,8 @@ func NewDeleteAuthPolicyOK() *DeleteAuthPolicyOK {
 	return &DeleteAuthPolicyOK{}
 }
 
-/* DeleteAuthPolicyOK describes a response with status code 200, with default header values.
+/*
+DeleteAuthPolicyOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -89,9 +91,46 @@ type DeleteAuthPolicyOK struct {
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteAuthPolicyOK) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete auth policy o k response has a 2xx status code
+func (o *DeleteAuthPolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete auth policy o k response has a 3xx status code
+func (o *DeleteAuthPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy o k response has a 4xx status code
+func (o *DeleteAuthPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete auth policy o k response has a 5xx status code
+func (o *DeleteAuthPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy o k response a status code equal to that given
+func (o *DeleteAuthPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete auth policy o k response
+func (o *DeleteAuthPolicyOK) Code() int {
+	return 200
+}
+
+func (o *DeleteAuthPolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyOK %s", 200, payload)
+}
+
+func (o *DeleteAuthPolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyOK %s", 200, payload)
+}
+
 func (o *DeleteAuthPolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -113,7 +152,8 @@ func NewDeleteAuthPolicyBadRequest() *DeleteAuthPolicyBadRequest {
 	return &DeleteAuthPolicyBadRequest{}
 }
 
-/* DeleteAuthPolicyBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteAuthPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -121,9 +161,46 @@ type DeleteAuthPolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete auth policy bad request response has a 2xx status code
+func (o *DeleteAuthPolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy bad request response has a 3xx status code
+func (o *DeleteAuthPolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy bad request response has a 4xx status code
+func (o *DeleteAuthPolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy bad request response has a 5xx status code
+func (o *DeleteAuthPolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy bad request response a status code equal to that given
+func (o *DeleteAuthPolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete auth policy bad request response
+func (o *DeleteAuthPolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteAuthPolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyBadRequest %s", 400, payload)
+}
+
+func (o *DeleteAuthPolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyBadRequest %s", 400, payload)
+}
+
 func (o *DeleteAuthPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -145,7 +222,8 @@ func NewDeleteAuthPolicyUnauthorized() *DeleteAuthPolicyUnauthorized {
 	return &DeleteAuthPolicyUnauthorized{}
 }
 
-/* DeleteAuthPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteAuthPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,9 +231,46 @@ type DeleteAuthPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete auth policy unauthorized response has a 2xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy unauthorized response has a 3xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy unauthorized response has a 4xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy unauthorized response has a 5xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy unauthorized response a status code equal to that given
+func (o *DeleteAuthPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete auth policy unauthorized response
+func (o *DeleteAuthPolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteAuthPolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteAuthPolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteAuthPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -177,7 +292,8 @@ func NewDeleteAuthPolicyTooManyRequests() *DeleteAuthPolicyTooManyRequests {
 	return &DeleteAuthPolicyTooManyRequests{}
 }
 
-/* DeleteAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -185,9 +301,46 @@ type DeleteAuthPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete auth policy too many requests response has a 2xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy too many requests response has a 3xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy too many requests response has a 4xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy too many requests response has a 5xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy too many requests response a status code equal to that given
+func (o *DeleteAuthPolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete auth policy too many requests response
+func (o *DeleteAuthPolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteAuthPolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteAuthPolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteAuthPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

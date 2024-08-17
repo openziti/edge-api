@@ -40,7 +40,8 @@ import (
 // ListServicePoliciesOKCode is the HTTP code returned for type ListServicePoliciesOK
 const ListServicePoliciesOKCode int = 200
 
-/*ListServicePoliciesOK A list of service policies
+/*
+ListServicePoliciesOK A list of service policies
 
 swagger:response listServicePoliciesOK
 */
@@ -84,7 +85,8 @@ func (o *ListServicePoliciesOK) WriteResponse(rw http.ResponseWriter, producer r
 // ListServicePoliciesBadRequestCode is the HTTP code returned for type ListServicePoliciesBadRequest
 const ListServicePoliciesBadRequestCode int = 400
 
-/*ListServicePoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListServicePoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServicePoliciesBadRequest
 */
@@ -128,7 +130,8 @@ func (o *ListServicePoliciesBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // ListServicePoliciesUnauthorizedCode is the HTTP code returned for type ListServicePoliciesUnauthorized
 const ListServicePoliciesUnauthorizedCode int = 401
 
-/*ListServicePoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServicePoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServicePoliciesUnauthorized
 */
@@ -172,7 +175,8 @@ func (o *ListServicePoliciesUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // ListServicePoliciesTooManyRequestsCode is the HTTP code returned for type ListServicePoliciesTooManyRequests
 const ListServicePoliciesTooManyRequestsCode int = 429
 
-/*ListServicePoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServicePoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServicePoliciesTooManyRequests
 */

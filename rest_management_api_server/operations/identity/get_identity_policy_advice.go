@@ -53,16 +53,15 @@ func NewGetIdentityPolicyAdvice(ctx *middleware.Context, handler GetIdentityPoli
 	return &GetIdentityPolicyAdvice{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityPolicyAdvice swagger:route GET /identities/{id}/policy-advice/{serviceId} Identity getIdentityPolicyAdvice
+/*
+	GetIdentityPolicyAdvice swagger:route GET /identities/{id}/policy-advice/{serviceId} Identity getIdentityPolicyAdvice
 
-Analyze policies relating the given identity and service
+# Analyze policies relating the given identity and service
 
 Analyzes policies to see if the given identity should be able to dial or bind the given service. |
 Will check services policies to see if the identity can access the service. Will check edge router policies |
 to check if the identity and service have access to common edge routers so that a connnection can be made. |
 Will also check if at least one edge router is on-line. Requires admin access.
-
-
 */
 type GetIdentityPolicyAdvice struct {
 	Context *middleware.Context

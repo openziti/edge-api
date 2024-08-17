@@ -53,12 +53,12 @@ func NewDetailServiceEdgeRouterPolicy(ctx *middleware.Context, handler DetailSer
 	return &DetailServiceEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* DetailServiceEdgeRouterPolicy swagger:route GET /service-edge-router-policies/{id} Service Edge Router Policy detailServiceEdgeRouterPolicy
+/*
+	DetailServiceEdgeRouterPolicy swagger:route GET /service-edge-router-policies/{id} Service Edge Router Policy detailServiceEdgeRouterPolicy
 
-Retrieves a single service edge policy
+# Retrieves a single service edge policy
 
 Retrieves a single service edge policy by id. Requires admin access.
-
 */
 type DetailServiceEdgeRouterPolicy struct {
 	Context *middleware.Context

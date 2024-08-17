@@ -53,12 +53,12 @@ func NewUpdateCa(ctx *middleware.Context, handler UpdateCaHandler) *UpdateCa {
 	return &UpdateCa{Context: ctx, Handler: handler}
 }
 
-/* UpdateCa swagger:route PUT /cas/{id} Certificate Authority updateCa
+/*
+	UpdateCa swagger:route PUT /cas/{id} Certificate Authority updateCa
 
-Update all fields on a CA
+# Update all fields on a CA
 
 Update all fields on a CA by id. Requires admin access.
-
 */
 type UpdateCa struct {
 	Context *middleware.Context
