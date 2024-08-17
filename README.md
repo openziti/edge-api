@@ -3,22 +3,22 @@
 This repository contains the Open API 2.0 specification for the OpenZiti Edge Client and Management REST APIs. It also
 contains a generated go module, in the `rest_*` directories that can be used to develop against OpenZiti Controllers.
 
-# Versioning
+## Versioning
 
-Versioning of the APIs in this repository are independent of the OpenZiti releases created in the 
-[`ziti`](https://github.com/openziti/zit) repository. Many versions of these API specifications are  compatible with 
+Versioning of the APIs in this repository is independent of the OpenZiti releases created in the
+[`ziti`](https://github.com/openziti/zit) repository. Many versions of these API specifications are compatible with
 multiple versions of the OpenZiti release versions. To make it somewhat intuitive, the minor version number of the API
-is the *minimum minor version of the `ziti`* repository releases that this API is compatible with. It will also be 
+is the *minimum minor version of the `ziti`* repository releases that this API is compatible with. It will also be
 compatible up until the next minor version of the specifications. Patch versions are used for internal fixes and release
 tags.
 
-For simplicity each controller hosts the specification version they expect and may be used instead of this repository
+For simplicity, each controller hosts the specification version they expect and may be used instead of this repository
 for live deployments.
 
-# Client & Server Generation
+## Client & Server Generation
 
-The root level `client.yml` and `management.yml` files are generated from the `source` directory. There are scripts
-within the `script` directory that will do the heavy lifting of re-generating them if needed.Both scripts require
+The root-level `client.yml` and `management.yml` files are generated from the `source` directory. There are scripts
+within the `script` directory that will do the heavy lifting of re-generating them if needed. Both scripts require
 that the `swagger` executable be available on your `path` environment variable. Releases of it are available in the
 [GitHub Go-Swagger](https://github.com/go-swagger/go-swagger/releases) repository. Avoid release 0.30 for now because
 it has a bug. 0.29 works.
@@ -33,13 +33,13 @@ it has a bug. 0.29 works.
 ./scripts/generate_rest.ps1
 ```
 
-# Using the generated go module
+## Using the generated go module
 
-Within the go module within the `go` directory is a submodule named `rest_util` with contains helper functions for using
+Within the go module within the `go` directory is a submodule named `rest_util` containing helper functions for using
 its sibling `*_client` submodules. This package is not generated. See `rest_util/examples` for full examples.
 
-
 Example:
+
 ```go
 func main() {
 	ctrlAddress := "https://localhost:1280"
