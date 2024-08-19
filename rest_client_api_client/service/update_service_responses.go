@@ -30,7 +30,6 @@ package service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *UpdateServiceReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /services/{id}] updateService", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type UpdateServiceOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this update service o k response has a 2xx status code
-func (o *UpdateServiceOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this update service o k response has a 3xx status code
-func (o *UpdateServiceOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update service o k response has a 4xx status code
-func (o *UpdateServiceOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this update service o k response has a 5xx status code
-func (o *UpdateServiceOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update service o k response a status code equal to that given
-func (o *UpdateServiceOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the update service o k response
-func (o *UpdateServiceOK) Code() int {
-	return 200
-}
-
 func (o *UpdateServiceOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateServiceOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceOK %s", 200, payload)
-}
-
 func (o *UpdateServiceOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type UpdateServiceBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update service bad request response has a 2xx status code
-func (o *UpdateServiceBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update service bad request response has a 3xx status code
-func (o *UpdateServiceBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update service bad request response has a 4xx status code
-func (o *UpdateServiceBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update service bad request response has a 5xx status code
-func (o *UpdateServiceBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update service bad request response a status code equal to that given
-func (o *UpdateServiceBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the update service bad request response
-func (o *UpdateServiceBadRequest) Code() int {
-	return 400
-}
-
 func (o *UpdateServiceBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *UpdateServiceBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceBadRequest %s", 400, payload)
-}
-
 func (o *UpdateServiceBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type UpdateServiceUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update service unauthorized response has a 2xx status code
-func (o *UpdateServiceUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update service unauthorized response has a 3xx status code
-func (o *UpdateServiceUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update service unauthorized response has a 4xx status code
-func (o *UpdateServiceUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update service unauthorized response has a 5xx status code
-func (o *UpdateServiceUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update service unauthorized response a status code equal to that given
-func (o *UpdateServiceUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update service unauthorized response
-func (o *UpdateServiceUnauthorized) Code() int {
-	return 401
-}
-
 func (o *UpdateServiceUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *UpdateServiceUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceUnauthorized %s", 401, payload)
-}
-
 func (o *UpdateServiceUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type UpdateServiceNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update service not found response has a 2xx status code
-func (o *UpdateServiceNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update service not found response has a 3xx status code
-func (o *UpdateServiceNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update service not found response has a 4xx status code
-func (o *UpdateServiceNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update service not found response has a 5xx status code
-func (o *UpdateServiceNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update service not found response a status code equal to that given
-func (o *UpdateServiceNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the update service not found response
-func (o *UpdateServiceNotFound) Code() int {
-	return 404
-}
-
 func (o *UpdateServiceNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceNotFound %s", 404, payload)
+	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceNotFound  %+v", 404, o.Payload)
 }
-
-func (o *UpdateServiceNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceNotFound %s", 404, payload)
-}
-
 func (o *UpdateServiceNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type UpdateServiceTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update service too many requests response has a 2xx status code
-func (o *UpdateServiceTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update service too many requests response has a 3xx status code
-func (o *UpdateServiceTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update service too many requests response has a 4xx status code
-func (o *UpdateServiceTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update service too many requests response has a 5xx status code
-func (o *UpdateServiceTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update service too many requests response a status code equal to that given
-func (o *UpdateServiceTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the update service too many requests response
-func (o *UpdateServiceTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *UpdateServiceTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *UpdateServiceTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /services/{id}][%d] updateServiceTooManyRequests %s", 429, payload)
-}
-
 func (o *UpdateServiceTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -294,10 +294,6 @@ func (m *ControllerDetail) ContextValidate(ctx context.Context, formats strfmt.R
 
 func (m *ControllerDetail) contextValidateAPIAddresses(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.APIAddresses) { // not required
-		return nil
-	}
-
 	if err := m.APIAddresses.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("apiAddresses")

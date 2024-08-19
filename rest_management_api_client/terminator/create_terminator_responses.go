@@ -30,7 +30,6 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /terminators] createTerminator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateTerminatorCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create terminator created response has a 2xx status code
-func (o *CreateTerminatorCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create terminator created response has a 3xx status code
-func (o *CreateTerminatorCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create terminator created response has a 4xx status code
-func (o *CreateTerminatorCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create terminator created response has a 5xx status code
-func (o *CreateTerminatorCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create terminator created response a status code equal to that given
-func (o *CreateTerminatorCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create terminator created response
-func (o *CreateTerminatorCreated) Code() int {
-	return 201
-}
-
 func (o *CreateTerminatorCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /terminators][%d] createTerminatorCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateTerminatorCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorCreated %s", 201, payload)
-}
-
 func (o *CreateTerminatorCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateTerminatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create terminator bad request response has a 2xx status code
-func (o *CreateTerminatorBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create terminator bad request response has a 3xx status code
-func (o *CreateTerminatorBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create terminator bad request response has a 4xx status code
-func (o *CreateTerminatorBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create terminator bad request response has a 5xx status code
-func (o *CreateTerminatorBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create terminator bad request response a status code equal to that given
-func (o *CreateTerminatorBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create terminator bad request response
-func (o *CreateTerminatorBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateTerminatorBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /terminators][%d] createTerminatorBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateTerminatorBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorBadRequest %s", 400, payload)
-}
-
 func (o *CreateTerminatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateTerminatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create terminator unauthorized response has a 2xx status code
-func (o *CreateTerminatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create terminator unauthorized response has a 3xx status code
-func (o *CreateTerminatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create terminator unauthorized response has a 4xx status code
-func (o *CreateTerminatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create terminator unauthorized response has a 5xx status code
-func (o *CreateTerminatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create terminator unauthorized response a status code equal to that given
-func (o *CreateTerminatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create terminator unauthorized response
-func (o *CreateTerminatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateTerminatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /terminators][%d] createTerminatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateTerminatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorUnauthorized %s", 401, payload)
-}
-
 func (o *CreateTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateTerminatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create terminator too many requests response has a 2xx status code
-func (o *CreateTerminatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create terminator too many requests response has a 3xx status code
-func (o *CreateTerminatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create terminator too many requests response has a 4xx status code
-func (o *CreateTerminatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create terminator too many requests response has a 5xx status code
-func (o *CreateTerminatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create terminator too many requests response a status code equal to that given
-func (o *CreateTerminatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create terminator too many requests response
-func (o *CreateTerminatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateTerminatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /terminators][%d] createTerminatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateTerminatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /terminators][%d] createTerminatorTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

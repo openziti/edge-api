@@ -2658,6 +2658,6 @@ func (o *ZitiEdgeManagementAPI) AddMiddlewareFor(method, path string, builder mi
 	}
 	o.Init()
 	if h, ok := o.handlers[um][path]; ok {
-		o.handlers[um][path] = builder(h)
+		o.handlers[method][path] = builder(h)
 	}
 }

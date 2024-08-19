@@ -30,7 +30,6 @@ package role_attributes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListEdgeRouterRoleAttributesReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /edge-router-role-attributes] listEdgeRouterRoleAttributes", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListEdgeRouterRoleAttributesOK struct {
 	Payload *rest_model.ListRoleAttributesEnvelope
 }
 
-// IsSuccess returns true when this list edge router role attributes o k response has a 2xx status code
-func (o *ListEdgeRouterRoleAttributesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list edge router role attributes o k response has a 3xx status code
-func (o *ListEdgeRouterRoleAttributesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router role attributes o k response has a 4xx status code
-func (o *ListEdgeRouterRoleAttributesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list edge router role attributes o k response has a 5xx status code
-func (o *ListEdgeRouterRoleAttributesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router role attributes o k response a status code equal to that given
-func (o *ListEdgeRouterRoleAttributesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list edge router role attributes o k response
-func (o *ListEdgeRouterRoleAttributesOK) Code() int {
-	return 200
-}
-
 func (o *ListEdgeRouterRoleAttributesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesOK  %+v", 200, o.Payload)
 }
-
-func (o *ListEdgeRouterRoleAttributesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesOK %s", 200, payload)
-}
-
 func (o *ListEdgeRouterRoleAttributesOK) GetPayload() *rest_model.ListRoleAttributesEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListEdgeRouterRoleAttributesBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list edge router role attributes bad request response has a 2xx status code
-func (o *ListEdgeRouterRoleAttributesBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list edge router role attributes bad request response has a 3xx status code
-func (o *ListEdgeRouterRoleAttributesBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router role attributes bad request response has a 4xx status code
-func (o *ListEdgeRouterRoleAttributesBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list edge router role attributes bad request response has a 5xx status code
-func (o *ListEdgeRouterRoleAttributesBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router role attributes bad request response a status code equal to that given
-func (o *ListEdgeRouterRoleAttributesBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list edge router role attributes bad request response
-func (o *ListEdgeRouterRoleAttributesBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListEdgeRouterRoleAttributesBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListEdgeRouterRoleAttributesBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesBadRequest %s", 400, payload)
-}
-
 func (o *ListEdgeRouterRoleAttributesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListEdgeRouterRoleAttributesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list edge router role attributes unauthorized response has a 2xx status code
-func (o *ListEdgeRouterRoleAttributesUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list edge router role attributes unauthorized response has a 3xx status code
-func (o *ListEdgeRouterRoleAttributesUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router role attributes unauthorized response has a 4xx status code
-func (o *ListEdgeRouterRoleAttributesUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list edge router role attributes unauthorized response has a 5xx status code
-func (o *ListEdgeRouterRoleAttributesUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router role attributes unauthorized response a status code equal to that given
-func (o *ListEdgeRouterRoleAttributesUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list edge router role attributes unauthorized response
-func (o *ListEdgeRouterRoleAttributesUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListEdgeRouterRoleAttributesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListEdgeRouterRoleAttributesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesUnauthorized %s", 401, payload)
-}
-
 func (o *ListEdgeRouterRoleAttributesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListEdgeRouterRoleAttributesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list edge router role attributes too many requests response has a 2xx status code
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list edge router role attributes too many requests response has a 3xx status code
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router role attributes too many requests response has a 4xx status code
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list edge router role attributes too many requests response has a 5xx status code
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router role attributes too many requests response a status code equal to that given
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list edge router role attributes too many requests response
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListEdgeRouterRoleAttributesTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListEdgeRouterRoleAttributesTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesTooManyRequests %s", 429, payload)
-}
-
 func (o *ListEdgeRouterRoleAttributesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

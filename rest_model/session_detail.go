@@ -387,7 +387,6 @@ func (m *SessionDetail) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *SessionDetail) contextValidateAPISession(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.APISession != nil {
-
 		if err := m.APISession.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("apiSession")
@@ -406,11 +405,6 @@ func (m *SessionDetail) contextValidateEdgeRouters(ctx context.Context, formats 
 	for i := 0; i < len(m.EdgeRouters); i++ {
 
 		if m.EdgeRouters[i] != nil {
-
-			if swag.IsZero(m.EdgeRouters[i]) { // not required
-				return nil
-			}
-
 			if err := m.EdgeRouters[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("edgeRouters" + "." + strconv.Itoa(i))
@@ -429,7 +423,6 @@ func (m *SessionDetail) contextValidateEdgeRouters(ctx context.Context, formats 
 func (m *SessionDetail) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
-
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("service")
@@ -446,7 +439,6 @@ func (m *SessionDetail) contextValidateService(ctx context.Context, formats strf
 func (m *SessionDetail) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
-
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")

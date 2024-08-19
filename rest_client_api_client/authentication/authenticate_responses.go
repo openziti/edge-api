@@ -30,7 +30,6 @@ package authentication
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *AuthenticateReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /authenticate] authenticate", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type AuthenticateOK struct {
 	Payload *rest_model.CurrentAPISessionDetailEnvelope
 }
 
-// IsSuccess returns true when this authenticate o k response has a 2xx status code
-func (o *AuthenticateOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this authenticate o k response has a 3xx status code
-func (o *AuthenticateOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate o k response has a 4xx status code
-func (o *AuthenticateOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this authenticate o k response has a 5xx status code
-func (o *AuthenticateOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate o k response a status code equal to that given
-func (o *AuthenticateOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the authenticate o k response
-func (o *AuthenticateOK) Code() int {
-	return 200
-}
-
 func (o *AuthenticateOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateOK %s", 200, payload)
+	return fmt.Sprintf("[POST /authenticate][%d] authenticateOK  %+v", 200, o.Payload)
 }
-
-func (o *AuthenticateOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateOK %s", 200, payload)
-}
-
 func (o *AuthenticateOK) GetPayload() *rest_model.CurrentAPISessionDetailEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type AuthenticateBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this authenticate bad request response has a 2xx status code
-func (o *AuthenticateBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this authenticate bad request response has a 3xx status code
-func (o *AuthenticateBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate bad request response has a 4xx status code
-func (o *AuthenticateBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this authenticate bad request response has a 5xx status code
-func (o *AuthenticateBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate bad request response a status code equal to that given
-func (o *AuthenticateBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the authenticate bad request response
-func (o *AuthenticateBadRequest) Code() int {
-	return 400
-}
-
 func (o *AuthenticateBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /authenticate][%d] authenticateBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *AuthenticateBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateBadRequest %s", 400, payload)
-}
-
 func (o *AuthenticateBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type AuthenticateUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this authenticate unauthorized response has a 2xx status code
-func (o *AuthenticateUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this authenticate unauthorized response has a 3xx status code
-func (o *AuthenticateUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate unauthorized response has a 4xx status code
-func (o *AuthenticateUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this authenticate unauthorized response has a 5xx status code
-func (o *AuthenticateUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate unauthorized response a status code equal to that given
-func (o *AuthenticateUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the authenticate unauthorized response
-func (o *AuthenticateUnauthorized) Code() int {
-	return 401
-}
-
 func (o *AuthenticateUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /authenticate][%d] authenticateUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *AuthenticateUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateUnauthorized %s", 401, payload)
-}
-
 func (o *AuthenticateUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type AuthenticateTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this authenticate too many requests response has a 2xx status code
-func (o *AuthenticateTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this authenticate too many requests response has a 3xx status code
-func (o *AuthenticateTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate too many requests response has a 4xx status code
-func (o *AuthenticateTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this authenticate too many requests response has a 5xx status code
-func (o *AuthenticateTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate too many requests response a status code equal to that given
-func (o *AuthenticateTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the authenticate too many requests response
-func (o *AuthenticateTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *AuthenticateTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /authenticate][%d] authenticateTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *AuthenticateTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate][%d] authenticateTooManyRequests %s", 429, payload)
-}
-
 func (o *AuthenticateTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

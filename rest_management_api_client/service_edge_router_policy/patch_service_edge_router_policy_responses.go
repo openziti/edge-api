@@ -30,7 +30,6 @@ package service_edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *PatchServiceEdgeRouterPolicyReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PATCH /service-edge-router-policies/{id}] patchServiceEdgeRouterPolicy", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type PatchServiceEdgeRouterPolicyOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this patch service edge router policy o k response has a 2xx status code
-func (o *PatchServiceEdgeRouterPolicyOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this patch service edge router policy o k response has a 3xx status code
-func (o *PatchServiceEdgeRouterPolicyOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service edge router policy o k response has a 4xx status code
-func (o *PatchServiceEdgeRouterPolicyOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this patch service edge router policy o k response has a 5xx status code
-func (o *PatchServiceEdgeRouterPolicyOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service edge router policy o k response a status code equal to that given
-func (o *PatchServiceEdgeRouterPolicyOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the patch service edge router policy o k response
-func (o *PatchServiceEdgeRouterPolicyOK) Code() int {
-	return 200
-}
-
 func (o *PatchServiceEdgeRouterPolicyOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyOK  %+v", 200, o.Payload)
 }
-
-func (o *PatchServiceEdgeRouterPolicyOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyOK %s", 200, payload)
-}
-
 func (o *PatchServiceEdgeRouterPolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type PatchServiceEdgeRouterPolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service edge router policy bad request response has a 2xx status code
-func (o *PatchServiceEdgeRouterPolicyBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service edge router policy bad request response has a 3xx status code
-func (o *PatchServiceEdgeRouterPolicyBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service edge router policy bad request response has a 4xx status code
-func (o *PatchServiceEdgeRouterPolicyBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service edge router policy bad request response has a 5xx status code
-func (o *PatchServiceEdgeRouterPolicyBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service edge router policy bad request response a status code equal to that given
-func (o *PatchServiceEdgeRouterPolicyBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the patch service edge router policy bad request response
-func (o *PatchServiceEdgeRouterPolicyBadRequest) Code() int {
-	return 400
-}
-
 func (o *PatchServiceEdgeRouterPolicyBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *PatchServiceEdgeRouterPolicyBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyBadRequest %s", 400, payload)
-}
-
 func (o *PatchServiceEdgeRouterPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type PatchServiceEdgeRouterPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service edge router policy unauthorized response has a 2xx status code
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service edge router policy unauthorized response has a 3xx status code
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service edge router policy unauthorized response has a 4xx status code
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service edge router policy unauthorized response has a 5xx status code
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service edge router policy unauthorized response a status code equal to that given
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the patch service edge router policy unauthorized response
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) Code() int {
-	return 401
-}
-
 func (o *PatchServiceEdgeRouterPolicyUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *PatchServiceEdgeRouterPolicyUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
-}
-
 func (o *PatchServiceEdgeRouterPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type PatchServiceEdgeRouterPolicyNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service edge router policy not found response has a 2xx status code
-func (o *PatchServiceEdgeRouterPolicyNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service edge router policy not found response has a 3xx status code
-func (o *PatchServiceEdgeRouterPolicyNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service edge router policy not found response has a 4xx status code
-func (o *PatchServiceEdgeRouterPolicyNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service edge router policy not found response has a 5xx status code
-func (o *PatchServiceEdgeRouterPolicyNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service edge router policy not found response a status code equal to that given
-func (o *PatchServiceEdgeRouterPolicyNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the patch service edge router policy not found response
-func (o *PatchServiceEdgeRouterPolicyNotFound) Code() int {
-	return 404
-}
-
 func (o *PatchServiceEdgeRouterPolicyNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyNotFound  %+v", 404, o.Payload)
 }
-
-func (o *PatchServiceEdgeRouterPolicyNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyNotFound %s", 404, payload)
-}
-
 func (o *PatchServiceEdgeRouterPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type PatchServiceEdgeRouterPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service edge router policy too many requests response has a 2xx status code
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service edge router policy too many requests response has a 3xx status code
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service edge router policy too many requests response has a 4xx status code
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service edge router policy too many requests response has a 5xx status code
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service edge router policy too many requests response a status code equal to that given
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the patch service edge router policy too many requests response
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *PatchServiceEdgeRouterPolicyTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *PatchServiceEdgeRouterPolicyTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /service-edge-router-policies/{id}][%d] patchServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
-}
-
 func (o *PatchServiceEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

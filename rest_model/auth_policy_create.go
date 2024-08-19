@@ -178,7 +178,6 @@ func (m *AuthPolicyCreate) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *AuthPolicyCreate) contextValidatePrimary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Primary != nil {
-
 		if err := m.Primary.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("primary")
@@ -195,7 +194,6 @@ func (m *AuthPolicyCreate) contextValidatePrimary(ctx context.Context, formats s
 func (m *AuthPolicyCreate) contextValidateSecondary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secondary != nil {
-
 		if err := m.Secondary.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secondary")
@@ -212,11 +210,6 @@ func (m *AuthPolicyCreate) contextValidateSecondary(ctx context.Context, formats
 func (m *AuthPolicyCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
-
-		if swag.IsZero(m.Tags) { // not required
-			return nil
-		}
-
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

@@ -220,7 +220,6 @@ func (m *AuthPolicyDetail) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *AuthPolicyDetail) contextValidatePrimary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Primary != nil {
-
 		if err := m.Primary.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("primary")
@@ -237,7 +236,6 @@ func (m *AuthPolicyDetail) contextValidatePrimary(ctx context.Context, formats s
 func (m *AuthPolicyDetail) contextValidateSecondary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secondary != nil {
-
 		if err := m.Secondary.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secondary")

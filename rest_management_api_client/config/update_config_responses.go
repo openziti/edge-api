@@ -30,7 +30,6 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *UpdateConfigReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /configs/{id}] updateConfig", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type UpdateConfigOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this update config o k response has a 2xx status code
-func (o *UpdateConfigOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this update config o k response has a 3xx status code
-func (o *UpdateConfigOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config o k response has a 4xx status code
-func (o *UpdateConfigOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this update config o k response has a 5xx status code
-func (o *UpdateConfigOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config o k response a status code equal to that given
-func (o *UpdateConfigOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the update config o k response
-func (o *UpdateConfigOK) Code() int {
-	return 200
-}
-
 func (o *UpdateConfigOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateConfigOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigOK %s", 200, payload)
-}
-
 func (o *UpdateConfigOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type UpdateConfigBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config bad request response has a 2xx status code
-func (o *UpdateConfigBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config bad request response has a 3xx status code
-func (o *UpdateConfigBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config bad request response has a 4xx status code
-func (o *UpdateConfigBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config bad request response has a 5xx status code
-func (o *UpdateConfigBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config bad request response a status code equal to that given
-func (o *UpdateConfigBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the update config bad request response
-func (o *UpdateConfigBadRequest) Code() int {
-	return 400
-}
-
 func (o *UpdateConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *UpdateConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigBadRequest %s", 400, payload)
-}
-
 func (o *UpdateConfigBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type UpdateConfigUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config unauthorized response has a 2xx status code
-func (o *UpdateConfigUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config unauthorized response has a 3xx status code
-func (o *UpdateConfigUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config unauthorized response has a 4xx status code
-func (o *UpdateConfigUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config unauthorized response has a 5xx status code
-func (o *UpdateConfigUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config unauthorized response a status code equal to that given
-func (o *UpdateConfigUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update config unauthorized response
-func (o *UpdateConfigUnauthorized) Code() int {
-	return 401
-}
-
 func (o *UpdateConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *UpdateConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigUnauthorized %s", 401, payload)
-}
-
 func (o *UpdateConfigUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type UpdateConfigNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config not found response has a 2xx status code
-func (o *UpdateConfigNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config not found response has a 3xx status code
-func (o *UpdateConfigNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config not found response has a 4xx status code
-func (o *UpdateConfigNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config not found response has a 5xx status code
-func (o *UpdateConfigNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config not found response a status code equal to that given
-func (o *UpdateConfigNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the update config not found response
-func (o *UpdateConfigNotFound) Code() int {
-	return 404
-}
-
 func (o *UpdateConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigNotFound  %+v", 404, o.Payload)
 }
-
-func (o *UpdateConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigNotFound %s", 404, payload)
-}
-
 func (o *UpdateConfigNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type UpdateConfigTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config too many requests response has a 2xx status code
-func (o *UpdateConfigTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config too many requests response has a 3xx status code
-func (o *UpdateConfigTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config too many requests response has a 4xx status code
-func (o *UpdateConfigTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config too many requests response has a 5xx status code
-func (o *UpdateConfigTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config too many requests response a status code equal to that given
-func (o *UpdateConfigTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the update config too many requests response
-func (o *UpdateConfigTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *UpdateConfigTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *UpdateConfigTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /configs/{id}][%d] updateConfigTooManyRequests %s", 429, payload)
-}
-
 func (o *UpdateConfigTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

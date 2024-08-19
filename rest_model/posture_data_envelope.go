@@ -131,7 +131,6 @@ func (m *PostureDataEnvelope) ContextValidate(ctx context.Context, formats strfm
 func (m *PostureDataEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
-
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")
@@ -148,7 +147,6 @@ func (m *PostureDataEnvelope) contextValidateData(ctx context.Context, formats s
 func (m *PostureDataEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
-
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

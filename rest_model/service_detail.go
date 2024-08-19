@@ -254,7 +254,7 @@ func (m *ServiceDetail) validateConfig(formats strfmt.Registry) error {
 			return err
 		}
 
-		if err := validate.Required("config"+"."+k, "body", m.Config[k]); err != nil {
+		if err := validate.Required("config"+"."+k, "body", m.Config); err != nil {
 			return err
 		}
 
@@ -427,11 +427,6 @@ func (m *ServiceDetail) contextValidatePostureQueries(ctx context.Context, forma
 	for i := 0; i < len(m.PostureQueries); i++ {
 
 		if m.PostureQueries[i] != nil {
-
-			if swag.IsZero(m.PostureQueries[i]) { // not required
-				return nil
-			}
-
 			if err := m.PostureQueries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("postureQueries" + "." + strconv.Itoa(i))

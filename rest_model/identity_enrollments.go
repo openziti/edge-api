@@ -157,11 +157,6 @@ func (m *IdentityEnrollments) ContextValidate(ctx context.Context, formats strfm
 func (m *IdentityEnrollments) contextValidateOtt(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ott != nil {
-
-		if swag.IsZero(m.Ott) { // not required
-			return nil
-		}
-
 		if err := m.Ott.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ott")
@@ -178,11 +173,6 @@ func (m *IdentityEnrollments) contextValidateOtt(ctx context.Context, formats st
 func (m *IdentityEnrollments) contextValidateOttca(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ottca != nil {
-
-		if swag.IsZero(m.Ottca) { // not required
-			return nil
-		}
-
 		if err := m.Ottca.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ottca")
@@ -199,11 +189,6 @@ func (m *IdentityEnrollments) contextValidateOttca(ctx context.Context, formats 
 func (m *IdentityEnrollments) contextValidateUpdb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Updb != nil {
-
-		if swag.IsZero(m.Updb) { // not required
-			return nil
-		}
-
 		if err := m.Updb.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updb")
@@ -394,11 +379,6 @@ func (m *IdentityEnrollmentsOttca) ContextValidate(ctx context.Context, formats 
 func (m *IdentityEnrollmentsOttca) contextValidateCa(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ca != nil {
-
-		if swag.IsZero(m.Ca) { // not required
-			return nil
-		}
-
 		if err := m.Ca.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ottca" + "." + "ca")

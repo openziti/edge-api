@@ -30,7 +30,6 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *DataIntegrityResultsReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /database/data-integrity-results] dataIntegrityResults", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type DataIntegrityResultsOK struct {
 	Payload *rest_model.DataIntegrityCheckResultEnvelope
 }
 
-// IsSuccess returns true when this data integrity results o k response has a 2xx status code
-func (o *DataIntegrityResultsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this data integrity results o k response has a 3xx status code
-func (o *DataIntegrityResultsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this data integrity results o k response has a 4xx status code
-func (o *DataIntegrityResultsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this data integrity results o k response has a 5xx status code
-func (o *DataIntegrityResultsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this data integrity results o k response a status code equal to that given
-func (o *DataIntegrityResultsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the data integrity results o k response
-func (o *DataIntegrityResultsOK) Code() int {
-	return 200
-}
-
 func (o *DataIntegrityResultsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsOK  %+v", 200, o.Payload)
 }
-
-func (o *DataIntegrityResultsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsOK %s", 200, payload)
-}
-
 func (o *DataIntegrityResultsOK) GetPayload() *rest_model.DataIntegrityCheckResultEnvelope {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type DataIntegrityResultsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this data integrity results unauthorized response has a 2xx status code
-func (o *DataIntegrityResultsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this data integrity results unauthorized response has a 3xx status code
-func (o *DataIntegrityResultsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this data integrity results unauthorized response has a 4xx status code
-func (o *DataIntegrityResultsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this data integrity results unauthorized response has a 5xx status code
-func (o *DataIntegrityResultsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this data integrity results unauthorized response a status code equal to that given
-func (o *DataIntegrityResultsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the data integrity results unauthorized response
-func (o *DataIntegrityResultsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DataIntegrityResultsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DataIntegrityResultsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsUnauthorized %s", 401, payload)
-}
-
 func (o *DataIntegrityResultsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type DataIntegrityResultsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this data integrity results too many requests response has a 2xx status code
-func (o *DataIntegrityResultsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this data integrity results too many requests response has a 3xx status code
-func (o *DataIntegrityResultsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this data integrity results too many requests response has a 4xx status code
-func (o *DataIntegrityResultsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this data integrity results too many requests response has a 5xx status code
-func (o *DataIntegrityResultsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this data integrity results too many requests response a status code equal to that given
-func (o *DataIntegrityResultsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the data integrity results too many requests response
-func (o *DataIntegrityResultsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DataIntegrityResultsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DataIntegrityResultsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsTooManyRequests %s", 429, payload)
-}
-
 func (o *DataIntegrityResultsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -163,7 +163,6 @@ func (m *AuthPolicyPrimary) ContextValidate(ctx context.Context, formats strfmt.
 func (m *AuthPolicyPrimary) contextValidateCert(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cert != nil {
-
 		if err := m.Cert.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cert")
@@ -180,7 +179,6 @@ func (m *AuthPolicyPrimary) contextValidateCert(ctx context.Context, formats str
 func (m *AuthPolicyPrimary) contextValidateExtJWT(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExtJWT != nil {
-
 		if err := m.ExtJWT.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("extJwt")
@@ -197,7 +195,6 @@ func (m *AuthPolicyPrimary) contextValidateExtJWT(ctx context.Context, formats s
 func (m *AuthPolicyPrimary) contextValidateUpdb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Updb != nil {
-
 		if err := m.Updb.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updb")

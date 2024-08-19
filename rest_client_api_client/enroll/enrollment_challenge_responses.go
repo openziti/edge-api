@@ -30,7 +30,6 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *EnrollmentChallengeReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /enroll/challenge] enrollmentChallenge", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type EnrollmentChallengeOK struct {
 	Payload *rest_model.NonceSignature
 }
 
-// IsSuccess returns true when this enrollment challenge o k response has a 2xx status code
-func (o *EnrollmentChallengeOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this enrollment challenge o k response has a 3xx status code
-func (o *EnrollmentChallengeOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this enrollment challenge o k response has a 4xx status code
-func (o *EnrollmentChallengeOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this enrollment challenge o k response has a 5xx status code
-func (o *EnrollmentChallengeOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this enrollment challenge o k response a status code equal to that given
-func (o *EnrollmentChallengeOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the enrollment challenge o k response
-func (o *EnrollmentChallengeOK) Code() int {
-	return 200
-}
-
 func (o *EnrollmentChallengeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeOK %s", 200, payload)
+	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeOK  %+v", 200, o.Payload)
 }
-
-func (o *EnrollmentChallengeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeOK %s", 200, payload)
-}
-
 func (o *EnrollmentChallengeOK) GetPayload() *rest_model.NonceSignature {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type EnrollmentChallengeBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this enrollment challenge bad request response has a 2xx status code
-func (o *EnrollmentChallengeBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this enrollment challenge bad request response has a 3xx status code
-func (o *EnrollmentChallengeBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this enrollment challenge bad request response has a 4xx status code
-func (o *EnrollmentChallengeBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this enrollment challenge bad request response has a 5xx status code
-func (o *EnrollmentChallengeBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this enrollment challenge bad request response a status code equal to that given
-func (o *EnrollmentChallengeBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the enrollment challenge bad request response
-func (o *EnrollmentChallengeBadRequest) Code() int {
-	return 400
-}
-
 func (o *EnrollmentChallengeBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *EnrollmentChallengeBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeBadRequest %s", 400, payload)
-}
-
 func (o *EnrollmentChallengeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type EnrollmentChallengeTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this enrollment challenge too many requests response has a 2xx status code
-func (o *EnrollmentChallengeTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this enrollment challenge too many requests response has a 3xx status code
-func (o *EnrollmentChallengeTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this enrollment challenge too many requests response has a 4xx status code
-func (o *EnrollmentChallengeTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this enrollment challenge too many requests response has a 5xx status code
-func (o *EnrollmentChallengeTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this enrollment challenge too many requests response a status code equal to that given
-func (o *EnrollmentChallengeTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the enrollment challenge too many requests response
-func (o *EnrollmentChallengeTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *EnrollmentChallengeTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *EnrollmentChallengeTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/challenge][%d] enrollmentChallengeTooManyRequests %s", 429, payload)
-}
-
 func (o *EnrollmentChallengeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

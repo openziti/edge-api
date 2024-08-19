@@ -30,7 +30,6 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -61,7 +60,7 @@ func (o *EnrollOttCaReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /enroll/ottca] enrollOttCa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -79,46 +78,9 @@ type EnrollOttCaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this enroll ott ca o k response has a 2xx status code
-func (o *EnrollOttCaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this enroll ott ca o k response has a 3xx status code
-func (o *EnrollOttCaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this enroll ott ca o k response has a 4xx status code
-func (o *EnrollOttCaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this enroll ott ca o k response has a 5xx status code
-func (o *EnrollOttCaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this enroll ott ca o k response a status code equal to that given
-func (o *EnrollOttCaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the enroll ott ca o k response
-func (o *EnrollOttCaOK) Code() int {
-	return 200
-}
-
 func (o *EnrollOttCaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaOK %s", 200, payload)
+	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaOK  %+v", 200, o.Payload)
 }
-
-func (o *EnrollOttCaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaOK %s", 200, payload)
-}
-
 func (o *EnrollOttCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -149,46 +111,9 @@ type EnrollOttCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this enroll ott ca too many requests response has a 2xx status code
-func (o *EnrollOttCaTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this enroll ott ca too many requests response has a 3xx status code
-func (o *EnrollOttCaTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this enroll ott ca too many requests response has a 4xx status code
-func (o *EnrollOttCaTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this enroll ott ca too many requests response has a 5xx status code
-func (o *EnrollOttCaTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this enroll ott ca too many requests response a status code equal to that given
-func (o *EnrollOttCaTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the enroll ott ca too many requests response
-func (o *EnrollOttCaTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *EnrollOttCaTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *EnrollOttCaTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaTooManyRequests %s", 429, payload)
-}
-
 func (o *EnrollOttCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

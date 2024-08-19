@@ -333,7 +333,6 @@ func (m *PostureCheckFailureMfa) ContextValidate(ctx context.Context, formats st
 func (m *PostureCheckFailureMfa) contextValidateActualValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ActualValue != nil {
-
 		if err := m.ActualValue.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("actualValue")
@@ -350,7 +349,6 @@ func (m *PostureCheckFailureMfa) contextValidateActualValue(ctx context.Context,
 func (m *PostureCheckFailureMfa) contextValidateCriteria(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Criteria != nil {
-
 		if err := m.Criteria.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("criteria")
@@ -367,7 +365,6 @@ func (m *PostureCheckFailureMfa) contextValidateCriteria(ctx context.Context, fo
 func (m *PostureCheckFailureMfa) contextValidateExpectedValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExpectedValue != nil {
-
 		if err := m.ExpectedValue.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("expectedValue")

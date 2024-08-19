@@ -30,7 +30,6 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /authenticators] createAuthenticator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateAuthenticatorCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create authenticator created response has a 2xx status code
-func (o *CreateAuthenticatorCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create authenticator created response has a 3xx status code
-func (o *CreateAuthenticatorCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create authenticator created response has a 4xx status code
-func (o *CreateAuthenticatorCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create authenticator created response has a 5xx status code
-func (o *CreateAuthenticatorCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create authenticator created response a status code equal to that given
-func (o *CreateAuthenticatorCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create authenticator created response
-func (o *CreateAuthenticatorCreated) Code() int {
-	return 201
-}
-
 func (o *CreateAuthenticatorCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateAuthenticatorCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorCreated %s", 201, payload)
-}
-
 func (o *CreateAuthenticatorCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateAuthenticatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create authenticator bad request response has a 2xx status code
-func (o *CreateAuthenticatorBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create authenticator bad request response has a 3xx status code
-func (o *CreateAuthenticatorBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create authenticator bad request response has a 4xx status code
-func (o *CreateAuthenticatorBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create authenticator bad request response has a 5xx status code
-func (o *CreateAuthenticatorBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create authenticator bad request response a status code equal to that given
-func (o *CreateAuthenticatorBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create authenticator bad request response
-func (o *CreateAuthenticatorBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateAuthenticatorBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateAuthenticatorBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorBadRequest %s", 400, payload)
-}
-
 func (o *CreateAuthenticatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create authenticator unauthorized response has a 2xx status code
-func (o *CreateAuthenticatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create authenticator unauthorized response has a 3xx status code
-func (o *CreateAuthenticatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create authenticator unauthorized response has a 4xx status code
-func (o *CreateAuthenticatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create authenticator unauthorized response has a 5xx status code
-func (o *CreateAuthenticatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create authenticator unauthorized response a status code equal to that given
-func (o *CreateAuthenticatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create authenticator unauthorized response
-func (o *CreateAuthenticatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateAuthenticatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateAuthenticatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorUnauthorized %s", 401, payload)
-}
-
 func (o *CreateAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateAuthenticatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create authenticator too many requests response has a 2xx status code
-func (o *CreateAuthenticatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create authenticator too many requests response has a 3xx status code
-func (o *CreateAuthenticatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create authenticator too many requests response has a 4xx status code
-func (o *CreateAuthenticatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create authenticator too many requests response has a 5xx status code
-func (o *CreateAuthenticatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create authenticator too many requests response a status code equal to that given
-func (o *CreateAuthenticatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create authenticator too many requests response
-func (o *CreateAuthenticatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateAuthenticatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateAuthenticatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators][%d] createAuthenticatorTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

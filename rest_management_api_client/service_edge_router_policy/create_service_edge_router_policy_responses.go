@@ -30,7 +30,6 @@ package service_edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateServiceEdgeRouterPolicyReader) ReadResponse(response runtime.Clie
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /service-edge-router-policies] createServiceEdgeRouterPolicy", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateServiceEdgeRouterPolicyCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create service edge router policy created response has a 2xx status code
-func (o *CreateServiceEdgeRouterPolicyCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create service edge router policy created response has a 3xx status code
-func (o *CreateServiceEdgeRouterPolicyCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service edge router policy created response has a 4xx status code
-func (o *CreateServiceEdgeRouterPolicyCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create service edge router policy created response has a 5xx status code
-func (o *CreateServiceEdgeRouterPolicyCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service edge router policy created response a status code equal to that given
-func (o *CreateServiceEdgeRouterPolicyCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create service edge router policy created response
-func (o *CreateServiceEdgeRouterPolicyCreated) Code() int {
-	return 201
-}
-
 func (o *CreateServiceEdgeRouterPolicyCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateServiceEdgeRouterPolicyCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyCreated %s", 201, payload)
-}
-
 func (o *CreateServiceEdgeRouterPolicyCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateServiceEdgeRouterPolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create service edge router policy bad request response has a 2xx status code
-func (o *CreateServiceEdgeRouterPolicyBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create service edge router policy bad request response has a 3xx status code
-func (o *CreateServiceEdgeRouterPolicyBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service edge router policy bad request response has a 4xx status code
-func (o *CreateServiceEdgeRouterPolicyBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create service edge router policy bad request response has a 5xx status code
-func (o *CreateServiceEdgeRouterPolicyBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service edge router policy bad request response a status code equal to that given
-func (o *CreateServiceEdgeRouterPolicyBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create service edge router policy bad request response
-func (o *CreateServiceEdgeRouterPolicyBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateServiceEdgeRouterPolicyBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateServiceEdgeRouterPolicyBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyBadRequest %s", 400, payload)
-}
-
 func (o *CreateServiceEdgeRouterPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateServiceEdgeRouterPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create service edge router policy unauthorized response has a 2xx status code
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create service edge router policy unauthorized response has a 3xx status code
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service edge router policy unauthorized response has a 4xx status code
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create service edge router policy unauthorized response has a 5xx status code
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service edge router policy unauthorized response a status code equal to that given
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create service edge router policy unauthorized response
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateServiceEdgeRouterPolicyUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateServiceEdgeRouterPolicyUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
-}
-
 func (o *CreateServiceEdgeRouterPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateServiceEdgeRouterPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create service edge router policy too many requests response has a 2xx status code
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create service edge router policy too many requests response has a 3xx status code
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service edge router policy too many requests response has a 4xx status code
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create service edge router policy too many requests response has a 5xx status code
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service edge router policy too many requests response a status code equal to that given
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create service edge router policy too many requests response
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateServiceEdgeRouterPolicyTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateServiceEdgeRouterPolicyTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-edge-router-policies][%d] createServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateServiceEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

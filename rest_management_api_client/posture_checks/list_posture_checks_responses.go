@@ -30,7 +30,6 @@ package posture_checks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListPostureChecksReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /posture-checks] listPostureChecks", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListPostureChecksOK struct {
 	Payload *rest_model.ListPostureCheckEnvelope
 }
 
-// IsSuccess returns true when this list posture checks o k response has a 2xx status code
-func (o *ListPostureChecksOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list posture checks o k response has a 3xx status code
-func (o *ListPostureChecksOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list posture checks o k response has a 4xx status code
-func (o *ListPostureChecksOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list posture checks o k response has a 5xx status code
-func (o *ListPostureChecksOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list posture checks o k response a status code equal to that given
-func (o *ListPostureChecksOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list posture checks o k response
-func (o *ListPostureChecksOK) Code() int {
-	return 200
-}
-
 func (o *ListPostureChecksOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksOK %s", 200, payload)
+	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksOK  %+v", 200, o.Payload)
 }
-
-func (o *ListPostureChecksOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksOK %s", 200, payload)
-}
-
 func (o *ListPostureChecksOK) GetPayload() *rest_model.ListPostureCheckEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListPostureChecksBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list posture checks bad request response has a 2xx status code
-func (o *ListPostureChecksBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list posture checks bad request response has a 3xx status code
-func (o *ListPostureChecksBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list posture checks bad request response has a 4xx status code
-func (o *ListPostureChecksBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list posture checks bad request response has a 5xx status code
-func (o *ListPostureChecksBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list posture checks bad request response a status code equal to that given
-func (o *ListPostureChecksBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list posture checks bad request response
-func (o *ListPostureChecksBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListPostureChecksBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListPostureChecksBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksBadRequest %s", 400, payload)
-}
-
 func (o *ListPostureChecksBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListPostureChecksUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list posture checks unauthorized response has a 2xx status code
-func (o *ListPostureChecksUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list posture checks unauthorized response has a 3xx status code
-func (o *ListPostureChecksUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list posture checks unauthorized response has a 4xx status code
-func (o *ListPostureChecksUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list posture checks unauthorized response has a 5xx status code
-func (o *ListPostureChecksUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list posture checks unauthorized response a status code equal to that given
-func (o *ListPostureChecksUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list posture checks unauthorized response
-func (o *ListPostureChecksUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListPostureChecksUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListPostureChecksUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksUnauthorized %s", 401, payload)
-}
-
 func (o *ListPostureChecksUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListPostureChecksTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list posture checks too many requests response has a 2xx status code
-func (o *ListPostureChecksTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list posture checks too many requests response has a 3xx status code
-func (o *ListPostureChecksTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list posture checks too many requests response has a 4xx status code
-func (o *ListPostureChecksTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list posture checks too many requests response has a 5xx status code
-func (o *ListPostureChecksTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list posture checks too many requests response a status code equal to that given
-func (o *ListPostureChecksTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list posture checks too many requests response
-func (o *ListPostureChecksTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListPostureChecksTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListPostureChecksTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /posture-checks][%d] listPostureChecksTooManyRequests %s", 429, payload)
-}
-
 func (o *ListPostureChecksTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

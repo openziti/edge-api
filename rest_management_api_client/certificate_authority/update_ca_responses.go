@@ -30,7 +30,6 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *UpdateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /cas/{id}] updateCa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type UpdateCaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this update ca o k response has a 2xx status code
-func (o *UpdateCaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this update ca o k response has a 3xx status code
-func (o *UpdateCaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update ca o k response has a 4xx status code
-func (o *UpdateCaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this update ca o k response has a 5xx status code
-func (o *UpdateCaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update ca o k response a status code equal to that given
-func (o *UpdateCaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the update ca o k response
-func (o *UpdateCaOK) Code() int {
-	return 200
-}
-
 func (o *UpdateCaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateCaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaOK %s", 200, payload)
-}
-
 func (o *UpdateCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type UpdateCaBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update ca bad request response has a 2xx status code
-func (o *UpdateCaBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update ca bad request response has a 3xx status code
-func (o *UpdateCaBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update ca bad request response has a 4xx status code
-func (o *UpdateCaBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update ca bad request response has a 5xx status code
-func (o *UpdateCaBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update ca bad request response a status code equal to that given
-func (o *UpdateCaBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the update ca bad request response
-func (o *UpdateCaBadRequest) Code() int {
-	return 400
-}
-
 func (o *UpdateCaBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *UpdateCaBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaBadRequest %s", 400, payload)
-}
-
 func (o *UpdateCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type UpdateCaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update ca unauthorized response has a 2xx status code
-func (o *UpdateCaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update ca unauthorized response has a 3xx status code
-func (o *UpdateCaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update ca unauthorized response has a 4xx status code
-func (o *UpdateCaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update ca unauthorized response has a 5xx status code
-func (o *UpdateCaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update ca unauthorized response a status code equal to that given
-func (o *UpdateCaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update ca unauthorized response
-func (o *UpdateCaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *UpdateCaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *UpdateCaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaUnauthorized %s", 401, payload)
-}
-
 func (o *UpdateCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type UpdateCaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update ca not found response has a 2xx status code
-func (o *UpdateCaNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update ca not found response has a 3xx status code
-func (o *UpdateCaNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update ca not found response has a 4xx status code
-func (o *UpdateCaNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update ca not found response has a 5xx status code
-func (o *UpdateCaNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update ca not found response a status code equal to that given
-func (o *UpdateCaNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the update ca not found response
-func (o *UpdateCaNotFound) Code() int {
-	return 404
-}
-
 func (o *UpdateCaNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaNotFound %s", 404, payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaNotFound  %+v", 404, o.Payload)
 }
-
-func (o *UpdateCaNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaNotFound %s", 404, payload)
-}
-
 func (o *UpdateCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type UpdateCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update ca too many requests response has a 2xx status code
-func (o *UpdateCaTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update ca too many requests response has a 3xx status code
-func (o *UpdateCaTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update ca too many requests response has a 4xx status code
-func (o *UpdateCaTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update ca too many requests response has a 5xx status code
-func (o *UpdateCaTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update ca too many requests response a status code equal to that given
-func (o *UpdateCaTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the update ca too many requests response
-func (o *UpdateCaTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *UpdateCaTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *UpdateCaTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests %s", 429, payload)
-}
-
 func (o *UpdateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

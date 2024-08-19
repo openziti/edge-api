@@ -70,16 +70,6 @@ func (m AuthPolicyUpdate) MarshalJSON() ([]byte, error) {
 
 // Validate validates this auth policy update
 func (m *AuthPolicyUpdate) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	// validation for a type composition with AuthPolicyCreate
-	if err := m.AuthPolicyCreate.Validate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 

@@ -30,7 +30,6 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /config-types/{id}] detailConfigType", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailConfigTypeOK struct {
 	Payload *rest_model.DetailConfigTypeEnvelope
 }
 
-// IsSuccess returns true when this detail config type o k response has a 2xx status code
-func (o *DetailConfigTypeOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail config type o k response has a 3xx status code
-func (o *DetailConfigTypeOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail config type o k response has a 4xx status code
-func (o *DetailConfigTypeOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail config type o k response has a 5xx status code
-func (o *DetailConfigTypeOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail config type o k response a status code equal to that given
-func (o *DetailConfigTypeOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail config type o k response
-func (o *DetailConfigTypeOK) Code() int {
-	return 200
-}
-
 func (o *DetailConfigTypeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeOK %s", 200, payload)
+	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailConfigTypeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeOK %s", 200, payload)
-}
-
 func (o *DetailConfigTypeOK) GetPayload() *rest_model.DetailConfigTypeEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailConfigTypeUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail config type unauthorized response has a 2xx status code
-func (o *DetailConfigTypeUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail config type unauthorized response has a 3xx status code
-func (o *DetailConfigTypeUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail config type unauthorized response has a 4xx status code
-func (o *DetailConfigTypeUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail config type unauthorized response has a 5xx status code
-func (o *DetailConfigTypeUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail config type unauthorized response a status code equal to that given
-func (o *DetailConfigTypeUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail config type unauthorized response
-func (o *DetailConfigTypeUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailConfigTypeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailConfigTypeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeUnauthorized %s", 401, payload)
-}
-
 func (o *DetailConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailConfigTypeNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail config type not found response has a 2xx status code
-func (o *DetailConfigTypeNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail config type not found response has a 3xx status code
-func (o *DetailConfigTypeNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail config type not found response has a 4xx status code
-func (o *DetailConfigTypeNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail config type not found response has a 5xx status code
-func (o *DetailConfigTypeNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail config type not found response a status code equal to that given
-func (o *DetailConfigTypeNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail config type not found response
-func (o *DetailConfigTypeNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailConfigTypeNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailConfigTypeNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeNotFound %s", 404, payload)
-}
-
 func (o *DetailConfigTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailConfigTypeTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail config type too many requests response has a 2xx status code
-func (o *DetailConfigTypeTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail config type too many requests response has a 3xx status code
-func (o *DetailConfigTypeTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail config type too many requests response has a 4xx status code
-func (o *DetailConfigTypeTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail config type too many requests response has a 5xx status code
-func (o *DetailConfigTypeTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail config type too many requests response a status code equal to that given
-func (o *DetailConfigTypeTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail config type too many requests response
-func (o *DetailConfigTypeTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailConfigTypeTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailConfigTypeTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types/{id}][%d] detailConfigTypeTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

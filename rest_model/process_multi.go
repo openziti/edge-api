@@ -126,7 +126,6 @@ func (m *ProcessMulti) ContextValidate(ctx context.Context, formats strfmt.Regis
 func (m *ProcessMulti) contextValidateOsType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OsType != nil {
-
 		if err := m.OsType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("osType")

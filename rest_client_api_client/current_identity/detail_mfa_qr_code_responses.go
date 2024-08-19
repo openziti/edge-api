@@ -57,7 +57,7 @@ func (o *DetailMfaQrCodeReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /current-identity/mfa/qr-code] detailMfaQrCode", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -74,42 +74,8 @@ OK
 type DetailMfaQrCodeOK struct {
 }
 
-// IsSuccess returns true when this detail mfa qr code o k response has a 2xx status code
-func (o *DetailMfaQrCodeOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail mfa qr code o k response has a 3xx status code
-func (o *DetailMfaQrCodeOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail mfa qr code o k response has a 4xx status code
-func (o *DetailMfaQrCodeOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail mfa qr code o k response has a 5xx status code
-func (o *DetailMfaQrCodeOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail mfa qr code o k response a status code equal to that given
-func (o *DetailMfaQrCodeOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail mfa qr code o k response
-func (o *DetailMfaQrCodeOK) Code() int {
-	return 200
-}
-
 func (o *DetailMfaQrCodeOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/qr-code][%d] detailMfaQrCodeOK", 200)
-}
-
-func (o *DetailMfaQrCodeOK) String() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/qr-code][%d] detailMfaQrCodeOK", 200)
+	return fmt.Sprintf("[GET /current-identity/mfa/qr-code][%d] detailMfaQrCodeOK ", 200)
 }
 
 func (o *DetailMfaQrCodeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -130,42 +96,8 @@ No MFA enrollment or MFA enrollment is completed
 type DetailMfaQrCodeNotFound struct {
 }
 
-// IsSuccess returns true when this detail mfa qr code not found response has a 2xx status code
-func (o *DetailMfaQrCodeNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail mfa qr code not found response has a 3xx status code
-func (o *DetailMfaQrCodeNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail mfa qr code not found response has a 4xx status code
-func (o *DetailMfaQrCodeNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail mfa qr code not found response has a 5xx status code
-func (o *DetailMfaQrCodeNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail mfa qr code not found response a status code equal to that given
-func (o *DetailMfaQrCodeNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail mfa qr code not found response
-func (o *DetailMfaQrCodeNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailMfaQrCodeNotFound) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/qr-code][%d] detailMfaQrCodeNotFound", 404)
-}
-
-func (o *DetailMfaQrCodeNotFound) String() string {
-	return fmt.Sprintf("[GET /current-identity/mfa/qr-code][%d] detailMfaQrCodeNotFound", 404)
+	return fmt.Sprintf("[GET /current-identity/mfa/qr-code][%d] detailMfaQrCodeNotFound ", 404)
 }
 
 func (o *DetailMfaQrCodeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

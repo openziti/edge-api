@@ -208,11 +208,6 @@ func (m *EdgeRouterUpdate) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *EdgeRouterUpdate) contextValidateAppData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppData != nil {
-
-		if swag.IsZero(m.AppData) { // not required
-			return nil
-		}
-
 		if err := m.AppData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("appData")
@@ -245,11 +240,6 @@ func (m *EdgeRouterUpdate) contextValidateRoleAttributes(ctx context.Context, fo
 func (m *EdgeRouterUpdate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
-
-		if swag.IsZero(m.Tags) { // not required
-			return nil
-		}
-
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

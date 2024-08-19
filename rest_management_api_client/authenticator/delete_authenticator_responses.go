@@ -30,7 +30,6 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DeleteAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /authenticators/{id}] deleteAuthenticator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DeleteAuthenticatorOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete authenticator o k response has a 2xx status code
-func (o *DeleteAuthenticatorOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete authenticator o k response has a 3xx status code
-func (o *DeleteAuthenticatorOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete authenticator o k response has a 4xx status code
-func (o *DeleteAuthenticatorOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete authenticator o k response has a 5xx status code
-func (o *DeleteAuthenticatorOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete authenticator o k response a status code equal to that given
-func (o *DeleteAuthenticatorOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete authenticator o k response
-func (o *DeleteAuthenticatorOK) Code() int {
-	return 200
-}
-
 func (o *DeleteAuthenticatorOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteAuthenticatorOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorOK %s", 200, payload)
-}
-
 func (o *DeleteAuthenticatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DeleteAuthenticatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete authenticator bad request response has a 2xx status code
-func (o *DeleteAuthenticatorBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete authenticator bad request response has a 3xx status code
-func (o *DeleteAuthenticatorBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete authenticator bad request response has a 4xx status code
-func (o *DeleteAuthenticatorBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete authenticator bad request response has a 5xx status code
-func (o *DeleteAuthenticatorBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete authenticator bad request response a status code equal to that given
-func (o *DeleteAuthenticatorBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the delete authenticator bad request response
-func (o *DeleteAuthenticatorBadRequest) Code() int {
-	return 400
-}
-
 func (o *DeleteAuthenticatorBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DeleteAuthenticatorBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorBadRequest %s", 400, payload)
-}
-
 func (o *DeleteAuthenticatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DeleteAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete authenticator unauthorized response has a 2xx status code
-func (o *DeleteAuthenticatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete authenticator unauthorized response has a 3xx status code
-func (o *DeleteAuthenticatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete authenticator unauthorized response has a 4xx status code
-func (o *DeleteAuthenticatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete authenticator unauthorized response has a 5xx status code
-func (o *DeleteAuthenticatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete authenticator unauthorized response a status code equal to that given
-func (o *DeleteAuthenticatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete authenticator unauthorized response
-func (o *DeleteAuthenticatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteAuthenticatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteAuthenticatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DeleteAuthenticatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete authenticator too many requests response has a 2xx status code
-func (o *DeleteAuthenticatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete authenticator too many requests response has a 3xx status code
-func (o *DeleteAuthenticatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete authenticator too many requests response has a 4xx status code
-func (o *DeleteAuthenticatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete authenticator too many requests response has a 5xx status code
-func (o *DeleteAuthenticatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete authenticator too many requests response a status code equal to that given
-func (o *DeleteAuthenticatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete authenticator too many requests response
-func (o *DeleteAuthenticatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteAuthenticatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteAuthenticatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

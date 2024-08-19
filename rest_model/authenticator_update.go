@@ -169,7 +169,6 @@ func (m *AuthenticatorUpdate) ContextValidate(ctx context.Context, formats strfm
 func (m *AuthenticatorUpdate) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Password != nil {
-
 		if err := m.Password.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("password")
@@ -186,11 +185,6 @@ func (m *AuthenticatorUpdate) contextValidatePassword(ctx context.Context, forma
 func (m *AuthenticatorUpdate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
-
-		if swag.IsZero(m.Tags) { // not required
-			return nil
-		}
-
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -207,7 +201,6 @@ func (m *AuthenticatorUpdate) contextValidateTags(ctx context.Context, formats s
 func (m *AuthenticatorUpdate) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Username != nil {
-
 		if err := m.Username.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("username")

@@ -30,7 +30,6 @@ package enrollment
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailEnrollmentReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /enrollments/{id}] detailEnrollment", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailEnrollmentOK struct {
 	Payload *rest_model.DetailEnrollmentEnvelope
 }
 
-// IsSuccess returns true when this detail enrollment o k response has a 2xx status code
-func (o *DetailEnrollmentOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail enrollment o k response has a 3xx status code
-func (o *DetailEnrollmentOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail enrollment o k response has a 4xx status code
-func (o *DetailEnrollmentOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail enrollment o k response has a 5xx status code
-func (o *DetailEnrollmentOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail enrollment o k response a status code equal to that given
-func (o *DetailEnrollmentOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail enrollment o k response
-func (o *DetailEnrollmentOK) Code() int {
-	return 200
-}
-
 func (o *DetailEnrollmentOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentOK %s", 200, payload)
+	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailEnrollmentOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentOK %s", 200, payload)
-}
-
 func (o *DetailEnrollmentOK) GetPayload() *rest_model.DetailEnrollmentEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailEnrollmentUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail enrollment unauthorized response has a 2xx status code
-func (o *DetailEnrollmentUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail enrollment unauthorized response has a 3xx status code
-func (o *DetailEnrollmentUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail enrollment unauthorized response has a 4xx status code
-func (o *DetailEnrollmentUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail enrollment unauthorized response has a 5xx status code
-func (o *DetailEnrollmentUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail enrollment unauthorized response a status code equal to that given
-func (o *DetailEnrollmentUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail enrollment unauthorized response
-func (o *DetailEnrollmentUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailEnrollmentUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailEnrollmentUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentUnauthorized %s", 401, payload)
-}
-
 func (o *DetailEnrollmentUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailEnrollmentNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail enrollment not found response has a 2xx status code
-func (o *DetailEnrollmentNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail enrollment not found response has a 3xx status code
-func (o *DetailEnrollmentNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail enrollment not found response has a 4xx status code
-func (o *DetailEnrollmentNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail enrollment not found response has a 5xx status code
-func (o *DetailEnrollmentNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail enrollment not found response a status code equal to that given
-func (o *DetailEnrollmentNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail enrollment not found response
-func (o *DetailEnrollmentNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailEnrollmentNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailEnrollmentNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentNotFound %s", 404, payload)
-}
-
 func (o *DetailEnrollmentNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailEnrollmentTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail enrollment too many requests response has a 2xx status code
-func (o *DetailEnrollmentTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail enrollment too many requests response has a 3xx status code
-func (o *DetailEnrollmentTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail enrollment too many requests response has a 4xx status code
-func (o *DetailEnrollmentTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail enrollment too many requests response has a 5xx status code
-func (o *DetailEnrollmentTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail enrollment too many requests response a status code equal to that given
-func (o *DetailEnrollmentTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail enrollment too many requests response
-func (o *DetailEnrollmentTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailEnrollmentTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailEnrollmentTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enrollments/{id}][%d] detailEnrollmentTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailEnrollmentTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

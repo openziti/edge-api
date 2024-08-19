@@ -238,7 +238,6 @@ func (m *AuthenticatorDetail) ContextValidate(ctx context.Context, formats strfm
 func (m *AuthenticatorDetail) contextValidateIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Identity != nil {
-
 		if err := m.Identity.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("identity")

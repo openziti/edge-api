@@ -501,7 +501,6 @@ func (m *PostureCheckMfaDetail) contextValidateRoleAttributes(ctx context.Contex
 func (m *PostureCheckMfaDetail) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
-
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

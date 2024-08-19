@@ -159,11 +159,6 @@ func (m *APISessionPostureData) ContextValidate(ctx context.Context, formats str
 func (m *APISessionPostureData) contextValidateEndpointState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EndpointState != nil {
-
-		if swag.IsZero(m.EndpointState) { // not required
-			return nil
-		}
-
 		if err := m.EndpointState.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("endpointState")
@@ -180,7 +175,6 @@ func (m *APISessionPostureData) contextValidateEndpointState(ctx context.Context
 func (m *APISessionPostureData) contextValidateMfa(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mfa != nil {
-
 		if err := m.Mfa.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mfa")
@@ -197,11 +191,6 @@ func (m *APISessionPostureData) contextValidateMfa(ctx context.Context, formats 
 func (m *APISessionPostureData) contextValidateSdkInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
-
-		if swag.IsZero(m.SdkInfo) { // not required
-			return nil
-		}
-
 		if err := m.SdkInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sdkInfo")

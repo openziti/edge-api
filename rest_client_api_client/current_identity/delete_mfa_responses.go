@@ -30,7 +30,6 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *DeleteMfaReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /current-identity/mfa] deleteMfa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type DeleteMfaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete mfa o k response has a 2xx status code
-func (o *DeleteMfaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete mfa o k response has a 3xx status code
-func (o *DeleteMfaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete mfa o k response has a 4xx status code
-func (o *DeleteMfaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete mfa o k response has a 5xx status code
-func (o *DeleteMfaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete mfa o k response a status code equal to that given
-func (o *DeleteMfaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete mfa o k response
-func (o *DeleteMfaOK) Code() int {
-	return 200
-}
-
 func (o *DeleteMfaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteMfaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaOK %s", 200, payload)
-}
-
 func (o *DeleteMfaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type DeleteMfaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete mfa unauthorized response has a 2xx status code
-func (o *DeleteMfaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete mfa unauthorized response has a 3xx status code
-func (o *DeleteMfaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete mfa unauthorized response has a 4xx status code
-func (o *DeleteMfaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete mfa unauthorized response has a 5xx status code
-func (o *DeleteMfaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete mfa unauthorized response a status code equal to that given
-func (o *DeleteMfaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete mfa unauthorized response
-func (o *DeleteMfaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteMfaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteMfaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type DeleteMfaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete mfa not found response has a 2xx status code
-func (o *DeleteMfaNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete mfa not found response has a 3xx status code
-func (o *DeleteMfaNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete mfa not found response has a 4xx status code
-func (o *DeleteMfaNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete mfa not found response has a 5xx status code
-func (o *DeleteMfaNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete mfa not found response a status code equal to that given
-func (o *DeleteMfaNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the delete mfa not found response
-func (o *DeleteMfaNotFound) Code() int {
-	return 404
-}
-
 func (o *DeleteMfaNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DeleteMfaNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-identity/mfa][%d] deleteMfaNotFound %s", 404, payload)
-}
-
 func (o *DeleteMfaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

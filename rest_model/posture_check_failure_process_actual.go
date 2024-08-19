@@ -148,10 +148,6 @@ func (m *PostureCheckFailureProcessActual) ContextValidate(ctx context.Context, 
 
 func (m *PostureCheckFailureProcessActual) contextValidateOsType(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OsType) { // not required
-		return nil
-	}
-
 	if err := m.OsType.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("osType")

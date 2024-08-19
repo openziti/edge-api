@@ -30,7 +30,6 @@ package edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListEdgeRouterPolicyIdentitiesReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /edge-router-policies/{id}/identities] listEdgeRouterPolicyIdentities", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListEdgeRouterPolicyIdentitiesOK struct {
 	Payload *rest_model.ListIdentitiesEnvelope
 }
 
-// IsSuccess returns true when this list edge router policy identities o k response has a 2xx status code
-func (o *ListEdgeRouterPolicyIdentitiesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list edge router policy identities o k response has a 3xx status code
-func (o *ListEdgeRouterPolicyIdentitiesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router policy identities o k response has a 4xx status code
-func (o *ListEdgeRouterPolicyIdentitiesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list edge router policy identities o k response has a 5xx status code
-func (o *ListEdgeRouterPolicyIdentitiesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router policy identities o k response a status code equal to that given
-func (o *ListEdgeRouterPolicyIdentitiesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list edge router policy identities o k response
-func (o *ListEdgeRouterPolicyIdentitiesOK) Code() int {
-	return 200
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesOK  %+v", 200, o.Payload)
 }
-
-func (o *ListEdgeRouterPolicyIdentitiesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesOK %s", 200, payload)
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesOK) GetPayload() *rest_model.ListIdentitiesEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListEdgeRouterPolicyIdentitiesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list edge router policy identities unauthorized response has a 2xx status code
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list edge router policy identities unauthorized response has a 3xx status code
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router policy identities unauthorized response has a 4xx status code
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list edge router policy identities unauthorized response has a 5xx status code
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router policy identities unauthorized response a status code equal to that given
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list edge router policy identities unauthorized response
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesUnauthorized %s", 401, payload)
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListEdgeRouterPolicyIdentitiesNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list edge router policy identities not found response has a 2xx status code
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list edge router policy identities not found response has a 3xx status code
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router policy identities not found response has a 4xx status code
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list edge router policy identities not found response has a 5xx status code
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router policy identities not found response a status code equal to that given
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the list edge router policy identities not found response
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) Code() int {
-	return 404
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesNotFound  %+v", 404, o.Payload)
 }
-
-func (o *ListEdgeRouterPolicyIdentitiesNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesNotFound %s", 404, payload)
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListEdgeRouterPolicyIdentitiesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list edge router policy identities too many requests response has a 2xx status code
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list edge router policy identities too many requests response has a 3xx status code
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list edge router policy identities too many requests response has a 4xx status code
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list edge router policy identities too many requests response has a 5xx status code
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list edge router policy identities too many requests response a status code equal to that given
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list edge router policy identities too many requests response
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /edge-router-policies/{id}/identities][%d] listEdgeRouterPolicyIdentitiesTooManyRequests %s", 429, payload)
-}
-
 func (o *ListEdgeRouterPolicyIdentitiesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

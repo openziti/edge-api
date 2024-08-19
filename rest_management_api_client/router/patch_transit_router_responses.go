@@ -30,7 +30,6 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *PatchTransitRouterReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PATCH /transit-routers/{id}] patchTransitRouter", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type PatchTransitRouterOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this patch transit router o k response has a 2xx status code
-func (o *PatchTransitRouterOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this patch transit router o k response has a 3xx status code
-func (o *PatchTransitRouterOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch transit router o k response has a 4xx status code
-func (o *PatchTransitRouterOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this patch transit router o k response has a 5xx status code
-func (o *PatchTransitRouterOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch transit router o k response a status code equal to that given
-func (o *PatchTransitRouterOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the patch transit router o k response
-func (o *PatchTransitRouterOK) Code() int {
-	return 200
-}
-
 func (o *PatchTransitRouterOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterOK  %+v", 200, o.Payload)
 }
-
-func (o *PatchTransitRouterOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterOK %s", 200, payload)
-}
-
 func (o *PatchTransitRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type PatchTransitRouterBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch transit router bad request response has a 2xx status code
-func (o *PatchTransitRouterBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch transit router bad request response has a 3xx status code
-func (o *PatchTransitRouterBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch transit router bad request response has a 4xx status code
-func (o *PatchTransitRouterBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch transit router bad request response has a 5xx status code
-func (o *PatchTransitRouterBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch transit router bad request response a status code equal to that given
-func (o *PatchTransitRouterBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the patch transit router bad request response
-func (o *PatchTransitRouterBadRequest) Code() int {
-	return 400
-}
-
 func (o *PatchTransitRouterBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *PatchTransitRouterBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterBadRequest %s", 400, payload)
-}
-
 func (o *PatchTransitRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type PatchTransitRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch transit router unauthorized response has a 2xx status code
-func (o *PatchTransitRouterUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch transit router unauthorized response has a 3xx status code
-func (o *PatchTransitRouterUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch transit router unauthorized response has a 4xx status code
-func (o *PatchTransitRouterUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch transit router unauthorized response has a 5xx status code
-func (o *PatchTransitRouterUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch transit router unauthorized response a status code equal to that given
-func (o *PatchTransitRouterUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the patch transit router unauthorized response
-func (o *PatchTransitRouterUnauthorized) Code() int {
-	return 401
-}
-
 func (o *PatchTransitRouterUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *PatchTransitRouterUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterUnauthorized %s", 401, payload)
-}
-
 func (o *PatchTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type PatchTransitRouterNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch transit router not found response has a 2xx status code
-func (o *PatchTransitRouterNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch transit router not found response has a 3xx status code
-func (o *PatchTransitRouterNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch transit router not found response has a 4xx status code
-func (o *PatchTransitRouterNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch transit router not found response has a 5xx status code
-func (o *PatchTransitRouterNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch transit router not found response a status code equal to that given
-func (o *PatchTransitRouterNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the patch transit router not found response
-func (o *PatchTransitRouterNotFound) Code() int {
-	return 404
-}
-
 func (o *PatchTransitRouterNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterNotFound  %+v", 404, o.Payload)
 }
-
-func (o *PatchTransitRouterNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterNotFound %s", 404, payload)
-}
-
 func (o *PatchTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type PatchTransitRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch transit router too many requests response has a 2xx status code
-func (o *PatchTransitRouterTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch transit router too many requests response has a 3xx status code
-func (o *PatchTransitRouterTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch transit router too many requests response has a 4xx status code
-func (o *PatchTransitRouterTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch transit router too many requests response has a 5xx status code
-func (o *PatchTransitRouterTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch transit router too many requests response a status code equal to that given
-func (o *PatchTransitRouterTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the patch transit router too many requests response
-func (o *PatchTransitRouterTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *PatchTransitRouterTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *PatchTransitRouterTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterTooManyRequests %s", 429, payload)
-}
-
 func (o *PatchTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

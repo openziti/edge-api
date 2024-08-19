@@ -143,7 +143,6 @@ func (m *ListConfigTypesEnvelope) contextValidateData(ctx context.Context, forma
 func (m *ListConfigTypesEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
-
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

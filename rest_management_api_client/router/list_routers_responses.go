@@ -30,7 +30,6 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListRoutersReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /routers] listRouters", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListRoutersOK struct {
 	Payload *rest_model.ListRoutersEnvelope
 }
 
-// IsSuccess returns true when this list routers o k response has a 2xx status code
-func (o *ListRoutersOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list routers o k response has a 3xx status code
-func (o *ListRoutersOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list routers o k response has a 4xx status code
-func (o *ListRoutersOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list routers o k response has a 5xx status code
-func (o *ListRoutersOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list routers o k response a status code equal to that given
-func (o *ListRoutersOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list routers o k response
-func (o *ListRoutersOK) Code() int {
-	return 200
-}
-
 func (o *ListRoutersOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersOK %s", 200, payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersOK  %+v", 200, o.Payload)
 }
-
-func (o *ListRoutersOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersOK %s", 200, payload)
-}
-
 func (o *ListRoutersOK) GetPayload() *rest_model.ListRoutersEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListRoutersBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list routers bad request response has a 2xx status code
-func (o *ListRoutersBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list routers bad request response has a 3xx status code
-func (o *ListRoutersBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list routers bad request response has a 4xx status code
-func (o *ListRoutersBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list routers bad request response has a 5xx status code
-func (o *ListRoutersBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list routers bad request response a status code equal to that given
-func (o *ListRoutersBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list routers bad request response
-func (o *ListRoutersBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListRoutersBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListRoutersBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersBadRequest %s", 400, payload)
-}
-
 func (o *ListRoutersBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListRoutersUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list routers unauthorized response has a 2xx status code
-func (o *ListRoutersUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list routers unauthorized response has a 3xx status code
-func (o *ListRoutersUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list routers unauthorized response has a 4xx status code
-func (o *ListRoutersUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list routers unauthorized response has a 5xx status code
-func (o *ListRoutersUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list routers unauthorized response a status code equal to that given
-func (o *ListRoutersUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list routers unauthorized response
-func (o *ListRoutersUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListRoutersUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListRoutersUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersUnauthorized %s", 401, payload)
-}
-
 func (o *ListRoutersUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListRoutersTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list routers too many requests response has a 2xx status code
-func (o *ListRoutersTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list routers too many requests response has a 3xx status code
-func (o *ListRoutersTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list routers too many requests response has a 4xx status code
-func (o *ListRoutersTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list routers too many requests response has a 5xx status code
-func (o *ListRoutersTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list routers too many requests response a status code equal to that given
-func (o *ListRoutersTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list routers too many requests response
-func (o *ListRoutersTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListRoutersTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListRoutersTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /routers][%d] listRoutersTooManyRequests %s", 429, payload)
-}
-
 func (o *ListRoutersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

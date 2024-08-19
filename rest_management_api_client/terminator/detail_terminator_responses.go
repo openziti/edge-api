@@ -30,7 +30,6 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /terminators/{id}] detailTerminator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailTerminatorOK struct {
 	Payload *rest_model.DetailTerminatorEnvelope
 }
 
-// IsSuccess returns true when this detail terminator o k response has a 2xx status code
-func (o *DetailTerminatorOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail terminator o k response has a 3xx status code
-func (o *DetailTerminatorOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail terminator o k response has a 4xx status code
-func (o *DetailTerminatorOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail terminator o k response has a 5xx status code
-func (o *DetailTerminatorOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail terminator o k response a status code equal to that given
-func (o *DetailTerminatorOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail terminator o k response
-func (o *DetailTerminatorOK) Code() int {
-	return 200
-}
-
 func (o *DetailTerminatorOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorOK %s", 200, payload)
+	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailTerminatorOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorOK %s", 200, payload)
-}
-
 func (o *DetailTerminatorOK) GetPayload() *rest_model.DetailTerminatorEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailTerminatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail terminator unauthorized response has a 2xx status code
-func (o *DetailTerminatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail terminator unauthorized response has a 3xx status code
-func (o *DetailTerminatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail terminator unauthorized response has a 4xx status code
-func (o *DetailTerminatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail terminator unauthorized response has a 5xx status code
-func (o *DetailTerminatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail terminator unauthorized response a status code equal to that given
-func (o *DetailTerminatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail terminator unauthorized response
-func (o *DetailTerminatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailTerminatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailTerminatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorUnauthorized %s", 401, payload)
-}
-
 func (o *DetailTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailTerminatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail terminator not found response has a 2xx status code
-func (o *DetailTerminatorNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail terminator not found response has a 3xx status code
-func (o *DetailTerminatorNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail terminator not found response has a 4xx status code
-func (o *DetailTerminatorNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail terminator not found response has a 5xx status code
-func (o *DetailTerminatorNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail terminator not found response a status code equal to that given
-func (o *DetailTerminatorNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail terminator not found response
-func (o *DetailTerminatorNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailTerminatorNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailTerminatorNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorNotFound %s", 404, payload)
-}
-
 func (o *DetailTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailTerminatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail terminator too many requests response has a 2xx status code
-func (o *DetailTerminatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail terminator too many requests response has a 3xx status code
-func (o *DetailTerminatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail terminator too many requests response has a 4xx status code
-func (o *DetailTerminatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail terminator too many requests response has a 5xx status code
-func (o *DetailTerminatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail terminator too many requests response a status code equal to that given
-func (o *DetailTerminatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail terminator too many requests response
-func (o *DetailTerminatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailTerminatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailTerminatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators/{id}][%d] detailTerminatorTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

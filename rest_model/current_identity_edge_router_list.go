@@ -78,11 +78,6 @@ func (m CurrentIdentityEdgeRouterList) ContextValidate(ctx context.Context, form
 	for i := 0; i < len(m); i++ {
 
 		if m[i] != nil {
-
-			if swag.IsZero(m[i]) { // not required
-				return nil
-			}
-
 			if err := m[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName(strconv.Itoa(i))

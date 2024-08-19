@@ -30,7 +30,6 @@ package edge_router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *PatchEdgeRouterReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PATCH /edge-routers/{id}] patchEdgeRouter", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type PatchEdgeRouterOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this patch edge router o k response has a 2xx status code
-func (o *PatchEdgeRouterOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this patch edge router o k response has a 3xx status code
-func (o *PatchEdgeRouterOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch edge router o k response has a 4xx status code
-func (o *PatchEdgeRouterOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this patch edge router o k response has a 5xx status code
-func (o *PatchEdgeRouterOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch edge router o k response a status code equal to that given
-func (o *PatchEdgeRouterOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the patch edge router o k response
-func (o *PatchEdgeRouterOK) Code() int {
-	return 200
-}
-
 func (o *PatchEdgeRouterOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterOK  %+v", 200, o.Payload)
 }
-
-func (o *PatchEdgeRouterOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterOK %s", 200, payload)
-}
-
 func (o *PatchEdgeRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type PatchEdgeRouterBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch edge router bad request response has a 2xx status code
-func (o *PatchEdgeRouterBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch edge router bad request response has a 3xx status code
-func (o *PatchEdgeRouterBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch edge router bad request response has a 4xx status code
-func (o *PatchEdgeRouterBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch edge router bad request response has a 5xx status code
-func (o *PatchEdgeRouterBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch edge router bad request response a status code equal to that given
-func (o *PatchEdgeRouterBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the patch edge router bad request response
-func (o *PatchEdgeRouterBadRequest) Code() int {
-	return 400
-}
-
 func (o *PatchEdgeRouterBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *PatchEdgeRouterBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterBadRequest %s", 400, payload)
-}
-
 func (o *PatchEdgeRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type PatchEdgeRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch edge router unauthorized response has a 2xx status code
-func (o *PatchEdgeRouterUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch edge router unauthorized response has a 3xx status code
-func (o *PatchEdgeRouterUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch edge router unauthorized response has a 4xx status code
-func (o *PatchEdgeRouterUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch edge router unauthorized response has a 5xx status code
-func (o *PatchEdgeRouterUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch edge router unauthorized response a status code equal to that given
-func (o *PatchEdgeRouterUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the patch edge router unauthorized response
-func (o *PatchEdgeRouterUnauthorized) Code() int {
-	return 401
-}
-
 func (o *PatchEdgeRouterUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *PatchEdgeRouterUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterUnauthorized %s", 401, payload)
-}
-
 func (o *PatchEdgeRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type PatchEdgeRouterNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch edge router not found response has a 2xx status code
-func (o *PatchEdgeRouterNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch edge router not found response has a 3xx status code
-func (o *PatchEdgeRouterNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch edge router not found response has a 4xx status code
-func (o *PatchEdgeRouterNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch edge router not found response has a 5xx status code
-func (o *PatchEdgeRouterNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch edge router not found response a status code equal to that given
-func (o *PatchEdgeRouterNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the patch edge router not found response
-func (o *PatchEdgeRouterNotFound) Code() int {
-	return 404
-}
-
 func (o *PatchEdgeRouterNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterNotFound  %+v", 404, o.Payload)
 }
-
-func (o *PatchEdgeRouterNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterNotFound %s", 404, payload)
-}
-
 func (o *PatchEdgeRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type PatchEdgeRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch edge router too many requests response has a 2xx status code
-func (o *PatchEdgeRouterTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch edge router too many requests response has a 3xx status code
-func (o *PatchEdgeRouterTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch edge router too many requests response has a 4xx status code
-func (o *PatchEdgeRouterTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch edge router too many requests response has a 5xx status code
-func (o *PatchEdgeRouterTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch edge router too many requests response a status code equal to that given
-func (o *PatchEdgeRouterTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the patch edge router too many requests response
-func (o *PatchEdgeRouterTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *PatchEdgeRouterTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *PatchEdgeRouterTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterTooManyRequests %s", 429, payload)
-}
-
 func (o *PatchEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

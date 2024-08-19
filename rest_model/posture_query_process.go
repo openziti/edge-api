@@ -96,10 +96,6 @@ func (m *PostureQueryProcess) ContextValidate(ctx context.Context, formats strfm
 
 func (m *PostureQueryProcess) contextValidateOsType(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OsType) { // not required
-		return nil
-	}
-
 	if err := m.OsType.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("osType")

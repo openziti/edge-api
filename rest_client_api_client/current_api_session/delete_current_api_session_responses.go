@@ -30,7 +30,6 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -61,7 +60,7 @@ func (o *DeleteCurrentAPISessionReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /current-api-session] DeleteCurrentAPISession", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -79,46 +78,9 @@ type DeleteCurrentAPISessionOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete current Api session o k response has a 2xx status code
-func (o *DeleteCurrentAPISessionOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete current Api session o k response has a 3xx status code
-func (o *DeleteCurrentAPISessionOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete current Api session o k response has a 4xx status code
-func (o *DeleteCurrentAPISessionOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete current Api session o k response has a 5xx status code
-func (o *DeleteCurrentAPISessionOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete current Api session o k response a status code equal to that given
-func (o *DeleteCurrentAPISessionOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete current Api session o k response
-func (o *DeleteCurrentAPISessionOK) Code() int {
-	return 200
-}
-
 func (o *DeleteCurrentAPISessionOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteCurrentAPISessionOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionOK %s", 200, payload)
-}
-
 func (o *DeleteCurrentAPISessionOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -149,46 +111,9 @@ type DeleteCurrentAPISessionUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete current Api session unauthorized response has a 2xx status code
-func (o *DeleteCurrentAPISessionUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete current Api session unauthorized response has a 3xx status code
-func (o *DeleteCurrentAPISessionUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete current Api session unauthorized response has a 4xx status code
-func (o *DeleteCurrentAPISessionUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete current Api session unauthorized response has a 5xx status code
-func (o *DeleteCurrentAPISessionUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete current Api session unauthorized response a status code equal to that given
-func (o *DeleteCurrentAPISessionUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete current Api session unauthorized response
-func (o *DeleteCurrentAPISessionUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteCurrentAPISessionUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteCurrentAPISessionUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteCurrentAPISessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -159,7 +159,6 @@ func (m *AuthenticatorPatchWithCurrent) ContextValidate(ctx context.Context, for
 func (m *AuthenticatorPatchWithCurrent) contextValidateCurrentPassword(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CurrentPassword != nil {
-
 		if err := m.CurrentPassword.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("currentPassword")

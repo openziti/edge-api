@@ -230,7 +230,6 @@ func (m *ConfigDetail) ContextValidate(ctx context.Context, formats strfmt.Regis
 func (m *ConfigDetail) contextValidateConfigType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ConfigType != nil {
-
 		if err := m.ConfigType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("configType")

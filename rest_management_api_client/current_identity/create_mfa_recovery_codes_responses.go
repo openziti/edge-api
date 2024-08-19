@@ -30,7 +30,6 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *CreateMfaRecoveryCodesReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /current-identity/mfa/recovery-codes] createMfaRecoveryCodes", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type CreateMfaRecoveryCodesOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this create mfa recovery codes o k response has a 2xx status code
-func (o *CreateMfaRecoveryCodesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create mfa recovery codes o k response has a 3xx status code
-func (o *CreateMfaRecoveryCodesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create mfa recovery codes o k response has a 4xx status code
-func (o *CreateMfaRecoveryCodesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create mfa recovery codes o k response has a 5xx status code
-func (o *CreateMfaRecoveryCodesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create mfa recovery codes o k response a status code equal to that given
-func (o *CreateMfaRecoveryCodesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the create mfa recovery codes o k response
-func (o *CreateMfaRecoveryCodesOK) Code() int {
-	return 200
-}
-
 func (o *CreateMfaRecoveryCodesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesOK %s", 200, payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesOK  %+v", 200, o.Payload)
 }
-
-func (o *CreateMfaRecoveryCodesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesOK %s", 200, payload)
-}
-
 func (o *CreateMfaRecoveryCodesOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type CreateMfaRecoveryCodesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create mfa recovery codes unauthorized response has a 2xx status code
-func (o *CreateMfaRecoveryCodesUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create mfa recovery codes unauthorized response has a 3xx status code
-func (o *CreateMfaRecoveryCodesUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create mfa recovery codes unauthorized response has a 4xx status code
-func (o *CreateMfaRecoveryCodesUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create mfa recovery codes unauthorized response has a 5xx status code
-func (o *CreateMfaRecoveryCodesUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create mfa recovery codes unauthorized response a status code equal to that given
-func (o *CreateMfaRecoveryCodesUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create mfa recovery codes unauthorized response
-func (o *CreateMfaRecoveryCodesUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateMfaRecoveryCodesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateMfaRecoveryCodesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesUnauthorized %s", 401, payload)
-}
-
 func (o *CreateMfaRecoveryCodesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type CreateMfaRecoveryCodesNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create mfa recovery codes not found response has a 2xx status code
-func (o *CreateMfaRecoveryCodesNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create mfa recovery codes not found response has a 3xx status code
-func (o *CreateMfaRecoveryCodesNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create mfa recovery codes not found response has a 4xx status code
-func (o *CreateMfaRecoveryCodesNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create mfa recovery codes not found response has a 5xx status code
-func (o *CreateMfaRecoveryCodesNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create mfa recovery codes not found response a status code equal to that given
-func (o *CreateMfaRecoveryCodesNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the create mfa recovery codes not found response
-func (o *CreateMfaRecoveryCodesNotFound) Code() int {
-	return 404
-}
-
 func (o *CreateMfaRecoveryCodesNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesNotFound  %+v", 404, o.Payload)
 }
-
-func (o *CreateMfaRecoveryCodesNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesNotFound %s", 404, payload)
-}
-
 func (o *CreateMfaRecoveryCodesNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

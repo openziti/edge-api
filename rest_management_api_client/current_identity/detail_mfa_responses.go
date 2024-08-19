@@ -30,7 +30,6 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *DetailMfaReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /current-identity/mfa] detailMfa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type DetailMfaOK struct {
 	Payload *rest_model.DetailMfaEnvelope
 }
 
-// IsSuccess returns true when this detail mfa o k response has a 2xx status code
-func (o *DetailMfaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail mfa o k response has a 3xx status code
-func (o *DetailMfaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail mfa o k response has a 4xx status code
-func (o *DetailMfaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail mfa o k response has a 5xx status code
-func (o *DetailMfaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail mfa o k response a status code equal to that given
-func (o *DetailMfaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail mfa o k response
-func (o *DetailMfaOK) Code() int {
-	return 200
-}
-
 func (o *DetailMfaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaOK %s", 200, payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailMfaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaOK %s", 200, payload)
-}
-
 func (o *DetailMfaOK) GetPayload() *rest_model.DetailMfaEnvelope {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type DetailMfaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail mfa unauthorized response has a 2xx status code
-func (o *DetailMfaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail mfa unauthorized response has a 3xx status code
-func (o *DetailMfaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail mfa unauthorized response has a 4xx status code
-func (o *DetailMfaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail mfa unauthorized response has a 5xx status code
-func (o *DetailMfaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail mfa unauthorized response a status code equal to that given
-func (o *DetailMfaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail mfa unauthorized response
-func (o *DetailMfaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailMfaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailMfaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaUnauthorized %s", 401, payload)
-}
-
 func (o *DetailMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type DetailMfaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail mfa not found response has a 2xx status code
-func (o *DetailMfaNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail mfa not found response has a 3xx status code
-func (o *DetailMfaNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail mfa not found response has a 4xx status code
-func (o *DetailMfaNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail mfa not found response has a 5xx status code
-func (o *DetailMfaNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail mfa not found response a status code equal to that given
-func (o *DetailMfaNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail mfa not found response
-func (o *DetailMfaNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailMfaNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailMfaNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaNotFound %s", 404, payload)
-}
-
 func (o *DetailMfaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

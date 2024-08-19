@@ -30,7 +30,6 @@ package external_jwt_signer
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *UpdateExternalJWTSignerReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /external-jwt-signers/{id}] updateExternalJwtSigner", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type UpdateExternalJWTSignerOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this update external Jwt signer o k response has a 2xx status code
-func (o *UpdateExternalJWTSignerOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this update external Jwt signer o k response has a 3xx status code
-func (o *UpdateExternalJWTSignerOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update external Jwt signer o k response has a 4xx status code
-func (o *UpdateExternalJWTSignerOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this update external Jwt signer o k response has a 5xx status code
-func (o *UpdateExternalJWTSignerOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update external Jwt signer o k response a status code equal to that given
-func (o *UpdateExternalJWTSignerOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the update external Jwt signer o k response
-func (o *UpdateExternalJWTSignerOK) Code() int {
-	return 200
-}
-
 func (o *UpdateExternalJWTSignerOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateExternalJWTSignerOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerOK %s", 200, payload)
-}
-
 func (o *UpdateExternalJWTSignerOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type UpdateExternalJWTSignerBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update external Jwt signer bad request response has a 2xx status code
-func (o *UpdateExternalJWTSignerBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update external Jwt signer bad request response has a 3xx status code
-func (o *UpdateExternalJWTSignerBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update external Jwt signer bad request response has a 4xx status code
-func (o *UpdateExternalJWTSignerBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update external Jwt signer bad request response has a 5xx status code
-func (o *UpdateExternalJWTSignerBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update external Jwt signer bad request response a status code equal to that given
-func (o *UpdateExternalJWTSignerBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the update external Jwt signer bad request response
-func (o *UpdateExternalJWTSignerBadRequest) Code() int {
-	return 400
-}
-
 func (o *UpdateExternalJWTSignerBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *UpdateExternalJWTSignerBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerBadRequest %s", 400, payload)
-}
-
 func (o *UpdateExternalJWTSignerBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type UpdateExternalJWTSignerUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update external Jwt signer unauthorized response has a 2xx status code
-func (o *UpdateExternalJWTSignerUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update external Jwt signer unauthorized response has a 3xx status code
-func (o *UpdateExternalJWTSignerUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update external Jwt signer unauthorized response has a 4xx status code
-func (o *UpdateExternalJWTSignerUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update external Jwt signer unauthorized response has a 5xx status code
-func (o *UpdateExternalJWTSignerUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update external Jwt signer unauthorized response a status code equal to that given
-func (o *UpdateExternalJWTSignerUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update external Jwt signer unauthorized response
-func (o *UpdateExternalJWTSignerUnauthorized) Code() int {
-	return 401
-}
-
 func (o *UpdateExternalJWTSignerUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *UpdateExternalJWTSignerUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerUnauthorized %s", 401, payload)
-}
-
 func (o *UpdateExternalJWTSignerUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type UpdateExternalJWTSignerNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update external Jwt signer not found response has a 2xx status code
-func (o *UpdateExternalJWTSignerNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update external Jwt signer not found response has a 3xx status code
-func (o *UpdateExternalJWTSignerNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update external Jwt signer not found response has a 4xx status code
-func (o *UpdateExternalJWTSignerNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update external Jwt signer not found response has a 5xx status code
-func (o *UpdateExternalJWTSignerNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update external Jwt signer not found response a status code equal to that given
-func (o *UpdateExternalJWTSignerNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the update external Jwt signer not found response
-func (o *UpdateExternalJWTSignerNotFound) Code() int {
-	return 404
-}
-
 func (o *UpdateExternalJWTSignerNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerNotFound %s", 404, payload)
+	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerNotFound  %+v", 404, o.Payload)
 }
-
-func (o *UpdateExternalJWTSignerNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerNotFound %s", 404, payload)
-}
-
 func (o *UpdateExternalJWTSignerNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type UpdateExternalJWTSignerTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update external Jwt signer too many requests response has a 2xx status code
-func (o *UpdateExternalJWTSignerTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update external Jwt signer too many requests response has a 3xx status code
-func (o *UpdateExternalJWTSignerTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update external Jwt signer too many requests response has a 4xx status code
-func (o *UpdateExternalJWTSignerTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update external Jwt signer too many requests response has a 5xx status code
-func (o *UpdateExternalJWTSignerTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update external Jwt signer too many requests response a status code equal to that given
-func (o *UpdateExternalJWTSignerTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the update external Jwt signer too many requests response
-func (o *UpdateExternalJWTSignerTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *UpdateExternalJWTSignerTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *UpdateExternalJWTSignerTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /external-jwt-signers/{id}][%d] updateExternalJwtSignerTooManyRequests %s", 429, payload)
-}
-
 func (o *UpdateExternalJWTSignerTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

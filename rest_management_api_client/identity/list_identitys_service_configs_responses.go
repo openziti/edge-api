@@ -30,7 +30,6 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListIdentitysServiceConfigsReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /identities/{id}/service-configs] listIdentitysServiceConfigs", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListIdentitysServiceConfigsOK struct {
 	Payload *rest_model.ListServiceConfigsEnvelope
 }
 
-// IsSuccess returns true when this list identitys service configs o k response has a 2xx status code
-func (o *ListIdentitysServiceConfigsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list identitys service configs o k response has a 3xx status code
-func (o *ListIdentitysServiceConfigsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list identitys service configs o k response has a 4xx status code
-func (o *ListIdentitysServiceConfigsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list identitys service configs o k response has a 5xx status code
-func (o *ListIdentitysServiceConfigsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list identitys service configs o k response a status code equal to that given
-func (o *ListIdentitysServiceConfigsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list identitys service configs o k response
-func (o *ListIdentitysServiceConfigsOK) Code() int {
-	return 200
-}
-
 func (o *ListIdentitysServiceConfigsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsOK  %+v", 200, o.Payload)
 }
-
-func (o *ListIdentitysServiceConfigsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsOK %s", 200, payload)
-}
-
 func (o *ListIdentitysServiceConfigsOK) GetPayload() *rest_model.ListServiceConfigsEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListIdentitysServiceConfigsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list identitys service configs unauthorized response has a 2xx status code
-func (o *ListIdentitysServiceConfigsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list identitys service configs unauthorized response has a 3xx status code
-func (o *ListIdentitysServiceConfigsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list identitys service configs unauthorized response has a 4xx status code
-func (o *ListIdentitysServiceConfigsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list identitys service configs unauthorized response has a 5xx status code
-func (o *ListIdentitysServiceConfigsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list identitys service configs unauthorized response a status code equal to that given
-func (o *ListIdentitysServiceConfigsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list identitys service configs unauthorized response
-func (o *ListIdentitysServiceConfigsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListIdentitysServiceConfigsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListIdentitysServiceConfigsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsUnauthorized %s", 401, payload)
-}
-
 func (o *ListIdentitysServiceConfigsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListIdentitysServiceConfigsNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list identitys service configs not found response has a 2xx status code
-func (o *ListIdentitysServiceConfigsNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list identitys service configs not found response has a 3xx status code
-func (o *ListIdentitysServiceConfigsNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list identitys service configs not found response has a 4xx status code
-func (o *ListIdentitysServiceConfigsNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list identitys service configs not found response has a 5xx status code
-func (o *ListIdentitysServiceConfigsNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list identitys service configs not found response a status code equal to that given
-func (o *ListIdentitysServiceConfigsNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the list identitys service configs not found response
-func (o *ListIdentitysServiceConfigsNotFound) Code() int {
-	return 404
-}
-
 func (o *ListIdentitysServiceConfigsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsNotFound  %+v", 404, o.Payload)
 }
-
-func (o *ListIdentitysServiceConfigsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsNotFound %s", 404, payload)
-}
-
 func (o *ListIdentitysServiceConfigsNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListIdentitysServiceConfigsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list identitys service configs too many requests response has a 2xx status code
-func (o *ListIdentitysServiceConfigsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list identitys service configs too many requests response has a 3xx status code
-func (o *ListIdentitysServiceConfigsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list identitys service configs too many requests response has a 4xx status code
-func (o *ListIdentitysServiceConfigsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list identitys service configs too many requests response has a 5xx status code
-func (o *ListIdentitysServiceConfigsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list identitys service configs too many requests response a status code equal to that given
-func (o *ListIdentitysServiceConfigsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list identitys service configs too many requests response
-func (o *ListIdentitysServiceConfigsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListIdentitysServiceConfigsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListIdentitysServiceConfigsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/service-configs][%d] listIdentitysServiceConfigsTooManyRequests %s", 429, payload)
-}
-
 func (o *ListIdentitysServiceConfigsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

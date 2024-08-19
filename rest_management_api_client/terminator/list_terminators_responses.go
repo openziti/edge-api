@@ -30,7 +30,6 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListTerminatorsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /terminators] listTerminators", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListTerminatorsOK struct {
 	Payload *rest_model.ListTerminatorsEnvelope
 }
 
-// IsSuccess returns true when this list terminators o k response has a 2xx status code
-func (o *ListTerminatorsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list terminators o k response has a 3xx status code
-func (o *ListTerminatorsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list terminators o k response has a 4xx status code
-func (o *ListTerminatorsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list terminators o k response has a 5xx status code
-func (o *ListTerminatorsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list terminators o k response a status code equal to that given
-func (o *ListTerminatorsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list terminators o k response
-func (o *ListTerminatorsOK) Code() int {
-	return 200
-}
-
 func (o *ListTerminatorsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsOK  %+v", 200, o.Payload)
 }
-
-func (o *ListTerminatorsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsOK %s", 200, payload)
-}
-
 func (o *ListTerminatorsOK) GetPayload() *rest_model.ListTerminatorsEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListTerminatorsBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list terminators bad request response has a 2xx status code
-func (o *ListTerminatorsBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list terminators bad request response has a 3xx status code
-func (o *ListTerminatorsBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list terminators bad request response has a 4xx status code
-func (o *ListTerminatorsBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list terminators bad request response has a 5xx status code
-func (o *ListTerminatorsBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list terminators bad request response a status code equal to that given
-func (o *ListTerminatorsBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list terminators bad request response
-func (o *ListTerminatorsBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListTerminatorsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListTerminatorsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsBadRequest %s", 400, payload)
-}
-
 func (o *ListTerminatorsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListTerminatorsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list terminators unauthorized response has a 2xx status code
-func (o *ListTerminatorsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list terminators unauthorized response has a 3xx status code
-func (o *ListTerminatorsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list terminators unauthorized response has a 4xx status code
-func (o *ListTerminatorsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list terminators unauthorized response has a 5xx status code
-func (o *ListTerminatorsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list terminators unauthorized response a status code equal to that given
-func (o *ListTerminatorsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list terminators unauthorized response
-func (o *ListTerminatorsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListTerminatorsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListTerminatorsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsUnauthorized %s", 401, payload)
-}
-
 func (o *ListTerminatorsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListTerminatorsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list terminators too many requests response has a 2xx status code
-func (o *ListTerminatorsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list terminators too many requests response has a 3xx status code
-func (o *ListTerminatorsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list terminators too many requests response has a 4xx status code
-func (o *ListTerminatorsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list terminators too many requests response has a 5xx status code
-func (o *ListTerminatorsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list terminators too many requests response a status code equal to that given
-func (o *ListTerminatorsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list terminators too many requests response
-func (o *ListTerminatorsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListTerminatorsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListTerminatorsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /terminators][%d] listTerminatorsTooManyRequests %s", 429, payload)
-}
-
 func (o *ListTerminatorsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

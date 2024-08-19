@@ -243,11 +243,6 @@ func (m *CommonEdgeRouterProperties) ContextValidate(ctx context.Context, format
 func (m *CommonEdgeRouterProperties) contextValidateAppData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppData != nil {
-
-		if swag.IsZero(m.AppData) { // not required
-			return nil
-		}
-
 		if err := m.AppData.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("appData")

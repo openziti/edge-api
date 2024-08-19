@@ -30,7 +30,6 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *UpdateTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /terminators/{id}] updateTerminator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type UpdateTerminatorOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this update terminator o k response has a 2xx status code
-func (o *UpdateTerminatorOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this update terminator o k response has a 3xx status code
-func (o *UpdateTerminatorOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update terminator o k response has a 4xx status code
-func (o *UpdateTerminatorOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this update terminator o k response has a 5xx status code
-func (o *UpdateTerminatorOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update terminator o k response a status code equal to that given
-func (o *UpdateTerminatorOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the update terminator o k response
-func (o *UpdateTerminatorOK) Code() int {
-	return 200
-}
-
 func (o *UpdateTerminatorOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateTerminatorOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorOK %s", 200, payload)
-}
-
 func (o *UpdateTerminatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type UpdateTerminatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update terminator bad request response has a 2xx status code
-func (o *UpdateTerminatorBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update terminator bad request response has a 3xx status code
-func (o *UpdateTerminatorBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update terminator bad request response has a 4xx status code
-func (o *UpdateTerminatorBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update terminator bad request response has a 5xx status code
-func (o *UpdateTerminatorBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update terminator bad request response a status code equal to that given
-func (o *UpdateTerminatorBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the update terminator bad request response
-func (o *UpdateTerminatorBadRequest) Code() int {
-	return 400
-}
-
 func (o *UpdateTerminatorBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *UpdateTerminatorBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorBadRequest %s", 400, payload)
-}
-
 func (o *UpdateTerminatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type UpdateTerminatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update terminator unauthorized response has a 2xx status code
-func (o *UpdateTerminatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update terminator unauthorized response has a 3xx status code
-func (o *UpdateTerminatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update terminator unauthorized response has a 4xx status code
-func (o *UpdateTerminatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update terminator unauthorized response has a 5xx status code
-func (o *UpdateTerminatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update terminator unauthorized response a status code equal to that given
-func (o *UpdateTerminatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update terminator unauthorized response
-func (o *UpdateTerminatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *UpdateTerminatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *UpdateTerminatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorUnauthorized %s", 401, payload)
-}
-
 func (o *UpdateTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type UpdateTerminatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update terminator not found response has a 2xx status code
-func (o *UpdateTerminatorNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update terminator not found response has a 3xx status code
-func (o *UpdateTerminatorNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update terminator not found response has a 4xx status code
-func (o *UpdateTerminatorNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update terminator not found response has a 5xx status code
-func (o *UpdateTerminatorNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update terminator not found response a status code equal to that given
-func (o *UpdateTerminatorNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the update terminator not found response
-func (o *UpdateTerminatorNotFound) Code() int {
-	return 404
-}
-
 func (o *UpdateTerminatorNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorNotFound %s", 404, payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorNotFound  %+v", 404, o.Payload)
 }
-
-func (o *UpdateTerminatorNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorNotFound %s", 404, payload)
-}
-
 func (o *UpdateTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type UpdateTerminatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update terminator too many requests response has a 2xx status code
-func (o *UpdateTerminatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update terminator too many requests response has a 3xx status code
-func (o *UpdateTerminatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update terminator too many requests response has a 4xx status code
-func (o *UpdateTerminatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update terminator too many requests response has a 5xx status code
-func (o *UpdateTerminatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update terminator too many requests response a status code equal to that given
-func (o *UpdateTerminatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the update terminator too many requests response
-func (o *UpdateTerminatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *UpdateTerminatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *UpdateTerminatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorTooManyRequests %s", 429, payload)
-}
-
 func (o *UpdateTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

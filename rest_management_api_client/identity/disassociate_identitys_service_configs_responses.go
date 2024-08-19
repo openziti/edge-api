@@ -30,7 +30,6 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *DisassociateIdentitysServiceConfigsReader) ReadResponse(response runtim
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /identities/{id}/service-configs] disassociateIdentitysServiceConfigs", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type DisassociateIdentitysServiceConfigsOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this disassociate identitys service configs o k response has a 2xx status code
-func (o *DisassociateIdentitysServiceConfigsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this disassociate identitys service configs o k response has a 3xx status code
-func (o *DisassociateIdentitysServiceConfigsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this disassociate identitys service configs o k response has a 4xx status code
-func (o *DisassociateIdentitysServiceConfigsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this disassociate identitys service configs o k response has a 5xx status code
-func (o *DisassociateIdentitysServiceConfigsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this disassociate identitys service configs o k response a status code equal to that given
-func (o *DisassociateIdentitysServiceConfigsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the disassociate identitys service configs o k response
-func (o *DisassociateIdentitysServiceConfigsOK) Code() int {
-	return 200
-}
-
 func (o *DisassociateIdentitysServiceConfigsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsOK  %+v", 200, o.Payload)
 }
-
-func (o *DisassociateIdentitysServiceConfigsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsOK %s", 200, payload)
-}
-
 func (o *DisassociateIdentitysServiceConfigsOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type DisassociateIdentitysServiceConfigsBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this disassociate identitys service configs bad request response has a 2xx status code
-func (o *DisassociateIdentitysServiceConfigsBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this disassociate identitys service configs bad request response has a 3xx status code
-func (o *DisassociateIdentitysServiceConfigsBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this disassociate identitys service configs bad request response has a 4xx status code
-func (o *DisassociateIdentitysServiceConfigsBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this disassociate identitys service configs bad request response has a 5xx status code
-func (o *DisassociateIdentitysServiceConfigsBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this disassociate identitys service configs bad request response a status code equal to that given
-func (o *DisassociateIdentitysServiceConfigsBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the disassociate identitys service configs bad request response
-func (o *DisassociateIdentitysServiceConfigsBadRequest) Code() int {
-	return 400
-}
-
 func (o *DisassociateIdentitysServiceConfigsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DisassociateIdentitysServiceConfigsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsBadRequest %s", 400, payload)
-}
-
 func (o *DisassociateIdentitysServiceConfigsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type DisassociateIdentitysServiceConfigsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this disassociate identitys service configs unauthorized response has a 2xx status code
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this disassociate identitys service configs unauthorized response has a 3xx status code
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this disassociate identitys service configs unauthorized response has a 4xx status code
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this disassociate identitys service configs unauthorized response has a 5xx status code
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this disassociate identitys service configs unauthorized response a status code equal to that given
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the disassociate identitys service configs unauthorized response
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DisassociateIdentitysServiceConfigsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DisassociateIdentitysServiceConfigsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsUnauthorized %s", 401, payload)
-}
-
 func (o *DisassociateIdentitysServiceConfigsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type DisassociateIdentitysServiceConfigsNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this disassociate identitys service configs not found response has a 2xx status code
-func (o *DisassociateIdentitysServiceConfigsNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this disassociate identitys service configs not found response has a 3xx status code
-func (o *DisassociateIdentitysServiceConfigsNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this disassociate identitys service configs not found response has a 4xx status code
-func (o *DisassociateIdentitysServiceConfigsNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this disassociate identitys service configs not found response has a 5xx status code
-func (o *DisassociateIdentitysServiceConfigsNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this disassociate identitys service configs not found response a status code equal to that given
-func (o *DisassociateIdentitysServiceConfigsNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the disassociate identitys service configs not found response
-func (o *DisassociateIdentitysServiceConfigsNotFound) Code() int {
-	return 404
-}
-
 func (o *DisassociateIdentitysServiceConfigsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DisassociateIdentitysServiceConfigsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsNotFound %s", 404, payload)
-}
-
 func (o *DisassociateIdentitysServiceConfigsNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type DisassociateIdentitysServiceConfigsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this disassociate identitys service configs too many requests response has a 2xx status code
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this disassociate identitys service configs too many requests response has a 3xx status code
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this disassociate identitys service configs too many requests response has a 4xx status code
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this disassociate identitys service configs too many requests response has a 5xx status code
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this disassociate identitys service configs too many requests response a status code equal to that given
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the disassociate identitys service configs too many requests response
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DisassociateIdentitysServiceConfigsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DisassociateIdentitysServiceConfigsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /identities/{id}/service-configs][%d] disassociateIdentitysServiceConfigsTooManyRequests %s", 429, payload)
-}
-
 func (o *DisassociateIdentitysServiceConfigsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

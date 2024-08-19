@@ -30,7 +30,6 @@ package service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailServiceReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /services/{id}] detailService", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailServiceOK struct {
 	Payload *rest_model.DetailServiceEnvelope
 }
 
-// IsSuccess returns true when this detail service o k response has a 2xx status code
-func (o *DetailServiceOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail service o k response has a 3xx status code
-func (o *DetailServiceOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service o k response has a 4xx status code
-func (o *DetailServiceOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail service o k response has a 5xx status code
-func (o *DetailServiceOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service o k response a status code equal to that given
-func (o *DetailServiceOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail service o k response
-func (o *DetailServiceOK) Code() int {
-	return 200
-}
-
 func (o *DetailServiceOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceOK %s", 200, payload)
+	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailServiceOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceOK %s", 200, payload)
-}
-
 func (o *DetailServiceOK) GetPayload() *rest_model.DetailServiceEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailServiceUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail service unauthorized response has a 2xx status code
-func (o *DetailServiceUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail service unauthorized response has a 3xx status code
-func (o *DetailServiceUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service unauthorized response has a 4xx status code
-func (o *DetailServiceUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail service unauthorized response has a 5xx status code
-func (o *DetailServiceUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service unauthorized response a status code equal to that given
-func (o *DetailServiceUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail service unauthorized response
-func (o *DetailServiceUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailServiceUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailServiceUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceUnauthorized %s", 401, payload)
-}
-
 func (o *DetailServiceUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailServiceNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail service not found response has a 2xx status code
-func (o *DetailServiceNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail service not found response has a 3xx status code
-func (o *DetailServiceNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service not found response has a 4xx status code
-func (o *DetailServiceNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail service not found response has a 5xx status code
-func (o *DetailServiceNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service not found response a status code equal to that given
-func (o *DetailServiceNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail service not found response
-func (o *DetailServiceNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailServiceNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailServiceNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceNotFound %s", 404, payload)
-}
-
 func (o *DetailServiceNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailServiceTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail service too many requests response has a 2xx status code
-func (o *DetailServiceTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail service too many requests response has a 3xx status code
-func (o *DetailServiceTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service too many requests response has a 4xx status code
-func (o *DetailServiceTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail service too many requests response has a 5xx status code
-func (o *DetailServiceTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service too many requests response a status code equal to that given
-func (o *DetailServiceTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail service too many requests response
-func (o *DetailServiceTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailServiceTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailServiceTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services/{id}][%d] detailServiceTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailServiceTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

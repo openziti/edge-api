@@ -30,7 +30,6 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *GetIdentityEnrollmentsReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /identities/{id}/enrollments] getIdentityEnrollments", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type GetIdentityEnrollmentsOK struct {
 	Payload *rest_model.ListEnrollmentsEnvelope
 }
 
-// IsSuccess returns true when this get identity enrollments o k response has a 2xx status code
-func (o *GetIdentityEnrollmentsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this get identity enrollments o k response has a 3xx status code
-func (o *GetIdentityEnrollmentsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity enrollments o k response has a 4xx status code
-func (o *GetIdentityEnrollmentsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this get identity enrollments o k response has a 5xx status code
-func (o *GetIdentityEnrollmentsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity enrollments o k response a status code equal to that given
-func (o *GetIdentityEnrollmentsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the get identity enrollments o k response
-func (o *GetIdentityEnrollmentsOK) Code() int {
-	return 200
-}
-
 func (o *GetIdentityEnrollmentsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsOK  %+v", 200, o.Payload)
 }
-
-func (o *GetIdentityEnrollmentsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsOK %s", 200, payload)
-}
-
 func (o *GetIdentityEnrollmentsOK) GetPayload() *rest_model.ListEnrollmentsEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type GetIdentityEnrollmentsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this get identity enrollments unauthorized response has a 2xx status code
-func (o *GetIdentityEnrollmentsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get identity enrollments unauthorized response has a 3xx status code
-func (o *GetIdentityEnrollmentsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity enrollments unauthorized response has a 4xx status code
-func (o *GetIdentityEnrollmentsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get identity enrollments unauthorized response has a 5xx status code
-func (o *GetIdentityEnrollmentsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity enrollments unauthorized response a status code equal to that given
-func (o *GetIdentityEnrollmentsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the get identity enrollments unauthorized response
-func (o *GetIdentityEnrollmentsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *GetIdentityEnrollmentsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *GetIdentityEnrollmentsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsUnauthorized %s", 401, payload)
-}
-
 func (o *GetIdentityEnrollmentsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type GetIdentityEnrollmentsNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this get identity enrollments not found response has a 2xx status code
-func (o *GetIdentityEnrollmentsNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get identity enrollments not found response has a 3xx status code
-func (o *GetIdentityEnrollmentsNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity enrollments not found response has a 4xx status code
-func (o *GetIdentityEnrollmentsNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get identity enrollments not found response has a 5xx status code
-func (o *GetIdentityEnrollmentsNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity enrollments not found response a status code equal to that given
-func (o *GetIdentityEnrollmentsNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the get identity enrollments not found response
-func (o *GetIdentityEnrollmentsNotFound) Code() int {
-	return 404
-}
-
 func (o *GetIdentityEnrollmentsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsNotFound  %+v", 404, o.Payload)
 }
-
-func (o *GetIdentityEnrollmentsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsNotFound %s", 404, payload)
-}
-
 func (o *GetIdentityEnrollmentsNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type GetIdentityEnrollmentsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this get identity enrollments too many requests response has a 2xx status code
-func (o *GetIdentityEnrollmentsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get identity enrollments too many requests response has a 3xx status code
-func (o *GetIdentityEnrollmentsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity enrollments too many requests response has a 4xx status code
-func (o *GetIdentityEnrollmentsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get identity enrollments too many requests response has a 5xx status code
-func (o *GetIdentityEnrollmentsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity enrollments too many requests response a status code equal to that given
-func (o *GetIdentityEnrollmentsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the get identity enrollments too many requests response
-func (o *GetIdentityEnrollmentsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *GetIdentityEnrollmentsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *GetIdentityEnrollmentsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/enrollments][%d] getIdentityEnrollmentsTooManyRequests %s", 429, payload)
-}
-
 func (o *GetIdentityEnrollmentsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

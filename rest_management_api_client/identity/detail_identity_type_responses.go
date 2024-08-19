@@ -30,7 +30,6 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailIdentityTypeReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /identity-types/{id}] detailIdentityType", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailIdentityTypeOK struct {
 	Payload *rest_model.DetailIdentityTypeEnvelope
 }
 
-// IsSuccess returns true when this detail identity type o k response has a 2xx status code
-func (o *DetailIdentityTypeOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail identity type o k response has a 3xx status code
-func (o *DetailIdentityTypeOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail identity type o k response has a 4xx status code
-func (o *DetailIdentityTypeOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail identity type o k response has a 5xx status code
-func (o *DetailIdentityTypeOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail identity type o k response a status code equal to that given
-func (o *DetailIdentityTypeOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail identity type o k response
-func (o *DetailIdentityTypeOK) Code() int {
-	return 200
-}
-
 func (o *DetailIdentityTypeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeOK %s", 200, payload)
+	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailIdentityTypeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeOK %s", 200, payload)
-}
-
 func (o *DetailIdentityTypeOK) GetPayload() *rest_model.DetailIdentityTypeEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailIdentityTypeUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail identity type unauthorized response has a 2xx status code
-func (o *DetailIdentityTypeUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail identity type unauthorized response has a 3xx status code
-func (o *DetailIdentityTypeUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail identity type unauthorized response has a 4xx status code
-func (o *DetailIdentityTypeUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail identity type unauthorized response has a 5xx status code
-func (o *DetailIdentityTypeUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail identity type unauthorized response a status code equal to that given
-func (o *DetailIdentityTypeUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail identity type unauthorized response
-func (o *DetailIdentityTypeUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailIdentityTypeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailIdentityTypeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeUnauthorized %s", 401, payload)
-}
-
 func (o *DetailIdentityTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailIdentityTypeNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail identity type not found response has a 2xx status code
-func (o *DetailIdentityTypeNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail identity type not found response has a 3xx status code
-func (o *DetailIdentityTypeNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail identity type not found response has a 4xx status code
-func (o *DetailIdentityTypeNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail identity type not found response has a 5xx status code
-func (o *DetailIdentityTypeNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail identity type not found response a status code equal to that given
-func (o *DetailIdentityTypeNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail identity type not found response
-func (o *DetailIdentityTypeNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailIdentityTypeNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailIdentityTypeNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeNotFound %s", 404, payload)
-}
-
 func (o *DetailIdentityTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailIdentityTypeTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail identity type too many requests response has a 2xx status code
-func (o *DetailIdentityTypeTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail identity type too many requests response has a 3xx status code
-func (o *DetailIdentityTypeTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail identity type too many requests response has a 4xx status code
-func (o *DetailIdentityTypeTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail identity type too many requests response has a 5xx status code
-func (o *DetailIdentityTypeTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail identity type too many requests response a status code equal to that given
-func (o *DetailIdentityTypeTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail identity type too many requests response
-func (o *DetailIdentityTypeTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailIdentityTypeTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailIdentityTypeTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identity-types/{id}][%d] detailIdentityTypeTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailIdentityTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

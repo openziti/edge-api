@@ -156,11 +156,6 @@ func (m *AuthPolicyPrimaryPatch) ContextValidate(ctx context.Context, formats st
 func (m *AuthPolicyPrimaryPatch) contextValidateCert(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cert != nil {
-
-		if swag.IsZero(m.Cert) { // not required
-			return nil
-		}
-
 		if err := m.Cert.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cert")
@@ -177,11 +172,6 @@ func (m *AuthPolicyPrimaryPatch) contextValidateCert(ctx context.Context, format
 func (m *AuthPolicyPrimaryPatch) contextValidateExtJWT(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExtJWT != nil {
-
-		if swag.IsZero(m.ExtJWT) { // not required
-			return nil
-		}
-
 		if err := m.ExtJWT.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("extJwt")
@@ -198,11 +188,6 @@ func (m *AuthPolicyPrimaryPatch) contextValidateExtJWT(ctx context.Context, form
 func (m *AuthPolicyPrimaryPatch) contextValidateUpdb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Updb != nil {
-
-		if swag.IsZero(m.Updb) { // not required
-			return nil
-		}
-
 		if err := m.Updb.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updb")

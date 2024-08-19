@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.23"
+    "version": "0.26.24"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -7655,7 +7655,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.23"
+    "version": "0.26.24"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -9750,8 +9750,8 @@ func init() {
         ],
         "description": "Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.\n",
         "produces": [
-          "image/png",
-          "application/json"
+          "application/json",
+          "image/png"
         ],
         "tags": [
           "Current Identity",
@@ -10045,14 +10045,14 @@ func init() {
       "post": {
         "description": "present a OTT and CSR to receive a long-lived client certificate",
         "consumes": [
-          "application/pkcs10",
           "application/json",
+          "application/pkcs10",
           "application/x-pem-file",
           "text/plain"
         ],
         "produces": [
-          "application/x-pem-file",
-          "application/json"
+          "application/json",
+          "application/x-pem-file"
         ],
         "tags": [
           "Enroll"
@@ -12630,8 +12630,8 @@ func init() {
         "security": [],
         "description": "Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).",
         "produces": [
-          "text/yaml",
-          "application/json"
+          "application/json",
+          "text/yaml"
         ],
         "tags": [
           "Informational"

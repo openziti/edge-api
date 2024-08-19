@@ -131,7 +131,6 @@ func (m *DetailAuthenticatorEnvelope) ContextValidate(ctx context.Context, forma
 func (m *DetailAuthenticatorEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
-
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")
@@ -148,7 +147,6 @@ func (m *DetailAuthenticatorEnvelope) contextValidateData(ctx context.Context, f
 func (m *DetailAuthenticatorEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
-
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("meta")

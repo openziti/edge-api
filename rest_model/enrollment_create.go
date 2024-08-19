@@ -58,7 +58,7 @@ type EnrollmentCreate struct {
 
 	// method
 	// Required: true
-	// Enum: ["ott","ottca","updb"]
+	// Enum: [ott ottca updb]
 	Method *string `json:"method"`
 
 	// username

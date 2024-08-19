@@ -30,7 +30,6 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /service-policies] createServicePolicy", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateServicePolicyCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create service policy created response has a 2xx status code
-func (o *CreateServicePolicyCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create service policy created response has a 3xx status code
-func (o *CreateServicePolicyCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service policy created response has a 4xx status code
-func (o *CreateServicePolicyCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create service policy created response has a 5xx status code
-func (o *CreateServicePolicyCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service policy created response a status code equal to that given
-func (o *CreateServicePolicyCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create service policy created response
-func (o *CreateServicePolicyCreated) Code() int {
-	return 201
-}
-
 func (o *CreateServicePolicyCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateServicePolicyCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyCreated %s", 201, payload)
-}
-
 func (o *CreateServicePolicyCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateServicePolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create service policy bad request response has a 2xx status code
-func (o *CreateServicePolicyBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create service policy bad request response has a 3xx status code
-func (o *CreateServicePolicyBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service policy bad request response has a 4xx status code
-func (o *CreateServicePolicyBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create service policy bad request response has a 5xx status code
-func (o *CreateServicePolicyBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service policy bad request response a status code equal to that given
-func (o *CreateServicePolicyBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create service policy bad request response
-func (o *CreateServicePolicyBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateServicePolicyBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateServicePolicyBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyBadRequest %s", 400, payload)
-}
-
 func (o *CreateServicePolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateServicePolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create service policy unauthorized response has a 2xx status code
-func (o *CreateServicePolicyUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create service policy unauthorized response has a 3xx status code
-func (o *CreateServicePolicyUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service policy unauthorized response has a 4xx status code
-func (o *CreateServicePolicyUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create service policy unauthorized response has a 5xx status code
-func (o *CreateServicePolicyUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service policy unauthorized response a status code equal to that given
-func (o *CreateServicePolicyUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create service policy unauthorized response
-func (o *CreateServicePolicyUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateServicePolicyUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateServicePolicyUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyUnauthorized %s", 401, payload)
-}
-
 func (o *CreateServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateServicePolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create service policy too many requests response has a 2xx status code
-func (o *CreateServicePolicyTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create service policy too many requests response has a 3xx status code
-func (o *CreateServicePolicyTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create service policy too many requests response has a 4xx status code
-func (o *CreateServicePolicyTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create service policy too many requests response has a 5xx status code
-func (o *CreateServicePolicyTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create service policy too many requests response a status code equal to that given
-func (o *CreateServicePolicyTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create service policy too many requests response
-func (o *CreateServicePolicyTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateServicePolicyTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateServicePolicyTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /service-policies][%d] createServicePolicyTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -30,7 +30,6 @@ package service_edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *DeleteServiceEdgeRouterPolicyReader) ReadResponse(response runtime.Clie
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /service-edge-router-policies/{id}] deleteServiceEdgeRouterPolicy", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type DeleteServiceEdgeRouterPolicyOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete service edge router policy o k response has a 2xx status code
-func (o *DeleteServiceEdgeRouterPolicyOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete service edge router policy o k response has a 3xx status code
-func (o *DeleteServiceEdgeRouterPolicyOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete service edge router policy o k response has a 4xx status code
-func (o *DeleteServiceEdgeRouterPolicyOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete service edge router policy o k response has a 5xx status code
-func (o *DeleteServiceEdgeRouterPolicyOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete service edge router policy o k response a status code equal to that given
-func (o *DeleteServiceEdgeRouterPolicyOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete service edge router policy o k response
-func (o *DeleteServiceEdgeRouterPolicyOK) Code() int {
-	return 200
-}
-
 func (o *DeleteServiceEdgeRouterPolicyOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteServiceEdgeRouterPolicyOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyOK %s", 200, payload)
-}
-
 func (o *DeleteServiceEdgeRouterPolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type DeleteServiceEdgeRouterPolicyBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete service edge router policy bad request response has a 2xx status code
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete service edge router policy bad request response has a 3xx status code
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete service edge router policy bad request response has a 4xx status code
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete service edge router policy bad request response has a 5xx status code
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete service edge router policy bad request response a status code equal to that given
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the delete service edge router policy bad request response
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) Code() int {
-	return 400
-}
-
 func (o *DeleteServiceEdgeRouterPolicyBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DeleteServiceEdgeRouterPolicyBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyBadRequest %s", 400, payload)
-}
-
 func (o *DeleteServiceEdgeRouterPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type DeleteServiceEdgeRouterPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete service edge router policy unauthorized response has a 2xx status code
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete service edge router policy unauthorized response has a 3xx status code
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete service edge router policy unauthorized response has a 4xx status code
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete service edge router policy unauthorized response has a 5xx status code
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete service edge router policy unauthorized response a status code equal to that given
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete service edge router policy unauthorized response
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteServiceEdgeRouterPolicyUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteServiceEdgeRouterPolicyUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteServiceEdgeRouterPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type DeleteServiceEdgeRouterPolicyConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete service edge router policy conflict response has a 2xx status code
-func (o *DeleteServiceEdgeRouterPolicyConflict) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete service edge router policy conflict response has a 3xx status code
-func (o *DeleteServiceEdgeRouterPolicyConflict) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete service edge router policy conflict response has a 4xx status code
-func (o *DeleteServiceEdgeRouterPolicyConflict) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete service edge router policy conflict response has a 5xx status code
-func (o *DeleteServiceEdgeRouterPolicyConflict) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete service edge router policy conflict response a status code equal to that given
-func (o *DeleteServiceEdgeRouterPolicyConflict) IsCode(code int) bool {
-	return code == 409
-}
-
-// Code gets the status code for the delete service edge router policy conflict response
-func (o *DeleteServiceEdgeRouterPolicyConflict) Code() int {
-	return 409
-}
-
 func (o *DeleteServiceEdgeRouterPolicyConflict) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyConflict %s", 409, payload)
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyConflict  %+v", 409, o.Payload)
 }
-
-func (o *DeleteServiceEdgeRouterPolicyConflict) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyConflict %s", 409, payload)
-}
-
 func (o *DeleteServiceEdgeRouterPolicyConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type DeleteServiceEdgeRouterPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete service edge router policy too many requests response has a 2xx status code
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete service edge router policy too many requests response has a 3xx status code
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete service edge router policy too many requests response has a 4xx status code
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete service edge router policy too many requests response has a 5xx status code
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete service edge router policy too many requests response a status code equal to that given
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete service edge router policy too many requests response
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

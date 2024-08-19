@@ -30,7 +30,6 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -55,7 +54,7 @@ func (o *DetailSpecBodyReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("[GET /specs/{id}/spec] detailSpecBody", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -73,46 +72,9 @@ type DetailSpecBodyOK struct {
 	Payload *rest_model.DetailSpecBodyEnvelope
 }
 
-// IsSuccess returns true when this detail spec body o k response has a 2xx status code
-func (o *DetailSpecBodyOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail spec body o k response has a 3xx status code
-func (o *DetailSpecBodyOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail spec body o k response has a 4xx status code
-func (o *DetailSpecBodyOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail spec body o k response has a 5xx status code
-func (o *DetailSpecBodyOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail spec body o k response a status code equal to that given
-func (o *DetailSpecBodyOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail spec body o k response
-func (o *DetailSpecBodyOK) Code() int {
-	return 200
-}
-
 func (o *DetailSpecBodyOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /specs/{id}/spec][%d] detailSpecBodyOK %s", 200, payload)
+	return fmt.Sprintf("[GET /specs/{id}/spec][%d] detailSpecBodyOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailSpecBodyOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /specs/{id}/spec][%d] detailSpecBodyOK %s", 200, payload)
-}
-
 func (o *DetailSpecBodyOK) GetPayload() *rest_model.DetailSpecBodyEnvelope {
 	return o.Payload
 }

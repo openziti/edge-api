@@ -30,7 +30,6 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *PatchAuthenticatorReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PATCH /authenticators/{id}] patchAuthenticator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type PatchAuthenticatorOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this patch authenticator o k response has a 2xx status code
-func (o *PatchAuthenticatorOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this patch authenticator o k response has a 3xx status code
-func (o *PatchAuthenticatorOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch authenticator o k response has a 4xx status code
-func (o *PatchAuthenticatorOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this patch authenticator o k response has a 5xx status code
-func (o *PatchAuthenticatorOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch authenticator o k response a status code equal to that given
-func (o *PatchAuthenticatorOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the patch authenticator o k response
-func (o *PatchAuthenticatorOK) Code() int {
-	return 200
-}
-
 func (o *PatchAuthenticatorOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorOK  %+v", 200, o.Payload)
 }
-
-func (o *PatchAuthenticatorOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorOK %s", 200, payload)
-}
-
 func (o *PatchAuthenticatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type PatchAuthenticatorBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch authenticator bad request response has a 2xx status code
-func (o *PatchAuthenticatorBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch authenticator bad request response has a 3xx status code
-func (o *PatchAuthenticatorBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch authenticator bad request response has a 4xx status code
-func (o *PatchAuthenticatorBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch authenticator bad request response has a 5xx status code
-func (o *PatchAuthenticatorBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch authenticator bad request response a status code equal to that given
-func (o *PatchAuthenticatorBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the patch authenticator bad request response
-func (o *PatchAuthenticatorBadRequest) Code() int {
-	return 400
-}
-
 func (o *PatchAuthenticatorBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *PatchAuthenticatorBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorBadRequest %s", 400, payload)
-}
-
 func (o *PatchAuthenticatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type PatchAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch authenticator unauthorized response has a 2xx status code
-func (o *PatchAuthenticatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch authenticator unauthorized response has a 3xx status code
-func (o *PatchAuthenticatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch authenticator unauthorized response has a 4xx status code
-func (o *PatchAuthenticatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch authenticator unauthorized response has a 5xx status code
-func (o *PatchAuthenticatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch authenticator unauthorized response a status code equal to that given
-func (o *PatchAuthenticatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the patch authenticator unauthorized response
-func (o *PatchAuthenticatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *PatchAuthenticatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *PatchAuthenticatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorUnauthorized %s", 401, payload)
-}
-
 func (o *PatchAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type PatchAuthenticatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch authenticator not found response has a 2xx status code
-func (o *PatchAuthenticatorNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch authenticator not found response has a 3xx status code
-func (o *PatchAuthenticatorNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch authenticator not found response has a 4xx status code
-func (o *PatchAuthenticatorNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch authenticator not found response has a 5xx status code
-func (o *PatchAuthenticatorNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch authenticator not found response a status code equal to that given
-func (o *PatchAuthenticatorNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the patch authenticator not found response
-func (o *PatchAuthenticatorNotFound) Code() int {
-	return 404
-}
-
 func (o *PatchAuthenticatorNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorNotFound  %+v", 404, o.Payload)
 }
-
-func (o *PatchAuthenticatorNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorNotFound %s", 404, payload)
-}
-
 func (o *PatchAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type PatchAuthenticatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch authenticator too many requests response has a 2xx status code
-func (o *PatchAuthenticatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch authenticator too many requests response has a 3xx status code
-func (o *PatchAuthenticatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch authenticator too many requests response has a 4xx status code
-func (o *PatchAuthenticatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch authenticator too many requests response has a 5xx status code
-func (o *PatchAuthenticatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch authenticator too many requests response a status code equal to that given
-func (o *PatchAuthenticatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the patch authenticator too many requests response
-func (o *PatchAuthenticatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *PatchAuthenticatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *PatchAuthenticatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /authenticators/{id}][%d] patchAuthenticatorTooManyRequests %s", 429, payload)
-}
-
 func (o *PatchAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

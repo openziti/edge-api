@@ -30,7 +30,6 @@ package auth_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailAuthPolicyReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /auth-policies/{id}] detailAuthPolicy", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailAuthPolicyOK struct {
 	Payload *rest_model.DetailAuthPolicyEnvelope
 }
 
-// IsSuccess returns true when this detail auth policy o k response has a 2xx status code
-func (o *DetailAuthPolicyOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail auth policy o k response has a 3xx status code
-func (o *DetailAuthPolicyOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail auth policy o k response has a 4xx status code
-func (o *DetailAuthPolicyOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail auth policy o k response has a 5xx status code
-func (o *DetailAuthPolicyOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail auth policy o k response a status code equal to that given
-func (o *DetailAuthPolicyOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail auth policy o k response
-func (o *DetailAuthPolicyOK) Code() int {
-	return 200
-}
-
 func (o *DetailAuthPolicyOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyOK %s", 200, payload)
+	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailAuthPolicyOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyOK %s", 200, payload)
-}
-
 func (o *DetailAuthPolicyOK) GetPayload() *rest_model.DetailAuthPolicyEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailAuthPolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail auth policy unauthorized response has a 2xx status code
-func (o *DetailAuthPolicyUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail auth policy unauthorized response has a 3xx status code
-func (o *DetailAuthPolicyUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail auth policy unauthorized response has a 4xx status code
-func (o *DetailAuthPolicyUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail auth policy unauthorized response has a 5xx status code
-func (o *DetailAuthPolicyUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail auth policy unauthorized response a status code equal to that given
-func (o *DetailAuthPolicyUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail auth policy unauthorized response
-func (o *DetailAuthPolicyUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailAuthPolicyUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailAuthPolicyUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyUnauthorized %s", 401, payload)
-}
-
 func (o *DetailAuthPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailAuthPolicyNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail auth policy not found response has a 2xx status code
-func (o *DetailAuthPolicyNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail auth policy not found response has a 3xx status code
-func (o *DetailAuthPolicyNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail auth policy not found response has a 4xx status code
-func (o *DetailAuthPolicyNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail auth policy not found response has a 5xx status code
-func (o *DetailAuthPolicyNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail auth policy not found response a status code equal to that given
-func (o *DetailAuthPolicyNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail auth policy not found response
-func (o *DetailAuthPolicyNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailAuthPolicyNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailAuthPolicyNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyNotFound %s", 404, payload)
-}
-
 func (o *DetailAuthPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailAuthPolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail auth policy too many requests response has a 2xx status code
-func (o *DetailAuthPolicyTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail auth policy too many requests response has a 3xx status code
-func (o *DetailAuthPolicyTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail auth policy too many requests response has a 4xx status code
-func (o *DetailAuthPolicyTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail auth policy too many requests response has a 5xx status code
-func (o *DetailAuthPolicyTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail auth policy too many requests response a status code equal to that given
-func (o *DetailAuthPolicyTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail auth policy too many requests response
-func (o *DetailAuthPolicyTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailAuthPolicyTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailAuthPolicyTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /auth-policies/{id}][%d] detailAuthPolicyTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailAuthPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

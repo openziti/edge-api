@@ -417,7 +417,6 @@ func (m *EdgeRouterPolicyDetail) contextValidateIdentityRolesDisplay(ctx context
 func (m *EdgeRouterPolicyDetail) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
-
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("semantic")

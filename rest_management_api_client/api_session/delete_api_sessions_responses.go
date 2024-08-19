@@ -30,7 +30,6 @@ package api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *DeleteAPISessionsReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /api-sessions/{id}] deleteAPISessions", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type DeleteAPISessionsOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete Api sessions o k response has a 2xx status code
-func (o *DeleteAPISessionsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete Api sessions o k response has a 3xx status code
-func (o *DeleteAPISessionsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete Api sessions o k response has a 4xx status code
-func (o *DeleteAPISessionsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete Api sessions o k response has a 5xx status code
-func (o *DeleteAPISessionsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete Api sessions o k response a status code equal to that given
-func (o *DeleteAPISessionsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete Api sessions o k response
-func (o *DeleteAPISessionsOK) Code() int {
-	return 200
-}
-
 func (o *DeleteAPISessionsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteAPISessionsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsOK %s", 200, payload)
-}
-
 func (o *DeleteAPISessionsOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type DeleteAPISessionsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete Api sessions unauthorized response has a 2xx status code
-func (o *DeleteAPISessionsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete Api sessions unauthorized response has a 3xx status code
-func (o *DeleteAPISessionsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete Api sessions unauthorized response has a 4xx status code
-func (o *DeleteAPISessionsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete Api sessions unauthorized response has a 5xx status code
-func (o *DeleteAPISessionsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete Api sessions unauthorized response a status code equal to that given
-func (o *DeleteAPISessionsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete Api sessions unauthorized response
-func (o *DeleteAPISessionsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteAPISessionsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteAPISessionsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteAPISessionsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type DeleteAPISessionsForbidden struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete Api sessions forbidden response has a 2xx status code
-func (o *DeleteAPISessionsForbidden) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete Api sessions forbidden response has a 3xx status code
-func (o *DeleteAPISessionsForbidden) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete Api sessions forbidden response has a 4xx status code
-func (o *DeleteAPISessionsForbidden) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete Api sessions forbidden response has a 5xx status code
-func (o *DeleteAPISessionsForbidden) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete Api sessions forbidden response a status code equal to that given
-func (o *DeleteAPISessionsForbidden) IsCode(code int) bool {
-	return code == 403
-}
-
-// Code gets the status code for the delete Api sessions forbidden response
-func (o *DeleteAPISessionsForbidden) Code() int {
-	return 403
-}
-
 func (o *DeleteAPISessionsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsForbidden  %+v", 403, o.Payload)
 }
-
-func (o *DeleteAPISessionsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsForbidden %s", 403, payload)
-}
-
 func (o *DeleteAPISessionsForbidden) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type DeleteAPISessionsNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete Api sessions not found response has a 2xx status code
-func (o *DeleteAPISessionsNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete Api sessions not found response has a 3xx status code
-func (o *DeleteAPISessionsNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete Api sessions not found response has a 4xx status code
-func (o *DeleteAPISessionsNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete Api sessions not found response has a 5xx status code
-func (o *DeleteAPISessionsNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete Api sessions not found response a status code equal to that given
-func (o *DeleteAPISessionsNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the delete Api sessions not found response
-func (o *DeleteAPISessionsNotFound) Code() int {
-	return 404
-}
-
 func (o *DeleteAPISessionsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DeleteAPISessionsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsNotFound %s", 404, payload)
-}
-
 func (o *DeleteAPISessionsNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type DeleteAPISessionsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete Api sessions too many requests response has a 2xx status code
-func (o *DeleteAPISessionsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete Api sessions too many requests response has a 3xx status code
-func (o *DeleteAPISessionsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete Api sessions too many requests response has a 4xx status code
-func (o *DeleteAPISessionsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete Api sessions too many requests response has a 5xx status code
-func (o *DeleteAPISessionsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete Api sessions too many requests response a status code equal to that given
-func (o *DeleteAPISessionsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete Api sessions too many requests response
-func (o *DeleteAPISessionsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteAPISessionsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteAPISessionsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /api-sessions/{id}][%d] deleteApiSessionsTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteAPISessionsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

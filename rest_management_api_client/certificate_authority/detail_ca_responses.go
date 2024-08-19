@@ -30,7 +30,6 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /cas/{id}] detailCa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailCaOK struct {
 	Payload *rest_model.DetailCaEnvelope
 }
 
-// IsSuccess returns true when this detail ca o k response has a 2xx status code
-func (o *DetailCaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail ca o k response has a 3xx status code
-func (o *DetailCaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail ca o k response has a 4xx status code
-func (o *DetailCaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail ca o k response has a 5xx status code
-func (o *DetailCaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail ca o k response a status code equal to that given
-func (o *DetailCaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail ca o k response
-func (o *DetailCaOK) Code() int {
-	return 200
-}
-
 func (o *DetailCaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaOK %s", 200, payload)
+	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailCaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaOK %s", 200, payload)
-}
-
 func (o *DetailCaOK) GetPayload() *rest_model.DetailCaEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailCaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail ca unauthorized response has a 2xx status code
-func (o *DetailCaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail ca unauthorized response has a 3xx status code
-func (o *DetailCaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail ca unauthorized response has a 4xx status code
-func (o *DetailCaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail ca unauthorized response has a 5xx status code
-func (o *DetailCaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail ca unauthorized response a status code equal to that given
-func (o *DetailCaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail ca unauthorized response
-func (o *DetailCaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailCaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailCaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaUnauthorized %s", 401, payload)
-}
-
 func (o *DetailCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailCaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail ca not found response has a 2xx status code
-func (o *DetailCaNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail ca not found response has a 3xx status code
-func (o *DetailCaNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail ca not found response has a 4xx status code
-func (o *DetailCaNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail ca not found response has a 5xx status code
-func (o *DetailCaNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail ca not found response a status code equal to that given
-func (o *DetailCaNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail ca not found response
-func (o *DetailCaNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailCaNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailCaNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaNotFound %s", 404, payload)
-}
-
 func (o *DetailCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail ca too many requests response has a 2xx status code
-func (o *DetailCaTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail ca too many requests response has a 3xx status code
-func (o *DetailCaTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail ca too many requests response has a 4xx status code
-func (o *DetailCaTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail ca too many requests response has a 5xx status code
-func (o *DetailCaTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail ca too many requests response a status code equal to that given
-func (o *DetailCaTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail ca too many requests response
-func (o *DetailCaTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailCaTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailCaTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /cas/{id}][%d] detailCaTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

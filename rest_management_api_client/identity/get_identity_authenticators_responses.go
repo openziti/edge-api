@@ -30,7 +30,6 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *GetIdentityAuthenticatorsReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /identities/{id}/authenticators] getIdentityAuthenticators", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type GetIdentityAuthenticatorsOK struct {
 	Payload *rest_model.ListAuthenticatorsEnvelope
 }
 
-// IsSuccess returns true when this get identity authenticators o k response has a 2xx status code
-func (o *GetIdentityAuthenticatorsOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this get identity authenticators o k response has a 3xx status code
-func (o *GetIdentityAuthenticatorsOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity authenticators o k response has a 4xx status code
-func (o *GetIdentityAuthenticatorsOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this get identity authenticators o k response has a 5xx status code
-func (o *GetIdentityAuthenticatorsOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity authenticators o k response a status code equal to that given
-func (o *GetIdentityAuthenticatorsOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the get identity authenticators o k response
-func (o *GetIdentityAuthenticatorsOK) Code() int {
-	return 200
-}
-
 func (o *GetIdentityAuthenticatorsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsOK  %+v", 200, o.Payload)
 }
-
-func (o *GetIdentityAuthenticatorsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsOK %s", 200, payload)
-}
-
 func (o *GetIdentityAuthenticatorsOK) GetPayload() *rest_model.ListAuthenticatorsEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type GetIdentityAuthenticatorsUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this get identity authenticators unauthorized response has a 2xx status code
-func (o *GetIdentityAuthenticatorsUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get identity authenticators unauthorized response has a 3xx status code
-func (o *GetIdentityAuthenticatorsUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity authenticators unauthorized response has a 4xx status code
-func (o *GetIdentityAuthenticatorsUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get identity authenticators unauthorized response has a 5xx status code
-func (o *GetIdentityAuthenticatorsUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity authenticators unauthorized response a status code equal to that given
-func (o *GetIdentityAuthenticatorsUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the get identity authenticators unauthorized response
-func (o *GetIdentityAuthenticatorsUnauthorized) Code() int {
-	return 401
-}
-
 func (o *GetIdentityAuthenticatorsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *GetIdentityAuthenticatorsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsUnauthorized %s", 401, payload)
-}
-
 func (o *GetIdentityAuthenticatorsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type GetIdentityAuthenticatorsNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this get identity authenticators not found response has a 2xx status code
-func (o *GetIdentityAuthenticatorsNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get identity authenticators not found response has a 3xx status code
-func (o *GetIdentityAuthenticatorsNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity authenticators not found response has a 4xx status code
-func (o *GetIdentityAuthenticatorsNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get identity authenticators not found response has a 5xx status code
-func (o *GetIdentityAuthenticatorsNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity authenticators not found response a status code equal to that given
-func (o *GetIdentityAuthenticatorsNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the get identity authenticators not found response
-func (o *GetIdentityAuthenticatorsNotFound) Code() int {
-	return 404
-}
-
 func (o *GetIdentityAuthenticatorsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsNotFound  %+v", 404, o.Payload)
 }
-
-func (o *GetIdentityAuthenticatorsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsNotFound %s", 404, payload)
-}
-
 func (o *GetIdentityAuthenticatorsNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type GetIdentityAuthenticatorsTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this get identity authenticators too many requests response has a 2xx status code
-func (o *GetIdentityAuthenticatorsTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get identity authenticators too many requests response has a 3xx status code
-func (o *GetIdentityAuthenticatorsTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get identity authenticators too many requests response has a 4xx status code
-func (o *GetIdentityAuthenticatorsTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get identity authenticators too many requests response has a 5xx status code
-func (o *GetIdentityAuthenticatorsTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get identity authenticators too many requests response a status code equal to that given
-func (o *GetIdentityAuthenticatorsTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the get identity authenticators too many requests response
-func (o *GetIdentityAuthenticatorsTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *GetIdentityAuthenticatorsTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *GetIdentityAuthenticatorsTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /identities/{id}/authenticators][%d] getIdentityAuthenticatorsTooManyRequests %s", 429, payload)
-}
-
 func (o *GetIdentityAuthenticatorsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

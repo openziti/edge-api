@@ -30,7 +30,6 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -55,7 +54,7 @@ func (o *ListEnumeratedCapabilitiesReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("[GET /enumerated-capabilities] listEnumeratedCapabilities", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -73,46 +72,9 @@ type ListEnumeratedCapabilitiesOK struct {
 	Payload *rest_model.ListEnumeratedCapabilitiesEnvelope
 }
 
-// IsSuccess returns true when this list enumerated capabilities o k response has a 2xx status code
-func (o *ListEnumeratedCapabilitiesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list enumerated capabilities o k response has a 3xx status code
-func (o *ListEnumeratedCapabilitiesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list enumerated capabilities o k response has a 4xx status code
-func (o *ListEnumeratedCapabilitiesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list enumerated capabilities o k response has a 5xx status code
-func (o *ListEnumeratedCapabilitiesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list enumerated capabilities o k response a status code equal to that given
-func (o *ListEnumeratedCapabilitiesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list enumerated capabilities o k response
-func (o *ListEnumeratedCapabilitiesOK) Code() int {
-	return 200
-}
-
 func (o *ListEnumeratedCapabilitiesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enumerated-capabilities][%d] listEnumeratedCapabilitiesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /enumerated-capabilities][%d] listEnumeratedCapabilitiesOK  %+v", 200, o.Payload)
 }
-
-func (o *ListEnumeratedCapabilitiesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /enumerated-capabilities][%d] listEnumeratedCapabilitiesOK %s", 200, payload)
-}
-
 func (o *ListEnumeratedCapabilitiesOK) GetPayload() *rest_model.ListEnumeratedCapabilitiesEnvelope {
 	return o.Payload
 }

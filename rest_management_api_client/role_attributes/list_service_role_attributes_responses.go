@@ -30,7 +30,6 @@ package role_attributes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListServiceRoleAttributesReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /service-role-attributes] listServiceRoleAttributes", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListServiceRoleAttributesOK struct {
 	Payload *rest_model.ListRoleAttributesEnvelope
 }
 
-// IsSuccess returns true when this list service role attributes o k response has a 2xx status code
-func (o *ListServiceRoleAttributesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list service role attributes o k response has a 3xx status code
-func (o *ListServiceRoleAttributesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list service role attributes o k response has a 4xx status code
-func (o *ListServiceRoleAttributesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list service role attributes o k response has a 5xx status code
-func (o *ListServiceRoleAttributesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list service role attributes o k response a status code equal to that given
-func (o *ListServiceRoleAttributesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list service role attributes o k response
-func (o *ListServiceRoleAttributesOK) Code() int {
-	return 200
-}
-
 func (o *ListServiceRoleAttributesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesOK  %+v", 200, o.Payload)
 }
-
-func (o *ListServiceRoleAttributesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesOK %s", 200, payload)
-}
-
 func (o *ListServiceRoleAttributesOK) GetPayload() *rest_model.ListRoleAttributesEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListServiceRoleAttributesBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list service role attributes bad request response has a 2xx status code
-func (o *ListServiceRoleAttributesBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list service role attributes bad request response has a 3xx status code
-func (o *ListServiceRoleAttributesBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list service role attributes bad request response has a 4xx status code
-func (o *ListServiceRoleAttributesBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list service role attributes bad request response has a 5xx status code
-func (o *ListServiceRoleAttributesBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list service role attributes bad request response a status code equal to that given
-func (o *ListServiceRoleAttributesBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list service role attributes bad request response
-func (o *ListServiceRoleAttributesBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListServiceRoleAttributesBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListServiceRoleAttributesBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesBadRequest %s", 400, payload)
-}
-
 func (o *ListServiceRoleAttributesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListServiceRoleAttributesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list service role attributes unauthorized response has a 2xx status code
-func (o *ListServiceRoleAttributesUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list service role attributes unauthorized response has a 3xx status code
-func (o *ListServiceRoleAttributesUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list service role attributes unauthorized response has a 4xx status code
-func (o *ListServiceRoleAttributesUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list service role attributes unauthorized response has a 5xx status code
-func (o *ListServiceRoleAttributesUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list service role attributes unauthorized response a status code equal to that given
-func (o *ListServiceRoleAttributesUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list service role attributes unauthorized response
-func (o *ListServiceRoleAttributesUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListServiceRoleAttributesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListServiceRoleAttributesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesUnauthorized %s", 401, payload)
-}
-
 func (o *ListServiceRoleAttributesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListServiceRoleAttributesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list service role attributes too many requests response has a 2xx status code
-func (o *ListServiceRoleAttributesTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list service role attributes too many requests response has a 3xx status code
-func (o *ListServiceRoleAttributesTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list service role attributes too many requests response has a 4xx status code
-func (o *ListServiceRoleAttributesTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list service role attributes too many requests response has a 5xx status code
-func (o *ListServiceRoleAttributesTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list service role attributes too many requests response a status code equal to that given
-func (o *ListServiceRoleAttributesTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list service role attributes too many requests response
-func (o *ListServiceRoleAttributesTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListServiceRoleAttributesTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListServiceRoleAttributesTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-role-attributes][%d] listServiceRoleAttributesTooManyRequests %s", 429, payload)
-}
-
 func (o *ListServiceRoleAttributesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

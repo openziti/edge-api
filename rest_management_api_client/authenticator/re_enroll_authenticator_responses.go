@@ -30,7 +30,6 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ReEnrollAuthenticatorReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /authenticators/{id}/re-enroll] reEnrollAuthenticator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ReEnrollAuthenticatorCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this re enroll authenticator created response has a 2xx status code
-func (o *ReEnrollAuthenticatorCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this re enroll authenticator created response has a 3xx status code
-func (o *ReEnrollAuthenticatorCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this re enroll authenticator created response has a 4xx status code
-func (o *ReEnrollAuthenticatorCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this re enroll authenticator created response has a 5xx status code
-func (o *ReEnrollAuthenticatorCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this re enroll authenticator created response a status code equal to that given
-func (o *ReEnrollAuthenticatorCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the re enroll authenticator created response
-func (o *ReEnrollAuthenticatorCreated) Code() int {
-	return 201
-}
-
 func (o *ReEnrollAuthenticatorCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorCreated  %+v", 201, o.Payload)
 }
-
-func (o *ReEnrollAuthenticatorCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorCreated %s", 201, payload)
-}
-
 func (o *ReEnrollAuthenticatorCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ReEnrollAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this re enroll authenticator unauthorized response has a 2xx status code
-func (o *ReEnrollAuthenticatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this re enroll authenticator unauthorized response has a 3xx status code
-func (o *ReEnrollAuthenticatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this re enroll authenticator unauthorized response has a 4xx status code
-func (o *ReEnrollAuthenticatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this re enroll authenticator unauthorized response has a 5xx status code
-func (o *ReEnrollAuthenticatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this re enroll authenticator unauthorized response a status code equal to that given
-func (o *ReEnrollAuthenticatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the re enroll authenticator unauthorized response
-func (o *ReEnrollAuthenticatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ReEnrollAuthenticatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ReEnrollAuthenticatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorUnauthorized %s", 401, payload)
-}
-
 func (o *ReEnrollAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ReEnrollAuthenticatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this re enroll authenticator not found response has a 2xx status code
-func (o *ReEnrollAuthenticatorNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this re enroll authenticator not found response has a 3xx status code
-func (o *ReEnrollAuthenticatorNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this re enroll authenticator not found response has a 4xx status code
-func (o *ReEnrollAuthenticatorNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this re enroll authenticator not found response has a 5xx status code
-func (o *ReEnrollAuthenticatorNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this re enroll authenticator not found response a status code equal to that given
-func (o *ReEnrollAuthenticatorNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the re enroll authenticator not found response
-func (o *ReEnrollAuthenticatorNotFound) Code() int {
-	return 404
-}
-
 func (o *ReEnrollAuthenticatorNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorNotFound  %+v", 404, o.Payload)
 }
-
-func (o *ReEnrollAuthenticatorNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorNotFound %s", 404, payload)
-}
-
 func (o *ReEnrollAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ReEnrollAuthenticatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this re enroll authenticator too many requests response has a 2xx status code
-func (o *ReEnrollAuthenticatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this re enroll authenticator too many requests response has a 3xx status code
-func (o *ReEnrollAuthenticatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this re enroll authenticator too many requests response has a 4xx status code
-func (o *ReEnrollAuthenticatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this re enroll authenticator too many requests response has a 5xx status code
-func (o *ReEnrollAuthenticatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this re enroll authenticator too many requests response a status code equal to that given
-func (o *ReEnrollAuthenticatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the re enroll authenticator too many requests response
-func (o *ReEnrollAuthenticatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ReEnrollAuthenticatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ReEnrollAuthenticatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticators/{id}/re-enroll][%d] reEnrollAuthenticatorTooManyRequests %s", 429, payload)
-}
-
 func (o *ReEnrollAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

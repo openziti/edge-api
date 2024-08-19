@@ -30,7 +30,6 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *DeleteConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /config-types/{id}] deleteConfigType", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type DeleteConfigTypeOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete config type o k response has a 2xx status code
-func (o *DeleteConfigTypeOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete config type o k response has a 3xx status code
-func (o *DeleteConfigTypeOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete config type o k response has a 4xx status code
-func (o *DeleteConfigTypeOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete config type o k response has a 5xx status code
-func (o *DeleteConfigTypeOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete config type o k response a status code equal to that given
-func (o *DeleteConfigTypeOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete config type o k response
-func (o *DeleteConfigTypeOK) Code() int {
-	return 200
-}
-
 func (o *DeleteConfigTypeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteConfigTypeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeOK %s", 200, payload)
-}
-
 func (o *DeleteConfigTypeOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type DeleteConfigTypeBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete config type bad request response has a 2xx status code
-func (o *DeleteConfigTypeBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete config type bad request response has a 3xx status code
-func (o *DeleteConfigTypeBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete config type bad request response has a 4xx status code
-func (o *DeleteConfigTypeBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete config type bad request response has a 5xx status code
-func (o *DeleteConfigTypeBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete config type bad request response a status code equal to that given
-func (o *DeleteConfigTypeBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the delete config type bad request response
-func (o *DeleteConfigTypeBadRequest) Code() int {
-	return 400
-}
-
 func (o *DeleteConfigTypeBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DeleteConfigTypeBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeBadRequest %s", 400, payload)
-}
-
 func (o *DeleteConfigTypeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type DeleteConfigTypeUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete config type unauthorized response has a 2xx status code
-func (o *DeleteConfigTypeUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete config type unauthorized response has a 3xx status code
-func (o *DeleteConfigTypeUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete config type unauthorized response has a 4xx status code
-func (o *DeleteConfigTypeUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete config type unauthorized response has a 5xx status code
-func (o *DeleteConfigTypeUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete config type unauthorized response a status code equal to that given
-func (o *DeleteConfigTypeUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete config type unauthorized response
-func (o *DeleteConfigTypeUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteConfigTypeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteConfigTypeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type DeleteConfigTypeConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete config type conflict response has a 2xx status code
-func (o *DeleteConfigTypeConflict) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete config type conflict response has a 3xx status code
-func (o *DeleteConfigTypeConflict) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete config type conflict response has a 4xx status code
-func (o *DeleteConfigTypeConflict) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete config type conflict response has a 5xx status code
-func (o *DeleteConfigTypeConflict) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete config type conflict response a status code equal to that given
-func (o *DeleteConfigTypeConflict) IsCode(code int) bool {
-	return code == 409
-}
-
-// Code gets the status code for the delete config type conflict response
-func (o *DeleteConfigTypeConflict) Code() int {
-	return 409
-}
-
 func (o *DeleteConfigTypeConflict) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeConflict %s", 409, payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeConflict  %+v", 409, o.Payload)
 }
-
-func (o *DeleteConfigTypeConflict) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeConflict %s", 409, payload)
-}
-
 func (o *DeleteConfigTypeConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type DeleteConfigTypeTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete config type too many requests response has a 2xx status code
-func (o *DeleteConfigTypeTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete config type too many requests response has a 3xx status code
-func (o *DeleteConfigTypeTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete config type too many requests response has a 4xx status code
-func (o *DeleteConfigTypeTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete config type too many requests response has a 5xx status code
-func (o *DeleteConfigTypeTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete config type too many requests response a status code equal to that given
-func (o *DeleteConfigTypeTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete config type too many requests response
-func (o *DeleteConfigTypeTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteConfigTypeTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteConfigTypeTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

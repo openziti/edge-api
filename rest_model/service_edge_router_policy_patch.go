@@ -196,10 +196,6 @@ func (m *ServiceEdgeRouterPolicyPatch) contextValidateEdgeRouterRoles(ctx contex
 
 func (m *ServiceEdgeRouterPolicyPatch) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Semantic) { // not required
-		return nil
-	}
-
 	if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("semantic")
@@ -229,11 +225,6 @@ func (m *ServiceEdgeRouterPolicyPatch) contextValidateServiceRoles(ctx context.C
 func (m *ServiceEdgeRouterPolicyPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
-
-		if swag.IsZero(m.Tags) { // not required
-			return nil
-		}
-
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

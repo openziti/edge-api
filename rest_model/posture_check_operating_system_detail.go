@@ -535,7 +535,6 @@ func (m *PostureCheckOperatingSystemDetail) contextValidateRoleAttributes(ctx co
 func (m *PostureCheckOperatingSystemDetail) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
-
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")
@@ -554,11 +553,6 @@ func (m *PostureCheckOperatingSystemDetail) contextValidateOperatingSystems(ctx 
 	for i := 0; i < len(m.OperatingSystems); i++ {
 
 		if m.OperatingSystems[i] != nil {
-
-			if swag.IsZero(m.OperatingSystems[i]) { // not required
-				return nil
-			}
-
 			if err := m.OperatingSystems[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("operatingSystems" + "." + strconv.Itoa(i))

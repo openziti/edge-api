@@ -30,7 +30,6 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /authenticators/{id}] detailAuthenticator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailAuthenticatorOK struct {
 	Payload *rest_model.DetailAuthenticatorEnvelope
 }
 
-// IsSuccess returns true when this detail authenticator o k response has a 2xx status code
-func (o *DetailAuthenticatorOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail authenticator o k response has a 3xx status code
-func (o *DetailAuthenticatorOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail authenticator o k response has a 4xx status code
-func (o *DetailAuthenticatorOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail authenticator o k response has a 5xx status code
-func (o *DetailAuthenticatorOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail authenticator o k response a status code equal to that given
-func (o *DetailAuthenticatorOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail authenticator o k response
-func (o *DetailAuthenticatorOK) Code() int {
-	return 200
-}
-
 func (o *DetailAuthenticatorOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK %s", 200, payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailAuthenticatorOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK %s", 200, payload)
-}
-
 func (o *DetailAuthenticatorOK) GetPayload() *rest_model.DetailAuthenticatorEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail authenticator unauthorized response has a 2xx status code
-func (o *DetailAuthenticatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail authenticator unauthorized response has a 3xx status code
-func (o *DetailAuthenticatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail authenticator unauthorized response has a 4xx status code
-func (o *DetailAuthenticatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail authenticator unauthorized response has a 5xx status code
-func (o *DetailAuthenticatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail authenticator unauthorized response a status code equal to that given
-func (o *DetailAuthenticatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail authenticator unauthorized response
-func (o *DetailAuthenticatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailAuthenticatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailAuthenticatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized %s", 401, payload)
-}
-
 func (o *DetailAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailAuthenticatorNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail authenticator not found response has a 2xx status code
-func (o *DetailAuthenticatorNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail authenticator not found response has a 3xx status code
-func (o *DetailAuthenticatorNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail authenticator not found response has a 4xx status code
-func (o *DetailAuthenticatorNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail authenticator not found response has a 5xx status code
-func (o *DetailAuthenticatorNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail authenticator not found response a status code equal to that given
-func (o *DetailAuthenticatorNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail authenticator not found response
-func (o *DetailAuthenticatorNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailAuthenticatorNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailAuthenticatorNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound %s", 404, payload)
-}
-
 func (o *DetailAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailAuthenticatorTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail authenticator too many requests response has a 2xx status code
-func (o *DetailAuthenticatorTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail authenticator too many requests response has a 3xx status code
-func (o *DetailAuthenticatorTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail authenticator too many requests response has a 4xx status code
-func (o *DetailAuthenticatorTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail authenticator too many requests response has a 5xx status code
-func (o *DetailAuthenticatorTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail authenticator too many requests response a status code equal to that given
-func (o *DetailAuthenticatorTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail authenticator too many requests response
-func (o *DetailAuthenticatorTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailAuthenticatorTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailAuthenticatorTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

@@ -30,7 +30,6 @@ package external_jwt_signer
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListExternalJWTSignersReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /external-jwt-signers] listExternalJwtSigners", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListExternalJWTSignersOK struct {
 	Payload *rest_model.ListClientExternalJWTSignersEnvelope
 }
 
-// IsSuccess returns true when this list external Jwt signers o k response has a 2xx status code
-func (o *ListExternalJWTSignersOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list external Jwt signers o k response has a 3xx status code
-func (o *ListExternalJWTSignersOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list external Jwt signers o k response has a 4xx status code
-func (o *ListExternalJWTSignersOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list external Jwt signers o k response has a 5xx status code
-func (o *ListExternalJWTSignersOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list external Jwt signers o k response a status code equal to that given
-func (o *ListExternalJWTSignersOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list external Jwt signers o k response
-func (o *ListExternalJWTSignersOK) Code() int {
-	return 200
-}
-
 func (o *ListExternalJWTSignersOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersOK %s", 200, payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersOK  %+v", 200, o.Payload)
 }
-
-func (o *ListExternalJWTSignersOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersOK %s", 200, payload)
-}
-
 func (o *ListExternalJWTSignersOK) GetPayload() *rest_model.ListClientExternalJWTSignersEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListExternalJWTSignersBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list external Jwt signers bad request response has a 2xx status code
-func (o *ListExternalJWTSignersBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list external Jwt signers bad request response has a 3xx status code
-func (o *ListExternalJWTSignersBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list external Jwt signers bad request response has a 4xx status code
-func (o *ListExternalJWTSignersBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list external Jwt signers bad request response has a 5xx status code
-func (o *ListExternalJWTSignersBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list external Jwt signers bad request response a status code equal to that given
-func (o *ListExternalJWTSignersBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list external Jwt signers bad request response
-func (o *ListExternalJWTSignersBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListExternalJWTSignersBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListExternalJWTSignersBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersBadRequest %s", 400, payload)
-}
-
 func (o *ListExternalJWTSignersBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListExternalJWTSignersUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list external Jwt signers unauthorized response has a 2xx status code
-func (o *ListExternalJWTSignersUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list external Jwt signers unauthorized response has a 3xx status code
-func (o *ListExternalJWTSignersUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list external Jwt signers unauthorized response has a 4xx status code
-func (o *ListExternalJWTSignersUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list external Jwt signers unauthorized response has a 5xx status code
-func (o *ListExternalJWTSignersUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list external Jwt signers unauthorized response a status code equal to that given
-func (o *ListExternalJWTSignersUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list external Jwt signers unauthorized response
-func (o *ListExternalJWTSignersUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListExternalJWTSignersUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListExternalJWTSignersUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersUnauthorized %s", 401, payload)
-}
-
 func (o *ListExternalJWTSignersUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListExternalJWTSignersTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list external Jwt signers too many requests response has a 2xx status code
-func (o *ListExternalJWTSignersTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list external Jwt signers too many requests response has a 3xx status code
-func (o *ListExternalJWTSignersTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list external Jwt signers too many requests response has a 4xx status code
-func (o *ListExternalJWTSignersTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list external Jwt signers too many requests response has a 5xx status code
-func (o *ListExternalJWTSignersTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list external Jwt signers too many requests response a status code equal to that given
-func (o *ListExternalJWTSignersTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list external Jwt signers too many requests response
-func (o *ListExternalJWTSignersTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListExternalJWTSignersTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListExternalJWTSignersTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersTooManyRequests %s", 429, payload)
-}
-
 func (o *ListExternalJWTSignersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

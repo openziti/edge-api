@@ -35,7 +35,6 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // DialBindArray dial bind array
@@ -71,10 +70,6 @@ func (m DialBindArray) ContextValidate(ctx context.Context, formats strfmt.Regis
 	var res []error
 
 	for i := 0; i < len(m); i++ {
-
-		if swag.IsZero(m[i]) { // not required
-			return nil
-		}
 
 		if err := m[i].ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

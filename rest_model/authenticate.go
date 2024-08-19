@@ -224,11 +224,6 @@ func (m *Authenticate) contextValidateConfigTypes(ctx context.Context, formats s
 func (m *Authenticate) contextValidateEnvInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EnvInfo != nil {
-
-		if swag.IsZero(m.EnvInfo) { // not required
-			return nil
-		}
-
 		if err := m.EnvInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("envInfo")
@@ -243,10 +238,6 @@ func (m *Authenticate) contextValidateEnvInfo(ctx context.Context, formats strfm
 }
 
 func (m *Authenticate) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Password) { // not required
-		return nil
-	}
 
 	if err := m.Password.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -263,11 +254,6 @@ func (m *Authenticate) contextValidatePassword(ctx context.Context, formats strf
 func (m *Authenticate) contextValidateSdkInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
-
-		if swag.IsZero(m.SdkInfo) { // not required
-			return nil
-		}
-
 		if err := m.SdkInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sdkInfo")
@@ -282,10 +268,6 @@ func (m *Authenticate) contextValidateSdkInfo(ctx context.Context, formats strfm
 }
 
 func (m *Authenticate) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Username) { // not required
-		return nil
-	}
 
 	if err := m.Username.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

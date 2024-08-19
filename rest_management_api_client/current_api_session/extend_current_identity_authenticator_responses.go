@@ -30,7 +30,6 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -61,7 +60,7 @@ func (o *ExtendCurrentIdentityAuthenticatorReader) ReadResponse(response runtime
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /current-identity/authenticators/{id}/extend] extendCurrentIdentityAuthenticator", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -79,46 +78,9 @@ type ExtendCurrentIdentityAuthenticatorOK struct {
 	Payload *rest_model.IdentityExtendEnrollmentEnvelope
 }
 
-// IsSuccess returns true when this extend current identity authenticator o k response has a 2xx status code
-func (o *ExtendCurrentIdentityAuthenticatorOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this extend current identity authenticator o k response has a 3xx status code
-func (o *ExtendCurrentIdentityAuthenticatorOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this extend current identity authenticator o k response has a 4xx status code
-func (o *ExtendCurrentIdentityAuthenticatorOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this extend current identity authenticator o k response has a 5xx status code
-func (o *ExtendCurrentIdentityAuthenticatorOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this extend current identity authenticator o k response a status code equal to that given
-func (o *ExtendCurrentIdentityAuthenticatorOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the extend current identity authenticator o k response
-func (o *ExtendCurrentIdentityAuthenticatorOK) Code() int {
-	return 200
-}
-
 func (o *ExtendCurrentIdentityAuthenticatorOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/authenticators/{id}/extend][%d] extendCurrentIdentityAuthenticatorOK %s", 200, payload)
+	return fmt.Sprintf("[POST /current-identity/authenticators/{id}/extend][%d] extendCurrentIdentityAuthenticatorOK  %+v", 200, o.Payload)
 }
-
-func (o *ExtendCurrentIdentityAuthenticatorOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/authenticators/{id}/extend][%d] extendCurrentIdentityAuthenticatorOK %s", 200, payload)
-}
-
 func (o *ExtendCurrentIdentityAuthenticatorOK) GetPayload() *rest_model.IdentityExtendEnrollmentEnvelope {
 	return o.Payload
 }
@@ -149,46 +111,9 @@ type ExtendCurrentIdentityAuthenticatorUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this extend current identity authenticator unauthorized response has a 2xx status code
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this extend current identity authenticator unauthorized response has a 3xx status code
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this extend current identity authenticator unauthorized response has a 4xx status code
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this extend current identity authenticator unauthorized response has a 5xx status code
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this extend current identity authenticator unauthorized response a status code equal to that given
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the extend current identity authenticator unauthorized response
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/authenticators/{id}/extend][%d] extendCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /current-identity/authenticators/{id}/extend][%d] extendCurrentIdentityAuthenticatorUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/authenticators/{id}/extend][%d] extendCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
-}
-
 func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

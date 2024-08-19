@@ -30,7 +30,6 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *CreateDatabaseSnapshotReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /database/snapshot] createDatabaseSnapshot", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type CreateDatabaseSnapshotOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this create database snapshot o k response has a 2xx status code
-func (o *CreateDatabaseSnapshotOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create database snapshot o k response has a 3xx status code
-func (o *CreateDatabaseSnapshotOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create database snapshot o k response has a 4xx status code
-func (o *CreateDatabaseSnapshotOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create database snapshot o k response has a 5xx status code
-func (o *CreateDatabaseSnapshotOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create database snapshot o k response a status code equal to that given
-func (o *CreateDatabaseSnapshotOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the create database snapshot o k response
-func (o *CreateDatabaseSnapshotOK) Code() int {
-	return 200
-}
-
 func (o *CreateDatabaseSnapshotOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotOK %s", 200, payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotOK  %+v", 200, o.Payload)
 }
-
-func (o *CreateDatabaseSnapshotOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotOK %s", 200, payload)
-}
-
 func (o *CreateDatabaseSnapshotOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type CreateDatabaseSnapshotUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create database snapshot unauthorized response has a 2xx status code
-func (o *CreateDatabaseSnapshotUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create database snapshot unauthorized response has a 3xx status code
-func (o *CreateDatabaseSnapshotUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create database snapshot unauthorized response has a 4xx status code
-func (o *CreateDatabaseSnapshotUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create database snapshot unauthorized response has a 5xx status code
-func (o *CreateDatabaseSnapshotUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create database snapshot unauthorized response a status code equal to that given
-func (o *CreateDatabaseSnapshotUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create database snapshot unauthorized response
-func (o *CreateDatabaseSnapshotUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateDatabaseSnapshotUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateDatabaseSnapshotUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotUnauthorized %s", 401, payload)
-}
-
 func (o *CreateDatabaseSnapshotUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type CreateDatabaseSnapshotTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create database snapshot too many requests response has a 2xx status code
-func (o *CreateDatabaseSnapshotTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create database snapshot too many requests response has a 3xx status code
-func (o *CreateDatabaseSnapshotTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create database snapshot too many requests response has a 4xx status code
-func (o *CreateDatabaseSnapshotTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create database snapshot too many requests response has a 5xx status code
-func (o *CreateDatabaseSnapshotTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create database snapshot too many requests response a status code equal to that given
-func (o *CreateDatabaseSnapshotTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create database snapshot too many requests response
-func (o *CreateDatabaseSnapshotTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateDatabaseSnapshotTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateDatabaseSnapshotTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateDatabaseSnapshotTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

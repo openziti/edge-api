@@ -30,7 +30,6 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *DeleteTransitRouterReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /transit-routers/{id}] deleteTransitRouter", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type DeleteTransitRouterOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete transit router o k response has a 2xx status code
-func (o *DeleteTransitRouterOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete transit router o k response has a 3xx status code
-func (o *DeleteTransitRouterOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete transit router o k response has a 4xx status code
-func (o *DeleteTransitRouterOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete transit router o k response has a 5xx status code
-func (o *DeleteTransitRouterOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete transit router o k response a status code equal to that given
-func (o *DeleteTransitRouterOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete transit router o k response
-func (o *DeleteTransitRouterOK) Code() int {
-	return 200
-}
-
 func (o *DeleteTransitRouterOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteTransitRouterOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterOK %s", 200, payload)
-}
-
 func (o *DeleteTransitRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type DeleteTransitRouterBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete transit router bad request response has a 2xx status code
-func (o *DeleteTransitRouterBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete transit router bad request response has a 3xx status code
-func (o *DeleteTransitRouterBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete transit router bad request response has a 4xx status code
-func (o *DeleteTransitRouterBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete transit router bad request response has a 5xx status code
-func (o *DeleteTransitRouterBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete transit router bad request response a status code equal to that given
-func (o *DeleteTransitRouterBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the delete transit router bad request response
-func (o *DeleteTransitRouterBadRequest) Code() int {
-	return 400
-}
-
 func (o *DeleteTransitRouterBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DeleteTransitRouterBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterBadRequest %s", 400, payload)
-}
-
 func (o *DeleteTransitRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type DeleteTransitRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete transit router unauthorized response has a 2xx status code
-func (o *DeleteTransitRouterUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete transit router unauthorized response has a 3xx status code
-func (o *DeleteTransitRouterUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete transit router unauthorized response has a 4xx status code
-func (o *DeleteTransitRouterUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete transit router unauthorized response has a 5xx status code
-func (o *DeleteTransitRouterUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete transit router unauthorized response a status code equal to that given
-func (o *DeleteTransitRouterUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete transit router unauthorized response
-func (o *DeleteTransitRouterUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteTransitRouterUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteTransitRouterUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type DeleteTransitRouterConflict struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete transit router conflict response has a 2xx status code
-func (o *DeleteTransitRouterConflict) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete transit router conflict response has a 3xx status code
-func (o *DeleteTransitRouterConflict) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete transit router conflict response has a 4xx status code
-func (o *DeleteTransitRouterConflict) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete transit router conflict response has a 5xx status code
-func (o *DeleteTransitRouterConflict) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete transit router conflict response a status code equal to that given
-func (o *DeleteTransitRouterConflict) IsCode(code int) bool {
-	return code == 409
-}
-
-// Code gets the status code for the delete transit router conflict response
-func (o *DeleteTransitRouterConflict) Code() int {
-	return 409
-}
-
 func (o *DeleteTransitRouterConflict) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterConflict %s", 409, payload)
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterConflict  %+v", 409, o.Payload)
 }
-
-func (o *DeleteTransitRouterConflict) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterConflict %s", 409, payload)
-}
-
 func (o *DeleteTransitRouterConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type DeleteTransitRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete transit router too many requests response has a 2xx status code
-func (o *DeleteTransitRouterTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete transit router too many requests response has a 3xx status code
-func (o *DeleteTransitRouterTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete transit router too many requests response has a 4xx status code
-func (o *DeleteTransitRouterTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete transit router too many requests response has a 5xx status code
-func (o *DeleteTransitRouterTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete transit router too many requests response a status code equal to that given
-func (o *DeleteTransitRouterTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete transit router too many requests response
-func (o *DeleteTransitRouterTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteTransitRouterTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteTransitRouterTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

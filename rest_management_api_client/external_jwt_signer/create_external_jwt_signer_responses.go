@@ -30,7 +30,6 @@ package external_jwt_signer
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateExternalJWTSignerReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /external-jwt-signers] createExternalJwtSigner", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateExternalJWTSignerCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create external Jwt signer created response has a 2xx status code
-func (o *CreateExternalJWTSignerCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create external Jwt signer created response has a 3xx status code
-func (o *CreateExternalJWTSignerCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create external Jwt signer created response has a 4xx status code
-func (o *CreateExternalJWTSignerCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create external Jwt signer created response has a 5xx status code
-func (o *CreateExternalJWTSignerCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create external Jwt signer created response a status code equal to that given
-func (o *CreateExternalJWTSignerCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create external Jwt signer created response
-func (o *CreateExternalJWTSignerCreated) Code() int {
-	return 201
-}
-
 func (o *CreateExternalJWTSignerCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateExternalJWTSignerCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerCreated %s", 201, payload)
-}
-
 func (o *CreateExternalJWTSignerCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateExternalJWTSignerBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create external Jwt signer bad request response has a 2xx status code
-func (o *CreateExternalJWTSignerBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create external Jwt signer bad request response has a 3xx status code
-func (o *CreateExternalJWTSignerBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create external Jwt signer bad request response has a 4xx status code
-func (o *CreateExternalJWTSignerBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create external Jwt signer bad request response has a 5xx status code
-func (o *CreateExternalJWTSignerBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create external Jwt signer bad request response a status code equal to that given
-func (o *CreateExternalJWTSignerBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create external Jwt signer bad request response
-func (o *CreateExternalJWTSignerBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateExternalJWTSignerBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateExternalJWTSignerBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerBadRequest %s", 400, payload)
-}
-
 func (o *CreateExternalJWTSignerBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateExternalJWTSignerUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create external Jwt signer unauthorized response has a 2xx status code
-func (o *CreateExternalJWTSignerUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create external Jwt signer unauthorized response has a 3xx status code
-func (o *CreateExternalJWTSignerUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create external Jwt signer unauthorized response has a 4xx status code
-func (o *CreateExternalJWTSignerUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create external Jwt signer unauthorized response has a 5xx status code
-func (o *CreateExternalJWTSignerUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create external Jwt signer unauthorized response a status code equal to that given
-func (o *CreateExternalJWTSignerUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create external Jwt signer unauthorized response
-func (o *CreateExternalJWTSignerUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateExternalJWTSignerUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateExternalJWTSignerUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerUnauthorized %s", 401, payload)
-}
-
 func (o *CreateExternalJWTSignerUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateExternalJWTSignerTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create external Jwt signer too many requests response has a 2xx status code
-func (o *CreateExternalJWTSignerTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create external Jwt signer too many requests response has a 3xx status code
-func (o *CreateExternalJWTSignerTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create external Jwt signer too many requests response has a 4xx status code
-func (o *CreateExternalJWTSignerTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create external Jwt signer too many requests response has a 5xx status code
-func (o *CreateExternalJWTSignerTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create external Jwt signer too many requests response a status code equal to that given
-func (o *CreateExternalJWTSignerTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create external Jwt signer too many requests response
-func (o *CreateExternalJWTSignerTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateExternalJWTSignerTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateExternalJWTSignerTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /external-jwt-signers][%d] createExternalJwtSignerTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateExternalJWTSignerTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

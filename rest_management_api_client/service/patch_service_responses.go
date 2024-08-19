@@ -30,7 +30,6 @@ package service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *PatchServiceReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PATCH /services/{id}] patchService", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type PatchServiceOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this patch service o k response has a 2xx status code
-func (o *PatchServiceOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this patch service o k response has a 3xx status code
-func (o *PatchServiceOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service o k response has a 4xx status code
-func (o *PatchServiceOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this patch service o k response has a 5xx status code
-func (o *PatchServiceOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service o k response a status code equal to that given
-func (o *PatchServiceOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the patch service o k response
-func (o *PatchServiceOK) Code() int {
-	return 200
-}
-
 func (o *PatchServiceOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceOK  %+v", 200, o.Payload)
 }
-
-func (o *PatchServiceOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceOK %s", 200, payload)
-}
-
 func (o *PatchServiceOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type PatchServiceBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service bad request response has a 2xx status code
-func (o *PatchServiceBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service bad request response has a 3xx status code
-func (o *PatchServiceBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service bad request response has a 4xx status code
-func (o *PatchServiceBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service bad request response has a 5xx status code
-func (o *PatchServiceBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service bad request response a status code equal to that given
-func (o *PatchServiceBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the patch service bad request response
-func (o *PatchServiceBadRequest) Code() int {
-	return 400
-}
-
 func (o *PatchServiceBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *PatchServiceBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceBadRequest %s", 400, payload)
-}
-
 func (o *PatchServiceBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type PatchServiceUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service unauthorized response has a 2xx status code
-func (o *PatchServiceUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service unauthorized response has a 3xx status code
-func (o *PatchServiceUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service unauthorized response has a 4xx status code
-func (o *PatchServiceUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service unauthorized response has a 5xx status code
-func (o *PatchServiceUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service unauthorized response a status code equal to that given
-func (o *PatchServiceUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the patch service unauthorized response
-func (o *PatchServiceUnauthorized) Code() int {
-	return 401
-}
-
 func (o *PatchServiceUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *PatchServiceUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceUnauthorized %s", 401, payload)
-}
-
 func (o *PatchServiceUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type PatchServiceNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service not found response has a 2xx status code
-func (o *PatchServiceNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service not found response has a 3xx status code
-func (o *PatchServiceNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service not found response has a 4xx status code
-func (o *PatchServiceNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service not found response has a 5xx status code
-func (o *PatchServiceNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service not found response a status code equal to that given
-func (o *PatchServiceNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the patch service not found response
-func (o *PatchServiceNotFound) Code() int {
-	return 404
-}
-
 func (o *PatchServiceNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceNotFound  %+v", 404, o.Payload)
 }
-
-func (o *PatchServiceNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceNotFound %s", 404, payload)
-}
-
 func (o *PatchServiceNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type PatchServiceTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this patch service too many requests response has a 2xx status code
-func (o *PatchServiceTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this patch service too many requests response has a 3xx status code
-func (o *PatchServiceTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this patch service too many requests response has a 4xx status code
-func (o *PatchServiceTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this patch service too many requests response has a 5xx status code
-func (o *PatchServiceTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this patch service too many requests response a status code equal to that given
-func (o *PatchServiceTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the patch service too many requests response
-func (o *PatchServiceTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *PatchServiceTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *PatchServiceTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceTooManyRequests %s", 429, payload)
-}
-
 func (o *PatchServiceTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

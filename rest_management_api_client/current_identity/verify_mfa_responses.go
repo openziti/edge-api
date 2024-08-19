@@ -30,7 +30,6 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *VerifyMfaReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /current-identity/mfa/verify] verifyMfa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type VerifyMfaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this verify mfa o k response has a 2xx status code
-func (o *VerifyMfaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this verify mfa o k response has a 3xx status code
-func (o *VerifyMfaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify mfa o k response has a 4xx status code
-func (o *VerifyMfaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this verify mfa o k response has a 5xx status code
-func (o *VerifyMfaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify mfa o k response a status code equal to that given
-func (o *VerifyMfaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the verify mfa o k response
-func (o *VerifyMfaOK) Code() int {
-	return 200
-}
-
 func (o *VerifyMfaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaOK %s", 200, payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaOK  %+v", 200, o.Payload)
 }
-
-func (o *VerifyMfaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaOK %s", 200, payload)
-}
-
 func (o *VerifyMfaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type VerifyMfaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this verify mfa unauthorized response has a 2xx status code
-func (o *VerifyMfaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this verify mfa unauthorized response has a 3xx status code
-func (o *VerifyMfaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify mfa unauthorized response has a 4xx status code
-func (o *VerifyMfaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this verify mfa unauthorized response has a 5xx status code
-func (o *VerifyMfaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify mfa unauthorized response a status code equal to that given
-func (o *VerifyMfaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the verify mfa unauthorized response
-func (o *VerifyMfaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *VerifyMfaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *VerifyMfaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaUnauthorized %s", 401, payload)
-}
-
 func (o *VerifyMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type VerifyMfaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this verify mfa not found response has a 2xx status code
-func (o *VerifyMfaNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this verify mfa not found response has a 3xx status code
-func (o *VerifyMfaNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify mfa not found response has a 4xx status code
-func (o *VerifyMfaNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this verify mfa not found response has a 5xx status code
-func (o *VerifyMfaNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify mfa not found response a status code equal to that given
-func (o *VerifyMfaNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the verify mfa not found response
-func (o *VerifyMfaNotFound) Code() int {
-	return 404
-}
-
 func (o *VerifyMfaNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaNotFound  %+v", 404, o.Payload)
 }
-
-func (o *VerifyMfaNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaNotFound %s", 404, payload)
-}
-
 func (o *VerifyMfaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

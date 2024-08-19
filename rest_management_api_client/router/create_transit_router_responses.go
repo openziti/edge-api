@@ -30,7 +30,6 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateTransitRouterReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /transit-routers] createTransitRouter", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateTransitRouterCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create transit router created response has a 2xx status code
-func (o *CreateTransitRouterCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create transit router created response has a 3xx status code
-func (o *CreateTransitRouterCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create transit router created response has a 4xx status code
-func (o *CreateTransitRouterCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create transit router created response has a 5xx status code
-func (o *CreateTransitRouterCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create transit router created response a status code equal to that given
-func (o *CreateTransitRouterCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create transit router created response
-func (o *CreateTransitRouterCreated) Code() int {
-	return 201
-}
-
 func (o *CreateTransitRouterCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateTransitRouterCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterCreated %s", 201, payload)
-}
-
 func (o *CreateTransitRouterCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateTransitRouterBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create transit router bad request response has a 2xx status code
-func (o *CreateTransitRouterBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create transit router bad request response has a 3xx status code
-func (o *CreateTransitRouterBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create transit router bad request response has a 4xx status code
-func (o *CreateTransitRouterBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create transit router bad request response has a 5xx status code
-func (o *CreateTransitRouterBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create transit router bad request response a status code equal to that given
-func (o *CreateTransitRouterBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create transit router bad request response
-func (o *CreateTransitRouterBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateTransitRouterBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateTransitRouterBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterBadRequest %s", 400, payload)
-}
-
 func (o *CreateTransitRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateTransitRouterUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create transit router unauthorized response has a 2xx status code
-func (o *CreateTransitRouterUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create transit router unauthorized response has a 3xx status code
-func (o *CreateTransitRouterUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create transit router unauthorized response has a 4xx status code
-func (o *CreateTransitRouterUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create transit router unauthorized response has a 5xx status code
-func (o *CreateTransitRouterUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create transit router unauthorized response a status code equal to that given
-func (o *CreateTransitRouterUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create transit router unauthorized response
-func (o *CreateTransitRouterUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateTransitRouterUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateTransitRouterUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterUnauthorized %s", 401, payload)
-}
-
 func (o *CreateTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateTransitRouterTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create transit router too many requests response has a 2xx status code
-func (o *CreateTransitRouterTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create transit router too many requests response has a 3xx status code
-func (o *CreateTransitRouterTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create transit router too many requests response has a 4xx status code
-func (o *CreateTransitRouterTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create transit router too many requests response has a 5xx status code
-func (o *CreateTransitRouterTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create transit router too many requests response a status code equal to that given
-func (o *CreateTransitRouterTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create transit router too many requests response
-func (o *CreateTransitRouterTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateTransitRouterTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateTransitRouterTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /transit-routers][%d] createTransitRouterTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

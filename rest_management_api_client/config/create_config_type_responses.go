@@ -30,7 +30,6 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *CreateConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /config-types] createConfigType", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type CreateConfigTypeCreated struct {
 	Payload *rest_model.CreateEnvelope
 }
 
-// IsSuccess returns true when this create config type created response has a 2xx status code
-func (o *CreateConfigTypeCreated) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this create config type created response has a 3xx status code
-func (o *CreateConfigTypeCreated) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create config type created response has a 4xx status code
-func (o *CreateConfigTypeCreated) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this create config type created response has a 5xx status code
-func (o *CreateConfigTypeCreated) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create config type created response a status code equal to that given
-func (o *CreateConfigTypeCreated) IsCode(code int) bool {
-	return code == 201
-}
-
-// Code gets the status code for the create config type created response
-func (o *CreateConfigTypeCreated) Code() int {
-	return 201
-}
-
 func (o *CreateConfigTypeCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeCreated  %+v", 201, o.Payload)
 }
-
-func (o *CreateConfigTypeCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeCreated %s", 201, payload)
-}
-
 func (o *CreateConfigTypeCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type CreateConfigTypeBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create config type bad request response has a 2xx status code
-func (o *CreateConfigTypeBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create config type bad request response has a 3xx status code
-func (o *CreateConfigTypeBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create config type bad request response has a 4xx status code
-func (o *CreateConfigTypeBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create config type bad request response has a 5xx status code
-func (o *CreateConfigTypeBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create config type bad request response a status code equal to that given
-func (o *CreateConfigTypeBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the create config type bad request response
-func (o *CreateConfigTypeBadRequest) Code() int {
-	return 400
-}
-
 func (o *CreateConfigTypeBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *CreateConfigTypeBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeBadRequest %s", 400, payload)
-}
-
 func (o *CreateConfigTypeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type CreateConfigTypeUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create config type unauthorized response has a 2xx status code
-func (o *CreateConfigTypeUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create config type unauthorized response has a 3xx status code
-func (o *CreateConfigTypeUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create config type unauthorized response has a 4xx status code
-func (o *CreateConfigTypeUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create config type unauthorized response has a 5xx status code
-func (o *CreateConfigTypeUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create config type unauthorized response a status code equal to that given
-func (o *CreateConfigTypeUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create config type unauthorized response
-func (o *CreateConfigTypeUnauthorized) Code() int {
-	return 401
-}
-
 func (o *CreateConfigTypeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *CreateConfigTypeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeUnauthorized %s", 401, payload)
-}
-
 func (o *CreateConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type CreateConfigTypeTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this create config type too many requests response has a 2xx status code
-func (o *CreateConfigTypeTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create config type too many requests response has a 3xx status code
-func (o *CreateConfigTypeTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create config type too many requests response has a 4xx status code
-func (o *CreateConfigTypeTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create config type too many requests response has a 5xx status code
-func (o *CreateConfigTypeTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create config type too many requests response a status code equal to that given
-func (o *CreateConfigTypeTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the create config type too many requests response
-func (o *CreateConfigTypeTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *CreateConfigTypeTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *CreateConfigTypeTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeTooManyRequests %s", 429, payload)
-}
-
 func (o *CreateConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

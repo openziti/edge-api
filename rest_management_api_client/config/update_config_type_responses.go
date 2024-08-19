@@ -30,7 +30,6 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *UpdateConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /config-types/{id}] updateConfigType", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type UpdateConfigTypeOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this update config type o k response has a 2xx status code
-func (o *UpdateConfigTypeOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this update config type o k response has a 3xx status code
-func (o *UpdateConfigTypeOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config type o k response has a 4xx status code
-func (o *UpdateConfigTypeOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this update config type o k response has a 5xx status code
-func (o *UpdateConfigTypeOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config type o k response a status code equal to that given
-func (o *UpdateConfigTypeOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the update config type o k response
-func (o *UpdateConfigTypeOK) Code() int {
-	return 200
-}
-
 func (o *UpdateConfigTypeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeOK %s", 200, payload)
+	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeOK  %+v", 200, o.Payload)
 }
-
-func (o *UpdateConfigTypeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeOK %s", 200, payload)
-}
-
 func (o *UpdateConfigTypeOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type UpdateConfigTypeBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config type bad request response has a 2xx status code
-func (o *UpdateConfigTypeBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config type bad request response has a 3xx status code
-func (o *UpdateConfigTypeBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config type bad request response has a 4xx status code
-func (o *UpdateConfigTypeBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config type bad request response has a 5xx status code
-func (o *UpdateConfigTypeBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config type bad request response a status code equal to that given
-func (o *UpdateConfigTypeBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the update config type bad request response
-func (o *UpdateConfigTypeBadRequest) Code() int {
-	return 400
-}
-
 func (o *UpdateConfigTypeBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *UpdateConfigTypeBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeBadRequest %s", 400, payload)
-}
-
 func (o *UpdateConfigTypeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type UpdateConfigTypeUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config type unauthorized response has a 2xx status code
-func (o *UpdateConfigTypeUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config type unauthorized response has a 3xx status code
-func (o *UpdateConfigTypeUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config type unauthorized response has a 4xx status code
-func (o *UpdateConfigTypeUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config type unauthorized response has a 5xx status code
-func (o *UpdateConfigTypeUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config type unauthorized response a status code equal to that given
-func (o *UpdateConfigTypeUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update config type unauthorized response
-func (o *UpdateConfigTypeUnauthorized) Code() int {
-	return 401
-}
-
 func (o *UpdateConfigTypeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *UpdateConfigTypeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeUnauthorized %s", 401, payload)
-}
-
 func (o *UpdateConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type UpdateConfigTypeNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config type not found response has a 2xx status code
-func (o *UpdateConfigTypeNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config type not found response has a 3xx status code
-func (o *UpdateConfigTypeNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config type not found response has a 4xx status code
-func (o *UpdateConfigTypeNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config type not found response has a 5xx status code
-func (o *UpdateConfigTypeNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config type not found response a status code equal to that given
-func (o *UpdateConfigTypeNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the update config type not found response
-func (o *UpdateConfigTypeNotFound) Code() int {
-	return 404
-}
-
 func (o *UpdateConfigTypeNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeNotFound %s", 404, payload)
+	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeNotFound  %+v", 404, o.Payload)
 }
-
-func (o *UpdateConfigTypeNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeNotFound %s", 404, payload)
-}
-
 func (o *UpdateConfigTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type UpdateConfigTypeTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this update config type too many requests response has a 2xx status code
-func (o *UpdateConfigTypeTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update config type too many requests response has a 3xx status code
-func (o *UpdateConfigTypeTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update config type too many requests response has a 4xx status code
-func (o *UpdateConfigTypeTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update config type too many requests response has a 5xx status code
-func (o *UpdateConfigTypeTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update config type too many requests response a status code equal to that given
-func (o *UpdateConfigTypeTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the update config type too many requests response
-func (o *UpdateConfigTypeTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *UpdateConfigTypeTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *UpdateConfigTypeTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PUT /config-types/{id}][%d] updateConfigTypeTooManyRequests %s", 429, payload)
-}
-
 func (o *UpdateConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

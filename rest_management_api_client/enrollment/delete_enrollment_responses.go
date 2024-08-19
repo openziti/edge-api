@@ -30,7 +30,6 @@ package enrollment
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DeleteEnrollmentReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /enrollments/{id}] deleteEnrollment", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DeleteEnrollmentOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete enrollment o k response has a 2xx status code
-func (o *DeleteEnrollmentOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete enrollment o k response has a 3xx status code
-func (o *DeleteEnrollmentOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete enrollment o k response has a 4xx status code
-func (o *DeleteEnrollmentOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete enrollment o k response has a 5xx status code
-func (o *DeleteEnrollmentOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete enrollment o k response a status code equal to that given
-func (o *DeleteEnrollmentOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete enrollment o k response
-func (o *DeleteEnrollmentOK) Code() int {
-	return 200
-}
-
 func (o *DeleteEnrollmentOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteEnrollmentOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentOK %s", 200, payload)
-}
-
 func (o *DeleteEnrollmentOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DeleteEnrollmentBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete enrollment bad request response has a 2xx status code
-func (o *DeleteEnrollmentBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete enrollment bad request response has a 3xx status code
-func (o *DeleteEnrollmentBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete enrollment bad request response has a 4xx status code
-func (o *DeleteEnrollmentBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete enrollment bad request response has a 5xx status code
-func (o *DeleteEnrollmentBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete enrollment bad request response a status code equal to that given
-func (o *DeleteEnrollmentBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the delete enrollment bad request response
-func (o *DeleteEnrollmentBadRequest) Code() int {
-	return 400
-}
-
 func (o *DeleteEnrollmentBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DeleteEnrollmentBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentBadRequest %s", 400, payload)
-}
-
 func (o *DeleteEnrollmentBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DeleteEnrollmentUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete enrollment unauthorized response has a 2xx status code
-func (o *DeleteEnrollmentUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete enrollment unauthorized response has a 3xx status code
-func (o *DeleteEnrollmentUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete enrollment unauthorized response has a 4xx status code
-func (o *DeleteEnrollmentUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete enrollment unauthorized response has a 5xx status code
-func (o *DeleteEnrollmentUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete enrollment unauthorized response a status code equal to that given
-func (o *DeleteEnrollmentUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete enrollment unauthorized response
-func (o *DeleteEnrollmentUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteEnrollmentUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteEnrollmentUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteEnrollmentUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DeleteEnrollmentTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete enrollment too many requests response has a 2xx status code
-func (o *DeleteEnrollmentTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete enrollment too many requests response has a 3xx status code
-func (o *DeleteEnrollmentTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete enrollment too many requests response has a 4xx status code
-func (o *DeleteEnrollmentTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete enrollment too many requests response has a 5xx status code
-func (o *DeleteEnrollmentTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete enrollment too many requests response a status code equal to that given
-func (o *DeleteEnrollmentTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete enrollment too many requests response
-func (o *DeleteEnrollmentTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteEnrollmentTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteEnrollmentTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteEnrollmentTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

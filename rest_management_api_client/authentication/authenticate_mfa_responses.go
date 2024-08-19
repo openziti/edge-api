@@ -30,7 +30,6 @@ package authentication
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -67,7 +66,7 @@ func (o *AuthenticateMfaReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /authenticate/mfa] authenticateMfa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -85,46 +84,9 @@ type AuthenticateMfaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this authenticate mfa o k response has a 2xx status code
-func (o *AuthenticateMfaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this authenticate mfa o k response has a 3xx status code
-func (o *AuthenticateMfaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate mfa o k response has a 4xx status code
-func (o *AuthenticateMfaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this authenticate mfa o k response has a 5xx status code
-func (o *AuthenticateMfaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate mfa o k response a status code equal to that given
-func (o *AuthenticateMfaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the authenticate mfa o k response
-func (o *AuthenticateMfaOK) Code() int {
-	return 200
-}
-
 func (o *AuthenticateMfaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaOK %s", 200, payload)
+	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaOK  %+v", 200, o.Payload)
 }
-
-func (o *AuthenticateMfaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaOK %s", 200, payload)
-}
-
 func (o *AuthenticateMfaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -155,46 +117,9 @@ type AuthenticateMfaUnauthorized struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this authenticate mfa unauthorized response has a 2xx status code
-func (o *AuthenticateMfaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this authenticate mfa unauthorized response has a 3xx status code
-func (o *AuthenticateMfaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate mfa unauthorized response has a 4xx status code
-func (o *AuthenticateMfaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this authenticate mfa unauthorized response has a 5xx status code
-func (o *AuthenticateMfaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate mfa unauthorized response a status code equal to that given
-func (o *AuthenticateMfaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the authenticate mfa unauthorized response
-func (o *AuthenticateMfaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *AuthenticateMfaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *AuthenticateMfaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaUnauthorized %s", 401, payload)
-}
-
 func (o *AuthenticateMfaUnauthorized) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -225,46 +150,9 @@ type AuthenticateMfaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this authenticate mfa too many requests response has a 2xx status code
-func (o *AuthenticateMfaTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this authenticate mfa too many requests response has a 3xx status code
-func (o *AuthenticateMfaTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this authenticate mfa too many requests response has a 4xx status code
-func (o *AuthenticateMfaTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this authenticate mfa too many requests response has a 5xx status code
-func (o *AuthenticateMfaTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this authenticate mfa too many requests response a status code equal to that given
-func (o *AuthenticateMfaTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the authenticate mfa too many requests response
-func (o *AuthenticateMfaTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *AuthenticateMfaTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *AuthenticateMfaTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /authenticate/mfa][%d] authenticateMfaTooManyRequests %s", 429, payload)
-}
-
 func (o *AuthenticateMfaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

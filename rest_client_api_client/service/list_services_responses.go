@@ -30,7 +30,6 @@ package service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListServicesReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /services] listServices", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListServicesOK struct {
 	Payload *rest_model.ListServicesEnvelope
 }
 
-// IsSuccess returns true when this list services o k response has a 2xx status code
-func (o *ListServicesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list services o k response has a 3xx status code
-func (o *ListServicesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list services o k response has a 4xx status code
-func (o *ListServicesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list services o k response has a 5xx status code
-func (o *ListServicesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list services o k response a status code equal to that given
-func (o *ListServicesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list services o k response
-func (o *ListServicesOK) Code() int {
-	return 200
-}
-
 func (o *ListServicesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /services][%d] listServicesOK  %+v", 200, o.Payload)
 }
-
-func (o *ListServicesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesOK %s", 200, payload)
-}
-
 func (o *ListServicesOK) GetPayload() *rest_model.ListServicesEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListServicesBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list services bad request response has a 2xx status code
-func (o *ListServicesBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list services bad request response has a 3xx status code
-func (o *ListServicesBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list services bad request response has a 4xx status code
-func (o *ListServicesBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list services bad request response has a 5xx status code
-func (o *ListServicesBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list services bad request response a status code equal to that given
-func (o *ListServicesBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list services bad request response
-func (o *ListServicesBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListServicesBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /services][%d] listServicesBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListServicesBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesBadRequest %s", 400, payload)
-}
-
 func (o *ListServicesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListServicesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list services unauthorized response has a 2xx status code
-func (o *ListServicesUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list services unauthorized response has a 3xx status code
-func (o *ListServicesUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list services unauthorized response has a 4xx status code
-func (o *ListServicesUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list services unauthorized response has a 5xx status code
-func (o *ListServicesUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list services unauthorized response a status code equal to that given
-func (o *ListServicesUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list services unauthorized response
-func (o *ListServicesUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListServicesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /services][%d] listServicesUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListServicesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesUnauthorized %s", 401, payload)
-}
-
 func (o *ListServicesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListServicesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list services too many requests response has a 2xx status code
-func (o *ListServicesTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list services too many requests response has a 3xx status code
-func (o *ListServicesTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list services too many requests response has a 4xx status code
-func (o *ListServicesTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list services too many requests response has a 5xx status code
-func (o *ListServicesTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list services too many requests response a status code equal to that given
-func (o *ListServicesTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list services too many requests response
-func (o *ListServicesTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListServicesTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /services][%d] listServicesTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListServicesTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /services][%d] listServicesTooManyRequests %s", 429, payload)
-}
-
 func (o *ListServicesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

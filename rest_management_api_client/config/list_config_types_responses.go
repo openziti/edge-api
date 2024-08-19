@@ -30,7 +30,6 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *ListConfigTypesReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /config-types] listConfigTypes", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type ListConfigTypesOK struct {
 	Payload *rest_model.ListConfigTypesEnvelope
 }
 
-// IsSuccess returns true when this list config types o k response has a 2xx status code
-func (o *ListConfigTypesOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this list config types o k response has a 3xx status code
-func (o *ListConfigTypesOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list config types o k response has a 4xx status code
-func (o *ListConfigTypesOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this list config types o k response has a 5xx status code
-func (o *ListConfigTypesOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list config types o k response a status code equal to that given
-func (o *ListConfigTypesOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the list config types o k response
-func (o *ListConfigTypesOK) Code() int {
-	return 200
-}
-
 func (o *ListConfigTypesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesOK  %+v", 200, o.Payload)
 }
-
-func (o *ListConfigTypesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesOK %s", 200, payload)
-}
-
 func (o *ListConfigTypesOK) GetPayload() *rest_model.ListConfigTypesEnvelope {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type ListConfigTypesBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list config types bad request response has a 2xx status code
-func (o *ListConfigTypesBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list config types bad request response has a 3xx status code
-func (o *ListConfigTypesBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list config types bad request response has a 4xx status code
-func (o *ListConfigTypesBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list config types bad request response has a 5xx status code
-func (o *ListConfigTypesBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list config types bad request response a status code equal to that given
-func (o *ListConfigTypesBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the list config types bad request response
-func (o *ListConfigTypesBadRequest) Code() int {
-	return 400
-}
-
 func (o *ListConfigTypesBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *ListConfigTypesBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesBadRequest %s", 400, payload)
-}
-
 func (o *ListConfigTypesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type ListConfigTypesUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list config types unauthorized response has a 2xx status code
-func (o *ListConfigTypesUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list config types unauthorized response has a 3xx status code
-func (o *ListConfigTypesUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list config types unauthorized response has a 4xx status code
-func (o *ListConfigTypesUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list config types unauthorized response has a 5xx status code
-func (o *ListConfigTypesUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list config types unauthorized response a status code equal to that given
-func (o *ListConfigTypesUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the list config types unauthorized response
-func (o *ListConfigTypesUnauthorized) Code() int {
-	return 401
-}
-
 func (o *ListConfigTypesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *ListConfigTypesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesUnauthorized %s", 401, payload)
-}
-
 func (o *ListConfigTypesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type ListConfigTypesTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this list config types too many requests response has a 2xx status code
-func (o *ListConfigTypesTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this list config types too many requests response has a 3xx status code
-func (o *ListConfigTypesTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this list config types too many requests response has a 4xx status code
-func (o *ListConfigTypesTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this list config types too many requests response has a 5xx status code
-func (o *ListConfigTypesTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this list config types too many requests response a status code equal to that given
-func (o *ListConfigTypesTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the list config types too many requests response
-func (o *ListConfigTypesTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *ListConfigTypesTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *ListConfigTypesTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /config-types][%d] listConfigTypesTooManyRequests %s", 429, payload)
-}
-
 func (o *ListConfigTypesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

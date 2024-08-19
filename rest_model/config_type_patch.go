@@ -103,11 +103,6 @@ func (m *ConfigTypePatch) ContextValidate(ctx context.Context, formats strfmt.Re
 func (m *ConfigTypePatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
-
-		if swag.IsZero(m.Tags) { // not required
-			return nil
-		}
-
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tags")

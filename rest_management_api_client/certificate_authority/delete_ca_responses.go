@@ -30,7 +30,6 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DeleteCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /cas/{id}] deleteCa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DeleteCaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this delete ca o k response has a 2xx status code
-func (o *DeleteCaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this delete ca o k response has a 3xx status code
-func (o *DeleteCaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete ca o k response has a 4xx status code
-func (o *DeleteCaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this delete ca o k response has a 5xx status code
-func (o *DeleteCaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete ca o k response a status code equal to that given
-func (o *DeleteCaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the delete ca o k response
-func (o *DeleteCaOK) Code() int {
-	return 200
-}
-
 func (o *DeleteCaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaOK  %+v", 200, o.Payload)
 }
-
-func (o *DeleteCaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaOK %s", 200, payload)
-}
-
 func (o *DeleteCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DeleteCaBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete ca bad request response has a 2xx status code
-func (o *DeleteCaBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete ca bad request response has a 3xx status code
-func (o *DeleteCaBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete ca bad request response has a 4xx status code
-func (o *DeleteCaBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete ca bad request response has a 5xx status code
-func (o *DeleteCaBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete ca bad request response a status code equal to that given
-func (o *DeleteCaBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the delete ca bad request response
-func (o *DeleteCaBadRequest) Code() int {
-	return 400
-}
-
 func (o *DeleteCaBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *DeleteCaBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaBadRequest %s", 400, payload)
-}
-
 func (o *DeleteCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DeleteCaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete ca unauthorized response has a 2xx status code
-func (o *DeleteCaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete ca unauthorized response has a 3xx status code
-func (o *DeleteCaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete ca unauthorized response has a 4xx status code
-func (o *DeleteCaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete ca unauthorized response has a 5xx status code
-func (o *DeleteCaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete ca unauthorized response a status code equal to that given
-func (o *DeleteCaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the delete ca unauthorized response
-func (o *DeleteCaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DeleteCaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DeleteCaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaUnauthorized %s", 401, payload)
-}
-
 func (o *DeleteCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DeleteCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this delete ca too many requests response has a 2xx status code
-func (o *DeleteCaTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this delete ca too many requests response has a 3xx status code
-func (o *DeleteCaTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this delete ca too many requests response has a 4xx status code
-func (o *DeleteCaTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this delete ca too many requests response has a 5xx status code
-func (o *DeleteCaTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this delete ca too many requests response a status code equal to that given
-func (o *DeleteCaTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the delete ca too many requests response
-func (o *DeleteCaTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DeleteCaTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DeleteCaTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaTooManyRequests %s", 429, payload)
-}
-
 func (o *DeleteCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

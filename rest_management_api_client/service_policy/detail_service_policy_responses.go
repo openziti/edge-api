@@ -30,7 +30,6 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -73,7 +72,7 @@ func (o *DetailServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /service-policies/{id}] detailServicePolicy", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -91,46 +90,9 @@ type DetailServicePolicyOK struct {
 	Payload *rest_model.DetailServicePolicyEnvelop
 }
 
-// IsSuccess returns true when this detail service policy o k response has a 2xx status code
-func (o *DetailServicePolicyOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this detail service policy o k response has a 3xx status code
-func (o *DetailServicePolicyOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service policy o k response has a 4xx status code
-func (o *DetailServicePolicyOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this detail service policy o k response has a 5xx status code
-func (o *DetailServicePolicyOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service policy o k response a status code equal to that given
-func (o *DetailServicePolicyOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the detail service policy o k response
-func (o *DetailServicePolicyOK) Code() int {
-	return 200
-}
-
 func (o *DetailServicePolicyOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyOK %s", 200, payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyOK  %+v", 200, o.Payload)
 }
-
-func (o *DetailServicePolicyOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyOK %s", 200, payload)
-}
-
 func (o *DetailServicePolicyOK) GetPayload() *rest_model.DetailServicePolicyEnvelop {
 	return o.Payload
 }
@@ -161,46 +123,9 @@ type DetailServicePolicyUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail service policy unauthorized response has a 2xx status code
-func (o *DetailServicePolicyUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail service policy unauthorized response has a 3xx status code
-func (o *DetailServicePolicyUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service policy unauthorized response has a 4xx status code
-func (o *DetailServicePolicyUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail service policy unauthorized response has a 5xx status code
-func (o *DetailServicePolicyUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service policy unauthorized response a status code equal to that given
-func (o *DetailServicePolicyUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the detail service policy unauthorized response
-func (o *DetailServicePolicyUnauthorized) Code() int {
-	return 401
-}
-
 func (o *DetailServicePolicyUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *DetailServicePolicyUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyUnauthorized %s", 401, payload)
-}
-
 func (o *DetailServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -231,46 +156,9 @@ type DetailServicePolicyNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail service policy not found response has a 2xx status code
-func (o *DetailServicePolicyNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail service policy not found response has a 3xx status code
-func (o *DetailServicePolicyNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service policy not found response has a 4xx status code
-func (o *DetailServicePolicyNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail service policy not found response has a 5xx status code
-func (o *DetailServicePolicyNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service policy not found response a status code equal to that given
-func (o *DetailServicePolicyNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the detail service policy not found response
-func (o *DetailServicePolicyNotFound) Code() int {
-	return 404
-}
-
 func (o *DetailServicePolicyNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyNotFound  %+v", 404, o.Payload)
 }
-
-func (o *DetailServicePolicyNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyNotFound %s", 404, payload)
-}
-
 func (o *DetailServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -301,46 +189,9 @@ type DetailServicePolicyTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this detail service policy too many requests response has a 2xx status code
-func (o *DetailServicePolicyTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this detail service policy too many requests response has a 3xx status code
-func (o *DetailServicePolicyTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this detail service policy too many requests response has a 4xx status code
-func (o *DetailServicePolicyTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this detail service policy too many requests response has a 5xx status code
-func (o *DetailServicePolicyTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this detail service policy too many requests response a status code equal to that given
-func (o *DetailServicePolicyTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the detail service policy too many requests response
-func (o *DetailServicePolicyTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *DetailServicePolicyTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *DetailServicePolicyTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyTooManyRequests %s", 429, payload)
-}
-
 func (o *DetailServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

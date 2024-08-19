@@ -30,7 +30,6 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,7 +78,7 @@ func (o *VerifyCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /cas/{id}/verify] verifyCa", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -97,46 +96,9 @@ type VerifyCaOK struct {
 	Payload *rest_model.Empty
 }
 
-// IsSuccess returns true when this verify ca o k response has a 2xx status code
-func (o *VerifyCaOK) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this verify ca o k response has a 3xx status code
-func (o *VerifyCaOK) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify ca o k response has a 4xx status code
-func (o *VerifyCaOK) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this verify ca o k response has a 5xx status code
-func (o *VerifyCaOK) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify ca o k response a status code equal to that given
-func (o *VerifyCaOK) IsCode(code int) bool {
-	return code == 200
-}
-
-// Code gets the status code for the verify ca o k response
-func (o *VerifyCaOK) Code() int {
-	return 200
-}
-
 func (o *VerifyCaOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaOK %s", 200, payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaOK  %+v", 200, o.Payload)
 }
-
-func (o *VerifyCaOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaOK %s", 200, payload)
-}
-
 func (o *VerifyCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
@@ -167,46 +129,9 @@ type VerifyCaBadRequest struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this verify ca bad request response has a 2xx status code
-func (o *VerifyCaBadRequest) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this verify ca bad request response has a 3xx status code
-func (o *VerifyCaBadRequest) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify ca bad request response has a 4xx status code
-func (o *VerifyCaBadRequest) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this verify ca bad request response has a 5xx status code
-func (o *VerifyCaBadRequest) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify ca bad request response a status code equal to that given
-func (o *VerifyCaBadRequest) IsCode(code int) bool {
-	return code == 400
-}
-
-// Code gets the status code for the verify ca bad request response
-func (o *VerifyCaBadRequest) Code() int {
-	return 400
-}
-
 func (o *VerifyCaBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaBadRequest  %+v", 400, o.Payload)
 }
-
-func (o *VerifyCaBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaBadRequest %s", 400, payload)
-}
-
 func (o *VerifyCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -237,46 +162,9 @@ type VerifyCaUnauthorized struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this verify ca unauthorized response has a 2xx status code
-func (o *VerifyCaUnauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this verify ca unauthorized response has a 3xx status code
-func (o *VerifyCaUnauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify ca unauthorized response has a 4xx status code
-func (o *VerifyCaUnauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this verify ca unauthorized response has a 5xx status code
-func (o *VerifyCaUnauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify ca unauthorized response a status code equal to that given
-func (o *VerifyCaUnauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the verify ca unauthorized response
-func (o *VerifyCaUnauthorized) Code() int {
-	return 401
-}
-
 func (o *VerifyCaUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaUnauthorized  %+v", 401, o.Payload)
 }
-
-func (o *VerifyCaUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaUnauthorized %s", 401, payload)
-}
-
 func (o *VerifyCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -307,46 +195,9 @@ type VerifyCaNotFound struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this verify ca not found response has a 2xx status code
-func (o *VerifyCaNotFound) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this verify ca not found response has a 3xx status code
-func (o *VerifyCaNotFound) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify ca not found response has a 4xx status code
-func (o *VerifyCaNotFound) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this verify ca not found response has a 5xx status code
-func (o *VerifyCaNotFound) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify ca not found response a status code equal to that given
-func (o *VerifyCaNotFound) IsCode(code int) bool {
-	return code == 404
-}
-
-// Code gets the status code for the verify ca not found response
-func (o *VerifyCaNotFound) Code() int {
-	return 404
-}
-
 func (o *VerifyCaNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaNotFound  %+v", 404, o.Payload)
 }
-
-func (o *VerifyCaNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaNotFound %s", 404, payload)
-}
-
 func (o *VerifyCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
@@ -377,46 +228,9 @@ type VerifyCaTooManyRequests struct {
 	Payload *rest_model.APIErrorEnvelope
 }
 
-// IsSuccess returns true when this verify ca too many requests response has a 2xx status code
-func (o *VerifyCaTooManyRequests) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this verify ca too many requests response has a 3xx status code
-func (o *VerifyCaTooManyRequests) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this verify ca too many requests response has a 4xx status code
-func (o *VerifyCaTooManyRequests) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this verify ca too many requests response has a 5xx status code
-func (o *VerifyCaTooManyRequests) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this verify ca too many requests response a status code equal to that given
-func (o *VerifyCaTooManyRequests) IsCode(code int) bool {
-	return code == 429
-}
-
-// Code gets the status code for the verify ca too many requests response
-func (o *VerifyCaTooManyRequests) Code() int {
-	return 429
-}
-
 func (o *VerifyCaTooManyRequests) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaTooManyRequests %s", 429, payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaTooManyRequests  %+v", 429, o.Payload)
 }
-
-func (o *VerifyCaTooManyRequests) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaTooManyRequests %s", 429, payload)
-}
-
 func (o *VerifyCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }

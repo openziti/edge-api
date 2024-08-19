@@ -512,7 +512,6 @@ func (m *ServicePolicyDetail) contextValidatePostureCheckRolesDisplay(ctx contex
 func (m *ServicePolicyDetail) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
-
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("semantic")
@@ -557,7 +556,6 @@ func (m *ServicePolicyDetail) contextValidateServiceRolesDisplay(ctx context.Con
 func (m *ServicePolicyDetail) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
-
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("type")
