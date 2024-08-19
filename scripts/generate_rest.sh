@@ -1,11 +1,17 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 
-command -v swagger >/dev/null 2>&1 || {
-  echo >&2 "Command 'swagger' not installed. See: https://github.com/go-swagger/go-swagger for installation"
+set -o errexit
+set -o nounset
+set -o pipefail
+
+GO_SWAGGER_VERSION="v0.29.0"
+if ! command -v swagger &>/dev/null || [[ "$(swagger version | awk '$1~/version/{print $2}')" != "${GO_SWAGGER_VERSION}" ]]
+then
+  echo >&2 "Go Swagger executable 'swagger' ${GO_SWAGGER_VERSION} is required. See: https://github.com/go-swagger/go-swagger"
   exit 1
-}
+fi
 
-scriptPath=$(realpath $0)
+scriptPath=$(realpath "$0")
 scriptDir=$(dirname "$scriptPath")
 
 rootDir=$(realpath "$scriptDir/..")
@@ -85,8 +91,8 @@ fi
 
 echo "...fixing go module deps"
 prev=$(pwd)
-cd $codeTarget
+cd "$codeTarget"
 go mod init github.com/openziti/edge-api || true
 go get -u ./...
 go mod tidy
-cd $prev
+cd "$prev"
