@@ -17737,6 +17737,9 @@ definitions:
       claimsProperty:
         type: string
         x-nullable: true
+      clientId:
+        type: string
+        x-nullable: true
       enabled:
         type: boolean
       externalAuthUrl:
@@ -17755,6 +17758,10 @@ definitions:
       name:
         type: string
         example: MyApps Signer
+      scopes:
+        type: array
+        items: null
+        x-nullable: true
       tags:
         $ref: '#/definitions/tags'
       useExternalId:
@@ -17781,6 +17788,8 @@ definitions:
       - kid
       - issuer
       - audience
+      - clientId
+      - scopes
       properties:
         audience:
           type: string
@@ -17788,6 +17797,8 @@ definitions:
           type: string
           x-nullable: true
         claimsProperty:
+          type: string
+        clientId:
           type: string
         commonName:
           type: string
@@ -17815,6 +17826,9 @@ definitions:
         notBefore:
           type: string
           format: date-time
+        scopes:
+          type: array
+          items: null
         useExternalId:
           type: boolean
   externalJwtSignerList:
@@ -17832,6 +17846,9 @@ definitions:
         type: string
         x-nullable: true
       claimsProperty:
+        type: string
+        x-nullable: true
+      clientId:
         type: string
         x-nullable: true
       enabled:
@@ -17855,6 +17872,9 @@ definitions:
         type: string
         x-nullable: true
         example: MyApps Signer
+      scopes:
+        type: array
+        items: null
       tags:
         $ref: '#/definitions/tags'
       useExternalId:
@@ -17877,6 +17897,9 @@ definitions:
       claimsProperty:
         type: string
         x-nullable: true
+      clientId:
+        type: string
+        x-nullable: true
       enabled:
         type: boolean
       externalAuthUrl:
@@ -17895,6 +17918,10 @@ definitions:
       name:
         type: string
         example: MyApps Signer
+      scopes:
+        type: array
+        items: null
+        x-nullable: true
       tags:
         $ref: '#/definitions/tags'
       useExternalId:

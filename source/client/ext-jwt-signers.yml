@@ -59,3 +59,8 @@ definitions:
           externalAuthUrl:
             type: string
             format: url
+          clientId:
+            type: string
+          scopes:
+            type: array
+            items: string

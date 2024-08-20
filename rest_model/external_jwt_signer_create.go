@@ -53,6 +53,9 @@ type ExternalJWTSignerCreate struct {
 	// claims property
 	ClaimsProperty *string `json:"claimsProperty,omitempty"`
 
+	// client Id
+	ClientID *string `json:"clientId,omitempty"`
+
 	// enabled
 	// Required: true
 	Enabled *bool `json:"enabled"`
@@ -75,6 +78,9 @@ type ExternalJWTSignerCreate struct {
 	// Example: MyApps Signer
 	// Required: true
 	Name *string `json:"name"`
+
+	// scopes
+	Scopes []interface{} `json:"scopes"`
 
 	// tags
 	Tags *Tags `json:"tags,omitempty"`

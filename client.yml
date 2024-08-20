@@ -3998,12 +3998,17 @@ definitions:
       - name
       - externalAuthUrl
       properties:
+        clientId:
+          type: string
         externalAuthUrl:
           type: string
           format: url
         name:
           type: string
           example: MyApps Signer
+        scopes:
+          type: array
+          items: null
   clientExternalJwtSignerList:
     description: An array of External JWT Signers resources
     type: array

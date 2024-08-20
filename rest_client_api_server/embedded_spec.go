@@ -5503,6 +5503,9 @@ func init() {
             "externalAuthUrl"
           ],
           "properties": {
+            "clientId": {
+              "type": "string"
+            },
             "externalAuthUrl": {
               "type": "string",
               "format": "url"
@@ -5510,6 +5513,9 @@ func init() {
             "name": {
               "type": "string",
               "example": "MyApps Signer"
+            },
+            "scopes": {
+              "type": "array"
             }
           }
         }
@@ -13176,6 +13182,9 @@ func init() {
             "externalAuthUrl"
           ],
           "properties": {
+            "clientId": {
+              "type": "string"
+            },
             "externalAuthUrl": {
               "type": "string",
               "format": "url"
@@ -13183,6 +13192,9 @@ func init() {
             "name": {
               "type": "string",
               "example": "MyApps Signer"
+            },
+            "scopes": {
+              "type": "array"
             }
           }
         }
