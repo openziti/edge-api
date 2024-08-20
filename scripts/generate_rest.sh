@@ -11,6 +11,14 @@ then
   exit 1
 fi
 
+if GO_VERSION="$(go version | awk '{print $3}')"
+then
+  echo "Using go toolchain version: ${GO_VERSION}"
+else
+  echo >&2 "Failed to determine go toolchain version"
+  exit 1
+fi
+
 scriptPath=$(realpath "$0")
 scriptDir=$(dirname "$scriptPath")
 
