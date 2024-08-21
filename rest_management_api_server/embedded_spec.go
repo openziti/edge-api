@@ -24574,6 +24574,10 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "clientId": {
+          "type": "string",
+          "x-nullable": true
+        },
         "enabled": {
           "type": "boolean"
         },
@@ -24597,6 +24601,13 @@ func init() {
         "name": {
           "type": "string",
           "example": "MyApps Signer"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -24630,7 +24641,9 @@ func init() {
             "useExternalId",
             "kid",
             "issuer",
-            "audience"
+            "audience",
+            "clientId",
+            "scopes"
           ],
           "properties": {
             "audience": {
@@ -24641,6 +24654,9 @@ func init() {
               "x-nullable": true
             },
             "claimsProperty": {
+              "type": "string"
+            },
+            "clientId": {
               "type": "string"
             },
             "commonName": {
@@ -24679,6 +24695,12 @@ func init() {
               "type": "string",
               "format": "date-time"
             },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
             "useExternalId": {
               "type": "boolean"
             }
@@ -24708,6 +24730,10 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "clientId": {
+          "type": "string",
+          "x-nullable": true
+        },
         "enabled": {
           "type": "boolean",
           "x-nullable": true
@@ -24734,6 +24760,12 @@ func init() {
           "type": "string",
           "x-nullable": true,
           "example": "MyApps Signer"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -24765,6 +24797,10 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "clientId": {
+          "type": "string",
+          "x-nullable": true
+        },
         "enabled": {
           "type": "boolean"
         },
@@ -24788,6 +24824,13 @@ func init() {
         "name": {
           "type": "string",
           "example": "MyApps Signer"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -53077,6 +53120,10 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "clientId": {
+          "type": "string",
+          "x-nullable": true
+        },
         "enabled": {
           "type": "boolean"
         },
@@ -53100,6 +53147,13 @@ func init() {
         "name": {
           "type": "string",
           "example": "MyApps Signer"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -53133,7 +53187,9 @@ func init() {
             "useExternalId",
             "kid",
             "issuer",
-            "audience"
+            "audience",
+            "clientId",
+            "scopes"
           ],
           "properties": {
             "audience": {
@@ -53144,6 +53200,9 @@ func init() {
               "x-nullable": true
             },
             "claimsProperty": {
+              "type": "string"
+            },
+            "clientId": {
               "type": "string"
             },
             "commonName": {
@@ -53182,6 +53241,12 @@ func init() {
               "type": "string",
               "format": "date-time"
             },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
             "useExternalId": {
               "type": "boolean"
             }
@@ -53211,6 +53276,10 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "clientId": {
+          "type": "string",
+          "x-nullable": true
+        },
         "enabled": {
           "type": "boolean",
           "x-nullable": true
@@ -53237,6 +53306,12 @@ func init() {
           "type": "string",
           "x-nullable": true,
           "example": "MyApps Signer"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -53268,6 +53343,10 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "clientId": {
+          "type": "string",
+          "x-nullable": true
+        },
         "enabled": {
           "type": "boolean"
         },
@@ -53291,6 +53370,13 @@ func init() {
         "name": {
           "type": "string",
           "example": "MyApps Signer"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
         "tags": {
           "$ref": "#/definitions/tags"
