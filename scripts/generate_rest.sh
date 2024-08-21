@@ -5,9 +5,12 @@ set -o nounset
 set -o pipefail
 
 GO_SWAGGER_VERSION="v0.29.0"
-if ! command -v swagger &>/dev/null || [[ "$(swagger version | awk '$1~/version/{print $2}')" != "${GO_SWAGGER_VERSION}" ]]
+GO_SWAGGER_HASH="09ae1192ca9a941bbb534aca09e6bdc562c95ef3"
+if ! command -v swagger &>/dev/null \
+|| [[ "$(swagger version | awk '$1~/^version:/{print $2}')" != "${GO_SWAGGER_VERSION}" \
+|| "$(swagger version | awk '$1~/^commit:/{print $2}')" != "${GO_SWAGGER_HASH}" ]]
 then
-  echo >&2 "Go Swagger executable 'swagger' ${GO_SWAGGER_VERSION} is required. See: https://github.com/go-swagger/go-swagger"
+  echo >&2 "Go Swagger executable 'swagger' ${GO_SWAGGER_VERSION} (${GO_SWAGGER_HASH}) is required. Download the binary from GitHub: https://github.com/go-swagger/go-swagger/releases/tag/v0.29.0"
   exit 1
 fi
 
