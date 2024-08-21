@@ -204,6 +204,8 @@ definitions:
           - kid
           - issuer
           - audience
+          - clientId
+          - scopes
         properties:
           name:
             type: string
@@ -240,6 +242,12 @@ definitions:
             type: string
           audience:
             type: string
+          clientId:
+            type: string
+          scopes:
+            type: array
+            items:
+              type: string
   externalJwtSignerCreate:
     description: A create Certificate Authority (CA) object
     type: object
@@ -278,6 +286,14 @@ definitions:
         type: string
       audience:
         type: string
+        x-nullable: true
+      clientId:
+        type: string
+        x-nullable: true
+      scopes:
+        type: array
+        items:
+          type: string
         x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
@@ -319,6 +335,14 @@ definitions:
       audience:
         type: string
         x-nullable: true
+      clientId:
+        type: string
+        x-nullable: true
+      scopes:
+        type: array
+        items:
+          type: string
+        x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   externalJwtSignerPatch:
@@ -357,5 +381,12 @@ definitions:
       audience:
         type: string
         x-nullable: true
+      clientId:
+        type: string
+        x-nullable: true
+      scopes:
+        type: array
+        items:
+          type: string
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'

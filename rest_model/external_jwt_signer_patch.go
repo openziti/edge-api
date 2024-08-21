@@ -52,6 +52,9 @@ type ExternalJWTSignerPatch struct {
 	// claims property
 	ClaimsProperty *string `json:"claimsProperty,omitempty"`
 
+	// client Id
+	ClientID *string `json:"clientId,omitempty"`
+
 	// enabled
 	Enabled *bool `json:"enabled,omitempty"`
 
@@ -71,6 +74,9 @@ type ExternalJWTSignerPatch struct {
 	// name
 	// Example: MyApps Signer
 	Name *string `json:"name,omitempty"`
+
+	// scopes
+	Scopes []string `json:"scopes"`
 
 	// tags
 	Tags *Tags `json:"tags,omitempty"`

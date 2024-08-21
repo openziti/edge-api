@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.23"
+    "version": "0.26.25"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5503,6 +5503,10 @@ func init() {
             "externalAuthUrl"
           ],
           "properties": {
+            "clientId": {
+              "type": "string",
+              "x-nullable": true
+            },
             "externalAuthUrl": {
               "type": "string",
               "format": "url"
@@ -5510,6 +5514,12 @@ func init() {
             "name": {
               "type": "string",
               "example": "MyApps Signer"
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -7655,7 +7665,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.23"
+    "version": "0.26.25"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -13176,6 +13186,10 @@ func init() {
             "externalAuthUrl"
           ],
           "properties": {
+            "clientId": {
+              "type": "string",
+              "x-nullable": true
+            },
             "externalAuthUrl": {
               "type": "string",
               "format": "url"
@@ -13183,6 +13197,12 @@ func init() {
             "name": {
               "type": "string",
               "example": "MyApps Signer"
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
