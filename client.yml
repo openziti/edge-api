@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.23
+  version: 0.26.25
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -4008,7 +4008,8 @@ definitions:
           example: MyApps Signer
         scopes:
           type: array
-          items: null
+          items:
+            type: string
   clientExternalJwtSignerList:
     description: An array of External JWT Signers resources
     type: array

@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.23
+  version: 0.26.25
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -17760,7 +17760,8 @@ definitions:
         example: MyApps Signer
       scopes:
         type: array
-        items: null
+        items:
+          type: string
         x-nullable: true
       tags:
         $ref: '#/definitions/tags'
@@ -17828,7 +17829,8 @@ definitions:
           format: date-time
         scopes:
           type: array
-          items: null
+          items:
+            type: string
         useExternalId:
           type: boolean
   externalJwtSignerList:
@@ -17874,7 +17876,8 @@ definitions:
         example: MyApps Signer
       scopes:
         type: array
-        items: null
+        items:
+          type: string
       tags:
         $ref: '#/definitions/tags'
       useExternalId:
@@ -17920,7 +17923,8 @@ definitions:
         example: MyApps Signer
       scopes:
         type: array
-        items: null
+        items:
+          type: string
         x-nullable: true
       tags:
         $ref: '#/definitions/tags'

@@ -80,7 +80,7 @@ type ExternalJWTSignerCreate struct {
 	Name *string `json:"name"`
 
 	// scopes
-	Scopes []interface{} `json:"scopes"`
+	Scopes []string `json:"scopes"`
 
 	// tags
 	Tags *Tags `json:"tags,omitempty"`

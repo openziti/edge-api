@@ -57,7 +57,7 @@ type ClientExternalJWTSignerDetail struct {
 	Name *string `json:"name"`
 
 	// scopes
-	Scopes []interface{} `json:"scopes"`
+	Scopes []string `json:"scopes"`
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
@@ -77,7 +77,7 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 		Name *string `json:"name"`
 
-		Scopes []interface{} `json:"scopes"`
+		Scopes []string `json:"scopes"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
@@ -110,7 +110,7 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 
 		Name *string `json:"name"`
 
-		Scopes []interface{} `json:"scopes"`
+		Scopes []string `json:"scopes"`
 	}
 
 	dataAO1.ClientID = m.ClientID

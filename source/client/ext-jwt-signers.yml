@@ -63,4 +63,5 @@ definitions:
             type: string
           scopes:
             type: array
-            items: string
+            items:
+              type: string

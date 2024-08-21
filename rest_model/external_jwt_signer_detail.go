@@ -106,7 +106,7 @@ type ExternalJWTSignerDetail struct {
 
 	// scopes
 	// Required: true
-	Scopes []interface{} `json:"scopes"`
+	Scopes []string `json:"scopes"`
 
 	// use external Id
 	// Required: true
@@ -152,7 +152,7 @@ func (m *ExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 		NotBefore *strfmt.DateTime `json:"notBefore"`
 
-		Scopes []interface{} `json:"scopes"`
+		Scopes []string `json:"scopes"`
 
 		UseExternalID *bool `json:"useExternalId"`
 	}
@@ -233,7 +233,7 @@ func (m ExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 
 		NotBefore *strfmt.DateTime `json:"notBefore"`
 
-		Scopes []interface{} `json:"scopes"`
+		Scopes []string `json:"scopes"`
 
 		UseExternalID *bool `json:"useExternalId"`
 	}
@@ -498,15 +498,6 @@ func (m *ExternalJWTSignerDetail) validateNotBefore(formats strfmt.Registry) err
 func (m *ExternalJWTSignerDetail) validateScopes(formats strfmt.Registry) error {
 
 	if err := validate.Required("scopes", "body", m.Scopes); err != nil {
-		return err
-	}
-
-	if err := m.Scopes.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("scopes")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("scopes")
-		}
 		return err
 	}
 

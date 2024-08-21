@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.23"
+    "version": "0.26.25"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -24604,6 +24604,9 @@ func init() {
         },
         "scopes": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "tags": {
@@ -24693,7 +24696,10 @@ func init() {
               "format": "date-time"
             },
             "scopes": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "useExternalId": {
               "type": "boolean"
@@ -24756,7 +24762,10 @@ func init() {
           "example": "MyApps Signer"
         },
         "scopes": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -24818,6 +24827,9 @@ func init() {
         },
         "scopes": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "tags": {
@@ -28498,7 +28510,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.23"
+    "version": "0.26.25"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -53138,6 +53150,9 @@ func init() {
         },
         "scopes": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "tags": {
@@ -53227,7 +53242,10 @@ func init() {
               "format": "date-time"
             },
             "scopes": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "useExternalId": {
               "type": "boolean"
@@ -53290,7 +53308,10 @@ func init() {
           "example": "MyApps Signer"
         },
         "scopes": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "tags": {
           "$ref": "#/definitions/tags"
@@ -53352,6 +53373,9 @@ func init() {
         },
         "scopes": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "tags": {
