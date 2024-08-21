@@ -4000,6 +4000,7 @@ definitions:
       properties:
         clientId:
           type: string
+          x-nullable: true
         externalAuthUrl:
           type: string
           format: url

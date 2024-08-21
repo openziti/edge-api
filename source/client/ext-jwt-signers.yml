@@ -61,6 +61,7 @@ definitions:
             format: url
           clientId:
             type: string
+            x-nullable: true
           scopes:
             type: array
             items:

@@ -5504,7 +5504,8 @@ func init() {
           ],
           "properties": {
             "clientId": {
-              "type": "string"
+              "type": "string",
+              "x-nullable": true
             },
             "externalAuthUrl": {
               "type": "string",
@@ -13186,7 +13187,8 @@ func init() {
           ],
           "properties": {
             "clientId": {
-              "type": "string"
+              "type": "string",
+              "x-nullable": true
             },
             "externalAuthUrl": {
               "type": "string",

@@ -45,7 +45,7 @@ type ClientExternalJWTSignerDetail struct {
 	BaseEntity
 
 	// client Id
-	ClientID string `json:"clientId,omitempty"`
+	ClientID *string `json:"clientId,omitempty"`
 
 	// external auth Url
 	// Required: true
@@ -71,7 +71,7 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
-		ClientID string `json:"clientId,omitempty"`
+		ClientID *string `json:"clientId,omitempty"`
 
 		ExternalAuthURL *string `json:"externalAuthUrl"`
 
@@ -104,7 +104,7 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO0)
 	var dataAO1 struct {
-		ClientID string `json:"clientId,omitempty"`
+		ClientID *string `json:"clientId,omitempty"`
 
 		ExternalAuthURL *string `json:"externalAuthUrl"`
 
