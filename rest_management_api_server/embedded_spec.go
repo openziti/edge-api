@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.25"
+    "version": "0.26.26"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -11772,7 +11772,7 @@ func init() {
             ]
           }
         ],
-        "description": "Allows an admin disable an identity for a set amount of time or indefinitely.\n",
+        "description": "Reject an identity's API session requests for N minutes or indefinitely if 0.\n",
         "tags": [
           "Identity"
         ],
@@ -28510,7 +28510,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.25"
+    "version": "0.26.26"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -40218,7 +40218,7 @@ func init() {
             ]
           }
         ],
-        "description": "Allows an admin disable an identity for a set amount of time or indefinitely.\n",
+        "description": "Reject an identity's API session requests for N minutes or indefinitely if 0.\n",
         "tags": [
           "Identity"
         ],

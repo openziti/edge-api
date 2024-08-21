@@ -531,7 +531,7 @@ paths:
     post:
       summary: Set an identity as disabled
       description: |
-        Allows an admin disable an identity for a set amount of time or indefinitely.
+        Reject an identity's API session requests for N minutes or indefinitely if 0.
       security:
         - ztSession: [ ]
         - oauth2: [ openid ]

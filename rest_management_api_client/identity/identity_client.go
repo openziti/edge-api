@@ -313,7 +313,7 @@ func (a *Client) DetailIdentityType(params *DetailIdentityTypeParams, authInfo r
 /*
   DisableIdentity sets an identity as disabled
 
-  Allows an admin disable an identity for a set amount of time or indefinitely.
+  Reject an identity's API session requests for N minutes or indefinitely if 0.
 
 */
 func (a *Client) DisableIdentity(params *DisableIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableIdentityOK, error) {

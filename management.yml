@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.25
+  version: 0.26.26
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -8558,7 +8558,7 @@ paths:
       - oauth2:
         - openid
       description: |
-        Allows an admin disable an identity for a set amount of time or indefinitely.
+        Reject an identity's API session requests for N minutes or indefinitely if 0.
       tags:
       - Identity
       summary: Set an identity as disabled

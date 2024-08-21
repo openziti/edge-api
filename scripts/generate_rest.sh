@@ -1,11 +1,28 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 
-command -v swagger >/dev/null 2>&1 || {
-  echo >&2 "Command 'swagger' not installed. See: https://github.com/go-swagger/go-swagger for installation"
+set -o errexit
+set -o nounset
+set -o pipefail
+
+GO_SWAGGER_VERSION="v0.29.0"
+GO_SWAGGER_HASH="09ae1192ca9a941bbb534aca09e6bdc562c95ef3"
+if ! command -v swagger &>/dev/null \
+|| [[ "$(swagger version | awk '$1~/^version:/{print $2}')" != "${GO_SWAGGER_VERSION}" \
+|| "$(swagger version | awk '$1~/^commit:/{print $2}')" != "${GO_SWAGGER_HASH}" ]]
+then
+  echo >&2 "Go Swagger executable 'swagger' ${GO_SWAGGER_VERSION} (${GO_SWAGGER_HASH}) is required. Download the binary from GitHub: https://github.com/go-swagger/go-swagger/releases/tag/v0.29.0"
   exit 1
-}
+fi
 
-scriptPath=$(realpath $0)
+if GO_VERSION="$(go version | awk '{print $3}')"
+then
+  echo "Using go toolchain version: ${GO_VERSION}"
+else
+  echo >&2 "Failed to determine go toolchain version"
+  exit 1
+fi
+
+scriptPath=$(realpath "$0")
 scriptDir=$(dirname "$scriptPath")
 
 rootDir=$(realpath "$scriptDir/..")
@@ -85,8 +102,8 @@ fi
 
 echo "...fixing go module deps"
 prev=$(pwd)
-cd $codeTarget
+cd "$codeTarget"
 go mod init github.com/openziti/edge-api || true
 go get -u ./...
 go mod tidy
-cd $prev
+cd "$prev"
