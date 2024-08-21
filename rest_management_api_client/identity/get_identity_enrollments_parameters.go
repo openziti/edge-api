@@ -76,12 +76,10 @@ func NewGetIdentityEnrollmentsParamsWithHTTPClient(client *http.Client) *GetIden
 	}
 }
 
-/*
-GetIdentityEnrollmentsParams contains all the parameters to send to the API endpoint
+/* GetIdentityEnrollmentsParams contains all the parameters to send to the API endpoint
+   for the get identity enrollments operation.
 
-	for the get identity enrollments operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type GetIdentityEnrollmentsParams struct {
 

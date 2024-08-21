@@ -76,12 +76,10 @@ func NewDeleteMfaParamsWithHTTPClient(client *http.Client) *DeleteMfaParams {
 	}
 }
 
-/*
-DeleteMfaParams contains all the parameters to send to the API endpoint
+/* DeleteMfaParams contains all the parameters to send to the API endpoint
+   for the delete mfa operation.
 
-	for the delete mfa operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteMfaParams struct {
 

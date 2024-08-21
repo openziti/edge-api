@@ -53,10 +53,10 @@ func NewListEnumeratedCapabilities(ctx *middleware.Context, handler ListEnumerat
 	return &ListEnumeratedCapabilities{Context: ctx, Handler: handler}
 }
 
-/*
-	ListEnumeratedCapabilities swagger:route GET /enumerated-capabilities Informational listEnumeratedCapabilities
+/* ListEnumeratedCapabilities swagger:route GET /enumerated-capabilities Informational listEnumeratedCapabilities
 
 Returns all capabilities this version of the controller is aware of, enabled or not.
+
 */
 type ListEnumeratedCapabilities struct {
 	Context *middleware.Context

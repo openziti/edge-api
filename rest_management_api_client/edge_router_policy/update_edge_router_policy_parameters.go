@@ -78,12 +78,10 @@ func NewUpdateEdgeRouterPolicyParamsWithHTTPClient(client *http.Client) *UpdateE
 	}
 }
 
-/*
-UpdateEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
+/* UpdateEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
+   for the update edge router policy operation.
 
-	for the update edge router policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateEdgeRouterPolicyParams struct {
 

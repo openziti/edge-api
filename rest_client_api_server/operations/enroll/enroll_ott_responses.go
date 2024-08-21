@@ -40,8 +40,7 @@ import (
 // EnrollOttOKCode is the HTTP code returned for type EnrollOttOK
 const EnrollOttOKCode int = 200
 
-/*
-EnrollOttOK A response containing and identities client certificate chains
+/*EnrollOttOK A response containing and identities client certificate chains
 
 swagger:response enrollOttOK
 */
@@ -85,8 +84,7 @@ func (o *EnrollOttOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // EnrollOttNotFoundCode is the HTTP code returned for type EnrollOttNotFound
 const EnrollOttNotFoundCode int = 404
 
-/*
-EnrollOttNotFound The requested resource does not exist
+/*EnrollOttNotFound The requested resource does not exist
 
 swagger:response enrollOttNotFound
 */
@@ -130,8 +128,7 @@ func (o *EnrollOttNotFound) WriteResponse(rw http.ResponseWriter, producer runti
 // EnrollOttTooManyRequestsCode is the HTTP code returned for type EnrollOttTooManyRequests
 const EnrollOttTooManyRequestsCode int = 429
 
-/*
-EnrollOttTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*EnrollOttTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollOttTooManyRequests
 */

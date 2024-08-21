@@ -53,12 +53,12 @@ func NewDeleteConfig(ctx *middleware.Context, handler DeleteConfigHandler) *Dele
 	return &DeleteConfig{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteConfig swagger:route DELETE /configs/{id} Config deleteConfig
+/* DeleteConfig swagger:route DELETE /configs/{id} Config deleteConfig
 
-# Delete a config
+Delete a config
 
 Delete a config by id. Requires admin access.
+
 */
 type DeleteConfig struct {
 	Context *middleware.Context

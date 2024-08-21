@@ -76,12 +76,10 @@ func NewGetEnrollmentJwksParamsWithHTTPClient(client *http.Client) *GetEnrollmen
 	}
 }
 
-/*
-GetEnrollmentJwksParams contains all the parameters to send to the API endpoint
+/* GetEnrollmentJwksParams contains all the parameters to send to the API endpoint
+   for the get enrollment jwks operation.
 
-	for the get enrollment jwks operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type GetEnrollmentJwksParams struct {
 	timeout    time.Duration

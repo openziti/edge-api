@@ -70,9 +70,9 @@ type ClientService interface {
 }
 
 /*
-CreateTerminator creates a terminator resource
+  CreateTerminator creates a terminator resource
 
-Create a terminator resource. Requires admin access.
+  Create a terminator resource. Requires admin access.
 */
 func (a *Client) CreateTerminator(params *CreateTerminatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerminatorCreated, error) {
 	// TODO: Validate the params before sending
@@ -111,9 +111,9 @@ func (a *Client) CreateTerminator(params *CreateTerminatorParams, authInfo runti
 }
 
 /*
-DeleteTerminator deletes a terminator
+  DeleteTerminator deletes a terminator
 
-Delete a terminator by id. Requires admin access.
+  Delete a terminator by id. Requires admin access.
 */
 func (a *Client) DeleteTerminator(params *DeleteTerminatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerminatorOK, error) {
 	// TODO: Validate the params before sending
@@ -152,9 +152,9 @@ func (a *Client) DeleteTerminator(params *DeleteTerminatorParams, authInfo runti
 }
 
 /*
-DetailTerminator retrieves a single terminator
+  DetailTerminator retrieves a single terminator
 
-Retrieves a single terminator by id. Requires admin access.
+  Retrieves a single terminator by id. Requires admin access.
 */
 func (a *Client) DetailTerminator(params *DetailTerminatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailTerminatorOK, error) {
 	// TODO: Validate the params before sending
@@ -193,9 +193,10 @@ func (a *Client) DetailTerminator(params *DetailTerminatorParams, authInfo runti
 }
 
 /*
-ListTerminators lists terminators
+  ListTerminators lists terminators
 
-Retrieves a list of terminator resources; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of terminator resources; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListTerminators(params *ListTerminatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTerminatorsOK, error) {
 	// TODO: Validate the params before sending
@@ -234,9 +235,9 @@ func (a *Client) ListTerminators(params *ListTerminatorsParams, authInfo runtime
 }
 
 /*
-PatchTerminator updates the supplied fields on a terminator
+  PatchTerminator updates the supplied fields on a terminator
 
-Update the supplied fields on a terminator. Requires admin access.
+  Update the supplied fields on a terminator. Requires admin access.
 */
 func (a *Client) PatchTerminator(params *PatchTerminatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchTerminatorOK, error) {
 	// TODO: Validate the params before sending
@@ -275,9 +276,9 @@ func (a *Client) PatchTerminator(params *PatchTerminatorParams, authInfo runtime
 }
 
 /*
-UpdateTerminator updates all fields on a terminator
+  UpdateTerminator updates all fields on a terminator
 
-Update all fields on a terminator by id. Requires admin access.
+  Update all fields on a terminator by id. Requires admin access.
 */
 func (a *Client) UpdateTerminator(params *UpdateTerminatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerminatorOK, error) {
 	// TODO: Validate the params before sending

@@ -40,8 +40,7 @@ import (
 // DataIntegrityResultsOKCode is the HTTP code returned for type DataIntegrityResultsOK
 const DataIntegrityResultsOKCode int = 200
 
-/*
-DataIntegrityResultsOK A list of data integrity issues found
+/*DataIntegrityResultsOK A list of data integrity issues found
 
 swagger:response dataIntegrityResultsOK
 */
@@ -85,8 +84,7 @@ func (o *DataIntegrityResultsOK) WriteResponse(rw http.ResponseWriter, producer 
 // DataIntegrityResultsUnauthorizedCode is the HTTP code returned for type DataIntegrityResultsUnauthorized
 const DataIntegrityResultsUnauthorizedCode int = 401
 
-/*
-DataIntegrityResultsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DataIntegrityResultsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response dataIntegrityResultsUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DataIntegrityResultsUnauthorized) WriteResponse(rw http.ResponseWriter,
 // DataIntegrityResultsTooManyRequestsCode is the HTTP code returned for type DataIntegrityResultsTooManyRequests
 const DataIntegrityResultsTooManyRequestsCode int = 429
 
-/*
-DataIntegrityResultsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DataIntegrityResultsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response dataIntegrityResultsTooManyRequests
 */

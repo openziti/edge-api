@@ -76,12 +76,10 @@ func NewListServiceUpdatesParamsWithHTTPClient(client *http.Client) *ListService
 	}
 }
 
-/*
-ListServiceUpdatesParams contains all the parameters to send to the API endpoint
+/* ListServiceUpdatesParams contains all the parameters to send to the API endpoint
+   for the list service updates operation.
 
-	for the list service updates operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListServiceUpdatesParams struct {
 	timeout    time.Duration

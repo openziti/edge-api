@@ -81,8 +81,7 @@ func NewDeleteAuthenticatorOK() *DeleteAuthenticatorOK {
 	return &DeleteAuthenticatorOK{}
 }
 
-/*
-DeleteAuthenticatorOK describes a response with status code 200, with default header values.
+/* DeleteAuthenticatorOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -114,8 +113,7 @@ func NewDeleteAuthenticatorBadRequest() *DeleteAuthenticatorBadRequest {
 	return &DeleteAuthenticatorBadRequest{}
 }
 
-/*
-DeleteAuthenticatorBadRequest describes a response with status code 400, with default header values.
+/* DeleteAuthenticatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewDeleteAuthenticatorUnauthorized() *DeleteAuthenticatorUnauthorized {
 	return &DeleteAuthenticatorUnauthorized{}
 }
 
-/*
-DeleteAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* DeleteAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewDeleteAuthenticatorTooManyRequests() *DeleteAuthenticatorTooManyRequests
 	return &DeleteAuthenticatorTooManyRequests{}
 }
 
-/*
-DeleteAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
+/* DeleteAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

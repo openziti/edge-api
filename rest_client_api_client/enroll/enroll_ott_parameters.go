@@ -78,12 +78,10 @@ func NewEnrollOttParamsWithHTTPClient(client *http.Client) *EnrollOttParams {
 	}
 }
 
-/*
-EnrollOttParams contains all the parameters to send to the API endpoint
+/* EnrollOttParams contains all the parameters to send to the API endpoint
+   for the enroll ott operation.
 
-	for the enroll ott operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type EnrollOttParams struct {
 

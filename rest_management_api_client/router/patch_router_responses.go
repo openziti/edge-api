@@ -87,8 +87,7 @@ func NewPatchRouterOK() *PatchRouterOK {
 	return &PatchRouterOK{}
 }
 
-/*
-PatchRouterOK describes a response with status code 200, with default header values.
+/* PatchRouterOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewPatchRouterBadRequest() *PatchRouterBadRequest {
 	return &PatchRouterBadRequest{}
 }
 
-/*
-PatchRouterBadRequest describes a response with status code 400, with default header values.
+/* PatchRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewPatchRouterUnauthorized() *PatchRouterUnauthorized {
 	return &PatchRouterUnauthorized{}
 }
 
-/*
-PatchRouterUnauthorized describes a response with status code 401, with default header values.
+/* PatchRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewPatchRouterNotFound() *PatchRouterNotFound {
 	return &PatchRouterNotFound{}
 }
 
-/*
-PatchRouterNotFound describes a response with status code 404, with default header values.
+/* PatchRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewPatchRouterTooManyRequests() *PatchRouterTooManyRequests {
 	return &PatchRouterTooManyRequests{}
 }
 
-/*
-PatchRouterTooManyRequests describes a response with status code 429, with default header values.
+/* PatchRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

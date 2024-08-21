@@ -77,12 +77,10 @@ func NewListPostureCheckTypesParamsWithHTTPClient(client *http.Client) *ListPost
 	}
 }
 
-/*
-ListPostureCheckTypesParams contains all the parameters to send to the API endpoint
+/* ListPostureCheckTypesParams contains all the parameters to send to the API endpoint
+   for the list posture check types operation.
 
-	for the list posture check types operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListPostureCheckTypesParams struct {
 

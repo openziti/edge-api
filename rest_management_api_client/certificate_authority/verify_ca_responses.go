@@ -87,8 +87,7 @@ func NewVerifyCaOK() *VerifyCaOK {
 	return &VerifyCaOK{}
 }
 
-/*
-VerifyCaOK describes a response with status code 200, with default header values.
+/* VerifyCaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -120,8 +119,7 @@ func NewVerifyCaBadRequest() *VerifyCaBadRequest {
 	return &VerifyCaBadRequest{}
 }
 
-/*
-VerifyCaBadRequest describes a response with status code 400, with default header values.
+/* VerifyCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewVerifyCaUnauthorized() *VerifyCaUnauthorized {
 	return &VerifyCaUnauthorized{}
 }
 
-/*
-VerifyCaUnauthorized describes a response with status code 401, with default header values.
+/* VerifyCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewVerifyCaNotFound() *VerifyCaNotFound {
 	return &VerifyCaNotFound{}
 }
 
-/*
-VerifyCaNotFound describes a response with status code 404, with default header values.
+/* VerifyCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewVerifyCaTooManyRequests() *VerifyCaTooManyRequests {
 	return &VerifyCaTooManyRequests{}
 }
 
-/*
-VerifyCaTooManyRequests describes a response with status code 429, with default header values.
+/* VerifyCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

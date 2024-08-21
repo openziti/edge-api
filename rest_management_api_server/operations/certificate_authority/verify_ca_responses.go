@@ -40,8 +40,7 @@ import (
 // VerifyCaOKCode is the HTTP code returned for type VerifyCaOK
 const VerifyCaOKCode int = 200
 
-/*
-VerifyCaOK Base empty response
+/*VerifyCaOK Base empty response
 
 swagger:response verifyCaOK
 */
@@ -85,8 +84,7 @@ func (o *VerifyCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // VerifyCaBadRequestCode is the HTTP code returned for type VerifyCaBadRequest
 const VerifyCaBadRequestCode int = 400
 
-/*
-VerifyCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*VerifyCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response verifyCaBadRequest
 */
@@ -130,8 +128,7 @@ func (o *VerifyCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // VerifyCaUnauthorizedCode is the HTTP code returned for type VerifyCaUnauthorized
 const VerifyCaUnauthorizedCode int = 401
 
-/*
-VerifyCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*VerifyCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response verifyCaUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *VerifyCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // VerifyCaNotFoundCode is the HTTP code returned for type VerifyCaNotFound
 const VerifyCaNotFoundCode int = 404
 
-/*
-VerifyCaNotFound The requested resource does not exist
+/*VerifyCaNotFound The requested resource does not exist
 
 swagger:response verifyCaNotFound
 */
@@ -220,8 +216,7 @@ func (o *VerifyCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // VerifyCaTooManyRequestsCode is the HTTP code returned for type VerifyCaTooManyRequests
 const VerifyCaTooManyRequestsCode int = 429
 
-/*
-VerifyCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*VerifyCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response verifyCaTooManyRequests
 */

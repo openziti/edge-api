@@ -53,10 +53,10 @@ func NewListRoot(ctx *middleware.Context, handler ListRootHandler) *ListRoot {
 	return &ListRoot{Context: ctx, Handler: handler}
 }
 
-/*
-	ListRoot swagger:route GET / Informational listRoot
+/* ListRoot swagger:route GET / Informational listRoot
 
 Returns version information
+
 */
 type ListRoot struct {
 	Context *middleware.Context

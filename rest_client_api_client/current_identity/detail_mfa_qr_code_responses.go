@@ -66,8 +66,7 @@ func NewDetailMfaQrCodeOK() *DetailMfaQrCodeOK {
 	return &DetailMfaQrCodeOK{}
 }
 
-/*
-DetailMfaQrCodeOK describes a response with status code 200, with default header values.
+/* DetailMfaQrCodeOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -88,8 +87,7 @@ func NewDetailMfaQrCodeNotFound() *DetailMfaQrCodeNotFound {
 	return &DetailMfaQrCodeNotFound{}
 }
 
-/*
-DetailMfaQrCodeNotFound describes a response with status code 404, with default header values.
+/* DetailMfaQrCodeNotFound describes a response with status code 404, with default header values.
 
 No MFA enrollment or MFA enrollment is completed
 */

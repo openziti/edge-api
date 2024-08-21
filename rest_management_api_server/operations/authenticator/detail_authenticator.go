@@ -53,12 +53,12 @@ func NewDetailAuthenticator(ctx *middleware.Context, handler DetailAuthenticator
 	return &DetailAuthenticator{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailAuthenticator swagger:route GET /authenticators/{id} Authenticator detailAuthenticator
+/* DetailAuthenticator swagger:route GET /authenticators/{id} Authenticator detailAuthenticator
 
-# Retrieves a single authenticator
+Retrieves a single authenticator
 
 Retrieves a single authenticator by id. Requires admin access.
+
 */
 type DetailAuthenticator struct {
 	Context *middleware.Context

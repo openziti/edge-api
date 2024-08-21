@@ -40,8 +40,7 @@ import (
 // ListEdgeRouterPoliciesOKCode is the HTTP code returned for type ListEdgeRouterPoliciesOK
 const ListEdgeRouterPoliciesOKCode int = 200
 
-/*
-ListEdgeRouterPoliciesOK A list of edge router policies
+/*ListEdgeRouterPoliciesOK A list of edge router policies
 
 swagger:response listEdgeRouterPoliciesOK
 */
@@ -85,8 +84,7 @@ func (o *ListEdgeRouterPoliciesOK) WriteResponse(rw http.ResponseWriter, produce
 // ListEdgeRouterPoliciesBadRequestCode is the HTTP code returned for type ListEdgeRouterPoliciesBadRequest
 const ListEdgeRouterPoliciesBadRequestCode int = 400
 
-/*
-ListEdgeRouterPoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListEdgeRouterPoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listEdgeRouterPoliciesBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListEdgeRouterPoliciesBadRequest) WriteResponse(rw http.ResponseWriter,
 // ListEdgeRouterPoliciesUnauthorizedCode is the HTTP code returned for type ListEdgeRouterPoliciesUnauthorized
 const ListEdgeRouterPoliciesUnauthorizedCode int = 401
 
-/*
-ListEdgeRouterPoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListEdgeRouterPoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEdgeRouterPoliciesUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListEdgeRouterPoliciesUnauthorized) WriteResponse(rw http.ResponseWrite
 // ListEdgeRouterPoliciesTooManyRequestsCode is the HTTP code returned for type ListEdgeRouterPoliciesTooManyRequests
 const ListEdgeRouterPoliciesTooManyRequestsCode int = 429
 
-/*
-ListEdgeRouterPoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListEdgeRouterPoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEdgeRouterPoliciesTooManyRequests
 */

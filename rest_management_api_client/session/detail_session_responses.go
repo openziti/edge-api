@@ -81,8 +81,7 @@ func NewDetailSessionOK() *DetailSessionOK {
 	return &DetailSessionOK{}
 }
 
-/*
-DetailSessionOK describes a response with status code 200, with default header values.
+/* DetailSessionOK describes a response with status code 200, with default header values.
 
 A single session
 */
@@ -114,8 +113,7 @@ func NewDetailSessionUnauthorized() *DetailSessionUnauthorized {
 	return &DetailSessionUnauthorized{}
 }
 
-/*
-DetailSessionUnauthorized describes a response with status code 401, with default header values.
+/* DetailSessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailSessionNotFound() *DetailSessionNotFound {
 	return &DetailSessionNotFound{}
 }
 
-/*
-DetailSessionNotFound describes a response with status code 404, with default header values.
+/* DetailSessionNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailSessionTooManyRequests() *DetailSessionTooManyRequests {
 	return &DetailSessionTooManyRequests{}
 }
 
-/*
-DetailSessionTooManyRequests describes a response with status code 429, with default header values.
+/* DetailSessionTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

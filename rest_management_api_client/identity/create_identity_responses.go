@@ -81,8 +81,7 @@ func NewCreateIdentityCreated() *CreateIdentityCreated {
 	return &CreateIdentityCreated{}
 }
 
-/*
-CreateIdentityCreated describes a response with status code 201, with default header values.
+/* CreateIdentityCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -114,8 +113,7 @@ func NewCreateIdentityBadRequest() *CreateIdentityBadRequest {
 	return &CreateIdentityBadRequest{}
 }
 
-/*
-CreateIdentityBadRequest describes a response with status code 400, with default header values.
+/* CreateIdentityBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewCreateIdentityUnauthorized() *CreateIdentityUnauthorized {
 	return &CreateIdentityUnauthorized{}
 }
 
-/*
-CreateIdentityUnauthorized describes a response with status code 401, with default header values.
+/* CreateIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewCreateIdentityTooManyRequests() *CreateIdentityTooManyRequests {
 	return &CreateIdentityTooManyRequests{}
 }
 
-/*
-CreateIdentityTooManyRequests describes a response with status code 429, with default header values.
+/* CreateIdentityTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

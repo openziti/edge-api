@@ -66,9 +66,9 @@ type ClientService interface {
 }
 
 /*
-CreateSession creates a session resource
+  CreateSession creates a session resource
 
-Create a session resource.
+  Create a session resource.
 */
 func (a *Client) CreateSession(params *CreateSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSessionCreated, error) {
 	// TODO: Validate the params before sending
@@ -107,9 +107,9 @@ func (a *Client) CreateSession(params *CreateSessionParams, authInfo runtime.Cli
 }
 
 /*
-DeleteSession deletes a session
+  DeleteSession deletes a session
 
-Delete a session by id.
+  Delete a session by id.
 */
 func (a *Client) DeleteSession(params *DeleteSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSessionOK, error) {
 	// TODO: Validate the params before sending
@@ -148,9 +148,9 @@ func (a *Client) DeleteSession(params *DeleteSessionParams, authInfo runtime.Cli
 }
 
 /*
-DetailSession retrieves a single session
+  DetailSession retrieves a single session
 
-Retrieves a single session by id.
+  Retrieves a single session by id.
 */
 func (a *Client) DetailSession(params *DetailSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailSessionOK, error) {
 	// TODO: Validate the params before sending
@@ -189,12 +189,13 @@ func (a *Client) DetailSession(params *DetailSessionParams, authInfo runtime.Cli
 }
 
 /*
-	ListSessions lists sessions
+  ListSessions lists sessions
 
-	Retrieves a list of active sessions resources; supports filtering, sorting, and pagination.
+  Retrieves a list of active sessions resources; supports filtering, sorting, and pagination.
 
 Sessions are tied to an API session and are moved when an API session times out or logs out. Active sessions
 (i.e. Ziti SDK connected to an edge router) will keep the session and API session marked as active.
+
 */
 func (a *Client) ListSessions(params *ListSessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSessionsOK, error) {
 	// TODO: Validate the params before sending

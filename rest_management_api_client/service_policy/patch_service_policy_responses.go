@@ -87,8 +87,7 @@ func NewPatchServicePolicyOK() *PatchServicePolicyOK {
 	return &PatchServicePolicyOK{}
 }
 
-/*
-PatchServicePolicyOK describes a response with status code 200, with default header values.
+/* PatchServicePolicyOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewPatchServicePolicyBadRequest() *PatchServicePolicyBadRequest {
 	return &PatchServicePolicyBadRequest{}
 }
 
-/*
-PatchServicePolicyBadRequest describes a response with status code 400, with default header values.
+/* PatchServicePolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewPatchServicePolicyUnauthorized() *PatchServicePolicyUnauthorized {
 	return &PatchServicePolicyUnauthorized{}
 }
 
-/*
-PatchServicePolicyUnauthorized describes a response with status code 401, with default header values.
+/* PatchServicePolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewPatchServicePolicyNotFound() *PatchServicePolicyNotFound {
 	return &PatchServicePolicyNotFound{}
 }
 
-/*
-PatchServicePolicyNotFound describes a response with status code 404, with default header values.
+/* PatchServicePolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewPatchServicePolicyTooManyRequests() *PatchServicePolicyTooManyRequests {
 	return &PatchServicePolicyTooManyRequests{}
 }
 
-/*
-PatchServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+/* PatchServicePolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

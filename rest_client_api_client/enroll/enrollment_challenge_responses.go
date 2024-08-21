@@ -75,8 +75,7 @@ func NewEnrollmentChallengeOK() *EnrollmentChallengeOK {
 	return &EnrollmentChallengeOK{}
 }
 
-/*
-EnrollmentChallengeOK describes a response with status code 200, with default header values.
+/* EnrollmentChallengeOK describes a response with status code 200, with default header values.
 
 A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.
 */
@@ -108,8 +107,7 @@ func NewEnrollmentChallengeBadRequest() *EnrollmentChallengeBadRequest {
 	return &EnrollmentChallengeBadRequest{}
 }
 
-/*
-EnrollmentChallengeBadRequest describes a response with status code 400, with default header values.
+/* EnrollmentChallengeBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -141,8 +139,7 @@ func NewEnrollmentChallengeTooManyRequests() *EnrollmentChallengeTooManyRequests
 	return &EnrollmentChallengeTooManyRequests{}
 }
 
-/*
-EnrollmentChallengeTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollmentChallengeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

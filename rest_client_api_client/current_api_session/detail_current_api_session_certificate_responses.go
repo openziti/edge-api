@@ -81,8 +81,7 @@ func NewDetailCurrentAPISessionCertificateOK() *DetailCurrentAPISessionCertifica
 	return &DetailCurrentAPISessionCertificateOK{}
 }
 
-/*
-DetailCurrentAPISessionCertificateOK describes a response with status code 200, with default header values.
+/* DetailCurrentAPISessionCertificateOK describes a response with status code 200, with default header values.
 
 A response containing a single API Session certificate
 */
@@ -114,8 +113,7 @@ func NewDetailCurrentAPISessionCertificateUnauthorized() *DetailCurrentAPISessio
 	return &DetailCurrentAPISessionCertificateUnauthorized{}
 }
 
-/*
-DetailCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
+/* DetailCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailCurrentAPISessionCertificateNotFound() *DetailCurrentAPISessionCer
 	return &DetailCurrentAPISessionCertificateNotFound{}
 }
 
-/*
-DetailCurrentAPISessionCertificateNotFound describes a response with status code 404, with default header values.
+/* DetailCurrentAPISessionCertificateNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailCurrentAPISessionCertificateTooManyRequests() *DetailCurrentAPISes
 	return &DetailCurrentAPISessionCertificateTooManyRequests{}
 }
 
-/*
-DetailCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
+/* DetailCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

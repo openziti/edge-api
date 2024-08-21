@@ -40,8 +40,7 @@ import (
 // PatchExternalJWTSignerOKCode is the HTTP code returned for type PatchExternalJWTSignerOK
 const PatchExternalJWTSignerOKCode int = 200
 
-/*
-PatchExternalJWTSignerOK The patch request was successful and the resource has been altered
+/*PatchExternalJWTSignerOK The patch request was successful and the resource has been altered
 
 swagger:response patchExternalJwtSignerOK
 */
@@ -85,8 +84,7 @@ func (o *PatchExternalJWTSignerOK) WriteResponse(rw http.ResponseWriter, produce
 // PatchExternalJWTSignerBadRequestCode is the HTTP code returned for type PatchExternalJWTSignerBadRequest
 const PatchExternalJWTSignerBadRequestCode int = 400
 
-/*
-PatchExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*PatchExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchExternalJwtSignerBadRequest
 */
@@ -130,8 +128,7 @@ func (o *PatchExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter,
 // PatchExternalJWTSignerUnauthorizedCode is the HTTP code returned for type PatchExternalJWTSignerUnauthorized
 const PatchExternalJWTSignerUnauthorizedCode int = 401
 
-/*
-PatchExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
+/*PatchExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchExternalJwtSignerUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *PatchExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrite
 // PatchExternalJWTSignerNotFoundCode is the HTTP code returned for type PatchExternalJWTSignerNotFound
 const PatchExternalJWTSignerNotFoundCode int = 404
 
-/*
-PatchExternalJWTSignerNotFound The requested resource does not exist
+/*PatchExternalJWTSignerNotFound The requested resource does not exist
 
 swagger:response patchExternalJwtSignerNotFound
 */
@@ -220,8 +216,7 @@ func (o *PatchExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, p
 // PatchExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type PatchExternalJWTSignerTooManyRequests
 const PatchExternalJWTSignerTooManyRequestsCode int = 429
 
-/*
-PatchExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*PatchExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchExternalJwtSignerTooManyRequests
 */

@@ -76,12 +76,10 @@ func NewDetailEdgeRouterParamsWithHTTPClient(client *http.Client) *DetailEdgeRou
 	}
 }
 
-/*
-DetailEdgeRouterParams contains all the parameters to send to the API endpoint
+/* DetailEdgeRouterParams contains all the parameters to send to the API endpoint
+   for the detail edge router operation.
 
-	for the detail edge router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DetailEdgeRouterParams struct {
 

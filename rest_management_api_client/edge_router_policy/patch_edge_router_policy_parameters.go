@@ -78,12 +78,10 @@ func NewPatchEdgeRouterPolicyParamsWithHTTPClient(client *http.Client) *PatchEdg
 	}
 }
 
-/*
-PatchEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
+/* PatchEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
+   for the patch edge router policy operation.
 
-	for the patch edge router policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type PatchEdgeRouterPolicyParams struct {
 

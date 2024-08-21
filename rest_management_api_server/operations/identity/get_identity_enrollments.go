@@ -53,12 +53,13 @@ func NewGetIdentityEnrollments(ctx *middleware.Context, handler GetIdentityEnrol
 	return &GetIdentityEnrollments{Context: ctx, Handler: handler}
 }
 
-/*
-	GetIdentityEnrollments swagger:route GET /identities/{id}/enrollments Identity getIdentityEnrollments
+/* GetIdentityEnrollments swagger:route GET /identities/{id}/enrollments Identity getIdentityEnrollments
 
-# Retrieve the current enrollments of a specific identity
+Retrieve the current enrollments of a specific identity
 
 Returns a list of enrollments associated to the identity specified
+
+
 */
 type GetIdentityEnrollments struct {
 	Context *middleware.Context

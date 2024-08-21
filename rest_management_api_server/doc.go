@@ -25,25 +25,25 @@
 
 // Package rest_management_api_server Ziti Edge Management
 //
-//	OpenZiti Edge Management API
-//	Schemes:
-//	  https
-//	Host: demo.ziti.dev
-//	BasePath: /edge/management/v1
-//	Version: 0.26.24
-//	License: Apache 2.0 https://www.apache.org/licenses/LICENSE-2.0.html
-//	Contact: OpenZiti<help@openziti.org> https://openziti.discourse.group
+//  OpenZiti Edge Management API
+//  Schemes:
+//    https
+//  Host: demo.ziti.dev
+//  BasePath: /edge/management/v1
+//  Version: 0.26.24
+//  License: Apache 2.0 https://www.apache.org/licenses/LICENSE-2.0.html
+//  Contact: OpenZiti<help@openziti.org> https://openziti.discourse.group
 //
-//	Consumes:
-//	  - application/json
-//	  - text/plain
+//  Consumes:
+//    - application/json
+//    - text/plain
 //
-//	Produces:
-//	  - application/jwt
-//	  - application/pkcs7-mime
-//	  - image/png
-//	  - application/json
-//	  - text/yaml
+//  Produces:
+//    - application/jwt
+//    - application/pkcs7-mime
+//    - image/png
+//    - application/json
+//    - text/yaml
 //
 // swagger:meta
 package rest_management_api_server

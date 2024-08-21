@@ -76,12 +76,10 @@ func NewReEnrollEdgeRouterParamsWithHTTPClient(client *http.Client) *ReEnrollEdg
 	}
 }
 
-/*
-ReEnrollEdgeRouterParams contains all the parameters to send to the API endpoint
+/* ReEnrollEdgeRouterParams contains all the parameters to send to the API endpoint
+   for the re enroll edge router operation.
 
-	for the re enroll edge router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ReEnrollEdgeRouterParams struct {
 

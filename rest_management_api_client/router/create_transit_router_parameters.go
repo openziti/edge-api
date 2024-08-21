@@ -78,12 +78,10 @@ func NewCreateTransitRouterParamsWithHTTPClient(client *http.Client) *CreateTran
 	}
 }
 
-/*
-CreateTransitRouterParams contains all the parameters to send to the API endpoint
+/* CreateTransitRouterParams contains all the parameters to send to the API endpoint
+   for the create transit router operation.
 
-	for the create transit router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateTransitRouterParams struct {
 

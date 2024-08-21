@@ -81,8 +81,7 @@ func NewDetailExternalJWTSignerOK() *DetailExternalJWTSignerOK {
 	return &DetailExternalJWTSignerOK{}
 }
 
-/*
-DetailExternalJWTSignerOK describes a response with status code 200, with default header values.
+/* DetailExternalJWTSignerOK describes a response with status code 200, with default header values.
 
 A singular External JWT Signer resource
 */
@@ -114,8 +113,7 @@ func NewDetailExternalJWTSignerUnauthorized() *DetailExternalJWTSignerUnauthoriz
 	return &DetailExternalJWTSignerUnauthorized{}
 }
 
-/*
-DetailExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
+/* DetailExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailExternalJWTSignerNotFound() *DetailExternalJWTSignerNotFound {
 	return &DetailExternalJWTSignerNotFound{}
 }
 
-/*
-DetailExternalJWTSignerNotFound describes a response with status code 404, with default header values.
+/* DetailExternalJWTSignerNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailExternalJWTSignerTooManyRequests() *DetailExternalJWTSignerTooMany
 	return &DetailExternalJWTSignerTooManyRequests{}
 }
 
-/*
-DetailExternalJWTSignerTooManyRequests describes a response with status code 429, with default header values.
+/* DetailExternalJWTSignerTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

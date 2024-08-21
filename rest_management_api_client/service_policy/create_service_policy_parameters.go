@@ -78,12 +78,10 @@ func NewCreateServicePolicyParamsWithHTTPClient(client *http.Client) *CreateServ
 	}
 }
 
-/*
-CreateServicePolicyParams contains all the parameters to send to the API endpoint
+/* CreateServicePolicyParams contains all the parameters to send to the API endpoint
+   for the create service policy operation.
 
-	for the create service policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateServicePolicyParams struct {
 

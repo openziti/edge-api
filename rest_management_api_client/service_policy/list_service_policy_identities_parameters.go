@@ -77,12 +77,10 @@ func NewListServicePolicyIdentitiesParamsWithHTTPClient(client *http.Client) *Li
 	}
 }
 
-/*
-ListServicePolicyIdentitiesParams contains all the parameters to send to the API endpoint
+/* ListServicePolicyIdentitiesParams contains all the parameters to send to the API endpoint
+   for the list service policy identities operation.
 
-	for the list service policy identities operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListServicePolicyIdentitiesParams struct {
 

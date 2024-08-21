@@ -76,12 +76,10 @@ func NewDetailAuthenticatorParamsWithHTTPClient(client *http.Client) *DetailAuth
 	}
 }
 
-/*
-DetailAuthenticatorParams contains all the parameters to send to the API endpoint
+/* DetailAuthenticatorParams contains all the parameters to send to the API endpoint
+   for the detail authenticator operation.
 
-	for the detail authenticator operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DetailAuthenticatorParams struct {
 

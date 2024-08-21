@@ -81,8 +81,7 @@ func NewListServiceServiceEdgeRouterPoliciesOK() *ListServiceServiceEdgeRouterPo
 	return &ListServiceServiceEdgeRouterPoliciesOK{}
 }
 
-/*
-ListServiceServiceEdgeRouterPoliciesOK describes a response with status code 200, with default header values.
+/* ListServiceServiceEdgeRouterPoliciesOK describes a response with status code 200, with default header values.
 
 A list of service edge router policies
 */
@@ -114,8 +113,7 @@ func NewListServiceServiceEdgeRouterPoliciesBadRequest() *ListServiceServiceEdge
 	return &ListServiceServiceEdgeRouterPoliciesBadRequest{}
 }
 
-/*
-ListServiceServiceEdgeRouterPoliciesBadRequest describes a response with status code 400, with default header values.
+/* ListServiceServiceEdgeRouterPoliciesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListServiceServiceEdgeRouterPoliciesUnauthorized() *ListServiceServiceEd
 	return &ListServiceServiceEdgeRouterPoliciesUnauthorized{}
 }
 
-/*
-ListServiceServiceEdgeRouterPoliciesUnauthorized describes a response with status code 401, with default header values.
+/* ListServiceServiceEdgeRouterPoliciesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListServiceServiceEdgeRouterPoliciesTooManyRequests() *ListServiceServic
 	return &ListServiceServiceEdgeRouterPoliciesTooManyRequests{}
 }
 
-/*
-ListServiceServiceEdgeRouterPoliciesTooManyRequests describes a response with status code 429, with default header values.
+/* ListServiceServiceEdgeRouterPoliciesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

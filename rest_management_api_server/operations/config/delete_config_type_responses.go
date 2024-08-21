@@ -40,8 +40,7 @@ import (
 // DeleteConfigTypeOKCode is the HTTP code returned for type DeleteConfigTypeOK
 const DeleteConfigTypeOKCode int = 200
 
-/*
-DeleteConfigTypeOK The delete request was successful and the resource has been removed
+/*DeleteConfigTypeOK The delete request was successful and the resource has been removed
 
 swagger:response deleteConfigTypeOK
 */
@@ -85,8 +84,7 @@ func (o *DeleteConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteConfigTypeBadRequestCode is the HTTP code returned for type DeleteConfigTypeBadRequest
 const DeleteConfigTypeBadRequestCode int = 400
 
-/*
-DeleteConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*DeleteConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteConfigTypeBadRequest
 */
@@ -130,8 +128,7 @@ func (o *DeleteConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // DeleteConfigTypeUnauthorizedCode is the HTTP code returned for type DeleteConfigTypeUnauthorized
 const DeleteConfigTypeUnauthorizedCode int = 401
 
-/*
-DeleteConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DeleteConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteConfigTypeUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *DeleteConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DeleteConfigTypeConflictCode is the HTTP code returned for type DeleteConfigTypeConflict
 const DeleteConfigTypeConflictCode int = 409
 
-/*
-DeleteConfigTypeConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*DeleteConfigTypeConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteConfigTypeConflict
 */
@@ -220,8 +216,7 @@ func (o *DeleteConfigTypeConflict) WriteResponse(rw http.ResponseWriter, produce
 // DeleteConfigTypeTooManyRequestsCode is the HTTP code returned for type DeleteConfigTypeTooManyRequests
 const DeleteConfigTypeTooManyRequestsCode int = 429
 
-/*
-DeleteConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DeleteConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteConfigTypeTooManyRequests
 */

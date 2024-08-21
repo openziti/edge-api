@@ -76,12 +76,10 @@ func NewGetCurrentIdentityParamsWithHTTPClient(client *http.Client) *GetCurrentI
 	}
 }
 
-/*
-GetCurrentIdentityParams contains all the parameters to send to the API endpoint
+/* GetCurrentIdentityParams contains all the parameters to send to the API endpoint
+   for the get current identity operation.
 
-	for the get current identity operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type GetCurrentIdentityParams struct {
 	timeout    time.Duration

@@ -81,8 +81,7 @@ func NewDetailAuthPolicyOK() *DetailAuthPolicyOK {
 	return &DetailAuthPolicyOK{}
 }
 
-/*
-DetailAuthPolicyOK describes a response with status code 200, with default header values.
+/* DetailAuthPolicyOK describes a response with status code 200, with default header values.
 
 A singular Auth Policy resource
 */
@@ -114,8 +113,7 @@ func NewDetailAuthPolicyUnauthorized() *DetailAuthPolicyUnauthorized {
 	return &DetailAuthPolicyUnauthorized{}
 }
 
-/*
-DetailAuthPolicyUnauthorized describes a response with status code 401, with default header values.
+/* DetailAuthPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailAuthPolicyNotFound() *DetailAuthPolicyNotFound {
 	return &DetailAuthPolicyNotFound{}
 }
 
-/*
-DetailAuthPolicyNotFound describes a response with status code 404, with default header values.
+/* DetailAuthPolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailAuthPolicyTooManyRequests() *DetailAuthPolicyTooManyRequests {
 	return &DetailAuthPolicyTooManyRequests{}
 }
 
-/*
-DetailAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
+/* DetailAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

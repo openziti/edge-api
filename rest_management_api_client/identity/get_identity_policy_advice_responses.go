@@ -81,8 +81,7 @@ func NewGetIdentityPolicyAdviceOK() *GetIdentityPolicyAdviceOK {
 	return &GetIdentityPolicyAdviceOK{}
 }
 
-/*
-GetIdentityPolicyAdviceOK describes a response with status code 200, with default header values.
+/* GetIdentityPolicyAdviceOK describes a response with status code 200, with default header values.
 
 Returns the document that represents the policy advice
 */
@@ -114,8 +113,7 @@ func NewGetIdentityPolicyAdviceUnauthorized() *GetIdentityPolicyAdviceUnauthoriz
 	return &GetIdentityPolicyAdviceUnauthorized{}
 }
 
-/*
-GetIdentityPolicyAdviceUnauthorized describes a response with status code 401, with default header values.
+/* GetIdentityPolicyAdviceUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewGetIdentityPolicyAdviceNotFound() *GetIdentityPolicyAdviceNotFound {
 	return &GetIdentityPolicyAdviceNotFound{}
 }
 
-/*
-GetIdentityPolicyAdviceNotFound describes a response with status code 404, with default header values.
+/* GetIdentityPolicyAdviceNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewGetIdentityPolicyAdviceTooManyRequests() *GetIdentityPolicyAdviceTooMany
 	return &GetIdentityPolicyAdviceTooManyRequests{}
 }
 
-/*
-GetIdentityPolicyAdviceTooManyRequests describes a response with status code 429, with default header values.
+/* GetIdentityPolicyAdviceTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

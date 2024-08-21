@@ -76,9 +76,9 @@ type ClientService interface {
 }
 
 /*
-CreateServicePolicy creates a service policy resource
+  CreateServicePolicy creates a service policy resource
 
-Create a service policy resource. Requires admin access.
+  Create a service policy resource. Requires admin access.
 */
 func (a *Client) CreateServicePolicy(params *CreateServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateServicePolicyCreated, error) {
 	// TODO: Validate the params before sending
@@ -117,9 +117,9 @@ func (a *Client) CreateServicePolicy(params *CreateServicePolicyParams, authInfo
 }
 
 /*
-DeleteServicePolicy deletes a service policy
+  DeleteServicePolicy deletes a service policy
 
-Delete a service policy by id. Requires admin access.
+  Delete a service policy by id. Requires admin access.
 */
 func (a *Client) DeleteServicePolicy(params *DeleteServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServicePolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -158,9 +158,9 @@ func (a *Client) DeleteServicePolicy(params *DeleteServicePolicyParams, authInfo
 }
 
 /*
-DetailServicePolicy retrieves a single service policy
+  DetailServicePolicy retrieves a single service policy
 
-Retrieves a single service policy by id. Requires admin access.
+  Retrieves a single service policy by id. Requires admin access.
 */
 func (a *Client) DetailServicePolicy(params *DetailServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailServicePolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -199,9 +199,10 @@ func (a *Client) DetailServicePolicy(params *DetailServicePolicyParams, authInfo
 }
 
 /*
-ListServicePolicies lists service policies
+  ListServicePolicies lists service policies
 
-Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListServicePolicies(params *ListServicePoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePoliciesOK, error) {
 	// TODO: Validate the params before sending
@@ -240,9 +241,10 @@ func (a *Client) ListServicePolicies(params *ListServicePoliciesParams, authInfo
 }
 
 /*
-ListServicePolicyIdentities lists identities a service policy affects
+  ListServicePolicyIdentities lists identities a service policy affects
 
-Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListServicePolicyIdentities(params *ListServicePolicyIdentitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePolicyIdentitiesOK, error) {
 	// TODO: Validate the params before sending
@@ -281,9 +283,10 @@ func (a *Client) ListServicePolicyIdentities(params *ListServicePolicyIdentities
 }
 
 /*
-ListServicePolicyPostureChecks lists posture check a service policy includes
+  ListServicePolicyPostureChecks lists posture check a service policy includes
 
-Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListServicePolicyPostureChecks(params *ListServicePolicyPostureChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePolicyPostureChecksOK, error) {
 	// TODO: Validate the params before sending
@@ -322,9 +325,10 @@ func (a *Client) ListServicePolicyPostureChecks(params *ListServicePolicyPosture
 }
 
 /*
-ListServicePolicyServices lists services a service policy affects
+  ListServicePolicyServices lists services a service policy affects
 
-Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListServicePolicyServices(params *ListServicePolicyServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePolicyServicesOK, error) {
 	// TODO: Validate the params before sending
@@ -363,9 +367,9 @@ func (a *Client) ListServicePolicyServices(params *ListServicePolicyServicesPara
 }
 
 /*
-PatchServicePolicy updates the supplied fields on a service policy
+  PatchServicePolicy updates the supplied fields on a service policy
 
-Update the supplied fields on a service policy. Requires admin access.
+  Update the supplied fields on a service policy. Requires admin access.
 */
 func (a *Client) PatchServicePolicy(params *PatchServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServicePolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -404,9 +408,9 @@ func (a *Client) PatchServicePolicy(params *PatchServicePolicyParams, authInfo r
 }
 
 /*
-UpdateServicePolicy updates all fields on a service policy
+  UpdateServicePolicy updates all fields on a service policy
 
-Update all fields on a service policy by id. Requires admin access.
+  Update all fields on a service policy by id. Requires admin access.
 */
 func (a *Client) UpdateServicePolicy(params *UpdateServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateServicePolicyOK, error) {
 	// TODO: Validate the params before sending

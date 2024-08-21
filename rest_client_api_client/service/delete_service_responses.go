@@ -87,8 +87,7 @@ func NewDeleteServiceOK() *DeleteServiceOK {
 	return &DeleteServiceOK{}
 }
 
-/*
-DeleteServiceOK describes a response with status code 200, with default header values.
+/* DeleteServiceOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -120,8 +119,7 @@ func NewDeleteServiceBadRequest() *DeleteServiceBadRequest {
 	return &DeleteServiceBadRequest{}
 }
 
-/*
-DeleteServiceBadRequest describes a response with status code 400, with default header values.
+/* DeleteServiceBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewDeleteServiceUnauthorized() *DeleteServiceUnauthorized {
 	return &DeleteServiceUnauthorized{}
 }
 
-/*
-DeleteServiceUnauthorized describes a response with status code 401, with default header values.
+/* DeleteServiceUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewDeleteServiceConflict() *DeleteServiceConflict {
 	return &DeleteServiceConflict{}
 }
 
-/*
-DeleteServiceConflict describes a response with status code 409, with default header values.
+/* DeleteServiceConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
@@ -219,8 +215,7 @@ func NewDeleteServiceTooManyRequests() *DeleteServiceTooManyRequests {
 	return &DeleteServiceTooManyRequests{}
 }
 
-/*
-DeleteServiceTooManyRequests describes a response with status code 429, with default header values.
+/* DeleteServiceTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -40,8 +40,7 @@ import (
 // DeleteCaOKCode is the HTTP code returned for type DeleteCaOK
 const DeleteCaOKCode int = 200
 
-/*
-DeleteCaOK The delete request was successful and the resource has been removed
+/*DeleteCaOK The delete request was successful and the resource has been removed
 
 swagger:response deleteCaOK
 */
@@ -85,8 +84,7 @@ func (o *DeleteCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // DeleteCaBadRequestCode is the HTTP code returned for type DeleteCaBadRequest
 const DeleteCaBadRequestCode int = 400
 
-/*
-DeleteCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*DeleteCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteCaBadRequest
 */
@@ -130,8 +128,7 @@ func (o *DeleteCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteCaUnauthorizedCode is the HTTP code returned for type DeleteCaUnauthorized
 const DeleteCaUnauthorizedCode int = 401
 
-/*
-DeleteCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DeleteCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteCaUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *DeleteCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // DeleteCaTooManyRequestsCode is the HTTP code returned for type DeleteCaTooManyRequests
 const DeleteCaTooManyRequestsCode int = 429
 
-/*
-DeleteCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DeleteCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteCaTooManyRequests
 */

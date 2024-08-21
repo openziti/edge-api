@@ -76,12 +76,10 @@ func NewListVersionParamsWithHTTPClient(client *http.Client) *ListVersionParams 
 	}
 }
 
-/*
-ListVersionParams contains all the parameters to send to the API endpoint
+/* ListVersionParams contains all the parameters to send to the API endpoint
+   for the list version operation.
 
-	for the list version operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListVersionParams struct {
 	timeout    time.Duration

@@ -75,8 +75,7 @@ func NewDataIntegrityResultsOK() *DataIntegrityResultsOK {
 	return &DataIntegrityResultsOK{}
 }
 
-/*
-DataIntegrityResultsOK describes a response with status code 200, with default header values.
+/* DataIntegrityResultsOK describes a response with status code 200, with default header values.
 
 A list of data integrity issues found
 */
@@ -108,8 +107,7 @@ func NewDataIntegrityResultsUnauthorized() *DataIntegrityResultsUnauthorized {
 	return &DataIntegrityResultsUnauthorized{}
 }
 
-/*
-DataIntegrityResultsUnauthorized describes a response with status code 401, with default header values.
+/* DataIntegrityResultsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewDataIntegrityResultsTooManyRequests() *DataIntegrityResultsTooManyReques
 	return &DataIntegrityResultsTooManyRequests{}
 }
 
-/*
-DataIntegrityResultsTooManyRequests describes a response with status code 429, with default header values.
+/* DataIntegrityResultsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

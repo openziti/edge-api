@@ -53,12 +53,12 @@ func NewDeleteServiceEdgeRouterPolicy(ctx *middleware.Context, handler DeleteSer
 	return &DeleteServiceEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteServiceEdgeRouterPolicy swagger:route DELETE /service-edge-router-policies/{id} Service Edge Router Policy deleteServiceEdgeRouterPolicy
+/* DeleteServiceEdgeRouterPolicy swagger:route DELETE /service-edge-router-policies/{id} Service Edge Router Policy deleteServiceEdgeRouterPolicy
 
-# Delete a service edge policy
+Delete a service edge policy
 
 Delete a service edge policy by id. Requires admin access.
+
 */
 type DeleteServiceEdgeRouterPolicy struct {
 	Context *middleware.Context

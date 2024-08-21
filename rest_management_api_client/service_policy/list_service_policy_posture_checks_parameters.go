@@ -77,12 +77,10 @@ func NewListServicePolicyPostureChecksParamsWithHTTPClient(client *http.Client) 
 	}
 }
 
-/*
-ListServicePolicyPostureChecksParams contains all the parameters to send to the API endpoint
+/* ListServicePolicyPostureChecksParams contains all the parameters to send to the API endpoint
+   for the list service policy posture checks operation.
 
-	for the list service policy posture checks operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListServicePolicyPostureChecksParams struct {
 

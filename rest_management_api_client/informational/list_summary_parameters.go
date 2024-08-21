@@ -76,12 +76,10 @@ func NewListSummaryParamsWithHTTPClient(client *http.Client) *ListSummaryParams 
 	}
 }
 
-/*
-ListSummaryParams contains all the parameters to send to the API endpoint
+/* ListSummaryParams contains all the parameters to send to the API endpoint
+   for the list summary operation.
 
-	for the list summary operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListSummaryParams struct {
 	timeout    time.Duration

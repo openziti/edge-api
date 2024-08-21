@@ -40,8 +40,7 @@ import (
 // ListEdgeRouterRoleAttributesOKCode is the HTTP code returned for type ListEdgeRouterRoleAttributesOK
 const ListEdgeRouterRoleAttributesOKCode int = 200
 
-/*
-ListEdgeRouterRoleAttributesOK A list of role attributes
+/*ListEdgeRouterRoleAttributesOK A list of role attributes
 
 swagger:response listEdgeRouterRoleAttributesOK
 */
@@ -85,8 +84,7 @@ func (o *ListEdgeRouterRoleAttributesOK) WriteResponse(rw http.ResponseWriter, p
 // ListEdgeRouterRoleAttributesBadRequestCode is the HTTP code returned for type ListEdgeRouterRoleAttributesBadRequest
 const ListEdgeRouterRoleAttributesBadRequestCode int = 400
 
-/*
-ListEdgeRouterRoleAttributesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListEdgeRouterRoleAttributesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listEdgeRouterRoleAttributesBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListEdgeRouterRoleAttributesBadRequest) WriteResponse(rw http.ResponseW
 // ListEdgeRouterRoleAttributesUnauthorizedCode is the HTTP code returned for type ListEdgeRouterRoleAttributesUnauthorized
 const ListEdgeRouterRoleAttributesUnauthorizedCode int = 401
 
-/*
-ListEdgeRouterRoleAttributesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListEdgeRouterRoleAttributesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEdgeRouterRoleAttributesUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListEdgeRouterRoleAttributesUnauthorized) WriteResponse(rw http.Respons
 // ListEdgeRouterRoleAttributesTooManyRequestsCode is the HTTP code returned for type ListEdgeRouterRoleAttributesTooManyRequests
 const ListEdgeRouterRoleAttributesTooManyRequestsCode int = 429
 
-/*
-ListEdgeRouterRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListEdgeRouterRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEdgeRouterRoleAttributesTooManyRequests
 */

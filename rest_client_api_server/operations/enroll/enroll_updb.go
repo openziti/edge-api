@@ -59,12 +59,13 @@ func NewEnrollUpdb(ctx *middleware.Context, handler EnrollUpdbHandler) *EnrollUp
 	return &EnrollUpdb{Context: ctx, Handler: handler}
 }
 
-/*
-	EnrollUpdb swagger:route POST /enroll/updb Enroll enrollUpdb
+/* EnrollUpdb swagger:route POST /enroll/updb Enroll enrollUpdb
 
-# Enroll an identity via one-time-token
+Enroll an identity via one-time-token
 
 Enrolls an identity via a one-time-token to establish an initial username and password combination
+
+
 */
 type EnrollUpdb struct {
 	Context *middleware.Context

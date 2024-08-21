@@ -81,8 +81,7 @@ func NewReEnrollAuthenticatorCreated() *ReEnrollAuthenticatorCreated {
 	return &ReEnrollAuthenticatorCreated{}
 }
 
-/*
-ReEnrollAuthenticatorCreated describes a response with status code 201, with default header values.
+/* ReEnrollAuthenticatorCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -114,8 +113,7 @@ func NewReEnrollAuthenticatorUnauthorized() *ReEnrollAuthenticatorUnauthorized {
 	return &ReEnrollAuthenticatorUnauthorized{}
 }
 
-/*
-ReEnrollAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* ReEnrollAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewReEnrollAuthenticatorNotFound() *ReEnrollAuthenticatorNotFound {
 	return &ReEnrollAuthenticatorNotFound{}
 }
 
-/*
-ReEnrollAuthenticatorNotFound describes a response with status code 404, with default header values.
+/* ReEnrollAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewReEnrollAuthenticatorTooManyRequests() *ReEnrollAuthenticatorTooManyRequ
 	return &ReEnrollAuthenticatorTooManyRequests{}
 }
 
-/*
-ReEnrollAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
+/* ReEnrollAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

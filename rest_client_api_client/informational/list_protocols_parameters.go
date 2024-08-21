@@ -76,12 +76,10 @@ func NewListProtocolsParamsWithHTTPClient(client *http.Client) *ListProtocolsPar
 	}
 }
 
-/*
-ListProtocolsParams contains all the parameters to send to the API endpoint
+/* ListProtocolsParams contains all the parameters to send to the API endpoint
+   for the list protocols operation.
 
-	for the list protocols operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListProtocolsParams struct {
 	timeout    time.Duration

@@ -40,8 +40,7 @@ import (
 // ListIdentityServicesOKCode is the HTTP code returned for type ListIdentityServicesOK
 const ListIdentityServicesOKCode int = 200
 
-/*
-ListIdentityServicesOK A list of services
+/*ListIdentityServicesOK A list of services
 
 swagger:response listIdentityServicesOK
 */
@@ -85,8 +84,7 @@ func (o *ListIdentityServicesOK) WriteResponse(rw http.ResponseWriter, producer 
 // ListIdentityServicesUnauthorizedCode is the HTTP code returned for type ListIdentityServicesUnauthorized
 const ListIdentityServicesUnauthorizedCode int = 401
 
-/*
-ListIdentityServicesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListIdentityServicesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listIdentityServicesUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *ListIdentityServicesUnauthorized) WriteResponse(rw http.ResponseWriter,
 // ListIdentityServicesNotFoundCode is the HTTP code returned for type ListIdentityServicesNotFound
 const ListIdentityServicesNotFoundCode int = 404
 
-/*
-ListIdentityServicesNotFound The requested resource does not exist
+/*ListIdentityServicesNotFound The requested resource does not exist
 
 swagger:response listIdentityServicesNotFound
 */
@@ -175,8 +172,7 @@ func (o *ListIdentityServicesNotFound) WriteResponse(rw http.ResponseWriter, pro
 // ListIdentityServicesTooManyRequestsCode is the HTTP code returned for type ListIdentityServicesTooManyRequests
 const ListIdentityServicesTooManyRequestsCode int = 429
 
-/*
-ListIdentityServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListIdentityServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listIdentityServicesTooManyRequests
 */

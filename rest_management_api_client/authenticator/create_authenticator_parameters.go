@@ -78,12 +78,10 @@ func NewCreateAuthenticatorParamsWithHTTPClient(client *http.Client) *CreateAuth
 	}
 }
 
-/*
-CreateAuthenticatorParams contains all the parameters to send to the API endpoint
+/* CreateAuthenticatorParams contains all the parameters to send to the API endpoint
+   for the create authenticator operation.
 
-	for the create authenticator operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateAuthenticatorParams struct {
 

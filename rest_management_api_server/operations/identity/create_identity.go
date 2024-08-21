@@ -53,12 +53,12 @@ func NewCreateIdentity(ctx *middleware.Context, handler CreateIdentityHandler) *
 	return &CreateIdentity{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateIdentity swagger:route POST /identities Identity createIdentity
+/* CreateIdentity swagger:route POST /identities Identity createIdentity
 
-# Create an identity resource
+Create an identity resource
 
 Create an identity resource. Requires admin access.
+
 */
 type CreateIdentity struct {
 	Context *middleware.Context

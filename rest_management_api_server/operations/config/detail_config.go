@@ -53,12 +53,12 @@ func NewDetailConfig(ctx *middleware.Context, handler DetailConfigHandler) *Deta
 	return &DetailConfig{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailConfig swagger:route GET /configs/{id} Config detailConfig
+/* DetailConfig swagger:route GET /configs/{id} Config detailConfig
 
-# Retrieves a single config
+Retrieves a single config
 
 Retrieves a single config by id. Requires admin access.
+
 */
 type DetailConfig struct {
 	Context *middleware.Context

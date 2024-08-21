@@ -78,12 +78,10 @@ func NewEnrollmentChallengeParamsWithHTTPClient(client *http.Client) *Enrollment
 	}
 }
 
-/*
-EnrollmentChallengeParams contains all the parameters to send to the API endpoint
+/* EnrollmentChallengeParams contains all the parameters to send to the API endpoint
+   for the enrollment challenge operation.
 
-	for the enrollment challenge operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type EnrollmentChallengeParams struct {
 

@@ -78,12 +78,10 @@ func NewUpdateIdentityParamsWithHTTPClient(client *http.Client) *UpdateIdentityP
 	}
 }
 
-/*
-UpdateIdentityParams contains all the parameters to send to the API endpoint
+/* UpdateIdentityParams contains all the parameters to send to the API endpoint
+   for the update identity operation.
 
-	for the update identity operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateIdentityParams struct {
 

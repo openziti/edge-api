@@ -60,9 +60,9 @@ type ClientService interface {
 }
 
 /*
-ListControllers lists controllers
+  ListControllers lists controllers
 
-Retrieves a list of controllers
+  Retrieves a list of controllers
 */
 func (a *Client) ListControllers(params *ListControllersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListControllersOK, error) {
 	// TODO: Validate the params before sending

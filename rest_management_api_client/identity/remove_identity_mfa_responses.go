@@ -81,8 +81,7 @@ func NewRemoveIdentityMfaOK() *RemoveIdentityMfaOK {
 	return &RemoveIdentityMfaOK{}
 }
 
-/*
-RemoveIdentityMfaOK describes a response with status code 200, with default header values.
+/* RemoveIdentityMfaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -114,8 +113,7 @@ func NewRemoveIdentityMfaUnauthorized() *RemoveIdentityMfaUnauthorized {
 	return &RemoveIdentityMfaUnauthorized{}
 }
 
-/*
-RemoveIdentityMfaUnauthorized describes a response with status code 401, with default header values.
+/* RemoveIdentityMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewRemoveIdentityMfaNotFound() *RemoveIdentityMfaNotFound {
 	return &RemoveIdentityMfaNotFound{}
 }
 
-/*
-RemoveIdentityMfaNotFound describes a response with status code 404, with default header values.
+/* RemoveIdentityMfaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewRemoveIdentityMfaTooManyRequests() *RemoveIdentityMfaTooManyRequests {
 	return &RemoveIdentityMfaTooManyRequests{}
 }
 
-/*
-RemoveIdentityMfaTooManyRequests describes a response with status code 429, with default header values.
+/* RemoveIdentityMfaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

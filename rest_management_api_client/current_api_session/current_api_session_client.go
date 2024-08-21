@@ -74,9 +74,9 @@ type ClientService interface {
 }
 
 /*
-DeleteCurrentAPISession logouts
+  DeleteCurrentAPISession logouts
 
-Terminates the current API session
+  Terminates the current API session
 */
 func (a *Client) DeleteCurrentAPISession(params *DeleteCurrentAPISessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCurrentAPISessionOK, error) {
 	// TODO: Validate the params before sending
@@ -115,9 +115,9 @@ func (a *Client) DeleteCurrentAPISession(params *DeleteCurrentAPISessionParams, 
 }
 
 /*
-DetailCurrentIdentityAuthenticator retrieves an authenticator for the current identity
+  DetailCurrentIdentityAuthenticator retrieves an authenticator for the current identity
 
-Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.
+  Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.
 */
 func (a *Client) DetailCurrentIdentityAuthenticator(params *DetailCurrentIdentityAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailCurrentIdentityAuthenticatorOK, error) {
 	// TODO: Validate the params before sending
@@ -156,10 +156,9 @@ func (a *Client) DetailCurrentIdentityAuthenticator(params *DetailCurrentIdentit
 }
 
 /*
-	ExtendCurrentIdentityAuthenticator allows the current identity to recieve a new certificate associated with a certificate based authenticator
+  ExtendCurrentIdentityAuthenticator allows the current identity to recieve a new certificate associated with a certificate based authenticator
 
-	This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.
-
+  This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.
 Allows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.
 The response from this endpoint is a new client certificate which the client must  be verified via the /authenticators/{id}/extend-verify endpoint.
 After verification is completion any new connections must be made with new certificate. Prior to verification the old client certificate remains active.
@@ -201,10 +200,9 @@ func (a *Client) ExtendCurrentIdentityAuthenticator(params *ExtendCurrentIdentit
 }
 
 /*
-	ExtendVerifyCurrentIdentityAuthenticator allows the current identity to validate reciept of a new client certificate
+  ExtendVerifyCurrentIdentityAuthenticator allows the current identity to validate reciept of a new client certificate
 
-	After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.
-
+  After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.
 After receipt, the new client certificate must be used for new authentication requests.
 */
 func (a *Client) ExtendVerifyCurrentIdentityAuthenticator(params *ExtendVerifyCurrentIdentityAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExtendVerifyCurrentIdentityAuthenticatorOK, error) {
@@ -244,9 +242,9 @@ func (a *Client) ExtendVerifyCurrentIdentityAuthenticator(params *ExtendVerifyCu
 }
 
 /*
-GetCurrentAPISession returns the current API session
+  GetCurrentAPISession returns the current API session
 
-Retrieves the API session that was used to issue the current request
+  Retrieves the API session that was used to issue the current request
 */
 func (a *Client) GetCurrentAPISession(params *GetCurrentAPISessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentAPISessionOK, error) {
 	// TODO: Validate the params before sending
@@ -285,9 +283,9 @@ func (a *Client) GetCurrentAPISession(params *GetCurrentAPISessionParams, authIn
 }
 
 /*
-ListCurrentIdentityAuthenticators lists authenticators for the current identity
+  ListCurrentIdentityAuthenticators lists authenticators for the current identity
 
-Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.
+  Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.
 */
 func (a *Client) ListCurrentIdentityAuthenticators(params *ListCurrentIdentityAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCurrentIdentityAuthenticatorsOK, error) {
 	// TODO: Validate the params before sending
@@ -326,11 +324,11 @@ func (a *Client) ListCurrentIdentityAuthenticators(params *ListCurrentIdentityAu
 }
 
 /*
-	PatchCurrentIdentityAuthenticator updates the supplied fields on an authenticator of this identity
+  PatchCurrentIdentityAuthenticator updates the supplied fields on an authenticator of this identity
 
-	Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API
-
+  Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API
 session's identity.
+
 */
 func (a *Client) PatchCurrentIdentityAuthenticator(params *PatchCurrentIdentityAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchCurrentIdentityAuthenticatorOK, error) {
 	// TODO: Validate the params before sending
@@ -369,11 +367,11 @@ func (a *Client) PatchCurrentIdentityAuthenticator(params *PatchCurrentIdentityA
 }
 
 /*
-	UpdateCurrentIdentityAuthenticator updates all fields on an authenticator of this identity
+  UpdateCurrentIdentityAuthenticator updates all fields on an authenticator of this identity
 
-	Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's
-
+  Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's
 identity.
+
 */
 func (a *Client) UpdateCurrentIdentityAuthenticator(params *UpdateCurrentIdentityAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCurrentIdentityAuthenticatorOK, error) {
 	// TODO: Validate the params before sending

@@ -75,8 +75,7 @@ func NewEnrollOttOK() *EnrollOttOK {
 	return &EnrollOttOK{}
 }
 
-/*
-EnrollOttOK describes a response with status code 200, with default header values.
+/* EnrollOttOK describes a response with status code 200, with default header values.
 
 A response containing and identities client certificate chains
 */
@@ -108,8 +107,7 @@ func NewEnrollOttNotFound() *EnrollOttNotFound {
 	return &EnrollOttNotFound{}
 }
 
-/*
-EnrollOttNotFound describes a response with status code 404, with default header values.
+/* EnrollOttNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -141,8 +139,7 @@ func NewEnrollOttTooManyRequests() *EnrollOttTooManyRequests {
 	return &EnrollOttTooManyRequests{}
 }
 
-/*
-EnrollOttTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollOttTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

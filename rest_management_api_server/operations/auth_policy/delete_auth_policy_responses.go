@@ -40,8 +40,7 @@ import (
 // DeleteAuthPolicyOKCode is the HTTP code returned for type DeleteAuthPolicyOK
 const DeleteAuthPolicyOKCode int = 200
 
-/*
-DeleteAuthPolicyOK The delete request was successful and the resource has been removed
+/*DeleteAuthPolicyOK The delete request was successful and the resource has been removed
 
 swagger:response deleteAuthPolicyOK
 */
@@ -85,8 +84,7 @@ func (o *DeleteAuthPolicyOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteAuthPolicyBadRequestCode is the HTTP code returned for type DeleteAuthPolicyBadRequest
 const DeleteAuthPolicyBadRequestCode int = 400
 
-/*
-DeleteAuthPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*DeleteAuthPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteAuthPolicyBadRequest
 */
@@ -130,8 +128,7 @@ func (o *DeleteAuthPolicyBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // DeleteAuthPolicyUnauthorizedCode is the HTTP code returned for type DeleteAuthPolicyUnauthorized
 const DeleteAuthPolicyUnauthorizedCode int = 401
 
-/*
-DeleteAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DeleteAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteAuthPolicyUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *DeleteAuthPolicyUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DeleteAuthPolicyTooManyRequestsCode is the HTTP code returned for type DeleteAuthPolicyTooManyRequests
 const DeleteAuthPolicyTooManyRequestsCode int = 429
 
-/*
-DeleteAuthPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DeleteAuthPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteAuthPolicyTooManyRequests
 */

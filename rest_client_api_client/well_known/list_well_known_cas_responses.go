@@ -61,8 +61,7 @@ func NewListWellKnownCasOK() *ListWellKnownCasOK {
 	return &ListWellKnownCasOK{}
 }
 
-/*
-ListWellKnownCasOK describes a response with status code 200, with default header values.
+/* ListWellKnownCasOK describes a response with status code 200, with default header values.
 
 A base64 encoded PKCS7 store
 */

@@ -78,12 +78,10 @@ func NewDetailMfaRecoveryCodesParamsWithHTTPClient(client *http.Client) *DetailM
 	}
 }
 
-/*
-DetailMfaRecoveryCodesParams contains all the parameters to send to the API endpoint
+/* DetailMfaRecoveryCodesParams contains all the parameters to send to the API endpoint
+   for the detail mfa recovery codes operation.
 
-	for the detail mfa recovery codes operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DetailMfaRecoveryCodesParams struct {
 

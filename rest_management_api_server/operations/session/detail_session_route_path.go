@@ -53,12 +53,12 @@ func NewDetailSessionRoutePath(ctx *middleware.Context, handler DetailSessionRou
 	return &DetailSessionRoutePath{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailSessionRoutePath swagger:route GET /sessions/{id}/route-path Session detailSessionRoutePath
+/* DetailSessionRoutePath swagger:route GET /sessions/{id}/route-path Session detailSessionRoutePath
 
-# Retrieves a single session's router path
+Retrieves a single session's router path
 
 Retrieves a single session's route path by id. Requires admin access.
+
 */
 type DetailSessionRoutePath struct {
 	Context *middleware.Context

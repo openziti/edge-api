@@ -87,8 +87,7 @@ func NewPatchServiceEdgeRouterPolicyOK() *PatchServiceEdgeRouterPolicyOK {
 	return &PatchServiceEdgeRouterPolicyOK{}
 }
 
-/*
-PatchServiceEdgeRouterPolicyOK describes a response with status code 200, with default header values.
+/* PatchServiceEdgeRouterPolicyOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewPatchServiceEdgeRouterPolicyBadRequest() *PatchServiceEdgeRouterPolicyBa
 	return &PatchServiceEdgeRouterPolicyBadRequest{}
 }
 
-/*
-PatchServiceEdgeRouterPolicyBadRequest describes a response with status code 400, with default header values.
+/* PatchServiceEdgeRouterPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewPatchServiceEdgeRouterPolicyUnauthorized() *PatchServiceEdgeRouterPolicy
 	return &PatchServiceEdgeRouterPolicyUnauthorized{}
 }
 
-/*
-PatchServiceEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
+/* PatchServiceEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewPatchServiceEdgeRouterPolicyNotFound() *PatchServiceEdgeRouterPolicyNotF
 	return &PatchServiceEdgeRouterPolicyNotFound{}
 }
 
-/*
-PatchServiceEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
+/* PatchServiceEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewPatchServiceEdgeRouterPolicyTooManyRequests() *PatchServiceEdgeRouterPol
 	return &PatchServiceEdgeRouterPolicyTooManyRequests{}
 }
 
-/*
-PatchServiceEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
+/* PatchServiceEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -81,8 +81,7 @@ func NewCreatePostureResponseBulkOK() *CreatePostureResponseBulkOK {
 	return &CreatePostureResponseBulkOK{}
 }
 
-/*
-CreatePostureResponseBulkOK describes a response with status code 200, with default header values.
+/* CreatePostureResponseBulkOK describes a response with status code 200, with default header values.
 
 Contains a list of services that have had their timers altered
 */
@@ -114,8 +113,7 @@ func NewCreatePostureResponseBulkBadRequest() *CreatePostureResponseBulkBadReque
 	return &CreatePostureResponseBulkBadRequest{}
 }
 
-/*
-CreatePostureResponseBulkBadRequest describes a response with status code 400, with default header values.
+/* CreatePostureResponseBulkBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewCreatePostureResponseBulkUnauthorized() *CreatePostureResponseBulkUnauth
 	return &CreatePostureResponseBulkUnauthorized{}
 }
 
-/*
-CreatePostureResponseBulkUnauthorized describes a response with status code 401, with default header values.
+/* CreatePostureResponseBulkUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewCreatePostureResponseBulkTooManyRequests() *CreatePostureResponseBulkToo
 	return &CreatePostureResponseBulkTooManyRequests{}
 }
 
-/*
-CreatePostureResponseBulkTooManyRequests describes a response with status code 429, with default header values.
+/* CreatePostureResponseBulkTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

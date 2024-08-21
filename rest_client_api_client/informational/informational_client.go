@@ -72,9 +72,9 @@ type ClientService interface {
 }
 
 /*
-DetailSpec returns a single spec resource
+  DetailSpec returns a single spec resource
 
-Returns single spec resource embedded within the controller for consumption/documentation/code geneartion
+  Returns single spec resource embedded within the controller for consumption/documentation/code geneartion
 */
 func (a *Client) DetailSpec(params *DetailSpecParams, opts ...ClientOption) (*DetailSpecOK, error) {
 	// TODO: Validate the params before sending
@@ -112,9 +112,9 @@ func (a *Client) DetailSpec(params *DetailSpecParams, opts ...ClientOption) (*De
 }
 
 /*
-DetailSpecBody returns the spec s file
+  DetailSpecBody returns the spec s file
 
-Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).
+  Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).
 */
 func (a *Client) DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOption) (*DetailSpecBodyOK, error) {
 	// TODO: Validate the params before sending
@@ -152,7 +152,7 @@ func (a *Client) DetailSpecBody(params *DetailSpecBodyParams, opts ...ClientOpti
 }
 
 /*
-ListEnumeratedCapabilities returns all capabilities this version of the controller is aware of enabled or not
+  ListEnumeratedCapabilities returns all capabilities this version of the controller is aware of enabled or not
 */
 func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesParams, opts ...ClientOption) (*ListEnumeratedCapabilitiesOK, error) {
 	// TODO: Validate the params before sending
@@ -190,7 +190,7 @@ func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesPa
 }
 
 /*
-ListProtocols returns a list of the listening edge protocols
+  ListProtocols returns a list of the listening edge protocols
 */
 func (a *Client) ListProtocols(params *ListProtocolsParams, opts ...ClientOption) (*ListProtocolsOK, error) {
 	// TODO: Validate the params before sending
@@ -228,7 +228,7 @@ func (a *Client) ListProtocols(params *ListProtocolsParams, opts ...ClientOption
 }
 
 /*
-ListRoot returns version information
+  ListRoot returns version information
 */
 func (a *Client) ListRoot(params *ListRootParams, opts ...ClientOption) (*ListRootOK, error) {
 	// TODO: Validate the params before sending
@@ -266,9 +266,9 @@ func (a *Client) ListRoot(params *ListRootParams, opts ...ClientOption) (*ListRo
 }
 
 /*
-ListSpecs returns a list of API specs
+  ListSpecs returns a list of API specs
 
-Returns a list of spec files embedded within the controller for consumption/documentation/code geneartion
+  Returns a list of spec files embedded within the controller for consumption/documentation/code geneartion
 */
 func (a *Client) ListSpecs(params *ListSpecsParams, opts ...ClientOption) (*ListSpecsOK, error) {
 	// TODO: Validate the params before sending
@@ -306,7 +306,7 @@ func (a *Client) ListSpecs(params *ListSpecsParams, opts ...ClientOption) (*List
 }
 
 /*
-ListVersion returns version information
+  ListVersion returns version information
 */
 func (a *Client) ListVersion(params *ListVersionParams, opts ...ClientOption) (*ListVersionOK, error) {
 	// TODO: Validate the params before sending

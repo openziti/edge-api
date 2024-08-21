@@ -40,8 +40,7 @@ import (
 // EnrollCaOKCode is the HTTP code returned for type EnrollCaOK
 const EnrollCaOKCode int = 200
 
-/*
-EnrollCaOK Base empty response
+/*EnrollCaOK Base empty response
 
 swagger:response enrollCaOK
 */
@@ -85,8 +84,7 @@ func (o *EnrollCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // EnrollCaNotFoundCode is the HTTP code returned for type EnrollCaNotFound
 const EnrollCaNotFoundCode int = 404
 
-/*
-EnrollCaNotFound The requested resource does not exist
+/*EnrollCaNotFound The requested resource does not exist
 
 swagger:response enrollCaNotFound
 */
@@ -130,8 +128,7 @@ func (o *EnrollCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // EnrollCaTooManyRequestsCode is the HTTP code returned for type EnrollCaTooManyRequests
 const EnrollCaTooManyRequestsCode int = 429
 
-/*
-EnrollCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*EnrollCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollCaTooManyRequests
 */

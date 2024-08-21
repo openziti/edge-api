@@ -76,12 +76,10 @@ func NewListEdgeRouterServicesParamsWithHTTPClient(client *http.Client) *ListEdg
 	}
 }
 
-/*
-ListEdgeRouterServicesParams contains all the parameters to send to the API endpoint
+/* ListEdgeRouterServicesParams contains all the parameters to send to the API endpoint
+   for the list edge router services operation.
 
-	for the list edge router services operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListEdgeRouterServicesParams struct {
 

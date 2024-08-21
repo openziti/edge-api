@@ -53,14 +53,15 @@ func NewVerifyCa(ctx *middleware.Context, handler VerifyCaHandler) *VerifyCa {
 	return &VerifyCa{Context: ctx, Handler: handler}
 }
 
-/*
-	VerifyCa swagger:route POST /cas/{id}/verify Certificate Authority verifyCa
+/* VerifyCa swagger:route POST /cas/{id}/verify Certificate Authority verifyCa
 
-# Verify a CA
+Verify a CA
 
 Allows a CA to become verified by submitting a certificate in PEM format that has been signed by the target CA.
 The common name on the certificate must match the verificationToken property of the CA. Unverfieid CAs can not
 be used for enrollment/authentication. Requires admin access.
+
+
 */
 type VerifyCa struct {
 	Context *middleware.Context

@@ -53,12 +53,12 @@ func NewListExternalJWTSigners(ctx *middleware.Context, handler ListExternalJWTS
 	return &ListExternalJWTSigners{Context: ctx, Handler: handler}
 }
 
-/*
-	ListExternalJWTSigners swagger:route GET /external-jwt-signers External JWT Signer listExternalJwtSigners
+/* ListExternalJWTSigners swagger:route GET /external-jwt-signers External JWT Signer listExternalJwtSigners
 
-# List External JWT Signers
+List External JWT Signers
 
 Retrieves a list of external JWT signers for authentication
+
 */
 type ListExternalJWTSigners struct {
 	Context *middleware.Context

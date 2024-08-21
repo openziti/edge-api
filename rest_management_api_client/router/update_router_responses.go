@@ -87,8 +87,7 @@ func NewUpdateRouterOK() *UpdateRouterOK {
 	return &UpdateRouterOK{}
 }
 
-/*
-UpdateRouterOK describes a response with status code 200, with default header values.
+/* UpdateRouterOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewUpdateRouterBadRequest() *UpdateRouterBadRequest {
 	return &UpdateRouterBadRequest{}
 }
 
-/*
-UpdateRouterBadRequest describes a response with status code 400, with default header values.
+/* UpdateRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewUpdateRouterUnauthorized() *UpdateRouterUnauthorized {
 	return &UpdateRouterUnauthorized{}
 }
 
-/*
-UpdateRouterUnauthorized describes a response with status code 401, with default header values.
+/* UpdateRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewUpdateRouterNotFound() *UpdateRouterNotFound {
 	return &UpdateRouterNotFound{}
 }
 
-/*
-UpdateRouterNotFound describes a response with status code 404, with default header values.
+/* UpdateRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewUpdateRouterTooManyRequests() *UpdateRouterTooManyRequests {
 	return &UpdateRouterTooManyRequests{}
 }
 
-/*
-UpdateRouterTooManyRequests describes a response with status code 429, with default header values.
+/* UpdateRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -53,12 +53,12 @@ func NewEnroll(ctx *middleware.Context, handler EnrollHandler) *Enroll {
 	return &Enroll{Context: ctx, Handler: handler}
 }
 
-/*
-	Enroll swagger:route POST /enroll Enroll enroll
+/* Enroll swagger:route POST /enroll Enroll enroll
 
-# Enroll an identity via one-time-token
+Enroll an identity via one-time-token
 
 present a OTT and CSR to receive a long-lived client certificate
+
 */
 type Enroll struct {
 	Context *middleware.Context

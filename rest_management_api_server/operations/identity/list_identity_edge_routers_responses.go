@@ -40,8 +40,7 @@ import (
 // ListIdentityEdgeRoutersOKCode is the HTTP code returned for type ListIdentityEdgeRoutersOK
 const ListIdentityEdgeRoutersOKCode int = 200
 
-/*
-ListIdentityEdgeRoutersOK A list of edge routers
+/*ListIdentityEdgeRoutersOK A list of edge routers
 
 swagger:response listIdentityEdgeRoutersOK
 */
@@ -85,8 +84,7 @@ func (o *ListIdentityEdgeRoutersOK) WriteResponse(rw http.ResponseWriter, produc
 // ListIdentityEdgeRoutersUnauthorizedCode is the HTTP code returned for type ListIdentityEdgeRoutersUnauthorized
 const ListIdentityEdgeRoutersUnauthorizedCode int = 401
 
-/*
-ListIdentityEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListIdentityEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listIdentityEdgeRoutersUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *ListIdentityEdgeRoutersUnauthorized) WriteResponse(rw http.ResponseWrit
 // ListIdentityEdgeRoutersNotFoundCode is the HTTP code returned for type ListIdentityEdgeRoutersNotFound
 const ListIdentityEdgeRoutersNotFoundCode int = 404
 
-/*
-ListIdentityEdgeRoutersNotFound The requested resource does not exist
+/*ListIdentityEdgeRoutersNotFound The requested resource does not exist
 
 swagger:response listIdentityEdgeRoutersNotFound
 */
@@ -175,8 +172,7 @@ func (o *ListIdentityEdgeRoutersNotFound) WriteResponse(rw http.ResponseWriter, 
 // ListIdentityEdgeRoutersTooManyRequestsCode is the HTTP code returned for type ListIdentityEdgeRoutersTooManyRequests
 const ListIdentityEdgeRoutersTooManyRequestsCode int = 429
 
-/*
-ListIdentityEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListIdentityEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listIdentityEdgeRoutersTooManyRequests
 */

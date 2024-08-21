@@ -77,12 +77,10 @@ func NewListControllersParamsWithHTTPClient(client *http.Client) *ListController
 	}
 }
 
-/*
-ListControllersParams contains all the parameters to send to the API endpoint
+/* ListControllersParams contains all the parameters to send to the API endpoint
+   for the list controllers operation.
 
-	for the list controllers operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListControllersParams struct {
 

@@ -75,8 +75,7 @@ func NewListConfigsForConfigTypeOK() *ListConfigsForConfigTypeOK {
 	return &ListConfigsForConfigTypeOK{}
 }
 
-/*
-ListConfigsForConfigTypeOK describes a response with status code 200, with default header values.
+/* ListConfigsForConfigTypeOK describes a response with status code 200, with default header values.
 
 A list of configs
 */
@@ -108,8 +107,7 @@ func NewListConfigsForConfigTypeUnauthorized() *ListConfigsForConfigTypeUnauthor
 	return &ListConfigsForConfigTypeUnauthorized{}
 }
 
-/*
-ListConfigsForConfigTypeUnauthorized describes a response with status code 401, with default header values.
+/* ListConfigsForConfigTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewListConfigsForConfigTypeTooManyRequests() *ListConfigsForConfigTypeTooMa
 	return &ListConfigsForConfigTypeTooManyRequests{}
 }
 
-/*
-ListConfigsForConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+/* ListConfigsForConfigTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

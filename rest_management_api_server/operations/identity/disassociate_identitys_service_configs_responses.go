@@ -40,8 +40,7 @@ import (
 // DisassociateIdentitysServiceConfigsOKCode is the HTTP code returned for type DisassociateIdentitysServiceConfigsOK
 const DisassociateIdentitysServiceConfigsOKCode int = 200
 
-/*
-DisassociateIdentitysServiceConfigsOK Base empty response
+/*DisassociateIdentitysServiceConfigsOK Base empty response
 
 swagger:response disassociateIdentitysServiceConfigsOK
 */
@@ -85,8 +84,7 @@ func (o *DisassociateIdentitysServiceConfigsOK) WriteResponse(rw http.ResponseWr
 // DisassociateIdentitysServiceConfigsBadRequestCode is the HTTP code returned for type DisassociateIdentitysServiceConfigsBadRequest
 const DisassociateIdentitysServiceConfigsBadRequestCode int = 400
 
-/*
-DisassociateIdentitysServiceConfigsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*DisassociateIdentitysServiceConfigsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response disassociateIdentitysServiceConfigsBadRequest
 */
@@ -130,8 +128,7 @@ func (o *DisassociateIdentitysServiceConfigsBadRequest) WriteResponse(rw http.Re
 // DisassociateIdentitysServiceConfigsUnauthorizedCode is the HTTP code returned for type DisassociateIdentitysServiceConfigsUnauthorized
 const DisassociateIdentitysServiceConfigsUnauthorizedCode int = 401
 
-/*
-DisassociateIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DisassociateIdentitysServiceConfigsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response disassociateIdentitysServiceConfigsUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *DisassociateIdentitysServiceConfigsUnauthorized) WriteResponse(rw http.
 // DisassociateIdentitysServiceConfigsNotFoundCode is the HTTP code returned for type DisassociateIdentitysServiceConfigsNotFound
 const DisassociateIdentitysServiceConfigsNotFoundCode int = 404
 
-/*
-DisassociateIdentitysServiceConfigsNotFound The requested resource does not exist
+/*DisassociateIdentitysServiceConfigsNotFound The requested resource does not exist
 
 swagger:response disassociateIdentitysServiceConfigsNotFound
 */
@@ -220,8 +216,7 @@ func (o *DisassociateIdentitysServiceConfigsNotFound) WriteResponse(rw http.Resp
 // DisassociateIdentitysServiceConfigsTooManyRequestsCode is the HTTP code returned for type DisassociateIdentitysServiceConfigsTooManyRequests
 const DisassociateIdentitysServiceConfigsTooManyRequestsCode int = 429
 
-/*
-DisassociateIdentitysServiceConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DisassociateIdentitysServiceConfigsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response disassociateIdentitysServiceConfigsTooManyRequests
 */

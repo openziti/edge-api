@@ -53,13 +53,14 @@ func NewListServiceUpdates(ctx *middleware.Context, handler ListServiceUpdatesHa
 	return &ListServiceUpdates{Context: ctx, Handler: handler}
 }
 
-/*
-	ListServiceUpdates swagger:route GET /current-api-session/service-updates Current API Session Services listServiceUpdates
+/* ListServiceUpdates swagger:route GET /current-api-session/service-updates Current API Session Services listServiceUpdates
 
-# Returns data indicating whether a client should updates it service list
+Returns data indicating whether a client should updates it service list
 
 Retrieves data indicating the last time data relevant to this API Session was altered that would necessitate
 service refreshes.
+
+
 */
 type ListServiceUpdates struct {
 	Context *middleware.Context

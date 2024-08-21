@@ -69,8 +69,7 @@ func NewDeleteCurrentAPISessionOK() *DeleteCurrentAPISessionOK {
 	return &DeleteCurrentAPISessionOK{}
 }
 
-/*
-DeleteCurrentAPISessionOK describes a response with status code 200, with default header values.
+/* DeleteCurrentAPISessionOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -102,8 +101,7 @@ func NewDeleteCurrentAPISessionUnauthorized() *DeleteCurrentAPISessionUnauthoriz
 	return &DeleteCurrentAPISessionUnauthorized{}
 }
 
-/*
-DeleteCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
+/* DeleteCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */

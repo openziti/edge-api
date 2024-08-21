@@ -53,12 +53,13 @@ func NewDisableIdentity(ctx *middleware.Context, handler DisableIdentityHandler)
 	return &DisableIdentity{Context: ctx, Handler: handler}
 }
 
-/*
-	DisableIdentity swagger:route POST /identities/{id}/disable Identity disableIdentity
+/* DisableIdentity swagger:route POST /identities/{id}/disable Identity disableIdentity
 
-# Set an identity as disabled
+Set an identity as disabled
 
 Reject an identity's API session requests for N minutes or indefinitely if 0.
+
+
 */
 type DisableIdentity struct {
 	Context *middleware.Context

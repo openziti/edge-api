@@ -78,12 +78,10 @@ func NewExtendRouterEnrollmentParamsWithHTTPClient(client *http.Client) *ExtendR
 	}
 }
 
-/*
-ExtendRouterEnrollmentParams contains all the parameters to send to the API endpoint
+/* ExtendRouterEnrollmentParams contains all the parameters to send to the API endpoint
+   for the extend router enrollment operation.
 
-	for the extend router enrollment operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ExtendRouterEnrollmentParams struct {
 

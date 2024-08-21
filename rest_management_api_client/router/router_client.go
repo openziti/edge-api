@@ -82,9 +82,9 @@ type ClientService interface {
 }
 
 /*
-CreateRouter creates a router resource
+  CreateRouter creates a router resource
 
-Create a router resource. Requires admin access.
+  Create a router resource. Requires admin access.
 */
 func (a *Client) CreateRouter(params *CreateRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRouterCreated, error) {
 	// TODO: Validate the params before sending
@@ -123,9 +123,9 @@ func (a *Client) CreateRouter(params *CreateRouterParams, authInfo runtime.Clien
 }
 
 /*
-CreateTransitRouter creates a router resource
+  CreateTransitRouter creates a router resource
 
-Create a router resource. Requires admin access.
+  Create a router resource. Requires admin access.
 */
 func (a *Client) CreateTransitRouter(params *CreateTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTransitRouterCreated, error) {
 	// TODO: Validate the params before sending
@@ -164,9 +164,9 @@ func (a *Client) CreateTransitRouter(params *CreateTransitRouterParams, authInfo
 }
 
 /*
-DeleteRouter deletes a router
+  DeleteRouter deletes a router
 
-Delete a router by id. Requires admin access.
+  Delete a router by id. Requires admin access.
 */
 func (a *Client) DeleteRouter(params *DeleteRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -205,9 +205,9 @@ func (a *Client) DeleteRouter(params *DeleteRouterParams, authInfo runtime.Clien
 }
 
 /*
-DeleteTransitRouter deletes a router
+  DeleteTransitRouter deletes a router
 
-Delete a router by id. Requires admin access.
+  Delete a router by id. Requires admin access.
 */
 func (a *Client) DeleteTransitRouter(params *DeleteTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTransitRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -246,9 +246,9 @@ func (a *Client) DeleteTransitRouter(params *DeleteTransitRouterParams, authInfo
 }
 
 /*
-DetailRouter retrieves a single router
+  DetailRouter retrieves a single router
 
-Retrieves a single router by id. Requires admin access.
+  Retrieves a single router by id. Requires admin access.
 */
 func (a *Client) DetailRouter(params *DetailRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -287,9 +287,9 @@ func (a *Client) DetailRouter(params *DetailRouterParams, authInfo runtime.Clien
 }
 
 /*
-DetailTransitRouter retrieves a single router
+  DetailTransitRouter retrieves a single router
 
-Retrieves a single router by id. Requires admin access.
+  Retrieves a single router by id. Requires admin access.
 */
 func (a *Client) DetailTransitRouter(params *DetailTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailTransitRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -328,9 +328,10 @@ func (a *Client) DetailTransitRouter(params *DetailTransitRouterParams, authInfo
 }
 
 /*
-ListRouters lists routers
+  ListRouters lists routers
 
-Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListRouters(params *ListRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRoutersOK, error) {
 	// TODO: Validate the params before sending
@@ -369,9 +370,10 @@ func (a *Client) ListRouters(params *ListRoutersParams, authInfo runtime.ClientA
 }
 
 /*
-ListTransitRouters lists routers
+  ListTransitRouters lists routers
 
-Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListTransitRouters(params *ListTransitRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTransitRoutersOK, error) {
 	// TODO: Validate the params before sending
@@ -410,9 +412,9 @@ func (a *Client) ListTransitRouters(params *ListTransitRoutersParams, authInfo r
 }
 
 /*
-PatchRouter updates the supplied fields on a router
+  PatchRouter updates the supplied fields on a router
 
-Update the supplied fields on a router. Requires admin access.
+  Update the supplied fields on a router. Requires admin access.
 */
 func (a *Client) PatchRouter(params *PatchRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -451,9 +453,9 @@ func (a *Client) PatchRouter(params *PatchRouterParams, authInfo runtime.ClientA
 }
 
 /*
-PatchTransitRouter updates the supplied fields on a router
+  PatchTransitRouter updates the supplied fields on a router
 
-Update the supplied fields on a router. Requires admin access.
+  Update the supplied fields on a router. Requires admin access.
 */
 func (a *Client) PatchTransitRouter(params *PatchTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchTransitRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -492,9 +494,9 @@ func (a *Client) PatchTransitRouter(params *PatchTransitRouterParams, authInfo r
 }
 
 /*
-UpdateRouter updates all fields on a router
+  UpdateRouter updates all fields on a router
 
-Update all fields on a router by id. Requires admin access.
+  Update all fields on a router by id. Requires admin access.
 */
 func (a *Client) UpdateRouter(params *UpdateRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRouterOK, error) {
 	// TODO: Validate the params before sending
@@ -533,9 +535,9 @@ func (a *Client) UpdateRouter(params *UpdateRouterParams, authInfo runtime.Clien
 }
 
 /*
-UpdateTransitRouter updates all fields on a router
+  UpdateTransitRouter updates all fields on a router
 
-Update all fields on a router by id. Requires admin access.
+  Update all fields on a router by id. Requires admin access.
 */
 func (a *Client) UpdateTransitRouter(params *UpdateTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTransitRouterOK, error) {
 	// TODO: Validate the params before sending

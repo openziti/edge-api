@@ -87,8 +87,7 @@ func NewDisassociateIdentitysServiceConfigsOK() *DisassociateIdentitysServiceCon
 	return &DisassociateIdentitysServiceConfigsOK{}
 }
 
-/*
-DisassociateIdentitysServiceConfigsOK describes a response with status code 200, with default header values.
+/* DisassociateIdentitysServiceConfigsOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -120,8 +119,7 @@ func NewDisassociateIdentitysServiceConfigsBadRequest() *DisassociateIdentitysSe
 	return &DisassociateIdentitysServiceConfigsBadRequest{}
 }
 
-/*
-DisassociateIdentitysServiceConfigsBadRequest describes a response with status code 400, with default header values.
+/* DisassociateIdentitysServiceConfigsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewDisassociateIdentitysServiceConfigsUnauthorized() *DisassociateIdentitys
 	return &DisassociateIdentitysServiceConfigsUnauthorized{}
 }
 
-/*
-DisassociateIdentitysServiceConfigsUnauthorized describes a response with status code 401, with default header values.
+/* DisassociateIdentitysServiceConfigsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewDisassociateIdentitysServiceConfigsNotFound() *DisassociateIdentitysServ
 	return &DisassociateIdentitysServiceConfigsNotFound{}
 }
 
-/*
-DisassociateIdentitysServiceConfigsNotFound describes a response with status code 404, with default header values.
+/* DisassociateIdentitysServiceConfigsNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewDisassociateIdentitysServiceConfigsTooManyRequests() *DisassociateIdenti
 	return &DisassociateIdentitysServiceConfigsTooManyRequests{}
 }
 
-/*
-DisassociateIdentitysServiceConfigsTooManyRequests describes a response with status code 429, with default header values.
+/* DisassociateIdentitysServiceConfigsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

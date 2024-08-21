@@ -74,9 +74,9 @@ type ClientService interface {
 }
 
 /*
-CreateEdgeRouterPolicy creates an edge router policy resource
+  CreateEdgeRouterPolicy creates an edge router policy resource
 
-Create an edge router policy resource. Requires admin access.
+  Create an edge router policy resource. Requires admin access.
 */
 func (a *Client) CreateEdgeRouterPolicy(params *CreateEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateEdgeRouterPolicyCreated, error) {
 	// TODO: Validate the params before sending
@@ -115,9 +115,9 @@ func (a *Client) CreateEdgeRouterPolicy(params *CreateEdgeRouterPolicyParams, au
 }
 
 /*
-DeleteEdgeRouterPolicy deletes an edge router policy
+  DeleteEdgeRouterPolicy deletes an edge router policy
 
-Delete an edge router policy by id. Requires admin access.
+  Delete an edge router policy by id. Requires admin access.
 */
 func (a *Client) DeleteEdgeRouterPolicy(params *DeleteEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -156,9 +156,9 @@ func (a *Client) DeleteEdgeRouterPolicy(params *DeleteEdgeRouterPolicyParams, au
 }
 
 /*
-DetailEdgeRouterPolicy retrieves a single edge router policy
+  DetailEdgeRouterPolicy retrieves a single edge router policy
 
-Retrieves a single edge router policy by id. Requires admin access.
+  Retrieves a single edge router policy by id. Requires admin access.
 */
 func (a *Client) DetailEdgeRouterPolicy(params *DetailEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -197,9 +197,10 @@ func (a *Client) DetailEdgeRouterPolicy(params *DetailEdgeRouterPolicyParams, au
 }
 
 /*
-ListEdgeRouterPolicies lists edge router policies
+  ListEdgeRouterPolicies lists edge router policies
 
-Retrieves a list of edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListEdgeRouterPolicies(params *ListEdgeRouterPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterPoliciesOK, error) {
 	// TODO: Validate the params before sending
@@ -238,9 +239,10 @@ func (a *Client) ListEdgeRouterPolicies(params *ListEdgeRouterPoliciesParams, au
 }
 
 /*
-ListEdgeRouterPolicyEdgeRouters lists edge routers a policy affects
+  ListEdgeRouterPolicyEdgeRouters lists edge routers a policy affects
 
-Retrieves a list of edge routers an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of edge routers an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListEdgeRouterPolicyEdgeRouters(params *ListEdgeRouterPolicyEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterPolicyEdgeRoutersOK, error) {
 	// TODO: Validate the params before sending
@@ -279,9 +281,10 @@ func (a *Client) ListEdgeRouterPolicyEdgeRouters(params *ListEdgeRouterPolicyEdg
 }
 
 /*
-ListEdgeRouterPolicyIdentities lists identities an edge router policy affects
+  ListEdgeRouterPolicyIdentities lists identities an edge router policy affects
 
-Retrieves a list of identities an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of identities an edge router policy resources affects; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 func (a *Client) ListEdgeRouterPolicyIdentities(params *ListEdgeRouterPolicyIdentitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterPolicyIdentitiesOK, error) {
 	// TODO: Validate the params before sending
@@ -320,9 +323,9 @@ func (a *Client) ListEdgeRouterPolicyIdentities(params *ListEdgeRouterPolicyIden
 }
 
 /*
-PatchEdgeRouterPolicy updates the supplied fields on an edge router policy
+  PatchEdgeRouterPolicy updates the supplied fields on an edge router policy
 
-Update the supplied fields on an edge router policy. Requires admin access.
+  Update the supplied fields on an edge router policy. Requires admin access.
 */
 func (a *Client) PatchEdgeRouterPolicy(params *PatchEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending
@@ -361,9 +364,9 @@ func (a *Client) PatchEdgeRouterPolicy(params *PatchEdgeRouterPolicyParams, auth
 }
 
 /*
-UpdateEdgeRouterPolicy updates all fields on an edge router policy
+  UpdateEdgeRouterPolicy updates all fields on an edge router policy
 
-Update all fields on an edge router policy by id. Requires admin access.
+  Update all fields on an edge router policy by id. Requires admin access.
 */
 func (a *Client) UpdateEdgeRouterPolicy(params *UpdateEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateEdgeRouterPolicyOK, error) {
 	// TODO: Validate the params before sending

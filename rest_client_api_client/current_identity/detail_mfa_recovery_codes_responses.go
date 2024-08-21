@@ -75,8 +75,7 @@ func NewDetailMfaRecoveryCodesOK() *DetailMfaRecoveryCodesOK {
 	return &DetailMfaRecoveryCodesOK{}
 }
 
-/*
-DetailMfaRecoveryCodesOK describes a response with status code 200, with default header values.
+/* DetailMfaRecoveryCodesOK describes a response with status code 200, with default header values.
 
 The recovery codes of an MFA enrollment
 */
@@ -108,8 +107,7 @@ func NewDetailMfaRecoveryCodesUnauthorized() *DetailMfaRecoveryCodesUnauthorized
 	return &DetailMfaRecoveryCodesUnauthorized{}
 }
 
-/*
-DetailMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
+/* DetailMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewDetailMfaRecoveryCodesNotFound() *DetailMfaRecoveryCodesNotFound {
 	return &DetailMfaRecoveryCodesNotFound{}
 }
 
-/*
-DetailMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
+/* DetailMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */

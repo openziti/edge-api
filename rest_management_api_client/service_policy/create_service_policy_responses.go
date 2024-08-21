@@ -81,8 +81,7 @@ func NewCreateServicePolicyCreated() *CreateServicePolicyCreated {
 	return &CreateServicePolicyCreated{}
 }
 
-/*
-CreateServicePolicyCreated describes a response with status code 201, with default header values.
+/* CreateServicePolicyCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -114,8 +113,7 @@ func NewCreateServicePolicyBadRequest() *CreateServicePolicyBadRequest {
 	return &CreateServicePolicyBadRequest{}
 }
 
-/*
-CreateServicePolicyBadRequest describes a response with status code 400, with default header values.
+/* CreateServicePolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewCreateServicePolicyUnauthorized() *CreateServicePolicyUnauthorized {
 	return &CreateServicePolicyUnauthorized{}
 }
 
-/*
-CreateServicePolicyUnauthorized describes a response with status code 401, with default header values.
+/* CreateServicePolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewCreateServicePolicyTooManyRequests() *CreateServicePolicyTooManyRequests
 	return &CreateServicePolicyTooManyRequests{}
 }
 
-/*
-CreateServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+/* CreateServicePolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

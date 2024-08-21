@@ -40,8 +40,7 @@ import (
 // UpdatePostureCheckOKCode is the HTTP code returned for type UpdatePostureCheckOK
 const UpdatePostureCheckOKCode int = 200
 
-/*
-UpdatePostureCheckOK The update request was successful and the resource has been altered
+/*UpdatePostureCheckOK The update request was successful and the resource has been altered
 
 swagger:response updatePostureCheckOK
 */
@@ -85,8 +84,7 @@ func (o *UpdatePostureCheckOK) WriteResponse(rw http.ResponseWriter, producer ru
 // UpdatePostureCheckBadRequestCode is the HTTP code returned for type UpdatePostureCheckBadRequest
 const UpdatePostureCheckBadRequestCode int = 400
 
-/*
-UpdatePostureCheckBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdatePostureCheckBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updatePostureCheckBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdatePostureCheckBadRequest) WriteResponse(rw http.ResponseWriter, pro
 // UpdatePostureCheckUnauthorizedCode is the HTTP code returned for type UpdatePostureCheckUnauthorized
 const UpdatePostureCheckUnauthorizedCode int = 401
 
-/*
-UpdatePostureCheckUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdatePostureCheckUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updatePostureCheckUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdatePostureCheckUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // UpdatePostureCheckNotFoundCode is the HTTP code returned for type UpdatePostureCheckNotFound
 const UpdatePostureCheckNotFoundCode int = 404
 
-/*
-UpdatePostureCheckNotFound The requested resource does not exist
+/*UpdatePostureCheckNotFound The requested resource does not exist
 
 swagger:response updatePostureCheckNotFound
 */
@@ -220,8 +216,7 @@ func (o *UpdatePostureCheckNotFound) WriteResponse(rw http.ResponseWriter, produ
 // UpdatePostureCheckTooManyRequestsCode is the HTTP code returned for type UpdatePostureCheckTooManyRequests
 const UpdatePostureCheckTooManyRequestsCode int = 429
 
-/*
-UpdatePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*UpdatePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updatePostureCheckTooManyRequests
 */

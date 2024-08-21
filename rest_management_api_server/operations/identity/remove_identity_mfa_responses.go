@@ -40,8 +40,7 @@ import (
 // RemoveIdentityMfaOKCode is the HTTP code returned for type RemoveIdentityMfaOK
 const RemoveIdentityMfaOKCode int = 200
 
-/*
-RemoveIdentityMfaOK Base empty response
+/*RemoveIdentityMfaOK Base empty response
 
 swagger:response removeIdentityMfaOK
 */
@@ -85,8 +84,7 @@ func (o *RemoveIdentityMfaOK) WriteResponse(rw http.ResponseWriter, producer run
 // RemoveIdentityMfaUnauthorizedCode is the HTTP code returned for type RemoveIdentityMfaUnauthorized
 const RemoveIdentityMfaUnauthorizedCode int = 401
 
-/*
-RemoveIdentityMfaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*RemoveIdentityMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response removeIdentityMfaUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *RemoveIdentityMfaUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // RemoveIdentityMfaNotFoundCode is the HTTP code returned for type RemoveIdentityMfaNotFound
 const RemoveIdentityMfaNotFoundCode int = 404
 
-/*
-RemoveIdentityMfaNotFound The requested resource does not exist
+/*RemoveIdentityMfaNotFound The requested resource does not exist
 
 swagger:response removeIdentityMfaNotFound
 */
@@ -175,8 +172,7 @@ func (o *RemoveIdentityMfaNotFound) WriteResponse(rw http.ResponseWriter, produc
 // RemoveIdentityMfaTooManyRequestsCode is the HTTP code returned for type RemoveIdentityMfaTooManyRequests
 const RemoveIdentityMfaTooManyRequestsCode int = 429
 
-/*
-RemoveIdentityMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*RemoveIdentityMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response removeIdentityMfaTooManyRequests
 */

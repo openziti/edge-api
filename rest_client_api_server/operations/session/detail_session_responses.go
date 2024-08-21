@@ -40,8 +40,7 @@ import (
 // DetailSessionOKCode is the HTTP code returned for type DetailSessionOK
 const DetailSessionOKCode int = 200
 
-/*
-DetailSessionOK A single session
+/*DetailSessionOK A single session
 
 swagger:response detailSessionOK
 */
@@ -85,8 +84,7 @@ func (o *DetailSessionOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // DetailSessionUnauthorizedCode is the HTTP code returned for type DetailSessionUnauthorized
 const DetailSessionUnauthorizedCode int = 401
 
-/*
-DetailSessionUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailSessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailSessionUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailSessionUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 // DetailSessionNotFoundCode is the HTTP code returned for type DetailSessionNotFound
 const DetailSessionNotFoundCode int = 404
 
-/*
-DetailSessionNotFound The requested resource does not exist
+/*DetailSessionNotFound The requested resource does not exist
 
 swagger:response detailSessionNotFound
 */

@@ -78,12 +78,10 @@ func NewAssociateIdentitysServiceConfigsParamsWithHTTPClient(client *http.Client
 	}
 }
 
-/*
-AssociateIdentitysServiceConfigsParams contains all the parameters to send to the API endpoint
+/* AssociateIdentitysServiceConfigsParams contains all the parameters to send to the API endpoint
+   for the associate identitys service configs operation.
 
-	for the associate identitys service configs operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type AssociateIdentitysServiceConfigsParams struct {
 

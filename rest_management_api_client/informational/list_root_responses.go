@@ -63,8 +63,7 @@ func NewListRootOK() *ListRootOK {
 	return &ListRootOK{}
 }
 
-/*
-ListRootOK describes a response with status code 200, with default header values.
+/* ListRootOK describes a response with status code 200, with default header values.
 
 Version information for the controller
 */

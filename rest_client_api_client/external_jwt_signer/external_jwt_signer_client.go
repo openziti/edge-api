@@ -60,9 +60,9 @@ type ClientService interface {
 }
 
 /*
-ListExternalJWTSigners lists client authentication external JWT
+  ListExternalJWTSigners lists client authentication external JWT
 
-Retrieves a list of external JWT signers for authentication
+  Retrieves a list of external JWT signers for authentication
 */
 func (a *Client) ListExternalJWTSigners(params *ListExternalJWTSignersParams, opts ...ClientOption) (*ListExternalJWTSignersOK, error) {
 	// TODO: Validate the params before sending

@@ -40,8 +40,7 @@ import (
 // CreateCurrentAPISessionCertificateCreatedCode is the HTTP code returned for type CreateCurrentAPISessionCertificateCreated
 const CreateCurrentAPISessionCertificateCreatedCode int = 201
 
-/*
-CreateCurrentAPISessionCertificateCreated A response of a create API Session certificate
+/*CreateCurrentAPISessionCertificateCreated A response of a create API Session certificate
 
 swagger:response createCurrentApiSessionCertificateCreated
 */
@@ -85,8 +84,7 @@ func (o *CreateCurrentAPISessionCertificateCreated) WriteResponse(rw http.Respon
 // CreateCurrentAPISessionCertificateBadRequestCode is the HTTP code returned for type CreateCurrentAPISessionCertificateBadRequest
 const CreateCurrentAPISessionCertificateBadRequestCode int = 400
 
-/*
-CreateCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*CreateCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createCurrentApiSessionCertificateBadRequest
 */
@@ -130,8 +128,7 @@ func (o *CreateCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.Res
 // CreateCurrentAPISessionCertificateUnauthorizedCode is the HTTP code returned for type CreateCurrentAPISessionCertificateUnauthorized
 const CreateCurrentAPISessionCertificateUnauthorizedCode int = 401
 
-/*
-CreateCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
+/*CreateCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createCurrentApiSessionCertificateUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *CreateCurrentAPISessionCertificateUnauthorized) WriteResponse(rw http.R
 // CreateCurrentAPISessionCertificateTooManyRequestsCode is the HTTP code returned for type CreateCurrentAPISessionCertificateTooManyRequests
 const CreateCurrentAPISessionCertificateTooManyRequestsCode int = 429
 
-/*
-CreateCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*CreateCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createCurrentApiSessionCertificateTooManyRequests
 */

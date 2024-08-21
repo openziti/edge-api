@@ -40,8 +40,7 @@ import (
 // EnrollMfaCreatedCode is the HTTP code returned for type EnrollMfaCreated
 const EnrollMfaCreatedCode int = 201
 
-/*
-EnrollMfaCreated The create request was successful and the resource has been added at the following location
+/*EnrollMfaCreated The create request was successful and the resource has been added at the following location
 
 swagger:response enrollMfaCreated
 */
@@ -85,8 +84,7 @@ func (o *EnrollMfaCreated) WriteResponse(rw http.ResponseWriter, producer runtim
 // EnrollMfaUnauthorizedCode is the HTTP code returned for type EnrollMfaUnauthorized
 const EnrollMfaUnauthorizedCode int = 401
 
-/*
-EnrollMfaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*EnrollMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response enrollMfaUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *EnrollMfaUnauthorized) WriteResponse(rw http.ResponseWriter, producer r
 // EnrollMfaConflictCode is the HTTP code returned for type EnrollMfaConflict
 const EnrollMfaConflictCode int = 409
 
-/*
-EnrollMfaConflict The identity is already enrolled in MFA
+/*EnrollMfaConflict The identity is already enrolled in MFA
 
 swagger:response enrollMfaConflict
 */

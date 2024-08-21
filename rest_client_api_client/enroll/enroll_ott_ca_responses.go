@@ -69,8 +69,7 @@ func NewEnrollOttCaOK() *EnrollOttCaOK {
 	return &EnrollOttCaOK{}
 }
 
-/*
-EnrollOttCaOK describes a response with status code 200, with default header values.
+/* EnrollOttCaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -102,8 +101,7 @@ func NewEnrollOttCaTooManyRequests() *EnrollOttCaTooManyRequests {
 	return &EnrollOttCaTooManyRequests{}
 }
 
-/*
-EnrollOttCaTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollOttCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

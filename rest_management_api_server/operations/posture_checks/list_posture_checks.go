@@ -53,12 +53,13 @@ func NewListPostureChecks(ctx *middleware.Context, handler ListPostureChecksHand
 	return &ListPostureChecks{Context: ctx, Handler: handler}
 }
 
-/*
-	ListPostureChecks swagger:route GET /posture-checks Posture Checks listPostureChecks
+/* ListPostureChecks swagger:route GET /posture-checks Posture Checks listPostureChecks
 
-# List a subset of posture checks
+List a subset of posture checks
 
 Retrieves a list of posture checks
+
+
 */
 type ListPostureChecks struct {
 	Context *middleware.Context

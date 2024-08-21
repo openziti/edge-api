@@ -81,8 +81,7 @@ func NewDetailServiceOK() *DetailServiceOK {
 	return &DetailServiceOK{}
 }
 
-/*
-DetailServiceOK describes a response with status code 200, with default header values.
+/* DetailServiceOK describes a response with status code 200, with default header values.
 
 A single service
 */
@@ -114,8 +113,7 @@ func NewDetailServiceUnauthorized() *DetailServiceUnauthorized {
 	return &DetailServiceUnauthorized{}
 }
 
-/*
-DetailServiceUnauthorized describes a response with status code 401, with default header values.
+/* DetailServiceUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailServiceNotFound() *DetailServiceNotFound {
 	return &DetailServiceNotFound{}
 }
 
-/*
-DetailServiceNotFound describes a response with status code 404, with default header values.
+/* DetailServiceNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailServiceTooManyRequests() *DetailServiceTooManyRequests {
 	return &DetailServiceTooManyRequests{}
 }
 
-/*
-DetailServiceTooManyRequests describes a response with status code 429, with default header values.
+/* DetailServiceTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

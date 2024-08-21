@@ -75,8 +75,7 @@ func NewCreateMfaRecoveryCodesOK() *CreateMfaRecoveryCodesOK {
 	return &CreateMfaRecoveryCodesOK{}
 }
 
-/*
-CreateMfaRecoveryCodesOK describes a response with status code 200, with default header values.
+/* CreateMfaRecoveryCodesOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -108,8 +107,7 @@ func NewCreateMfaRecoveryCodesUnauthorized() *CreateMfaRecoveryCodesUnauthorized
 	return &CreateMfaRecoveryCodesUnauthorized{}
 }
 
-/*
-CreateMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
+/* CreateMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewCreateMfaRecoveryCodesNotFound() *CreateMfaRecoveryCodesNotFound {
 	return &CreateMfaRecoveryCodesNotFound{}
 }
 
-/*
-CreateMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
+/* CreateMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */

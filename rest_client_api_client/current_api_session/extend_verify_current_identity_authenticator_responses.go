@@ -69,8 +69,7 @@ func NewExtendVerifyCurrentIdentityAuthenticatorOK() *ExtendVerifyCurrentIdentit
 	return &ExtendVerifyCurrentIdentityAuthenticatorOK{}
 }
 
-/*
-ExtendVerifyCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/* ExtendVerifyCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -102,8 +101,7 @@ func NewExtendVerifyCurrentIdentityAuthenticatorUnauthorized() *ExtendVerifyCurr
 	return &ExtendVerifyCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/*
-ExtendVerifyCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* ExtendVerifyCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */

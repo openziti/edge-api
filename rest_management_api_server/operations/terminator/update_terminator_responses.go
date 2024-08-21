@@ -40,8 +40,7 @@ import (
 // UpdateTerminatorOKCode is the HTTP code returned for type UpdateTerminatorOK
 const UpdateTerminatorOKCode int = 200
 
-/*
-UpdateTerminatorOK The update request was successful and the resource has been altered
+/*UpdateTerminatorOK The update request was successful and the resource has been altered
 
 swagger:response updateTerminatorOK
 */
@@ -85,8 +84,7 @@ func (o *UpdateTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateTerminatorBadRequestCode is the HTTP code returned for type UpdateTerminatorBadRequest
 const UpdateTerminatorBadRequestCode int = 400
 
-/*
-UpdateTerminatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdateTerminatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateTerminatorBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdateTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateTerminatorUnauthorizedCode is the HTTP code returned for type UpdateTerminatorUnauthorized
 const UpdateTerminatorUnauthorizedCode int = 401
 
-/*
-UpdateTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdateTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateTerminatorUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdateTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // UpdateTerminatorNotFoundCode is the HTTP code returned for type UpdateTerminatorNotFound
 const UpdateTerminatorNotFoundCode int = 404
 
-/*
-UpdateTerminatorNotFound The requested resource does not exist
+/*UpdateTerminatorNotFound The requested resource does not exist
 
 swagger:response updateTerminatorNotFound
 */
@@ -220,8 +216,7 @@ func (o *UpdateTerminatorNotFound) WriteResponse(rw http.ResponseWriter, produce
 // UpdateTerminatorTooManyRequestsCode is the HTTP code returned for type UpdateTerminatorTooManyRequests
 const UpdateTerminatorTooManyRequestsCode int = 429
 
-/*
-UpdateTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*UpdateTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateTerminatorTooManyRequests
 */

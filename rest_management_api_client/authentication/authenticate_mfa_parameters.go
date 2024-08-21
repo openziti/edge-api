@@ -78,12 +78,10 @@ func NewAuthenticateMfaParamsWithHTTPClient(client *http.Client) *AuthenticateMf
 	}
 }
 
-/*
-AuthenticateMfaParams contains all the parameters to send to the API endpoint
+/* AuthenticateMfaParams contains all the parameters to send to the API endpoint
+   for the authenticate mfa operation.
 
-	for the authenticate mfa operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type AuthenticateMfaParams struct {
 

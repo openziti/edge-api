@@ -81,8 +81,7 @@ func NewListPostureCheckRoleAttributesOK() *ListPostureCheckRoleAttributesOK {
 	return &ListPostureCheckRoleAttributesOK{}
 }
 
-/*
-ListPostureCheckRoleAttributesOK describes a response with status code 200, with default header values.
+/* ListPostureCheckRoleAttributesOK describes a response with status code 200, with default header values.
 
 A list of role attributes
 */
@@ -114,8 +113,7 @@ func NewListPostureCheckRoleAttributesBadRequest() *ListPostureCheckRoleAttribut
 	return &ListPostureCheckRoleAttributesBadRequest{}
 }
 
-/*
-ListPostureCheckRoleAttributesBadRequest describes a response with status code 400, with default header values.
+/* ListPostureCheckRoleAttributesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListPostureCheckRoleAttributesUnauthorized() *ListPostureCheckRoleAttrib
 	return &ListPostureCheckRoleAttributesUnauthorized{}
 }
 
-/*
-ListPostureCheckRoleAttributesUnauthorized describes a response with status code 401, with default header values.
+/* ListPostureCheckRoleAttributesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListPostureCheckRoleAttributesTooManyRequests() *ListPostureCheckRoleAtt
 	return &ListPostureCheckRoleAttributesTooManyRequests{}
 }
 
-/*
-ListPostureCheckRoleAttributesTooManyRequests describes a response with status code 429, with default header values.
+/* ListPostureCheckRoleAttributesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

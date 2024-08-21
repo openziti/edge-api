@@ -78,12 +78,10 @@ func NewCreatePostureResponseParamsWithHTTPClient(client *http.Client) *CreatePo
 	}
 }
 
-/*
-CreatePostureResponseParams contains all the parameters to send to the API endpoint
+/* CreatePostureResponseParams contains all the parameters to send to the API endpoint
+   for the create posture response operation.
 
-	for the create posture response operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreatePostureResponseParams struct {
 

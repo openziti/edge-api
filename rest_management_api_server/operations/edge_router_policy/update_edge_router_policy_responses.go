@@ -40,8 +40,7 @@ import (
 // UpdateEdgeRouterPolicyOKCode is the HTTP code returned for type UpdateEdgeRouterPolicyOK
 const UpdateEdgeRouterPolicyOKCode int = 200
 
-/*
-UpdateEdgeRouterPolicyOK The update request was successful and the resource has been altered
+/*UpdateEdgeRouterPolicyOK The update request was successful and the resource has been altered
 
 swagger:response updateEdgeRouterPolicyOK
 */
@@ -85,8 +84,7 @@ func (o *UpdateEdgeRouterPolicyOK) WriteResponse(rw http.ResponseWriter, produce
 // UpdateEdgeRouterPolicyBadRequestCode is the HTTP code returned for type UpdateEdgeRouterPolicyBadRequest
 const UpdateEdgeRouterPolicyBadRequestCode int = 400
 
-/*
-UpdateEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdateEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateEdgeRouterPolicyBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdateEdgeRouterPolicyBadRequest) WriteResponse(rw http.ResponseWriter,
 // UpdateEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type UpdateEdgeRouterPolicyUnauthorized
 const UpdateEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*
-UpdateEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdateEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateEdgeRouterPolicyUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdateEdgeRouterPolicyUnauthorized) WriteResponse(rw http.ResponseWrite
 // UpdateEdgeRouterPolicyNotFoundCode is the HTTP code returned for type UpdateEdgeRouterPolicyNotFound
 const UpdateEdgeRouterPolicyNotFoundCode int = 404
 
-/*
-UpdateEdgeRouterPolicyNotFound The requested resource does not exist
+/*UpdateEdgeRouterPolicyNotFound The requested resource does not exist
 
 swagger:response updateEdgeRouterPolicyNotFound
 */
@@ -220,8 +216,7 @@ func (o *UpdateEdgeRouterPolicyNotFound) WriteResponse(rw http.ResponseWriter, p
 // UpdateEdgeRouterPolicyTooManyRequestsCode is the HTTP code returned for type UpdateEdgeRouterPolicyTooManyRequests
 const UpdateEdgeRouterPolicyTooManyRequestsCode int = 429
 
-/*
-UpdateEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*UpdateEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateEdgeRouterPolicyTooManyRequests
 */

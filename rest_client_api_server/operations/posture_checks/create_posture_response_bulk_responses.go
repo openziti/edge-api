@@ -40,8 +40,7 @@ import (
 // CreatePostureResponseBulkOKCode is the HTTP code returned for type CreatePostureResponseBulkOK
 const CreatePostureResponseBulkOKCode int = 200
 
-/*
-CreatePostureResponseBulkOK Contains a list of services that have had their timers altered
+/*CreatePostureResponseBulkOK Contains a list of services that have had their timers altered
 
 swagger:response createPostureResponseBulkOK
 */
@@ -85,8 +84,7 @@ func (o *CreatePostureResponseBulkOK) WriteResponse(rw http.ResponseWriter, prod
 // CreatePostureResponseBulkBadRequestCode is the HTTP code returned for type CreatePostureResponseBulkBadRequest
 const CreatePostureResponseBulkBadRequestCode int = 400
 
-/*
-CreatePostureResponseBulkBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*CreatePostureResponseBulkBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createPostureResponseBulkBadRequest
 */
@@ -130,8 +128,7 @@ func (o *CreatePostureResponseBulkBadRequest) WriteResponse(rw http.ResponseWrit
 // CreatePostureResponseBulkUnauthorizedCode is the HTTP code returned for type CreatePostureResponseBulkUnauthorized
 const CreatePostureResponseBulkUnauthorizedCode int = 401
 
-/*
-CreatePostureResponseBulkUnauthorized The supplied session does not have the correct access rights to request this resource
+/*CreatePostureResponseBulkUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createPostureResponseBulkUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *CreatePostureResponseBulkUnauthorized) WriteResponse(rw http.ResponseWr
 // CreatePostureResponseBulkTooManyRequestsCode is the HTTP code returned for type CreatePostureResponseBulkTooManyRequests
 const CreatePostureResponseBulkTooManyRequestsCode int = 429
 
-/*
-CreatePostureResponseBulkTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*CreatePostureResponseBulkTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createPostureResponseBulkTooManyRequests
 */

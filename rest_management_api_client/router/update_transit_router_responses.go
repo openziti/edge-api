@@ -87,8 +87,7 @@ func NewUpdateTransitRouterOK() *UpdateTransitRouterOK {
 	return &UpdateTransitRouterOK{}
 }
 
-/*
-UpdateTransitRouterOK describes a response with status code 200, with default header values.
+/* UpdateTransitRouterOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewUpdateTransitRouterBadRequest() *UpdateTransitRouterBadRequest {
 	return &UpdateTransitRouterBadRequest{}
 }
 
-/*
-UpdateTransitRouterBadRequest describes a response with status code 400, with default header values.
+/* UpdateTransitRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewUpdateTransitRouterUnauthorized() *UpdateTransitRouterUnauthorized {
 	return &UpdateTransitRouterUnauthorized{}
 }
 
-/*
-UpdateTransitRouterUnauthorized describes a response with status code 401, with default header values.
+/* UpdateTransitRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewUpdateTransitRouterNotFound() *UpdateTransitRouterNotFound {
 	return &UpdateTransitRouterNotFound{}
 }
 
-/*
-UpdateTransitRouterNotFound describes a response with status code 404, with default header values.
+/* UpdateTransitRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewUpdateTransitRouterTooManyRequests() *UpdateTransitRouterTooManyRequests
 	return &UpdateTransitRouterTooManyRequests{}
 }
 
-/*
-UpdateTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+/* UpdateTransitRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -75,8 +75,7 @@ func NewAuthenticateMfaOK() *AuthenticateMfaOK {
 	return &AuthenticateMfaOK{}
 }
 
-/*
-AuthenticateMfaOK describes a response with status code 200, with default header values.
+/* AuthenticateMfaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -108,8 +107,7 @@ func NewAuthenticateMfaUnauthorized() *AuthenticateMfaUnauthorized {
 	return &AuthenticateMfaUnauthorized{}
 }
 
-/*
-AuthenticateMfaUnauthorized describes a response with status code 401, with default header values.
+/* AuthenticateMfaUnauthorized describes a response with status code 401, with default header values.
 
 Base empty response
 */
@@ -141,8 +139,7 @@ func NewAuthenticateMfaTooManyRequests() *AuthenticateMfaTooManyRequests {
 	return &AuthenticateMfaTooManyRequests{}
 }
 
-/*
-AuthenticateMfaTooManyRequests describes a response with status code 429, with default header values.
+/* AuthenticateMfaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

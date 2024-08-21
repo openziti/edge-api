@@ -81,8 +81,7 @@ func NewDeleteAuthPolicyOK() *DeleteAuthPolicyOK {
 	return &DeleteAuthPolicyOK{}
 }
 
-/*
-DeleteAuthPolicyOK describes a response with status code 200, with default header values.
+/* DeleteAuthPolicyOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -114,8 +113,7 @@ func NewDeleteAuthPolicyBadRequest() *DeleteAuthPolicyBadRequest {
 	return &DeleteAuthPolicyBadRequest{}
 }
 
-/*
-DeleteAuthPolicyBadRequest describes a response with status code 400, with default header values.
+/* DeleteAuthPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewDeleteAuthPolicyUnauthorized() *DeleteAuthPolicyUnauthorized {
 	return &DeleteAuthPolicyUnauthorized{}
 }
 
-/*
-DeleteAuthPolicyUnauthorized describes a response with status code 401, with default header values.
+/* DeleteAuthPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewDeleteAuthPolicyTooManyRequests() *DeleteAuthPolicyTooManyRequests {
 	return &DeleteAuthPolicyTooManyRequests{}
 }
 
-/*
-DeleteAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
+/* DeleteAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

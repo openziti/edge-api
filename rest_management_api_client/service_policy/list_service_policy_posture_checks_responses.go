@@ -81,8 +81,7 @@ func NewListServicePolicyPostureChecksOK() *ListServicePolicyPostureChecksOK {
 	return &ListServicePolicyPostureChecksOK{}
 }
 
-/*
-ListServicePolicyPostureChecksOK describes a response with status code 200, with default header values.
+/* ListServicePolicyPostureChecksOK describes a response with status code 200, with default header values.
 
 A list of posture checks
 */
@@ -114,8 +113,7 @@ func NewListServicePolicyPostureChecksBadRequest() *ListServicePolicyPostureChec
 	return &ListServicePolicyPostureChecksBadRequest{}
 }
 
-/*
-ListServicePolicyPostureChecksBadRequest describes a response with status code 400, with default header values.
+/* ListServicePolicyPostureChecksBadRequest describes a response with status code 400, with default header values.
 
 The requested resource does not exist
 */
@@ -147,8 +145,7 @@ func NewListServicePolicyPostureChecksUnauthorized() *ListServicePolicyPostureCh
 	return &ListServicePolicyPostureChecksUnauthorized{}
 }
 
-/*
-ListServicePolicyPostureChecksUnauthorized describes a response with status code 401, with default header values.
+/* ListServicePolicyPostureChecksUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListServicePolicyPostureChecksTooManyRequests() *ListServicePolicyPostur
 	return &ListServicePolicyPostureChecksTooManyRequests{}
 }
 
-/*
-ListServicePolicyPostureChecksTooManyRequests describes a response with status code 429, with default header values.
+/* ListServicePolicyPostureChecksTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -78,12 +78,10 @@ func NewCreateIdentityParamsWithHTTPClient(client *http.Client) *CreateIdentityP
 	}
 }
 
-/*
-CreateIdentityParams contains all the parameters to send to the API endpoint
+/* CreateIdentityParams contains all the parameters to send to the API endpoint
+   for the create identity operation.
 
-	for the create identity operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateIdentityParams struct {
 

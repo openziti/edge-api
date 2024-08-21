@@ -81,8 +81,7 @@ func NewListControllersOK() *ListControllersOK {
 	return &ListControllersOK{}
 }
 
-/*
-ListControllersOK describes a response with status code 200, with default header values.
+/* ListControllersOK describes a response with status code 200, with default header values.
 
 A list of controllers
 */
@@ -114,8 +113,7 @@ func NewListControllersBadRequest() *ListControllersBadRequest {
 	return &ListControllersBadRequest{}
 }
 
-/*
-ListControllersBadRequest describes a response with status code 400, with default header values.
+/* ListControllersBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListControllersUnauthorized() *ListControllersUnauthorized {
 	return &ListControllersUnauthorized{}
 }
 
-/*
-ListControllersUnauthorized describes a response with status code 401, with default header values.
+/* ListControllersUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListControllersTooManyRequests() *ListControllersTooManyRequests {
 	return &ListControllersTooManyRequests{}
 }
 
-/*
-ListControllersTooManyRequests describes a response with status code 429, with default header values.
+/* ListControllersTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

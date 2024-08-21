@@ -76,12 +76,10 @@ func NewGetCaJWTParamsWithHTTPClient(client *http.Client) *GetCaJWTParams {
 	}
 }
 
-/*
-GetCaJWTParams contains all the parameters to send to the API endpoint
+/* GetCaJWTParams contains all the parameters to send to the API endpoint
+   for the get ca Jwt operation.
 
-	for the get ca Jwt operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type GetCaJWTParams struct {
 

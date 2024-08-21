@@ -77,12 +77,10 @@ func NewListCurrentIdentityAuthenticatorsParamsWithHTTPClient(client *http.Clien
 	}
 }
 
-/*
-ListCurrentIdentityAuthenticatorsParams contains all the parameters to send to the API endpoint
+/* ListCurrentIdentityAuthenticatorsParams contains all the parameters to send to the API endpoint
+   for the list current identity authenticators operation.
 
-	for the list current identity authenticators operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListCurrentIdentityAuthenticatorsParams struct {
 

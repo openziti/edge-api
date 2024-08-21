@@ -78,8 +78,7 @@ func NewEnrollUpdbOK() *EnrollUpdbOK {
 	return &EnrollUpdbOK{}
 }
 
-/*
-EnrollUpdbOK describes a response with status code 200, with default header values.
+/* EnrollUpdbOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -111,8 +110,7 @@ func NewEnrollUpdbNotFound() *EnrollUpdbNotFound {
 	return &EnrollUpdbNotFound{}
 }
 
-/*
-EnrollUpdbNotFound describes a response with status code 404, with default header values.
+/* EnrollUpdbNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -144,8 +142,7 @@ func NewEnrollUpdbTooManyRequests() *EnrollUpdbTooManyRequests {
 	return &EnrollUpdbTooManyRequests{}
 }
 
-/*
-EnrollUpdbTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollUpdbTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
@@ -172,8 +169,7 @@ func (o *EnrollUpdbTooManyRequests) readResponse(response runtime.ClientResponse
 	return nil
 }
 
-/*
-EnrollUpdbBody enroll updb body
+/*EnrollUpdbBody enroll updb body
 swagger:model EnrollUpdbBody
 */
 type EnrollUpdbBody struct {

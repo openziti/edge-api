@@ -53,10 +53,9 @@ func NewEnrollOttCa(ctx *middleware.Context, handler EnrollOttCaHandler) *Enroll
 	return &EnrollOttCa{Context: ctx, Handler: handler}
 }
 
-/*
-	EnrollOttCa swagger:route POST /enroll/ottca Enroll enrollOttCa
+/* EnrollOttCa swagger:route POST /enroll/ottca Enroll enrollOttCa
 
-# Enroll an identity via one-time-token with a pre-exchanged client certificate
+Enroll an identity via one-time-token with a pre-exchanged client certificate
 
 Enroll an identity via a one-time-token that also requires a pre-exchanged client certificate to match a
 Certificate Authority that has been added and verified (See POST /cas and POST /cas{id}/verify). The client
@@ -64,6 +63,8 @@ must present a client certificate signed by CA associated with the enrollment. T
 CA auto enrollment except that is required the identity to be pre-created.
 
 As the client certificate has been pre-exchanged there is no CSR input to this enrollment method.
+
+
 */
 type EnrollOttCa struct {
 	Context *middleware.Context

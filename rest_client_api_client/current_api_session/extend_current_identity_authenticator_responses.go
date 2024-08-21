@@ -69,8 +69,7 @@ func NewExtendCurrentIdentityAuthenticatorOK() *ExtendCurrentIdentityAuthenticat
 	return &ExtendCurrentIdentityAuthenticatorOK{}
 }
 
-/*
-ExtendCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/* ExtendCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 A response containg the identity's new certificate
 */
@@ -102,8 +101,7 @@ func NewExtendCurrentIdentityAuthenticatorUnauthorized() *ExtendCurrentIdentityA
 	return &ExtendCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/*
-ExtendCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* ExtendCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */

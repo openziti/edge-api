@@ -53,12 +53,12 @@ func NewListCurrentAPISessionCertificates(ctx *middleware.Context, handler ListC
 	return &ListCurrentAPISessionCertificates{Context: ctx, Handler: handler}
 }
 
-/*
-	ListCurrentAPISessionCertificates swagger:route GET /current-api-session/certificates Current API Session listCurrentApiSessionCertificates
+/* ListCurrentAPISessionCertificates swagger:route GET /current-api-session/certificates Current API Session listCurrentApiSessionCertificates
 
-# List the ephemeral certificates available for the current API Session
+List the ephemeral certificates available for the current API Session
 
 Retrieves a list of certificate resources for the current API session; supports filtering, sorting, and pagination
+
 */
 type ListCurrentAPISessionCertificates struct {
 	Context *middleware.Context

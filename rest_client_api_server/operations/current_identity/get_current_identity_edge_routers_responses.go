@@ -40,8 +40,7 @@ import (
 // GetCurrentIdentityEdgeRoutersOKCode is the HTTP code returned for type GetCurrentIdentityEdgeRoutersOK
 const GetCurrentIdentityEdgeRoutersOKCode int = 200
 
-/*
-GetCurrentIdentityEdgeRoutersOK A list of edge routers
+/*GetCurrentIdentityEdgeRoutersOK A list of edge routers
 
 swagger:response getCurrentIdentityEdgeRoutersOK
 */
@@ -85,8 +84,7 @@ func (o *GetCurrentIdentityEdgeRoutersOK) WriteResponse(rw http.ResponseWriter, 
 // GetCurrentIdentityEdgeRoutersUnauthorizedCode is the HTTP code returned for type GetCurrentIdentityEdgeRoutersUnauthorized
 const GetCurrentIdentityEdgeRoutersUnauthorizedCode int = 401
 
-/*
-GetCurrentIdentityEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*GetCurrentIdentityEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCurrentIdentityEdgeRoutersUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *GetCurrentIdentityEdgeRoutersUnauthorized) WriteResponse(rw http.Respon
 // GetCurrentIdentityEdgeRoutersTooManyRequestsCode is the HTTP code returned for type GetCurrentIdentityEdgeRoutersTooManyRequests
 const GetCurrentIdentityEdgeRoutersTooManyRequestsCode int = 429
 
-/*
-GetCurrentIdentityEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*GetCurrentIdentityEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getCurrentIdentityEdgeRoutersTooManyRequests
 */

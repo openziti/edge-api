@@ -77,12 +77,10 @@ func NewListCasParamsWithHTTPClient(client *http.Client) *ListCasParams {
 	}
 }
 
-/*
-ListCasParams contains all the parameters to send to the API endpoint
+/* ListCasParams contains all the parameters to send to the API endpoint
+   for the list cas operation.
 
-	for the list cas operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListCasParams struct {
 

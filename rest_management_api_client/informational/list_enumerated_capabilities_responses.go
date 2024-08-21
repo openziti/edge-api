@@ -63,8 +63,7 @@ func NewListEnumeratedCapabilitiesOK() *ListEnumeratedCapabilitiesOK {
 	return &ListEnumeratedCapabilitiesOK{}
 }
 
-/*
-ListEnumeratedCapabilitiesOK describes a response with status code 200, with default header values.
+/* ListEnumeratedCapabilitiesOK describes a response with status code 200, with default header values.
 
 A typed and enumerated list of capabilities
 */

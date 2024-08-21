@@ -69,8 +69,7 @@ func NewEnrollErOttOK() *EnrollErOttOK {
 	return &EnrollErOttOK{}
 }
 
-/*
-EnrollErOttOK describes a response with status code 200, with default header values.
+/* EnrollErOttOK describes a response with status code 200, with default header values.
 
 A response containing the edge routers signed certificates (server chain, server cert, CAs).
 */
@@ -102,8 +101,7 @@ func NewEnrollErOttTooManyRequests() *EnrollErOttTooManyRequests {
 	return &EnrollErOttTooManyRequests{}
 }
 
-/*
-EnrollErOttTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollErOttTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

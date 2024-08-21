@@ -40,8 +40,7 @@ import (
 // DetailCaOKCode is the HTTP code returned for type DetailCaOK
 const DetailCaOKCode int = 200
 
-/*
-DetailCaOK A singular Certificate Authority (CA) resource
+/*DetailCaOK A singular Certificate Authority (CA) resource
 
 swagger:response detailCaOK
 */
@@ -85,8 +84,7 @@ func (o *DetailCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // DetailCaUnauthorizedCode is the HTTP code returned for type DetailCaUnauthorized
 const DetailCaUnauthorizedCode int = 401
 
-/*
-DetailCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailCaUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // DetailCaNotFoundCode is the HTTP code returned for type DetailCaNotFound
 const DetailCaNotFoundCode int = 404
 
-/*
-DetailCaNotFound The requested resource does not exist
+/*DetailCaNotFound The requested resource does not exist
 
 swagger:response detailCaNotFound
 */
@@ -175,8 +172,7 @@ func (o *DetailCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // DetailCaTooManyRequestsCode is the HTTP code returned for type DetailCaTooManyRequests
 const DetailCaTooManyRequestsCode int = 429
 
-/*
-DetailCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DetailCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailCaTooManyRequests
 */

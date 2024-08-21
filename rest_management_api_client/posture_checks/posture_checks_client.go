@@ -74,9 +74,9 @@ type ClientService interface {
 }
 
 /*
-CreatePostureCheck creates a posture checks
+  CreatePostureCheck creates a posture checks
 
-Creates a Posture Checks
+  Creates a Posture Checks
 */
 func (a *Client) CreatePostureCheck(params *CreatePostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostureCheckCreated, error) {
 	// TODO: Validate the params before sending
@@ -115,9 +115,9 @@ func (a *Client) CreatePostureCheck(params *CreatePostureCheckParams, authInfo r
 }
 
 /*
-DeletePostureCheck deletes an posture checks
+  DeletePostureCheck deletes an posture checks
 
-Deletes and Posture Checks by id
+  Deletes and Posture Checks by id
 */
 func (a *Client) DeletePostureCheck(params *DeletePostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostureCheckOK, error) {
 	// TODO: Validate the params before sending
@@ -156,9 +156,9 @@ func (a *Client) DeletePostureCheck(params *DeletePostureCheckParams, authInfo r
 }
 
 /*
-DetailPostureCheck retrieves a single posture checks
+  DetailPostureCheck retrieves a single posture checks
 
-Retrieves a single Posture Checks by id
+  Retrieves a single Posture Checks by id
 */
 func (a *Client) DetailPostureCheck(params *DetailPostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailPostureCheckOK, error) {
 	// TODO: Validate the params before sending
@@ -197,9 +197,9 @@ func (a *Client) DetailPostureCheck(params *DetailPostureCheckParams, authInfo r
 }
 
 /*
-DetailPostureCheckType retrieves a single posture check type
+  DetailPostureCheckType retrieves a single posture check type
 
-Retrieves a single posture check type by id
+  Retrieves a single posture check type by id
 */
 func (a *Client) DetailPostureCheckType(params *DetailPostureCheckTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailPostureCheckTypeOK, error) {
 	// TODO: Validate the params before sending
@@ -238,9 +238,10 @@ func (a *Client) DetailPostureCheckType(params *DetailPostureCheckTypeParams, au
 }
 
 /*
-ListPostureCheckTypes lists a subset of posture check types
+  ListPostureCheckTypes lists a subset of posture check types
 
-Retrieves a list of posture check types
+  Retrieves a list of posture check types
+
 */
 func (a *Client) ListPostureCheckTypes(params *ListPostureCheckTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckTypesOK, error) {
 	// TODO: Validate the params before sending
@@ -279,9 +280,10 @@ func (a *Client) ListPostureCheckTypes(params *ListPostureCheckTypesParams, auth
 }
 
 /*
-ListPostureChecks lists a subset of posture checks
+  ListPostureChecks lists a subset of posture checks
 
-Retrieves a list of posture checks
+  Retrieves a list of posture checks
+
 */
 func (a *Client) ListPostureChecks(params *ListPostureChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureChecksOK, error) {
 	// TODO: Validate the params before sending
@@ -320,9 +322,9 @@ func (a *Client) ListPostureChecks(params *ListPostureChecksParams, authInfo run
 }
 
 /*
-PatchPostureCheck updates the supplied fields on a posture checks
+  PatchPostureCheck updates the supplied fields on a posture checks
 
-Update only the supplied fields on a Posture Checks by id
+  Update only the supplied fields on a Posture Checks by id
 */
 func (a *Client) PatchPostureCheck(params *PatchPostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchPostureCheckOK, error) {
 	// TODO: Validate the params before sending
@@ -361,9 +363,9 @@ func (a *Client) PatchPostureCheck(params *PatchPostureCheckParams, authInfo run
 }
 
 /*
-UpdatePostureCheck updates all fields on a posture checks
+  UpdatePostureCheck updates all fields on a posture checks
 
-Update all fields on a Posture Checks by id
+  Update all fields on a Posture Checks by id
 */
 func (a *Client) UpdatePostureCheck(params *UpdatePostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostureCheckOK, error) {
 	// TODO: Validate the params before sending

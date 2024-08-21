@@ -76,12 +76,10 @@ func NewDetailSessionRoutePathParamsWithHTTPClient(client *http.Client) *DetailS
 	}
 }
 
-/*
-DetailSessionRoutePathParams contains all the parameters to send to the API endpoint
+/* DetailSessionRoutePathParams contains all the parameters to send to the API endpoint
+   for the detail session route path operation.
 
-	for the detail session route path operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DetailSessionRoutePathParams struct {
 

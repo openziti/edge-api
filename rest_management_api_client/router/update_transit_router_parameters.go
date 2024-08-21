@@ -78,12 +78,10 @@ func NewUpdateTransitRouterParamsWithHTTPClient(client *http.Client) *UpdateTran
 	}
 }
 
-/*
-UpdateTransitRouterParams contains all the parameters to send to the API endpoint
+/* UpdateTransitRouterParams contains all the parameters to send to the API endpoint
+   for the update transit router operation.
 
-	for the update transit router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateTransitRouterParams struct {
 

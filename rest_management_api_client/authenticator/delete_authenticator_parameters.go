@@ -76,12 +76,10 @@ func NewDeleteAuthenticatorParamsWithHTTPClient(client *http.Client) *DeleteAuth
 	}
 }
 
-/*
-DeleteAuthenticatorParams contains all the parameters to send to the API endpoint
+/* DeleteAuthenticatorParams contains all the parameters to send to the API endpoint
+   for the delete authenticator operation.
 
-	for the delete authenticator operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteAuthenticatorParams struct {
 

@@ -40,8 +40,7 @@ import (
 // ListPostureCheckRoleAttributesOKCode is the HTTP code returned for type ListPostureCheckRoleAttributesOK
 const ListPostureCheckRoleAttributesOKCode int = 200
 
-/*
-ListPostureCheckRoleAttributesOK A list of role attributes
+/*ListPostureCheckRoleAttributesOK A list of role attributes
 
 swagger:response listPostureCheckRoleAttributesOK
 */
@@ -85,8 +84,7 @@ func (o *ListPostureCheckRoleAttributesOK) WriteResponse(rw http.ResponseWriter,
 // ListPostureCheckRoleAttributesBadRequestCode is the HTTP code returned for type ListPostureCheckRoleAttributesBadRequest
 const ListPostureCheckRoleAttributesBadRequestCode int = 400
 
-/*
-ListPostureCheckRoleAttributesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListPostureCheckRoleAttributesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listPostureCheckRoleAttributesBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListPostureCheckRoleAttributesBadRequest) WriteResponse(rw http.Respons
 // ListPostureCheckRoleAttributesUnauthorizedCode is the HTTP code returned for type ListPostureCheckRoleAttributesUnauthorized
 const ListPostureCheckRoleAttributesUnauthorizedCode int = 401
 
-/*
-ListPostureCheckRoleAttributesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListPostureCheckRoleAttributesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listPostureCheckRoleAttributesUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListPostureCheckRoleAttributesUnauthorized) WriteResponse(rw http.Respo
 // ListPostureCheckRoleAttributesTooManyRequestsCode is the HTTP code returned for type ListPostureCheckRoleAttributesTooManyRequests
 const ListPostureCheckRoleAttributesTooManyRequestsCode int = 429
 
-/*
-ListPostureCheckRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListPostureCheckRoleAttributesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listPostureCheckRoleAttributesTooManyRequests
 */

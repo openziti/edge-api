@@ -81,8 +81,7 @@ func NewAuthenticateOK() *AuthenticateOK {
 	return &AuthenticateOK{}
 }
 
-/*
-AuthenticateOK describes a response with status code 200, with default header values.
+/* AuthenticateOK describes a response with status code 200, with default header values.
 
 The API session associated with the session used to issue the request
 */
@@ -114,8 +113,7 @@ func NewAuthenticateBadRequest() *AuthenticateBadRequest {
 	return &AuthenticateBadRequest{}
 }
 
-/*
-AuthenticateBadRequest describes a response with status code 400, with default header values.
+/* AuthenticateBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewAuthenticateUnauthorized() *AuthenticateUnauthorized {
 	return &AuthenticateUnauthorized{}
 }
 
-/*
-AuthenticateUnauthorized describes a response with status code 401, with default header values.
+/* AuthenticateUnauthorized describes a response with status code 401, with default header values.
 
 The authentication request could not be processed as the credentials are invalid
 */
@@ -180,8 +177,7 @@ func NewAuthenticateTooManyRequests() *AuthenticateTooManyRequests {
 	return &AuthenticateTooManyRequests{}
 }
 
-/*
-AuthenticateTooManyRequests describes a response with status code 429, with default header values.
+/* AuthenticateTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

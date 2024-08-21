@@ -78,12 +78,10 @@ func NewCreatePostureCheckParamsWithHTTPClient(client *http.Client) *CreatePostu
 	}
 }
 
-/*
-CreatePostureCheckParams contains all the parameters to send to the API endpoint
+/* CreatePostureCheckParams contains all the parameters to send to the API endpoint
+   for the create posture check operation.
 
-	for the create posture check operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreatePostureCheckParams struct {
 

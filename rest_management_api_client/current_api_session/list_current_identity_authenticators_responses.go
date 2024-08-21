@@ -75,8 +75,7 @@ func NewListCurrentIdentityAuthenticatorsOK() *ListCurrentIdentityAuthenticators
 	return &ListCurrentIdentityAuthenticatorsOK{}
 }
 
-/*
-ListCurrentIdentityAuthenticatorsOK describes a response with status code 200, with default header values.
+/* ListCurrentIdentityAuthenticatorsOK describes a response with status code 200, with default header values.
 
 A list of authenticators
 */
@@ -108,8 +107,7 @@ func NewListCurrentIdentityAuthenticatorsBadRequest() *ListCurrentIdentityAuthen
 	return &ListCurrentIdentityAuthenticatorsBadRequest{}
 }
 
-/*
-ListCurrentIdentityAuthenticatorsBadRequest describes a response with status code 400, with default header values.
+/* ListCurrentIdentityAuthenticatorsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -141,8 +139,7 @@ func NewListCurrentIdentityAuthenticatorsUnauthorized() *ListCurrentIdentityAuth
 	return &ListCurrentIdentityAuthenticatorsUnauthorized{}
 }
 
-/*
-ListCurrentIdentityAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
+/* ListCurrentIdentityAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */

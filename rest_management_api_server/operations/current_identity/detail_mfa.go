@@ -53,12 +53,13 @@ func NewDetailMfa(ctx *middleware.Context, handler DetailMfaHandler) *DetailMfa 
 	return &DetailMfa{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailMfa swagger:route GET /current-identity/mfa Current Identity MFA detailMfa
+/* DetailMfa swagger:route GET /current-identity/mfa Current Identity MFA detailMfa
 
-# Returns the current status of MFA enrollment
+Returns the current status of MFA enrollment
 
 Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
+
+
 */
 type DetailMfa struct {
 	Context *middleware.Context

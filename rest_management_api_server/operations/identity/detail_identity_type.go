@@ -53,12 +53,12 @@ func NewDetailIdentityType(ctx *middleware.Context, handler DetailIdentityTypeHa
 	return &DetailIdentityType{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailIdentityType swagger:route GET /identity-types/{id} Identity detailIdentityType
+/* DetailIdentityType swagger:route GET /identity-types/{id} Identity detailIdentityType
 
-# Retrieves a identity type
+Retrieves a identity type
 
 Retrieves a single identity type by id. Requires admin access.
+
 */
 type DetailIdentityType struct {
 	Context *middleware.Context

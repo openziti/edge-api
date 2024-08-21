@@ -74,9 +74,9 @@ type ClientService interface {
 }
 
 /*
-CreateCa creates a c a
+  CreateCa creates a c a
 
-Creates a CA in an unverified state. Requires admin access.
+  Creates a CA in an unverified state. Requires admin access.
 */
 func (a *Client) CreateCa(params *CreateCaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCaCreated, error) {
 	// TODO: Validate the params before sending
@@ -115,11 +115,11 @@ func (a *Client) CreateCa(params *CreateCaParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-	DeleteCa deletes a c a
+  DeleteCa deletes a c a
 
-	Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it
-
+  Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it
 impossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.
+
 */
 func (a *Client) DeleteCa(params *DeleteCaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCaOK, error) {
 	// TODO: Validate the params before sending
@@ -158,9 +158,9 @@ func (a *Client) DeleteCa(params *DeleteCaParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-DetailCa retrieves a single c a
+  DetailCa retrieves a single c a
 
-Retrieves a single CA by id. Requires admin access.
+  Retrieves a single CA by id. Requires admin access.
 */
 func (a *Client) DetailCa(params *DetailCaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailCaOK, error) {
 	// TODO: Validate the params before sending
@@ -199,11 +199,11 @@ func (a *Client) DetailCa(params *DetailCaParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-	GetCaJWT retrieves the enrollment JWT for a c a
+  GetCaJWT retrieves the enrollment JWT for a c a
 
-	For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides
-
+  For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides
 the jwt as a text response.
+
 */
 func (a *Client) GetCaJWT(params *GetCaJWTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCaJWTOK, error) {
 	// TODO: Validate the params before sending
@@ -242,9 +242,9 @@ func (a *Client) GetCaJWT(params *GetCaJWTParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-ListCas lists c as
+  ListCas lists c as
 
-Retrieves a list of CA resources; supports filtering, sorting, and pagination. Requires admin access.
+  Retrieves a list of CA resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListCas(params *ListCasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCasOK, error) {
 	// TODO: Validate the params before sending
@@ -283,9 +283,9 @@ func (a *Client) ListCas(params *ListCasParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-PatchCa updates the supplied fields on a c a
+  PatchCa updates the supplied fields on a c a
 
-Update only the supplied fields on a CA by id. Requires admin access.
+  Update only the supplied fields on a CA by id. Requires admin access.
 */
 func (a *Client) PatchCa(params *PatchCaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchCaOK, error) {
 	// TODO: Validate the params before sending
@@ -324,9 +324,9 @@ func (a *Client) PatchCa(params *PatchCaParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-UpdateCa updates all fields on a c a
+  UpdateCa updates all fields on a c a
 
-Update all fields on a CA by id. Requires admin access.
+  Update all fields on a CA by id. Requires admin access.
 */
 func (a *Client) UpdateCa(params *UpdateCaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCaOK, error) {
 	// TODO: Validate the params before sending
@@ -365,12 +365,12 @@ func (a *Client) UpdateCa(params *UpdateCaParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-	VerifyCa verifies a c a
+  VerifyCa verifies a c a
 
-	Allows a CA to become verified by submitting a certificate in PEM format that has been signed by the target CA.
-
+  Allows a CA to become verified by submitting a certificate in PEM format that has been signed by the target CA.
 The common name on the certificate must match the verificationToken property of the CA. Unverfieid CAs can not
 be used for enrollment/authentication. Requires admin access.
+
 */
 func (a *Client) VerifyCa(params *VerifyCaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VerifyCaOK, error) {
 	// TODO: Validate the params before sending

@@ -53,12 +53,12 @@ func NewAssociateIdentitysServiceConfigs(ctx *middleware.Context, handler Associ
 	return &AssociateIdentitysServiceConfigs{Context: ctx, Handler: handler}
 }
 
-/*
-	AssociateIdentitysServiceConfigs swagger:route POST /identities/{id}/service-configs Identity associateIdentitysServiceConfigs
+/* AssociateIdentitysServiceConfigs swagger:route POST /identities/{id}/service-configs Identity associateIdentitysServiceConfigs
 
-# Associate service configs for a specific identity
+Associate service configs for a specific identity
 
 Associate service configs to a specific identity
+
 */
 type AssociateIdentitysServiceConfigs struct {
 	Context *middleware.Context

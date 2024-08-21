@@ -81,8 +81,7 @@ func NewDetailCaOK() *DetailCaOK {
 	return &DetailCaOK{}
 }
 
-/*
-DetailCaOK describes a response with status code 200, with default header values.
+/* DetailCaOK describes a response with status code 200, with default header values.
 
 A singular Certificate Authority (CA) resource
 */
@@ -114,8 +113,7 @@ func NewDetailCaUnauthorized() *DetailCaUnauthorized {
 	return &DetailCaUnauthorized{}
 }
 
-/*
-DetailCaUnauthorized describes a response with status code 401, with default header values.
+/* DetailCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailCaNotFound() *DetailCaNotFound {
 	return &DetailCaNotFound{}
 }
 
-/*
-DetailCaNotFound describes a response with status code 404, with default header values.
+/* DetailCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailCaTooManyRequests() *DetailCaTooManyRequests {
 	return &DetailCaTooManyRequests{}
 }
 
-/*
-DetailCaTooManyRequests describes a response with status code 429, with default header values.
+/* DetailCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

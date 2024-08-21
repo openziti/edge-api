@@ -40,8 +40,7 @@ import (
 // CreateTransitRouterCreatedCode is the HTTP code returned for type CreateTransitRouterCreated
 const CreateTransitRouterCreatedCode int = 201
 
-/*
-CreateTransitRouterCreated The create request was successful and the resource has been added at the following location
+/*CreateTransitRouterCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createTransitRouterCreated
 */
@@ -85,8 +84,7 @@ func (o *CreateTransitRouterCreated) WriteResponse(rw http.ResponseWriter, produ
 // CreateTransitRouterBadRequestCode is the HTTP code returned for type CreateTransitRouterBadRequest
 const CreateTransitRouterBadRequestCode int = 400
 
-/*
-CreateTransitRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*CreateTransitRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createTransitRouterBadRequest
 */
@@ -130,8 +128,7 @@ func (o *CreateTransitRouterBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // CreateTransitRouterUnauthorizedCode is the HTTP code returned for type CreateTransitRouterUnauthorized
 const CreateTransitRouterUnauthorizedCode int = 401
 
-/*
-CreateTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*CreateTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createTransitRouterUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *CreateTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // CreateTransitRouterTooManyRequestsCode is the HTTP code returned for type CreateTransitRouterTooManyRequests
 const CreateTransitRouterTooManyRequestsCode int = 429
 
-/*
-CreateTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*CreateTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createTransitRouterTooManyRequests
 */

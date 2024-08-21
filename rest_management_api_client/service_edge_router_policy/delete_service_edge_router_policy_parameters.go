@@ -76,12 +76,10 @@ func NewDeleteServiceEdgeRouterPolicyParamsWithHTTPClient(client *http.Client) *
 	}
 }
 
-/*
-DeleteServiceEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
+/* DeleteServiceEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
+   for the delete service edge router policy operation.
 
-	for the delete service edge router policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteServiceEdgeRouterPolicyParams struct {
 

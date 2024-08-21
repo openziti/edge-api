@@ -53,12 +53,12 @@ func NewDeleteEnrollment(ctx *middleware.Context, handler DeleteEnrollmentHandle
 	return &DeleteEnrollment{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteEnrollment swagger:route DELETE /enrollments/{id} Enrollment deleteEnrollment
+/* DeleteEnrollment swagger:route DELETE /enrollments/{id} Enrollment deleteEnrollment
 
-# Delete an outstanding enrollment
+Delete an outstanding enrollment
 
 Delete an outstanding enrollment by id. Requires admin access.
+
 */
 type DeleteEnrollment struct {
 	Context *middleware.Context

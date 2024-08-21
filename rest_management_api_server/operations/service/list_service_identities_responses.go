@@ -40,8 +40,7 @@ import (
 // ListServiceIdentitiesOKCode is the HTTP code returned for type ListServiceIdentitiesOK
 const ListServiceIdentitiesOKCode int = 200
 
-/*
-ListServiceIdentitiesOK A list of identities
+/*ListServiceIdentitiesOK A list of identities
 
 swagger:response listServiceIdentitiesOK
 */
@@ -85,8 +84,7 @@ func (o *ListServiceIdentitiesOK) WriteResponse(rw http.ResponseWriter, producer
 // ListServiceIdentitiesBadRequestCode is the HTTP code returned for type ListServiceIdentitiesBadRequest
 const ListServiceIdentitiesBadRequestCode int = 400
 
-/*
-ListServiceIdentitiesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListServiceIdentitiesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServiceIdentitiesBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListServiceIdentitiesBadRequest) WriteResponse(rw http.ResponseWriter, 
 // ListServiceIdentitiesUnauthorizedCode is the HTTP code returned for type ListServiceIdentitiesUnauthorized
 const ListServiceIdentitiesUnauthorizedCode int = 401
 
-/*
-ListServiceIdentitiesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListServiceIdentitiesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServiceIdentitiesUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListServiceIdentitiesUnauthorized) WriteResponse(rw http.ResponseWriter
 // ListServiceIdentitiesTooManyRequestsCode is the HTTP code returned for type ListServiceIdentitiesTooManyRequests
 const ListServiceIdentitiesTooManyRequestsCode int = 429
 
-/*
-ListServiceIdentitiesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListServiceIdentitiesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServiceIdentitiesTooManyRequests
 */

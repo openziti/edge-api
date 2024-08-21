@@ -40,8 +40,7 @@ import (
 // ListVersionOKCode is the HTTP code returned for type ListVersionOK
 const ListVersionOKCode int = 200
 
-/*
-ListVersionOK Version information for the controller
+/*ListVersionOK Version information for the controller
 
 swagger:response listVersionOK
 */

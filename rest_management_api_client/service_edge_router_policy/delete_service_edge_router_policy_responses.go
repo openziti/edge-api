@@ -87,8 +87,7 @@ func NewDeleteServiceEdgeRouterPolicyOK() *DeleteServiceEdgeRouterPolicyOK {
 	return &DeleteServiceEdgeRouterPolicyOK{}
 }
 
-/*
-DeleteServiceEdgeRouterPolicyOK describes a response with status code 200, with default header values.
+/* DeleteServiceEdgeRouterPolicyOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -120,8 +119,7 @@ func NewDeleteServiceEdgeRouterPolicyBadRequest() *DeleteServiceEdgeRouterPolicy
 	return &DeleteServiceEdgeRouterPolicyBadRequest{}
 }
 
-/*
-DeleteServiceEdgeRouterPolicyBadRequest describes a response with status code 400, with default header values.
+/* DeleteServiceEdgeRouterPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewDeleteServiceEdgeRouterPolicyUnauthorized() *DeleteServiceEdgeRouterPoli
 	return &DeleteServiceEdgeRouterPolicyUnauthorized{}
 }
 
-/*
-DeleteServiceEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
+/* DeleteServiceEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewDeleteServiceEdgeRouterPolicyConflict() *DeleteServiceEdgeRouterPolicyCo
 	return &DeleteServiceEdgeRouterPolicyConflict{}
 }
 
-/*
-DeleteServiceEdgeRouterPolicyConflict describes a response with status code 409, with default header values.
+/* DeleteServiceEdgeRouterPolicyConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
@@ -219,8 +215,7 @@ func NewDeleteServiceEdgeRouterPolicyTooManyRequests() *DeleteServiceEdgeRouterP
 	return &DeleteServiceEdgeRouterPolicyTooManyRequests{}
 }
 
-/*
-DeleteServiceEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
+/* DeleteServiceEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

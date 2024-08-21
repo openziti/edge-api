@@ -53,14 +53,15 @@ func NewGetEnrollmentJwks(ctx *middleware.Context, handler GetEnrollmentJwksHand
 	return &GetEnrollmentJwks{Context: ctx, Handler: handler}
 }
 
-/*
-	GetEnrollmentJwks swagger:route GET /enroll/jwks Enroll getEnrollmentJwks
+/* GetEnrollmentJwks swagger:route GET /enroll/jwks Enroll getEnrollmentJwks
 
-# List JSON Web Keys associated with enrollment
+List JSON Web Keys associated with enrollment
 
 Returns a list of JSON Web Keys (JWKS) that are used for enrollment signing. The keys listed here are used
 to sign and co-sign enrollment JWTs. They can be verified through a challenge endpoint, using the public keys
 from this endpoint to verify the target machine has possession of the related private key.
+
+
 */
 type GetEnrollmentJwks struct {
 	Context *middleware.Context

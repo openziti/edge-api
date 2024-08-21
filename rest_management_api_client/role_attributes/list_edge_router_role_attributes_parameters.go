@@ -77,12 +77,10 @@ func NewListEdgeRouterRoleAttributesParamsWithHTTPClient(client *http.Client) *L
 	}
 }
 
-/*
-ListEdgeRouterRoleAttributesParams contains all the parameters to send to the API endpoint
+/* ListEdgeRouterRoleAttributesParams contains all the parameters to send to the API endpoint
+   for the list edge router role attributes operation.
 
-	for the list edge router role attributes operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListEdgeRouterRoleAttributesParams struct {
 

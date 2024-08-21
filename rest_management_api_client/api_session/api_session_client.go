@@ -64,9 +64,9 @@ type ClientService interface {
 }
 
 /*
-DeleteAPISessions deletes an API sessions
+  DeleteAPISessions deletes an API sessions
 
-Deletes and API sesion by id. Requires admin access.
+  Deletes and API sesion by id. Requires admin access.
 */
 func (a *Client) DeleteAPISessions(params *DeleteAPISessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAPISessionsOK, error) {
 	// TODO: Validate the params before sending
@@ -105,9 +105,9 @@ func (a *Client) DeleteAPISessions(params *DeleteAPISessionsParams, authInfo run
 }
 
 /*
-DetailAPISessions retrieves a single API session
+  DetailAPISessions retrieves a single API session
 
-Retrieves a single API Session by id. Requires admin access.
+  Retrieves a single API Session by id. Requires admin access.
 */
 func (a *Client) DetailAPISessions(params *DetailAPISessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailAPISessionsOK, error) {
 	// TODO: Validate the params before sending
@@ -146,11 +146,11 @@ func (a *Client) DetailAPISessions(params *DetailAPISessionsParams, authInfo run
 }
 
 /*
-	ListAPISessions lists active API sessions
+  ListAPISessions lists active API sessions
 
-	Returns a list of active API sessions. The resources can be sorted, filtered, and paginated. This endpoint
-
+  Returns a list of active API sessions. The resources can be sorted, filtered, and paginated. This endpoint
 requires admin access.
+
 */
 func (a *Client) ListAPISessions(params *ListAPISessionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAPISessionsOK, error) {
 	// TODO: Validate the params before sending

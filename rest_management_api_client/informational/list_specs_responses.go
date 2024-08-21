@@ -63,8 +63,7 @@ func NewListSpecsOK() *ListSpecsOK {
 	return &ListSpecsOK{}
 }
 
-/*
-ListSpecsOK describes a response with status code 200, with default header values.
+/* ListSpecsOK describes a response with status code 200, with default header values.
 
 A list of specifications
 */

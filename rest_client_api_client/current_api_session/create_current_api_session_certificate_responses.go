@@ -81,8 +81,7 @@ func NewCreateCurrentAPISessionCertificateCreated() *CreateCurrentAPISessionCert
 	return &CreateCurrentAPISessionCertificateCreated{}
 }
 
-/*
-CreateCurrentAPISessionCertificateCreated describes a response with status code 201, with default header values.
+/* CreateCurrentAPISessionCertificateCreated describes a response with status code 201, with default header values.
 
 A response of a create API Session certificate
 */
@@ -114,8 +113,7 @@ func NewCreateCurrentAPISessionCertificateBadRequest() *CreateCurrentAPISessionC
 	return &CreateCurrentAPISessionCertificateBadRequest{}
 }
 
-/*
-CreateCurrentAPISessionCertificateBadRequest describes a response with status code 400, with default header values.
+/* CreateCurrentAPISessionCertificateBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewCreateCurrentAPISessionCertificateUnauthorized() *CreateCurrentAPISessio
 	return &CreateCurrentAPISessionCertificateUnauthorized{}
 }
 
-/*
-CreateCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
+/* CreateCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewCreateCurrentAPISessionCertificateTooManyRequests() *CreateCurrentAPISes
 	return &CreateCurrentAPISessionCertificateTooManyRequests{}
 }
 
-/*
-CreateCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
+/* CreateCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

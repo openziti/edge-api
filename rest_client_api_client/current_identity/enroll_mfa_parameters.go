@@ -76,12 +76,10 @@ func NewEnrollMfaParamsWithHTTPClient(client *http.Client) *EnrollMfaParams {
 	}
 }
 
-/*
-EnrollMfaParams contains all the parameters to send to the API endpoint
+/* EnrollMfaParams contains all the parameters to send to the API endpoint
+   for the enroll mfa operation.
 
-	for the enroll mfa operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type EnrollMfaParams struct {
 	timeout    time.Duration

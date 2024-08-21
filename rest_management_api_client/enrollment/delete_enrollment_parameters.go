@@ -76,12 +76,10 @@ func NewDeleteEnrollmentParamsWithHTTPClient(client *http.Client) *DeleteEnrollm
 	}
 }
 
-/*
-DeleteEnrollmentParams contains all the parameters to send to the API endpoint
+/* DeleteEnrollmentParams contains all the parameters to send to the API endpoint
+   for the delete enrollment operation.
 
-	for the delete enrollment operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteEnrollmentParams struct {
 

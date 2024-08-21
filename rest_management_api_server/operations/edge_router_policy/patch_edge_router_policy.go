@@ -53,12 +53,12 @@ func NewPatchEdgeRouterPolicy(ctx *middleware.Context, handler PatchEdgeRouterPo
 	return &PatchEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/*
-	PatchEdgeRouterPolicy swagger:route PATCH /edge-router-policies/{id} Edge Router Policy patchEdgeRouterPolicy
+/* PatchEdgeRouterPolicy swagger:route PATCH /edge-router-policies/{id} Edge Router Policy patchEdgeRouterPolicy
 
-# Update the supplied fields on an edge router policy
+Update the supplied fields on an edge router policy
 
 Update the supplied fields on an edge router policy. Requires admin access.
+
 */
 type PatchEdgeRouterPolicy struct {
 	Context *middleware.Context

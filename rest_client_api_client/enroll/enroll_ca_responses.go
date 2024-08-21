@@ -75,8 +75,7 @@ func NewEnrollCaOK() *EnrollCaOK {
 	return &EnrollCaOK{}
 }
 
-/*
-EnrollCaOK describes a response with status code 200, with default header values.
+/* EnrollCaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -108,8 +107,7 @@ func NewEnrollCaNotFound() *EnrollCaNotFound {
 	return &EnrollCaNotFound{}
 }
 
-/*
-EnrollCaNotFound describes a response with status code 404, with default header values.
+/* EnrollCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -141,8 +139,7 @@ func NewEnrollCaTooManyRequests() *EnrollCaTooManyRequests {
 	return &EnrollCaTooManyRequests{}
 }
 
-/*
-EnrollCaTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

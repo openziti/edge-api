@@ -69,8 +69,7 @@ func NewListProtocolsOK() *ListProtocolsOK {
 	return &ListProtocolsOK{}
 }
 
-/*
-ListProtocolsOK describes a response with status code 200, with default header values.
+/* ListProtocolsOK describes a response with status code 200, with default header values.
 
 A list of supported Edge protocols
 */
@@ -102,8 +101,7 @@ func NewListProtocolsTooManyRequests() *ListProtocolsTooManyRequests {
 	return &ListProtocolsTooManyRequests{}
 }
 
-/*
-ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
+/* ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

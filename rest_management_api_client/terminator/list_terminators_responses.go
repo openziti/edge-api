@@ -81,8 +81,7 @@ func NewListTerminatorsOK() *ListTerminatorsOK {
 	return &ListTerminatorsOK{}
 }
 
-/*
-ListTerminatorsOK describes a response with status code 200, with default header values.
+/* ListTerminatorsOK describes a response with status code 200, with default header values.
 
 A list of terminators
 */
@@ -114,8 +113,7 @@ func NewListTerminatorsBadRequest() *ListTerminatorsBadRequest {
 	return &ListTerminatorsBadRequest{}
 }
 
-/*
-ListTerminatorsBadRequest describes a response with status code 400, with default header values.
+/* ListTerminatorsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListTerminatorsUnauthorized() *ListTerminatorsUnauthorized {
 	return &ListTerminatorsUnauthorized{}
 }
 
-/*
-ListTerminatorsUnauthorized describes a response with status code 401, with default header values.
+/* ListTerminatorsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListTerminatorsTooManyRequests() *ListTerminatorsTooManyRequests {
 	return &ListTerminatorsTooManyRequests{}
 }
 
-/*
-ListTerminatorsTooManyRequests describes a response with status code 429, with default header values.
+/* ListTerminatorsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

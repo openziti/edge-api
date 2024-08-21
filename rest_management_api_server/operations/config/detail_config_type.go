@@ -53,12 +53,12 @@ func NewDetailConfigType(ctx *middleware.Context, handler DetailConfigTypeHandle
 	return &DetailConfigType{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailConfigType swagger:route GET /config-types/{id} Config detailConfigType
+/* DetailConfigType swagger:route GET /config-types/{id} Config detailConfigType
 
-# Retrieves a single config-type
+Retrieves a single config-type
 
 Retrieves a single config-type by id. Requires admin access.
+
 */
 type DetailConfigType struct {
 	Context *middleware.Context

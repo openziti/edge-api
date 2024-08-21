@@ -78,12 +78,10 @@ func NewUpdateAuthPolicyParamsWithHTTPClient(client *http.Client) *UpdateAuthPol
 	}
 }
 
-/*
-UpdateAuthPolicyParams contains all the parameters to send to the API endpoint
+/* UpdateAuthPolicyParams contains all the parameters to send to the API endpoint
+   for the update auth policy operation.
 
-	for the update auth policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateAuthPolicyParams struct {
 

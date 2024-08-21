@@ -78,12 +78,10 @@ func NewUpdateExternalJWTSignerParamsWithHTTPClient(client *http.Client) *Update
 	}
 }
 
-/*
-UpdateExternalJWTSignerParams contains all the parameters to send to the API endpoint
+/* UpdateExternalJWTSignerParams contains all the parameters to send to the API endpoint
+   for the update external Jwt signer operation.
 
-	for the update external Jwt signer operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateExternalJWTSignerParams struct {
 

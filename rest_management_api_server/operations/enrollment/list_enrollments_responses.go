@@ -40,8 +40,7 @@ import (
 // ListEnrollmentsOKCode is the HTTP code returned for type ListEnrollmentsOK
 const ListEnrollmentsOKCode int = 200
 
-/*
-ListEnrollmentsOK A list of enrollments
+/*ListEnrollmentsOK A list of enrollments
 
 swagger:response listEnrollmentsOK
 */
@@ -85,8 +84,7 @@ func (o *ListEnrollmentsOK) WriteResponse(rw http.ResponseWriter, producer runti
 // ListEnrollmentsBadRequestCode is the HTTP code returned for type ListEnrollmentsBadRequest
 const ListEnrollmentsBadRequestCode int = 400
 
-/*
-ListEnrollmentsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListEnrollmentsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listEnrollmentsBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListEnrollmentsBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // ListEnrollmentsUnauthorizedCode is the HTTP code returned for type ListEnrollmentsUnauthorized
 const ListEnrollmentsUnauthorizedCode int = 401
 
-/*
-ListEnrollmentsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListEnrollmentsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEnrollmentsUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListEnrollmentsUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // ListEnrollmentsTooManyRequestsCode is the HTTP code returned for type ListEnrollmentsTooManyRequests
 const ListEnrollmentsTooManyRequestsCode int = 429
 
-/*
-ListEnrollmentsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListEnrollmentsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEnrollmentsTooManyRequests
 */

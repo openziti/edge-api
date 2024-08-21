@@ -75,8 +75,7 @@ func NewListServiceUpdatesOK() *ListServiceUpdatesOK {
 	return &ListServiceUpdatesOK{}
 }
 
-/*
-ListServiceUpdatesOK describes a response with status code 200, with default header values.
+/* ListServiceUpdatesOK describes a response with status code 200, with default header values.
 
 Data indicating necessary service updates
 */
@@ -108,8 +107,7 @@ func NewListServiceUpdatesUnauthorized() *ListServiceUpdatesUnauthorized {
 	return &ListServiceUpdatesUnauthorized{}
 }
 
-/*
-ListServiceUpdatesUnauthorized describes a response with status code 401, with default header values.
+/* ListServiceUpdatesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewListServiceUpdatesTooManyRequests() *ListServiceUpdatesTooManyRequests {
 	return &ListServiceUpdatesTooManyRequests{}
 }
 
-/*
-ListServiceUpdatesTooManyRequests describes a response with status code 429, with default header values.
+/* ListServiceUpdatesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

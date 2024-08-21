@@ -87,8 +87,7 @@ func NewDeleteAPISessionsOK() *DeleteAPISessionsOK {
 	return &DeleteAPISessionsOK{}
 }
 
-/*
-DeleteAPISessionsOK describes a response with status code 200, with default header values.
+/* DeleteAPISessionsOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -120,8 +119,7 @@ func NewDeleteAPISessionsUnauthorized() *DeleteAPISessionsUnauthorized {
 	return &DeleteAPISessionsUnauthorized{}
 }
 
-/*
-DeleteAPISessionsUnauthorized describes a response with status code 401, with default header values.
+/* DeleteAPISessionsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -153,8 +151,7 @@ func NewDeleteAPISessionsForbidden() *DeleteAPISessionsForbidden {
 	return &DeleteAPISessionsForbidden{}
 }
 
-/*
-DeleteAPISessionsForbidden describes a response with status code 403, with default header values.
+/* DeleteAPISessionsForbidden describes a response with status code 403, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewDeleteAPISessionsNotFound() *DeleteAPISessionsNotFound {
 	return &DeleteAPISessionsNotFound{}
 }
 
-/*
-DeleteAPISessionsNotFound describes a response with status code 404, with default header values.
+/* DeleteAPISessionsNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewDeleteAPISessionsTooManyRequests() *DeleteAPISessionsTooManyRequests {
 	return &DeleteAPISessionsTooManyRequests{}
 }
 
-/*
-DeleteAPISessionsTooManyRequests describes a response with status code 429, with default header values.
+/* DeleteAPISessionsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

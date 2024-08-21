@@ -53,12 +53,12 @@ func NewUpdateEdgeRouter(ctx *middleware.Context, handler UpdateEdgeRouterHandle
 	return &UpdateEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/*
-	UpdateEdgeRouter swagger:route PUT /edge-routers/{id} Edge Router updateEdgeRouter
+/* UpdateEdgeRouter swagger:route PUT /edge-routers/{id} Edge Router updateEdgeRouter
 
-# Update all fields on an edge router
+Update all fields on an edge router
 
 Update all fields on an edge router by id. Requires admin access.
+
 */
 type UpdateEdgeRouter struct {
 	Context *middleware.Context

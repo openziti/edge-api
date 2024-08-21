@@ -70,9 +70,9 @@ type ClientService interface {
 }
 
 /*
-CreateExternalJWTSigner creates an external JWT signer
+  CreateExternalJWTSigner creates an external JWT signer
 
-Creates an External JWT Signer. Requires admin access.
+  Creates an External JWT Signer. Requires admin access.
 */
 func (a *Client) CreateExternalJWTSigner(params *CreateExternalJWTSignerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateExternalJWTSignerCreated, error) {
 	// TODO: Validate the params before sending
@@ -111,9 +111,10 @@ func (a *Client) CreateExternalJWTSigner(params *CreateExternalJWTSignerParams, 
 }
 
 /*
-DeleteExternalJWTSigner deletes an external JWT signer
+  DeleteExternalJWTSigner deletes an external JWT signer
 
-Delete an External JWT Signer by id. Requires admin access.
+  Delete an External JWT Signer by id. Requires admin access.
+
 */
 func (a *Client) DeleteExternalJWTSigner(params *DeleteExternalJWTSignerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteExternalJWTSignerOK, error) {
 	// TODO: Validate the params before sending
@@ -152,9 +153,9 @@ func (a *Client) DeleteExternalJWTSigner(params *DeleteExternalJWTSignerParams, 
 }
 
 /*
-DetailExternalJWTSigner retrieves a single external JWT signer
+  DetailExternalJWTSigner retrieves a single external JWT signer
 
-Retrieves a single External JWT Signer by id. Requires admin access.
+  Retrieves a single External JWT Signer by id. Requires admin access.
 */
 func (a *Client) DetailExternalJWTSigner(params *DetailExternalJWTSignerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailExternalJWTSignerOK, error) {
 	// TODO: Validate the params before sending
@@ -193,9 +194,9 @@ func (a *Client) DetailExternalJWTSigner(params *DetailExternalJWTSignerParams, 
 }
 
 /*
-ListExternalJWTSigners lists external JWT signers
+  ListExternalJWTSigners lists external JWT signers
 
-Retrieves a list of external JWT signers for authentication
+  Retrieves a list of external JWT signers for authentication
 */
 func (a *Client) ListExternalJWTSigners(params *ListExternalJWTSignersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalJWTSignersOK, error) {
 	// TODO: Validate the params before sending
@@ -234,9 +235,9 @@ func (a *Client) ListExternalJWTSigners(params *ListExternalJWTSignersParams, au
 }
 
 /*
-PatchExternalJWTSigner updates the supplied fields on an external JWT signer
+  PatchExternalJWTSigner updates the supplied fields on an external JWT signer
 
-Update only the supplied fields on an External JWT Signer by id. Requires admin access.
+  Update only the supplied fields on an External JWT Signer by id. Requires admin access.
 */
 func (a *Client) PatchExternalJWTSigner(params *PatchExternalJWTSignerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchExternalJWTSignerOK, error) {
 	// TODO: Validate the params before sending
@@ -275,9 +276,9 @@ func (a *Client) PatchExternalJWTSigner(params *PatchExternalJWTSignerParams, au
 }
 
 /*
-UpdateExternalJWTSigner updates all fields on an external JWT signer
+  UpdateExternalJWTSigner updates all fields on an external JWT signer
 
-Update all fields on an External JWT Signer by id. Requires admin access.
+  Update all fields on an External JWT Signer by id. Requires admin access.
 */
 func (a *Client) UpdateExternalJWTSigner(params *UpdateExternalJWTSignerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateExternalJWTSignerOK, error) {
 	// TODO: Validate the params before sending

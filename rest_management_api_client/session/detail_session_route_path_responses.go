@@ -81,8 +81,7 @@ func NewDetailSessionRoutePathOK() *DetailSessionRoutePathOK {
 	return &DetailSessionRoutePathOK{}
 }
 
-/*
-DetailSessionRoutePathOK describes a response with status code 200, with default header values.
+/* DetailSessionRoutePathOK describes a response with status code 200, with default header values.
 
 A single session's route path
 */
@@ -114,8 +113,7 @@ func NewDetailSessionRoutePathUnauthorized() *DetailSessionRoutePathUnauthorized
 	return &DetailSessionRoutePathUnauthorized{}
 }
 
-/*
-DetailSessionRoutePathUnauthorized describes a response with status code 401, with default header values.
+/* DetailSessionRoutePathUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailSessionRoutePathNotFound() *DetailSessionRoutePathNotFound {
 	return &DetailSessionRoutePathNotFound{}
 }
 
-/*
-DetailSessionRoutePathNotFound describes a response with status code 404, with default header values.
+/* DetailSessionRoutePathNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailSessionRoutePathTooManyRequests() *DetailSessionRoutePathTooManyRe
 	return &DetailSessionRoutePathTooManyRequests{}
 }
 
-/*
-DetailSessionRoutePathTooManyRequests describes a response with status code 429, with default header values.
+/* DetailSessionRoutePathTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

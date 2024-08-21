@@ -53,13 +53,14 @@ func NewGetCurrentIdentityEdgeRouters(ctx *middleware.Context, handler GetCurren
 	return &GetCurrentIdentityEdgeRouters{Context: ctx, Handler: handler}
 }
 
-/*
-	GetCurrentIdentityEdgeRouters swagger:route GET /current-identity/edge-routers Current Identity Edge Router getCurrentIdentityEdgeRouters
+/* GetCurrentIdentityEdgeRouters swagger:route GET /current-identity/edge-routers Current Identity Edge Router getCurrentIdentityEdgeRouters
 
-# Return this list of Edge Routers the identity has access to
+Return this list of Edge Routers the identity has access to
 
 Lists the Edge Routers that the current identity has access to via policies. The data returned
 includes their address and online status
+
+
 */
 type GetCurrentIdentityEdgeRouters struct {
 	Context *middleware.Context

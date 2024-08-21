@@ -62,9 +62,10 @@ type ClientService interface {
 }
 
 /*
-Authenticate authenticates via a method supplied via a query string parameter
+  Authenticate authenticates via a method supplied via a query string parameter
 
-Allowed authentication methods include "password", "cert", and "ext-jwt"
+  Allowed authentication methods include "password", "cert", and "ext-jwt"
+
 */
 func (a *Client) Authenticate(params *AuthenticateParams, opts ...ClientOption) (*AuthenticateOK, error) {
 	// TODO: Validate the params before sending
@@ -102,9 +103,9 @@ func (a *Client) Authenticate(params *AuthenticateParams, opts ...ClientOption) 
 }
 
 /*
-AuthenticateMfa completes m f a authentication
+  AuthenticateMfa completes m f a authentication
 
-Completes MFA authentication by submitting a MFA time based one time token or backup code.
+  Completes MFA authentication by submitting a MFA time based one time token or backup code.
 */
 func (a *Client) AuthenticateMfa(params *AuthenticateMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthenticateMfaOK, error) {
 	// TODO: Validate the params before sending

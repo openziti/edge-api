@@ -53,13 +53,14 @@ func NewUpdateCurrentIdentityAuthenticator(ctx *middleware.Context, handler Upda
 	return &UpdateCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/*
-	UpdateCurrentIdentityAuthenticator swagger:route PUT /current-identity/authenticators/{id} Current API Session updateCurrentIdentityAuthenticator
+/* UpdateCurrentIdentityAuthenticator swagger:route PUT /current-identity/authenticators/{id} Current API Session updateCurrentIdentityAuthenticator
 
-# Update all fields on an authenticator of this identity
+Update all fields on an authenticator of this identity
 
 Update all fields on an authenticator by id.  Will only update authenticators assigned to the API session's
 identity.
+
+
 */
 type UpdateCurrentIdentityAuthenticator struct {
 	Context *middleware.Context

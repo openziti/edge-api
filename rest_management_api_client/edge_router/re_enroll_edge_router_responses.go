@@ -81,8 +81,7 @@ func NewReEnrollEdgeRouterOK() *ReEnrollEdgeRouterOK {
 	return &ReEnrollEdgeRouterOK{}
 }
 
-/*
-ReEnrollEdgeRouterOK describes a response with status code 200, with default header values.
+/* ReEnrollEdgeRouterOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -114,8 +113,7 @@ func NewReEnrollEdgeRouterUnauthorized() *ReEnrollEdgeRouterUnauthorized {
 	return &ReEnrollEdgeRouterUnauthorized{}
 }
 
-/*
-ReEnrollEdgeRouterUnauthorized describes a response with status code 401, with default header values.
+/* ReEnrollEdgeRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewReEnrollEdgeRouterNotFound() *ReEnrollEdgeRouterNotFound {
 	return &ReEnrollEdgeRouterNotFound{}
 }
 
-/*
-ReEnrollEdgeRouterNotFound describes a response with status code 404, with default header values.
+/* ReEnrollEdgeRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewReEnrollEdgeRouterTooManyRequests() *ReEnrollEdgeRouterTooManyRequests {
 	return &ReEnrollEdgeRouterTooManyRequests{}
 }
 
-/*
-ReEnrollEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+/* ReEnrollEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -81,8 +81,7 @@ func NewListIdentitysServiceConfigsOK() *ListIdentitysServiceConfigsOK {
 	return &ListIdentitysServiceConfigsOK{}
 }
 
-/*
-ListIdentitysServiceConfigsOK describes a response with status code 200, with default header values.
+/* ListIdentitysServiceConfigsOK describes a response with status code 200, with default header values.
 
 A list of service configs
 */
@@ -114,8 +113,7 @@ func NewListIdentitysServiceConfigsUnauthorized() *ListIdentitysServiceConfigsUn
 	return &ListIdentitysServiceConfigsUnauthorized{}
 }
 
-/*
-ListIdentitysServiceConfigsUnauthorized describes a response with status code 401, with default header values.
+/* ListIdentitysServiceConfigsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewListIdentitysServiceConfigsNotFound() *ListIdentitysServiceConfigsNotFou
 	return &ListIdentitysServiceConfigsNotFound{}
 }
 
-/*
-ListIdentitysServiceConfigsNotFound describes a response with status code 404, with default header values.
+/* ListIdentitysServiceConfigsNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewListIdentitysServiceConfigsTooManyRequests() *ListIdentitysServiceConfig
 	return &ListIdentitysServiceConfigsTooManyRequests{}
 }
 
-/*
-ListIdentitysServiceConfigsTooManyRequests describes a response with status code 429, with default header values.
+/* ListIdentitysServiceConfigsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -76,12 +76,10 @@ func NewDetailTransitRouterParamsWithHTTPClient(client *http.Client) *DetailTran
 	}
 }
 
-/*
-DetailTransitRouterParams contains all the parameters to send to the API endpoint
+/* DetailTransitRouterParams contains all the parameters to send to the API endpoint
+   for the detail transit router operation.
 
-	for the detail transit router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DetailTransitRouterParams struct {
 

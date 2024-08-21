@@ -53,12 +53,12 @@ func NewDeleteAPISessions(ctx *middleware.Context, handler DeleteAPISessionsHand
 	return &DeleteAPISessions{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteAPISessions swagger:route DELETE /api-sessions/{id} API Session deleteApiSessions
+/* DeleteAPISessions swagger:route DELETE /api-sessions/{id} API Session deleteApiSessions
 
-# Deletes an API Sessions
+Deletes an API Sessions
 
 Deletes and API sesion by id. Requires admin access.
+
 */
 type DeleteAPISessions struct {
 	Context *middleware.Context

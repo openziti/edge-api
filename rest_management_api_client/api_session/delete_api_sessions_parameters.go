@@ -76,12 +76,10 @@ func NewDeleteAPISessionsParamsWithHTTPClient(client *http.Client) *DeleteAPISes
 	}
 }
 
-/*
-DeleteAPISessionsParams contains all the parameters to send to the API endpoint
+/* DeleteAPISessionsParams contains all the parameters to send to the API endpoint
+   for the delete API sessions operation.
 
-	for the delete API sessions operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteAPISessionsParams struct {
 

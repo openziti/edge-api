@@ -81,8 +81,7 @@ func NewListPostureCheckTypesOK() *ListPostureCheckTypesOK {
 	return &ListPostureCheckTypesOK{}
 }
 
-/*
-ListPostureCheckTypesOK describes a response with status code 200, with default header values.
+/* ListPostureCheckTypesOK describes a response with status code 200, with default header values.
 
 A list of posture check types
 */
@@ -114,8 +113,7 @@ func NewListPostureCheckTypesBadRequest() *ListPostureCheckTypesBadRequest {
 	return &ListPostureCheckTypesBadRequest{}
 }
 
-/*
-ListPostureCheckTypesBadRequest describes a response with status code 400, with default header values.
+/* ListPostureCheckTypesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListPostureCheckTypesUnauthorized() *ListPostureCheckTypesUnauthorized {
 	return &ListPostureCheckTypesUnauthorized{}
 }
 
-/*
-ListPostureCheckTypesUnauthorized describes a response with status code 401, with default header values.
+/* ListPostureCheckTypesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListPostureCheckTypesTooManyRequests() *ListPostureCheckTypesTooManyRequ
 	return &ListPostureCheckTypesTooManyRequests{}
 }
 
-/*
-ListPostureCheckTypesTooManyRequests describes a response with status code 429, with default header values.
+/* ListPostureCheckTypesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

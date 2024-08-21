@@ -40,8 +40,7 @@ import (
 // UpdateAuthenticatorOKCode is the HTTP code returned for type UpdateAuthenticatorOK
 const UpdateAuthenticatorOKCode int = 200
 
-/*
-UpdateAuthenticatorOK The update request was successful and the resource has been altered
+/*UpdateAuthenticatorOK The update request was successful and the resource has been altered
 
 swagger:response updateAuthenticatorOK
 */
@@ -85,8 +84,7 @@ func (o *UpdateAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer r
 // UpdateAuthenticatorBadRequestCode is the HTTP code returned for type UpdateAuthenticatorBadRequest
 const UpdateAuthenticatorBadRequestCode int = 400
 
-/*
-UpdateAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdateAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateAuthenticatorBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdateAuthenticatorBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // UpdateAuthenticatorUnauthorizedCode is the HTTP code returned for type UpdateAuthenticatorUnauthorized
 const UpdateAuthenticatorUnauthorizedCode int = 401
 
-/*
-UpdateAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdateAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateAuthenticatorUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdateAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // UpdateAuthenticatorNotFoundCode is the HTTP code returned for type UpdateAuthenticatorNotFound
 const UpdateAuthenticatorNotFoundCode int = 404
 
-/*
-UpdateAuthenticatorNotFound The requested resource does not exist
+/*UpdateAuthenticatorNotFound The requested resource does not exist
 
 swagger:response updateAuthenticatorNotFound
 */
@@ -220,8 +216,7 @@ func (o *UpdateAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, prod
 // UpdateAuthenticatorTooManyRequestsCode is the HTTP code returned for type UpdateAuthenticatorTooManyRequests
 const UpdateAuthenticatorTooManyRequestsCode int = 429
 
-/*
-UpdateAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*UpdateAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateAuthenticatorTooManyRequests
 */

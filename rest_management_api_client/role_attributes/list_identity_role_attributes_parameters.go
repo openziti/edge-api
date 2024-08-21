@@ -77,12 +77,10 @@ func NewListIdentityRoleAttributesParamsWithHTTPClient(client *http.Client) *Lis
 	}
 }
 
-/*
-ListIdentityRoleAttributesParams contains all the parameters to send to the API endpoint
+/* ListIdentityRoleAttributesParams contains all the parameters to send to the API endpoint
+   for the list identity role attributes operation.
 
-	for the list identity role attributes operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListIdentityRoleAttributesParams struct {
 

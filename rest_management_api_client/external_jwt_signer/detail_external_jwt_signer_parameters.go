@@ -76,12 +76,10 @@ func NewDetailExternalJWTSignerParamsWithHTTPClient(client *http.Client) *Detail
 	}
 }
 
-/*
-DetailExternalJWTSignerParams contains all the parameters to send to the API endpoint
+/* DetailExternalJWTSignerParams contains all the parameters to send to the API endpoint
+   for the detail external Jwt signer operation.
 
-	for the detail external Jwt signer operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DetailExternalJWTSignerParams struct {
 

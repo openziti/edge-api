@@ -81,8 +81,7 @@ func NewUpdateCurrentIdentityAuthenticatorOK() *UpdateCurrentIdentityAuthenticat
 	return &UpdateCurrentIdentityAuthenticatorOK{}
 }
 
-/*
-UpdateCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/* UpdateCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -114,8 +113,7 @@ func NewUpdateCurrentIdentityAuthenticatorBadRequest() *UpdateCurrentIdentityAut
 	return &UpdateCurrentIdentityAuthenticatorBadRequest{}
 }
 
-/*
-UpdateCurrentIdentityAuthenticatorBadRequest describes a response with status code 400, with default header values.
+/* UpdateCurrentIdentityAuthenticatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewUpdateCurrentIdentityAuthenticatorUnauthorized() *UpdateCurrentIdentityA
 	return &UpdateCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/*
-UpdateCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* UpdateCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewUpdateCurrentIdentityAuthenticatorNotFound() *UpdateCurrentIdentityAuthe
 	return &UpdateCurrentIdentityAuthenticatorNotFound{}
 }
 
-/*
-UpdateCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
+/* UpdateCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */

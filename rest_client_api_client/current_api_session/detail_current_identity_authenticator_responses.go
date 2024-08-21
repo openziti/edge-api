@@ -75,8 +75,7 @@ func NewDetailCurrentIdentityAuthenticatorOK() *DetailCurrentIdentityAuthenticat
 	return &DetailCurrentIdentityAuthenticatorOK{}
 }
 
-/*
-DetailCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/* DetailCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 A singular authenticator resource
 */
@@ -108,8 +107,7 @@ func NewDetailCurrentIdentityAuthenticatorUnauthorized() *DetailCurrentIdentityA
 	return &DetailCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/*
-DetailCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* DetailCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewDetailCurrentIdentityAuthenticatorNotFound() *DetailCurrentIdentityAuthe
 	return &DetailCurrentIdentityAuthenticatorNotFound{}
 }
 
-/*
-DetailCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
+/* DetailCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */

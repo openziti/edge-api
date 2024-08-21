@@ -87,8 +87,7 @@ func NewUpdateExternalJWTSignerOK() *UpdateExternalJWTSignerOK {
 	return &UpdateExternalJWTSignerOK{}
 }
 
-/*
-UpdateExternalJWTSignerOK describes a response with status code 200, with default header values.
+/* UpdateExternalJWTSignerOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewUpdateExternalJWTSignerBadRequest() *UpdateExternalJWTSignerBadRequest {
 	return &UpdateExternalJWTSignerBadRequest{}
 }
 
-/*
-UpdateExternalJWTSignerBadRequest describes a response with status code 400, with default header values.
+/* UpdateExternalJWTSignerBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewUpdateExternalJWTSignerUnauthorized() *UpdateExternalJWTSignerUnauthoriz
 	return &UpdateExternalJWTSignerUnauthorized{}
 }
 
-/*
-UpdateExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
+/* UpdateExternalJWTSignerUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewUpdateExternalJWTSignerNotFound() *UpdateExternalJWTSignerNotFound {
 	return &UpdateExternalJWTSignerNotFound{}
 }
 
-/*
-UpdateExternalJWTSignerNotFound describes a response with status code 404, with default header values.
+/* UpdateExternalJWTSignerNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewUpdateExternalJWTSignerTooManyRequests() *UpdateExternalJWTSignerTooMany
 	return &UpdateExternalJWTSignerTooManyRequests{}
 }
 
-/*
-UpdateExternalJWTSignerTooManyRequests describes a response with status code 429, with default header values.
+/* UpdateExternalJWTSignerTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

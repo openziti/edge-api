@@ -40,8 +40,7 @@ import (
 // PatchCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type PatchCurrentIdentityAuthenticatorOK
 const PatchCurrentIdentityAuthenticatorOKCode int = 200
 
-/*
-PatchCurrentIdentityAuthenticatorOK The patch request was successful and the resource has been altered
+/*PatchCurrentIdentityAuthenticatorOK The patch request was successful and the resource has been altered
 
 swagger:response patchCurrentIdentityAuthenticatorOK
 */
@@ -85,8 +84,7 @@ func (o *PatchCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWrit
 // PatchCurrentIdentityAuthenticatorBadRequestCode is the HTTP code returned for type PatchCurrentIdentityAuthenticatorBadRequest
 const PatchCurrentIdentityAuthenticatorBadRequestCode int = 400
 
-/*
-PatchCurrentIdentityAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*PatchCurrentIdentityAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchCurrentIdentityAuthenticatorBadRequest
 */
@@ -130,8 +128,7 @@ func (o *PatchCurrentIdentityAuthenticatorBadRequest) WriteResponse(rw http.Resp
 // PatchCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type PatchCurrentIdentityAuthenticatorUnauthorized
 const PatchCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*
-PatchCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*PatchCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchCurrentIdentityAuthenticatorUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *PatchCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.Re
 // PatchCurrentIdentityAuthenticatorNotFoundCode is the HTTP code returned for type PatchCurrentIdentityAuthenticatorNotFound
 const PatchCurrentIdentityAuthenticatorNotFoundCode int = 404
 
-/*
-PatchCurrentIdentityAuthenticatorNotFound The requested resource does not exist
+/*PatchCurrentIdentityAuthenticatorNotFound The requested resource does not exist
 
 swagger:response patchCurrentIdentityAuthenticatorNotFound
 */

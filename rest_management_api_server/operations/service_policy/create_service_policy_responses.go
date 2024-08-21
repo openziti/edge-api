@@ -40,8 +40,7 @@ import (
 // CreateServicePolicyCreatedCode is the HTTP code returned for type CreateServicePolicyCreated
 const CreateServicePolicyCreatedCode int = 201
 
-/*
-CreateServicePolicyCreated The create request was successful and the resource has been added at the following location
+/*CreateServicePolicyCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createServicePolicyCreated
 */
@@ -85,8 +84,7 @@ func (o *CreateServicePolicyCreated) WriteResponse(rw http.ResponseWriter, produ
 // CreateServicePolicyBadRequestCode is the HTTP code returned for type CreateServicePolicyBadRequest
 const CreateServicePolicyBadRequestCode int = 400
 
-/*
-CreateServicePolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*CreateServicePolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createServicePolicyBadRequest
 */
@@ -130,8 +128,7 @@ func (o *CreateServicePolicyBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // CreateServicePolicyUnauthorizedCode is the HTTP code returned for type CreateServicePolicyUnauthorized
 const CreateServicePolicyUnauthorizedCode int = 401
 
-/*
-CreateServicePolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*CreateServicePolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createServicePolicyUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *CreateServicePolicyUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // CreateServicePolicyTooManyRequestsCode is the HTTP code returned for type CreateServicePolicyTooManyRequests
 const CreateServicePolicyTooManyRequestsCode int = 429
 
-/*
-CreateServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*CreateServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createServicePolicyTooManyRequests
 */

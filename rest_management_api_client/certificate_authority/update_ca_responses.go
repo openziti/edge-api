@@ -87,8 +87,7 @@ func NewUpdateCaOK() *UpdateCaOK {
 	return &UpdateCaOK{}
 }
 
-/*
-UpdateCaOK describes a response with status code 200, with default header values.
+/* UpdateCaOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewUpdateCaBadRequest() *UpdateCaBadRequest {
 	return &UpdateCaBadRequest{}
 }
 
-/*
-UpdateCaBadRequest describes a response with status code 400, with default header values.
+/* UpdateCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewUpdateCaUnauthorized() *UpdateCaUnauthorized {
 	return &UpdateCaUnauthorized{}
 }
 
-/*
-UpdateCaUnauthorized describes a response with status code 401, with default header values.
+/* UpdateCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewUpdateCaNotFound() *UpdateCaNotFound {
 	return &UpdateCaNotFound{}
 }
 
-/*
-UpdateCaNotFound describes a response with status code 404, with default header values.
+/* UpdateCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewUpdateCaTooManyRequests() *UpdateCaTooManyRequests {
 	return &UpdateCaTooManyRequests{}
 }
 
-/*
-UpdateCaTooManyRequests describes a response with status code 429, with default header values.
+/* UpdateCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

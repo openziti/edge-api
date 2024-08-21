@@ -81,8 +81,7 @@ func NewListAuthenticatorsOK() *ListAuthenticatorsOK {
 	return &ListAuthenticatorsOK{}
 }
 
-/*
-ListAuthenticatorsOK describes a response with status code 200, with default header values.
+/* ListAuthenticatorsOK describes a response with status code 200, with default header values.
 
 A list of authenticators
 */
@@ -114,8 +113,7 @@ func NewListAuthenticatorsBadRequest() *ListAuthenticatorsBadRequest {
 	return &ListAuthenticatorsBadRequest{}
 }
 
-/*
-ListAuthenticatorsBadRequest describes a response with status code 400, with default header values.
+/* ListAuthenticatorsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListAuthenticatorsUnauthorized() *ListAuthenticatorsUnauthorized {
 	return &ListAuthenticatorsUnauthorized{}
 }
 
-/*
-ListAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
+/* ListAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListAuthenticatorsTooManyRequests() *ListAuthenticatorsTooManyRequests {
 	return &ListAuthenticatorsTooManyRequests{}
 }
 
-/*
-ListAuthenticatorsTooManyRequests describes a response with status code 429, with default header values.
+/* ListAuthenticatorsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

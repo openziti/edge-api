@@ -81,8 +81,7 @@ func NewGetCaJWTOK() *GetCaJWTOK {
 	return &GetCaJWTOK{}
 }
 
-/*
-GetCaJWTOK describes a response with status code 200, with default header values.
+/* GetCaJWTOK describes a response with status code 200, with default header values.
 
 The result is the JWT text to validate the CA
 */
@@ -112,8 +111,7 @@ func NewGetCaJWTUnauthorized() *GetCaJWTUnauthorized {
 	return &GetCaJWTUnauthorized{}
 }
 
-/*
-GetCaJWTUnauthorized describes a response with status code 401, with default header values.
+/* GetCaJWTUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -145,8 +143,7 @@ func NewGetCaJWTNotFound() *GetCaJWTNotFound {
 	return &GetCaJWTNotFound{}
 }
 
-/*
-GetCaJWTNotFound describes a response with status code 404, with default header values.
+/* GetCaJWTNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -178,8 +175,7 @@ func NewGetCaJWTTooManyRequests() *GetCaJWTTooManyRequests {
 	return &GetCaJWTTooManyRequests{}
 }
 
-/*
-GetCaJWTTooManyRequests describes a response with status code 429, with default header values.
+/* GetCaJWTTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

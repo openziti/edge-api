@@ -77,12 +77,10 @@ func NewListServiceIdentitiesParamsWithHTTPClient(client *http.Client) *ListServ
 	}
 }
 
-/*
-ListServiceIdentitiesParams contains all the parameters to send to the API endpoint
+/* ListServiceIdentitiesParams contains all the parameters to send to the API endpoint
+   for the list service identities operation.
 
-	for the list service identities operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListServiceIdentitiesParams struct {
 

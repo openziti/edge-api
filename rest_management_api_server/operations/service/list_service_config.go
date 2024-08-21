@@ -53,12 +53,13 @@ func NewListServiceConfig(ctx *middleware.Context, handler ListServiceConfigHand
 	return &ListServiceConfig{Context: ctx, Handler: handler}
 }
 
-/*
-	ListServiceConfig swagger:route GET /services/{id}/configs Service listServiceConfig
+/* ListServiceConfig swagger:route GET /services/{id}/configs Service listServiceConfig
 
-# List configs associated to a specific service
+List configs associated to a specific service
 
 Retrieves a list of config resources associated to a specific service; supports filtering, sorting, and pagination. Requires admin access.
+
+
 */
 type ListServiceConfig struct {
 	Context *middleware.Context

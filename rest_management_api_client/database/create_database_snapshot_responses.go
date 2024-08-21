@@ -75,8 +75,7 @@ func NewCreateDatabaseSnapshotOK() *CreateDatabaseSnapshotOK {
 	return &CreateDatabaseSnapshotOK{}
 }
 
-/*
-CreateDatabaseSnapshotOK describes a response with status code 200, with default header values.
+/* CreateDatabaseSnapshotOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -108,8 +107,7 @@ func NewCreateDatabaseSnapshotUnauthorized() *CreateDatabaseSnapshotUnauthorized
 	return &CreateDatabaseSnapshotUnauthorized{}
 }
 
-/*
-CreateDatabaseSnapshotUnauthorized describes a response with status code 401, with default header values.
+/* CreateDatabaseSnapshotUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewCreateDatabaseSnapshotTooManyRequests() *CreateDatabaseSnapshotTooManyRe
 	return &CreateDatabaseSnapshotTooManyRequests{}
 }
 
-/*
-CreateDatabaseSnapshotTooManyRequests describes a response with status code 429, with default header values.
+/* CreateDatabaseSnapshotTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

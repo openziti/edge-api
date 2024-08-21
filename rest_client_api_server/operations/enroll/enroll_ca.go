@@ -53,16 +53,17 @@ func NewEnrollCa(ctx *middleware.Context, handler EnrollCaHandler) *EnrollCa {
 	return &EnrollCa{Context: ctx, Handler: handler}
 }
 
-/*
-	EnrollCa swagger:route POST /enroll/ca Enroll enrollCa
+/* EnrollCa swagger:route POST /enroll/ca Enroll enrollCa
 
-# Enroll an identity with a pre-exchanged certificate
+Enroll an identity with a pre-exchanged certificate
 
 For CA auto enrollment, an identity is not created beforehand.
 Instead one will be created during enrollment. The client will present a client certificate that is signed by a
 Certificate Authority that has been added and verified (See POST /cas and POST /cas/{id}/verify).
 
 During this process no CSRs are requires as the client should already be in possession of a valid certificate.
+
+
 */
 type EnrollCa struct {
 	Context *middleware.Context

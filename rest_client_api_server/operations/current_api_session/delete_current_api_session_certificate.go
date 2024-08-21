@@ -53,12 +53,13 @@ func NewDeleteCurrentAPISessionCertificate(ctx *middleware.Context, handler Dele
 	return &DeleteCurrentAPISessionCertificate{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteCurrentAPISessionCertificate swagger:route DELETE /current-api-session/certificates/{id} Current API Session deleteCurrentApiSessionCertificate
+/* DeleteCurrentAPISessionCertificate swagger:route DELETE /current-api-session/certificates/{id} Current API Session deleteCurrentApiSessionCertificate
 
-# Delete an ephemeral certificate
+Delete an ephemeral certificate
 
 Delete an ephemeral certificateby id
+
+
 */
 type DeleteCurrentAPISessionCertificate struct {
 	Context *middleware.Context

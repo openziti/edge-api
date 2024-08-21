@@ -53,12 +53,12 @@ func NewDetailSpec(ctx *middleware.Context, handler DetailSpecHandler) *DetailSp
 	return &DetailSpec{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailSpec swagger:route GET /specs/{id} Informational detailSpec
+/* DetailSpec swagger:route GET /specs/{id} Informational detailSpec
 
-# Return a single spec resource
+Return a single spec resource
 
 Returns single spec resource embedded within the controller for consumption/documentation/code geneartion
+
 */
 type DetailSpec struct {
 	Context *middleware.Context

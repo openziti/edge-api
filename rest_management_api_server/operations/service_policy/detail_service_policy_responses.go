@@ -40,8 +40,7 @@ import (
 // DetailServicePolicyOKCode is the HTTP code returned for type DetailServicePolicyOK
 const DetailServicePolicyOKCode int = 200
 
-/*
-DetailServicePolicyOK A single service policy
+/*DetailServicePolicyOK A single service policy
 
 swagger:response detailServicePolicyOK
 */
@@ -85,8 +84,7 @@ func (o *DetailServicePolicyOK) WriteResponse(rw http.ResponseWriter, producer r
 // DetailServicePolicyUnauthorizedCode is the HTTP code returned for type DetailServicePolicyUnauthorized
 const DetailServicePolicyUnauthorizedCode int = 401
 
-/*
-DetailServicePolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailServicePolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailServicePolicyUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailServicePolicyUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // DetailServicePolicyNotFoundCode is the HTTP code returned for type DetailServicePolicyNotFound
 const DetailServicePolicyNotFoundCode int = 404
 
-/*
-DetailServicePolicyNotFound The requested resource does not exist
+/*DetailServicePolicyNotFound The requested resource does not exist
 
 swagger:response detailServicePolicyNotFound
 */
@@ -175,8 +172,7 @@ func (o *DetailServicePolicyNotFound) WriteResponse(rw http.ResponseWriter, prod
 // DetailServicePolicyTooManyRequestsCode is the HTTP code returned for type DetailServicePolicyTooManyRequests
 const DetailServicePolicyTooManyRequestsCode int = 429
 
-/*
-DetailServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DetailServicePolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailServicePolicyTooManyRequests
 */

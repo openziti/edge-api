@@ -53,12 +53,12 @@ func NewListCas(ctx *middleware.Context, handler ListCasHandler) *ListCas {
 	return &ListCas{Context: ctx, Handler: handler}
 }
 
-/*
-	ListCas swagger:route GET /cas Certificate Authority listCas
+/* ListCas swagger:route GET /cas Certificate Authority listCas
 
-# List CAs
+List CAs
 
 Retrieves a list of CA resources; supports filtering, sorting, and pagination. Requires admin access.
+
 */
 type ListCas struct {
 	Context *middleware.Context

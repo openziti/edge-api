@@ -40,8 +40,7 @@ import (
 // PatchTransitRouterOKCode is the HTTP code returned for type PatchTransitRouterOK
 const PatchTransitRouterOKCode int = 200
 
-/*
-PatchTransitRouterOK The patch request was successful and the resource has been altered
+/*PatchTransitRouterOK The patch request was successful and the resource has been altered
 
 swagger:response patchTransitRouterOK
 */
@@ -85,8 +84,7 @@ func (o *PatchTransitRouterOK) WriteResponse(rw http.ResponseWriter, producer ru
 // PatchTransitRouterBadRequestCode is the HTTP code returned for type PatchTransitRouterBadRequest
 const PatchTransitRouterBadRequestCode int = 400
 
-/*
-PatchTransitRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*PatchTransitRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchTransitRouterBadRequest
 */
@@ -130,8 +128,7 @@ func (o *PatchTransitRouterBadRequest) WriteResponse(rw http.ResponseWriter, pro
 // PatchTransitRouterUnauthorizedCode is the HTTP code returned for type PatchTransitRouterUnauthorized
 const PatchTransitRouterUnauthorizedCode int = 401
 
-/*
-PatchTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*PatchTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchTransitRouterUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *PatchTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // PatchTransitRouterNotFoundCode is the HTTP code returned for type PatchTransitRouterNotFound
 const PatchTransitRouterNotFoundCode int = 404
 
-/*
-PatchTransitRouterNotFound The requested resource does not exist
+/*PatchTransitRouterNotFound The requested resource does not exist
 
 swagger:response patchTransitRouterNotFound
 */
@@ -220,8 +216,7 @@ func (o *PatchTransitRouterNotFound) WriteResponse(rw http.ResponseWriter, produ
 // PatchTransitRouterTooManyRequestsCode is the HTTP code returned for type PatchTransitRouterTooManyRequests
 const PatchTransitRouterTooManyRequestsCode int = 429
 
-/*
-PatchTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*PatchTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchTransitRouterTooManyRequests
 */

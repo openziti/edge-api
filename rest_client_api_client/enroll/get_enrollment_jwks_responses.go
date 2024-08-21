@@ -63,8 +63,7 @@ func NewGetEnrollmentJwksOK() *GetEnrollmentJwksOK {
 	return &GetEnrollmentJwksOK{}
 }
 
-/*
-GetEnrollmentJwksOK describes a response with status code 200, with default header values.
+/* GetEnrollmentJwksOK describes a response with status code 200, with default header values.
 
 A JWKS response for enrollment.
 */

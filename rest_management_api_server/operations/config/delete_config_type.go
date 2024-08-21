@@ -53,12 +53,12 @@ func NewDeleteConfigType(ctx *middleware.Context, handler DeleteConfigTypeHandle
 	return &DeleteConfigType{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteConfigType swagger:route DELETE /config-types/{id} Config deleteConfigType
+/* DeleteConfigType swagger:route DELETE /config-types/{id} Config deleteConfigType
 
-# Delete a config-type
+Delete a config-type
 
 Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
+
 */
 type DeleteConfigType struct {
 	Context *middleware.Context

@@ -40,8 +40,7 @@ import (
 // RefreshEnrollmentOKCode is the HTTP code returned for type RefreshEnrollmentOK
 const RefreshEnrollmentOKCode int = 200
 
-/*
-RefreshEnrollmentOK The create request was successful and the resource has been added at the following location
+/*RefreshEnrollmentOK The create request was successful and the resource has been added at the following location
 
 swagger:response refreshEnrollmentOK
 */
@@ -85,8 +84,7 @@ func (o *RefreshEnrollmentOK) WriteResponse(rw http.ResponseWriter, producer run
 // RefreshEnrollmentBadRequestCode is the HTTP code returned for type RefreshEnrollmentBadRequest
 const RefreshEnrollmentBadRequestCode int = 400
 
-/*
-RefreshEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*RefreshEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response refreshEnrollmentBadRequest
 */
@@ -130,8 +128,7 @@ func (o *RefreshEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // RefreshEnrollmentUnauthorizedCode is the HTTP code returned for type RefreshEnrollmentUnauthorized
 const RefreshEnrollmentUnauthorizedCode int = 401
 
-/*
-RefreshEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
+/*RefreshEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response refreshEnrollmentUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *RefreshEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // RefreshEnrollmentTooManyRequestsCode is the HTTP code returned for type RefreshEnrollmentTooManyRequests
 const RefreshEnrollmentTooManyRequestsCode int = 429
 
-/*
-RefreshEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*RefreshEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response refreshEnrollmentTooManyRequests
 */

@@ -78,12 +78,10 @@ func NewReEnrollAuthenticatorParamsWithHTTPClient(client *http.Client) *ReEnroll
 	}
 }
 
-/*
-ReEnrollAuthenticatorParams contains all the parameters to send to the API endpoint
+/* ReEnrollAuthenticatorParams contains all the parameters to send to the API endpoint
+   for the re enroll authenticator operation.
 
-	for the re enroll authenticator operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ReEnrollAuthenticatorParams struct {
 

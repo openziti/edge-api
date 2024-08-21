@@ -40,8 +40,7 @@ import (
 // CreateAuthenticatorCreatedCode is the HTTP code returned for type CreateAuthenticatorCreated
 const CreateAuthenticatorCreatedCode int = 201
 
-/*
-CreateAuthenticatorCreated The create request was successful and the resource has been added at the following location
+/*CreateAuthenticatorCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createAuthenticatorCreated
 */
@@ -85,8 +84,7 @@ func (o *CreateAuthenticatorCreated) WriteResponse(rw http.ResponseWriter, produ
 // CreateAuthenticatorBadRequestCode is the HTTP code returned for type CreateAuthenticatorBadRequest
 const CreateAuthenticatorBadRequestCode int = 400
 
-/*
-CreateAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*CreateAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createAuthenticatorBadRequest
 */
@@ -130,8 +128,7 @@ func (o *CreateAuthenticatorBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // CreateAuthenticatorUnauthorizedCode is the HTTP code returned for type CreateAuthenticatorUnauthorized
 const CreateAuthenticatorUnauthorizedCode int = 401
 
-/*
-CreateAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*CreateAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createAuthenticatorUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *CreateAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // CreateAuthenticatorTooManyRequestsCode is the HTTP code returned for type CreateAuthenticatorTooManyRequests
 const CreateAuthenticatorTooManyRequestsCode int = 429
 
-/*
-CreateAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*CreateAuthenticatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createAuthenticatorTooManyRequests
 */

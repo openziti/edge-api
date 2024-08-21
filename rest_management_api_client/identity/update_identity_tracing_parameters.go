@@ -78,12 +78,10 @@ func NewUpdateIdentityTracingParamsWithHTTPClient(client *http.Client) *UpdateId
 	}
 }
 
-/*
-UpdateIdentityTracingParams contains all the parameters to send to the API endpoint
+/* UpdateIdentityTracingParams contains all the parameters to send to the API endpoint
+   for the update identity tracing operation.
 
-	for the update identity tracing operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateIdentityTracingParams struct {
 

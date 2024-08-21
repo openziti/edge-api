@@ -40,8 +40,7 @@ import (
 // DeletePostureCheckOKCode is the HTTP code returned for type DeletePostureCheckOK
 const DeletePostureCheckOKCode int = 200
 
-/*
-DeletePostureCheckOK The delete request was successful and the resource has been removed
+/*DeletePostureCheckOK The delete request was successful and the resource has been removed
 
 swagger:response deletePostureCheckOK
 */
@@ -85,8 +84,7 @@ func (o *DeletePostureCheckOK) WriteResponse(rw http.ResponseWriter, producer ru
 // DeletePostureCheckForbiddenCode is the HTTP code returned for type DeletePostureCheckForbidden
 const DeletePostureCheckForbiddenCode int = 403
 
-/*
-DeletePostureCheckForbidden The supplied session does not have the correct access rights to request this resource
+/*DeletePostureCheckForbidden The supplied session does not have the correct access rights to request this resource
 
 swagger:response deletePostureCheckForbidden
 */
@@ -130,8 +128,7 @@ func (o *DeletePostureCheckForbidden) WriteResponse(rw http.ResponseWriter, prod
 // DeletePostureCheckNotFoundCode is the HTTP code returned for type DeletePostureCheckNotFound
 const DeletePostureCheckNotFoundCode int = 404
 
-/*
-DeletePostureCheckNotFound The requested resource does not exist
+/*DeletePostureCheckNotFound The requested resource does not exist
 
 swagger:response deletePostureCheckNotFound
 */
@@ -175,8 +172,7 @@ func (o *DeletePostureCheckNotFound) WriteResponse(rw http.ResponseWriter, produ
 // DeletePostureCheckTooManyRequestsCode is the HTTP code returned for type DeletePostureCheckTooManyRequests
 const DeletePostureCheckTooManyRequestsCode int = 429
 
-/*
-DeletePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DeletePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deletePostureCheckTooManyRequests
 */

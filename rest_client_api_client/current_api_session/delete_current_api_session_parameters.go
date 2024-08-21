@@ -76,12 +76,10 @@ func NewDeleteCurrentAPISessionParamsWithHTTPClient(client *http.Client) *Delete
 	}
 }
 
-/*
-DeleteCurrentAPISessionParams contains all the parameters to send to the API endpoint
+/* DeleteCurrentAPISessionParams contains all the parameters to send to the API endpoint
+   for the delete current API session operation.
 
-	for the delete current API session operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteCurrentAPISessionParams struct {
 	timeout    time.Duration

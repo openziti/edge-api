@@ -81,8 +81,7 @@ func NewListServicesOK() *ListServicesOK {
 	return &ListServicesOK{}
 }
 
-/*
-ListServicesOK describes a response with status code 200, with default header values.
+/* ListServicesOK describes a response with status code 200, with default header values.
 
 A list of services
 */
@@ -114,8 +113,7 @@ func NewListServicesBadRequest() *ListServicesBadRequest {
 	return &ListServicesBadRequest{}
 }
 
-/*
-ListServicesBadRequest describes a response with status code 400, with default header values.
+/* ListServicesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListServicesUnauthorized() *ListServicesUnauthorized {
 	return &ListServicesUnauthorized{}
 }
 
-/*
-ListServicesUnauthorized describes a response with status code 401, with default header values.
+/* ListServicesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListServicesTooManyRequests() *ListServicesTooManyRequests {
 	return &ListServicesTooManyRequests{}
 }
 
-/*
-ListServicesTooManyRequests describes a response with status code 429, with default header values.
+/* ListServicesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

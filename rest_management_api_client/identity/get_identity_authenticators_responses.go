@@ -81,8 +81,7 @@ func NewGetIdentityAuthenticatorsOK() *GetIdentityAuthenticatorsOK {
 	return &GetIdentityAuthenticatorsOK{}
 }
 
-/*
-GetIdentityAuthenticatorsOK describes a response with status code 200, with default header values.
+/* GetIdentityAuthenticatorsOK describes a response with status code 200, with default header values.
 
 A list of authenticators
 */
@@ -114,8 +113,7 @@ func NewGetIdentityAuthenticatorsUnauthorized() *GetIdentityAuthenticatorsUnauth
 	return &GetIdentityAuthenticatorsUnauthorized{}
 }
 
-/*
-GetIdentityAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
+/* GetIdentityAuthenticatorsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewGetIdentityAuthenticatorsNotFound() *GetIdentityAuthenticatorsNotFound {
 	return &GetIdentityAuthenticatorsNotFound{}
 }
 
-/*
-GetIdentityAuthenticatorsNotFound describes a response with status code 404, with default header values.
+/* GetIdentityAuthenticatorsNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewGetIdentityAuthenticatorsTooManyRequests() *GetIdentityAuthenticatorsToo
 	return &GetIdentityAuthenticatorsTooManyRequests{}
 }
 
-/*
-GetIdentityAuthenticatorsTooManyRequests describes a response with status code 429, with default header values.
+/* GetIdentityAuthenticatorsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

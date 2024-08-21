@@ -78,12 +78,10 @@ func NewUpdateAuthenticatorParamsWithHTTPClient(client *http.Client) *UpdateAuth
 	}
 }
 
-/*
-UpdateAuthenticatorParams contains all the parameters to send to the API endpoint
+/* UpdateAuthenticatorParams contains all the parameters to send to the API endpoint
+   for the update authenticator operation.
 
-	for the update authenticator operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type UpdateAuthenticatorParams struct {
 

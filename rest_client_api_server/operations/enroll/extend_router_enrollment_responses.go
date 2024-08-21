@@ -40,8 +40,7 @@ import (
 // ExtendRouterEnrollmentOKCode is the HTTP code returned for type ExtendRouterEnrollmentOK
 const ExtendRouterEnrollmentOKCode int = 200
 
-/*
-ExtendRouterEnrollmentOK A response containing the edge routers new signed certificates (server chain, server cert, CAs).
+/*ExtendRouterEnrollmentOK A response containing the edge routers new signed certificates (server chain, server cert, CAs).
 
 swagger:response extendRouterEnrollmentOK
 */
@@ -85,8 +84,7 @@ func (o *ExtendRouterEnrollmentOK) WriteResponse(rw http.ResponseWriter, produce
 // ExtendRouterEnrollmentUnauthorizedCode is the HTTP code returned for type ExtendRouterEnrollmentUnauthorized
 const ExtendRouterEnrollmentUnauthorizedCode int = 401
 
-/*
-ExtendRouterEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ExtendRouterEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendRouterEnrollmentUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *ExtendRouterEnrollmentUnauthorized) WriteResponse(rw http.ResponseWrite
 // ExtendRouterEnrollmentTooManyRequestsCode is the HTTP code returned for type ExtendRouterEnrollmentTooManyRequests
 const ExtendRouterEnrollmentTooManyRequestsCode int = 429
 
-/*
-ExtendRouterEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ExtendRouterEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response extendRouterEnrollmentTooManyRequests
 */

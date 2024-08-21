@@ -81,8 +81,7 @@ func NewDetailConfigTypeOK() *DetailConfigTypeOK {
 	return &DetailConfigTypeOK{}
 }
 
-/*
-DetailConfigTypeOK describes a response with status code 200, with default header values.
+/* DetailConfigTypeOK describes a response with status code 200, with default header values.
 
 A singular config-type resource
 */
@@ -114,8 +113,7 @@ func NewDetailConfigTypeUnauthorized() *DetailConfigTypeUnauthorized {
 	return &DetailConfigTypeUnauthorized{}
 }
 
-/*
-DetailConfigTypeUnauthorized describes a response with status code 401, with default header values.
+/* DetailConfigTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailConfigTypeNotFound() *DetailConfigTypeNotFound {
 	return &DetailConfigTypeNotFound{}
 }
 
-/*
-DetailConfigTypeNotFound describes a response with status code 404, with default header values.
+/* DetailConfigTypeNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailConfigTypeTooManyRequests() *DetailConfigTypeTooManyRequests {
 	return &DetailConfigTypeTooManyRequests{}
 }
 
-/*
-DetailConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+/* DetailConfigTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

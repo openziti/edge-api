@@ -40,8 +40,7 @@ import (
 // DetailPostureCheckTypeOKCode is the HTTP code returned for type DetailPostureCheckTypeOK
 const DetailPostureCheckTypeOKCode int = 200
 
-/*
-DetailPostureCheckTypeOK Retrieves a singular posture check type by id
+/*DetailPostureCheckTypeOK Retrieves a singular posture check type by id
 
 swagger:response detailPostureCheckTypeOK
 */
@@ -85,8 +84,7 @@ func (o *DetailPostureCheckTypeOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailPostureCheckTypeUnauthorizedCode is the HTTP code returned for type DetailPostureCheckTypeUnauthorized
 const DetailPostureCheckTypeUnauthorizedCode int = 401
 
-/*
-DetailPostureCheckTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailPostureCheckTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailPostureCheckTypeUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailPostureCheckTypeUnauthorized) WriteResponse(rw http.ResponseWrite
 // DetailPostureCheckTypeNotFoundCode is the HTTP code returned for type DetailPostureCheckTypeNotFound
 const DetailPostureCheckTypeNotFoundCode int = 404
 
-/*
-DetailPostureCheckTypeNotFound The requested resource does not exist
+/*DetailPostureCheckTypeNotFound The requested resource does not exist
 
 swagger:response detailPostureCheckTypeNotFound
 */
@@ -175,8 +172,7 @@ func (o *DetailPostureCheckTypeNotFound) WriteResponse(rw http.ResponseWriter, p
 // DetailPostureCheckTypeTooManyRequestsCode is the HTTP code returned for type DetailPostureCheckTypeTooManyRequests
 const DetailPostureCheckTypeTooManyRequestsCode int = 429
 
-/*
-DetailPostureCheckTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DetailPostureCheckTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailPostureCheckTypeTooManyRequests
 */

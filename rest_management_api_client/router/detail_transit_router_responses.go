@@ -81,8 +81,7 @@ func NewDetailTransitRouterOK() *DetailTransitRouterOK {
 	return &DetailTransitRouterOK{}
 }
 
-/*
-DetailTransitRouterOK describes a response with status code 200, with default header values.
+/* DetailTransitRouterOK describes a response with status code 200, with default header values.
 
 A single router
 */
@@ -114,8 +113,7 @@ func NewDetailTransitRouterUnauthorized() *DetailTransitRouterUnauthorized {
 	return &DetailTransitRouterUnauthorized{}
 }
 
-/*
-DetailTransitRouterUnauthorized describes a response with status code 401, with default header values.
+/* DetailTransitRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailTransitRouterNotFound() *DetailTransitRouterNotFound {
 	return &DetailTransitRouterNotFound{}
 }
 
-/*
-DetailTransitRouterNotFound describes a response with status code 404, with default header values.
+/* DetailTransitRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailTransitRouterTooManyRequests() *DetailTransitRouterTooManyRequests
 	return &DetailTransitRouterTooManyRequests{}
 }
 
-/*
-DetailTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+/* DetailTransitRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

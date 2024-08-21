@@ -77,12 +77,10 @@ func NewListSessionsParamsWithHTTPClient(client *http.Client) *ListSessionsParam
 	}
 }
 
-/*
-ListSessionsParams contains all the parameters to send to the API endpoint
+/* ListSessionsParams contains all the parameters to send to the API endpoint
+   for the list sessions operation.
 
-	for the list sessions operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListSessionsParams struct {
 

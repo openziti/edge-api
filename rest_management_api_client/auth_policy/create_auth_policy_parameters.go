@@ -78,12 +78,10 @@ func NewCreateAuthPolicyParamsWithHTTPClient(client *http.Client) *CreateAuthPol
 	}
 }
 
-/*
-CreateAuthPolicyParams contains all the parameters to send to the API endpoint
+/* CreateAuthPolicyParams contains all the parameters to send to the API endpoint
+   for the create auth policy operation.
 
-	for the create auth policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateAuthPolicyParams struct {
 

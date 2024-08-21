@@ -75,8 +75,7 @@ func NewDetailMfaOK() *DetailMfaOK {
 	return &DetailMfaOK{}
 }
 
-/*
-DetailMfaOK describes a response with status code 200, with default header values.
+/* DetailMfaOK describes a response with status code 200, with default header values.
 
 The details of an MFA enrollment
 */
@@ -108,8 +107,7 @@ func NewDetailMfaUnauthorized() *DetailMfaUnauthorized {
 	return &DetailMfaUnauthorized{}
 }
 
-/*
-DetailMfaUnauthorized describes a response with status code 401, with default header values.
+/* DetailMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewDetailMfaNotFound() *DetailMfaNotFound {
 	return &DetailMfaNotFound{}
 }
 
-/*
-DetailMfaNotFound describes a response with status code 404, with default header values.
+/* DetailMfaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */

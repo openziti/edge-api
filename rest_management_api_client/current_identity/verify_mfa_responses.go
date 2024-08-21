@@ -75,8 +75,7 @@ func NewVerifyMfaOK() *VerifyMfaOK {
 	return &VerifyMfaOK{}
 }
 
-/*
-VerifyMfaOK describes a response with status code 200, with default header values.
+/* VerifyMfaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -108,8 +107,7 @@ func NewVerifyMfaUnauthorized() *VerifyMfaUnauthorized {
 	return &VerifyMfaUnauthorized{}
 }
 
-/*
-VerifyMfaUnauthorized describes a response with status code 401, with default header values.
+/* VerifyMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewVerifyMfaNotFound() *VerifyMfaNotFound {
 	return &VerifyMfaNotFound{}
 }
 
-/*
-VerifyMfaNotFound describes a response with status code 404, with default header values.
+/* VerifyMfaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */

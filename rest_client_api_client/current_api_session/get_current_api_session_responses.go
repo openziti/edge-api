@@ -69,8 +69,7 @@ func NewGetCurrentAPISessionOK() *GetCurrentAPISessionOK {
 	return &GetCurrentAPISessionOK{}
 }
 
-/*
-GetCurrentAPISessionOK describes a response with status code 200, with default header values.
+/* GetCurrentAPISessionOK describes a response with status code 200, with default header values.
 
 The API session associated with the session used to issue the request
 */
@@ -102,8 +101,7 @@ func NewGetCurrentAPISessionUnauthorized() *GetCurrentAPISessionUnauthorized {
 	return &GetCurrentAPISessionUnauthorized{}
 }
 
-/*
-GetCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
+/* GetCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */

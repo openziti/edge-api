@@ -53,12 +53,13 @@ func NewListIdentityRoleAttributes(ctx *middleware.Context, handler ListIdentity
 	return &ListIdentityRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/*
-	ListIdentityRoleAttributes swagger:route GET /identity-role-attributes Role Attributes listIdentityRoleAttributes
+/* ListIdentityRoleAttributes swagger:route GET /identity-role-attributes Role Attributes listIdentityRoleAttributes
 
-# List role attributes in use by identities
+List role attributes in use by identities
 
 Retrieves a list of role attributes in use by identities; supports filtering, sorting, and pagination. Requires admin access.
+
+
 */
 type ListIdentityRoleAttributes struct {
 	Context *middleware.Context

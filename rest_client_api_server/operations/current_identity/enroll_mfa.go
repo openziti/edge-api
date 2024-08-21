@@ -53,12 +53,13 @@ func NewEnrollMfa(ctx *middleware.Context, handler EnrollMfaHandler) *EnrollMfa 
 	return &EnrollMfa{Context: ctx, Handler: handler}
 }
 
-/*
-	EnrollMfa swagger:route POST /current-identity/mfa Current Identity MFA enrollMfa
+/* EnrollMfa swagger:route POST /current-identity/mfa Current Identity MFA enrollMfa
 
-# Initiate MFA enrollment
+Initiate MFA enrollment
 
 Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via `POST /current-identity/mfa/verify`
+
+
 */
 type EnrollMfa struct {
 	Context *middleware.Context

@@ -53,12 +53,12 @@ func NewUpdateConfig(ctx *middleware.Context, handler UpdateConfigHandler) *Upda
 	return &UpdateConfig{Context: ctx, Handler: handler}
 }
 
-/*
-	UpdateConfig swagger:route PUT /configs/{id} Config updateConfig
+/* UpdateConfig swagger:route PUT /configs/{id} Config updateConfig
 
-# Update all fields on a config
+Update all fields on a config
 
 Update all fields on a config by id. Requires admin access.
+
 */
 type UpdateConfig struct {
 	Context *middleware.Context

@@ -40,8 +40,7 @@ import (
 // PatchIdentityOKCode is the HTTP code returned for type PatchIdentityOK
 const PatchIdentityOKCode int = 200
 
-/*
-PatchIdentityOK The patch request was successful and the resource has been altered
+/*PatchIdentityOK The patch request was successful and the resource has been altered
 
 swagger:response patchIdentityOK
 */
@@ -85,8 +84,7 @@ func (o *PatchIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // PatchIdentityBadRequestCode is the HTTP code returned for type PatchIdentityBadRequest
 const PatchIdentityBadRequestCode int = 400
 
-/*
-PatchIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*PatchIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchIdentityBadRequest
 */
@@ -130,8 +128,7 @@ func (o *PatchIdentityBadRequest) WriteResponse(rw http.ResponseWriter, producer
 // PatchIdentityUnauthorizedCode is the HTTP code returned for type PatchIdentityUnauthorized
 const PatchIdentityUnauthorizedCode int = 401
 
-/*
-PatchIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*PatchIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchIdentityUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *PatchIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 // PatchIdentityNotFoundCode is the HTTP code returned for type PatchIdentityNotFound
 const PatchIdentityNotFoundCode int = 404
 
-/*
-PatchIdentityNotFound The requested resource does not exist
+/*PatchIdentityNotFound The requested resource does not exist
 
 swagger:response patchIdentityNotFound
 */
@@ -220,8 +216,7 @@ func (o *PatchIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer r
 // PatchIdentityTooManyRequestsCode is the HTTP code returned for type PatchIdentityTooManyRequests
 const PatchIdentityTooManyRequestsCode int = 429
 
-/*
-PatchIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*PatchIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchIdentityTooManyRequests
 */

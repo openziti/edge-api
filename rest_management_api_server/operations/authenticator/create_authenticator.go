@@ -53,12 +53,13 @@ func NewCreateAuthenticator(ctx *middleware.Context, handler CreateAuthenticator
 	return &CreateAuthenticator{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateAuthenticator swagger:route POST /authenticators Authenticator createAuthenticator
+/* CreateAuthenticator swagger:route POST /authenticators Authenticator createAuthenticator
 
-# Creates an authenticator
+Creates an authenticator
 
 Creates an authenticator for a specific identity. Requires admin access.
+
+
 */
 type CreateAuthenticator struct {
 	Context *middleware.Context

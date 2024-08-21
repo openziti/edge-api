@@ -78,12 +78,10 @@ func NewExtendVerifyCurrentIdentityAuthenticatorParamsWithHTTPClient(client *htt
 	}
 }
 
-/*
-ExtendVerifyCurrentIdentityAuthenticatorParams contains all the parameters to send to the API endpoint
+/* ExtendVerifyCurrentIdentityAuthenticatorParams contains all the parameters to send to the API endpoint
+   for the extend verify current identity authenticator operation.
 
-	for the extend verify current identity authenticator operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ExtendVerifyCurrentIdentityAuthenticatorParams struct {
 

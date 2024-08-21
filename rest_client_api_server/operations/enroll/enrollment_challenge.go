@@ -53,14 +53,15 @@ func NewEnrollmentChallenge(ctx *middleware.Context, handler EnrollmentChallenge
 	return &EnrollmentChallenge{Context: ctx, Handler: handler}
 }
 
-/*
-	EnrollmentChallenge swagger:route POST /enroll/challenge Enroll enrollmentChallenge
+/* EnrollmentChallenge swagger:route POST /enroll/challenge Enroll enrollmentChallenge
 
 Allows verification of a controller or cluster of controllers as being the valid target for enrollment.
 
 A caller may submit a nonce and a key id (kid) from the enrollment JWKS endpoint or enrollment JWT that will
 be used to sign the nonce. The resulting signature may be validated with the associated public key in order
 to verify a networks identity during enrollment. The nonce must be a valid formatted UUID.
+
+
 */
 type EnrollmentChallenge struct {
 	Context *middleware.Context

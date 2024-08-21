@@ -53,12 +53,12 @@ func NewCreateCa(ctx *middleware.Context, handler CreateCaHandler) *CreateCa {
 	return &CreateCa{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateCa swagger:route POST /cas Certificate Authority createCa
+/* CreateCa swagger:route POST /cas Certificate Authority createCa
 
-# Creates a CA
+Creates a CA
 
 Creates a CA in an unverified state. Requires admin access.
+
 */
 type CreateCa struct {
 	Context *middleware.Context

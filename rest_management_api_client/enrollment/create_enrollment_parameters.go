@@ -78,12 +78,10 @@ func NewCreateEnrollmentParamsWithHTTPClient(client *http.Client) *CreateEnrollm
 	}
 }
 
-/*
-CreateEnrollmentParams contains all the parameters to send to the API endpoint
+/* CreateEnrollmentParams contains all the parameters to send to the API endpoint
+   for the create enrollment operation.
 
-	for the create enrollment operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateEnrollmentParams struct {
 

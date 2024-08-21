@@ -40,8 +40,7 @@ import (
 // ListEdgeRouterPolicyEdgeRoutersOKCode is the HTTP code returned for type ListEdgeRouterPolicyEdgeRoutersOK
 const ListEdgeRouterPolicyEdgeRoutersOKCode int = 200
 
-/*
-ListEdgeRouterPolicyEdgeRoutersOK A list of edge routers
+/*ListEdgeRouterPolicyEdgeRoutersOK A list of edge routers
 
 swagger:response listEdgeRouterPolicyEdgeRoutersOK
 */
@@ -85,8 +84,7 @@ func (o *ListEdgeRouterPolicyEdgeRoutersOK) WriteResponse(rw http.ResponseWriter
 // ListEdgeRouterPolicyEdgeRoutersUnauthorizedCode is the HTTP code returned for type ListEdgeRouterPolicyEdgeRoutersUnauthorized
 const ListEdgeRouterPolicyEdgeRoutersUnauthorizedCode int = 401
 
-/*
-ListEdgeRouterPolicyEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListEdgeRouterPolicyEdgeRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEdgeRouterPolicyEdgeRoutersUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *ListEdgeRouterPolicyEdgeRoutersUnauthorized) WriteResponse(rw http.Resp
 // ListEdgeRouterPolicyEdgeRoutersNotFoundCode is the HTTP code returned for type ListEdgeRouterPolicyEdgeRoutersNotFound
 const ListEdgeRouterPolicyEdgeRoutersNotFoundCode int = 404
 
-/*
-ListEdgeRouterPolicyEdgeRoutersNotFound The requested resource does not exist
+/*ListEdgeRouterPolicyEdgeRoutersNotFound The requested resource does not exist
 
 swagger:response listEdgeRouterPolicyEdgeRoutersNotFound
 */
@@ -175,8 +172,7 @@ func (o *ListEdgeRouterPolicyEdgeRoutersNotFound) WriteResponse(rw http.Response
 // ListEdgeRouterPolicyEdgeRoutersTooManyRequestsCode is the HTTP code returned for type ListEdgeRouterPolicyEdgeRoutersTooManyRequests
 const ListEdgeRouterPolicyEdgeRoutersTooManyRequestsCode int = 429
 
-/*
-ListEdgeRouterPolicyEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListEdgeRouterPolicyEdgeRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEdgeRouterPolicyEdgeRoutersTooManyRequests
 */

@@ -40,8 +40,7 @@ import (
 // DisableIdentityOKCode is the HTTP code returned for type DisableIdentityOK
 const DisableIdentityOKCode int = 200
 
-/*
-DisableIdentityOK Base empty response
+/*DisableIdentityOK Base empty response
 
 swagger:response disableIdentityOK
 */
@@ -85,8 +84,7 @@ func (o *DisableIdentityOK) WriteResponse(rw http.ResponseWriter, producer runti
 // DisableIdentityUnauthorizedCode is the HTTP code returned for type DisableIdentityUnauthorized
 const DisableIdentityUnauthorizedCode int = 401
 
-/*
-DisableIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DisableIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response disableIdentityUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DisableIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // DisableIdentityNotFoundCode is the HTTP code returned for type DisableIdentityNotFound
 const DisableIdentityNotFoundCode int = 404
 
-/*
-DisableIdentityNotFound The requested resource does not exist
+/*DisableIdentityNotFound The requested resource does not exist
 
 swagger:response disableIdentityNotFound
 */
@@ -175,8 +172,7 @@ func (o *DisableIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer
 // DisableIdentityTooManyRequestsCode is the HTTP code returned for type DisableIdentityTooManyRequests
 const DisableIdentityTooManyRequestsCode int = 429
 
-/*
-DisableIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DisableIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response disableIdentityTooManyRequests
 */

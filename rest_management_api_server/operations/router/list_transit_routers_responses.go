@@ -40,8 +40,7 @@ import (
 // ListTransitRoutersOKCode is the HTTP code returned for type ListTransitRoutersOK
 const ListTransitRoutersOKCode int = 200
 
-/*
-ListTransitRoutersOK A list of specifications
+/*ListTransitRoutersOK A list of specifications
 
 swagger:response listTransitRoutersOK
 */
@@ -85,8 +84,7 @@ func (o *ListTransitRoutersOK) WriteResponse(rw http.ResponseWriter, producer ru
 // ListTransitRoutersBadRequestCode is the HTTP code returned for type ListTransitRoutersBadRequest
 const ListTransitRoutersBadRequestCode int = 400
 
-/*
-ListTransitRoutersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListTransitRoutersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listTransitRoutersBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListTransitRoutersBadRequest) WriteResponse(rw http.ResponseWriter, pro
 // ListTransitRoutersUnauthorizedCode is the HTTP code returned for type ListTransitRoutersUnauthorized
 const ListTransitRoutersUnauthorizedCode int = 401
 
-/*
-ListTransitRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListTransitRoutersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listTransitRoutersUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListTransitRoutersUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // ListTransitRoutersTooManyRequestsCode is the HTTP code returned for type ListTransitRoutersTooManyRequests
 const ListTransitRoutersTooManyRequestsCode int = 429
 
-/*
-ListTransitRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListTransitRoutersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listTransitRoutersTooManyRequests
 */

@@ -40,8 +40,7 @@ import (
 // UpdateCaOKCode is the HTTP code returned for type UpdateCaOK
 const UpdateCaOKCode int = 200
 
-/*
-UpdateCaOK The update request was successful and the resource has been altered
+/*UpdateCaOK The update request was successful and the resource has been altered
 
 swagger:response updateCaOK
 */
@@ -85,8 +84,7 @@ func (o *UpdateCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // UpdateCaBadRequestCode is the HTTP code returned for type UpdateCaBadRequest
 const UpdateCaBadRequestCode int = 400
 
-/*
-UpdateCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdateCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateCaBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdateCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateCaUnauthorizedCode is the HTTP code returned for type UpdateCaUnauthorized
 const UpdateCaUnauthorizedCode int = 401
 
-/*
-UpdateCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdateCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateCaUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdateCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // UpdateCaNotFoundCode is the HTTP code returned for type UpdateCaNotFound
 const UpdateCaNotFoundCode int = 404
 
-/*
-UpdateCaNotFound The requested resource does not exist
+/*UpdateCaNotFound The requested resource does not exist
 
 swagger:response updateCaNotFound
 */
@@ -220,8 +216,7 @@ func (o *UpdateCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // UpdateCaTooManyRequestsCode is the HTTP code returned for type UpdateCaTooManyRequests
 const UpdateCaTooManyRequestsCode int = 429
 
-/*
-UpdateCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*UpdateCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateCaTooManyRequests
 */

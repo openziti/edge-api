@@ -53,12 +53,12 @@ func NewUpdateAuthPolicy(ctx *middleware.Context, handler UpdateAuthPolicyHandle
 	return &UpdateAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/*
-	UpdateAuthPolicy swagger:route PUT /auth-policies/{id} Auth Policy updateAuthPolicy
+/* UpdateAuthPolicy swagger:route PUT /auth-policies/{id} Auth Policy updateAuthPolicy
 
-# Update all fields on an Auth Policy
+Update all fields on an Auth Policy
 
 Update all fields on an Auth Policy by id. Requires admin access.
+
 */
 type UpdateAuthPolicy struct {
 	Context *middleware.Context

@@ -75,8 +75,7 @@ func NewEnrollMfaCreated() *EnrollMfaCreated {
 	return &EnrollMfaCreated{}
 }
 
-/*
-EnrollMfaCreated describes a response with status code 201, with default header values.
+/* EnrollMfaCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
@@ -108,8 +107,7 @@ func NewEnrollMfaUnauthorized() *EnrollMfaUnauthorized {
 	return &EnrollMfaUnauthorized{}
 }
 
-/*
-EnrollMfaUnauthorized describes a response with status code 401, with default header values.
+/* EnrollMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -141,8 +139,7 @@ func NewEnrollMfaConflict() *EnrollMfaConflict {
 	return &EnrollMfaConflict{}
 }
 
-/*
-EnrollMfaConflict describes a response with status code 409, with default header values.
+/* EnrollMfaConflict describes a response with status code 409, with default header values.
 
 The identity is already enrolled in MFA
 */

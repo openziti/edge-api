@@ -81,8 +81,7 @@ func NewDeletePostureCheckOK() *DeletePostureCheckOK {
 	return &DeletePostureCheckOK{}
 }
 
-/*
-DeletePostureCheckOK describes a response with status code 200, with default header values.
+/* DeletePostureCheckOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -114,8 +113,7 @@ func NewDeletePostureCheckForbidden() *DeletePostureCheckForbidden {
 	return &DeletePostureCheckForbidden{}
 }
 
-/*
-DeletePostureCheckForbidden describes a response with status code 403, with default header values.
+/* DeletePostureCheckForbidden describes a response with status code 403, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDeletePostureCheckNotFound() *DeletePostureCheckNotFound {
 	return &DeletePostureCheckNotFound{}
 }
 
-/*
-DeletePostureCheckNotFound describes a response with status code 404, with default header values.
+/* DeletePostureCheckNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDeletePostureCheckTooManyRequests() *DeletePostureCheckTooManyRequests {
 	return &DeletePostureCheckTooManyRequests{}
 }
 
-/*
-DeletePostureCheckTooManyRequests describes a response with status code 429, with default header values.
+/* DeletePostureCheckTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

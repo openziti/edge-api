@@ -53,12 +53,12 @@ func NewDetailSession(ctx *middleware.Context, handler DetailSessionHandler) *De
 	return &DetailSession{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailSession swagger:route GET /sessions/{id} Session detailSession
+/* DetailSession swagger:route GET /sessions/{id} Session detailSession
 
-# Retrieves a single session
+Retrieves a single session
 
 Retrieves a single session by id. Requires admin access.
+
 */
 type DetailSession struct {
 	Context *middleware.Context

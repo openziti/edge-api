@@ -76,12 +76,10 @@ func NewListIdentitysServiceConfigsParamsWithHTTPClient(client *http.Client) *Li
 	}
 }
 
-/*
-ListIdentitysServiceConfigsParams contains all the parameters to send to the API endpoint
+/* ListIdentitysServiceConfigsParams contains all the parameters to send to the API endpoint
+   for the list identitys service configs operation.
 
-	for the list identitys service configs operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListIdentitysServiceConfigsParams struct {
 

@@ -53,12 +53,12 @@ func NewDetailCurrentIdentityAuthenticator(ctx *middleware.Context, handler Deta
 	return &DetailCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailCurrentIdentityAuthenticator swagger:route GET /current-identity/authenticators/{id} Current API Session detailCurrentIdentityAuthenticator
+/* DetailCurrentIdentityAuthenticator swagger:route GET /current-identity/authenticators/{id} Current API Session detailCurrentIdentityAuthenticator
 
-# Retrieve an authenticator for the current identity
+Retrieve an authenticator for the current identity
 
 Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.
+
 */
 type DetailCurrentIdentityAuthenticator struct {
 	Context *middleware.Context

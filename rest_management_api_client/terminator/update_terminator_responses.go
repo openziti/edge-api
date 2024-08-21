@@ -87,8 +87,7 @@ func NewUpdateTerminatorOK() *UpdateTerminatorOK {
 	return &UpdateTerminatorOK{}
 }
 
-/*
-UpdateTerminatorOK describes a response with status code 200, with default header values.
+/* UpdateTerminatorOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewUpdateTerminatorBadRequest() *UpdateTerminatorBadRequest {
 	return &UpdateTerminatorBadRequest{}
 }
 
-/*
-UpdateTerminatorBadRequest describes a response with status code 400, with default header values.
+/* UpdateTerminatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewUpdateTerminatorUnauthorized() *UpdateTerminatorUnauthorized {
 	return &UpdateTerminatorUnauthorized{}
 }
 
-/*
-UpdateTerminatorUnauthorized describes a response with status code 401, with default header values.
+/* UpdateTerminatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewUpdateTerminatorNotFound() *UpdateTerminatorNotFound {
 	return &UpdateTerminatorNotFound{}
 }
 
-/*
-UpdateTerminatorNotFound describes a response with status code 404, with default header values.
+/* UpdateTerminatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewUpdateTerminatorTooManyRequests() *UpdateTerminatorTooManyRequests {
 	return &UpdateTerminatorTooManyRequests{}
 }
 
-/*
-UpdateTerminatorTooManyRequests describes a response with status code 429, with default header values.
+/* UpdateTerminatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

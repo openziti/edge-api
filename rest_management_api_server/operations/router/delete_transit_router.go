@@ -53,12 +53,12 @@ func NewDeleteTransitRouter(ctx *middleware.Context, handler DeleteTransitRouter
 	return &DeleteTransitRouter{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteTransitRouter swagger:route DELETE /transit-routers/{id} Router deleteTransitRouter
+/* DeleteTransitRouter swagger:route DELETE /transit-routers/{id} Router deleteTransitRouter
 
-# Delete a router
+Delete a router
 
 Delete a router by id. Requires admin access.
+
 */
 type DeleteTransitRouter struct {
 	Context *middleware.Context

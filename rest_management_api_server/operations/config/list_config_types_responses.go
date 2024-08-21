@@ -40,8 +40,7 @@ import (
 // ListConfigTypesOKCode is the HTTP code returned for type ListConfigTypesOK
 const ListConfigTypesOKCode int = 200
 
-/*
-ListConfigTypesOK A list of config-types
+/*ListConfigTypesOK A list of config-types
 
 swagger:response listConfigTypesOK
 */
@@ -85,8 +84,7 @@ func (o *ListConfigTypesOK) WriteResponse(rw http.ResponseWriter, producer runti
 // ListConfigTypesBadRequestCode is the HTTP code returned for type ListConfigTypesBadRequest
 const ListConfigTypesBadRequestCode int = 400
 
-/*
-ListConfigTypesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListConfigTypesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listConfigTypesBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListConfigTypesBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // ListConfigTypesUnauthorizedCode is the HTTP code returned for type ListConfigTypesUnauthorized
 const ListConfigTypesUnauthorizedCode int = 401
 
-/*
-ListConfigTypesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListConfigTypesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listConfigTypesUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListConfigTypesUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // ListConfigTypesTooManyRequestsCode is the HTTP code returned for type ListConfigTypesTooManyRequests
 const ListConfigTypesTooManyRequestsCode int = 429
 
-/*
-ListConfigTypesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListConfigTypesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listConfigTypesTooManyRequests
 */

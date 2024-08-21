@@ -78,12 +78,10 @@ func NewPatchTransitRouterParamsWithHTTPClient(client *http.Client) *PatchTransi
 	}
 }
 
-/*
-PatchTransitRouterParams contains all the parameters to send to the API endpoint
+/* PatchTransitRouterParams contains all the parameters to send to the API endpoint
+   for the patch transit router operation.
 
-	for the patch transit router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type PatchTransitRouterParams struct {
 

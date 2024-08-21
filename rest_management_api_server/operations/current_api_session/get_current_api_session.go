@@ -53,12 +53,12 @@ func NewGetCurrentAPISession(ctx *middleware.Context, handler GetCurrentAPISessi
 	return &GetCurrentAPISession{Context: ctx, Handler: handler}
 }
 
-/*
-	GetCurrentAPISession swagger:route GET /current-api-session Current API Session getCurrentApiSession
+/* GetCurrentAPISession swagger:route GET /current-api-session Current API Session getCurrentApiSession
 
-# Return the current API session
+Return the current API session
 
 Retrieves the API session that was used to issue the current request
+
 */
 type GetCurrentAPISession struct {
 	Context *middleware.Context

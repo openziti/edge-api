@@ -53,13 +53,14 @@ func NewGetCaJWT(ctx *middleware.Context, handler GetCaJWTHandler) *GetCaJWT {
 	return &GetCaJWT{Context: ctx, Handler: handler}
 }
 
-/*
-	GetCaJWT swagger:route GET /cas/{id}/jwt Certificate Authority getCaJwt
+/* GetCaJWT swagger:route GET /cas/{id}/jwt Certificate Authority getCaJwt
 
-# Retrieve the enrollment JWT for a CA
+Retrieve the enrollment JWT for a CA
 
 For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides
 the jwt as a text response.
+
+
 */
 type GetCaJWT struct {
 	Context *middleware.Context

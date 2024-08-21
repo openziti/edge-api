@@ -81,8 +81,7 @@ func NewGetIdentityEnrollmentsOK() *GetIdentityEnrollmentsOK {
 	return &GetIdentityEnrollmentsOK{}
 }
 
-/*
-GetIdentityEnrollmentsOK describes a response with status code 200, with default header values.
+/* GetIdentityEnrollmentsOK describes a response with status code 200, with default header values.
 
 A list of enrollments
 */
@@ -114,8 +113,7 @@ func NewGetIdentityEnrollmentsUnauthorized() *GetIdentityEnrollmentsUnauthorized
 	return &GetIdentityEnrollmentsUnauthorized{}
 }
 
-/*
-GetIdentityEnrollmentsUnauthorized describes a response with status code 401, with default header values.
+/* GetIdentityEnrollmentsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewGetIdentityEnrollmentsNotFound() *GetIdentityEnrollmentsNotFound {
 	return &GetIdentityEnrollmentsNotFound{}
 }
 
-/*
-GetIdentityEnrollmentsNotFound describes a response with status code 404, with default header values.
+/* GetIdentityEnrollmentsNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewGetIdentityEnrollmentsTooManyRequests() *GetIdentityEnrollmentsTooManyRe
 	return &GetIdentityEnrollmentsTooManyRequests{}
 }
 
-/*
-GetIdentityEnrollmentsTooManyRequests describes a response with status code 429, with default header values.
+/* GetIdentityEnrollmentsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

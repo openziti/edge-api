@@ -40,8 +40,7 @@ import (
 // DetailMfaOKCode is the HTTP code returned for type DetailMfaOK
 const DetailMfaOKCode int = 200
 
-/*
-DetailMfaOK The details of an MFA enrollment
+/*DetailMfaOK The details of an MFA enrollment
 
 swagger:response detailMfaOK
 */
@@ -85,8 +84,7 @@ func (o *DetailMfaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // DetailMfaUnauthorizedCode is the HTTP code returned for type DetailMfaUnauthorized
 const DetailMfaUnauthorizedCode int = 401
 
-/*
-DetailMfaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailMfaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailMfaUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailMfaUnauthorized) WriteResponse(rw http.ResponseWriter, producer r
 // DetailMfaNotFoundCode is the HTTP code returned for type DetailMfaNotFound
 const DetailMfaNotFoundCode int = 404
 
-/*
-DetailMfaNotFound The requested resource does not exist
+/*DetailMfaNotFound The requested resource does not exist
 
 swagger:response detailMfaNotFound
 */

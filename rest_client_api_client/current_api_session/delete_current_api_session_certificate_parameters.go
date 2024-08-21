@@ -76,12 +76,10 @@ func NewDeleteCurrentAPISessionCertificateParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/*
-DeleteCurrentAPISessionCertificateParams contains all the parameters to send to the API endpoint
+/* DeleteCurrentAPISessionCertificateParams contains all the parameters to send to the API endpoint
+   for the delete current Api session certificate operation.
 
-	for the delete current Api session certificate operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteCurrentAPISessionCertificateParams struct {
 

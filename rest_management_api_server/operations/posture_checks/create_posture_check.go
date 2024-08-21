@@ -53,12 +53,12 @@ func NewCreatePostureCheck(ctx *middleware.Context, handler CreatePostureCheckHa
 	return &CreatePostureCheck{Context: ctx, Handler: handler}
 }
 
-/*
-	CreatePostureCheck swagger:route POST /posture-checks Posture Checks createPostureCheck
-
-# Creates a Posture Checks
+/* CreatePostureCheck swagger:route POST /posture-checks Posture Checks createPostureCheck
 
 Creates a Posture Checks
+
+Creates a Posture Checks
+
 */
 type CreatePostureCheck struct {
 	Context *middleware.Context

@@ -87,8 +87,7 @@ func NewPatchTerminatorOK() *PatchTerminatorOK {
 	return &PatchTerminatorOK{}
 }
 
-/*
-PatchTerminatorOK describes a response with status code 200, with default header values.
+/* PatchTerminatorOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
@@ -120,8 +119,7 @@ func NewPatchTerminatorBadRequest() *PatchTerminatorBadRequest {
 	return &PatchTerminatorBadRequest{}
 }
 
-/*
-PatchTerminatorBadRequest describes a response with status code 400, with default header values.
+/* PatchTerminatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewPatchTerminatorUnauthorized() *PatchTerminatorUnauthorized {
 	return &PatchTerminatorUnauthorized{}
 }
 
-/*
-PatchTerminatorUnauthorized describes a response with status code 401, with default header values.
+/* PatchTerminatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewPatchTerminatorNotFound() *PatchTerminatorNotFound {
 	return &PatchTerminatorNotFound{}
 }
 
-/*
-PatchTerminatorNotFound describes a response with status code 404, with default header values.
+/* PatchTerminatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewPatchTerminatorTooManyRequests() *PatchTerminatorTooManyRequests {
 	return &PatchTerminatorTooManyRequests{}
 }
 
-/*
-PatchTerminatorTooManyRequests describes a response with status code 429, with default header values.
+/* PatchTerminatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

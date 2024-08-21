@@ -87,8 +87,7 @@ func NewUpdateIdentityTracingOK() *UpdateIdentityTracingOK {
 	return &UpdateIdentityTracingOK{}
 }
 
-/*
-UpdateIdentityTracingOK describes a response with status code 200, with default header values.
+/* UpdateIdentityTracingOK describes a response with status code 200, with default header values.
 
 Returns the document that represents the trace state
 */
@@ -120,8 +119,7 @@ func NewUpdateIdentityTracingBadRequest() *UpdateIdentityTracingBadRequest {
 	return &UpdateIdentityTracingBadRequest{}
 }
 
-/*
-UpdateIdentityTracingBadRequest describes a response with status code 400, with default header values.
+/* UpdateIdentityTracingBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewUpdateIdentityTracingUnauthorized() *UpdateIdentityTracingUnauthorized {
 	return &UpdateIdentityTracingUnauthorized{}
 }
 
-/*
-UpdateIdentityTracingUnauthorized describes a response with status code 401, with default header values.
+/* UpdateIdentityTracingUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewUpdateIdentityTracingNotFound() *UpdateIdentityTracingNotFound {
 	return &UpdateIdentityTracingNotFound{}
 }
 
-/*
-UpdateIdentityTracingNotFound describes a response with status code 404, with default header values.
+/* UpdateIdentityTracingNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -219,8 +215,7 @@ func NewUpdateIdentityTracingTooManyRequests() *UpdateIdentityTracingTooManyRequ
 	return &UpdateIdentityTracingTooManyRequests{}
 }
 
-/*
-UpdateIdentityTracingTooManyRequests describes a response with status code 429, with default header values.
+/* UpdateIdentityTracingTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

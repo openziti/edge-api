@@ -78,12 +78,10 @@ func NewPatchCaParamsWithHTTPClient(client *http.Client) *PatchCaParams {
 	}
 }
 
-/*
-PatchCaParams contains all the parameters to send to the API endpoint
+/* PatchCaParams contains all the parameters to send to the API endpoint
+   for the patch ca operation.
 
-	for the patch ca operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type PatchCaParams struct {
 

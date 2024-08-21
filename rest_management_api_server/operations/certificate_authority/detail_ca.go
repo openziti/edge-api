@@ -53,12 +53,12 @@ func NewDetailCa(ctx *middleware.Context, handler DetailCaHandler) *DetailCa {
 	return &DetailCa{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailCa swagger:route GET /cas/{id} Certificate Authority detailCa
+/* DetailCa swagger:route GET /cas/{id} Certificate Authority detailCa
 
-# Retrieves a single CA
+Retrieves a single CA
 
 Retrieves a single CA by id. Requires admin access.
+
 */
 type DetailCa struct {
 	Context *middleware.Context

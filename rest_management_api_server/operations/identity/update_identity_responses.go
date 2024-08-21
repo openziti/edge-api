@@ -40,8 +40,7 @@ import (
 // UpdateIdentityOKCode is the HTTP code returned for type UpdateIdentityOK
 const UpdateIdentityOKCode int = 200
 
-/*
-UpdateIdentityOK The update request was successful and the resource has been altered
+/*UpdateIdentityOK The update request was successful and the resource has been altered
 
 swagger:response updateIdentityOK
 */
@@ -85,8 +84,7 @@ func (o *UpdateIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtim
 // UpdateIdentityBadRequestCode is the HTTP code returned for type UpdateIdentityBadRequest
 const UpdateIdentityBadRequestCode int = 400
 
-/*
-UpdateIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdateIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateIdentityBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdateIdentityBadRequest) WriteResponse(rw http.ResponseWriter, produce
 // UpdateIdentityUnauthorizedCode is the HTTP code returned for type UpdateIdentityUnauthorized
 const UpdateIdentityUnauthorizedCode int = 401
 
-/*
-UpdateIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdateIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateIdentityUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdateIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, produ
 // UpdateIdentityNotFoundCode is the HTTP code returned for type UpdateIdentityNotFound
 const UpdateIdentityNotFoundCode int = 404
 
-/*
-UpdateIdentityNotFound The requested resource does not exist
+/*UpdateIdentityNotFound The requested resource does not exist
 
 swagger:response updateIdentityNotFound
 */
@@ -220,8 +216,7 @@ func (o *UpdateIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer 
 // UpdateIdentityTooManyRequestsCode is the HTTP code returned for type UpdateIdentityTooManyRequests
 const UpdateIdentityTooManyRequestsCode int = 429
 
-/*
-UpdateIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*UpdateIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateIdentityTooManyRequests
 */

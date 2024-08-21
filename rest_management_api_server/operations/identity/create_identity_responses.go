@@ -40,8 +40,7 @@ import (
 // CreateIdentityCreatedCode is the HTTP code returned for type CreateIdentityCreated
 const CreateIdentityCreatedCode int = 201
 
-/*
-CreateIdentityCreated The create request was successful and the resource has been added at the following location
+/*CreateIdentityCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createIdentityCreated
 */
@@ -85,8 +84,7 @@ func (o *CreateIdentityCreated) WriteResponse(rw http.ResponseWriter, producer r
 // CreateIdentityBadRequestCode is the HTTP code returned for type CreateIdentityBadRequest
 const CreateIdentityBadRequestCode int = 400
 
-/*
-CreateIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*CreateIdentityBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createIdentityBadRequest
 */
@@ -130,8 +128,7 @@ func (o *CreateIdentityBadRequest) WriteResponse(rw http.ResponseWriter, produce
 // CreateIdentityUnauthorizedCode is the HTTP code returned for type CreateIdentityUnauthorized
 const CreateIdentityUnauthorizedCode int = 401
 
-/*
-CreateIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*CreateIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createIdentityUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *CreateIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, produ
 // CreateIdentityTooManyRequestsCode is the HTTP code returned for type CreateIdentityTooManyRequests
 const CreateIdentityTooManyRequestsCode int = 429
 
-/*
-CreateIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*CreateIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createIdentityTooManyRequests
 */

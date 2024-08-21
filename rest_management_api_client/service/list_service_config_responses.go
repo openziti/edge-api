@@ -81,8 +81,7 @@ func NewListServiceConfigOK() *ListServiceConfigOK {
 	return &ListServiceConfigOK{}
 }
 
-/*
-ListServiceConfigOK describes a response with status code 200, with default header values.
+/* ListServiceConfigOK describes a response with status code 200, with default header values.
 
 A list of configs
 */
@@ -114,8 +113,7 @@ func NewListServiceConfigBadRequest() *ListServiceConfigBadRequest {
 	return &ListServiceConfigBadRequest{}
 }
 
-/*
-ListServiceConfigBadRequest describes a response with status code 400, with default header values.
+/* ListServiceConfigBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListServiceConfigUnauthorized() *ListServiceConfigUnauthorized {
 	return &ListServiceConfigUnauthorized{}
 }
 
-/*
-ListServiceConfigUnauthorized describes a response with status code 401, with default header values.
+/* ListServiceConfigUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListServiceConfigTooManyRequests() *ListServiceConfigTooManyRequests {
 	return &ListServiceConfigTooManyRequests{}
 }
 
-/*
-ListServiceConfigTooManyRequests describes a response with status code 429, with default header values.
+/* ListServiceConfigTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

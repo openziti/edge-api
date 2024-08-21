@@ -87,8 +87,7 @@ func NewDeleteConfigTypeOK() *DeleteConfigTypeOK {
 	return &DeleteConfigTypeOK{}
 }
 
-/*
-DeleteConfigTypeOK describes a response with status code 200, with default header values.
+/* DeleteConfigTypeOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
@@ -120,8 +119,7 @@ func NewDeleteConfigTypeBadRequest() *DeleteConfigTypeBadRequest {
 	return &DeleteConfigTypeBadRequest{}
 }
 
-/*
-DeleteConfigTypeBadRequest describes a response with status code 400, with default header values.
+/* DeleteConfigTypeBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -153,8 +151,7 @@ func NewDeleteConfigTypeUnauthorized() *DeleteConfigTypeUnauthorized {
 	return &DeleteConfigTypeUnauthorized{}
 }
 
-/*
-DeleteConfigTypeUnauthorized describes a response with status code 401, with default header values.
+/* DeleteConfigTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -186,8 +183,7 @@ func NewDeleteConfigTypeConflict() *DeleteConfigTypeConflict {
 	return &DeleteConfigTypeConflict{}
 }
 
-/*
-DeleteConfigTypeConflict describes a response with status code 409, with default header values.
+/* DeleteConfigTypeConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
@@ -219,8 +215,7 @@ func NewDeleteConfigTypeTooManyRequests() *DeleteConfigTypeTooManyRequests {
 	return &DeleteConfigTypeTooManyRequests{}
 }
 
-/*
-DeleteConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+/* DeleteConfigTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

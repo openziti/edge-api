@@ -81,8 +81,7 @@ func NewListSessionsOK() *ListSessionsOK {
 	return &ListSessionsOK{}
 }
 
-/*
-ListSessionsOK describes a response with status code 200, with default header values.
+/* ListSessionsOK describes a response with status code 200, with default header values.
 
 A list of sessions
 */
@@ -114,8 +113,7 @@ func NewListSessionsBadRequest() *ListSessionsBadRequest {
 	return &ListSessionsBadRequest{}
 }
 
-/*
-ListSessionsBadRequest describes a response with status code 400, with default header values.
+/* ListSessionsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
@@ -147,8 +145,7 @@ func NewListSessionsUnauthorized() *ListSessionsUnauthorized {
 	return &ListSessionsUnauthorized{}
 }
 
-/*
-ListSessionsUnauthorized describes a response with status code 401, with default header values.
+/* ListSessionsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListSessionsTooManyRequests() *ListSessionsTooManyRequests {
 	return &ListSessionsTooManyRequests{}
 }
 
-/*
-ListSessionsTooManyRequests describes a response with status code 429, with default header values.
+/* ListSessionsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

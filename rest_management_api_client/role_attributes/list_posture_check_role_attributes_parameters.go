@@ -77,12 +77,10 @@ func NewListPostureCheckRoleAttributesParamsWithHTTPClient(client *http.Client) 
 	}
 }
 
-/*
-ListPostureCheckRoleAttributesParams contains all the parameters to send to the API endpoint
+/* ListPostureCheckRoleAttributesParams contains all the parameters to send to the API endpoint
+   for the list posture check role attributes operation.
 
-	for the list posture check role attributes operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListPostureCheckRoleAttributesParams struct {
 

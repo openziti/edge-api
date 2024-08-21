@@ -53,12 +53,12 @@ func NewDeleteCurrentAPISession(ctx *middleware.Context, handler DeleteCurrentAP
 	return &DeleteCurrentAPISession{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteCurrentAPISession swagger:route DELETE /current-api-session Current API Session deleteCurrentApiSession
+/* DeleteCurrentAPISession swagger:route DELETE /current-api-session Current API Session deleteCurrentApiSession
 
-# Logout
+Logout
 
 Terminates the current API session
+
 */
 type DeleteCurrentAPISession struct {
 	Context *middleware.Context

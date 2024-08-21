@@ -53,12 +53,12 @@ func NewDetailEnrollment(ctx *middleware.Context, handler DetailEnrollmentHandle
 	return &DetailEnrollment{Context: ctx, Handler: handler}
 }
 
-/*
-	DetailEnrollment swagger:route GET /enrollments/{id} Enrollment detailEnrollment
+/* DetailEnrollment swagger:route GET /enrollments/{id} Enrollment detailEnrollment
 
-# Retrieves an outstanding enrollment
+Retrieves an outstanding enrollment
 
 Retrieves a single outstanding enrollment by id. Requires admin access.
+
 */
 type DetailEnrollment struct {
 	Context *middleware.Context

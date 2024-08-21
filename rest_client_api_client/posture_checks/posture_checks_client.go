@@ -62,9 +62,9 @@ type ClientService interface {
 }
 
 /*
-CreatePostureResponse submits a posture response to a posture query
+  CreatePostureResponse submits a posture response to a posture query
 
-Submits posture responses
+  Submits posture responses
 */
 func (a *Client) CreatePostureResponse(params *CreatePostureResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostureResponseCreated, error) {
 	// TODO: Validate the params before sending
@@ -103,9 +103,9 @@ func (a *Client) CreatePostureResponse(params *CreatePostureResponseParams, auth
 }
 
 /*
-CreatePostureResponseBulk submits multiple posture responses
+  CreatePostureResponseBulk submits multiple posture responses
 
-Submits posture responses
+  Submits posture responses
 */
 func (a *Client) CreatePostureResponseBulk(params *CreatePostureResponseBulkParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostureResponseBulkOK, error) {
 	// TODO: Validate the params before sending

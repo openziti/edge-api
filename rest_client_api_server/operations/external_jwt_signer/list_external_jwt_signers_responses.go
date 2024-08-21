@@ -40,8 +40,7 @@ import (
 // ListExternalJWTSignersOKCode is the HTTP code returned for type ListExternalJWTSignersOK
 const ListExternalJWTSignersOKCode int = 200
 
-/*
-ListExternalJWTSignersOK A list of External JWT Signers
+/*ListExternalJWTSignersOK A list of External JWT Signers
 
 swagger:response listExternalJwtSignersOK
 */
@@ -85,8 +84,7 @@ func (o *ListExternalJWTSignersOK) WriteResponse(rw http.ResponseWriter, produce
 // ListExternalJWTSignersBadRequestCode is the HTTP code returned for type ListExternalJWTSignersBadRequest
 const ListExternalJWTSignersBadRequestCode int = 400
 
-/*
-ListExternalJWTSignersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*ListExternalJWTSignersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listExternalJwtSignersBadRequest
 */
@@ -130,8 +128,7 @@ func (o *ListExternalJWTSignersBadRequest) WriteResponse(rw http.ResponseWriter,
 // ListExternalJWTSignersUnauthorizedCode is the HTTP code returned for type ListExternalJWTSignersUnauthorized
 const ListExternalJWTSignersUnauthorizedCode int = 401
 
-/*
-ListExternalJWTSignersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListExternalJWTSignersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listExternalJwtSignersUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *ListExternalJWTSignersUnauthorized) WriteResponse(rw http.ResponseWrite
 // ListExternalJWTSignersTooManyRequestsCode is the HTTP code returned for type ListExternalJWTSignersTooManyRequests
 const ListExternalJWTSignersTooManyRequestsCode int = 429
 
-/*
-ListExternalJWTSignersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListExternalJWTSignersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listExternalJwtSignersTooManyRequests
 */

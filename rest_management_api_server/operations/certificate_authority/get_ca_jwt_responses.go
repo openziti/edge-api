@@ -40,8 +40,7 @@ import (
 // GetCaJWTOKCode is the HTTP code returned for type GetCaJWTOK
 const GetCaJWTOKCode int = 200
 
-/*
-GetCaJWTOK The result is the JWT text to validate the CA
+/*GetCaJWTOK The result is the JWT text to validate the CA
 
 swagger:response getCaJwtOK
 */
@@ -83,8 +82,7 @@ func (o *GetCaJWTOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // GetCaJWTUnauthorizedCode is the HTTP code returned for type GetCaJWTUnauthorized
 const GetCaJWTUnauthorizedCode int = 401
 
-/*
-GetCaJWTUnauthorized The supplied session does not have the correct access rights to request this resource
+/*GetCaJWTUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCaJwtUnauthorized
 */
@@ -128,8 +126,7 @@ func (o *GetCaJWTUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // GetCaJWTNotFoundCode is the HTTP code returned for type GetCaJWTNotFound
 const GetCaJWTNotFoundCode int = 404
 
-/*
-GetCaJWTNotFound The requested resource does not exist
+/*GetCaJWTNotFound The requested resource does not exist
 
 swagger:response getCaJwtNotFound
 */
@@ -173,8 +170,7 @@ func (o *GetCaJWTNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // GetCaJWTTooManyRequestsCode is the HTTP code returned for type GetCaJWTTooManyRequests
 const GetCaJWTTooManyRequestsCode int = 429
 
-/*
-GetCaJWTTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*GetCaJWTTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getCaJwtTooManyRequests
 */

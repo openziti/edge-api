@@ -53,10 +53,10 @@ func NewListVersion(ctx *middleware.Context, handler ListVersionHandler) *ListVe
 	return &ListVersion{Context: ctx, Handler: handler}
 }
 
-/*
-	ListVersion swagger:route GET /version Informational listVersion
+/* ListVersion swagger:route GET /version Informational listVersion
 
 Returns version information
+
 */
 type ListVersion struct {
 	Context *middleware.Context

@@ -77,12 +77,10 @@ func NewListConfigServicesParamsWithHTTPClient(client *http.Client) *ListConfigS
 	}
 }
 
-/*
-ListConfigServicesParams contains all the parameters to send to the API endpoint
+/* ListConfigServicesParams contains all the parameters to send to the API endpoint
+   for the list config services operation.
 
-	for the list config services operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type ListConfigServicesParams struct {
 

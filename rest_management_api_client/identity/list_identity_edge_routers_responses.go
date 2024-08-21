@@ -81,8 +81,7 @@ func NewListIdentityEdgeRoutersOK() *ListIdentityEdgeRoutersOK {
 	return &ListIdentityEdgeRoutersOK{}
 }
 
-/*
-ListIdentityEdgeRoutersOK describes a response with status code 200, with default header values.
+/* ListIdentityEdgeRoutersOK describes a response with status code 200, with default header values.
 
 A list of edge routers
 */
@@ -114,8 +113,7 @@ func NewListIdentityEdgeRoutersUnauthorized() *ListIdentityEdgeRoutersUnauthoriz
 	return &ListIdentityEdgeRoutersUnauthorized{}
 }
 
-/*
-ListIdentityEdgeRoutersUnauthorized describes a response with status code 401, with default header values.
+/* ListIdentityEdgeRoutersUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewListIdentityEdgeRoutersNotFound() *ListIdentityEdgeRoutersNotFound {
 	return &ListIdentityEdgeRoutersNotFound{}
 }
 
-/*
-ListIdentityEdgeRoutersNotFound describes a response with status code 404, with default header values.
+/* ListIdentityEdgeRoutersNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewListIdentityEdgeRoutersTooManyRequests() *ListIdentityEdgeRoutersTooMany
 	return &ListIdentityEdgeRoutersTooManyRequests{}
 }
 
-/*
-ListIdentityEdgeRoutersTooManyRequests describes a response with status code 429, with default header values.
+/* ListIdentityEdgeRoutersTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

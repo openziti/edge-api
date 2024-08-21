@@ -81,8 +81,7 @@ func NewEnableIdentityOK() *EnableIdentityOK {
 	return &EnableIdentityOK{}
 }
 
-/*
-EnableIdentityOK describes a response with status code 200, with default header values.
+/* EnableIdentityOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
@@ -114,8 +113,7 @@ func NewEnableIdentityUnauthorized() *EnableIdentityUnauthorized {
 	return &EnableIdentityUnauthorized{}
 }
 
-/*
-EnableIdentityUnauthorized describes a response with status code 401, with default header values.
+/* EnableIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewEnableIdentityNotFound() *EnableIdentityNotFound {
 	return &EnableIdentityNotFound{}
 }
 
-/*
-EnableIdentityNotFound describes a response with status code 404, with default header values.
+/* EnableIdentityNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewEnableIdentityTooManyRequests() *EnableIdentityTooManyRequests {
 	return &EnableIdentityTooManyRequests{}
 }
 
-/*
-EnableIdentityTooManyRequests describes a response with status code 429, with default header values.
+/* EnableIdentityTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

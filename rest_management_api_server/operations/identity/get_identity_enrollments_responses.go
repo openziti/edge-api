@@ -40,8 +40,7 @@ import (
 // GetIdentityEnrollmentsOKCode is the HTTP code returned for type GetIdentityEnrollmentsOK
 const GetIdentityEnrollmentsOKCode int = 200
 
-/*
-GetIdentityEnrollmentsOK A list of enrollments
+/*GetIdentityEnrollmentsOK A list of enrollments
 
 swagger:response getIdentityEnrollmentsOK
 */
@@ -85,8 +84,7 @@ func (o *GetIdentityEnrollmentsOK) WriteResponse(rw http.ResponseWriter, produce
 // GetIdentityEnrollmentsUnauthorizedCode is the HTTP code returned for type GetIdentityEnrollmentsUnauthorized
 const GetIdentityEnrollmentsUnauthorizedCode int = 401
 
-/*
-GetIdentityEnrollmentsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*GetIdentityEnrollmentsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityEnrollmentsUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *GetIdentityEnrollmentsUnauthorized) WriteResponse(rw http.ResponseWrite
 // GetIdentityEnrollmentsNotFoundCode is the HTTP code returned for type GetIdentityEnrollmentsNotFound
 const GetIdentityEnrollmentsNotFoundCode int = 404
 
-/*
-GetIdentityEnrollmentsNotFound The requested resource does not exist
+/*GetIdentityEnrollmentsNotFound The requested resource does not exist
 
 swagger:response getIdentityEnrollmentsNotFound
 */
@@ -175,8 +172,7 @@ func (o *GetIdentityEnrollmentsNotFound) WriteResponse(rw http.ResponseWriter, p
 // GetIdentityEnrollmentsTooManyRequestsCode is the HTTP code returned for type GetIdentityEnrollmentsTooManyRequests
 const GetIdentityEnrollmentsTooManyRequestsCode int = 429
 
-/*
-GetIdentityEnrollmentsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*GetIdentityEnrollmentsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityEnrollmentsTooManyRequests
 */

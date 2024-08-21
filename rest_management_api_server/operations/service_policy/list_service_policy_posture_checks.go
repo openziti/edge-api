@@ -53,12 +53,13 @@ func NewListServicePolicyPostureChecks(ctx *middleware.Context, handler ListServ
 	return &ListServicePolicyPostureChecks{Context: ctx, Handler: handler}
 }
 
-/*
-	ListServicePolicyPostureChecks swagger:route GET /service-policies/{id}/posture-checks Service Policy listServicePolicyPostureChecks
+/* ListServicePolicyPostureChecks swagger:route GET /service-policies/{id}/posture-checks Service Policy listServicePolicyPostureChecks
 
-# List posture check a service policy includes
+List posture check a service policy includes
 
 Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+
+
 */
 type ListServicePolicyPostureChecks struct {
 	Context *middleware.Context

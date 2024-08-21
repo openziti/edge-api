@@ -81,8 +81,7 @@ func NewDetailPostureCheckOK() *DetailPostureCheckOK {
 	return &DetailPostureCheckOK{}
 }
 
-/*
-DetailPostureCheckOK describes a response with status code 200, with default header values.
+/* DetailPostureCheckOK describes a response with status code 200, with default header values.
 
 Retrieves a singular posture check by id
 */
@@ -114,8 +113,7 @@ func NewDetailPostureCheckUnauthorized() *DetailPostureCheckUnauthorized {
 	return &DetailPostureCheckUnauthorized{}
 }
 
-/*
-DetailPostureCheckUnauthorized describes a response with status code 401, with default header values.
+/* DetailPostureCheckUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailPostureCheckNotFound() *DetailPostureCheckNotFound {
 	return &DetailPostureCheckNotFound{}
 }
 
-/*
-DetailPostureCheckNotFound describes a response with status code 404, with default header values.
+/* DetailPostureCheckNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailPostureCheckTooManyRequests() *DetailPostureCheckTooManyRequests {
 	return &DetailPostureCheckTooManyRequests{}
 }
 
-/*
-DetailPostureCheckTooManyRequests describes a response with status code 429, with default header values.
+/* DetailPostureCheckTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

@@ -40,8 +40,7 @@ import (
 // DeleteExternalJWTSignerOKCode is the HTTP code returned for type DeleteExternalJWTSignerOK
 const DeleteExternalJWTSignerOKCode int = 200
 
-/*
-DeleteExternalJWTSignerOK The delete request was successful and the resource has been removed
+/*DeleteExternalJWTSignerOK The delete request was successful and the resource has been removed
 
 swagger:response deleteExternalJwtSignerOK
 */
@@ -85,8 +84,7 @@ func (o *DeleteExternalJWTSignerOK) WriteResponse(rw http.ResponseWriter, produc
 // DeleteExternalJWTSignerBadRequestCode is the HTTP code returned for type DeleteExternalJWTSignerBadRequest
 const DeleteExternalJWTSignerBadRequestCode int = 400
 
-/*
-DeleteExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*DeleteExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteExternalJwtSignerBadRequest
 */
@@ -130,8 +128,7 @@ func (o *DeleteExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter
 // DeleteExternalJWTSignerUnauthorizedCode is the HTTP code returned for type DeleteExternalJWTSignerUnauthorized
 const DeleteExternalJWTSignerUnauthorizedCode int = 401
 
-/*
-DeleteExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DeleteExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteExternalJwtSignerUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *DeleteExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 // DeleteExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type DeleteExternalJWTSignerTooManyRequests
 const DeleteExternalJWTSignerTooManyRequestsCode int = 429
 
-/*
-DeleteExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DeleteExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteExternalJwtSignerTooManyRequests
 */

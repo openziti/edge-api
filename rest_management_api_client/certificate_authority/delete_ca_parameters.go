@@ -76,12 +76,10 @@ func NewDeleteCaParamsWithHTTPClient(client *http.Client) *DeleteCaParams {
 	}
 }
 
-/*
-DeleteCaParams contains all the parameters to send to the API endpoint
+/* DeleteCaParams contains all the parameters to send to the API endpoint
+   for the delete ca operation.
 
-	for the delete ca operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteCaParams struct {
 

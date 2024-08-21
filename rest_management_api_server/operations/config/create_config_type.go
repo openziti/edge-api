@@ -53,10 +53,10 @@ func NewCreateConfigType(ctx *middleware.Context, handler CreateConfigTypeHandle
 	return &CreateConfigType{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateConfigType swagger:route POST /config-types Config createConfigType
+/* CreateConfigType swagger:route POST /config-types Config createConfigType
 
 Create a config-type. Requires admin access.
+
 */
 type CreateConfigType struct {
 	Context *middleware.Context

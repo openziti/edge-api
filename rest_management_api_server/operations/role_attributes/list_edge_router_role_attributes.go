@@ -53,12 +53,13 @@ func NewListEdgeRouterRoleAttributes(ctx *middleware.Context, handler ListEdgeRo
 	return &ListEdgeRouterRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/*
-	ListEdgeRouterRoleAttributes swagger:route GET /edge-router-role-attributes Role Attributes listEdgeRouterRoleAttributes
+/* ListEdgeRouterRoleAttributes swagger:route GET /edge-router-role-attributes Role Attributes listEdgeRouterRoleAttributes
 
-# List role attributes in use by edge routers
+List role attributes in use by edge routers
 
 Retrieves a list of role attributes in use by edge routers; supports filtering, sorting, and pagination. Requires admin access.
+
+
 */
 type ListEdgeRouterRoleAttributes struct {
 	Context *middleware.Context

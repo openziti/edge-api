@@ -53,12 +53,13 @@ func NewDeleteAuthPolicy(ctx *middleware.Context, handler DeleteAuthPolicyHandle
 	return &DeleteAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteAuthPolicy swagger:route DELETE /auth-policies/{id} Auth Policy deleteAuthPolicy
+/* DeleteAuthPolicy swagger:route DELETE /auth-policies/{id} Auth Policy deleteAuthPolicy
 
-# Delete an Auth Policy
+Delete an Auth Policy
 
 Delete an Auth Policy by id. Requires admin access.
+
+
 */
 type DeleteAuthPolicy struct {
 	Context *middleware.Context

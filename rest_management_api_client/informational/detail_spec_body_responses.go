@@ -63,8 +63,7 @@ func NewDetailSpecBodyOK() *DetailSpecBodyOK {
 	return &DetailSpecBodyOK{}
 }
 
-/*
-DetailSpecBodyOK describes a response with status code 200, with default header values.
+/* DetailSpecBodyOK describes a response with status code 200, with default header values.
 
 Returns the document that represents the specification
 */

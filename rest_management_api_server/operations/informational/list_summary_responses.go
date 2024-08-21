@@ -40,8 +40,7 @@ import (
 // ListSummaryOKCode is the HTTP code returned for type ListSummaryOK
 const ListSummaryOKCode int = 200
 
-/*
-ListSummaryOK Entity counts scopped to the current identitie's access
+/*ListSummaryOK Entity counts scopped to the current identitie's access
 
 swagger:response listSummaryOK
 */
@@ -85,8 +84,7 @@ func (o *ListSummaryOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // ListSummaryUnauthorizedCode is the HTTP code returned for type ListSummaryUnauthorized
 const ListSummaryUnauthorizedCode int = 401
 
-/*
-ListSummaryUnauthorized The supplied session does not have the correct access rights to request this resource
+/*ListSummaryUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listSummaryUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *ListSummaryUnauthorized) WriteResponse(rw http.ResponseWriter, producer
 // ListSummaryTooManyRequestsCode is the HTTP code returned for type ListSummaryTooManyRequests
 const ListSummaryTooManyRequestsCode int = 429
 
-/*
-ListSummaryTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*ListSummaryTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listSummaryTooManyRequests
 */

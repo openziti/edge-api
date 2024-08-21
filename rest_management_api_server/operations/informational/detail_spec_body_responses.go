@@ -40,8 +40,7 @@ import (
 // DetailSpecBodyOKCode is the HTTP code returned for type DetailSpecBodyOK
 const DetailSpecBodyOKCode int = 200
 
-/*
-DetailSpecBodyOK Returns the document that represents the specification
+/*DetailSpecBodyOK Returns the document that represents the specification
 
 swagger:response detailSpecBodyOK
 */

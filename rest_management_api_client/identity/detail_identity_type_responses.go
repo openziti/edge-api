@@ -81,8 +81,7 @@ func NewDetailIdentityTypeOK() *DetailIdentityTypeOK {
 	return &DetailIdentityTypeOK{}
 }
 
-/*
-DetailIdentityTypeOK describes a response with status code 200, with default header values.
+/* DetailIdentityTypeOK describes a response with status code 200, with default header values.
 
 A single identity type
 */
@@ -114,8 +113,7 @@ func NewDetailIdentityTypeUnauthorized() *DetailIdentityTypeUnauthorized {
 	return &DetailIdentityTypeUnauthorized{}
 }
 
-/*
-DetailIdentityTypeUnauthorized describes a response with status code 401, with default header values.
+/* DetailIdentityTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailIdentityTypeNotFound() *DetailIdentityTypeNotFound {
 	return &DetailIdentityTypeNotFound{}
 }
 
-/*
-DetailIdentityTypeNotFound describes a response with status code 404, with default header values.
+/* DetailIdentityTypeNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailIdentityTypeTooManyRequests() *DetailIdentityTypeTooManyRequests {
 	return &DetailIdentityTypeTooManyRequests{}
 }
 
-/*
-DetailIdentityTypeTooManyRequests describes a response with status code 429, with default header values.
+/* DetailIdentityTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

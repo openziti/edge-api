@@ -76,12 +76,10 @@ func NewDeleteServicePolicyParamsWithHTTPClient(client *http.Client) *DeleteServ
 	}
 }
 
-/*
-DeleteServicePolicyParams contains all the parameters to send to the API endpoint
+/* DeleteServicePolicyParams contains all the parameters to send to the API endpoint
+   for the delete service policy operation.
 
-	for the delete service policy operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteServicePolicyParams struct {
 

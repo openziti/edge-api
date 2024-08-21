@@ -40,8 +40,7 @@ import (
 // DetailSpecOKCode is the HTTP code returned for type DetailSpecOK
 const DetailSpecOKCode int = 200
 
-/*
-DetailSpecOK A single specification
+/*DetailSpecOK A single specification
 
 swagger:response detailSpecOK
 */

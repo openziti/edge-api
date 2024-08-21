@@ -40,8 +40,7 @@ import (
 // DetailEdgeRouterOKCode is the HTTP code returned for type DetailEdgeRouterOK
 const DetailEdgeRouterOKCode int = 200
 
-/*
-DetailEdgeRouterOK A singular edge router resource
+/*DetailEdgeRouterOK A singular edge router resource
 
 swagger:response detailEdgeRouterOK
 */
@@ -85,8 +84,7 @@ func (o *DetailEdgeRouterOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailEdgeRouterUnauthorizedCode is the HTTP code returned for type DetailEdgeRouterUnauthorized
 const DetailEdgeRouterUnauthorizedCode int = 401
 
-/*
-DetailEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailEdgeRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailEdgeRouterUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailEdgeRouterUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DetailEdgeRouterNotFoundCode is the HTTP code returned for type DetailEdgeRouterNotFound
 const DetailEdgeRouterNotFoundCode int = 404
 
-/*
-DetailEdgeRouterNotFound The requested resource does not exist
+/*DetailEdgeRouterNotFound The requested resource does not exist
 
 swagger:response detailEdgeRouterNotFound
 */
@@ -175,8 +172,7 @@ func (o *DetailEdgeRouterNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DetailEdgeRouterTooManyRequestsCode is the HTTP code returned for type DetailEdgeRouterTooManyRequests
 const DetailEdgeRouterTooManyRequestsCode int = 429
 
-/*
-DetailEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DetailEdgeRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailEdgeRouterTooManyRequests
 */

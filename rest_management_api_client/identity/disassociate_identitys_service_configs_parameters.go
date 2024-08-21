@@ -78,12 +78,10 @@ func NewDisassociateIdentitysServiceConfigsParamsWithHTTPClient(client *http.Cli
 	}
 }
 
-/*
-DisassociateIdentitysServiceConfigsParams contains all the parameters to send to the API endpoint
+/* DisassociateIdentitysServiceConfigsParams contains all the parameters to send to the API endpoint
+   for the disassociate identitys service configs operation.
 
-	for the disassociate identitys service configs operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DisassociateIdentitysServiceConfigsParams struct {
 

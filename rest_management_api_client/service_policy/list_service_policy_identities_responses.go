@@ -81,8 +81,7 @@ func NewListServicePolicyIdentitiesOK() *ListServicePolicyIdentitiesOK {
 	return &ListServicePolicyIdentitiesOK{}
 }
 
-/*
-ListServicePolicyIdentitiesOK describes a response with status code 200, with default header values.
+/* ListServicePolicyIdentitiesOK describes a response with status code 200, with default header values.
 
 A list of identities
 */
@@ -114,8 +113,7 @@ func NewListServicePolicyIdentitiesBadRequest() *ListServicePolicyIdentitiesBadR
 	return &ListServicePolicyIdentitiesBadRequest{}
 }
 
-/*
-ListServicePolicyIdentitiesBadRequest describes a response with status code 400, with default header values.
+/* ListServicePolicyIdentitiesBadRequest describes a response with status code 400, with default header values.
 
 The requested resource does not exist
 */
@@ -147,8 +145,7 @@ func NewListServicePolicyIdentitiesUnauthorized() *ListServicePolicyIdentitiesUn
 	return &ListServicePolicyIdentitiesUnauthorized{}
 }
 
-/*
-ListServicePolicyIdentitiesUnauthorized describes a response with status code 401, with default header values.
+/* ListServicePolicyIdentitiesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -180,8 +177,7 @@ func NewListServicePolicyIdentitiesTooManyRequests() *ListServicePolicyIdentitie
 	return &ListServicePolicyIdentitiesTooManyRequests{}
 }
 
-/*
-ListServicePolicyIdentitiesTooManyRequests describes a response with status code 429, with default header values.
+/* ListServicePolicyIdentitiesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

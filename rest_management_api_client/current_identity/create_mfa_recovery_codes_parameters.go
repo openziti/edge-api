@@ -78,12 +78,10 @@ func NewCreateMfaRecoveryCodesParamsWithHTTPClient(client *http.Client) *CreateM
 	}
 }
 
-/*
-CreateMfaRecoveryCodesParams contains all the parameters to send to the API endpoint
+/* CreateMfaRecoveryCodesParams contains all the parameters to send to the API endpoint
+   for the create mfa recovery codes operation.
 
-	for the create mfa recovery codes operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type CreateMfaRecoveryCodesParams struct {
 

@@ -40,8 +40,7 @@ import (
 // DetailExternalJWTSignerOKCode is the HTTP code returned for type DetailExternalJWTSignerOK
 const DetailExternalJWTSignerOKCode int = 200
 
-/*
-DetailExternalJWTSignerOK A singular External JWT Signer resource
+/*DetailExternalJWTSignerOK A singular External JWT Signer resource
 
 swagger:response detailExternalJwtSignerOK
 */
@@ -85,8 +84,7 @@ func (o *DetailExternalJWTSignerOK) WriteResponse(rw http.ResponseWriter, produc
 // DetailExternalJWTSignerUnauthorizedCode is the HTTP code returned for type DetailExternalJWTSignerUnauthorized
 const DetailExternalJWTSignerUnauthorizedCode int = 401
 
-/*
-DetailExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DetailExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailExternalJwtSignerUnauthorized
 */
@@ -130,8 +128,7 @@ func (o *DetailExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 // DetailExternalJWTSignerNotFoundCode is the HTTP code returned for type DetailExternalJWTSignerNotFound
 const DetailExternalJWTSignerNotFoundCode int = 404
 
-/*
-DetailExternalJWTSignerNotFound The requested resource does not exist
+/*DetailExternalJWTSignerNotFound The requested resource does not exist
 
 swagger:response detailExternalJwtSignerNotFound
 */
@@ -175,8 +172,7 @@ func (o *DetailExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, 
 // DetailExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type DetailExternalJWTSignerTooManyRequests
 const DetailExternalJWTSignerTooManyRequestsCode int = 429
 
-/*
-DetailExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DetailExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailExternalJwtSignerTooManyRequests
 */

@@ -53,12 +53,12 @@ func NewPatchEdgeRouter(ctx *middleware.Context, handler PatchEdgeRouterHandler)
 	return &PatchEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/*
-	PatchEdgeRouter swagger:route PATCH /edge-routers/{id} Edge Router patchEdgeRouter
+/* PatchEdgeRouter swagger:route PATCH /edge-routers/{id} Edge Router patchEdgeRouter
 
-# Update the supplied fields on an edge router
+Update the supplied fields on an edge router
 
 Update the supplied fields on an edge router. Requires admin access.
+
 */
 type PatchEdgeRouter struct {
 	Context *middleware.Context

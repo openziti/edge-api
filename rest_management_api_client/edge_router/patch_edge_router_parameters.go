@@ -78,12 +78,10 @@ func NewPatchEdgeRouterParamsWithHTTPClient(client *http.Client) *PatchEdgeRoute
 	}
 }
 
-/*
-PatchEdgeRouterParams contains all the parameters to send to the API endpoint
+/* PatchEdgeRouterParams contains all the parameters to send to the API endpoint
+   for the patch edge router operation.
 
-	for the patch edge router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type PatchEdgeRouterParams struct {
 

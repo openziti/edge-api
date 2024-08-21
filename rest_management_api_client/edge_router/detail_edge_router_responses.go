@@ -81,8 +81,7 @@ func NewDetailEdgeRouterOK() *DetailEdgeRouterOK {
 	return &DetailEdgeRouterOK{}
 }
 
-/*
-DetailEdgeRouterOK describes a response with status code 200, with default header values.
+/* DetailEdgeRouterOK describes a response with status code 200, with default header values.
 
 A singular edge router resource
 */
@@ -114,8 +113,7 @@ func NewDetailEdgeRouterUnauthorized() *DetailEdgeRouterUnauthorized {
 	return &DetailEdgeRouterUnauthorized{}
 }
 
-/*
-DetailEdgeRouterUnauthorized describes a response with status code 401, with default header values.
+/* DetailEdgeRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailEdgeRouterNotFound() *DetailEdgeRouterNotFound {
 	return &DetailEdgeRouterNotFound{}
 }
 
-/*
-DetailEdgeRouterNotFound describes a response with status code 404, with default header values.
+/* DetailEdgeRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailEdgeRouterTooManyRequests() *DetailEdgeRouterTooManyRequests {
 	return &DetailEdgeRouterTooManyRequests{}
 }
 
-/*
-DetailEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+/* DetailEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

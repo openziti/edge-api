@@ -76,12 +76,10 @@ func NewGetIdentityFailedServiceRequestsParamsWithHTTPClient(client *http.Client
 	}
 }
 
-/*
-GetIdentityFailedServiceRequestsParams contains all the parameters to send to the API endpoint
+/* GetIdentityFailedServiceRequestsParams contains all the parameters to send to the API endpoint
+   for the get identity failed service requests operation.
 
-	for the get identity failed service requests operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type GetIdentityFailedServiceRequestsParams struct {
 

@@ -63,8 +63,7 @@ func NewDetailSpecOK() *DetailSpecOK {
 	return &DetailSpecOK{}
 }
 
-/*
-DetailSpecOK describes a response with status code 200, with default header values.
+/* DetailSpecOK describes a response with status code 200, with default header values.
 
 A single specification
 */

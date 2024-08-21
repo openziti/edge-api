@@ -40,8 +40,7 @@ import (
 // DeleteServiceEdgeRouterPolicyOKCode is the HTTP code returned for type DeleteServiceEdgeRouterPolicyOK
 const DeleteServiceEdgeRouterPolicyOKCode int = 200
 
-/*
-DeleteServiceEdgeRouterPolicyOK The delete request was successful and the resource has been removed
+/*DeleteServiceEdgeRouterPolicyOK The delete request was successful and the resource has been removed
 
 swagger:response deleteServiceEdgeRouterPolicyOK
 */
@@ -85,8 +84,7 @@ func (o *DeleteServiceEdgeRouterPolicyOK) WriteResponse(rw http.ResponseWriter, 
 // DeleteServiceEdgeRouterPolicyBadRequestCode is the HTTP code returned for type DeleteServiceEdgeRouterPolicyBadRequest
 const DeleteServiceEdgeRouterPolicyBadRequestCode int = 400
 
-/*
-DeleteServiceEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*DeleteServiceEdgeRouterPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteServiceEdgeRouterPolicyBadRequest
 */
@@ -130,8 +128,7 @@ func (o *DeleteServiceEdgeRouterPolicyBadRequest) WriteResponse(rw http.Response
 // DeleteServiceEdgeRouterPolicyUnauthorizedCode is the HTTP code returned for type DeleteServiceEdgeRouterPolicyUnauthorized
 const DeleteServiceEdgeRouterPolicyUnauthorizedCode int = 401
 
-/*
-DeleteServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*DeleteServiceEdgeRouterPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteServiceEdgeRouterPolicyUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *DeleteServiceEdgeRouterPolicyUnauthorized) WriteResponse(rw http.Respon
 // DeleteServiceEdgeRouterPolicyConflictCode is the HTTP code returned for type DeleteServiceEdgeRouterPolicyConflict
 const DeleteServiceEdgeRouterPolicyConflictCode int = 409
 
-/*
-DeleteServiceEdgeRouterPolicyConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*DeleteServiceEdgeRouterPolicyConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteServiceEdgeRouterPolicyConflict
 */
@@ -220,8 +216,7 @@ func (o *DeleteServiceEdgeRouterPolicyConflict) WriteResponse(rw http.ResponseWr
 // DeleteServiceEdgeRouterPolicyTooManyRequestsCode is the HTTP code returned for type DeleteServiceEdgeRouterPolicyTooManyRequests
 const DeleteServiceEdgeRouterPolicyTooManyRequestsCode int = 429
 
-/*
-DeleteServiceEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*DeleteServiceEdgeRouterPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteServiceEdgeRouterPolicyTooManyRequests
 */

@@ -76,12 +76,10 @@ func NewDeleteEdgeRouterParamsWithHTTPClient(client *http.Client) *DeleteEdgeRou
 	}
 }
 
-/*
-DeleteEdgeRouterParams contains all the parameters to send to the API endpoint
+/* DeleteEdgeRouterParams contains all the parameters to send to the API endpoint
+   for the delete edge router operation.
 
-	for the delete edge router operation.
-
-	Typically these are written to a http.Request.
+   Typically these are written to a http.Request.
 */
 type DeleteEdgeRouterParams struct {
 

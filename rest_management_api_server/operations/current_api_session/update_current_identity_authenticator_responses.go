@@ -40,8 +40,7 @@ import (
 // UpdateCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorOK
 const UpdateCurrentIdentityAuthenticatorOKCode int = 200
 
-/*
-UpdateCurrentIdentityAuthenticatorOK The update request was successful and the resource has been altered
+/*UpdateCurrentIdentityAuthenticatorOK The update request was successful and the resource has been altered
 
 swagger:response updateCurrentIdentityAuthenticatorOK
 */
@@ -85,8 +84,7 @@ func (o *UpdateCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // UpdateCurrentIdentityAuthenticatorBadRequestCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorBadRequest
 const UpdateCurrentIdentityAuthenticatorBadRequestCode int = 400
 
-/*
-UpdateCurrentIdentityAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*UpdateCurrentIdentityAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateCurrentIdentityAuthenticatorBadRequest
 */
@@ -130,8 +128,7 @@ func (o *UpdateCurrentIdentityAuthenticatorBadRequest) WriteResponse(rw http.Res
 // UpdateCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorUnauthorized
 const UpdateCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*
-UpdateCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*UpdateCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateCurrentIdentityAuthenticatorUnauthorized
 */
@@ -175,8 +172,7 @@ func (o *UpdateCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.R
 // UpdateCurrentIdentityAuthenticatorNotFoundCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorNotFound
 const UpdateCurrentIdentityAuthenticatorNotFoundCode int = 404
 
-/*
-UpdateCurrentIdentityAuthenticatorNotFound The requested resource does not exist
+/*UpdateCurrentIdentityAuthenticatorNotFound The requested resource does not exist
 
 swagger:response updateCurrentIdentityAuthenticatorNotFound
 */

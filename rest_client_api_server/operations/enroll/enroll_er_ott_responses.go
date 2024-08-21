@@ -40,8 +40,7 @@ import (
 // EnrollErOttOKCode is the HTTP code returned for type EnrollErOttOK
 const EnrollErOttOKCode int = 200
 
-/*
-EnrollErOttOK A response containing the edge routers signed certificates (server chain, server cert, CAs).
+/*EnrollErOttOK A response containing the edge routers signed certificates (server chain, server cert, CAs).
 
 swagger:response enrollErOttOK
 */
@@ -85,8 +84,7 @@ func (o *EnrollErOttOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // EnrollErOttTooManyRequestsCode is the HTTP code returned for type EnrollErOttTooManyRequests
 const EnrollErOttTooManyRequestsCode int = 429
 
-/*
-EnrollErOttTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*EnrollErOttTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollErOttTooManyRequests
 */

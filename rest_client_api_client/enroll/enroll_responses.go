@@ -75,8 +75,7 @@ func NewEnrollOK() *EnrollOK {
 	return &EnrollOK{}
 }
 
-/*
-EnrollOK describes a response with status code 200, with default header values.
+/* EnrollOK describes a response with status code 200, with default header values.
 
 A response for multi-format legacy enrollment.
 */
@@ -106,8 +105,7 @@ func NewEnrollNotFound() *EnrollNotFound {
 	return &EnrollNotFound{}
 }
 
-/*
-EnrollNotFound describes a response with status code 404, with default header values.
+/* EnrollNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -139,8 +137,7 @@ func NewEnrollTooManyRequests() *EnrollTooManyRequests {
 	return &EnrollTooManyRequests{}
 }
 
-/*
-EnrollTooManyRequests describes a response with status code 429, with default header values.
+/* EnrollTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

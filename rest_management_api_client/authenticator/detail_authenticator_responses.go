@@ -81,8 +81,7 @@ func NewDetailAuthenticatorOK() *DetailAuthenticatorOK {
 	return &DetailAuthenticatorOK{}
 }
 
-/*
-DetailAuthenticatorOK describes a response with status code 200, with default header values.
+/* DetailAuthenticatorOK describes a response with status code 200, with default header values.
 
 A singular authenticator resource
 */
@@ -114,8 +113,7 @@ func NewDetailAuthenticatorUnauthorized() *DetailAuthenticatorUnauthorized {
 	return &DetailAuthenticatorUnauthorized{}
 }
 
-/*
-DetailAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/* DetailAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewDetailAuthenticatorNotFound() *DetailAuthenticatorNotFound {
 	return &DetailAuthenticatorNotFound{}
 }
 
-/*
-DetailAuthenticatorNotFound describes a response with status code 404, with default header values.
+/* DetailAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewDetailAuthenticatorTooManyRequests() *DetailAuthenticatorTooManyRequests
 	return &DetailAuthenticatorTooManyRequests{}
 }
 
-/*
-DetailAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
+/* DetailAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */

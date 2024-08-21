@@ -74,9 +74,10 @@ type ClientService interface {
 }
 
 /*
-CreateMfaRecoveryCodes fors a completed m f a enrollment regenerate the recovery codes
+  CreateMfaRecoveryCodes fors a completed m f a enrollment regenerate the recovery codes
 
-Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.
+  Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.
+
 */
 func (a *Client) CreateMfaRecoveryCodes(params *CreateMfaRecoveryCodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMfaRecoveryCodesOK, error) {
 	// TODO: Validate the params before sending
@@ -115,9 +116,10 @@ func (a *Client) CreateMfaRecoveryCodes(params *CreateMfaRecoveryCodesParams, au
 }
 
 /*
-DeleteMfa disables m f a for the current identity
+  DeleteMfa disables m f a for the current identity
 
-Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
+  Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
+
 */
 func (a *Client) DeleteMfa(params *DeleteMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMfaOK, error) {
 	// TODO: Validate the params before sending
@@ -156,9 +158,10 @@ func (a *Client) DeleteMfa(params *DeleteMfaParams, authInfo runtime.ClientAuthI
 }
 
 /*
-DetailMfa returns the current status of m f a enrollment
+  DetailMfa returns the current status of m f a enrollment
 
-Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
+  Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
+
 */
 func (a *Client) DetailMfa(params *DetailMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailMfaOK, error) {
 	// TODO: Validate the params before sending
@@ -197,9 +200,10 @@ func (a *Client) DetailMfa(params *DetailMfaParams, authInfo runtime.ClientAuthI
 }
 
 /*
-DetailMfaQrCode shows a q r code for unverified m f a enrollments
+  DetailMfaQrCode shows a q r code for unverified m f a enrollments
 
-Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.
+  Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.
+
 */
 func (a *Client) DetailMfaQrCode(params *DetailMfaQrCodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailMfaQrCodeOK, error) {
 	// TODO: Validate the params before sending
@@ -238,9 +242,10 @@ func (a *Client) DetailMfaQrCode(params *DetailMfaQrCodeParams, authInfo runtime
 }
 
 /*
-DetailMfaRecoveryCodes fors a completed m f a enrollment view the current recovery codes
+  DetailMfaRecoveryCodes fors a completed m f a enrollment view the current recovery codes
 
-Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.
+  Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.
+
 */
 func (a *Client) DetailMfaRecoveryCodes(params *DetailMfaRecoveryCodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailMfaRecoveryCodesOK, error) {
 	// TODO: Validate the params before sending
@@ -279,9 +284,10 @@ func (a *Client) DetailMfaRecoveryCodes(params *DetailMfaRecoveryCodesParams, au
 }
 
 /*
-EnrollMfa initiates m f a enrollment
+  EnrollMfa initiates m f a enrollment
 
-Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via `POST /current-identity/mfa/verify`
+  Allows authenticator based MFA enrollment. If enrollment has already been completed, it must be disabled before attempting to re-enroll. Subsequent enrollment request is completed via `POST /current-identity/mfa/verify`
+
 */
 func (a *Client) EnrollMfa(params *EnrollMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnrollMfaCreated, error) {
 	// TODO: Validate the params before sending
@@ -320,9 +326,9 @@ func (a *Client) EnrollMfa(params *EnrollMfaParams, authInfo runtime.ClientAuthI
 }
 
 /*
-GetCurrentIdentity returns the current identity
+  GetCurrentIdentity returns the current identity
 
-Returns the identity associated with the API sessions used to issue the current request
+  Returns the identity associated with the API sessions used to issue the current request
 */
 func (a *Client) GetCurrentIdentity(params *GetCurrentIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentIdentityOK, error) {
 	// TODO: Validate the params before sending
@@ -361,9 +367,10 @@ func (a *Client) GetCurrentIdentity(params *GetCurrentIdentityParams, authInfo r
 }
 
 /*
-VerifyMfa completes m f a enrollment by verifying a time based one time token
+  VerifyMfa completes m f a enrollment by verifying a time based one time token
 
-Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via `POST /current-identity/mfa`.
+  Completes MFA enrollment by accepting a time based one time password as verification. Called after MFA enrollment has been initiated via `POST /current-identity/mfa`.
+
 */
 func (a *Client) VerifyMfa(params *VerifyMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VerifyMfaOK, error) {
 	// TODO: Validate the params before sending

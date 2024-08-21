@@ -53,12 +53,13 @@ func NewListServicePolicyServices(ctx *middleware.Context, handler ListServicePo
 	return &ListServicePolicyServices{Context: ctx, Handler: handler}
 }
 
-/*
-	ListServicePolicyServices swagger:route GET /service-policies/{id}/services Service Policy listServicePolicyServices
+/* ListServicePolicyServices swagger:route GET /service-policies/{id}/services Service Policy listServicePolicyServices
 
-# List services a service policy affects
+List services a service policy affects
 
 Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
+
+
 */
 type ListServicePolicyServices struct {
 	Context *middleware.Context

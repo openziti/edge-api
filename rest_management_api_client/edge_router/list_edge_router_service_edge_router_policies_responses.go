@@ -81,8 +81,7 @@ func NewListEdgeRouterServiceEdgeRouterPoliciesOK() *ListEdgeRouterServiceEdgeRo
 	return &ListEdgeRouterServiceEdgeRouterPoliciesOK{}
 }
 
-/*
-ListEdgeRouterServiceEdgeRouterPoliciesOK describes a response with status code 200, with default header values.
+/* ListEdgeRouterServiceEdgeRouterPoliciesOK describes a response with status code 200, with default header values.
 
 A list of service policies
 */
@@ -114,8 +113,7 @@ func NewListEdgeRouterServiceEdgeRouterPoliciesUnauthorized() *ListEdgeRouterSer
 	return &ListEdgeRouterServiceEdgeRouterPoliciesUnauthorized{}
 }
 
-/*
-ListEdgeRouterServiceEdgeRouterPoliciesUnauthorized describes a response with status code 401, with default header values.
+/* ListEdgeRouterServiceEdgeRouterPoliciesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
@@ -147,8 +145,7 @@ func NewListEdgeRouterServiceEdgeRouterPoliciesNotFound() *ListEdgeRouterService
 	return &ListEdgeRouterServiceEdgeRouterPoliciesNotFound{}
 }
 
-/*
-ListEdgeRouterServiceEdgeRouterPoliciesNotFound describes a response with status code 404, with default header values.
+/* ListEdgeRouterServiceEdgeRouterPoliciesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
@@ -180,8 +177,7 @@ func NewListEdgeRouterServiceEdgeRouterPoliciesTooManyRequests() *ListEdgeRouter
 	return &ListEdgeRouterServiceEdgeRouterPoliciesTooManyRequests{}
 }
 
-/*
-ListEdgeRouterServiceEdgeRouterPoliciesTooManyRequests describes a response with status code 429, with default header values.
+/* ListEdgeRouterServiceEdgeRouterPoliciesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
