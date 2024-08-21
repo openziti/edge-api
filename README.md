@@ -17,16 +17,59 @@ for live deployments.
 
 ## Client & Server Generation
 
-The root-level `client.yml` and `management.yml` files are generated from the `source` directory. There are scripts
-within the `script` directory that will do the heavy lifting of re-generating them if needed. Both scripts require
-that the `swagger` executable be available on your `path` environment variable. Releases of it are available in the
-[GitHub Go-Swagger](https://github.com/go-swagger/go-swagger/releases) repository. Avoid release 0.30 for now because
-it has a bug. 0.29 works.
+The root-level `client.yml` and `management.yml` OpenAPI 2.0 specification  files are generated from the `source`
+directory. There are scripts in `./scripts/` for re-generating these specifications and the Go client and server
+libraries. The scripts require that a specific build of the `swagger` (aka "go-swagger") executable.
+[Download the Go-Swagger v0.29.0 binary](https://github.com/go-swagger/go-swagger/releases/tag/v0.29.0) from GitHub.
+
+Do not `go install` the binary because the rendering may introduce whitespace changes in many files.
+
+### Modify the Specification Sources
+
+These files are used to build the specifications.
 
 ```bash
-#bash
-./scripts/generate_rest.sh
+./source
+├── client
+├── client.yml
+├── management
+├── management.yml
+└── shared
 ```
+
+### Bump the Specification Version
+
+Update the version numbers in `./source/client.yml` and `./source/management.yml` in your PR. The versions must be identical.
+
+### Prepare the Local Filesystem
+
+You must clone two repos in adjacent directories.
+
+1. this repo - https://github.com/openziti/edge-api.git
+1. the main ziti repo - https://github.com/openziti/ziti.git
+
+### Generate the Specifications and Test
+
+You must create a workspace for the main repo (`ziti`) to run tests against the checkout in this repo (`edge-api`).
+
+#### Linux/Darwin Example
+
+```bash
+(
+    set -euxo pipefail;
+    ./scripts/generate_rest.sh;
+    (
+        cd ../ziti;
+        [[ -s ./go.work ]] && mv -v ./go.work{,.$(date --utc --iso-8601=seconds)};
+        go work init;
+        go work use .;
+        go work use ../edge-api;
+        go test ./... -tags apitests;
+    )
+)
+```
+
+#### Windows Example
 
 ```powershell
 #powershell
