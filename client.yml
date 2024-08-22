@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.26
+  version: 0.26.27
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -4169,12 +4169,15 @@ definitions:
       required:
       - expiresAt
       - expirationSeconds
+      - isCertExtendable
       properties:
         expirationSeconds:
           type: integer
         expiresAt:
           type: string
           format: date-time
+        isCertExtendable:
+          type: boolean
   currentApiSessionDetailEnvelope:
     type: object
     required:

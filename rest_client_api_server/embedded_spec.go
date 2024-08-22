@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.26"
+    "version": "0.26.27"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5760,7 +5760,8 @@ func init() {
           "type": "object",
           "required": [
             "expiresAt",
-            "expirationSeconds"
+            "expirationSeconds",
+            "isCertExtendable"
           ],
           "properties": {
             "expirationSeconds": {
@@ -5769,6 +5770,9 @@ func init() {
             "expiresAt": {
               "type": "string",
               "format": "date-time"
+            },
+            "isCertExtendable": {
+              "type": "boolean"
             }
           }
         }
@@ -7665,7 +7669,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.26"
+    "version": "0.26.27"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -13444,7 +13448,8 @@ func init() {
           "type": "object",
           "required": [
             "expiresAt",
-            "expirationSeconds"
+            "expirationSeconds",
+            "isCertExtendable"
           ],
           "properties": {
             "expirationSeconds": {
@@ -13453,6 +13458,9 @@ func init() {
             "expiresAt": {
               "type": "string",
               "format": "date-time"
+            },
+            "isCertExtendable": {
+              "type": "boolean"
             }
           }
         }
