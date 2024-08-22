@@ -1,5 +1,5 @@
-# Treat all text files as text, with automatic line-ending handling
-* text=auto
+# Treat all text files as text, with LF (Unix) line-endings on commit and checkout
+* text eol=lf
 
 # Explicitly mark certain text files
 *.attr text
