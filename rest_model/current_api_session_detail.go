@@ -52,10 +52,6 @@ type CurrentAPISessionDetail struct {
 	// Required: true
 	// Format: date-time
 	ExpiresAt *strfmt.DateTime `json:"expiresAt"`
-
-	// is cert extendable
-	// Required: true
-	IsCertExtendable *bool `json:"isCertExtendable"`
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
@@ -72,8 +68,6 @@ func (m *CurrentAPISessionDetail) UnmarshalJSON(raw []byte) error {
 		ExpirationSeconds *int64 `json:"expirationSeconds"`
 
 		ExpiresAt *strfmt.DateTime `json:"expiresAt"`
-
-		IsCertExtendable *bool `json:"isCertExtendable"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
@@ -82,8 +76,6 @@ func (m *CurrentAPISessionDetail) UnmarshalJSON(raw []byte) error {
 	m.ExpirationSeconds = dataAO1.ExpirationSeconds
 
 	m.ExpiresAt = dataAO1.ExpiresAt
-
-	m.IsCertExtendable = dataAO1.IsCertExtendable
 
 	return nil
 }
@@ -101,15 +93,11 @@ func (m CurrentAPISessionDetail) MarshalJSON() ([]byte, error) {
 		ExpirationSeconds *int64 `json:"expirationSeconds"`
 
 		ExpiresAt *strfmt.DateTime `json:"expiresAt"`
-
-		IsCertExtendable *bool `json:"isCertExtendable"`
 	}
 
 	dataAO1.ExpirationSeconds = m.ExpirationSeconds
 
 	dataAO1.ExpiresAt = m.ExpiresAt
-
-	dataAO1.IsCertExtendable = m.IsCertExtendable
 
 	jsonDataAO1, errAO1 := swag.WriteJSON(dataAO1)
 	if errAO1 != nil {
@@ -136,10 +124,6 @@ func (m *CurrentAPISessionDetail) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateIsCertExtendable(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -162,15 +146,6 @@ func (m *CurrentAPISessionDetail) validateExpiresAt(formats strfmt.Registry) err
 	}
 
 	if err := validate.FormatOf("expiresAt", "body", "date-time", m.ExpiresAt.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CurrentAPISessionDetail) validateIsCertExtendable(formats strfmt.Registry) error {
-
-	if err := validate.Required("isCertExtendable", "body", m.IsCertExtendable); err != nil {
 		return err
 	}
 

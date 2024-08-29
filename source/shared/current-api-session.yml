@@ -88,12 +88,9 @@ definitions:
         required:
           - expiresAt
           - expirationSeconds
-          - isCertExtendable
         properties:
           expiresAt:
             type: string
             format: date-time
           expirationSeconds:
             type: integer
-          isCertExtendable:
-            type: boolean

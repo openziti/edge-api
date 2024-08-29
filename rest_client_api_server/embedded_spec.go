@@ -5205,7 +5205,8 @@ func init() {
             "cachedUpdatedAt",
             "isMfaRequired",
             "isMfaComplete",
-            "authenticatorId"
+            "authenticatorId",
+            "isCertExtendable"
           ],
           "properties": {
             "authQueries": {
@@ -5232,6 +5233,9 @@ func init() {
             },
             "ipAddress": {
               "type": "string"
+            },
+            "isCertExtendable": {
+              "type": "boolean"
             },
             "isMfaComplete": {
               "type": "boolean"
@@ -5361,6 +5365,9 @@ func init() {
             },
             "identityId": {
               "type": "string"
+            },
+            "isIssuedByNetwork": {
+              "type": "boolean"
             },
             "method": {
               "type": "string"
@@ -5760,8 +5767,7 @@ func init() {
           "type": "object",
           "required": [
             "expiresAt",
-            "expirationSeconds",
-            "isCertExtendable"
+            "expirationSeconds"
           ],
           "properties": {
             "expirationSeconds": {
@@ -5770,9 +5776,6 @@ func init() {
             "expiresAt": {
               "type": "string",
               "format": "date-time"
-            },
-            "isCertExtendable": {
-              "type": "boolean"
             }
           }
         }
@@ -12892,7 +12895,8 @@ func init() {
             "cachedUpdatedAt",
             "isMfaRequired",
             "isMfaComplete",
-            "authenticatorId"
+            "authenticatorId",
+            "isCertExtendable"
           ],
           "properties": {
             "authQueries": {
@@ -12919,6 +12923,9 @@ func init() {
             },
             "ipAddress": {
               "type": "string"
+            },
+            "isCertExtendable": {
+              "type": "boolean"
             },
             "isMfaComplete": {
               "type": "boolean"
@@ -13048,6 +13055,9 @@ func init() {
             },
             "identityId": {
               "type": "string"
+            },
+            "isIssuedByNetwork": {
+              "type": "boolean"
             },
             "method": {
               "type": "string"
@@ -13448,8 +13458,7 @@ func init() {
           "type": "object",
           "required": [
             "expiresAt",
-            "expirationSeconds",
-            "isCertExtendable"
+            "expirationSeconds"
           ],
           "properties": {
             "expirationSeconds": {
@@ -13458,9 +13467,6 @@ func init() {
             "expiresAt": {
               "type": "string",
               "format": "date-time"
-            },
-            "isCertExtendable": {
-              "type": "boolean"
             }
           }
         }

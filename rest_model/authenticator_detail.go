@@ -58,6 +58,9 @@ type AuthenticatorDetail struct {
 	// Required: true
 	IdentityID *string `json:"identityId"`
 
+	// is issued by network
+	IsIssuedByNetwork bool `json:"isIssuedByNetwork,omitempty"`
+
 	// method
 	// Required: true
 	Method *string `json:"method"`
@@ -85,6 +88,8 @@ func (m *AuthenticatorDetail) UnmarshalJSON(raw []byte) error {
 
 		IdentityID *string `json:"identityId"`
 
+		IsIssuedByNetwork bool `json:"isIssuedByNetwork,omitempty"`
+
 		Method *string `json:"method"`
 
 		Username string `json:"username,omitempty"`
@@ -100,6 +105,8 @@ func (m *AuthenticatorDetail) UnmarshalJSON(raw []byte) error {
 	m.Identity = dataAO1.Identity
 
 	m.IdentityID = dataAO1.IdentityID
+
+	m.IsIssuedByNetwork = dataAO1.IsIssuedByNetwork
 
 	m.Method = dataAO1.Method
 
@@ -126,6 +133,8 @@ func (m AuthenticatorDetail) MarshalJSON() ([]byte, error) {
 
 		IdentityID *string `json:"identityId"`
 
+		IsIssuedByNetwork bool `json:"isIssuedByNetwork,omitempty"`
+
 		Method *string `json:"method"`
 
 		Username string `json:"username,omitempty"`
@@ -138,6 +147,8 @@ func (m AuthenticatorDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.Identity = m.Identity
 
 	dataAO1.IdentityID = m.IdentityID
+
+	dataAO1.IsIssuedByNetwork = m.IsIssuedByNetwork
 
 	dataAO1.Method = m.Method
 
