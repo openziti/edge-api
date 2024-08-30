@@ -72,6 +72,10 @@ type APISessionDetail struct {
 	// Required: true
 	IPAddress *string `json:"ipAddress"`
 
+	// is cert extendable
+	// Required: true
+	IsCertExtendable *bool `json:"isCertExtendable"`
+
 	// is mfa complete
 	// Required: true
 	IsMfaComplete *bool `json:"isMfaComplete"`
@@ -114,6 +118,8 @@ func (m *APISessionDetail) UnmarshalJSON(raw []byte) error {
 
 		IPAddress *string `json:"ipAddress"`
 
+		IsCertExtendable *bool `json:"isCertExtendable"`
+
 		IsMfaComplete *bool `json:"isMfaComplete"`
 
 		IsMfaRequired *bool `json:"isMfaRequired"`
@@ -139,6 +145,8 @@ func (m *APISessionDetail) UnmarshalJSON(raw []byte) error {
 	m.IdentityID = dataAO1.IdentityID
 
 	m.IPAddress = dataAO1.IPAddress
+
+	m.IsCertExtendable = dataAO1.IsCertExtendable
 
 	m.IsMfaComplete = dataAO1.IsMfaComplete
 
@@ -175,6 +183,8 @@ func (m APISessionDetail) MarshalJSON() ([]byte, error) {
 
 		IPAddress *string `json:"ipAddress"`
 
+		IsCertExtendable *bool `json:"isCertExtendable"`
+
 		IsMfaComplete *bool `json:"isMfaComplete"`
 
 		IsMfaRequired *bool `json:"isMfaRequired"`
@@ -197,6 +207,8 @@ func (m APISessionDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.IdentityID = m.IdentityID
 
 	dataAO1.IPAddress = m.IPAddress
+
+	dataAO1.IsCertExtendable = m.IsCertExtendable
 
 	dataAO1.IsMfaComplete = m.IsMfaComplete
 
@@ -248,6 +260,10 @@ func (m *APISessionDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateIPAddress(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsCertExtendable(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -354,6 +370,15 @@ func (m *APISessionDetail) validateIdentityID(formats strfmt.Registry) error {
 func (m *APISessionDetail) validateIPAddress(formats strfmt.Registry) error {
 
 	if err := validate.Required("ipAddress", "body", m.IPAddress); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APISessionDetail) validateIsCertExtendable(formats strfmt.Registry) error {
+
+	if err := validate.Required("isCertExtendable", "body", m.IsCertExtendable); err != nil {
 		return err
 	}
 

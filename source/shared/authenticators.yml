@@ -82,6 +82,8 @@ definitions:
             type: string
           username:
             type: string
+          isIssuedByNetwork:
+            type: boolean
   authenticatorUpdate:
     description: All of the fields on an authenticator that will be updated
     type: object

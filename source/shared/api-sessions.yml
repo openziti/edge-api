@@ -41,6 +41,7 @@ definitions:
           - isMfaRequired
           - isMfaComplete
           - authenticatorId
+          - isCertExtendable
         properties:
           token:
             type: string
@@ -68,3 +69,5 @@ definitions:
             format: date-time
           authenticatorId:
             type: string
+          isCertExtendable:
+            type: boolean

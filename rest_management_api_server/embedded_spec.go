@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.26"
+    "version": "0.26.27"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -22177,7 +22177,8 @@ func init() {
             "cachedUpdatedAt",
             "isMfaRequired",
             "isMfaComplete",
-            "authenticatorId"
+            "authenticatorId",
+            "isCertExtendable"
           ],
           "properties": {
             "authQueries": {
@@ -22204,6 +22205,9 @@ func init() {
             },
             "ipAddress": {
               "type": "string"
+            },
+            "isCertExtendable": {
+              "type": "boolean"
             },
             "isMfaComplete": {
               "type": "boolean"
@@ -22665,6 +22669,9 @@ func init() {
             },
             "identityId": {
               "type": "string"
+            },
+            "isIssuedByNetwork": {
+              "type": "boolean"
             },
             "method": {
               "type": "string"
@@ -28510,7 +28517,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.26"
+    "version": "0.26.27"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -50719,7 +50726,8 @@ func init() {
             "cachedUpdatedAt",
             "isMfaRequired",
             "isMfaComplete",
-            "authenticatorId"
+            "authenticatorId",
+            "isCertExtendable"
           ],
           "properties": {
             "authQueries": {
@@ -50746,6 +50754,9 @@ func init() {
             },
             "ipAddress": {
               "type": "string"
+            },
+            "isCertExtendable": {
+              "type": "boolean"
             },
             "isMfaComplete": {
               "type": "boolean"
@@ -51207,6 +51218,9 @@ func init() {
             },
             "identityId": {
               "type": "string"
+            },
+            "isIssuedByNetwork": {
+              "type": "boolean"
             },
             "method": {
               "type": "string"

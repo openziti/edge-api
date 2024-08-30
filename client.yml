@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.26
+  version: 0.26.27
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -3804,6 +3804,7 @@ definitions:
       - isMfaRequired
       - isMfaComplete
       - authenticatorId
+      - isCertExtendable
       properties:
         authQueries:
           $ref: '#/definitions/authQueryList'
@@ -3822,6 +3823,8 @@ definitions:
           type: string
         ipAddress:
           type: string
+        isCertExtendable:
+          type: boolean
         isMfaComplete:
           type: boolean
         isMfaRequired:
@@ -3908,6 +3911,8 @@ definitions:
           $ref: '#/definitions/entityRef'
         identityId:
           type: string
+        isIssuedByNetwork:
+          type: boolean
         method:
           type: string
         username:
