@@ -1,0 +1,30 @@
+name: Check Version Consistency and Git Tag Match
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: List latest tag
+        run: git describe --tags --abbrev=0 origin/main
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x' # specify the Python version you want to use
+
+      - name: Install dependencies
+        run: pip install pyyaml semver
+
+      - name: Parse and check versions
+        run: python .github/workflows/check_versions.py
