@@ -43,6 +43,9 @@ import (
 // swagger:model authQueryDetail
 type AuthQueryDetail struct {
 
+	// client Id
+	ClientID string `json:"clientId,omitempty"`
+
 	// format
 	Format MfaFormats `json:"format,omitempty"`
 
@@ -61,6 +64,9 @@ type AuthQueryDetail struct {
 	// provider
 	// Required: true
 	Provider *MfaProviders `json:"provider"`
+
+	// scopes
+	Scopes []string `json:"scopes"`
 
 	// type Id
 	TypeID string `json:"typeId,omitempty"`

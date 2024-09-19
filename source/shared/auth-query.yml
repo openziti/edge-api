@@ -23,3 +23,9 @@ definitions:
         type: integer
       format:
         $ref: 'current-identity-mfa.yml#/definitions/mfaFormats'
+      scopes:
+        type: array
+        items:
+          type: string
+      clientId:
+        type: string

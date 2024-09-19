@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.30
+  version: 0.26.31
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -3859,6 +3859,8 @@ definitions:
     required:
     - provider
     properties:
+      clientId:
+        type: string
       format:
         $ref: '#/definitions/mfaFormats'
       httpMethod:
@@ -3871,6 +3873,10 @@ definitions:
         type: integer
       provider:
         $ref: '#/definitions/mfaProviders'
+      scopes:
+        type: array
+        items:
+          type: string
       typeId:
         type: string
   authQueryList:
