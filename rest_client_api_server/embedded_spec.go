@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.30"
+    "version": "0.26.31"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5289,6 +5289,9 @@ func init() {
         "provider"
       ],
       "properties": {
+        "clientId": {
+          "type": "string"
+        },
         "format": {
           "$ref": "#/definitions/mfaFormats"
         },
@@ -5306,6 +5309,12 @@ func init() {
         },
         "provider": {
           "$ref": "#/definitions/mfaProviders"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "typeId": {
           "type": "string"
@@ -7672,7 +7681,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.30"
+    "version": "0.26.31"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -12979,6 +12988,9 @@ func init() {
         "provider"
       ],
       "properties": {
+        "clientId": {
+          "type": "string"
+        },
         "format": {
           "$ref": "#/definitions/mfaFormats"
         },
@@ -12996,6 +13008,12 @@ func init() {
         },
         "provider": {
           "$ref": "#/definitions/mfaProviders"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "typeId": {
           "type": "string"
