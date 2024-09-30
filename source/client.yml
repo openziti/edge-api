@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.31
+  version: 0.26.32
   title: Ziti Edge Client
   description: OpenZiti Edge Client API
   contact:

@@ -133,7 +133,6 @@ try
     "...fixing go module deps"
     Push-Location $rootDir
     go mod init github.com/openziti/edge-api
-    go get -u -f ./...
     go mod tidy
     Pop-Location
 }
