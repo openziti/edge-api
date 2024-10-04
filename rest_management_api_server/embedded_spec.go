@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.32"
+    "version": "0.26.33"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -22572,6 +22572,9 @@ func init() {
         "httpUrl": {
           "type": "string"
         },
+        "id": {
+          "type": "string"
+        },
         "maxLength": {
           "type": "integer"
         },
@@ -22588,7 +22591,7 @@ func init() {
           }
         },
         "typeId": {
-          "type": "string"
+          "$ref": "#/definitions/authQueryType"
         }
       }
     },
@@ -22597,6 +22600,14 @@ func init() {
       "items": {
         "$ref": "#/definitions/authQueryDetail"
       }
+    },
+    "authQueryType": {
+      "type": "string",
+      "enum": [
+        "MFA",
+        "TOTP",
+        "EXT-JWT"
+      ]
     },
     "authenticate": {
       "description": "A generic authenticate object meant for use with the /authenticate path. Required fields depend on authentication method.",
@@ -28526,7 +28537,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.32"
+    "version": "0.26.33"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -51130,6 +51141,9 @@ func init() {
         "httpUrl": {
           "type": "string"
         },
+        "id": {
+          "type": "string"
+        },
         "maxLength": {
           "type": "integer"
         },
@@ -51146,7 +51160,7 @@ func init() {
           }
         },
         "typeId": {
-          "type": "string"
+          "$ref": "#/definitions/authQueryType"
         }
       }
     },
@@ -51155,6 +51169,14 @@ func init() {
       "items": {
         "$ref": "#/definitions/authQueryDetail"
       }
+    },
+    "authQueryType": {
+      "type": "string",
+      "enum": [
+        "MFA",
+        "TOTP",
+        "EXT-JWT"
+      ]
     },
     "authenticate": {
       "description": "A generic authenticate object meant for use with the /authenticate path. Required fields depend on authentication method.",

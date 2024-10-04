@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.32
+  version: 0.26.33
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -3867,6 +3867,8 @@ definitions:
         type: string
       httpUrl:
         type: string
+      id:
+        type: string
       maxLength:
         type: integer
       minLength:
@@ -3878,11 +3880,17 @@ definitions:
         items:
           type: string
       typeId:
-        type: string
+        $ref: '#/definitions/authQueryType'
   authQueryList:
     type: array
     items:
       $ref: '#/definitions/authQueryDetail'
+  authQueryType:
+    type: string
+    enum:
+    - MFA
+    - TOTP
+    - EXT-JWT
   authenticate:
     description: A generic authenticate object meant for use with the /authenticate
       path. Required fields depend on authentication method.
