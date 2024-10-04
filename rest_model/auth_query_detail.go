@@ -55,6 +55,9 @@ type AuthQueryDetail struct {
 	// http Url
 	HTTPURL string `json:"httpUrl,omitempty"`
 
+	// id
+	ID string `json:"id,omitempty"`
+
 	// max length
 	MaxLength int64 `json:"maxLength,omitempty"`
 
@@ -69,7 +72,7 @@ type AuthQueryDetail struct {
 	Scopes []string `json:"scopes"`
 
 	// type Id
-	TypeID string `json:"typeId,omitempty"`
+	TypeID AuthQueryType `json:"typeId,omitempty"`
 }
 
 // Validate validates this auth query detail
@@ -81,6 +84,10 @@ func (m *AuthQueryDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProvider(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTypeID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -131,6 +138,23 @@ func (m *AuthQueryDetail) validateProvider(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AuthQueryDetail) validateTypeID(formats strfmt.Registry) error {
+	if swag.IsZero(m.TypeID) { // not required
+		return nil
+	}
+
+	if err := m.TypeID.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("typeId")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("typeId")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this auth query detail based on the context it is used
 func (m *AuthQueryDetail) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -140,6 +164,10 @@ func (m *AuthQueryDetail) ContextValidate(ctx context.Context, formats strfmt.Re
 	}
 
 	if err := m.contextValidateProvider(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTypeID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -174,6 +202,20 @@ func (m *AuthQueryDetail) contextValidateProvider(ctx context.Context, formats s
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AuthQueryDetail) contextValidateTypeID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.TypeID.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("typeId")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("typeId")
+		}
+		return err
 	}
 
 	return nil

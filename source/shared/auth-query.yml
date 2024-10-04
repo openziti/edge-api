@@ -1,5 +1,11 @@
 ---
 definitions:
+  authQueryType:
+    type: string
+    enum:
+      - MFA #legacy TOTP type
+      - TOTP
+      - EXT-JWT
   authQueryList:
     type: array
     items:
@@ -10,7 +16,7 @@ definitions:
       - provider
     properties:
       typeId:
-        type: string
+        $ref: '#/definitions/authQueryType'
       provider:
         $ref: 'current-identity-mfa.yml#/definitions/mfaProviders'
       httpMethod:
@@ -28,4 +34,6 @@ definitions:
         items:
           type: string
       clientId:
+        type: string
+      id:
         type: string
