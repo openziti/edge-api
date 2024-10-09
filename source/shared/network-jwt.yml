@@ -1,0 +1,55 @@
+---
+paths:
+  network-jwts:
+    get:
+      summary: Returns a list of JWTs suitable for bootstrapping network trust.
+      description: Returns a list of JWTs for trusting a network
+      tags:
+        - Enrollment
+      operationId: listNetworkJWTs
+      responses:
+        '200':
+          $ref: '#/responses/listNetworkJWTs'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+responses:
+  listNetworkJWTs:
+    description: A list of network JWTs
+    schema:
+      $ref: '#/definitions/listNetworkJWTsEnvelope'
+
+definitions:
+  listNetworkJWTsEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/networkJWTList'
+  networkJWTList:
+    description: An array of network JWTs
+    type: array
+    items:
+      $ref: '#/definitions/networkJWT'
+
+  networkJWT:
+    description: A network JWT
+    type: object
+    allOf:
+      - type: object
+        required:
+          - name
+          - token
+        properties:
+          name:
+            type: string
+          token:
+            type: string

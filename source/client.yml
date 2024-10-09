@@ -108,6 +108,9 @@ paths:
   '/protocols':
     $ref: 'client/protocols.yml#/paths/protocols'
 
+  '/network-jwts':
+    $ref: 'shared/network-jwt.yml#/paths/network-jwts'
+
   '/services':
     $ref: 'client/services.yml#/paths/services'
   '/services/{id}':

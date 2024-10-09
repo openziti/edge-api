@@ -49,6 +49,7 @@ import (
 	"github.com/openziti/edge-api/rest_client_api_server/operations/current_api_session"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/current_identity"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/enroll"
+	"github.com/openziti/edge-api/rest_client_api_server/operations/enrollment"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/external_jwt_signer"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/informational"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/posture_checks"
@@ -218,6 +219,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		}),
 		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
+		}),
+		EnrollmentListNetworkJWTsHandler: enrollment.ListNetworkJWTsHandlerFunc(func(params enrollment.ListNetworkJWTsParams) middleware.Responder {
+			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
 		}),
 		InformationalListProtocolsHandler: informational.ListProtocolsHandlerFunc(func(params informational.ListProtocolsParams) middleware.Responder {
 			return middleware.NotImplemented("operation informational.ListProtocols has not yet been implemented")
@@ -424,6 +428,8 @@ type ZitiEdgeClientAPI struct {
 	InformationalListEnumeratedCapabilitiesHandler informational.ListEnumeratedCapabilitiesHandler
 	// ExternalJWTSignerListExternalJWTSignersHandler sets the operation handler for the list external Jwt signers operation
 	ExternalJWTSignerListExternalJWTSignersHandler external_jwt_signer.ListExternalJWTSignersHandler
+	// EnrollmentListNetworkJWTsHandler sets the operation handler for the list network j w ts operation
+	EnrollmentListNetworkJWTsHandler enrollment.ListNetworkJWTsHandler
 	// InformationalListProtocolsHandler sets the operation handler for the list protocols operation
 	InformationalListProtocolsHandler informational.ListProtocolsHandler
 	// InformationalListRootHandler sets the operation handler for the list root operation
@@ -681,6 +687,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.ExternalJWTSignerListExternalJWTSignersHandler == nil {
 		unregistered = append(unregistered, "external_jwt_signer.ListExternalJWTSignersHandler")
+	}
+	if o.EnrollmentListNetworkJWTsHandler == nil {
+		unregistered = append(unregistered, "enrollment.ListNetworkJWTsHandler")
 	}
 	if o.InformationalListProtocolsHandler == nil {
 		unregistered = append(unregistered, "informational.ListProtocolsHandler")
@@ -1005,6 +1014,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/external-jwt-signers"] = external_jwt_signer.NewListExternalJWTSigners(o.context, o.ExternalJWTSignerListExternalJWTSignersHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/network-jwts"] = enrollment.NewListNetworkJWTs(o.context, o.EnrollmentListNetworkJWTsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
