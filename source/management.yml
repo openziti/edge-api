@@ -198,6 +198,9 @@ paths:
   '/identity-types/{id}':
     $ref: 'management/identity-types.yml#/paths/identity-types-id'
 
+  '/network-jwts':
+    $ref: 'shared/network-jwt.yml#/paths/network-jwts'
+
   '/posture-checks':
     $ref: 'management/posture-checks.yml#/paths/posture-checks'
   '/posture-checks/{id}':

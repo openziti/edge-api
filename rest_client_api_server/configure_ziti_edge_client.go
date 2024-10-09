@@ -41,6 +41,7 @@ import (
 	"github.com/openziti/edge-api/rest_client_api_server/operations/current_api_session"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/current_identity"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/enroll"
+	"github.com/openziti/edge-api/rest_client_api_server/operations/enrollment"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/external_jwt_signer"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/informational"
 	"github.com/openziti/edge-api/rest_client_api_server/operations/posture_checks"
@@ -311,6 +312,11 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 	if api.ExternalJWTSignerListExternalJWTSignersHandler == nil {
 		api.ExternalJWTSignerListExternalJWTSignersHandler = external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams) middleware.Responder {
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
+		})
+	}
+	if api.EnrollmentListNetworkJWTsHandler == nil {
+		api.EnrollmentListNetworkJWTsHandler = enrollment.ListNetworkJWTsHandlerFunc(func(params enrollment.ListNetworkJWTsParams) middleware.Responder {
+			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
 		})
 	}
 	if api.InformationalListProtocolsHandler == nil {

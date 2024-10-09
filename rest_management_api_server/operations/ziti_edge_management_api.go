@@ -458,6 +458,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		IdentityListIdentitysServiceConfigsHandler: identity.ListIdentitysServiceConfigsHandlerFunc(func(params identity.ListIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation identity.ListIdentitysServiceConfigs has not yet been implemented")
 		}),
+		EnrollmentListNetworkJWTsHandler: enrollment.ListNetworkJWTsHandlerFunc(func(params enrollment.ListNetworkJWTsParams) middleware.Responder {
+			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
+		}),
 		RoleAttributesListPostureCheckRoleAttributesHandler: role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributes has not yet been implemented")
 		}),
@@ -970,6 +973,8 @@ type ZitiEdgeManagementAPI struct {
 	IdentityListIdentitysEdgeRouterPoliciesHandler identity.ListIdentitysEdgeRouterPoliciesHandler
 	// IdentityListIdentitysServiceConfigsHandler sets the operation handler for the list identitys service configs operation
 	IdentityListIdentitysServiceConfigsHandler identity.ListIdentitysServiceConfigsHandler
+	// EnrollmentListNetworkJWTsHandler sets the operation handler for the list network j w ts operation
+	EnrollmentListNetworkJWTsHandler enrollment.ListNetworkJWTsHandler
 	// RoleAttributesListPostureCheckRoleAttributesHandler sets the operation handler for the list posture check role attributes operation
 	RoleAttributesListPostureCheckRoleAttributesHandler role_attributes.ListPostureCheckRoleAttributesHandler
 	// PostureChecksListPostureCheckTypesHandler sets the operation handler for the list posture check types operation
@@ -1558,6 +1563,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.IdentityListIdentitysServiceConfigsHandler == nil {
 		unregistered = append(unregistered, "identity.ListIdentitysServiceConfigsHandler")
+	}
+	if o.EnrollmentListNetworkJWTsHandler == nil {
+		unregistered = append(unregistered, "enrollment.ListNetworkJWTsHandler")
 	}
 	if o.RoleAttributesListPostureCheckRoleAttributesHandler == nil {
 		unregistered = append(unregistered, "role_attributes.ListPostureCheckRoleAttributesHandler")
@@ -2345,6 +2353,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/identities/{id}/service-configs"] = identity.NewListIdentitysServiceConfigs(o.context, o.IdentityListIdentitysServiceConfigsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/network-jwts"] = enrollment.NewListNetworkJWTs(o.context, o.EnrollmentListNetworkJWTsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

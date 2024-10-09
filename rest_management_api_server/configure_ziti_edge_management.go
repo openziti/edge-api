@@ -706,6 +706,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation identity.ListIdentitysServiceConfigs has not yet been implemented")
 		})
 	}
+	if api.EnrollmentListNetworkJWTsHandler == nil {
+		api.EnrollmentListNetworkJWTsHandler = enrollment.ListNetworkJWTsHandlerFunc(func(params enrollment.ListNetworkJWTsParams) middleware.Responder {
+			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
+		})
+	}
 	if api.RoleAttributesListPostureCheckRoleAttributesHandler == nil {
 		api.RoleAttributesListPostureCheckRoleAttributesHandler = role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributes has not yet been implemented")
