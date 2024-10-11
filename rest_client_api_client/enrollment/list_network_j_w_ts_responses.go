@@ -59,12 +59,6 @@ func (o *ListNetworkJWTsReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
-	case 401:
-		result := NewListNetworkJWTsUnauthorized()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
 	case 429:
 		result := NewListNetworkJWTsTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -129,38 +123,6 @@ func (o *ListNetworkJWTsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *ListNetworkJWTsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(rest_model.APIErrorEnvelope)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewListNetworkJWTsUnauthorized creates a ListNetworkJWTsUnauthorized with default headers values
-func NewListNetworkJWTsUnauthorized() *ListNetworkJWTsUnauthorized {
-	return &ListNetworkJWTsUnauthorized{}
-}
-
-/* ListNetworkJWTsUnauthorized describes a response with status code 401, with default header values.
-
-The supplied session does not have the correct access rights to request this resource
-*/
-type ListNetworkJWTsUnauthorized struct {
-	Payload *rest_model.APIErrorEnvelope
-}
-
-func (o *ListNetworkJWTsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /network-jwts][%d] listNetworkJWTsUnauthorized  %+v", 401, o.Payload)
-}
-func (o *ListNetworkJWTsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
-	return o.Payload
-}
-
-func (o *ListNetworkJWTsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -125,50 +125,6 @@ func (o *ListNetworkJWTsBadRequest) WriteResponse(rw http.ResponseWriter, produc
 	}
 }
 
-// ListNetworkJWTsUnauthorizedCode is the HTTP code returned for type ListNetworkJWTsUnauthorized
-const ListNetworkJWTsUnauthorizedCode int = 401
-
-/*ListNetworkJWTsUnauthorized The supplied session does not have the correct access rights to request this resource
-
-swagger:response listNetworkJWTsUnauthorized
-*/
-type ListNetworkJWTsUnauthorized struct {
-
-	/*
-	  In: Body
-	*/
-	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
-}
-
-// NewListNetworkJWTsUnauthorized creates ListNetworkJWTsUnauthorized with default headers values
-func NewListNetworkJWTsUnauthorized() *ListNetworkJWTsUnauthorized {
-
-	return &ListNetworkJWTsUnauthorized{}
-}
-
-// WithPayload adds the payload to the list network j w ts unauthorized response
-func (o *ListNetworkJWTsUnauthorized) WithPayload(payload *rest_model.APIErrorEnvelope) *ListNetworkJWTsUnauthorized {
-	o.Payload = payload
-	return o
-}
-
-// SetPayload sets the payload to the list network j w ts unauthorized response
-func (o *ListNetworkJWTsUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) {
-	o.Payload = payload
-}
-
-// WriteResponse to the client
-func (o *ListNetworkJWTsUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
-
-	rw.WriteHeader(401)
-	if o.Payload != nil {
-		payload := o.Payload
-		if err := producer.Produce(rw, payload); err != nil {
-			panic(err) // let the recovery middleware deal with this
-		}
-	}
-}
-
 // ListNetworkJWTsTooManyRequestsCode is the HTTP code returned for type ListNetworkJWTsTooManyRequests
 const ListNetworkJWTsTooManyRequestsCode int = 429
 
