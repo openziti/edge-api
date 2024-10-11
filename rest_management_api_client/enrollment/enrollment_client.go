@@ -62,6 +62,8 @@ type ClientService interface {
 
 	ListEnrollments(params *ListEnrollmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEnrollmentsOK, error)
 
+	ListNetworkJWTs(params *ListNetworkJWTsParams, opts ...ClientOption) (*ListNetworkJWTsOK, error)
+
 	RefreshEnrollment(params *RefreshEnrollmentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RefreshEnrollmentOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -229,6 +231,46 @@ func (a *Client) ListEnrollments(params *ListEnrollmentsParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listEnrollments: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  ListNetworkJWTs returns a list of j w ts suitable for bootstrapping network trust
+
+  Returns a list of JWTs for trusting a network
+*/
+func (a *Client) ListNetworkJWTs(params *ListNetworkJWTsParams, opts ...ClientOption) (*ListNetworkJWTsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListNetworkJWTsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listNetworkJWTs",
+		Method:             "GET",
+		PathPattern:        "/network-jwts",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListNetworkJWTsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListNetworkJWTsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listNetworkJWTs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

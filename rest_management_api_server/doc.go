@@ -30,7 +30,7 @@
 //    https
 //  Host: demo.ziti.dev
 //  BasePath: /edge/management/v1
-//  Version: 0.26.33
+//  Version: 0.26.34
 //  License: Apache 2.0 https://www.apache.org/licenses/LICENSE-2.0.html
 //  Contact: OpenZiti<help@openziti.org> https://openziti.discourse.group
 //
