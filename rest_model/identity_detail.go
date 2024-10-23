@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -77,6 +78,11 @@ type IdentityDetail struct {
 	// disabled until
 	// Format: date-time
 	DisabledUntil *strfmt.DateTime `json:"disabledUntil,omitempty"`
+
+	// edge router connection status
+	// Required: true
+	// Enum: [online offline unknown]
+	EdgeRouterConnectionStatus *string `json:"edgeRouterConnectionStatus"`
 
 	// enrollment
 	// Required: true
@@ -168,6 +174,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 
 		DisabledUntil *strfmt.DateTime `json:"disabledUntil,omitempty"`
 
+		EdgeRouterConnectionStatus *string `json:"edgeRouterConnectionStatus"`
+
 		Enrollment *IdentityEnrollments `json:"enrollment"`
 
 		EnvInfo *EnvInfo `json:"envInfo"`
@@ -219,6 +227,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 	m.DisabledAt = dataAO1.DisabledAt
 
 	m.DisabledUntil = dataAO1.DisabledUntil
+
+	m.EdgeRouterConnectionStatus = dataAO1.EdgeRouterConnectionStatus
 
 	m.Enrollment = dataAO1.Enrollment
 
@@ -281,6 +291,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 
 		DisabledUntil *strfmt.DateTime `json:"disabledUntil,omitempty"`
 
+		EdgeRouterConnectionStatus *string `json:"edgeRouterConnectionStatus"`
+
 		Enrollment *IdentityEnrollments `json:"enrollment"`
 
 		EnvInfo *EnvInfo `json:"envInfo"`
@@ -329,6 +341,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.DisabledAt = m.DisabledAt
 
 	dataAO1.DisabledUntil = m.DisabledUntil
+
+	dataAO1.EdgeRouterConnectionStatus = m.EdgeRouterConnectionStatus
 
 	dataAO1.Enrollment = m.Enrollment
 
@@ -410,6 +424,10 @@ func (m *IdentityDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDisabledUntil(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEdgeRouterConnectionStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -619,6 +637,40 @@ func (m *IdentityDetail) validateDisabledUntil(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("disabledUntil", "body", "date-time", m.DisabledUntil.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var identityDetailTypeEdgeRouterConnectionStatusPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["online","offline","unknown"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		identityDetailTypeEdgeRouterConnectionStatusPropEnum = append(identityDetailTypeEdgeRouterConnectionStatusPropEnum, v)
+	}
+}
+
+// property enum
+func (m *IdentityDetail) validateEdgeRouterConnectionStatusEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, identityDetailTypeEdgeRouterConnectionStatusPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *IdentityDetail) validateEdgeRouterConnectionStatus(formats strfmt.Registry) error {
+
+	if err := validate.Required("edgeRouterConnectionStatus", "body", m.EdgeRouterConnectionStatus); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateEdgeRouterConnectionStatusEnum("edgeRouterConnectionStatus", "body", *m.EdgeRouterConnectionStatus); err != nil {
 		return err
 	}
 

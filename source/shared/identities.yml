@@ -24,6 +24,7 @@ definitions:
           - sdkInfo
           - roleAttributes
           - hasEdgeRouterConnection
+          - edgeRouterConnectionStatus
           - hasApiSession
           - isMfaEnabled
           - serviceHostingPrecedences
@@ -56,6 +57,12 @@ definitions:
             $ref: 'base-entity.yml#/definitions/attributes'
           hasEdgeRouterConnection:
             type: boolean
+          edgeRouterConnectionStatus:
+            type: string
+            enum:
+              - online
+              - offline
+              - unknown
           hasApiSession:
             type: boolean
           isMfaEnabled:
@@ -63,7 +70,7 @@ definitions:
           authPolicyId:
             type: string
           authPolicy:
-              $ref: 'base-entity.yml#/definitions/entityRef'
+            $ref: 'base-entity.yml#/definitions/entityRef'
           defaultHostingPrecedence:
             $ref: 'terminators.yml#/definitions/terminatorPrecedence'
           defaultHostingCost:
