@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.34"
+    "version": "0.26.35"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -6277,6 +6277,7 @@ func init() {
             "sdkInfo",
             "roleAttributes",
             "hasEdgeRouterConnection",
+            "edgeRouterConnectionStatus",
             "hasApiSession",
             "isMfaEnabled",
             "serviceHostingPrecedences",
@@ -6318,6 +6319,14 @@ func init() {
               "type": "string",
               "format": "date-time",
               "x-nullable": true
+            },
+            "edgeRouterConnectionStatus": {
+              "type": "string",
+              "enum": [
+                "online",
+                "offline",
+                "unknown"
+              ]
             },
             "enrollment": {
               "$ref": "#/definitions/identityEnrollments"
@@ -7813,7 +7822,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.34"
+    "version": "0.26.35"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -14109,6 +14118,7 @@ func init() {
             "sdkInfo",
             "roleAttributes",
             "hasEdgeRouterConnection",
+            "edgeRouterConnectionStatus",
             "hasApiSession",
             "isMfaEnabled",
             "serviceHostingPrecedences",
@@ -14150,6 +14160,14 @@ func init() {
               "type": "string",
               "format": "date-time",
               "x-nullable": true
+            },
+            "edgeRouterConnectionStatus": {
+              "type": "string",
+              "enum": [
+                "online",
+                "offline",
+                "unknown"
+              ]
             },
             "enrollment": {
               "$ref": "#/definitions/identityEnrollments"
