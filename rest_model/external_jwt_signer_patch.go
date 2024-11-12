@@ -75,6 +75,9 @@ type ExternalJWTSignerPatch struct {
 	// Example: MyApps Signer
 	Name *string `json:"name,omitempty"`
 
+	// open Id configuration Url
+	OpenIDConfigurationURL *string `json:"openIdConfigurationUrl,omitempty"`
+
 	// scopes
 	Scopes []string `json:"scopes"`
 

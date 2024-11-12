@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.39
+  version: 0.26.40
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -260,6 +260,13 @@ paths:
     $ref: 'management/sessions.yml#/paths/sessions-id'
   '/sessions/{id}/route-path':
     $ref: 'management/sessions.yml#/paths/sessions-id-route-path'
+
+  '/controller-settings':
+     $ref: 'management/controller-settings.yml#/paths/controller-settings'
+  '/controller-settings/{id}':
+    $ref: 'management/controller-settings.yml#/paths/controller-setting-id'
+  '/controller-settings/{id}/effective':
+    $ref: 'management/controller-settings.yml#/paths/controller-setting-id-effective'
 
   '/specs':
     $ref: 'shared/specs.yml#/paths/specs'
