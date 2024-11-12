@@ -67,6 +67,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service_edge_router_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/session"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/settings"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/terminator"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/well_known"
 )
@@ -134,6 +135,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		ConfigCreateConfigTypeHandler: config.CreateConfigTypeHandlerFunc(func(params config.CreateConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.CreateConfigType has not yet been implemented")
 		}),
+		SettingsCreateControllerSettingHandler: settings.CreateControllerSettingHandlerFunc(func(params settings.CreateControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.CreateControllerSetting has not yet been implemented")
+		}),
 		DatabaseCreateDatabaseSnapshotHandler: database.CreateDatabaseSnapshotHandlerFunc(func(params database.CreateDatabaseSnapshotParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation database.CreateDatabaseSnapshot has not yet been implemented")
 		}),
@@ -197,6 +201,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		ConfigDeleteConfigTypeHandler: config.DeleteConfigTypeHandlerFunc(func(params config.DeleteConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.DeleteConfigType has not yet been implemented")
 		}),
+		SettingsDeleteControllerSettingHandler: settings.DeleteControllerSettingHandlerFunc(func(params settings.DeleteControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.DeleteControllerSetting has not yet been implemented")
+		}),
 		EdgeRouterDeleteEdgeRouterHandler: edge_router.DeleteEdgeRouterHandlerFunc(func(params edge_router.DeleteEdgeRouterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation edge_router.DeleteEdgeRouter has not yet been implemented")
 		}),
@@ -256,6 +263,12 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		}),
 		ConfigDetailConfigTypeHandler: config.DetailConfigTypeHandlerFunc(func(params config.DetailConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.DetailConfigType has not yet been implemented")
+		}),
+		SettingsDetailControllerSettingHandler: settings.DetailControllerSettingHandlerFunc(func(params settings.DetailControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.DetailControllerSetting has not yet been implemented")
+		}),
+		SettingsDetailControllerSettingEffectiveHandler: settings.DetailControllerSettingEffectiveHandlerFunc(func(params settings.DetailControllerSettingEffectiveParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.DetailControllerSettingEffective has not yet been implemented")
 		}),
 		CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler: current_api_session.DetailCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.DetailCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.DetailCurrentIdentityAuthenticator has not yet been implemented")
@@ -391,6 +404,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		}),
 		ConfigListConfigsForConfigTypeHandler: config.ListConfigsForConfigTypeHandlerFunc(func(params config.ListConfigsForConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.ListConfigsForConfigType has not yet been implemented")
+		}),
+		SettingsListControllerSettingsHandler: settings.ListControllerSettingsHandlerFunc(func(params settings.ListControllerSettingsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.ListControllerSettings has not yet been implemented")
 		}),
 		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation controllers.ListControllers has not yet been implemented")
@@ -557,6 +573,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		ConfigPatchConfigTypeHandler: config.PatchConfigTypeHandlerFunc(func(params config.PatchConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.PatchConfigType has not yet been implemented")
 		}),
+		SettingsPatchControllerSettingHandler: settings.PatchControllerSettingHandlerFunc(func(params settings.PatchControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.PatchControllerSetting has not yet been implemented")
+		}),
 		CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler: current_api_session.PatchCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.PatchCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.PatchCurrentIdentityAuthenticator has not yet been implemented")
 		}),
@@ -619,6 +638,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		}),
 		ConfigUpdateConfigTypeHandler: config.UpdateConfigTypeHandlerFunc(func(params config.UpdateConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.UpdateConfigType has not yet been implemented")
+		}),
+		SettingsUpdateControllerSettingHandler: settings.UpdateControllerSettingHandlerFunc(func(params settings.UpdateControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.UpdateControllerSetting has not yet been implemented")
 		}),
 		CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler: current_api_session.UpdateCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.UpdateCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.UpdateCurrentIdentityAuthenticator has not yet been implemented")
@@ -757,6 +779,8 @@ type ZitiEdgeManagementAPI struct {
 	ConfigCreateConfigHandler config.CreateConfigHandler
 	// ConfigCreateConfigTypeHandler sets the operation handler for the create config type operation
 	ConfigCreateConfigTypeHandler config.CreateConfigTypeHandler
+	// SettingsCreateControllerSettingHandler sets the operation handler for the create controller setting operation
+	SettingsCreateControllerSettingHandler settings.CreateControllerSettingHandler
 	// DatabaseCreateDatabaseSnapshotHandler sets the operation handler for the create database snapshot operation
 	DatabaseCreateDatabaseSnapshotHandler database.CreateDatabaseSnapshotHandler
 	// EdgeRouterCreateEdgeRouterHandler sets the operation handler for the create edge router operation
@@ -799,6 +823,8 @@ type ZitiEdgeManagementAPI struct {
 	ConfigDeleteConfigHandler config.DeleteConfigHandler
 	// ConfigDeleteConfigTypeHandler sets the operation handler for the delete config type operation
 	ConfigDeleteConfigTypeHandler config.DeleteConfigTypeHandler
+	// SettingsDeleteControllerSettingHandler sets the operation handler for the delete controller setting operation
+	SettingsDeleteControllerSettingHandler settings.DeleteControllerSettingHandler
 	// EdgeRouterDeleteEdgeRouterHandler sets the operation handler for the delete edge router operation
 	EdgeRouterDeleteEdgeRouterHandler edge_router.DeleteEdgeRouterHandler
 	// EdgeRouterPolicyDeleteEdgeRouterPolicyHandler sets the operation handler for the delete edge router policy operation
@@ -839,6 +865,10 @@ type ZitiEdgeManagementAPI struct {
 	ConfigDetailConfigHandler config.DetailConfigHandler
 	// ConfigDetailConfigTypeHandler sets the operation handler for the detail config type operation
 	ConfigDetailConfigTypeHandler config.DetailConfigTypeHandler
+	// SettingsDetailControllerSettingHandler sets the operation handler for the detail controller setting operation
+	SettingsDetailControllerSettingHandler settings.DetailControllerSettingHandler
+	// SettingsDetailControllerSettingEffectiveHandler sets the operation handler for the detail controller setting effective operation
+	SettingsDetailControllerSettingEffectiveHandler settings.DetailControllerSettingEffectiveHandler
 	// CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler sets the operation handler for the detail current identity authenticator operation
 	CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler current_api_session.DetailCurrentIdentityAuthenticatorHandler
 	// EdgeRouterDetailEdgeRouterHandler sets the operation handler for the detail edge router operation
@@ -929,6 +959,8 @@ type ZitiEdgeManagementAPI struct {
 	ConfigListConfigsHandler config.ListConfigsHandler
 	// ConfigListConfigsForConfigTypeHandler sets the operation handler for the list configs for config type operation
 	ConfigListConfigsForConfigTypeHandler config.ListConfigsForConfigTypeHandler
+	// SettingsListControllerSettingsHandler sets the operation handler for the list controller settings operation
+	SettingsListControllerSettingsHandler settings.ListControllerSettingsHandler
 	// ControllersListControllersHandler sets the operation handler for the list controllers operation
 	ControllersListControllersHandler controllers.ListControllersHandler
 	// CurrentAPISessionListCurrentIdentityAuthenticatorsHandler sets the operation handler for the list current identity authenticators operation
@@ -1039,6 +1071,8 @@ type ZitiEdgeManagementAPI struct {
 	ConfigPatchConfigHandler config.PatchConfigHandler
 	// ConfigPatchConfigTypeHandler sets the operation handler for the patch config type operation
 	ConfigPatchConfigTypeHandler config.PatchConfigTypeHandler
+	// SettingsPatchControllerSettingHandler sets the operation handler for the patch controller setting operation
+	SettingsPatchControllerSettingHandler settings.PatchControllerSettingHandler
 	// CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler sets the operation handler for the patch current identity authenticator operation
 	CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler current_api_session.PatchCurrentIdentityAuthenticatorHandler
 	// EdgeRouterPatchEdgeRouterHandler sets the operation handler for the patch edge router operation
@@ -1081,6 +1115,8 @@ type ZitiEdgeManagementAPI struct {
 	ConfigUpdateConfigHandler config.UpdateConfigHandler
 	// ConfigUpdateConfigTypeHandler sets the operation handler for the update config type operation
 	ConfigUpdateConfigTypeHandler config.UpdateConfigTypeHandler
+	// SettingsUpdateControllerSettingHandler sets the operation handler for the update controller setting operation
+	SettingsUpdateControllerSettingHandler settings.UpdateControllerSettingHandler
 	// CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler sets the operation handler for the update current identity authenticator operation
 	CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler current_api_session.UpdateCurrentIdentityAuthenticatorHandler
 	// EdgeRouterUpdateEdgeRouterHandler sets the operation handler for the update edge router operation
@@ -1240,6 +1276,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.ConfigCreateConfigTypeHandler == nil {
 		unregistered = append(unregistered, "config.CreateConfigTypeHandler")
 	}
+	if o.SettingsCreateControllerSettingHandler == nil {
+		unregistered = append(unregistered, "settings.CreateControllerSettingHandler")
+	}
 	if o.DatabaseCreateDatabaseSnapshotHandler == nil {
 		unregistered = append(unregistered, "database.CreateDatabaseSnapshotHandler")
 	}
@@ -1303,6 +1342,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.ConfigDeleteConfigTypeHandler == nil {
 		unregistered = append(unregistered, "config.DeleteConfigTypeHandler")
 	}
+	if o.SettingsDeleteControllerSettingHandler == nil {
+		unregistered = append(unregistered, "settings.DeleteControllerSettingHandler")
+	}
 	if o.EdgeRouterDeleteEdgeRouterHandler == nil {
 		unregistered = append(unregistered, "edge_router.DeleteEdgeRouterHandler")
 	}
@@ -1362,6 +1404,12 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.ConfigDetailConfigTypeHandler == nil {
 		unregistered = append(unregistered, "config.DetailConfigTypeHandler")
+	}
+	if o.SettingsDetailControllerSettingHandler == nil {
+		unregistered = append(unregistered, "settings.DetailControllerSettingHandler")
+	}
+	if o.SettingsDetailControllerSettingEffectiveHandler == nil {
+		unregistered = append(unregistered, "settings.DetailControllerSettingEffectiveHandler")
 	}
 	if o.CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler == nil {
 		unregistered = append(unregistered, "current_api_session.DetailCurrentIdentityAuthenticatorHandler")
@@ -1497,6 +1545,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.ConfigListConfigsForConfigTypeHandler == nil {
 		unregistered = append(unregistered, "config.ListConfigsForConfigTypeHandler")
+	}
+	if o.SettingsListControllerSettingsHandler == nil {
+		unregistered = append(unregistered, "settings.ListControllerSettingsHandler")
 	}
 	if o.ControllersListControllersHandler == nil {
 		unregistered = append(unregistered, "controllers.ListControllersHandler")
@@ -1663,6 +1714,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.ConfigPatchConfigTypeHandler == nil {
 		unregistered = append(unregistered, "config.PatchConfigTypeHandler")
 	}
+	if o.SettingsPatchControllerSettingHandler == nil {
+		unregistered = append(unregistered, "settings.PatchControllerSettingHandler")
+	}
 	if o.CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler == nil {
 		unregistered = append(unregistered, "current_api_session.PatchCurrentIdentityAuthenticatorHandler")
 	}
@@ -1725,6 +1779,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.ConfigUpdateConfigTypeHandler == nil {
 		unregistered = append(unregistered, "config.UpdateConfigTypeHandler")
+	}
+	if o.SettingsUpdateControllerSettingHandler == nil {
+		unregistered = append(unregistered, "settings.UpdateControllerSettingHandler")
 	}
 	if o.CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler == nil {
 		unregistered = append(unregistered, "current_api_session.UpdateCurrentIdentityAuthenticatorHandler")
@@ -1924,6 +1981,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/controller-settings"] = settings.NewCreateControllerSetting(o.context, o.SettingsCreateControllerSettingHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/database/snapshot"] = database.NewCreateDatabaseSnapshot(o.context, o.DatabaseCreateDatabaseSnapshotHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -2008,6 +2069,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/controller-settings/{id}/effective"] = settings.NewDeleteControllerSetting(o.context, o.SettingsDeleteControllerSettingHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/edge-routers/{id}"] = edge_router.NewDeleteEdgeRouter(o.context, o.EdgeRouterDeleteEdgeRouterHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -2085,6 +2150,14 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/config-types/{id}"] = config.NewDetailConfigType(o.context, o.ConfigDetailConfigTypeHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/controller-settings/{id}"] = settings.NewDetailControllerSetting(o.context, o.SettingsDetailControllerSettingHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/controller-settings/{id}/effective"] = settings.NewDetailControllerSettingEffective(o.context, o.SettingsDetailControllerSettingEffectiveHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -2265,6 +2338,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/config-types/{id}/configs"] = config.NewListConfigsForConfigType(o.context, o.ConfigListConfigsForConfigTypeHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/controller-settings"] = settings.NewListControllerSettings(o.context, o.SettingsListControllerSettingsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -2488,6 +2565,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
+	o.handlers["PATCH"]["/controller-settings/{id}/effective"] = settings.NewPatchControllerSetting(o.context, o.SettingsPatchControllerSettingHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
 	o.handlers["PATCH"]["/current-identity/authenticators/{id}"] = current_api_session.NewPatchCurrentIdentityAuthenticator(o.context, o.CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
@@ -2569,6 +2650,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/config-types/{id}"] = config.NewUpdateConfigType(o.context, o.ConfigUpdateConfigTypeHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/controller-settings/{id}/effective"] = settings.NewUpdateControllerSetting(o.context, o.SettingsUpdateControllerSettingHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

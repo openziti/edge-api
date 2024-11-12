@@ -1,0 +1,278 @@
+---
+paths:
+  controller-settings:
+    get:
+      summary: List controller settings
+      description: |
+        Retrieves a list controller settings including the base `global` settings object and any overriding controller specific settings.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: listControllerSettings
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+      responses:
+        '200':
+          $ref: '#/responses/listControllerSettings'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+    post:
+      summary: Create a controller specific setting
+      description: Create a new controller specific settings object. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: createControllerSetting
+      parameters:
+        - name: controllerSetting
+          in: body
+          required: true
+          description: A controller settings object to create
+          schema:
+            $ref: '#/definitions/controllerSettingCreate'
+      responses:
+        '201':
+          $ref: '../shared/standard-responses.yml#/responses/createResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+  controller-setting-id:
+    parameters:
+      - $ref: '../shared/parameters.yml#/id'
+    get:
+      summary: Retrieves a single controller setting object.
+      description: Retrieves a single controller setting object by id. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: detailControllerSetting
+      responses:
+        '200':
+          $ref: '#/responses/detailControllerSetting'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+  controller-setting-id-effective:
+    parameters:
+      - $ref: '../shared/parameters.yml#/id'
+    get:
+      summary: Retrieves a single controller's effective calculated settings from the instance and global configuration.
+      description: Retrieves a single controller's effective setting object by id. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: detailControllerSettingEffective
+      responses:
+        '200':
+          $ref: '#/responses/detailControllerSettingEffective'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+    put:
+      summary: Update all fields on a controller setting object
+      description: Update all fields on a controller setting object by id. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: updateControllerSetting
+      parameters:
+        - name: controllerSetting
+          in: body
+          required: true
+          description: A controller setting update object
+          schema:
+            $ref: '#/definitions/controllerSettingUpdate'
+      responses:
+        '200':
+          $ref: '../shared/standard-responses.yml#/responses/updateResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+    patch:
+      summary: Update the supplied fields on a controller setting object
+      description: Update the supplied fields on a controller setting object. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: patchControllerSetting
+      parameters:
+        - name: controllerSetting
+          in: body
+          required: true
+          description: A controller setting object patch object
+          schema:
+            $ref: '#/definitions/controllerSettingPatch'
+      responses:
+        '200':
+          $ref: '../shared/standard-responses.yml#/responses/patchResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+    delete:
+      summary: Delete a controller setting object
+      description: Delete a controller setting object by id. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Settings
+      operationId: deleteControllerSetting
+      responses:
+        '200':
+          $ref: '../shared/standard-responses.yml#/responses/deleteResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '409':
+          $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+
+responses:
+  listControllerSettings:
+    description: A list of controller setting objects
+    schema:
+      $ref: '#/definitions/listControllerSettingEnvelope'
+  detailControllerSetting:
+    description: A singular controller setting object
+    schema:
+      $ref: '#/definitions/detailControllerSettingEnvelope'
+  detailControllerSettingEffective:
+    description: A singular controller's effective setting object
+    schema:
+      $ref: '#/definitions/detailControllerSettingEffectiveEnvelope'
+
+definitions:
+  listControllerSettingEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/controllerSettingsList'
+  detailControllerSettingEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/controllerSettingDetail'
+  detailControllerSettingEffectiveEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/controllerSettingEffective'
+  controllerSettingsList:
+    type: array
+    items: '#/definition/controllerSettingDetail'
+  controllerSettings:
+    type: object
+    properties:
+      oidc:
+        type: object
+        properties:
+          redirectUris:
+            type: array
+            items:
+              type: string
+          postLogoutUris:
+            type: array
+            items:
+              type: string
+  controllerSettingDetail:
+    type: object
+    allOf:
+      - $ref: '../shared/base-entity.yml#/definitions/baseEntity'
+      - $ref: '#/definitions/controllerSettings'
+  controllerSettingEffective:
+    type: object
+    allOf:
+      - $ref: '../shared/base-entity.yml#/definitions/baseEntity'
+      - type: object
+        properties:
+          effective:
+            $ref: '#/definitions/controllerSettings'
+          instance:
+            $ref: '#/definitions/controllerSettings'
+  controllerSettingCreate:
+    type: object
+    allOf:
+      - $ref: '#/definitions/controllerSettings'
+      - type: object
+        required:
+          - controllerId
+        properties:
+          controllerId:
+            type: string
+          tags:
+            $ref: '../shared/base-entity.yml#/definitions/tags'
+  controllerSettingUpdate:
+    type: object
+    allOf:
+    - $ref: '#/definitions/controllerSettings'
+    - type: object
+      properties:
+        tags:
+          $ref: '../shared/base-entity.yml#/definitions/tags'
+  controllerSettingPatch:
+    type: object
+    allOf:
+      - $ref: '#/definitions/controllerSettings'
+      - type: object
+        properties:
+          tags:
+            $ref: '../shared/base-entity.yml#/definitions/tags'

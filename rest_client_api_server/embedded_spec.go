@@ -5620,6 +5620,9 @@ func init() {
               "type": "string",
               "example": "MyApps Signer"
             },
+            "openIdConfigurationUrl": {
+              "type": "string"
+            },
             "scopes": {
               "type": "array",
               "items": {
@@ -13459,6 +13462,9 @@ func init() {
             "name": {
               "type": "string",
               "example": "MyApps Signer"
+            },
+            "openIdConfigurationUrl": {
+              "type": "string"
             },
             "scopes": {
               "type": "array",

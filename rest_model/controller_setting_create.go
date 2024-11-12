@@ -38,61 +38,83 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ExternalJWTSignerPatch external Jwt signer patch
+// ControllerSettingCreate controller setting create
 //
-// swagger:model externalJwtSignerPatch
-type ExternalJWTSignerPatch struct {
+// swagger:model controllerSettingCreate
+type ControllerSettingCreate struct {
+	ControllerSettings
 
-	// audience
-	Audience *string `json:"audience,omitempty"`
-
-	// cert pem
-	CertPem *string `json:"certPem,omitempty"`
-
-	// claims property
-	ClaimsProperty *string `json:"claimsProperty,omitempty"`
-
-	// client Id
-	ClientID *string `json:"clientId,omitempty"`
-
-	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
-
-	// external auth Url
-	ExternalAuthURL *string `json:"externalAuthUrl,omitempty"`
-
-	// issuer
-	Issuer *string `json:"issuer,omitempty"`
-
-	// jwks endpoint
-	// Format: uri
-	JwksEndpoint *strfmt.URI `json:"jwksEndpoint,omitempty"`
-
-	// kid
-	Kid *string `json:"kid,omitempty"`
-
-	// name
-	// Example: MyApps Signer
-	Name *string `json:"name,omitempty"`
-
-	// open Id configuration Url
-	OpenIDConfigurationURL *string `json:"openIdConfigurationUrl,omitempty"`
-
-	// scopes
-	Scopes []string `json:"scopes"`
+	// controller Id
+	// Required: true
+	ControllerID *string `json:"controllerId"`
 
 	// tags
 	Tags *Tags `json:"tags,omitempty"`
-
-	// use external Id
-	UseExternalID *bool `json:"useExternalId,omitempty"`
 }
 
-// Validate validates this external Jwt signer patch
-func (m *ExternalJWTSignerPatch) Validate(formats strfmt.Registry) error {
+// UnmarshalJSON unmarshals this object from a JSON structure
+func (m *ControllerSettingCreate) UnmarshalJSON(raw []byte) error {
+	// AO0
+	var aO0 ControllerSettings
+	if err := swag.ReadJSON(raw, &aO0); err != nil {
+		return err
+	}
+	m.ControllerSettings = aO0
+
+	// AO1
+	var dataAO1 struct {
+		ControllerID *string `json:"controllerId"`
+
+		Tags *Tags `json:"tags,omitempty"`
+	}
+	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
+		return err
+	}
+
+	m.ControllerID = dataAO1.ControllerID
+
+	m.Tags = dataAO1.Tags
+
+	return nil
+}
+
+// MarshalJSON marshals this object to a JSON structure
+func (m ControllerSettingCreate) MarshalJSON() ([]byte, error) {
+	_parts := make([][]byte, 0, 2)
+
+	aO0, err := swag.WriteJSON(m.ControllerSettings)
+	if err != nil {
+		return nil, err
+	}
+	_parts = append(_parts, aO0)
+	var dataAO1 struct {
+		ControllerID *string `json:"controllerId"`
+
+		Tags *Tags `json:"tags,omitempty"`
+	}
+
+	dataAO1.ControllerID = m.ControllerID
+
+	dataAO1.Tags = m.Tags
+
+	jsonDataAO1, errAO1 := swag.WriteJSON(dataAO1)
+	if errAO1 != nil {
+		return nil, errAO1
+	}
+	_parts = append(_parts, jsonDataAO1)
+	return swag.ConcatJSON(_parts...), nil
+}
+
+// Validate validates this controller setting create
+func (m *ControllerSettingCreate) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateJwksEndpoint(formats); err != nil {
+	// validation for a type composition with ControllerSettings
+	if err := m.ControllerSettings.Validate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateControllerID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -106,19 +128,17 @@ func (m *ExternalJWTSignerPatch) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ExternalJWTSignerPatch) validateJwksEndpoint(formats strfmt.Registry) error {
-	if swag.IsZero(m.JwksEndpoint) { // not required
-		return nil
-	}
+func (m *ControllerSettingCreate) validateControllerID(formats strfmt.Registry) error {
 
-	if err := validate.FormatOf("jwksEndpoint", "body", "uri", m.JwksEndpoint.String(), formats); err != nil {
+	if err := validate.Required("controllerId", "body", m.ControllerID); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ExternalJWTSignerPatch) validateTags(formats strfmt.Registry) error {
+func (m *ControllerSettingCreate) validateTags(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Tags) { // not required
 		return nil
 	}
@@ -137,9 +157,14 @@ func (m *ExternalJWTSignerPatch) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this external Jwt signer patch based on the context it is used
-func (m *ExternalJWTSignerPatch) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this controller setting create based on the context it is used
+func (m *ControllerSettingCreate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	// validation for a type composition with ControllerSettings
+	if err := m.ControllerSettings.ContextValidate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateTags(ctx, formats); err != nil {
 		res = append(res, err)
@@ -151,7 +176,7 @@ func (m *ExternalJWTSignerPatch) ContextValidate(ctx context.Context, formats st
 	return nil
 }
 
-func (m *ExternalJWTSignerPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
+func (m *ControllerSettingCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
@@ -168,7 +193,7 @@ func (m *ExternalJWTSignerPatch) contextValidateTags(ctx context.Context, format
 }
 
 // MarshalBinary interface implementation
-func (m *ExternalJWTSignerPatch) MarshalBinary() ([]byte, error) {
+func (m *ControllerSettingCreate) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -176,8 +201,8 @@ func (m *ExternalJWTSignerPatch) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ExternalJWTSignerPatch) UnmarshalBinary(b []byte) error {
-	var res ExternalJWTSignerPatch
+func (m *ControllerSettingCreate) UnmarshalBinary(b []byte) error {
+	var res ControllerSettingCreate
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
