@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.35"
+    "version": "0.26.36"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5620,6 +5620,9 @@ func init() {
               "type": "string",
               "example": "MyApps Signer"
             },
+            "openIdConfigurationUrl": {
+              "type": "string"
+            },
             "scopes": {
               "type": "array",
               "items": {
@@ -7822,7 +7825,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.35"
+    "version": "0.26.36"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -13459,6 +13462,9 @@ func init() {
             "name": {
               "type": "string",
               "example": "MyApps Signer"
+            },
+            "openIdConfigurationUrl": {
+              "type": "string"
             },
             "scopes": {
               "type": "array",
