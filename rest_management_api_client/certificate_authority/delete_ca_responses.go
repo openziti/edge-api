@@ -65,6 +65,12 @@ func (o *DeleteCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteCaNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteCaTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -161,6 +167,38 @@ func (o *DeleteCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DeleteCaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteCaNotFound creates a DeleteCaNotFound with default headers values
+func NewDeleteCaNotFound() *DeleteCaNotFound {
+	return &DeleteCaNotFound{}
+}
+
+/* DeleteCaNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteCaNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteCaNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteCaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

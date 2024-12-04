@@ -65,6 +65,12 @@ func (o *DeleteServiceEdgeRouterPolicyReader) ReadResponse(response runtime.Clie
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteServiceEdgeRouterPolicyNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteServiceEdgeRouterPolicyConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +173,38 @@ func (o *DeleteServiceEdgeRouterPolicyUnauthorized) GetPayload() *rest_model.API
 }
 
 func (o *DeleteServiceEdgeRouterPolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteServiceEdgeRouterPolicyNotFound creates a DeleteServiceEdgeRouterPolicyNotFound with default headers values
+func NewDeleteServiceEdgeRouterPolicyNotFound() *DeleteServiceEdgeRouterPolicyNotFound {
+	return &DeleteServiceEdgeRouterPolicyNotFound{}
+}
+
+/* DeleteServiceEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteServiceEdgeRouterPolicyNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServiceEdgeRouterPolicyNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteServiceEdgeRouterPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServiceEdgeRouterPolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

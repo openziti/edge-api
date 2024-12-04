@@ -65,6 +65,12 @@ func (o *DeleteEnrollmentReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteEnrollmentNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteEnrollmentTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -161,6 +167,38 @@ func (o *DeleteEnrollmentUnauthorized) GetPayload() *rest_model.APIErrorEnvelope
 }
 
 func (o *DeleteEnrollmentUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteEnrollmentNotFound creates a DeleteEnrollmentNotFound with default headers values
+func NewDeleteEnrollmentNotFound() *DeleteEnrollmentNotFound {
+	return &DeleteEnrollmentNotFound{}
+}
+
+/* DeleteEnrollmentNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteEnrollmentNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteEnrollmentNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteEnrollmentNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteEnrollmentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

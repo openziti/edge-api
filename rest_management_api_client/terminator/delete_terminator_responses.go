@@ -65,6 +65,12 @@ func (o *DeleteTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteTerminatorNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteTerminatorConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +173,38 @@ func (o *DeleteTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope
 }
 
 func (o *DeleteTerminatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteTerminatorNotFound creates a DeleteTerminatorNotFound with default headers values
+func NewDeleteTerminatorNotFound() *DeleteTerminatorNotFound {
+	return &DeleteTerminatorNotFound{}
+}
+
+/* DeleteTerminatorNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteTerminatorNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteTerminatorNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteTerminatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

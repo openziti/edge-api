@@ -169,6 +169,50 @@ func (o *DeleteAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, 
 	}
 }
 
+// DeleteAuthenticatorNotFoundCode is the HTTP code returned for type DeleteAuthenticatorNotFound
+const DeleteAuthenticatorNotFoundCode int = 404
+
+/*DeleteAuthenticatorNotFound The requested resource does not exist
+
+swagger:response deleteAuthenticatorNotFound
+*/
+type DeleteAuthenticatorNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAuthenticatorNotFound creates DeleteAuthenticatorNotFound with default headers values
+func NewDeleteAuthenticatorNotFound() *DeleteAuthenticatorNotFound {
+
+	return &DeleteAuthenticatorNotFound{}
+}
+
+// WithPayload adds the payload to the delete authenticator not found response
+func (o *DeleteAuthenticatorNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAuthenticatorNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete authenticator not found response
+func (o *DeleteAuthenticatorNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteAuthenticatorTooManyRequestsCode is the HTTP code returned for type DeleteAuthenticatorTooManyRequests
 const DeleteAuthenticatorTooManyRequestsCode int = 429
 

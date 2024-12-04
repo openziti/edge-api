@@ -169,6 +169,50 @@ func (o *DeleteServiceUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 	}
 }
 
+// DeleteServiceNotFoundCode is the HTTP code returned for type DeleteServiceNotFound
+const DeleteServiceNotFoundCode int = 404
+
+/*DeleteServiceNotFound The requested resource does not exist
+
+swagger:response deleteServiceNotFound
+*/
+type DeleteServiceNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteServiceNotFound creates DeleteServiceNotFound with default headers values
+func NewDeleteServiceNotFound() *DeleteServiceNotFound {
+
+	return &DeleteServiceNotFound{}
+}
+
+// WithPayload adds the payload to the delete service not found response
+func (o *DeleteServiceNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteServiceNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete service not found response
+func (o *DeleteServiceNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteServiceNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteServiceConflictCode is the HTTP code returned for type DeleteServiceConflict
 const DeleteServiceConflictCode int = 409
 

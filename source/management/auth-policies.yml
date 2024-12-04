@@ -146,6 +146,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 

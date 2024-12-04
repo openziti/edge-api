@@ -65,6 +65,12 @@ func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteServicePolicyNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteServicePolicyConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +173,38 @@ func (o *DeleteServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteServicePolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteServicePolicyNotFound creates a DeleteServicePolicyNotFound with default headers values
+func NewDeleteServicePolicyNotFound() *DeleteServicePolicyNotFound {
+	return &DeleteServicePolicyNotFound{}
+}
+
+/* DeleteServicePolicyNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteServicePolicyNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServicePolicyNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServicePolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -65,6 +65,12 @@ func (o *DeleteAuthPolicyReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteAuthPolicyNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteAuthPolicyTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -161,6 +167,38 @@ func (o *DeleteAuthPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope
 }
 
 func (o *DeleteAuthPolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteAuthPolicyNotFound creates a DeleteAuthPolicyNotFound with default headers values
+func NewDeleteAuthPolicyNotFound() *DeleteAuthPolicyNotFound {
+	return &DeleteAuthPolicyNotFound{}
+}
+
+/* DeleteAuthPolicyNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteAuthPolicyNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteAuthPolicyNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteAuthPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteAuthPolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -169,6 +169,50 @@ func (o *DeleteConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 	}
 }
 
+// DeleteConfigTypeNotFoundCode is the HTTP code returned for type DeleteConfigTypeNotFound
+const DeleteConfigTypeNotFoundCode int = 404
+
+/*DeleteConfigTypeNotFound The requested resource does not exist
+
+swagger:response deleteConfigTypeNotFound
+*/
+type DeleteConfigTypeNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteConfigTypeNotFound creates DeleteConfigTypeNotFound with default headers values
+func NewDeleteConfigTypeNotFound() *DeleteConfigTypeNotFound {
+
+	return &DeleteConfigTypeNotFound{}
+}
+
+// WithPayload adds the payload to the delete config type not found response
+func (o *DeleteConfigTypeNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteConfigTypeNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete config type not found response
+func (o *DeleteConfigTypeNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteConfigTypeConflictCode is the HTTP code returned for type DeleteConfigTypeConflict
 const DeleteConfigTypeConflictCode int = 409
 

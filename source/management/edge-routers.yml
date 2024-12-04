@@ -7,8 +7,8 @@ paths:
       description: |
         Retrieves a list of edge router resources; supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
-        - oauth2: [openid]
+        - ztSession: [ ]
+        - oauth2: [ openid ]
       tags:
         - Edge Router
       operationId: listEdgeRouters
@@ -32,7 +32,7 @@ paths:
       summary: Create an edge router
       description: Create a edge router resource. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -61,7 +61,7 @@ paths:
       summary: Retrieves a single edge router
       description: Retrieves a single edge router by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -80,7 +80,7 @@ paths:
       summary: Update all fields on an edge router
       description: Update all fields on an edge router by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -108,7 +108,7 @@ paths:
       summary: Update the supplied fields on an edge router
       description: Update the supplied fields on an edge router. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -136,7 +136,7 @@ paths:
       summary: Delete an edge router
       description: Delete an edge router by id. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -148,6 +148,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
         '429':
@@ -160,7 +162,7 @@ paths:
       summary: List the edge router policies that affect an edge router
       description: Retrieves a list of edge router policies that apply to the specified edge router.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -183,7 +185,7 @@ paths:
       description: |
         Retrieves a list of identities that may access services via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -205,7 +207,7 @@ paths:
       summary: List the service policies that affect an edge router
       description: Retrieves a list of service policies policies that apply to the specified edge router.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -228,7 +230,7 @@ paths:
       description: |
         Retrieves a list of services that may be accessed via the given edge router. Supports filtering, sorting, and pagination. Requires admin access.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -256,7 +258,7 @@ paths:
         If the edge router has an existing outstanding enrollment JWT it will be replaced. The previous JWT will no longer be usable to
         complete the enrollment process.
       security:
-        - ztSession: []
+        - ztSession: [ ]
         - oauth2: [ openid ]
       tags:
         - Edge Router
@@ -451,7 +453,7 @@ definitions:
           href: "./edge-routers/b0766b8d-bd1a-4d28-8415-639b29d3c83d/edge-routers"
         self:
           href: "./edge-routers/b0766b8d-bd1a-4d28-8415-639b29d3c83d"
-      tags: { }
+      tags: {}
       name: TestRouter-e33c837f-3222-4b40-bcd6-b3458fd5156e
       fingerprint:
       roleAttributes:
@@ -473,7 +475,7 @@ definitions:
       enrollmentCreatedAt: '2020-03-16T17:13:31.5777637Z'
       enrollmentExpiresAt: '2020-03-16T17:18:31.5777637Z'
       hostname: ''
-      supportedProtocols: { }
+      supportedProtocols: {}
   routerEntityRef:
     type: object
     allOf:

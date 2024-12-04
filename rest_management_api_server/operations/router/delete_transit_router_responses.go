@@ -169,6 +169,50 @@ func (o *DeleteTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, 
 	}
 }
 
+// DeleteTransitRouterNotFoundCode is the HTTP code returned for type DeleteTransitRouterNotFound
+const DeleteTransitRouterNotFoundCode int = 404
+
+/*DeleteTransitRouterNotFound The requested resource does not exist
+
+swagger:response deleteTransitRouterNotFound
+*/
+type DeleteTransitRouterNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteTransitRouterNotFound creates DeleteTransitRouterNotFound with default headers values
+func NewDeleteTransitRouterNotFound() *DeleteTransitRouterNotFound {
+
+	return &DeleteTransitRouterNotFound{}
+}
+
+// WithPayload adds the payload to the delete transit router not found response
+func (o *DeleteTransitRouterNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteTransitRouterNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete transit router not found response
+func (o *DeleteTransitRouterNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteTransitRouterNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteTransitRouterConflictCode is the HTTP code returned for type DeleteTransitRouterConflict
 const DeleteTransitRouterConflictCode int = 409
 

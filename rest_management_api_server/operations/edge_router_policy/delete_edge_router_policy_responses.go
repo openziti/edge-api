@@ -169,6 +169,50 @@ func (o *DeleteEdgeRouterPolicyUnauthorized) WriteResponse(rw http.ResponseWrite
 	}
 }
 
+// DeleteEdgeRouterPolicyNotFoundCode is the HTTP code returned for type DeleteEdgeRouterPolicyNotFound
+const DeleteEdgeRouterPolicyNotFoundCode int = 404
+
+/*DeleteEdgeRouterPolicyNotFound The requested resource does not exist
+
+swagger:response deleteEdgeRouterPolicyNotFound
+*/
+type DeleteEdgeRouterPolicyNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteEdgeRouterPolicyNotFound creates DeleteEdgeRouterPolicyNotFound with default headers values
+func NewDeleteEdgeRouterPolicyNotFound() *DeleteEdgeRouterPolicyNotFound {
+
+	return &DeleteEdgeRouterPolicyNotFound{}
+}
+
+// WithPayload adds the payload to the delete edge router policy not found response
+func (o *DeleteEdgeRouterPolicyNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteEdgeRouterPolicyNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete edge router policy not found response
+func (o *DeleteEdgeRouterPolicyNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteEdgeRouterPolicyNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteEdgeRouterPolicyConflictCode is the HTTP code returned for type DeleteEdgeRouterPolicyConflict
 const DeleteEdgeRouterPolicyConflictCode int = 409
 

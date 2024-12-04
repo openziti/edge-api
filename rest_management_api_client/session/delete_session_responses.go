@@ -65,6 +65,12 @@ func (o *DeleteSessionReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteSessionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteSessionConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +173,38 @@ func (o *DeleteSessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DeleteSessionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteSessionNotFound creates a DeleteSessionNotFound with default headers values
+func NewDeleteSessionNotFound() *DeleteSessionNotFound {
+	return &DeleteSessionNotFound{}
+}
+
+/* DeleteSessionNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteSessionNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteSessionNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteSessionNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteSessionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

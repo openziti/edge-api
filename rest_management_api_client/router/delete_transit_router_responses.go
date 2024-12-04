@@ -65,6 +65,12 @@ func (o *DeleteTransitRouterReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteTransitRouterNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteTransitRouterConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +173,38 @@ func (o *DeleteTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteTransitRouterUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteTransitRouterNotFound creates a DeleteTransitRouterNotFound with default headers values
+func NewDeleteTransitRouterNotFound() *DeleteTransitRouterNotFound {
+	return &DeleteTransitRouterNotFound{}
+}
+
+/* DeleteTransitRouterNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteTransitRouterNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteTransitRouterNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteTransitRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

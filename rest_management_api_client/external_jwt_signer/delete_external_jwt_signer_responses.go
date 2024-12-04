@@ -65,6 +65,12 @@ func (o *DeleteExternalJWTSignerReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteExternalJWTSignerNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteExternalJWTSignerTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -161,6 +167,38 @@ func (o *DeleteExternalJWTSignerUnauthorized) GetPayload() *rest_model.APIErrorE
 }
 
 func (o *DeleteExternalJWTSignerUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteExternalJWTSignerNotFound creates a DeleteExternalJWTSignerNotFound with default headers values
+func NewDeleteExternalJWTSignerNotFound() *DeleteExternalJWTSignerNotFound {
+	return &DeleteExternalJWTSignerNotFound{}
+}
+
+/* DeleteExternalJWTSignerNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteExternalJWTSignerNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteExternalJWTSignerNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /external-jwt-signers/{id}][%d] deleteExternalJwtSignerNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteExternalJWTSignerNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteExternalJWTSignerNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
