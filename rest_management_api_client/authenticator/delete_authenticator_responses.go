@@ -65,6 +65,12 @@ func (o *DeleteAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteAuthenticatorNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteAuthenticatorTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -161,6 +167,38 @@ func (o *DeleteAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteAuthenticatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteAuthenticatorNotFound creates a DeleteAuthenticatorNotFound with default headers values
+func NewDeleteAuthenticatorNotFound() *DeleteAuthenticatorNotFound {
+	return &DeleteAuthenticatorNotFound{}
+}
+
+/* DeleteAuthenticatorNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteAuthenticatorNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteAuthenticatorNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteAuthenticatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

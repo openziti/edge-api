@@ -169,6 +169,50 @@ func (o *DeleteExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 	}
 }
 
+// DeleteExternalJWTSignerNotFoundCode is the HTTP code returned for type DeleteExternalJWTSignerNotFound
+const DeleteExternalJWTSignerNotFoundCode int = 404
+
+/*DeleteExternalJWTSignerNotFound The requested resource does not exist
+
+swagger:response deleteExternalJwtSignerNotFound
+*/
+type DeleteExternalJWTSignerNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteExternalJWTSignerNotFound creates DeleteExternalJWTSignerNotFound with default headers values
+func NewDeleteExternalJWTSignerNotFound() *DeleteExternalJWTSignerNotFound {
+
+	return &DeleteExternalJWTSignerNotFound{}
+}
+
+// WithPayload adds the payload to the delete external Jwt signer not found response
+func (o *DeleteExternalJWTSignerNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteExternalJWTSignerNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete external Jwt signer not found response
+func (o *DeleteExternalJWTSignerNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type DeleteExternalJWTSignerTooManyRequests
 const DeleteExternalJWTSignerTooManyRequestsCode int = 429
 

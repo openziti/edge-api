@@ -169,6 +169,50 @@ func (o *DeleteIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, produ
 	}
 }
 
+// DeleteIdentityNotFoundCode is the HTTP code returned for type DeleteIdentityNotFound
+const DeleteIdentityNotFoundCode int = 404
+
+/*DeleteIdentityNotFound The requested resource does not exist
+
+swagger:response deleteIdentityNotFound
+*/
+type DeleteIdentityNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteIdentityNotFound creates DeleteIdentityNotFound with default headers values
+func NewDeleteIdentityNotFound() *DeleteIdentityNotFound {
+
+	return &DeleteIdentityNotFound{}
+}
+
+// WithPayload adds the payload to the delete identity not found response
+func (o *DeleteIdentityNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteIdentityNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete identity not found response
+func (o *DeleteIdentityNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteIdentityConflictCode is the HTTP code returned for type DeleteIdentityConflict
 const DeleteIdentityConflictCode int = 409
 

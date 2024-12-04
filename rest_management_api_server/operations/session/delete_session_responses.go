@@ -169,6 +169,50 @@ func (o *DeleteSessionUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 	}
 }
 
+// DeleteSessionNotFoundCode is the HTTP code returned for type DeleteSessionNotFound
+const DeleteSessionNotFoundCode int = 404
+
+/*DeleteSessionNotFound The requested resource does not exist
+
+swagger:response deleteSessionNotFound
+*/
+type DeleteSessionNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteSessionNotFound creates DeleteSessionNotFound with default headers values
+func NewDeleteSessionNotFound() *DeleteSessionNotFound {
+
+	return &DeleteSessionNotFound{}
+}
+
+// WithPayload adds the payload to the delete session not found response
+func (o *DeleteSessionNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteSessionNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete session not found response
+func (o *DeleteSessionNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteSessionNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteSessionConflictCode is the HTTP code returned for type DeleteSessionConflict
 const DeleteSessionConflictCode int = 409
 

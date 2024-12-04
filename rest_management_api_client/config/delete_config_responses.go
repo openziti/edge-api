@@ -65,6 +65,12 @@ func (o *DeleteConfigReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteConfigNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteConfigConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +173,38 @@ func (o *DeleteConfigUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DeleteConfigUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteConfigNotFound creates a DeleteConfigNotFound with default headers values
+func NewDeleteConfigNotFound() *DeleteConfigNotFound {
+	return &DeleteConfigNotFound{}
+}
+
+/* DeleteConfigNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteConfigNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteConfigNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /configs/{id}][%d] deleteConfigNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteConfigNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteConfigNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

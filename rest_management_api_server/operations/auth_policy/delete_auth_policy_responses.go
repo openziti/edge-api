@@ -169,6 +169,50 @@ func (o *DeleteAuthPolicyUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 	}
 }
 
+// DeleteAuthPolicyNotFoundCode is the HTTP code returned for type DeleteAuthPolicyNotFound
+const DeleteAuthPolicyNotFoundCode int = 404
+
+/*DeleteAuthPolicyNotFound The requested resource does not exist
+
+swagger:response deleteAuthPolicyNotFound
+*/
+type DeleteAuthPolicyNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAuthPolicyNotFound creates DeleteAuthPolicyNotFound with default headers values
+func NewDeleteAuthPolicyNotFound() *DeleteAuthPolicyNotFound {
+
+	return &DeleteAuthPolicyNotFound{}
+}
+
+// WithPayload adds the payload to the delete auth policy not found response
+func (o *DeleteAuthPolicyNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAuthPolicyNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete auth policy not found response
+func (o *DeleteAuthPolicyNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAuthPolicyNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteAuthPolicyTooManyRequestsCode is the HTTP code returned for type DeleteAuthPolicyTooManyRequests
 const DeleteAuthPolicyTooManyRequestsCode int = 429
 
