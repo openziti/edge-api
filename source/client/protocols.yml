@@ -12,6 +12,8 @@ paths:
           $ref: '#/responses/listProtocols'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
 responses:
   listProtocols:

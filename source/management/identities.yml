@@ -26,6 +26,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     post:
       summary: Create an identity resource
@@ -52,6 +54,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id:
     parameters:
@@ -74,6 +78,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     put:
       summary: Update all fields on an identity
@@ -102,6 +108,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     patch:
       summary: Update the supplied fields on an identity
@@ -130,6 +138,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     delete:
       summary: Delete an identity
@@ -147,10 +157,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-edge-router-policies:
     parameters:
@@ -173,6 +187,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-service-configs:
     parameters:
@@ -195,6 +211,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     post:
       summary: Associate service configs for a specific identity
@@ -223,6 +241,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     delete:
       summary: Remove associated service configs from a specific identity
@@ -251,6 +271,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-service-policies:
     parameters:
@@ -273,6 +295,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-edge-routers:
     parameters:
@@ -296,6 +320,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-services:
     parameters:
@@ -322,6 +348,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-policy-advice-service-id:
     parameters:
@@ -349,6 +377,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-posture-data:
     parameters:
@@ -373,6 +403,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-authenticators:
     parameters:
@@ -396,6 +428,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-enrollments:
     parameters:
@@ -419,6 +453,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-failed-service-requests:
     parameters:
@@ -444,6 +480,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-mfa:
     parameters:
@@ -468,6 +506,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-trace:
     parameters:
@@ -501,6 +541,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-enable:
     parameters:
@@ -524,6 +566,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   identities-id-disable:
     parameters:
@@ -554,6 +598,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
 responses:
   listIdentities:

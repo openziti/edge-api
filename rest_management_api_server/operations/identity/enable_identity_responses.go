@@ -212,3 +212,47 @@ func (o *EnableIdentityTooManyRequests) WriteResponse(rw http.ResponseWriter, pr
 		}
 	}
 }
+
+// EnableIdentityServiceUnavailableCode is the HTTP code returned for type EnableIdentityServiceUnavailable
+const EnableIdentityServiceUnavailableCode int = 503
+
+/*EnableIdentityServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response enableIdentityServiceUnavailable
+*/
+type EnableIdentityServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnableIdentityServiceUnavailable creates EnableIdentityServiceUnavailable with default headers values
+func NewEnableIdentityServiceUnavailable() *EnableIdentityServiceUnavailable {
+
+	return &EnableIdentityServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the enable identity service unavailable response
+func (o *EnableIdentityServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *EnableIdentityServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enable identity service unavailable response
+func (o *EnableIdentityServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnableIdentityServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

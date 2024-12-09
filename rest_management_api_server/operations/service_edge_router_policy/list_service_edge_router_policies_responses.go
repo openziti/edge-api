@@ -212,3 +212,47 @@ func (o *ListServiceEdgeRouterPoliciesTooManyRequests) WriteResponse(rw http.Res
 		}
 	}
 }
+
+// ListServiceEdgeRouterPoliciesServiceUnavailableCode is the HTTP code returned for type ListServiceEdgeRouterPoliciesServiceUnavailable
+const ListServiceEdgeRouterPoliciesServiceUnavailableCode int = 503
+
+/*ListServiceEdgeRouterPoliciesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listServiceEdgeRouterPoliciesServiceUnavailable
+*/
+type ListServiceEdgeRouterPoliciesServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServiceEdgeRouterPoliciesServiceUnavailable creates ListServiceEdgeRouterPoliciesServiceUnavailable with default headers values
+func NewListServiceEdgeRouterPoliciesServiceUnavailable() *ListServiceEdgeRouterPoliciesServiceUnavailable {
+
+	return &ListServiceEdgeRouterPoliciesServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list service edge router policies service unavailable response
+func (o *ListServiceEdgeRouterPoliciesServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServiceEdgeRouterPoliciesServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list service edge router policies service unavailable response
+func (o *ListServiceEdgeRouterPoliciesServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServiceEdgeRouterPoliciesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

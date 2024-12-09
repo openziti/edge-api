@@ -256,3 +256,47 @@ func (o *VerifyCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer
 		}
 	}
 }
+
+// VerifyCaServiceUnavailableCode is the HTTP code returned for type VerifyCaServiceUnavailable
+const VerifyCaServiceUnavailableCode int = 503
+
+/*VerifyCaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response verifyCaServiceUnavailable
+*/
+type VerifyCaServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewVerifyCaServiceUnavailable creates VerifyCaServiceUnavailable with default headers values
+func NewVerifyCaServiceUnavailable() *VerifyCaServiceUnavailable {
+
+	return &VerifyCaServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the verify ca service unavailable response
+func (o *VerifyCaServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *VerifyCaServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the verify ca service unavailable response
+func (o *VerifyCaServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *VerifyCaServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

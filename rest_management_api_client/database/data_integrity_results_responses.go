@@ -65,6 +65,12 @@ func (o *DataIntegrityResultsReader) ReadResponse(response runtime.ClientRespons
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewDataIntegrityResultsServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *DataIntegrityResultsTooManyRequests) GetPayload() *rest_model.APIErrorE
 }
 
 func (o *DataIntegrityResultsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDataIntegrityResultsServiceUnavailable creates a DataIntegrityResultsServiceUnavailable with default headers values
+func NewDataIntegrityResultsServiceUnavailable() *DataIntegrityResultsServiceUnavailable {
+	return &DataIntegrityResultsServiceUnavailable{}
+}
+
+/* DataIntegrityResultsServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DataIntegrityResultsServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DataIntegrityResultsServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DataIntegrityResultsServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DataIntegrityResultsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

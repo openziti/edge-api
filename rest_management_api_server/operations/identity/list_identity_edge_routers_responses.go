@@ -212,3 +212,47 @@ func (o *ListIdentityEdgeRoutersTooManyRequests) WriteResponse(rw http.ResponseW
 		}
 	}
 }
+
+// ListIdentityEdgeRoutersServiceUnavailableCode is the HTTP code returned for type ListIdentityEdgeRoutersServiceUnavailable
+const ListIdentityEdgeRoutersServiceUnavailableCode int = 503
+
+/*ListIdentityEdgeRoutersServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listIdentityEdgeRoutersServiceUnavailable
+*/
+type ListIdentityEdgeRoutersServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListIdentityEdgeRoutersServiceUnavailable creates ListIdentityEdgeRoutersServiceUnavailable with default headers values
+func NewListIdentityEdgeRoutersServiceUnavailable() *ListIdentityEdgeRoutersServiceUnavailable {
+
+	return &ListIdentityEdgeRoutersServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list identity edge routers service unavailable response
+func (o *ListIdentityEdgeRoutersServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListIdentityEdgeRoutersServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list identity edge routers service unavailable response
+func (o *ListIdentityEdgeRoutersServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListIdentityEdgeRoutersServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

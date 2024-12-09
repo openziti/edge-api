@@ -212,3 +212,47 @@ func (o *GetIdentityAuthenticatorsTooManyRequests) WriteResponse(rw http.Respons
 		}
 	}
 }
+
+// GetIdentityAuthenticatorsServiceUnavailableCode is the HTTP code returned for type GetIdentityAuthenticatorsServiceUnavailable
+const GetIdentityAuthenticatorsServiceUnavailableCode int = 503
+
+/*GetIdentityAuthenticatorsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response getIdentityAuthenticatorsServiceUnavailable
+*/
+type GetIdentityAuthenticatorsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityAuthenticatorsServiceUnavailable creates GetIdentityAuthenticatorsServiceUnavailable with default headers values
+func NewGetIdentityAuthenticatorsServiceUnavailable() *GetIdentityAuthenticatorsServiceUnavailable {
+
+	return &GetIdentityAuthenticatorsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the get identity authenticators service unavailable response
+func (o *GetIdentityAuthenticatorsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityAuthenticatorsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity authenticators service unavailable response
+func (o *GetIdentityAuthenticatorsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityAuthenticatorsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -28,6 +28,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     post:
       summary: Creates a Posture Checks
@@ -54,6 +56,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   posture-checks-id:
     parameters:
@@ -76,6 +80,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     put:
       summary: Update all fields on a Posture Checks
@@ -104,6 +110,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     patch:
       summary: Update the supplied fields on a Posture Checks
@@ -132,6 +140,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
     delete:
       summary: Deletes an Posture Checks
@@ -151,6 +161,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
 responses:
   listPostureChecks:

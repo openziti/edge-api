@@ -65,6 +65,12 @@ func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteEdgeRouterNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteEdgeRouterConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -73,6 +79,12 @@ func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, result
 	case 429:
 		result := NewDeleteEdgeRouterTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteEdgeRouterServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -178,6 +190,38 @@ func (o *DeleteEdgeRouterUnauthorized) readResponse(response runtime.ClientRespo
 	return nil
 }
 
+// NewDeleteEdgeRouterNotFound creates a DeleteEdgeRouterNotFound with default headers values
+func NewDeleteEdgeRouterNotFound() *DeleteEdgeRouterNotFound {
+	return &DeleteEdgeRouterNotFound{}
+}
+
+/* DeleteEdgeRouterNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteEdgeRouterNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteEdgeRouterNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteEdgeRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteEdgeRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteEdgeRouterConflict creates a DeleteEdgeRouterConflict with default headers values
 func NewDeleteEdgeRouterConflict() *DeleteEdgeRouterConflict {
 	return &DeleteEdgeRouterConflict{}
@@ -231,6 +275,38 @@ func (o *DeleteEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteEdgeRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteEdgeRouterServiceUnavailable creates a DeleteEdgeRouterServiceUnavailable with default headers values
+func NewDeleteEdgeRouterServiceUnavailable() *DeleteEdgeRouterServiceUnavailable {
+	return &DeleteEdgeRouterServiceUnavailable{}
+}
+
+/* DeleteEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteEdgeRouterServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteEdgeRouterServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteEdgeRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteEdgeRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

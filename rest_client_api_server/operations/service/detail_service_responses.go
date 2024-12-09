@@ -212,3 +212,47 @@ func (o *DetailServiceTooManyRequests) WriteResponse(rw http.ResponseWriter, pro
 		}
 	}
 }
+
+// DetailServiceServiceUnavailableCode is the HTTP code returned for type DetailServiceServiceUnavailable
+const DetailServiceServiceUnavailableCode int = 503
+
+/*DetailServiceServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailServiceServiceUnavailable
+*/
+type DetailServiceServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailServiceServiceUnavailable creates DetailServiceServiceUnavailable with default headers values
+func NewDetailServiceServiceUnavailable() *DetailServiceServiceUnavailable {
+
+	return &DetailServiceServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail service service unavailable response
+func (o *DetailServiceServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailServiceServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail service service unavailable response
+func (o *DetailServiceServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailServiceServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

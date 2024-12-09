@@ -169,6 +169,50 @@ func (o *DeleteEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 	}
 }
 
+// DeleteEnrollmentNotFoundCode is the HTTP code returned for type DeleteEnrollmentNotFound
+const DeleteEnrollmentNotFoundCode int = 404
+
+/*DeleteEnrollmentNotFound The requested resource does not exist
+
+swagger:response deleteEnrollmentNotFound
+*/
+type DeleteEnrollmentNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteEnrollmentNotFound creates DeleteEnrollmentNotFound with default headers values
+func NewDeleteEnrollmentNotFound() *DeleteEnrollmentNotFound {
+
+	return &DeleteEnrollmentNotFound{}
+}
+
+// WithPayload adds the payload to the delete enrollment not found response
+func (o *DeleteEnrollmentNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteEnrollmentNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete enrollment not found response
+func (o *DeleteEnrollmentNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteEnrollmentNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteEnrollmentTooManyRequestsCode is the HTTP code returned for type DeleteEnrollmentTooManyRequests
 const DeleteEnrollmentTooManyRequestsCode int = 429
 
@@ -205,6 +249,50 @@ func (o *DeleteEnrollmentTooManyRequests) SetPayload(payload *rest_model.APIErro
 func (o *DeleteEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// DeleteEnrollmentServiceUnavailableCode is the HTTP code returned for type DeleteEnrollmentServiceUnavailable
+const DeleteEnrollmentServiceUnavailableCode int = 503
+
+/*DeleteEnrollmentServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteEnrollmentServiceUnavailable
+*/
+type DeleteEnrollmentServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteEnrollmentServiceUnavailable creates DeleteEnrollmentServiceUnavailable with default headers values
+func NewDeleteEnrollmentServiceUnavailable() *DeleteEnrollmentServiceUnavailable {
+
+	return &DeleteEnrollmentServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete enrollment service unavailable response
+func (o *DeleteEnrollmentServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteEnrollmentServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete enrollment service unavailable response
+func (o *DeleteEnrollmentServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteEnrollmentServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
 	if o.Payload != nil {
 		payload := o.Payload
 		if err := producer.Produce(rw, payload); err != nil {

@@ -168,3 +168,47 @@ func (o *DataIntegrityResultsTooManyRequests) WriteResponse(rw http.ResponseWrit
 		}
 	}
 }
+
+// DataIntegrityResultsServiceUnavailableCode is the HTTP code returned for type DataIntegrityResultsServiceUnavailable
+const DataIntegrityResultsServiceUnavailableCode int = 503
+
+/*DataIntegrityResultsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response dataIntegrityResultsServiceUnavailable
+*/
+type DataIntegrityResultsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDataIntegrityResultsServiceUnavailable creates DataIntegrityResultsServiceUnavailable with default headers values
+func NewDataIntegrityResultsServiceUnavailable() *DataIntegrityResultsServiceUnavailable {
+
+	return &DataIntegrityResultsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the data integrity results service unavailable response
+func (o *DataIntegrityResultsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DataIntegrityResultsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the data integrity results service unavailable response
+func (o *DataIntegrityResultsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DataIntegrityResultsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

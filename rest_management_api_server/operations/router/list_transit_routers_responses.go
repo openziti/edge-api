@@ -212,3 +212,47 @@ func (o *ListTransitRoutersTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// ListTransitRoutersServiceUnavailableCode is the HTTP code returned for type ListTransitRoutersServiceUnavailable
+const ListTransitRoutersServiceUnavailableCode int = 503
+
+/*ListTransitRoutersServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listTransitRoutersServiceUnavailable
+*/
+type ListTransitRoutersServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListTransitRoutersServiceUnavailable creates ListTransitRoutersServiceUnavailable with default headers values
+func NewListTransitRoutersServiceUnavailable() *ListTransitRoutersServiceUnavailable {
+
+	return &ListTransitRoutersServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list transit routers service unavailable response
+func (o *ListTransitRoutersServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListTransitRoutersServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list transit routers service unavailable response
+func (o *ListTransitRoutersServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListTransitRoutersServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

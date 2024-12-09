@@ -169,6 +169,50 @@ func (o *DeleteCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 	}
 }
 
+// DeleteCaNotFoundCode is the HTTP code returned for type DeleteCaNotFound
+const DeleteCaNotFoundCode int = 404
+
+/*DeleteCaNotFound The requested resource does not exist
+
+swagger:response deleteCaNotFound
+*/
+type DeleteCaNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteCaNotFound creates DeleteCaNotFound with default headers values
+func NewDeleteCaNotFound() *DeleteCaNotFound {
+
+	return &DeleteCaNotFound{}
+}
+
+// WithPayload adds the payload to the delete ca not found response
+func (o *DeleteCaNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteCaNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete ca not found response
+func (o *DeleteCaNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteCaTooManyRequestsCode is the HTTP code returned for type DeleteCaTooManyRequests
 const DeleteCaTooManyRequestsCode int = 429
 
@@ -205,6 +249,50 @@ func (o *DeleteCaTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelop
 func (o *DeleteCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// DeleteCaServiceUnavailableCode is the HTTP code returned for type DeleteCaServiceUnavailable
+const DeleteCaServiceUnavailableCode int = 503
+
+/*DeleteCaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteCaServiceUnavailable
+*/
+type DeleteCaServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteCaServiceUnavailable creates DeleteCaServiceUnavailable with default headers values
+func NewDeleteCaServiceUnavailable() *DeleteCaServiceUnavailable {
+
+	return &DeleteCaServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete ca service unavailable response
+func (o *DeleteCaServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteCaServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete ca service unavailable response
+func (o *DeleteCaServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteCaServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
 	if o.Payload != nil {
 		payload := o.Payload
 		if err := producer.Produce(rw, payload); err != nil {

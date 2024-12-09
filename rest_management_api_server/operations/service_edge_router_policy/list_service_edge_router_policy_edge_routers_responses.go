@@ -212,3 +212,47 @@ func (o *ListServiceEdgeRouterPolicyEdgeRoutersTooManyRequests) WriteResponse(rw
 		}
 	}
 }
+
+// ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailableCode is the HTTP code returned for type ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable
+const ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailableCode int = 503
+
+/*ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable
+*/
+type ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable creates ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable with default headers values
+func NewListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable() *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable {
+
+	return &ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list service edge router policy edge routers service unavailable response
+func (o *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list service edge router policy edge routers service unavailable response
+func (o *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

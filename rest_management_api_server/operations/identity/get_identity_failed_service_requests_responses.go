@@ -212,3 +212,47 @@ func (o *GetIdentityFailedServiceRequestsTooManyRequests) WriteResponse(rw http.
 		}
 	}
 }
+
+// GetIdentityFailedServiceRequestsServiceUnavailableCode is the HTTP code returned for type GetIdentityFailedServiceRequestsServiceUnavailable
+const GetIdentityFailedServiceRequestsServiceUnavailableCode int = 503
+
+/*GetIdentityFailedServiceRequestsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response getIdentityFailedServiceRequestsServiceUnavailable
+*/
+type GetIdentityFailedServiceRequestsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityFailedServiceRequestsServiceUnavailable creates GetIdentityFailedServiceRequestsServiceUnavailable with default headers values
+func NewGetIdentityFailedServiceRequestsServiceUnavailable() *GetIdentityFailedServiceRequestsServiceUnavailable {
+
+	return &GetIdentityFailedServiceRequestsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the get identity failed service requests service unavailable response
+func (o *GetIdentityFailedServiceRequestsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityFailedServiceRequestsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity failed service requests service unavailable response
+func (o *GetIdentityFailedServiceRequestsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityFailedServiceRequestsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

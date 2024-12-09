@@ -212,3 +212,47 @@ func (o *ListPostureCheckRoleAttributesTooManyRequests) WriteResponse(rw http.Re
 		}
 	}
 }
+
+// ListPostureCheckRoleAttributesServiceUnavailableCode is the HTTP code returned for type ListPostureCheckRoleAttributesServiceUnavailable
+const ListPostureCheckRoleAttributesServiceUnavailableCode int = 503
+
+/*ListPostureCheckRoleAttributesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listPostureCheckRoleAttributesServiceUnavailable
+*/
+type ListPostureCheckRoleAttributesServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListPostureCheckRoleAttributesServiceUnavailable creates ListPostureCheckRoleAttributesServiceUnavailable with default headers values
+func NewListPostureCheckRoleAttributesServiceUnavailable() *ListPostureCheckRoleAttributesServiceUnavailable {
+
+	return &ListPostureCheckRoleAttributesServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list posture check role attributes service unavailable response
+func (o *ListPostureCheckRoleAttributesServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListPostureCheckRoleAttributesServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list posture check role attributes service unavailable response
+func (o *ListPostureCheckRoleAttributesServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListPostureCheckRoleAttributesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

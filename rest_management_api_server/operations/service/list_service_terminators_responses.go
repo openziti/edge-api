@@ -212,3 +212,47 @@ func (o *ListServiceTerminatorsTooManyRequests) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// ListServiceTerminatorsServiceUnavailableCode is the HTTP code returned for type ListServiceTerminatorsServiceUnavailable
+const ListServiceTerminatorsServiceUnavailableCode int = 503
+
+/*ListServiceTerminatorsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listServiceTerminatorsServiceUnavailable
+*/
+type ListServiceTerminatorsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServiceTerminatorsServiceUnavailable creates ListServiceTerminatorsServiceUnavailable with default headers values
+func NewListServiceTerminatorsServiceUnavailable() *ListServiceTerminatorsServiceUnavailable {
+
+	return &ListServiceTerminatorsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list service terminators service unavailable response
+func (o *ListServiceTerminatorsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServiceTerminatorsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list service terminators service unavailable response
+func (o *ListServiceTerminatorsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServiceTerminatorsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

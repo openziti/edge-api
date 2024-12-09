@@ -28,7 +28,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
   api-sessions-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -50,7 +51,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
     delete:
       summary: Deletes an API Sessions
       description: Deletes and API sesion by id. Requires admin access.
@@ -70,7 +72,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 responses:
   listAPISessions:
     description: A list of active API Sessions

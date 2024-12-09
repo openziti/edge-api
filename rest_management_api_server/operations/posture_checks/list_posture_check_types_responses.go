@@ -212,3 +212,47 @@ func (o *ListPostureCheckTypesTooManyRequests) WriteResponse(rw http.ResponseWri
 		}
 	}
 }
+
+// ListPostureCheckTypesServiceUnavailableCode is the HTTP code returned for type ListPostureCheckTypesServiceUnavailable
+const ListPostureCheckTypesServiceUnavailableCode int = 503
+
+/*ListPostureCheckTypesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listPostureCheckTypesServiceUnavailable
+*/
+type ListPostureCheckTypesServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListPostureCheckTypesServiceUnavailable creates ListPostureCheckTypesServiceUnavailable with default headers values
+func NewListPostureCheckTypesServiceUnavailable() *ListPostureCheckTypesServiceUnavailable {
+
+	return &ListPostureCheckTypesServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list posture check types service unavailable response
+func (o *ListPostureCheckTypesServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListPostureCheckTypesServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list posture check types service unavailable response
+func (o *ListPostureCheckTypesServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListPostureCheckTypesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

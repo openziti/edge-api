@@ -71,6 +71,12 @@ func (o *CreateEdgeRouterPolicyReader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewCreateEdgeRouterPolicyServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *CreateEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErro
 }
 
 func (o *CreateEdgeRouterPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateEdgeRouterPolicyServiceUnavailable creates a CreateEdgeRouterPolicyServiceUnavailable with default headers values
+func NewCreateEdgeRouterPolicyServiceUnavailable() *CreateEdgeRouterPolicyServiceUnavailable {
+	return &CreateEdgeRouterPolicyServiceUnavailable{}
+}
+
+/* CreateEdgeRouterPolicyServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type CreateEdgeRouterPolicyServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateEdgeRouterPolicyServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /edge-router-policies][%d] createEdgeRouterPolicyServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *CreateEdgeRouterPolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateEdgeRouterPolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

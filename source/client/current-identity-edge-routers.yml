@@ -20,6 +20,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
 responses:
   listCurrentIdentityEdgeRouters:

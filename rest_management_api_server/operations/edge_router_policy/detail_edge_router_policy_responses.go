@@ -212,3 +212,47 @@ func (o *DetailEdgeRouterPolicyTooManyRequests) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// DetailEdgeRouterPolicyServiceUnavailableCode is the HTTP code returned for type DetailEdgeRouterPolicyServiceUnavailable
+const DetailEdgeRouterPolicyServiceUnavailableCode int = 503
+
+/*DetailEdgeRouterPolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailEdgeRouterPolicyServiceUnavailable
+*/
+type DetailEdgeRouterPolicyServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailEdgeRouterPolicyServiceUnavailable creates DetailEdgeRouterPolicyServiceUnavailable with default headers values
+func NewDetailEdgeRouterPolicyServiceUnavailable() *DetailEdgeRouterPolicyServiceUnavailable {
+
+	return &DetailEdgeRouterPolicyServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail edge router policy service unavailable response
+func (o *DetailEdgeRouterPolicyServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailEdgeRouterPolicyServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail edge router policy service unavailable response
+func (o *DetailEdgeRouterPolicyServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailEdgeRouterPolicyServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

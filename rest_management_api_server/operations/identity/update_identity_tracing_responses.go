@@ -256,3 +256,47 @@ func (o *UpdateIdentityTracingTooManyRequests) WriteResponse(rw http.ResponseWri
 		}
 	}
 }
+
+// UpdateIdentityTracingServiceUnavailableCode is the HTTP code returned for type UpdateIdentityTracingServiceUnavailable
+const UpdateIdentityTracingServiceUnavailableCode int = 503
+
+/*UpdateIdentityTracingServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response updateIdentityTracingServiceUnavailable
+*/
+type UpdateIdentityTracingServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdateIdentityTracingServiceUnavailable creates UpdateIdentityTracingServiceUnavailable with default headers values
+func NewUpdateIdentityTracingServiceUnavailable() *UpdateIdentityTracingServiceUnavailable {
+
+	return &UpdateIdentityTracingServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the update identity tracing service unavailable response
+func (o *UpdateIdentityTracingServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdateIdentityTracingServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update identity tracing service unavailable response
+func (o *UpdateIdentityTracingServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdateIdentityTracingServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

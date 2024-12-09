@@ -71,6 +71,12 @@ func (o *DetailPostureCheckTypeReader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewDetailPostureCheckTypeServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *DetailPostureCheckTypeTooManyRequests) GetPayload() *rest_model.APIErro
 }
 
 func (o *DetailPostureCheckTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDetailPostureCheckTypeServiceUnavailable creates a DetailPostureCheckTypeServiceUnavailable with default headers values
+func NewDetailPostureCheckTypeServiceUnavailable() *DetailPostureCheckTypeServiceUnavailable {
+	return &DetailPostureCheckTypeServiceUnavailable{}
+}
+
+/* DetailPostureCheckTypeServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DetailPostureCheckTypeServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DetailPostureCheckTypeServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /posture-check-types/{id}][%d] detailPostureCheckTypeServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DetailPostureCheckTypeServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DetailPostureCheckTypeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

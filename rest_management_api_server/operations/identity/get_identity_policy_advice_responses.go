@@ -212,3 +212,47 @@ func (o *GetIdentityPolicyAdviceTooManyRequests) WriteResponse(rw http.ResponseW
 		}
 	}
 }
+
+// GetIdentityPolicyAdviceServiceUnavailableCode is the HTTP code returned for type GetIdentityPolicyAdviceServiceUnavailable
+const GetIdentityPolicyAdviceServiceUnavailableCode int = 503
+
+/*GetIdentityPolicyAdviceServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response getIdentityPolicyAdviceServiceUnavailable
+*/
+type GetIdentityPolicyAdviceServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityPolicyAdviceServiceUnavailable creates GetIdentityPolicyAdviceServiceUnavailable with default headers values
+func NewGetIdentityPolicyAdviceServiceUnavailable() *GetIdentityPolicyAdviceServiceUnavailable {
+
+	return &GetIdentityPolicyAdviceServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the get identity policy advice service unavailable response
+func (o *GetIdentityPolicyAdviceServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityPolicyAdviceServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity policy advice service unavailable response
+func (o *GetIdentityPolicyAdviceServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityPolicyAdviceServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

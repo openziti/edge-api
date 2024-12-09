@@ -212,3 +212,47 @@ func (o *GetIdentityPostureDataTooManyRequests) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// GetIdentityPostureDataServiceUnavailableCode is the HTTP code returned for type GetIdentityPostureDataServiceUnavailable
+const GetIdentityPostureDataServiceUnavailableCode int = 503
+
+/*GetIdentityPostureDataServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response getIdentityPostureDataServiceUnavailable
+*/
+type GetIdentityPostureDataServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityPostureDataServiceUnavailable creates GetIdentityPostureDataServiceUnavailable with default headers values
+func NewGetIdentityPostureDataServiceUnavailable() *GetIdentityPostureDataServiceUnavailable {
+
+	return &GetIdentityPostureDataServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the get identity posture data service unavailable response
+func (o *GetIdentityPostureDataServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityPostureDataServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity posture data service unavailable response
+func (o *GetIdentityPostureDataServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityPostureDataServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

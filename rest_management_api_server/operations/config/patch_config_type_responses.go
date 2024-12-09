@@ -256,3 +256,47 @@ func (o *PatchConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, p
 		}
 	}
 }
+
+// PatchConfigTypeServiceUnavailableCode is the HTTP code returned for type PatchConfigTypeServiceUnavailable
+const PatchConfigTypeServiceUnavailableCode int = 503
+
+/*PatchConfigTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response patchConfigTypeServiceUnavailable
+*/
+type PatchConfigTypeServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewPatchConfigTypeServiceUnavailable creates PatchConfigTypeServiceUnavailable with default headers values
+func NewPatchConfigTypeServiceUnavailable() *PatchConfigTypeServiceUnavailable {
+
+	return &PatchConfigTypeServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the patch config type service unavailable response
+func (o *PatchConfigTypeServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *PatchConfigTypeServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the patch config type service unavailable response
+func (o *PatchConfigTypeServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PatchConfigTypeServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

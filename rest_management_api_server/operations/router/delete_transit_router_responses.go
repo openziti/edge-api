@@ -169,6 +169,50 @@ func (o *DeleteTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, 
 	}
 }
 
+// DeleteTransitRouterNotFoundCode is the HTTP code returned for type DeleteTransitRouterNotFound
+const DeleteTransitRouterNotFoundCode int = 404
+
+/*DeleteTransitRouterNotFound The requested resource does not exist
+
+swagger:response deleteTransitRouterNotFound
+*/
+type DeleteTransitRouterNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteTransitRouterNotFound creates DeleteTransitRouterNotFound with default headers values
+func NewDeleteTransitRouterNotFound() *DeleteTransitRouterNotFound {
+
+	return &DeleteTransitRouterNotFound{}
+}
+
+// WithPayload adds the payload to the delete transit router not found response
+func (o *DeleteTransitRouterNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteTransitRouterNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete transit router not found response
+func (o *DeleteTransitRouterNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteTransitRouterNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteTransitRouterConflictCode is the HTTP code returned for type DeleteTransitRouterConflict
 const DeleteTransitRouterConflictCode int = 409
 
@@ -249,6 +293,50 @@ func (o *DeleteTransitRouterTooManyRequests) SetPayload(payload *rest_model.APIE
 func (o *DeleteTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// DeleteTransitRouterServiceUnavailableCode is the HTTP code returned for type DeleteTransitRouterServiceUnavailable
+const DeleteTransitRouterServiceUnavailableCode int = 503
+
+/*DeleteTransitRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteTransitRouterServiceUnavailable
+*/
+type DeleteTransitRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteTransitRouterServiceUnavailable creates DeleteTransitRouterServiceUnavailable with default headers values
+func NewDeleteTransitRouterServiceUnavailable() *DeleteTransitRouterServiceUnavailable {
+
+	return &DeleteTransitRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete transit router service unavailable response
+func (o *DeleteTransitRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteTransitRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete transit router service unavailable response
+func (o *DeleteTransitRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteTransitRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
 	if o.Payload != nil {
 		payload := o.Payload
 		if err := producer.Produce(rw, payload); err != nil {

@@ -212,3 +212,47 @@ func (o *DetailTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// DetailTerminatorServiceUnavailableCode is the HTTP code returned for type DetailTerminatorServiceUnavailable
+const DetailTerminatorServiceUnavailableCode int = 503
+
+/*DetailTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailTerminatorServiceUnavailable
+*/
+type DetailTerminatorServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailTerminatorServiceUnavailable creates DetailTerminatorServiceUnavailable with default headers values
+func NewDetailTerminatorServiceUnavailable() *DetailTerminatorServiceUnavailable {
+
+	return &DetailTerminatorServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail terminator service unavailable response
+func (o *DetailTerminatorServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailTerminatorServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail terminator service unavailable response
+func (o *DetailTerminatorServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailTerminatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

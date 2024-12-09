@@ -24,7 +24,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
     post:
       summary: Create an edge router policy resource
       description: Create an edge router policy resource. Requires admin access.
@@ -50,7 +51,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
   edge-router-policies-id:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -72,7 +74,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
     put:
       summary: Update all fields on an edge router policy
       description: Update all fields on an edge router policy by id. Requires admin access.
@@ -100,7 +103,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
     patch:
       summary: Update the supplied fields on an edge router policy
       description: Update the supplied fields on an edge router policy. Requires admin access.
@@ -128,7 +132,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
     delete:
       summary: Delete an edge router policy
       description: Delete an edge router policy by id. Requires admin access.
@@ -145,11 +150,14 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '409':
           $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
   edge-router-policies-id-edge-routers:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -172,7 +180,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
   edge-router-policies-id-identities:
     parameters:
       - $ref: '../shared/parameters.yml#/id'
@@ -195,7 +204,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 responses:
   listEdgeRouterPolicies:
     description: A list of edge router policies

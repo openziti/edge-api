@@ -65,6 +65,12 @@ func (o *DeleteTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteTerminatorNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteTerminatorConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -73,6 +79,12 @@ func (o *DeleteTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, result
 	case 429:
 		result := NewDeleteTerminatorTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteTerminatorServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -178,6 +190,38 @@ func (o *DeleteTerminatorUnauthorized) readResponse(response runtime.ClientRespo
 	return nil
 }
 
+// NewDeleteTerminatorNotFound creates a DeleteTerminatorNotFound with default headers values
+func NewDeleteTerminatorNotFound() *DeleteTerminatorNotFound {
+	return &DeleteTerminatorNotFound{}
+}
+
+/* DeleteTerminatorNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteTerminatorNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteTerminatorNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteTerminatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteTerminatorConflict creates a DeleteTerminatorConflict with default headers values
 func NewDeleteTerminatorConflict() *DeleteTerminatorConflict {
 	return &DeleteTerminatorConflict{}
@@ -231,6 +275,38 @@ func (o *DeleteTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteTerminatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteTerminatorServiceUnavailable creates a DeleteTerminatorServiceUnavailable with default headers values
+func NewDeleteTerminatorServiceUnavailable() *DeleteTerminatorServiceUnavailable {
+	return &DeleteTerminatorServiceUnavailable{}
+}
+
+/* DeleteTerminatorServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteTerminatorServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteTerminatorServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteTerminatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteTerminatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

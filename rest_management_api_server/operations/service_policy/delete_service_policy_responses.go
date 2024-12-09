@@ -169,6 +169,50 @@ func (o *DeleteServicePolicyUnauthorized) WriteResponse(rw http.ResponseWriter, 
 	}
 }
 
+// DeleteServicePolicyNotFoundCode is the HTTP code returned for type DeleteServicePolicyNotFound
+const DeleteServicePolicyNotFoundCode int = 404
+
+/*DeleteServicePolicyNotFound The requested resource does not exist
+
+swagger:response deleteServicePolicyNotFound
+*/
+type DeleteServicePolicyNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteServicePolicyNotFound creates DeleteServicePolicyNotFound with default headers values
+func NewDeleteServicePolicyNotFound() *DeleteServicePolicyNotFound {
+
+	return &DeleteServicePolicyNotFound{}
+}
+
+// WithPayload adds the payload to the delete service policy not found response
+func (o *DeleteServicePolicyNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteServicePolicyNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete service policy not found response
+func (o *DeleteServicePolicyNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteServicePolicyNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteServicePolicyConflictCode is the HTTP code returned for type DeleteServicePolicyConflict
 const DeleteServicePolicyConflictCode int = 409
 
@@ -249,6 +293,50 @@ func (o *DeleteServicePolicyTooManyRequests) SetPayload(payload *rest_model.APIE
 func (o *DeleteServicePolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// DeleteServicePolicyServiceUnavailableCode is the HTTP code returned for type DeleteServicePolicyServiceUnavailable
+const DeleteServicePolicyServiceUnavailableCode int = 503
+
+/*DeleteServicePolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteServicePolicyServiceUnavailable
+*/
+type DeleteServicePolicyServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteServicePolicyServiceUnavailable creates DeleteServicePolicyServiceUnavailable with default headers values
+func NewDeleteServicePolicyServiceUnavailable() *DeleteServicePolicyServiceUnavailable {
+
+	return &DeleteServicePolicyServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete service policy service unavailable response
+func (o *DeleteServicePolicyServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteServicePolicyServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete service policy service unavailable response
+func (o *DeleteServicePolicyServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteServicePolicyServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
 	if o.Payload != nil {
 		payload := o.Payload
 		if err := producer.Produce(rw, payload); err != nil {

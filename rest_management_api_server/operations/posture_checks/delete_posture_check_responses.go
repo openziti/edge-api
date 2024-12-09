@@ -212,3 +212,47 @@ func (o *DeletePostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// DeletePostureCheckServiceUnavailableCode is the HTTP code returned for type DeletePostureCheckServiceUnavailable
+const DeletePostureCheckServiceUnavailableCode int = 503
+
+/*DeletePostureCheckServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deletePostureCheckServiceUnavailable
+*/
+type DeletePostureCheckServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeletePostureCheckServiceUnavailable creates DeletePostureCheckServiceUnavailable with default headers values
+func NewDeletePostureCheckServiceUnavailable() *DeletePostureCheckServiceUnavailable {
+
+	return &DeletePostureCheckServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete posture check service unavailable response
+func (o *DeletePostureCheckServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeletePostureCheckServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete posture check service unavailable response
+func (o *DeletePostureCheckServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeletePostureCheckServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

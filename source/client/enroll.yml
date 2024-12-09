@@ -26,6 +26,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   enroll-ca:
     post:
@@ -46,6 +48,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   enroll-ott:
     parameters:
@@ -72,6 +76,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   enroll-ottca:
     parameters:
@@ -98,6 +104,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   enroll-updb:
     parameters:
@@ -106,12 +114,12 @@ paths:
         in: body
         required: true
         schema:
-            type: object
-            properties:
-              username:
-                $ref: 'shared/authenticate.yml#/definitions/username'
-              password:
-                $ref: 'shared/authenticate.yml#/definitions/password'
+          type: object
+          properties:
+            username:
+              $ref: 'shared/authenticate.yml#/definitions/username'
+            password:
+              $ref: 'shared/authenticate.yml#/definitions/password'
     post:
       summary: Enroll an identity via one-time-token
       description: |
@@ -126,6 +134,8 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   enroll-erott:
     parameters:
@@ -147,6 +157,8 @@ paths:
           $ref: '#/responses/erOttResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
   enroll-extend-router:
     post:
@@ -208,12 +220,12 @@ paths:
       tags:
         - Enroll
       responses:
-          '200':
-            $ref: '#/responses/nonceChallengeResponse'
-          '400':
-            $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
-          '429':
-            $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '200':
+          $ref: '#/responses/nonceChallengeResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
 
 responses:
   erOttResponse:
@@ -245,10 +257,10 @@ definitions:
   ottEnrollmentRequest:
     type: object
     properties:
-        token:
-          type: string
-        clientCsr:
-          type: string
+      token:
+        type: string
+      clientCsr:
+        type: string
   erOttEnrollmentRequest:
     type: object
     properties:

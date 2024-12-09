@@ -212,3 +212,47 @@ func (o *ListEnrollmentsTooManyRequests) WriteResponse(rw http.ResponseWriter, p
 		}
 	}
 }
+
+// ListEnrollmentsServiceUnavailableCode is the HTTP code returned for type ListEnrollmentsServiceUnavailable
+const ListEnrollmentsServiceUnavailableCode int = 503
+
+/*ListEnrollmentsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listEnrollmentsServiceUnavailable
+*/
+type ListEnrollmentsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListEnrollmentsServiceUnavailable creates ListEnrollmentsServiceUnavailable with default headers values
+func NewListEnrollmentsServiceUnavailable() *ListEnrollmentsServiceUnavailable {
+
+	return &ListEnrollmentsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list enrollments service unavailable response
+func (o *ListEnrollmentsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListEnrollmentsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list enrollments service unavailable response
+func (o *ListEnrollmentsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListEnrollmentsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

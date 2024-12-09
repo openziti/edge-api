@@ -212,3 +212,47 @@ func (o *RemoveIdentityMfaTooManyRequests) WriteResponse(rw http.ResponseWriter,
 		}
 	}
 }
+
+// RemoveIdentityMfaServiceUnavailableCode is the HTTP code returned for type RemoveIdentityMfaServiceUnavailable
+const RemoveIdentityMfaServiceUnavailableCode int = 503
+
+/*RemoveIdentityMfaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response removeIdentityMfaServiceUnavailable
+*/
+type RemoveIdentityMfaServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewRemoveIdentityMfaServiceUnavailable creates RemoveIdentityMfaServiceUnavailable with default headers values
+func NewRemoveIdentityMfaServiceUnavailable() *RemoveIdentityMfaServiceUnavailable {
+
+	return &RemoveIdentityMfaServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the remove identity mfa service unavailable response
+func (o *RemoveIdentityMfaServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *RemoveIdentityMfaServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the remove identity mfa service unavailable response
+func (o *RemoveIdentityMfaServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *RemoveIdentityMfaServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

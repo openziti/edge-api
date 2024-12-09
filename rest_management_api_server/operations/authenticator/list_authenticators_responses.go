@@ -212,3 +212,47 @@ func (o *ListAuthenticatorsTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// ListAuthenticatorsServiceUnavailableCode is the HTTP code returned for type ListAuthenticatorsServiceUnavailable
+const ListAuthenticatorsServiceUnavailableCode int = 503
+
+/*ListAuthenticatorsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listAuthenticatorsServiceUnavailable
+*/
+type ListAuthenticatorsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListAuthenticatorsServiceUnavailable creates ListAuthenticatorsServiceUnavailable with default headers values
+func NewListAuthenticatorsServiceUnavailable() *ListAuthenticatorsServiceUnavailable {
+
+	return &ListAuthenticatorsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list authenticators service unavailable response
+func (o *ListAuthenticatorsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListAuthenticatorsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list authenticators service unavailable response
+func (o *ListAuthenticatorsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListAuthenticatorsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -210,3 +210,47 @@ func (o *GetCaJWTTooManyRequests) WriteResponse(rw http.ResponseWriter, producer
 		}
 	}
 }
+
+// GetCaJWTServiceUnavailableCode is the HTTP code returned for type GetCaJWTServiceUnavailable
+const GetCaJWTServiceUnavailableCode int = 503
+
+/*GetCaJWTServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response getCaJwtServiceUnavailable
+*/
+type GetCaJWTServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetCaJWTServiceUnavailable creates GetCaJWTServiceUnavailable with default headers values
+func NewGetCaJWTServiceUnavailable() *GetCaJWTServiceUnavailable {
+
+	return &GetCaJWTServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the get ca Jwt service unavailable response
+func (o *GetCaJWTServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *GetCaJWTServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get ca Jwt service unavailable response
+func (o *GetCaJWTServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetCaJWTServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

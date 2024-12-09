@@ -77,6 +77,12 @@ func (o *PatchConfigTypeReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewPatchConfigTypeServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -231,6 +237,38 @@ func (o *PatchConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelo
 }
 
 func (o *PatchConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchConfigTypeServiceUnavailable creates a PatchConfigTypeServiceUnavailable with default headers values
+func NewPatchConfigTypeServiceUnavailable() *PatchConfigTypeServiceUnavailable {
+	return &PatchConfigTypeServiceUnavailable{}
+}
+
+/* PatchConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type PatchConfigTypeServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *PatchConfigTypeServiceUnavailable) Error() string {
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *PatchConfigTypeServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *PatchConfigTypeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

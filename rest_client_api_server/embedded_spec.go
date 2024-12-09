@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.35"
+    "version": "0.26.36"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -3817,6 +3817,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -3964,6 +3970,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -4052,6 +4064,32 @@ func init() {
               }
             }
           },
+          "404": {
+            "description": "The requested resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "cause": null,
+                  "causeMessage": "",
+                  "code": "NOT_FOUND",
+                  "message": "The resource requested was not found or is no longer available",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
           "409": {
             "description": "The resource requested to be removed/altered cannot be as it is referenced by another object.",
             "schema": {
@@ -4098,6 +4136,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }
@@ -4245,6 +4289,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }
@@ -7822,7 +7872,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.35"
+    "version": "0.26.36"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -11575,6 +11625,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -11722,6 +11778,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -11810,6 +11872,32 @@ func init() {
               }
             }
           },
+          "404": {
+            "description": "The requested resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "cause": null,
+                  "causeMessage": "",
+                  "code": "NOT_FOUND",
+                  "message": "The resource requested was not found or is no longer available",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
           "409": {
             "description": "The resource requested to be removed/altered cannot be as it is referenced by another object.",
             "schema": {
@@ -11856,6 +11944,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }
@@ -12003,6 +12097,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }

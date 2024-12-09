@@ -212,3 +212,47 @@ func (o *DetailIdentityTypeTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// DetailIdentityTypeServiceUnavailableCode is the HTTP code returned for type DetailIdentityTypeServiceUnavailable
+const DetailIdentityTypeServiceUnavailableCode int = 503
+
+/*DetailIdentityTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailIdentityTypeServiceUnavailable
+*/
+type DetailIdentityTypeServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailIdentityTypeServiceUnavailable creates DetailIdentityTypeServiceUnavailable with default headers values
+func NewDetailIdentityTypeServiceUnavailable() *DetailIdentityTypeServiceUnavailable {
+
+	return &DetailIdentityTypeServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail identity type service unavailable response
+func (o *DetailIdentityTypeServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailIdentityTypeServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail identity type service unavailable response
+func (o *DetailIdentityTypeServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailIdentityTypeServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

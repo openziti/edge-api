@@ -212,3 +212,47 @@ func (o *DetailSessionRoutePathTooManyRequests) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// DetailSessionRoutePathServiceUnavailableCode is the HTTP code returned for type DetailSessionRoutePathServiceUnavailable
+const DetailSessionRoutePathServiceUnavailableCode int = 503
+
+/*DetailSessionRoutePathServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailSessionRoutePathServiceUnavailable
+*/
+type DetailSessionRoutePathServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailSessionRoutePathServiceUnavailable creates DetailSessionRoutePathServiceUnavailable with default headers values
+func NewDetailSessionRoutePathServiceUnavailable() *DetailSessionRoutePathServiceUnavailable {
+
+	return &DetailSessionRoutePathServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail session route path service unavailable response
+func (o *DetailSessionRoutePathServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailSessionRoutePathServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail session route path service unavailable response
+func (o *DetailSessionRoutePathServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailSessionRoutePathServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

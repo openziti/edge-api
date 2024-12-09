@@ -71,6 +71,12 @@ func (o *GetCaJWTReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewGetCaJWTServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -191,6 +197,38 @@ func (o *GetCaJWTTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *GetCaJWTTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetCaJWTServiceUnavailable creates a GetCaJWTServiceUnavailable with default headers values
+func NewGetCaJWTServiceUnavailable() *GetCaJWTServiceUnavailable {
+	return &GetCaJWTServiceUnavailable{}
+}
+
+/* GetCaJWTServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type GetCaJWTServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *GetCaJWTServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /cas/{id}/jwt][%d] getCaJwtServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *GetCaJWTServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *GetCaJWTServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

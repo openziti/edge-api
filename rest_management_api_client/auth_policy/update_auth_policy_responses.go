@@ -77,6 +77,12 @@ func (o *UpdateAuthPolicyReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewUpdateAuthPolicyServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -231,6 +237,38 @@ func (o *UpdateAuthPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *UpdateAuthPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewUpdateAuthPolicyServiceUnavailable creates a UpdateAuthPolicyServiceUnavailable with default headers values
+func NewUpdateAuthPolicyServiceUnavailable() *UpdateAuthPolicyServiceUnavailable {
+	return &UpdateAuthPolicyServiceUnavailable{}
+}
+
+/* UpdateAuthPolicyServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type UpdateAuthPolicyServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *UpdateAuthPolicyServiceUnavailable) Error() string {
+	return fmt.Sprintf("[PUT /auth-policies/{id}][%d] updateAuthPolicyServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *UpdateAuthPolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *UpdateAuthPolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

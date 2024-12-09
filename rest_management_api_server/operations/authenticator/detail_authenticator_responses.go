@@ -212,3 +212,47 @@ func (o *DetailAuthenticatorTooManyRequests) WriteResponse(rw http.ResponseWrite
 		}
 	}
 }
+
+// DetailAuthenticatorServiceUnavailableCode is the HTTP code returned for type DetailAuthenticatorServiceUnavailable
+const DetailAuthenticatorServiceUnavailableCode int = 503
+
+/*DetailAuthenticatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailAuthenticatorServiceUnavailable
+*/
+type DetailAuthenticatorServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailAuthenticatorServiceUnavailable creates DetailAuthenticatorServiceUnavailable with default headers values
+func NewDetailAuthenticatorServiceUnavailable() *DetailAuthenticatorServiceUnavailable {
+
+	return &DetailAuthenticatorServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail authenticator service unavailable response
+func (o *DetailAuthenticatorServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailAuthenticatorServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail authenticator service unavailable response
+func (o *DetailAuthenticatorServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailAuthenticatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
