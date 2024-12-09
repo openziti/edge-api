@@ -83,6 +83,12 @@ func (o *DeleteServiceEdgeRouterPolicyReader) ReadResponse(response runtime.Clie
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewDeleteServiceEdgeRouterPolicyServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -269,6 +275,38 @@ func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.
 }
 
 func (o *DeleteServiceEdgeRouterPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteServiceEdgeRouterPolicyServiceUnavailable creates a DeleteServiceEdgeRouterPolicyServiceUnavailable with default headers values
+func NewDeleteServiceEdgeRouterPolicyServiceUnavailable() *DeleteServiceEdgeRouterPolicyServiceUnavailable {
+	return &DeleteServiceEdgeRouterPolicyServiceUnavailable{}
+}
+
+/* DeleteServiceEdgeRouterPolicyServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteServiceEdgeRouterPolicyServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServiceEdgeRouterPolicyServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /service-edge-router-policies/{id}][%d] deleteServiceEdgeRouterPolicyServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteServiceEdgeRouterPolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServiceEdgeRouterPolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

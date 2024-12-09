@@ -300,3 +300,47 @@ func (o *DeleteIdentityTooManyRequests) WriteResponse(rw http.ResponseWriter, pr
 		}
 	}
 }
+
+// DeleteIdentityServiceUnavailableCode is the HTTP code returned for type DeleteIdentityServiceUnavailable
+const DeleteIdentityServiceUnavailableCode int = 503
+
+/*DeleteIdentityServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteIdentityServiceUnavailable
+*/
+type DeleteIdentityServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteIdentityServiceUnavailable creates DeleteIdentityServiceUnavailable with default headers values
+func NewDeleteIdentityServiceUnavailable() *DeleteIdentityServiceUnavailable {
+
+	return &DeleteIdentityServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete identity service unavailable response
+func (o *DeleteIdentityServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteIdentityServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete identity service unavailable response
+func (o *DeleteIdentityServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteIdentityServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

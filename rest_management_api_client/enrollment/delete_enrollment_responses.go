@@ -77,6 +77,12 @@ func (o *DeleteEnrollmentReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewDeleteEnrollmentServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -231,6 +237,38 @@ func (o *DeleteEnrollmentTooManyRequests) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteEnrollmentTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteEnrollmentServiceUnavailable creates a DeleteEnrollmentServiceUnavailable with default headers values
+func NewDeleteEnrollmentServiceUnavailable() *DeleteEnrollmentServiceUnavailable {
+	return &DeleteEnrollmentServiceUnavailable{}
+}
+
+/* DeleteEnrollmentServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteEnrollmentServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteEnrollmentServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /enrollments/{id}][%d] deleteEnrollmentServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteEnrollmentServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteEnrollmentServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

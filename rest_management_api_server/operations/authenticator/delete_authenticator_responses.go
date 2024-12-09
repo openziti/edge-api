@@ -256,3 +256,47 @@ func (o *DeleteAuthenticatorTooManyRequests) WriteResponse(rw http.ResponseWrite
 		}
 	}
 }
+
+// DeleteAuthenticatorServiceUnavailableCode is the HTTP code returned for type DeleteAuthenticatorServiceUnavailable
+const DeleteAuthenticatorServiceUnavailableCode int = 503
+
+/*DeleteAuthenticatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteAuthenticatorServiceUnavailable
+*/
+type DeleteAuthenticatorServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAuthenticatorServiceUnavailable creates DeleteAuthenticatorServiceUnavailable with default headers values
+func NewDeleteAuthenticatorServiceUnavailable() *DeleteAuthenticatorServiceUnavailable {
+
+	return &DeleteAuthenticatorServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete authenticator service unavailable response
+func (o *DeleteAuthenticatorServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAuthenticatorServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete authenticator service unavailable response
+func (o *DeleteAuthenticatorServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAuthenticatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

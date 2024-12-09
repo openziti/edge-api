@@ -212,3 +212,47 @@ func (o *ListExternalJWTSignersTooManyRequests) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// ListExternalJWTSignersServiceUnavailableCode is the HTTP code returned for type ListExternalJWTSignersServiceUnavailable
+const ListExternalJWTSignersServiceUnavailableCode int = 503
+
+/*ListExternalJWTSignersServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listExternalJwtSignersServiceUnavailable
+*/
+type ListExternalJWTSignersServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListExternalJWTSignersServiceUnavailable creates ListExternalJWTSignersServiceUnavailable with default headers values
+func NewListExternalJWTSignersServiceUnavailable() *ListExternalJWTSignersServiceUnavailable {
+
+	return &ListExternalJWTSignersServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list external Jwt signers service unavailable response
+func (o *ListExternalJWTSignersServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListExternalJWTSignersServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list external Jwt signers service unavailable response
+func (o *ListExternalJWTSignersServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListExternalJWTSignersServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -212,3 +212,47 @@ func (o *ListIdentitysServiceConfigsTooManyRequests) WriteResponse(rw http.Respo
 		}
 	}
 }
+
+// ListIdentitysServiceConfigsServiceUnavailableCode is the HTTP code returned for type ListIdentitysServiceConfigsServiceUnavailable
+const ListIdentitysServiceConfigsServiceUnavailableCode int = 503
+
+/*ListIdentitysServiceConfigsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listIdentitysServiceConfigsServiceUnavailable
+*/
+type ListIdentitysServiceConfigsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListIdentitysServiceConfigsServiceUnavailable creates ListIdentitysServiceConfigsServiceUnavailable with default headers values
+func NewListIdentitysServiceConfigsServiceUnavailable() *ListIdentitysServiceConfigsServiceUnavailable {
+
+	return &ListIdentitysServiceConfigsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list identitys service configs service unavailable response
+func (o *ListIdentitysServiceConfigsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListIdentitysServiceConfigsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list identitys service configs service unavailable response
+func (o *ListIdentitysServiceConfigsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListIdentitysServiceConfigsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

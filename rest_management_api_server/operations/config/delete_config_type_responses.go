@@ -300,3 +300,47 @@ func (o *DeleteConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// DeleteConfigTypeServiceUnavailableCode is the HTTP code returned for type DeleteConfigTypeServiceUnavailable
+const DeleteConfigTypeServiceUnavailableCode int = 503
+
+/*DeleteConfigTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteConfigTypeServiceUnavailable
+*/
+type DeleteConfigTypeServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteConfigTypeServiceUnavailable creates DeleteConfigTypeServiceUnavailable with default headers values
+func NewDeleteConfigTypeServiceUnavailable() *DeleteConfigTypeServiceUnavailable {
+
+	return &DeleteConfigTypeServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete config type service unavailable response
+func (o *DeleteConfigTypeServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteConfigTypeServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete config type service unavailable response
+func (o *DeleteConfigTypeServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteConfigTypeServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

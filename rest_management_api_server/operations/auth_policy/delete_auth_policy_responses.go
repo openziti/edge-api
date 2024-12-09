@@ -256,3 +256,47 @@ func (o *DeleteAuthPolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// DeleteAuthPolicyServiceUnavailableCode is the HTTP code returned for type DeleteAuthPolicyServiceUnavailable
+const DeleteAuthPolicyServiceUnavailableCode int = 503
+
+/*DeleteAuthPolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteAuthPolicyServiceUnavailable
+*/
+type DeleteAuthPolicyServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAuthPolicyServiceUnavailable creates DeleteAuthPolicyServiceUnavailable with default headers values
+func NewDeleteAuthPolicyServiceUnavailable() *DeleteAuthPolicyServiceUnavailable {
+
+	return &DeleteAuthPolicyServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete auth policy service unavailable response
+func (o *DeleteAuthPolicyServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAuthPolicyServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete auth policy service unavailable response
+func (o *DeleteAuthPolicyServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAuthPolicyServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -212,3 +212,47 @@ func (o *DetailTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWrite
 		}
 	}
 }
+
+// DetailTransitRouterServiceUnavailableCode is the HTTP code returned for type DetailTransitRouterServiceUnavailable
+const DetailTransitRouterServiceUnavailableCode int = 503
+
+/*DetailTransitRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailTransitRouterServiceUnavailable
+*/
+type DetailTransitRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailTransitRouterServiceUnavailable creates DetailTransitRouterServiceUnavailable with default headers values
+func NewDetailTransitRouterServiceUnavailable() *DetailTransitRouterServiceUnavailable {
+
+	return &DetailTransitRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail transit router service unavailable response
+func (o *DetailTransitRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailTransitRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail transit router service unavailable response
+func (o *DetailTransitRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailTransitRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

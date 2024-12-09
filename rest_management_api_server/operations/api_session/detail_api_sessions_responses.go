@@ -212,3 +212,47 @@ func (o *DetailAPISessionsTooManyRequests) WriteResponse(rw http.ResponseWriter,
 		}
 	}
 }
+
+// DetailAPISessionsServiceUnavailableCode is the HTTP code returned for type DetailAPISessionsServiceUnavailable
+const DetailAPISessionsServiceUnavailableCode int = 503
+
+/*DetailAPISessionsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailApiSessionsServiceUnavailable
+*/
+type DetailAPISessionsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailAPISessionsServiceUnavailable creates DetailAPISessionsServiceUnavailable with default headers values
+func NewDetailAPISessionsServiceUnavailable() *DetailAPISessionsServiceUnavailable {
+
+	return &DetailAPISessionsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail Api sessions service unavailable response
+func (o *DetailAPISessionsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailAPISessionsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail Api sessions service unavailable response
+func (o *DetailAPISessionsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailAPISessionsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

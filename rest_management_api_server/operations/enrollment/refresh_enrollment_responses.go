@@ -212,3 +212,47 @@ func (o *RefreshEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter,
 		}
 	}
 }
+
+// RefreshEnrollmentServiceUnavailableCode is the HTTP code returned for type RefreshEnrollmentServiceUnavailable
+const RefreshEnrollmentServiceUnavailableCode int = 503
+
+/*RefreshEnrollmentServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response refreshEnrollmentServiceUnavailable
+*/
+type RefreshEnrollmentServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewRefreshEnrollmentServiceUnavailable creates RefreshEnrollmentServiceUnavailable with default headers values
+func NewRefreshEnrollmentServiceUnavailable() *RefreshEnrollmentServiceUnavailable {
+
+	return &RefreshEnrollmentServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the refresh enrollment service unavailable response
+func (o *RefreshEnrollmentServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *RefreshEnrollmentServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the refresh enrollment service unavailable response
+func (o *RefreshEnrollmentServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *RefreshEnrollmentServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

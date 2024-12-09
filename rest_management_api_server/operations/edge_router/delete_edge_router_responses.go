@@ -300,3 +300,47 @@ func (o *DeleteEdgeRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// DeleteEdgeRouterServiceUnavailableCode is the HTTP code returned for type DeleteEdgeRouterServiceUnavailable
+const DeleteEdgeRouterServiceUnavailableCode int = 503
+
+/*DeleteEdgeRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteEdgeRouterServiceUnavailable
+*/
+type DeleteEdgeRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteEdgeRouterServiceUnavailable creates DeleteEdgeRouterServiceUnavailable with default headers values
+func NewDeleteEdgeRouterServiceUnavailable() *DeleteEdgeRouterServiceUnavailable {
+
+	return &DeleteEdgeRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete edge router service unavailable response
+func (o *DeleteEdgeRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteEdgeRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete edge router service unavailable response
+func (o *DeleteEdgeRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteEdgeRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

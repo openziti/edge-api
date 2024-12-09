@@ -300,3 +300,47 @@ func (o *DeleteTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWrite
 		}
 	}
 }
+
+// DeleteTransitRouterServiceUnavailableCode is the HTTP code returned for type DeleteTransitRouterServiceUnavailable
+const DeleteTransitRouterServiceUnavailableCode int = 503
+
+/*DeleteTransitRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteTransitRouterServiceUnavailable
+*/
+type DeleteTransitRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteTransitRouterServiceUnavailable creates DeleteTransitRouterServiceUnavailable with default headers values
+func NewDeleteTransitRouterServiceUnavailable() *DeleteTransitRouterServiceUnavailable {
+
+	return &DeleteTransitRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete transit router service unavailable response
+func (o *DeleteTransitRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteTransitRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete transit router service unavailable response
+func (o *DeleteTransitRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteTransitRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

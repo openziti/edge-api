@@ -71,6 +71,12 @@ func (o *ListEdgeRouterRoleAttributesReader) ReadResponse(response runtime.Clien
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewListEdgeRouterRoleAttributesServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *ListEdgeRouterRoleAttributesTooManyRequests) GetPayload() *rest_model.A
 }
 
 func (o *ListEdgeRouterRoleAttributesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListEdgeRouterRoleAttributesServiceUnavailable creates a ListEdgeRouterRoleAttributesServiceUnavailable with default headers values
+func NewListEdgeRouterRoleAttributesServiceUnavailable() *ListEdgeRouterRoleAttributesServiceUnavailable {
+	return &ListEdgeRouterRoleAttributesServiceUnavailable{}
+}
+
+/* ListEdgeRouterRoleAttributesServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type ListEdgeRouterRoleAttributesServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListEdgeRouterRoleAttributesServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /edge-router-role-attributes][%d] listEdgeRouterRoleAttributesServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *ListEdgeRouterRoleAttributesServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListEdgeRouterRoleAttributesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

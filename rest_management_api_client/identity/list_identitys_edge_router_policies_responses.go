@@ -71,6 +71,12 @@ func (o *ListIdentitysEdgeRouterPoliciesReader) ReadResponse(response runtime.Cl
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewListIdentitysEdgeRouterPoliciesServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *ListIdentitysEdgeRouterPoliciesTooManyRequests) GetPayload() *rest_mode
 }
 
 func (o *ListIdentitysEdgeRouterPoliciesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListIdentitysEdgeRouterPoliciesServiceUnavailable creates a ListIdentitysEdgeRouterPoliciesServiceUnavailable with default headers values
+func NewListIdentitysEdgeRouterPoliciesServiceUnavailable() *ListIdentitysEdgeRouterPoliciesServiceUnavailable {
+	return &ListIdentitysEdgeRouterPoliciesServiceUnavailable{}
+}
+
+/* ListIdentitysEdgeRouterPoliciesServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type ListIdentitysEdgeRouterPoliciesServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListIdentitysEdgeRouterPoliciesServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /identities/{id}/edge-router-policies][%d] listIdentitysEdgeRouterPoliciesServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *ListIdentitysEdgeRouterPoliciesServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListIdentitysEdgeRouterPoliciesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

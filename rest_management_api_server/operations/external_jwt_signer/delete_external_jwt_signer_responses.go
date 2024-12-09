@@ -256,3 +256,47 @@ func (o *DeleteExternalJWTSignerTooManyRequests) WriteResponse(rw http.ResponseW
 		}
 	}
 }
+
+// DeleteExternalJWTSignerServiceUnavailableCode is the HTTP code returned for type DeleteExternalJWTSignerServiceUnavailable
+const DeleteExternalJWTSignerServiceUnavailableCode int = 503
+
+/*DeleteExternalJWTSignerServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteExternalJwtSignerServiceUnavailable
+*/
+type DeleteExternalJWTSignerServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteExternalJWTSignerServiceUnavailable creates DeleteExternalJWTSignerServiceUnavailable with default headers values
+func NewDeleteExternalJWTSignerServiceUnavailable() *DeleteExternalJWTSignerServiceUnavailable {
+
+	return &DeleteExternalJWTSignerServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete external Jwt signer service unavailable response
+func (o *DeleteExternalJWTSignerServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteExternalJWTSignerServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete external Jwt signer service unavailable response
+func (o *DeleteExternalJWTSignerServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteExternalJWTSignerServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

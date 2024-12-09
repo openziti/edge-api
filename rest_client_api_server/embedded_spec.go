@@ -3817,6 +3817,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -3963,6 +3969,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }
@@ -4125,6 +4137,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -4271,6 +4289,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }
@@ -11601,6 +11625,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -11747,6 +11777,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }
@@ -11909,6 +11945,12 @@ func init() {
                 }
               }
             }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
           }
         }
       },
@@ -12055,6 +12097,12 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
             }
           }
         }

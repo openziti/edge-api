@@ -256,3 +256,47 @@ func (o *UpdateTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWrite
 		}
 	}
 }
+
+// UpdateTransitRouterServiceUnavailableCode is the HTTP code returned for type UpdateTransitRouterServiceUnavailable
+const UpdateTransitRouterServiceUnavailableCode int = 503
+
+/*UpdateTransitRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response updateTransitRouterServiceUnavailable
+*/
+type UpdateTransitRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdateTransitRouterServiceUnavailable creates UpdateTransitRouterServiceUnavailable with default headers values
+func NewUpdateTransitRouterServiceUnavailable() *UpdateTransitRouterServiceUnavailable {
+
+	return &UpdateTransitRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the update transit router service unavailable response
+func (o *UpdateTransitRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdateTransitRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update transit router service unavailable response
+func (o *UpdateTransitRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdateTransitRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

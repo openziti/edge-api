@@ -71,6 +71,12 @@ func (o *ListRoutersReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewListRoutersServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *ListRoutersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *ListRoutersTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListRoutersServiceUnavailable creates a ListRoutersServiceUnavailable with default headers values
+func NewListRoutersServiceUnavailable() *ListRoutersServiceUnavailable {
+	return &ListRoutersServiceUnavailable{}
+}
+
+/* ListRoutersServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type ListRoutersServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListRoutersServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /routers][%d] listRoutersServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *ListRoutersServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListRoutersServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

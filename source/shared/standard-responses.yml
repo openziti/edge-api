@@ -28,7 +28,7 @@ responses:
       'application/json':
         error:
           args:
-            urlVars: { }
+            urlVars: {}
           cause:
             field: '(root)'
             type: required
@@ -51,6 +51,10 @@ responses:
     description: The request could not be completed due to a conflict of configuration or state
     schema:
       $ref: '#/definitions/apiErrorEnvelope'
+  serverUnavailableResponse:
+    description: The request could not be completed due to the server being busy or in a temporarily bad state
+    schema:
+      $ref: '#/definitions/apiErrorEnvelope'
   unauthorizedResponse:
     description: The supplied session does not have the correct access rights to request this resource
     schema:
@@ -59,7 +63,7 @@ responses:
       'application/json':
         error:
           args:
-            urlVars: { }
+            urlVars: {}
           cause: ''
           causeMessage: ''
           code: UNAUTHORIZED
@@ -77,7 +81,7 @@ responses:
       'application/json':
         error:
           args:
-            urlVars: { }
+            urlVars: {}
           cause: ''
           causeMessage: ''
           code: INVALID_AUTH
@@ -129,7 +133,7 @@ responses:
       'application/json':
         error:
           args:
-            urlVars: { }
+            urlVars: {}
           causeMessage: 'you have hit a rate limit in the requested operation'
           code: RATE_LIMITED
           message: The resource is rate limited and the rate limit has been exceeded. Please try again later
@@ -148,7 +152,7 @@ definitions:
         $ref: '#/definitions/meta'
       data:
         type: object
-        example: { }
+        example: {}
   meta:
     type: object
     properties:
@@ -222,7 +226,7 @@ definitions:
     type: object
     properties:
       urlVars:
-        properties: { }
+        properties: {}
         additionalProperties:
           type: string
         type: object

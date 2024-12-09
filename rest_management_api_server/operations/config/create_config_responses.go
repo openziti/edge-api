@@ -212,3 +212,47 @@ func (o *CreateConfigTooManyRequests) WriteResponse(rw http.ResponseWriter, prod
 		}
 	}
 }
+
+// CreateConfigServiceUnavailableCode is the HTTP code returned for type CreateConfigServiceUnavailable
+const CreateConfigServiceUnavailableCode int = 503
+
+/*CreateConfigServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response createConfigServiceUnavailable
+*/
+type CreateConfigServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateConfigServiceUnavailable creates CreateConfigServiceUnavailable with default headers values
+func NewCreateConfigServiceUnavailable() *CreateConfigServiceUnavailable {
+
+	return &CreateConfigServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the create config service unavailable response
+func (o *CreateConfigServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateConfigServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create config service unavailable response
+func (o *CreateConfigServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateConfigServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

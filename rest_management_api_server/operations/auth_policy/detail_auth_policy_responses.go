@@ -212,3 +212,47 @@ func (o *DetailAuthPolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// DetailAuthPolicyServiceUnavailableCode is the HTTP code returned for type DetailAuthPolicyServiceUnavailable
+const DetailAuthPolicyServiceUnavailableCode int = 503
+
+/*DetailAuthPolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailAuthPolicyServiceUnavailable
+*/
+type DetailAuthPolicyServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailAuthPolicyServiceUnavailable creates DetailAuthPolicyServiceUnavailable with default headers values
+func NewDetailAuthPolicyServiceUnavailable() *DetailAuthPolicyServiceUnavailable {
+
+	return &DetailAuthPolicyServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail auth policy service unavailable response
+func (o *DetailAuthPolicyServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailAuthPolicyServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail auth policy service unavailable response
+func (o *DetailAuthPolicyServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailAuthPolicyServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

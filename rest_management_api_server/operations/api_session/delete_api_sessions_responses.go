@@ -256,3 +256,47 @@ func (o *DeleteAPISessionsTooManyRequests) WriteResponse(rw http.ResponseWriter,
 		}
 	}
 }
+
+// DeleteAPISessionsServiceUnavailableCode is the HTTP code returned for type DeleteAPISessionsServiceUnavailable
+const DeleteAPISessionsServiceUnavailableCode int = 503
+
+/*DeleteAPISessionsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteApiSessionsServiceUnavailable
+*/
+type DeleteAPISessionsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteAPISessionsServiceUnavailable creates DeleteAPISessionsServiceUnavailable with default headers values
+func NewDeleteAPISessionsServiceUnavailable() *DeleteAPISessionsServiceUnavailable {
+
+	return &DeleteAPISessionsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete Api sessions service unavailable response
+func (o *DeleteAPISessionsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteAPISessionsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete Api sessions service unavailable response
+func (o *DeleteAPISessionsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteAPISessionsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

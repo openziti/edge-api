@@ -83,6 +83,12 @@ func (o *DeleteTransitRouterReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewDeleteTransitRouterServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -269,6 +275,38 @@ func (o *DeleteTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEn
 }
 
 func (o *DeleteTransitRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteTransitRouterServiceUnavailable creates a DeleteTransitRouterServiceUnavailable with default headers values
+func NewDeleteTransitRouterServiceUnavailable() *DeleteTransitRouterServiceUnavailable {
+	return &DeleteTransitRouterServiceUnavailable{}
+}
+
+/* DeleteTransitRouterServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteTransitRouterServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteTransitRouterServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /transit-routers/{id}][%d] deleteTransitRouterServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteTransitRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteTransitRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

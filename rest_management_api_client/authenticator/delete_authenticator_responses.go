@@ -77,6 +77,12 @@ func (o *DeleteAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewDeleteAuthenticatorServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -231,6 +237,38 @@ func (o *DeleteAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEn
 }
 
 func (o *DeleteAuthenticatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteAuthenticatorServiceUnavailable creates a DeleteAuthenticatorServiceUnavailable with default headers values
+func NewDeleteAuthenticatorServiceUnavailable() *DeleteAuthenticatorServiceUnavailable {
+	return &DeleteAuthenticatorServiceUnavailable{}
+}
+
+/* DeleteAuthenticatorServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteAuthenticatorServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteAuthenticatorServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteAuthenticatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteAuthenticatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

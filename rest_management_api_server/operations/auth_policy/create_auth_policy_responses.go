@@ -212,3 +212,47 @@ func (o *CreateAuthPolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 		}
 	}
 }
+
+// CreateAuthPolicyServiceUnavailableCode is the HTTP code returned for type CreateAuthPolicyServiceUnavailable
+const CreateAuthPolicyServiceUnavailableCode int = 503
+
+/*CreateAuthPolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response createAuthPolicyServiceUnavailable
+*/
+type CreateAuthPolicyServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreateAuthPolicyServiceUnavailable creates CreateAuthPolicyServiceUnavailable with default headers values
+func NewCreateAuthPolicyServiceUnavailable() *CreateAuthPolicyServiceUnavailable {
+
+	return &CreateAuthPolicyServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the create auth policy service unavailable response
+func (o *CreateAuthPolicyServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *CreateAuthPolicyServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create auth policy service unavailable response
+func (o *CreateAuthPolicyServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreateAuthPolicyServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -71,6 +71,12 @@ func (o *ListSessionsReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewListSessionsServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *ListSessionsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope 
 }
 
 func (o *ListSessionsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListSessionsServiceUnavailable creates a ListSessionsServiceUnavailable with default headers values
+func NewListSessionsServiceUnavailable() *ListSessionsServiceUnavailable {
+	return &ListSessionsServiceUnavailable{}
+}
+
+/* ListSessionsServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type ListSessionsServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListSessionsServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /sessions][%d] listSessionsServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *ListSessionsServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListSessionsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
