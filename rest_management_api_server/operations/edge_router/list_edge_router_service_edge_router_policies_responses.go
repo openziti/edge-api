@@ -212,3 +212,47 @@ func (o *ListEdgeRouterServiceEdgeRouterPoliciesTooManyRequests) WriteResponse(r
 		}
 	}
 }
+
+// ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailableCode is the HTTP code returned for type ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable
+const ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailableCode int = 503
+
+/*ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable
+*/
+type ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable creates ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable with default headers values
+func NewListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable() *ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable {
+
+	return &ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list edge router service edge router policies service unavailable response
+func (o *ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list edge router service edge router policies service unavailable response
+func (o *ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListEdgeRouterServiceEdgeRouterPoliciesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

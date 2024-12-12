@@ -256,3 +256,47 @@ func (o *UpdateConfigTooManyRequests) WriteResponse(rw http.ResponseWriter, prod
 		}
 	}
 }
+
+// UpdateConfigServiceUnavailableCode is the HTTP code returned for type UpdateConfigServiceUnavailable
+const UpdateConfigServiceUnavailableCode int = 503
+
+/*UpdateConfigServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response updateConfigServiceUnavailable
+*/
+type UpdateConfigServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdateConfigServiceUnavailable creates UpdateConfigServiceUnavailable with default headers values
+func NewUpdateConfigServiceUnavailable() *UpdateConfigServiceUnavailable {
+
+	return &UpdateConfigServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the update config service unavailable response
+func (o *UpdateConfigServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdateConfigServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update config service unavailable response
+func (o *UpdateConfigServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdateConfigServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

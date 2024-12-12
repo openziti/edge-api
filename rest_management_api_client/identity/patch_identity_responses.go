@@ -77,6 +77,12 @@ func (o *PatchIdentityReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewPatchIdentityServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -231,6 +237,38 @@ func (o *PatchIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope
 }
 
 func (o *PatchIdentityTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchIdentityServiceUnavailable creates a PatchIdentityServiceUnavailable with default headers values
+func NewPatchIdentityServiceUnavailable() *PatchIdentityServiceUnavailable {
+	return &PatchIdentityServiceUnavailable{}
+}
+
+/* PatchIdentityServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type PatchIdentityServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *PatchIdentityServiceUnavailable) Error() string {
+	return fmt.Sprintf("[PATCH /identities/{id}][%d] patchIdentityServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *PatchIdentityServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *PatchIdentityServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

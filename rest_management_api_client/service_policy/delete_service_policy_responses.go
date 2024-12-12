@@ -65,6 +65,12 @@ func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteServicePolicyNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteServicePolicyConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -73,6 +79,12 @@ func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		return nil, result
 	case 429:
 		result := NewDeleteServicePolicyTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteServicePolicyServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -178,6 +190,38 @@ func (o *DeleteServicePolicyUnauthorized) readResponse(response runtime.ClientRe
 	return nil
 }
 
+// NewDeleteServicePolicyNotFound creates a DeleteServicePolicyNotFound with default headers values
+func NewDeleteServicePolicyNotFound() *DeleteServicePolicyNotFound {
+	return &DeleteServicePolicyNotFound{}
+}
+
+/* DeleteServicePolicyNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteServicePolicyNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServicePolicyNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServicePolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteServicePolicyConflict creates a DeleteServicePolicyConflict with default headers values
 func NewDeleteServicePolicyConflict() *DeleteServicePolicyConflict {
 	return &DeleteServicePolicyConflict{}
@@ -231,6 +275,38 @@ func (o *DeleteServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEn
 }
 
 func (o *DeleteServicePolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteServicePolicyServiceUnavailable creates a DeleteServicePolicyServiceUnavailable with default headers values
+func NewDeleteServicePolicyServiceUnavailable() *DeleteServicePolicyServiceUnavailable {
+	return &DeleteServicePolicyServiceUnavailable{}
+}
+
+/* DeleteServicePolicyServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteServicePolicyServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServicePolicyServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteServicePolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServicePolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

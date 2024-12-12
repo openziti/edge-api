@@ -256,3 +256,47 @@ func (o *UpdatePostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// UpdatePostureCheckServiceUnavailableCode is the HTTP code returned for type UpdatePostureCheckServiceUnavailable
+const UpdatePostureCheckServiceUnavailableCode int = 503
+
+/*UpdatePostureCheckServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response updatePostureCheckServiceUnavailable
+*/
+type UpdatePostureCheckServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewUpdatePostureCheckServiceUnavailable creates UpdatePostureCheckServiceUnavailable with default headers values
+func NewUpdatePostureCheckServiceUnavailable() *UpdatePostureCheckServiceUnavailable {
+
+	return &UpdatePostureCheckServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the update posture check service unavailable response
+func (o *UpdatePostureCheckServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *UpdatePostureCheckServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the update posture check service unavailable response
+func (o *UpdatePostureCheckServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *UpdatePostureCheckServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

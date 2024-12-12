@@ -169,6 +169,50 @@ func (o *DeleteTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 	}
 }
 
+// DeleteTerminatorNotFoundCode is the HTTP code returned for type DeleteTerminatorNotFound
+const DeleteTerminatorNotFoundCode int = 404
+
+/*DeleteTerminatorNotFound The requested resource does not exist
+
+swagger:response deleteTerminatorNotFound
+*/
+type DeleteTerminatorNotFound struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteTerminatorNotFound creates DeleteTerminatorNotFound with default headers values
+func NewDeleteTerminatorNotFound() *DeleteTerminatorNotFound {
+
+	return &DeleteTerminatorNotFound{}
+}
+
+// WithPayload adds the payload to the delete terminator not found response
+func (o *DeleteTerminatorNotFound) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteTerminatorNotFound {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete terminator not found response
+func (o *DeleteTerminatorNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteTerminatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(404)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // DeleteTerminatorConflictCode is the HTTP code returned for type DeleteTerminatorConflict
 const DeleteTerminatorConflictCode int = 409
 
@@ -249,6 +293,50 @@ func (o *DeleteTerminatorTooManyRequests) SetPayload(payload *rest_model.APIErro
 func (o *DeleteTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(429)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// DeleteTerminatorServiceUnavailableCode is the HTTP code returned for type DeleteTerminatorServiceUnavailable
+const DeleteTerminatorServiceUnavailableCode int = 503
+
+/*DeleteTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteTerminatorServiceUnavailable
+*/
+type DeleteTerminatorServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteTerminatorServiceUnavailable creates DeleteTerminatorServiceUnavailable with default headers values
+func NewDeleteTerminatorServiceUnavailable() *DeleteTerminatorServiceUnavailable {
+
+	return &DeleteTerminatorServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete terminator service unavailable response
+func (o *DeleteTerminatorServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteTerminatorServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete terminator service unavailable response
+func (o *DeleteTerminatorServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteTerminatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
 	if o.Payload != nil {
 		payload := o.Payload
 		if err := producer.Produce(rw, payload); err != nil {

@@ -65,8 +65,20 @@ func (o *DeleteAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteAuthenticatorNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteAuthenticatorTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteAuthenticatorServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -172,6 +184,38 @@ func (o *DeleteAuthenticatorUnauthorized) readResponse(response runtime.ClientRe
 	return nil
 }
 
+// NewDeleteAuthenticatorNotFound creates a DeleteAuthenticatorNotFound with default headers values
+func NewDeleteAuthenticatorNotFound() *DeleteAuthenticatorNotFound {
+	return &DeleteAuthenticatorNotFound{}
+}
+
+/* DeleteAuthenticatorNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteAuthenticatorNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteAuthenticatorNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteAuthenticatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteAuthenticatorTooManyRequests creates a DeleteAuthenticatorTooManyRequests with default headers values
 func NewDeleteAuthenticatorTooManyRequests() *DeleteAuthenticatorTooManyRequests {
 	return &DeleteAuthenticatorTooManyRequests{}
@@ -193,6 +237,38 @@ func (o *DeleteAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEn
 }
 
 func (o *DeleteAuthenticatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteAuthenticatorServiceUnavailable creates a DeleteAuthenticatorServiceUnavailable with default headers values
+func NewDeleteAuthenticatorServiceUnavailable() *DeleteAuthenticatorServiceUnavailable {
+	return &DeleteAuthenticatorServiceUnavailable{}
+}
+
+/* DeleteAuthenticatorServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteAuthenticatorServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteAuthenticatorServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /authenticators/{id}][%d] deleteAuthenticatorServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteAuthenticatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteAuthenticatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

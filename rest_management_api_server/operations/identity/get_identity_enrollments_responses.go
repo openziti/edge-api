@@ -212,3 +212,47 @@ func (o *GetIdentityEnrollmentsTooManyRequests) WriteResponse(rw http.ResponseWr
 		}
 	}
 }
+
+// GetIdentityEnrollmentsServiceUnavailableCode is the HTTP code returned for type GetIdentityEnrollmentsServiceUnavailable
+const GetIdentityEnrollmentsServiceUnavailableCode int = 503
+
+/*GetIdentityEnrollmentsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response getIdentityEnrollmentsServiceUnavailable
+*/
+type GetIdentityEnrollmentsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewGetIdentityEnrollmentsServiceUnavailable creates GetIdentityEnrollmentsServiceUnavailable with default headers values
+func NewGetIdentityEnrollmentsServiceUnavailable() *GetIdentityEnrollmentsServiceUnavailable {
+
+	return &GetIdentityEnrollmentsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the get identity enrollments service unavailable response
+func (o *GetIdentityEnrollmentsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *GetIdentityEnrollmentsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get identity enrollments service unavailable response
+func (o *GetIdentityEnrollmentsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetIdentityEnrollmentsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

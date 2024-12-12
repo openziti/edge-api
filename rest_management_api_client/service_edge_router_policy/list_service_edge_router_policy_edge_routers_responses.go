@@ -71,6 +71,12 @@ func (o *ListServiceEdgeRouterPolicyEdgeRoutersReader) ReadResponse(response run
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *ListServiceEdgeRouterPolicyEdgeRoutersTooManyRequests) GetPayload() *re
 }
 
 func (o *ListServiceEdgeRouterPolicyEdgeRoutersTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable creates a ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable with default headers values
+func NewListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable() *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable {
+	return &ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable{}
+}
+
+/* ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /service-edge-router-policies/{id}/edge-routers][%d] listServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *ListServiceEdgeRouterPolicyEdgeRoutersServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

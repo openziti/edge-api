@@ -71,6 +71,12 @@ func (o *CreateConfigReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewCreateConfigServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *CreateConfigTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope 
 }
 
 func (o *CreateConfigTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateConfigServiceUnavailable creates a CreateConfigServiceUnavailable with default headers values
+func NewCreateConfigServiceUnavailable() *CreateConfigServiceUnavailable {
+	return &CreateConfigServiceUnavailable{}
+}
+
+/* CreateConfigServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type CreateConfigServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateConfigServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /configs][%d] createConfigServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *CreateConfigServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateConfigServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

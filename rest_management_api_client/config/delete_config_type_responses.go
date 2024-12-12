@@ -65,6 +65,12 @@ func (o *DeleteConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteConfigTypeNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteConfigTypeConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -73,6 +79,12 @@ func (o *DeleteConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, result
 	case 429:
 		result := NewDeleteConfigTypeTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteConfigTypeServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -178,6 +190,38 @@ func (o *DeleteConfigTypeUnauthorized) readResponse(response runtime.ClientRespo
 	return nil
 }
 
+// NewDeleteConfigTypeNotFound creates a DeleteConfigTypeNotFound with default headers values
+func NewDeleteConfigTypeNotFound() *DeleteConfigTypeNotFound {
+	return &DeleteConfigTypeNotFound{}
+}
+
+/* DeleteConfigTypeNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteConfigTypeNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteConfigTypeNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteConfigTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteConfigTypeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteConfigTypeConflict creates a DeleteConfigTypeConflict with default headers values
 func NewDeleteConfigTypeConflict() *DeleteConfigTypeConflict {
 	return &DeleteConfigTypeConflict{}
@@ -231,6 +275,38 @@ func (o *DeleteConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvel
 }
 
 func (o *DeleteConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteConfigTypeServiceUnavailable creates a DeleteConfigTypeServiceUnavailable with default headers values
+func NewDeleteConfigTypeServiceUnavailable() *DeleteConfigTypeServiceUnavailable {
+	return &DeleteConfigTypeServiceUnavailable{}
+}
+
+/* DeleteConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteConfigTypeServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteConfigTypeServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteConfigTypeServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteConfigTypeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

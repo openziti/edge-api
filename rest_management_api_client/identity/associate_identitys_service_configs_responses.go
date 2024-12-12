@@ -77,6 +77,12 @@ func (o *AssociateIdentitysServiceConfigsReader) ReadResponse(response runtime.C
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewAssociateIdentitysServiceConfigsServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -231,6 +237,38 @@ func (o *AssociateIdentitysServiceConfigsTooManyRequests) GetPayload() *rest_mod
 }
 
 func (o *AssociateIdentitysServiceConfigsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewAssociateIdentitysServiceConfigsServiceUnavailable creates a AssociateIdentitysServiceConfigsServiceUnavailable with default headers values
+func NewAssociateIdentitysServiceConfigsServiceUnavailable() *AssociateIdentitysServiceConfigsServiceUnavailable {
+	return &AssociateIdentitysServiceConfigsServiceUnavailable{}
+}
+
+/* AssociateIdentitysServiceConfigsServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type AssociateIdentitysServiceConfigsServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *AssociateIdentitysServiceConfigsServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /identities/{id}/service-configs][%d] associateIdentitysServiceConfigsServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *AssociateIdentitysServiceConfigsServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *AssociateIdentitysServiceConfigsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

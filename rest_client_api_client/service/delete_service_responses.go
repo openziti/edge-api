@@ -65,6 +65,12 @@ func (o *DeleteServiceReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteServiceNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteServiceConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -73,6 +79,12 @@ func (o *DeleteServiceReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, result
 	case 429:
 		result := NewDeleteServiceTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteServiceServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -178,6 +190,38 @@ func (o *DeleteServiceUnauthorized) readResponse(response runtime.ClientResponse
 	return nil
 }
 
+// NewDeleteServiceNotFound creates a DeleteServiceNotFound with default headers values
+func NewDeleteServiceNotFound() *DeleteServiceNotFound {
+	return &DeleteServiceNotFound{}
+}
+
+/* DeleteServiceNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteServiceNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServiceNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /services/{id}][%d] deleteServiceNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteServiceNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServiceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteServiceConflict creates a DeleteServiceConflict with default headers values
 func NewDeleteServiceConflict() *DeleteServiceConflict {
 	return &DeleteServiceConflict{}
@@ -231,6 +275,38 @@ func (o *DeleteServiceTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope
 }
 
 func (o *DeleteServiceTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteServiceServiceUnavailable creates a DeleteServiceServiceUnavailable with default headers values
+func NewDeleteServiceServiceUnavailable() *DeleteServiceServiceUnavailable {
+	return &DeleteServiceServiceUnavailable{}
+}
+
+/* DeleteServiceServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteServiceServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteServiceServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /services/{id}][%d] deleteServiceServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteServiceServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteServiceServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -212,3 +212,47 @@ func (o *DetailPostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// DetailPostureCheckServiceUnavailableCode is the HTTP code returned for type DetailPostureCheckServiceUnavailable
+const DetailPostureCheckServiceUnavailableCode int = 503
+
+/*DetailPostureCheckServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailPostureCheckServiceUnavailable
+*/
+type DetailPostureCheckServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailPostureCheckServiceUnavailable creates DetailPostureCheckServiceUnavailable with default headers values
+func NewDetailPostureCheckServiceUnavailable() *DetailPostureCheckServiceUnavailable {
+
+	return &DetailPostureCheckServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail posture check service unavailable response
+func (o *DetailPostureCheckServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailPostureCheckServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail posture check service unavailable response
+func (o *DetailPostureCheckServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailPostureCheckServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

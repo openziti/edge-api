@@ -256,3 +256,47 @@ func (o *AssociateIdentitysServiceConfigsTooManyRequests) WriteResponse(rw http.
 		}
 	}
 }
+
+// AssociateIdentitysServiceConfigsServiceUnavailableCode is the HTTP code returned for type AssociateIdentitysServiceConfigsServiceUnavailable
+const AssociateIdentitysServiceConfigsServiceUnavailableCode int = 503
+
+/*AssociateIdentitysServiceConfigsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response associateIdentitysServiceConfigsServiceUnavailable
+*/
+type AssociateIdentitysServiceConfigsServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewAssociateIdentitysServiceConfigsServiceUnavailable creates AssociateIdentitysServiceConfigsServiceUnavailable with default headers values
+func NewAssociateIdentitysServiceConfigsServiceUnavailable() *AssociateIdentitysServiceConfigsServiceUnavailable {
+
+	return &AssociateIdentitysServiceConfigsServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the associate identitys service configs service unavailable response
+func (o *AssociateIdentitysServiceConfigsServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *AssociateIdentitysServiceConfigsServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the associate identitys service configs service unavailable response
+func (o *AssociateIdentitysServiceConfigsServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *AssociateIdentitysServiceConfigsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

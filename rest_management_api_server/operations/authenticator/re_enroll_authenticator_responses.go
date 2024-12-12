@@ -212,3 +212,47 @@ func (o *ReEnrollAuthenticatorTooManyRequests) WriteResponse(rw http.ResponseWri
 		}
 	}
 }
+
+// ReEnrollAuthenticatorServiceUnavailableCode is the HTTP code returned for type ReEnrollAuthenticatorServiceUnavailable
+const ReEnrollAuthenticatorServiceUnavailableCode int = 503
+
+/*ReEnrollAuthenticatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response reEnrollAuthenticatorServiceUnavailable
+*/
+type ReEnrollAuthenticatorServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewReEnrollAuthenticatorServiceUnavailable creates ReEnrollAuthenticatorServiceUnavailable with default headers values
+func NewReEnrollAuthenticatorServiceUnavailable() *ReEnrollAuthenticatorServiceUnavailable {
+
+	return &ReEnrollAuthenticatorServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the re enroll authenticator service unavailable response
+func (o *ReEnrollAuthenticatorServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ReEnrollAuthenticatorServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the re enroll authenticator service unavailable response
+func (o *ReEnrollAuthenticatorServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ReEnrollAuthenticatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

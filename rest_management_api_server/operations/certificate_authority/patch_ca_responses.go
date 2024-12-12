@@ -256,3 +256,47 @@ func (o *PatchCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer 
 		}
 	}
 }
+
+// PatchCaServiceUnavailableCode is the HTTP code returned for type PatchCaServiceUnavailable
+const PatchCaServiceUnavailableCode int = 503
+
+/*PatchCaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response patchCaServiceUnavailable
+*/
+type PatchCaServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewPatchCaServiceUnavailable creates PatchCaServiceUnavailable with default headers values
+func NewPatchCaServiceUnavailable() *PatchCaServiceUnavailable {
+
+	return &PatchCaServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the patch ca service unavailable response
+func (o *PatchCaServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *PatchCaServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the patch ca service unavailable response
+func (o *PatchCaServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PatchCaServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

@@ -256,3 +256,47 @@ func (o *PatchEdgeRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, p
 		}
 	}
 }
+
+// PatchEdgeRouterServiceUnavailableCode is the HTTP code returned for type PatchEdgeRouterServiceUnavailable
+const PatchEdgeRouterServiceUnavailableCode int = 503
+
+/*PatchEdgeRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response patchEdgeRouterServiceUnavailable
+*/
+type PatchEdgeRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewPatchEdgeRouterServiceUnavailable creates PatchEdgeRouterServiceUnavailable with default headers values
+func NewPatchEdgeRouterServiceUnavailable() *PatchEdgeRouterServiceUnavailable {
+
+	return &PatchEdgeRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the patch edge router service unavailable response
+func (o *PatchEdgeRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *PatchEdgeRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the patch edge router service unavailable response
+func (o *PatchEdgeRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PatchEdgeRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

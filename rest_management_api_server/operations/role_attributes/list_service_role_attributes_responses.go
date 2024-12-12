@@ -212,3 +212,47 @@ func (o *ListServiceRoleAttributesTooManyRequests) WriteResponse(rw http.Respons
 		}
 	}
 }
+
+// ListServiceRoleAttributesServiceUnavailableCode is the HTTP code returned for type ListServiceRoleAttributesServiceUnavailable
+const ListServiceRoleAttributesServiceUnavailableCode int = 503
+
+/*ListServiceRoleAttributesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listServiceRoleAttributesServiceUnavailable
+*/
+type ListServiceRoleAttributesServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServiceRoleAttributesServiceUnavailable creates ListServiceRoleAttributesServiceUnavailable with default headers values
+func NewListServiceRoleAttributesServiceUnavailable() *ListServiceRoleAttributesServiceUnavailable {
+
+	return &ListServiceRoleAttributesServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list service role attributes service unavailable response
+func (o *ListServiceRoleAttributesServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServiceRoleAttributesServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list service role attributes service unavailable response
+func (o *ListServiceRoleAttributesServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServiceRoleAttributesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

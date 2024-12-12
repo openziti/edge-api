@@ -71,6 +71,12 @@ func (o *CreateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewCreateCaServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *CreateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *CreateCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateCaServiceUnavailable creates a CreateCaServiceUnavailable with default headers values
+func NewCreateCaServiceUnavailable() *CreateCaServiceUnavailable {
+	return &CreateCaServiceUnavailable{}
+}
+
+/* CreateCaServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type CreateCaServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *CreateCaServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /cas][%d] createCaServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *CreateCaServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *CreateCaServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

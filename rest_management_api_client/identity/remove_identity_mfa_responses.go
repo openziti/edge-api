@@ -71,6 +71,12 @@ func (o *RemoveIdentityMfaReader) ReadResponse(response runtime.ClientResponse, 
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewRemoveIdentityMfaServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -193,6 +199,38 @@ func (o *RemoveIdentityMfaTooManyRequests) GetPayload() *rest_model.APIErrorEnve
 }
 
 func (o *RemoveIdentityMfaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewRemoveIdentityMfaServiceUnavailable creates a RemoveIdentityMfaServiceUnavailable with default headers values
+func NewRemoveIdentityMfaServiceUnavailable() *RemoveIdentityMfaServiceUnavailable {
+	return &RemoveIdentityMfaServiceUnavailable{}
+}
+
+/* RemoveIdentityMfaServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type RemoveIdentityMfaServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *RemoveIdentityMfaServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /identities/{id}/mfa][%d] removeIdentityMfaServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *RemoveIdentityMfaServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *RemoveIdentityMfaServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -65,6 +65,12 @@ func (o *DeleteIdentityReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteIdentityNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 409:
 		result := NewDeleteIdentityConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -73,6 +79,12 @@ func (o *DeleteIdentityReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, result
 	case 429:
 		result := NewDeleteIdentityTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteIdentityServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -178,6 +190,38 @@ func (o *DeleteIdentityUnauthorized) readResponse(response runtime.ClientRespons
 	return nil
 }
 
+// NewDeleteIdentityNotFound creates a DeleteIdentityNotFound with default headers values
+func NewDeleteIdentityNotFound() *DeleteIdentityNotFound {
+	return &DeleteIdentityNotFound{}
+}
+
+/* DeleteIdentityNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteIdentityNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteIdentityNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /identities/{id}][%d] deleteIdentityNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteIdentityNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteIdentityNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteIdentityConflict creates a DeleteIdentityConflict with default headers values
 func NewDeleteIdentityConflict() *DeleteIdentityConflict {
 	return &DeleteIdentityConflict{}
@@ -231,6 +275,38 @@ func (o *DeleteIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelop
 }
 
 func (o *DeleteIdentityTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteIdentityServiceUnavailable creates a DeleteIdentityServiceUnavailable with default headers values
+func NewDeleteIdentityServiceUnavailable() *DeleteIdentityServiceUnavailable {
+	return &DeleteIdentityServiceUnavailable{}
+}
+
+/* DeleteIdentityServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteIdentityServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteIdentityServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /identities/{id}][%d] deleteIdentityServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteIdentityServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteIdentityServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

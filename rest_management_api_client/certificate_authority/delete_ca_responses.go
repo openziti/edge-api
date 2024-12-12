@@ -65,8 +65,20 @@ func (o *DeleteCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewDeleteCaNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewDeleteCaTooManyRequests()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 503:
+		result := NewDeleteCaServiceUnavailable()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -172,6 +184,38 @@ func (o *DeleteCaUnauthorized) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
+// NewDeleteCaNotFound creates a DeleteCaNotFound with default headers values
+func NewDeleteCaNotFound() *DeleteCaNotFound {
+	return &DeleteCaNotFound{}
+}
+
+/* DeleteCaNotFound describes a response with status code 404, with default header values.
+
+The requested resource does not exist
+*/
+type DeleteCaNotFound struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteCaNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaNotFound  %+v", 404, o.Payload)
+}
+func (o *DeleteCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteCaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDeleteCaTooManyRequests creates a DeleteCaTooManyRequests with default headers values
 func NewDeleteCaTooManyRequests() *DeleteCaTooManyRequests {
 	return &DeleteCaTooManyRequests{}
@@ -193,6 +237,38 @@ func (o *DeleteCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *DeleteCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteCaServiceUnavailable creates a DeleteCaServiceUnavailable with default headers values
+func NewDeleteCaServiceUnavailable() *DeleteCaServiceUnavailable {
+	return &DeleteCaServiceUnavailable{}
+}
+
+/* DeleteCaServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type DeleteCaServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *DeleteCaServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /cas/{id}][%d] deleteCaServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *DeleteCaServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *DeleteCaServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -212,3 +212,47 @@ func (o *ReEnrollEdgeRouterTooManyRequests) WriteResponse(rw http.ResponseWriter
 		}
 	}
 }
+
+// ReEnrollEdgeRouterServiceUnavailableCode is the HTTP code returned for type ReEnrollEdgeRouterServiceUnavailable
+const ReEnrollEdgeRouterServiceUnavailableCode int = 503
+
+/*ReEnrollEdgeRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response reEnrollEdgeRouterServiceUnavailable
+*/
+type ReEnrollEdgeRouterServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewReEnrollEdgeRouterServiceUnavailable creates ReEnrollEdgeRouterServiceUnavailable with default headers values
+func NewReEnrollEdgeRouterServiceUnavailable() *ReEnrollEdgeRouterServiceUnavailable {
+
+	return &ReEnrollEdgeRouterServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the re enroll edge router service unavailable response
+func (o *ReEnrollEdgeRouterServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ReEnrollEdgeRouterServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the re enroll edge router service unavailable response
+func (o *ReEnrollEdgeRouterServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ReEnrollEdgeRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
