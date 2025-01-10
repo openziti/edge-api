@@ -262,6 +262,8 @@ definitions:
             type: array
             items:
               type: string
+          openIdConfigurationUrl:
+            type: string
   externalJwtSignerCreate:
     description: A create Certificate Authority (CA) object
     type: object
@@ -311,6 +313,9 @@ definitions:
         x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      openIdConfigurationUrl:
+        type: string
+        x-nullable: true
   externalJwtSignerUpdate:
     type: object
     required:
@@ -359,6 +364,9 @@ definitions:
         x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      openIdConfigurationUrl:
+        type: string
+        x-nullable: true
   externalJwtSignerPatch:
     type: object
     properties:
@@ -404,3 +412,6 @@ definitions:
           type: string
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      openIdConfigurationUrl:
+        type: string
+        x-nullable: true

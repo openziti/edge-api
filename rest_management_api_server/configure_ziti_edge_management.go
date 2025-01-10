@@ -59,6 +59,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service_edge_router_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/session"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/settings"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/terminator"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/well_known"
 )
@@ -166,6 +167,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation config.CreateConfigType has not yet been implemented")
 		})
 	}
+	if api.SettingsCreateControllerSettingHandler == nil {
+		api.SettingsCreateControllerSettingHandler = settings.CreateControllerSettingHandlerFunc(func(params settings.CreateControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.CreateControllerSetting has not yet been implemented")
+		})
+	}
 	if api.DatabaseCreateDatabaseSnapshotHandler == nil {
 		api.DatabaseCreateDatabaseSnapshotHandler = database.CreateDatabaseSnapshotHandlerFunc(func(params database.CreateDatabaseSnapshotParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation database.CreateDatabaseSnapshot has not yet been implemented")
@@ -271,6 +277,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation config.DeleteConfigType has not yet been implemented")
 		})
 	}
+	if api.SettingsDeleteControllerSettingHandler == nil {
+		api.SettingsDeleteControllerSettingHandler = settings.DeleteControllerSettingHandlerFunc(func(params settings.DeleteControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.DeleteControllerSetting has not yet been implemented")
+		})
+	}
 	if api.EdgeRouterDeleteEdgeRouterHandler == nil {
 		api.EdgeRouterDeleteEdgeRouterHandler = edge_router.DeleteEdgeRouterHandlerFunc(func(params edge_router.DeleteEdgeRouterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation edge_router.DeleteEdgeRouter has not yet been implemented")
@@ -369,6 +380,16 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.ConfigDetailConfigTypeHandler == nil {
 		api.ConfigDetailConfigTypeHandler = config.DetailConfigTypeHandlerFunc(func(params config.DetailConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.DetailConfigType has not yet been implemented")
+		})
+	}
+	if api.SettingsDetailControllerSettingHandler == nil {
+		api.SettingsDetailControllerSettingHandler = settings.DetailControllerSettingHandlerFunc(func(params settings.DetailControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.DetailControllerSetting has not yet been implemented")
+		})
+	}
+	if api.SettingsDetailControllerSettingEffectiveHandler == nil {
+		api.SettingsDetailControllerSettingEffectiveHandler = settings.DetailControllerSettingEffectiveHandlerFunc(func(params settings.DetailControllerSettingEffectiveParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.DetailControllerSettingEffective has not yet been implemented")
 		})
 	}
 	if api.CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler == nil {
@@ -594,6 +615,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.ConfigListConfigsForConfigTypeHandler == nil {
 		api.ConfigListConfigsForConfigTypeHandler = config.ListConfigsForConfigTypeHandlerFunc(func(params config.ListConfigsForConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.ListConfigsForConfigType has not yet been implemented")
+		})
+	}
+	if api.SettingsListControllerSettingsHandler == nil {
+		api.SettingsListControllerSettingsHandler = settings.ListControllerSettingsHandlerFunc(func(params settings.ListControllerSettingsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.ListControllerSettings has not yet been implemented")
 		})
 	}
 	if api.ControllersListControllersHandler == nil {
@@ -871,6 +897,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation config.PatchConfigType has not yet been implemented")
 		})
 	}
+	if api.SettingsPatchControllerSettingHandler == nil {
+		api.SettingsPatchControllerSettingHandler = settings.PatchControllerSettingHandlerFunc(func(params settings.PatchControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.PatchControllerSetting has not yet been implemented")
+		})
+	}
 	if api.CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler == nil {
 		api.CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler = current_api_session.PatchCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.PatchCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.PatchCurrentIdentityAuthenticator has not yet been implemented")
@@ -974,6 +1005,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.ConfigUpdateConfigTypeHandler == nil {
 		api.ConfigUpdateConfigTypeHandler = config.UpdateConfigTypeHandlerFunc(func(params config.UpdateConfigTypeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation config.UpdateConfigType has not yet been implemented")
+		})
+	}
+	if api.SettingsUpdateControllerSettingHandler == nil {
+		api.SettingsUpdateControllerSettingHandler = settings.UpdateControllerSettingHandlerFunc(func(params settings.UpdateControllerSettingParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.UpdateControllerSetting has not yet been implemented")
 		})
 	}
 	if api.CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler == nil {

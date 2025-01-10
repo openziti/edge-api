@@ -56,6 +56,9 @@ type ClientExternalJWTSignerDetail struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// open Id configuration Url
+	OpenIDConfigurationURL string `json:"openIdConfigurationUrl,omitempty"`
+
 	// scopes
 	Scopes []string `json:"scopes"`
 }
@@ -77,6 +80,8 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 		Name *string `json:"name"`
 
+		OpenIDConfigurationURL string `json:"openIdConfigurationUrl,omitempty"`
+
 		Scopes []string `json:"scopes"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
@@ -88,6 +93,8 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 	m.ExternalAuthURL = dataAO1.ExternalAuthURL
 
 	m.Name = dataAO1.Name
+
+	m.OpenIDConfigurationURL = dataAO1.OpenIDConfigurationURL
 
 	m.Scopes = dataAO1.Scopes
 
@@ -110,6 +117,8 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 
 		Name *string `json:"name"`
 
+		OpenIDConfigurationURL string `json:"openIdConfigurationUrl,omitempty"`
+
 		Scopes []string `json:"scopes"`
 	}
 
@@ -118,6 +127,8 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.ExternalAuthURL = m.ExternalAuthURL
 
 	dataAO1.Name = m.Name
+
+	dataAO1.OpenIDConfigurationURL = m.OpenIDConfigurationURL
 
 	dataAO1.Scopes = m.Scopes
 

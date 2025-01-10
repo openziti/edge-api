@@ -68,3 +68,5 @@ definitions:
             type: array
             items:
               type: string
+          openIdConfigurationUrl:
+            type: string
