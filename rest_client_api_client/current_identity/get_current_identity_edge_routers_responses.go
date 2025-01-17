@@ -65,6 +65,12 @@ func (o *GetCurrentIdentityEdgeRoutersReader) ReadResponse(response runtime.Clie
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewGetCurrentIdentityEdgeRoutersServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -155,6 +161,38 @@ func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) GetPayload() *rest_model.
 }
 
 func (o *GetCurrentIdentityEdgeRoutersTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetCurrentIdentityEdgeRoutersServiceUnavailable creates a GetCurrentIdentityEdgeRoutersServiceUnavailable with default headers values
+func NewGetCurrentIdentityEdgeRoutersServiceUnavailable() *GetCurrentIdentityEdgeRoutersServiceUnavailable {
+	return &GetCurrentIdentityEdgeRoutersServiceUnavailable{}
+}
+
+/* GetCurrentIdentityEdgeRoutersServiceUnavailable describes a response with status code 503, with default header values.
+
+The request could not be completed due to the server being busy or in a temporarily bad state
+*/
+type GetCurrentIdentityEdgeRoutersServiceUnavailable struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *GetCurrentIdentityEdgeRoutersServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /current-identity/edge-routers][%d] getCurrentIdentityEdgeRoutersServiceUnavailable  %+v", 503, o.Payload)
+}
+func (o *GetCurrentIdentityEdgeRoutersServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *GetCurrentIdentityEdgeRoutersServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -168,3 +168,47 @@ func (o *EnrollCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer
 		}
 	}
 }
+
+// EnrollCaServiceUnavailableCode is the HTTP code returned for type EnrollCaServiceUnavailable
+const EnrollCaServiceUnavailableCode int = 503
+
+/*EnrollCaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response enrollCaServiceUnavailable
+*/
+type EnrollCaServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollCaServiceUnavailable creates EnrollCaServiceUnavailable with default headers values
+func NewEnrollCaServiceUnavailable() *EnrollCaServiceUnavailable {
+
+	return &EnrollCaServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the enroll ca service unavailable response
+func (o *EnrollCaServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollCaServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll ca service unavailable response
+func (o *EnrollCaServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollCaServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

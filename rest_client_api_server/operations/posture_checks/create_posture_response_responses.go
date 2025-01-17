@@ -212,3 +212,47 @@ func (o *CreatePostureResponseTooManyRequests) WriteResponse(rw http.ResponseWri
 		}
 	}
 }
+
+// CreatePostureResponseServiceUnavailableCode is the HTTP code returned for type CreatePostureResponseServiceUnavailable
+const CreatePostureResponseServiceUnavailableCode int = 503
+
+/*CreatePostureResponseServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response createPostureResponseServiceUnavailable
+*/
+type CreatePostureResponseServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewCreatePostureResponseServiceUnavailable creates CreatePostureResponseServiceUnavailable with default headers values
+func NewCreatePostureResponseServiceUnavailable() *CreatePostureResponseServiceUnavailable {
+
+	return &CreatePostureResponseServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the create posture response service unavailable response
+func (o *CreatePostureResponseServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *CreatePostureResponseServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the create posture response service unavailable response
+func (o *CreatePostureResponseServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *CreatePostureResponseServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
