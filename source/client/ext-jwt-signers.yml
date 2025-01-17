@@ -68,3 +68,6 @@ definitions:
             type: array
             items:
               type: string
+          audience:
+            type: string
+            x-nullable: true
