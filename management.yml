@@ -212,11 +212,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /api-sessions/{id}:
     get:
       security:
@@ -288,11 +283,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -381,11 +371,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -484,11 +469,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -578,11 +558,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /auth-policies/{id}:
     get:
       security:
@@ -654,11 +629,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -766,11 +736,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -836,24 +801,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "429":
           description: The resource requested is rate limited and the rate limit has
             been exceeded
@@ -872,11 +819,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -985,11 +927,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -1254,11 +1191,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -1349,11 +1281,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /authenticators/{id}:
     get:
       security:
@@ -1425,11 +1352,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -1537,11 +1459,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -1608,24 +1525,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "429":
           description: The resource requested is rate limited and the rate limit has
             been exceeded
@@ -1644,11 +1543,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -1757,11 +1651,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -1852,11 +1741,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -1956,11 +1840,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -2050,11 +1929,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /cas/{id}:
     get:
       security:
@@ -2126,11 +2000,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -2238,11 +2107,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -2309,24 +2173,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "429":
           description: The resource requested is rate limited and the rate limit has
             been exceeded
@@ -2345,11 +2191,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -2457,11 +2298,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -2549,11 +2385,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -2673,11 +2504,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -2777,11 +2603,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -2870,11 +2691,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /config-types/{id}:
     get:
       security:
@@ -2946,11 +2762,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -3058,11 +2869,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -3129,24 +2935,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -3184,11 +2972,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -3296,11 +3079,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -3360,11 +3138,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -3464,11 +3237,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -3558,11 +3326,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /configs/{id}:
     get:
       security:
@@ -3634,11 +3397,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -3746,11 +3504,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -3815,24 +3568,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -3870,11 +3605,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -3982,11 +3712,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -4075,11 +3800,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -5241,11 +4961,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /database/fix-data-integrity:
     post:
       security:
@@ -5448,11 +5163,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -5542,11 +5252,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /edge-router-policies/{id}:
     get:
       security:
@@ -5618,11 +5323,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -5731,11 +5431,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -5800,24 +5495,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -5855,11 +5532,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -5968,11 +5640,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -6051,11 +5718,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -6134,11 +5796,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -6238,11 +5895,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /edge-routers:
     get:
       security:
@@ -6345,11 +5997,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -6439,11 +6086,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /edge-routers/{id}:
     get:
       security:
@@ -6515,11 +6157,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -6627,11 +6264,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -6696,24 +6328,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -6751,11 +6365,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -6863,11 +6472,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -6946,11 +6550,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7029,11 +6628,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7117,11 +6711,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7200,11 +6789,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7283,11 +6867,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7387,11 +6966,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -7489,11 +7063,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /enrollments/{id}:
     get:
       security:
@@ -7566,11 +7135,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -7635,24 +7199,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "429":
           description: The resource requested is rate limited and the rate limit has
             been exceeded
@@ -7671,11 +7217,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7773,11 +7314,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -7889,11 +7425,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -7983,11 +7514,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /external-jwt-signers/{id}:
     get:
       security:
@@ -8059,11 +7585,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -8172,11 +7693,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -8242,24 +7758,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "429":
           description: The resource requested is rate limited and the rate limit has
             been exceeded
@@ -8278,11 +7776,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -8391,11 +7884,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -8504,11 +7992,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -8598,11 +8081,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /identities/{id}:
     get:
       security:
@@ -8674,11 +8152,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -8786,11 +8259,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -8855,24 +8323,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -8910,11 +8360,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -9022,11 +8467,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9105,11 +8545,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9195,11 +8630,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9278,11 +8708,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9361,11 +8786,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9444,11 +8864,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9527,11 +8942,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9613,11 +9023,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9697,11 +9102,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9783,11 +9183,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9872,11 +9267,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -9954,11 +9344,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -10065,11 +9450,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -10175,11 +9555,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -10258,11 +9633,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -10351,11 +9721,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -10471,11 +9836,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -10575,11 +9935,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /identity-types:
     get:
       security:
@@ -10673,11 +10028,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /identity-types/{id}:
     get:
       security:
@@ -10749,11 +10099,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -10912,11 +10257,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /posture-check-types:
     get:
       security:
@@ -11012,11 +10352,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /posture-check-types/{id}:
     get:
       security:
@@ -11088,11 +10423,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -11203,11 +10533,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -11297,11 +10622,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /posture-checks/{id}:
     get:
       security:
@@ -11373,11 +10693,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -11485,11 +10800,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -11561,11 +10871,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -11673,11 +10978,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -11777,11 +11077,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -11871,11 +11166,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /routers/{id}:
     get:
       security:
@@ -11947,11 +11237,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -12059,11 +11344,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -12165,11 +11445,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -12277,11 +11552,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -12381,11 +11651,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -12475,11 +11740,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /service-edge-router-policies/{id}:
     get:
       security:
@@ -12551,11 +11811,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -12664,11 +11919,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -12733,24 +11983,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -12788,11 +12020,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -12901,11 +12128,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -12984,11 +12206,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -13066,11 +12283,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -13170,11 +12382,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -13264,11 +12471,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /service-policies/{id}:
     get:
       security:
@@ -13340,11 +12542,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -13452,11 +12649,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -13521,24 +12713,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -13576,11 +12750,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -13689,11 +12858,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -13782,11 +12946,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -13875,11 +13034,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -13968,11 +13122,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -14072,11 +13221,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /services:
     get:
       security:
@@ -14185,11 +13329,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -14279,11 +13418,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /services/{id}:
     get:
       security:
@@ -14355,11 +13489,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -14467,11 +13596,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -14536,24 +13660,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -14591,11 +13697,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -14703,11 +13804,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -14807,11 +13903,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -14911,11 +14002,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15021,11 +14107,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15125,11 +14206,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15229,11 +14305,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15333,11 +14404,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15440,11 +14506,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /sessions/{id}:
     get:
       security:
@@ -15516,11 +14577,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -15585,24 +14641,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -15640,11 +14678,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15722,11 +14755,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -15844,11 +14872,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /terminators:
     get:
       security:
@@ -15942,11 +14965,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -16036,11 +15054,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /terminators/{id}:
     get:
       security:
@@ -16112,11 +15125,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -16224,11 +15232,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -16293,24 +15296,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -16348,11 +15333,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -16460,11 +15440,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
@@ -16564,11 +15539,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     post:
       security:
       - ztSession: []
@@ -16658,11 +15628,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
   /transit-routers/{id}:
     get:
       security:
@@ -16734,11 +15699,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     put:
       security:
       - ztSession: []
@@ -16846,11 +15806,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     delete:
       security:
       - ztSession: []
@@ -16915,24 +15870,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "404":
-          description: The requested resource does not exist
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
-          examples:
-            application/json:
-              error:
-                args:
-                  urlVars:
-                    id: 71a3000f-7dda-491a-9b90-a19f4ee6c406
-                cause: null
-                causeMessage: ""
-                code: NOT_FOUND
-                message: The resource requested was not found or is no longer available
-                requestId: 270908d6-f2ef-4577-b973-67bec18ae376
-              meta:
-                apiEnrollmentVersion: 0.0.1
-                apiVersion: 0.0.1
         "409":
           description: The resource requested to be removed/altered cannot be as it
             is referenced by another object.
@@ -16970,11 +15907,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     patch:
       security:
       - ztSession: []
@@ -17082,11 +16014,6 @@ paths:
               meta:
                 apiEnrollmentVersion: 0.0.1
                 apiVersion: 0.0.1
-        "503":
-          description: The request could not be completed due to the server being
-            busy or in a temporarily bad state
-          schema:
-            $ref: '#/definitions/apiErrorEnvelope'
     parameters:
     - type: string
       description: The id of the requested resource
