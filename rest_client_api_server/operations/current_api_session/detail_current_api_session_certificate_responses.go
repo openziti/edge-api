@@ -212,3 +212,47 @@ func (o *DetailCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw htt
 		}
 	}
 }
+
+// DetailCurrentAPISessionCertificateServiceUnavailableCode is the HTTP code returned for type DetailCurrentAPISessionCertificateServiceUnavailable
+const DetailCurrentAPISessionCertificateServiceUnavailableCode int = 503
+
+/*DetailCurrentAPISessionCertificateServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response detailCurrentApiSessionCertificateServiceUnavailable
+*/
+type DetailCurrentAPISessionCertificateServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDetailCurrentAPISessionCertificateServiceUnavailable creates DetailCurrentAPISessionCertificateServiceUnavailable with default headers values
+func NewDetailCurrentAPISessionCertificateServiceUnavailable() *DetailCurrentAPISessionCertificateServiceUnavailable {
+
+	return &DetailCurrentAPISessionCertificateServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the detail current Api session certificate service unavailable response
+func (o *DetailCurrentAPISessionCertificateServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DetailCurrentAPISessionCertificateServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the detail current Api session certificate service unavailable response
+func (o *DetailCurrentAPISessionCertificateServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DetailCurrentAPISessionCertificateServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

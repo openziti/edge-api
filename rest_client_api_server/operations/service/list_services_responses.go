@@ -212,3 +212,47 @@ func (o *ListServicesTooManyRequests) WriteResponse(rw http.ResponseWriter, prod
 		}
 	}
 }
+
+// ListServicesServiceUnavailableCode is the HTTP code returned for type ListServicesServiceUnavailable
+const ListServicesServiceUnavailableCode int = 503
+
+/*ListServicesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response listServicesServiceUnavailable
+*/
+type ListServicesServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewListServicesServiceUnavailable creates ListServicesServiceUnavailable with default headers values
+func NewListServicesServiceUnavailable() *ListServicesServiceUnavailable {
+
+	return &ListServicesServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the list services service unavailable response
+func (o *ListServicesServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *ListServicesServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the list services service unavailable response
+func (o *ListServicesServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *ListServicesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

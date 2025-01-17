@@ -212,3 +212,47 @@ func (o *DeleteCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw htt
 		}
 	}
 }
+
+// DeleteCurrentAPISessionCertificateServiceUnavailableCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateServiceUnavailable
+const DeleteCurrentAPISessionCertificateServiceUnavailableCode int = 503
+
+/*DeleteCurrentAPISessionCertificateServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response deleteCurrentApiSessionCertificateServiceUnavailable
+*/
+type DeleteCurrentAPISessionCertificateServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewDeleteCurrentAPISessionCertificateServiceUnavailable creates DeleteCurrentAPISessionCertificateServiceUnavailable with default headers values
+func NewDeleteCurrentAPISessionCertificateServiceUnavailable() *DeleteCurrentAPISessionCertificateServiceUnavailable {
+
+	return &DeleteCurrentAPISessionCertificateServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the delete current Api session certificate service unavailable response
+func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *DeleteCurrentAPISessionCertificateServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete current Api session certificate service unavailable response
+func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
