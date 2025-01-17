@@ -5784,6 +5784,10 @@ func init() {
             "externalAuthUrl"
           ],
           "properties": {
+            "audience": {
+              "type": "string",
+              "x-nullable": true
+            },
             "clientId": {
               "type": "string",
               "x-nullable": true
@@ -13800,6 +13804,10 @@ func init() {
             "externalAuthUrl"
           ],
           "properties": {
+            "audience": {
+              "type": "string",
+              "x-nullable": true
+            },
             "clientId": {
               "type": "string",
               "x-nullable": true

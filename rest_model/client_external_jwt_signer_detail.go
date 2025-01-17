@@ -44,6 +44,9 @@ import (
 type ClientExternalJWTSignerDetail struct {
 	BaseEntity
 
+	// audience
+	Audience *string `json:"audience,omitempty"`
+
 	// client Id
 	ClientID *string `json:"clientId,omitempty"`
 
@@ -71,6 +74,8 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
+		Audience *string `json:"audience,omitempty"`
+
 		ClientID *string `json:"clientId,omitempty"`
 
 		ExternalAuthURL *string `json:"externalAuthUrl"`
@@ -82,6 +87,8 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
 	}
+
+	m.Audience = dataAO1.Audience
 
 	m.ClientID = dataAO1.ClientID
 
@@ -104,6 +111,8 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO0)
 	var dataAO1 struct {
+		Audience *string `json:"audience,omitempty"`
+
 		ClientID *string `json:"clientId,omitempty"`
 
 		ExternalAuthURL *string `json:"externalAuthUrl"`
@@ -112,6 +121,8 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 
 		Scopes []string `json:"scopes"`
 	}
+
+	dataAO1.Audience = m.Audience
 
 	dataAO1.ClientID = m.ClientID
 
