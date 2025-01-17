@@ -166,3 +166,47 @@ func (o *EnrollTooManyRequests) WriteResponse(rw http.ResponseWriter, producer r
 		}
 	}
 }
+
+// EnrollServiceUnavailableCode is the HTTP code returned for type EnrollServiceUnavailable
+const EnrollServiceUnavailableCode int = 503
+
+/*EnrollServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response enrollServiceUnavailable
+*/
+type EnrollServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollServiceUnavailable creates EnrollServiceUnavailable with default headers values
+func NewEnrollServiceUnavailable() *EnrollServiceUnavailable {
+
+	return &EnrollServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the enroll service unavailable response
+func (o *EnrollServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll service unavailable response
+func (o *EnrollServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}

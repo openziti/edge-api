@@ -124,3 +124,47 @@ func (o *EnrollErOttTooManyRequests) WriteResponse(rw http.ResponseWriter, produ
 		}
 	}
 }
+
+// EnrollErOttServiceUnavailableCode is the HTTP code returned for type EnrollErOttServiceUnavailable
+const EnrollErOttServiceUnavailableCode int = 503
+
+/*EnrollErOttServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+
+swagger:response enrollErOttServiceUnavailable
+*/
+type EnrollErOttServiceUnavailable struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollErOttServiceUnavailable creates EnrollErOttServiceUnavailable with default headers values
+func NewEnrollErOttServiceUnavailable() *EnrollErOttServiceUnavailable {
+
+	return &EnrollErOttServiceUnavailable{}
+}
+
+// WithPayload adds the payload to the enroll er ott service unavailable response
+func (o *EnrollErOttServiceUnavailable) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollErOttServiceUnavailable {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll er ott service unavailable response
+func (o *EnrollErOttServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollErOttServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(503)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
