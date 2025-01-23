@@ -5805,6 +5805,9 @@ func init() {
               "items": {
                 "type": "string"
               }
+            },
+            "targetToken": {
+              "$ref": "#/definitions/targetToken"
             }
           }
         }
@@ -7849,6 +7852,15 @@ func init() {
         {
           "$ref": "#/definitions/subTags"
         }
+      ],
+      "x-nullable": true
+    },
+    "targetToken": {
+      "description": "Defines the target token type",
+      "type": "string",
+      "enum": [
+        "ACCESS",
+        "ID"
       ],
       "x-nullable": true
     },
@@ -13825,6 +13837,9 @@ func init() {
               "items": {
                 "type": "string"
               }
+            },
+            "targetToken": {
+              "$ref": "#/definitions/targetToken"
             }
           }
         }
@@ -15870,6 +15885,15 @@ func init() {
         {
           "$ref": "#/definitions/subTags"
         }
+      ],
+      "x-nullable": true
+    },
+    "targetToken": {
+      "description": "Defines the target token type",
+      "type": "string",
+      "enum": [
+        "ACCESS",
+        "ID"
       ],
       "x-nullable": true
     },

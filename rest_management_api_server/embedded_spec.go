@@ -26075,6 +26075,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -26106,7 +26109,8 @@ func init() {
             "issuer",
             "audience",
             "clientId",
-            "scopes"
+            "scopes",
+            "targetToken"
           ],
           "properties": {
             "audience": {
@@ -26163,6 +26167,9 @@ func init() {
               "items": {
                 "type": "string"
               }
+            },
+            "targetToken": {
+              "$ref": "#/definitions/targetToken"
             },
             "useExternalId": {
               "type": "boolean"
@@ -26233,6 +26240,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -26297,6 +26307,9 @@ func init() {
         },
         "tags": {
           "$ref": "#/definitions/tags"
+        },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
         },
         "useExternalId": {
           "type": "boolean",
@@ -29674,6 +29687,15 @@ func init() {
         {
           "$ref": "#/definitions/subTags"
         }
+      ],
+      "x-nullable": true
+    },
+    "targetToken": {
+      "description": "Defines the target token type",
+      "type": "string",
+      "enum": [
+        "ACCESS",
+        "ID"
       ],
       "x-nullable": true
     },
@@ -56136,6 +56158,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -56167,7 +56192,8 @@ func init() {
             "issuer",
             "audience",
             "clientId",
-            "scopes"
+            "scopes",
+            "targetToken"
           ],
           "properties": {
             "audience": {
@@ -56224,6 +56250,9 @@ func init() {
               "items": {
                 "type": "string"
               }
+            },
+            "targetToken": {
+              "$ref": "#/definitions/targetToken"
             },
             "useExternalId": {
               "type": "boolean"
@@ -56294,6 +56323,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -56358,6 +56390,9 @@ func init() {
         },
         "tags": {
           "$ref": "#/definitions/tags"
+        },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
         },
         "useExternalId": {
           "type": "boolean",
@@ -59739,6 +59774,15 @@ func init() {
         {
           "$ref": "#/definitions/subTags"
         }
+      ],
+      "x-nullable": true
+    },
+    "targetToken": {
+      "description": "Defines the target token type",
+      "type": "string",
+      "enum": [
+        "ACCESS",
+        "ID"
       ],
       "x-nullable": true
     },
