@@ -220,6 +220,7 @@ definitions:
           - audience
           - clientId
           - scopes
+          - targetToken
         properties:
           name:
             type: string
@@ -262,6 +263,8 @@ definitions:
             type: array
             items:
               type: string
+          targetToken:
+              $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
   externalJwtSignerCreate:
     description: A create Certificate Authority (CA) object
     type: object
@@ -309,6 +312,8 @@ definitions:
         items:
           type: string
         x-nullable: true
+      targetToken:
+        $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   externalJwtSignerUpdate:
@@ -357,6 +362,8 @@ definitions:
         items:
           type: string
         x-nullable: true
+      targetToken:
+        $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   externalJwtSignerPatch:
@@ -402,5 +409,7 @@ definitions:
         type: array
         items:
           type: string
+      targetToken:
+        $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'

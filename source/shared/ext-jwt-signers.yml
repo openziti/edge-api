@@ -1,0 +1,9 @@
+---
+definitions:
+  targetToken:
+    type: string
+    description: "Defines the target token type"
+    enum:
+      - ACCESS
+      - ID
+    x-nullable: true

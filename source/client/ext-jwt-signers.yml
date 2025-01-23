@@ -71,3 +71,5 @@ definitions:
           audience:
             type: string
             x-nullable: true
+          targetToken:
+            $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"

@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.38"
+    "version": "0.26.39"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -26075,6 +26075,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -26106,7 +26109,8 @@ func init() {
             "issuer",
             "audience",
             "clientId",
-            "scopes"
+            "scopes",
+            "targetToken"
           ],
           "properties": {
             "audience": {
@@ -26163,6 +26167,9 @@ func init() {
               "items": {
                 "type": "string"
               }
+            },
+            "targetToken": {
+              "$ref": "#/definitions/targetToken"
             },
             "useExternalId": {
               "type": "boolean"
@@ -26233,6 +26240,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -26297,6 +26307,9 @@ func init() {
         },
         "tags": {
           "$ref": "#/definitions/tags"
+        },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
         },
         "useExternalId": {
           "type": "boolean",
@@ -29677,6 +29690,15 @@ func init() {
       ],
       "x-nullable": true
     },
+    "targetToken": {
+      "description": "Defines the target token type",
+      "type": "string",
+      "enum": [
+        "ACCESS",
+        "ID"
+      ],
+      "x-nullable": true
+    },
     "terminatorCost": {
       "type": "integer",
       "maximum": 65535
@@ -30025,7 +30047,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.38"
+    "version": "0.26.39"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -56136,6 +56158,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -56167,7 +56192,8 @@ func init() {
             "issuer",
             "audience",
             "clientId",
-            "scopes"
+            "scopes",
+            "targetToken"
           ],
           "properties": {
             "audience": {
@@ -56224,6 +56250,9 @@ func init() {
               "items": {
                 "type": "string"
               }
+            },
+            "targetToken": {
+              "$ref": "#/definitions/targetToken"
             },
             "useExternalId": {
               "type": "boolean"
@@ -56294,6 +56323,9 @@ func init() {
         "tags": {
           "$ref": "#/definitions/tags"
         },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
+        },
         "useExternalId": {
           "type": "boolean",
           "x-nullable": true
@@ -56358,6 +56390,9 @@ func init() {
         },
         "tags": {
           "$ref": "#/definitions/tags"
+        },
+        "targetToken": {
+          "$ref": "#/definitions/targetToken"
         },
         "useExternalId": {
           "type": "boolean",
@@ -59739,6 +59774,15 @@ func init() {
         {
           "$ref": "#/definitions/subTags"
         }
+      ],
+      "x-nullable": true
+    },
+    "targetToken": {
+      "description": "Defines the target token type",
+      "type": "string",
+      "enum": [
+        "ACCESS",
+        "ID"
       ],
       "x-nullable": true
     },

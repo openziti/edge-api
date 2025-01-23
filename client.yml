@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.38
+  version: 0.26.39
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -4235,6 +4235,8 @@ definitions:
           type: array
           items:
             type: string
+        targetToken:
+          $ref: '#/definitions/targetToken'
   clientExternalJwtSignerList:
     description: An array of External JWT Signers resources
     type: array
@@ -5595,6 +5597,13 @@ definitions:
       to the following types/values: null, string, boolean'
     allOf:
     - $ref: '#/definitions/subTags'
+    x-nullable: true
+  targetToken:
+    description: Defines the target token type
+    type: string
+    enum:
+    - ACCESS
+    - ID
     x-nullable: true
   terminatorClientDetail:
     type: object
