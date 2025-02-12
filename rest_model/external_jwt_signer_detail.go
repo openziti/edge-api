@@ -104,9 +104,6 @@ type ExternalJWTSignerDetail struct {
 	// Format: date-time
 	NotBefore *strfmt.DateTime `json:"notBefore"`
 
-	// open Id configuration Url
-	OpenIDConfigurationURL string `json:"openIdConfigurationUrl,omitempty"`
-
 	// scopes
 	// Required: true
 	Scopes []string `json:"scopes"`
@@ -159,8 +156,6 @@ func (m *ExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 		NotBefore *strfmt.DateTime `json:"notBefore"`
 
-		OpenIDConfigurationURL string `json:"openIdConfigurationUrl,omitempty"`
-
 		Scopes []string `json:"scopes"`
 
 		TargetToken *TargetToken `json:"targetToken"`
@@ -198,8 +193,6 @@ func (m *ExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 	m.NotAfter = dataAO1.NotAfter
 
 	m.NotBefore = dataAO1.NotBefore
-
-	m.OpenIDConfigurationURL = dataAO1.OpenIDConfigurationURL
 
 	m.Scopes = dataAO1.Scopes
 
@@ -248,8 +241,6 @@ func (m ExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 
 		NotBefore *strfmt.DateTime `json:"notBefore"`
 
-		OpenIDConfigurationURL string `json:"openIdConfigurationUrl,omitempty"`
-
 		Scopes []string `json:"scopes"`
 
 		TargetToken *TargetToken `json:"targetToken"`
@@ -284,8 +275,6 @@ func (m ExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.NotAfter = m.NotAfter
 
 	dataAO1.NotBefore = m.NotBefore
-
-	dataAO1.OpenIDConfigurationURL = m.OpenIDConfigurationURL
 
 	dataAO1.Scopes = m.Scopes
 

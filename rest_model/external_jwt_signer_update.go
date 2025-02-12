@@ -79,9 +79,6 @@ type ExternalJWTSignerUpdate struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// open Id configuration Url
-	OpenIDConfigurationURL *string `json:"openIdConfigurationUrl,omitempty"`
-
 	// scopes
 	Scopes []string `json:"scopes"`
 

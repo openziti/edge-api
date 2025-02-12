@@ -263,8 +263,6 @@ definitions:
             type: array
             items:
               type: string
-          openIdConfigurationUrl:
-            type: string
           targetToken:
               $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
   externalJwtSignerCreate:
@@ -318,9 +316,6 @@ definitions:
         $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
-      openIdConfigurationUrl:
-        type: string
-        x-nullable: true
   externalJwtSignerUpdate:
     type: object
     required:
@@ -371,9 +366,6 @@ definitions:
         $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
-      openIdConfigurationUrl:
-        type: string
-        x-nullable: true
   externalJwtSignerPatch:
     type: object
     properties:
@@ -421,6 +413,3 @@ definitions:
         $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
-      openIdConfigurationUrl:
-        type: string
-        x-nullable: true

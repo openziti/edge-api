@@ -27103,10 +27103,6 @@ func init() {
           "type": "string",
           "example": "MyApps Signer"
         },
-        "openIdConfigurationUrl": {
-          "type": "string",
-          "x-nullable": true
-        },
         "scopes": {
           "type": "array",
           "items": {
@@ -27204,9 +27200,6 @@ func init() {
               "type": "string",
               "format": "date-time"
             },
-            "openIdConfigurationUrl": {
-              "type": "string"
-            },
             "scopes": {
               "type": "array",
               "items": {
@@ -27276,10 +27269,6 @@ func init() {
           "x-nullable": true,
           "example": "MyApps Signer"
         },
-        "openIdConfigurationUrl": {
-          "type": "string",
-          "x-nullable": true
-        },
         "scopes": {
           "type": "array",
           "items": {
@@ -27346,10 +27335,6 @@ func init() {
         "name": {
           "type": "string",
           "example": "MyApps Signer"
-        },
-        "openIdConfigurationUrl": {
-          "type": "string",
-          "x-nullable": true
         },
         "scopes": {
           "type": "array",
@@ -58271,10 +58256,6 @@ func init() {
           "type": "string",
           "example": "MyApps Signer"
         },
-        "openIdConfigurationUrl": {
-          "type": "string",
-          "x-nullable": true
-        },
         "scopes": {
           "type": "array",
           "items": {
@@ -58372,9 +58353,6 @@ func init() {
               "type": "string",
               "format": "date-time"
             },
-            "openIdConfigurationUrl": {
-              "type": "string"
-            },
             "scopes": {
               "type": "array",
               "items": {
@@ -58444,10 +58422,6 @@ func init() {
           "x-nullable": true,
           "example": "MyApps Signer"
         },
-        "openIdConfigurationUrl": {
-          "type": "string",
-          "x-nullable": true
-        },
         "scopes": {
           "type": "array",
           "items": {
@@ -58514,10 +58488,6 @@ func init() {
         "name": {
           "type": "string",
           "example": "MyApps Signer"
-        },
-        "openIdConfigurationUrl": {
-          "type": "string",
-          "x-nullable": true
         },
         "scopes": {
           "type": "array",

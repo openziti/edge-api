@@ -19646,9 +19646,6 @@ definitions:
       name:
         type: string
         example: MyApps Signer
-      openIdConfigurationUrl:
-        type: string
-        x-nullable: true
       scopes:
         type: array
         items:
@@ -19721,8 +19718,6 @@ definitions:
         notBefore:
           type: string
           format: date-time
-        openIdConfigurationUrl:
-          type: string
         scopes:
           type: array
           items:
@@ -19772,9 +19767,6 @@ definitions:
         type: string
         x-nullable: true
         example: MyApps Signer
-      openIdConfigurationUrl:
-        type: string
-        x-nullable: true
       scopes:
         type: array
         items:
@@ -19824,9 +19816,6 @@ definitions:
       name:
         type: string
         example: MyApps Signer
-      openIdConfigurationUrl:
-        type: string
-        x-nullable: true
       scopes:
         type: array
         items:
