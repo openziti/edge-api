@@ -1,5 +1,7 @@
 $PSDefaultParameterValues += @{ 'New-RegKey:ErrorAction' = 'Stop' }
 
+$ProgressPreference = 'SilentlyContinue'
+
 $orignalLocaltion = Get-Location
 try
 {
