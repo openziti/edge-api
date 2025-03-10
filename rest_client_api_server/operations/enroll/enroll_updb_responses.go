@@ -81,6 +81,50 @@ func (o *EnrollUpdbOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pr
 	}
 }
 
+// EnrollUpdbBadRequestCode is the HTTP code returned for type EnrollUpdbBadRequest
+const EnrollUpdbBadRequestCode int = 400
+
+/*EnrollUpdbBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+
+swagger:response enrollUpdbBadRequest
+*/
+type EnrollUpdbBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollUpdbBadRequest creates EnrollUpdbBadRequest with default headers values
+func NewEnrollUpdbBadRequest() *EnrollUpdbBadRequest {
+
+	return &EnrollUpdbBadRequest{}
+}
+
+// WithPayload adds the payload to the enroll updb bad request response
+func (o *EnrollUpdbBadRequest) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollUpdbBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll updb bad request response
+func (o *EnrollUpdbBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollUpdbBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // EnrollUpdbNotFoundCode is the HTTP code returned for type EnrollUpdbNotFound
 const EnrollUpdbNotFoundCode int = 404
 

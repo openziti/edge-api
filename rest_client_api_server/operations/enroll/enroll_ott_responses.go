@@ -81,6 +81,50 @@ func (o *EnrollOttOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 	}
 }
 
+// EnrollOttBadRequestCode is the HTTP code returned for type EnrollOttBadRequest
+const EnrollOttBadRequestCode int = 400
+
+/*EnrollOttBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+
+swagger:response enrollOttBadRequest
+*/
+type EnrollOttBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollOttBadRequest creates EnrollOttBadRequest with default headers values
+func NewEnrollOttBadRequest() *EnrollOttBadRequest {
+
+	return &EnrollOttBadRequest{}
+}
+
+// WithPayload adds the payload to the enroll ott bad request response
+func (o *EnrollOttBadRequest) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollOttBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll ott bad request response
+func (o *EnrollOttBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollOttBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // EnrollOttNotFoundCode is the HTTP code returned for type EnrollOttNotFound
 const EnrollOttNotFoundCode int = 404
 

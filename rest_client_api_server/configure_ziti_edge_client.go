@@ -70,8 +70,8 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 	// To continue using redoc as your UI, uncomment the following line
 	// api.UseRedoc()
 
-	api.ApplicationPkcs10Consumer = runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
-		return errors.NotImplemented("applicationPkcs10 consumer has not yet been implemented")
+	api.ApplicationPkcs7Consumer = runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
+		return errors.NotImplemented("applicationPkcs7 consumer has not yet been implemented")
 	})
 	api.ApplicationXPemFileConsumer = runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
 		return errors.NotImplemented("applicationXPemFile consumer has not yet been implemented")
@@ -81,9 +81,6 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 
 	api.ApplicationPkcs7MimeProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 		return errors.NotImplemented("applicationPkcs7Mime producer has not yet been implemented")
-	})
-	api.ApplicationXPemFileProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
-		return errors.NotImplemented("applicationXPemFile producer has not yet been implemented")
 	})
 	api.BinProducer = runtime.ByteStreamProducer()
 	api.JSONProducer = runtime.JSONProducer()

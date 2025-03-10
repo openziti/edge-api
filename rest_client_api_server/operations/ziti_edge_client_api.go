@@ -76,8 +76,8 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		APIKeyAuthenticator: security.APIKeyAuth,
 		BearerAuthenticator: security.BearerAuth,
 
-		ApplicationPkcs10Consumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
-			return errors.NotImplemented("applicationPkcs10 consumer has not yet been implemented")
+		ApplicationPkcs7Consumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
+			return errors.NotImplemented("applicationPkcs7 consumer has not yet been implemented")
 		}),
 		ApplicationXPemFileConsumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
 			return errors.NotImplemented("applicationXPemFile consumer has not yet been implemented")
@@ -87,9 +87,6 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 
 		ApplicationPkcs7MimeProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 			return errors.NotImplemented("applicationPkcs7Mime producer has not yet been implemented")
-		}),
-		ApplicationXPemFileProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
-			return errors.NotImplemented("applicationXPemFile producer has not yet been implemented")
 		}),
 		BinProducer:  runtime.ByteStreamProducer(),
 		JSONProducer: runtime.JSONProducer(),
@@ -306,9 +303,9 @@ type ZitiEdgeClientAPI struct {
 	// It has a default implementation in the security package, however you can replace it for your particular usage.
 	BearerAuthenticator func(string, security.ScopedTokenAuthentication) runtime.Authenticator
 
-	// ApplicationPkcs10Consumer registers a consumer for the following mime types:
-	//   - application/pkcs10
-	ApplicationPkcs10Consumer runtime.Consumer
+	// ApplicationPkcs7Consumer registers a consumer for the following mime types:
+	//   - application/pkcs7
+	ApplicationPkcs7Consumer runtime.Consumer
 	// ApplicationXPemFileConsumer registers a consumer for the following mime types:
 	//   - application/x-pem-file
 	ApplicationXPemFileConsumer runtime.Consumer
@@ -322,9 +319,6 @@ type ZitiEdgeClientAPI struct {
 	// ApplicationPkcs7MimeProducer registers a producer for the following mime types:
 	//   - application/pkcs7-mime
 	ApplicationPkcs7MimeProducer runtime.Producer
-	// ApplicationXPemFileProducer registers a producer for the following mime types:
-	//   - application/x-pem-file
-	ApplicationXPemFileProducer runtime.Producer
 	// BinProducer registers a producer for the following mime types:
 	//   - image/png
 	BinProducer runtime.Producer
@@ -529,8 +523,8 @@ func (o *ZitiEdgeClientAPI) RegisterFormat(name string, format strfmt.Format, va
 func (o *ZitiEdgeClientAPI) Validate() error {
 	var unregistered []string
 
-	if o.ApplicationPkcs10Consumer == nil {
-		unregistered = append(unregistered, "ApplicationPkcs10Consumer")
+	if o.ApplicationPkcs7Consumer == nil {
+		unregistered = append(unregistered, "ApplicationPkcs7Consumer")
 	}
 	if o.ApplicationXPemFileConsumer == nil {
 		unregistered = append(unregistered, "ApplicationXPemFileConsumer")
@@ -544,9 +538,6 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 
 	if o.ApplicationPkcs7MimeProducer == nil {
 		unregistered = append(unregistered, "ApplicationPkcs7MimeProducer")
-	}
-	if o.ApplicationXPemFileProducer == nil {
-		unregistered = append(unregistered, "ApplicationXPemFileProducer")
 	}
 	if o.BinProducer == nil {
 		unregistered = append(unregistered, "BinProducer")
@@ -777,8 +768,8 @@ func (o *ZitiEdgeClientAPI) ConsumersFor(mediaTypes []string) map[string]runtime
 	result := make(map[string]runtime.Consumer, len(mediaTypes))
 	for _, mt := range mediaTypes {
 		switch mt {
-		case "application/pkcs10":
-			result["application/pkcs10"] = o.ApplicationPkcs10Consumer
+		case "application/pkcs7":
+			result["application/pkcs7"] = o.ApplicationPkcs7Consumer
 		case "application/x-pem-file":
 			result["application/x-pem-file"] = o.ApplicationXPemFileConsumer
 		case "application/json":
@@ -802,8 +793,6 @@ func (o *ZitiEdgeClientAPI) ProducersFor(mediaTypes []string) map[string]runtime
 		switch mt {
 		case "application/pkcs7-mime":
 			result["application/pkcs7-mime"] = o.ApplicationPkcs7MimeProducer
-		case "application/x-pem-file":
-			result["application/x-pem-file"] = o.ApplicationXPemFileProducer
 		case "image/png":
 			result["image/png"] = o.BinProducer
 		case "application/json":

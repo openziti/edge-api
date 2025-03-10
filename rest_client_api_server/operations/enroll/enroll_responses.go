@@ -40,7 +40,7 @@ import (
 // EnrollOKCode is the HTTP code returned for type EnrollOK
 const EnrollOKCode int = 200
 
-/*EnrollOK A response for multi-format legacy enrollment.
+/*EnrollOK A response containing and identities client certificate chains
 
 swagger:response enrollOK
 */
@@ -49,7 +49,7 @@ type EnrollOK struct {
 	/*
 	  In: Body
 	*/
-	Payload string `json:"body,omitempty"`
+	Payload *rest_model.EnrollmentCertsEnvelope `json:"body,omitempty"`
 }
 
 // NewEnrollOK creates EnrollOK with default headers values
@@ -59,13 +59,13 @@ func NewEnrollOK() *EnrollOK {
 }
 
 // WithPayload adds the payload to the enroll o k response
-func (o *EnrollOK) WithPayload(payload string) *EnrollOK {
+func (o *EnrollOK) WithPayload(payload *rest_model.EnrollmentCertsEnvelope) *EnrollOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the enroll o k response
-func (o *EnrollOK) SetPayload(payload string) {
+func (o *EnrollOK) SetPayload(payload *rest_model.EnrollmentCertsEnvelope) {
 	o.Payload = payload
 }
 
@@ -73,9 +73,55 @@ func (o *EnrollOK) SetPayload(payload string) {
 func (o *EnrollOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(200)
-	payload := o.Payload
-	if err := producer.Produce(rw, payload); err != nil {
-		panic(err) // let the recovery middleware deal with this
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// EnrollBadRequestCode is the HTTP code returned for type EnrollBadRequest
+const EnrollBadRequestCode int = 400
+
+/*EnrollBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+
+swagger:response enrollBadRequest
+*/
+type EnrollBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollBadRequest creates EnrollBadRequest with default headers values
+func NewEnrollBadRequest() *EnrollBadRequest {
+
+	return &EnrollBadRequest{}
+}
+
+// WithPayload adds the payload to the enroll bad request response
+func (o *EnrollBadRequest) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll bad request response
+func (o *EnrollBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
 	}
 }
 
