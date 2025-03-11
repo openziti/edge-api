@@ -4,6 +4,10 @@ paths:
     parameters:
       - $ref: '../shared/parameters.yml#/token-optional'
       - $ref: '../shared/parameters.yml#/method-optional'
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/genericEnroll'
     post:
       summary: Enroll an identity via one-time-token
       description: present a OTT and CSR to receive a long-lived client certificate
@@ -11,17 +15,17 @@ paths:
       tags:
         - Enroll
       consumes:
-        - application/pkcs10
+        - application/pkcs7
         - application/json
         - application/x-pem-file
         - text/plain
       produces:
-        #default to PEM for older clients that do not properly set/inspect accept/content-type headers
-        - application/x-pem-file
         - application/json
       responses:
         '200':
-          $ref: '#/responses/stringResponse'
+          $ref: '#/responses/enrollmentCerts'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
@@ -44,6 +48,8 @@ paths:
       responses:
         '200':
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
@@ -72,6 +78,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/enrollmentCerts'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
@@ -102,6 +110,8 @@ paths:
       responses:
         '200':
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
         '503':
@@ -130,6 +140,8 @@ paths:
       responses:
         '200':
           $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '404':
           $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
         '429':
@@ -155,6 +167,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/erOttResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
         '503':
@@ -186,6 +200,8 @@ paths:
       responses:
         '200':
           $ref: '#/responses/routerExtendEnrollmentResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '401':
           $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
         '429':
@@ -240,10 +256,6 @@ responses:
     description: A response containing and identities client certificate chains
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
-  stringResponse:
-    description: A response for multi-format legacy enrollment.
-    schema:
-      type: string
   getJwksResponse:
     description: A JWKS response for enrollment.
     schema:
@@ -254,6 +266,30 @@ responses:
       $ref: '#/definitions/nonceSignature'
 
 definitions:
+  genericEnroll:
+    type: object
+    # the properties here are all over the place due to legacy behavior
+    properties:
+      # for identity enrollment (ca), this is the "requested name"
+      name:
+        type: string
+
+        # for identity enrollment (updb)
+      username:
+        $ref: '../shared/authenticate.yml#/definitions/username'
+      password:
+        $ref: '../shared/authenticate.yml#/definitions/password'
+
+      # for identity enrollment (ott) enrollment
+      clientCsr:
+        type: string
+
+      # for erott
+      serverCertCsr:
+        type: string
+      certCsr:
+        type: string
+
   ottEnrollmentRequest:
     type: object
     properties:

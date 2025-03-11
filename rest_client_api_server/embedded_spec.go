@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.40"
+    "version": "0.26.42"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -2490,13 +2490,12 @@ func init() {
       "post": {
         "description": "present a OTT and CSR to receive a long-lived client certificate",
         "consumes": [
-          "application/pkcs10",
+          "application/pkcs7",
           "application/json",
           "application/x-pem-file",
           "text/plain"
         ],
         "produces": [
-          "application/x-pem-file",
           "application/json"
         ],
         "tags": [
@@ -2506,9 +2505,46 @@ func init() {
         "operationId": "enroll",
         "responses": {
           "200": {
-            "description": "A response for multi-format legacy enrollment.",
+            "description": "A response containing and identities client certificate chains",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/enrollmentCertsEnvelope"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -2579,6 +2615,13 @@ func init() {
           "type": "string",
           "name": "method",
           "in": "query"
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/genericEnroll"
+          }
         }
       ]
     },
@@ -2595,6 +2638,43 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -2758,6 +2838,43 @@ func init() {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
             }
           },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
@@ -2825,6 +2942,43 @@ func init() {
             "description": "A response containing the edge routers new signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "401": {
@@ -2908,6 +3062,43 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -2994,6 +3185,43 @@ func init() {
               "$ref": "#/definitions/empty"
             }
           },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
@@ -3050,6 +3278,43 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -6415,6 +6680,29 @@ func init() {
         }
       }
     },
+    "genericEnroll": {
+      "type": "object",
+      "properties": {
+        "certCsr": {
+          "type": "string"
+        },
+        "clientCsr": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "$ref": "#/definitions/password"
+        },
+        "serverCertCsr": {
+          "type": "string"
+        },
+        "username": {
+          "$ref": "#/definitions/username"
+        }
+      }
+    },
     "identityAuthenticators": {
       "type": "object",
       "properties": {
@@ -8017,7 +8305,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.40"
+    "version": "0.26.42"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -10444,13 +10732,12 @@ func init() {
         "description": "present a OTT and CSR to receive a long-lived client certificate",
         "consumes": [
           "application/json",
-          "application/pkcs10",
+          "application/pkcs7",
           "application/x-pem-file",
           "text/plain"
         ],
         "produces": [
-          "application/json",
-          "application/x-pem-file"
+          "application/json"
         ],
         "tags": [
           "Enroll"
@@ -10459,9 +10746,46 @@ func init() {
         "operationId": "enroll",
         "responses": {
           "200": {
-            "description": "A response for multi-format legacy enrollment.",
+            "description": "A response containing and identities client certificate chains",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/enrollmentCertsEnvelope"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -10532,6 +10856,13 @@ func init() {
           "type": "string",
           "name": "method",
           "in": "query"
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/genericEnroll"
+          }
         }
       ]
     },
@@ -10548,6 +10879,43 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -10711,6 +11079,43 @@ func init() {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
             }
           },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
@@ -10778,6 +11183,43 @@ func init() {
             "description": "A response containing the edge routers new signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "401": {
@@ -10861,6 +11303,43 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -10947,6 +11426,43 @@ func init() {
               "$ref": "#/definitions/empty"
             }
           },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
@@ -11003,6 +11519,43 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           },
           "404": {
@@ -14448,6 +15001,29 @@ func init() {
         },
         "token": {
           "type": "string"
+        }
+      }
+    },
+    "genericEnroll": {
+      "type": "object",
+      "properties": {
+        "certCsr": {
+          "type": "string"
+        },
+        "clientCsr": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "$ref": "#/definitions/password"
+        },
+        "serverCertCsr": {
+          "type": "string"
+        },
+        "username": {
+          "$ref": "#/definitions/username"
         }
       }
     },

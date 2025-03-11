@@ -81,6 +81,50 @@ func (o *EnrollCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 	}
 }
 
+// EnrollCaBadRequestCode is the HTTP code returned for type EnrollCaBadRequest
+const EnrollCaBadRequestCode int = 400
+
+/*EnrollCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+
+swagger:response enrollCaBadRequest
+*/
+type EnrollCaBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollCaBadRequest creates EnrollCaBadRequest with default headers values
+func NewEnrollCaBadRequest() *EnrollCaBadRequest {
+
+	return &EnrollCaBadRequest{}
+}
+
+// WithPayload adds the payload to the enroll ca bad request response
+func (o *EnrollCaBadRequest) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollCaBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll ca bad request response
+func (o *EnrollCaBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // EnrollCaNotFoundCode is the HTTP code returned for type EnrollCaNotFound
 const EnrollCaNotFoundCode int = 404
 

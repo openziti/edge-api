@@ -30,6 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -37,6 +38,8 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
+
+	"github.com/openziti/edge-api/rest_model"
 )
 
 // NewEnrollParams creates a new EnrollParams object
@@ -57,6 +60,10 @@ type EnrollParams struct {
 	HTTPRequest *http.Request `json:"-"`
 
 	/*
+	  In: body
+	*/
+	Body *rest_model.GenericEnroll
+	/*
 	  In: query
 	*/
 	Method *string
@@ -76,6 +83,28 @@ func (o *EnrollParams) BindRequest(r *http.Request, route *middleware.MatchedRou
 	o.HTTPRequest = r
 
 	qs := runtime.Values(r.URL.Query())
+
+	if runtime.HasBody(r) {
+		defer r.Body.Close()
+		var body rest_model.GenericEnroll
+		if err := route.Consumer.Consume(r.Body, &body); err != nil {
+			res = append(res, errors.NewParseError("body", "body", "", err))
+		} else {
+			// validate body object
+			if err := body.Validate(route.Formats); err != nil {
+				res = append(res, err)
+			}
+
+			ctx := validate.WithOperationRequest(context.Background())
+			if err := body.ContextValidate(ctx, route.Formats); err != nil {
+				res = append(res, err)
+			}
+
+			if len(res) == 0 {
+				o.Body = &body
+			}
+		}
+	}
 
 	qMethod, qhkMethod, _ := qs.GetOK("method")
 	if err := o.bindMethod(qMethod, qhkMethod, route.Formats); err != nil {

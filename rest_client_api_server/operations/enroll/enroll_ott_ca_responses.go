@@ -81,6 +81,50 @@ func (o *EnrollOttCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 	}
 }
 
+// EnrollOttCaBadRequestCode is the HTTP code returned for type EnrollOttCaBadRequest
+const EnrollOttCaBadRequestCode int = 400
+
+/*EnrollOttCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+
+swagger:response enrollOttCaBadRequest
+*/
+type EnrollOttCaBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollOttCaBadRequest creates EnrollOttCaBadRequest with default headers values
+func NewEnrollOttCaBadRequest() *EnrollOttCaBadRequest {
+
+	return &EnrollOttCaBadRequest{}
+}
+
+// WithPayload adds the payload to the enroll ott ca bad request response
+func (o *EnrollOttCaBadRequest) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollOttCaBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll ott ca bad request response
+func (o *EnrollOttCaBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollOttCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // EnrollOttCaTooManyRequestsCode is the HTTP code returned for type EnrollOttCaTooManyRequests
 const EnrollOttCaTooManyRequestsCode int = 429
 
