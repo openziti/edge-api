@@ -47,6 +47,10 @@ responses:
         meta:
           apiEnrollmentVersion: 0.0.1
           apiVersion: 0.0.1
+  unprocessableEntityResponse:
+    description: The entity could not be processed due to semantic errors in the payload
+    schema:
+      $ref: '#/definitions/apiErrorEnvelope'
   conflictResponse:
     description: The request could not be completed due to a conflict of configuration or state
     schema:

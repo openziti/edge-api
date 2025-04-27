@@ -35,6 +35,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/openziti/edge-api/rest_management_api_client/api_session"
+	"github.com/openziti/edge-api/rest_management_api_client/ascode"
 	"github.com/openziti/edge-api/rest_management_api_client/auth_policy"
 	"github.com/openziti/edge-api/rest_management_api_client/authentication"
 	"github.com/openziti/edge-api/rest_management_api_client/authenticator"
@@ -105,6 +106,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *ZitiEdgeMa
 	cli := new(ZitiEdgeManagement)
 	cli.Transport = transport
 	cli.APISession = api_session.New(transport, formats)
+	cli.Ascode = ascode.New(transport, formats)
 	cli.AuthPolicy = auth_policy.New(transport, formats)
 	cli.Authentication = authentication.New(transport, formats)
 	cli.Authenticator = authenticator.New(transport, formats)
@@ -176,6 +178,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type ZitiEdgeManagement struct {
 	APISession api_session.ClientService
 
+	Ascode ascode.ClientService
+
 	AuthPolicy auth_policy.ClientService
 
 	Authentication authentication.ClientService
@@ -233,6 +237,7 @@ type ZitiEdgeManagement struct {
 func (c *ZitiEdgeManagement) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.APISession.SetTransport(transport)
+	c.Ascode.SetTransport(transport)
 	c.AuthPolicy.SetTransport(transport)
 	c.Authentication.SetTransport(transport)
 	c.Authenticator.SetTransport(transport)

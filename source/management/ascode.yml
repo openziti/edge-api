@@ -1,0 +1,75 @@
+paths:
+  ascode:
+    export:
+      post:
+        summary: Export network bundle
+        tags: [Ascode]
+        operationId: exportAscode
+        consumes:
+          - application/json
+        parameters:
+          - in: body
+            name: exportRequest
+            description: Export options
+            required: true
+            schema:
+              type: object
+              properties:
+                types:
+                  type: string
+                format:
+                  type: string
+                  enum: [yaml, json]
+        responses:
+          '200':
+            $ref: '#/responses/exportResponse'
+          '401':
+            $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+
+    import:
+      post:
+        summary: Import a network bundle
+        tags: [Ascode]
+        operationId: importAscode
+        parameters:
+          - name: dryRun
+            in: query
+            required: false
+            type: boolean
+            description: If true, the import is validated but not persisted
+        requestBody:
+          content:
+            application/json:
+              schema: { $ref: '#/definitions/ascodeBundle' }
+          required: true
+        responses:
+          '204':
+            $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+          '422':
+            $ref: '../shared/standard-responses.yml#/responses/unprocessableEntityResponse'
+
+responses:
+  exportResponse:
+    description: Network configuration bundle exported
+    content:
+      application/yaml:
+        schema: { type: string }
+      application/json:
+        schema: { type: object }
+
+definitions:
+  ascodeBundle:
+    description: A bundle of exported OpenZiti network entities
+    type: object
+    required:
+      - version
+      - items
+    properties:
+      version:
+        type: integer
+      items:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: object

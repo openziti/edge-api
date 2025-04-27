@@ -44,6 +44,11 @@ paths:
   '/api-sessions/{id}':
     $ref: 'management/api-sessions.yml#/paths/api-sessions-id'
 
+  '/ascode/export':
+    $ref: 'management/ascode.yml#/paths/ascode/export'
+  '/ascode/import':
+    $ref: 'management/ascode.yml#/paths/ascode/import'
+
   '/authenticate':
     $ref: 'shared/authenticate.yml#/paths/authenticate'
   '/authenticate/mfa':
