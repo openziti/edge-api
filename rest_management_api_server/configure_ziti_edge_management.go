@@ -37,6 +37,7 @@ import (
 
 	"github.com/openziti/edge-api/rest_management_api_server/operations"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/api_session"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/ascode"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/auth_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authentication"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authenticator"
@@ -522,6 +523,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation current_identity.EnrollMfa has not yet been implemented")
 		})
 	}
+	if api.AscodeExportAscodeHandler == nil {
+		api.AscodeExportAscodeHandler = ascode.ExportAscodeHandlerFunc(func(params ascode.ExportAscodeParams) middleware.Responder {
+			return middleware.NotImplemented("operation ascode.ExportAscode has not yet been implemented")
+		})
+	}
 	if api.CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler == nil {
 		api.CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler = current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.ExtendCurrentIdentityAuthenticator has not yet been implemented")
@@ -575,6 +581,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 	if api.IdentityGetIdentityPostureDataHandler == nil {
 		api.IdentityGetIdentityPostureDataHandler = identity.GetIdentityPostureDataHandlerFunc(func(params identity.GetIdentityPostureDataParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation identity.GetIdentityPostureData has not yet been implemented")
+		})
+	}
+	if api.AscodeImportAscodeHandler == nil {
+		api.AscodeImportAscodeHandler = ascode.ImportAscodeHandlerFunc(func(params ascode.ImportAscodeParams) middleware.Responder {
+			return middleware.NotImplemented("operation ascode.ImportAscode has not yet been implemented")
 		})
 	}
 	if api.APISessionListAPISessionsHandler == nil {

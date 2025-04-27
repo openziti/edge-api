@@ -45,6 +45,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_management_api_server/operations/api_session"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/ascode"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/auth_policy"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authentication"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authenticator"
@@ -348,6 +349,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		CurrentIdentityEnrollMfaHandler: current_identity.EnrollMfaHandlerFunc(func(params current_identity.EnrollMfaParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_identity.EnrollMfa has not yet been implemented")
 		}),
+		AscodeExportAscodeHandler: ascode.ExportAscodeHandlerFunc(func(params ascode.ExportAscodeParams) middleware.Responder {
+			return middleware.NotImplemented("operation ascode.ExportAscode has not yet been implemented")
+		}),
 		CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler: current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.ExtendCurrentIdentityAuthenticator has not yet been implemented")
 		}),
@@ -380,6 +384,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		}),
 		IdentityGetIdentityPostureDataHandler: identity.GetIdentityPostureDataHandlerFunc(func(params identity.GetIdentityPostureDataParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation identity.GetIdentityPostureData has not yet been implemented")
+		}),
+		AscodeImportAscodeHandler: ascode.ImportAscodeHandlerFunc(func(params ascode.ImportAscodeParams) middleware.Responder {
+			return middleware.NotImplemented("operation ascode.ImportAscode has not yet been implemented")
 		}),
 		APISessionListAPISessionsHandler: api_session.ListAPISessionsHandlerFunc(func(params api_session.ListAPISessionsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation api_session.ListAPISessions has not yet been implemented")
@@ -921,6 +928,8 @@ type ZitiEdgeManagementAPI struct {
 	IdentityEnableIdentityHandler identity.EnableIdentityHandler
 	// CurrentIdentityEnrollMfaHandler sets the operation handler for the enroll mfa operation
 	CurrentIdentityEnrollMfaHandler current_identity.EnrollMfaHandler
+	// AscodeExportAscodeHandler sets the operation handler for the export ascode operation
+	AscodeExportAscodeHandler ascode.ExportAscodeHandler
 	// CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler sets the operation handler for the extend current identity authenticator operation
 	CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler current_api_session.ExtendCurrentIdentityAuthenticatorHandler
 	// CurrentAPISessionExtendVerifyCurrentIdentityAuthenticatorHandler sets the operation handler for the extend verify current identity authenticator operation
@@ -943,6 +952,8 @@ type ZitiEdgeManagementAPI struct {
 	IdentityGetIdentityPolicyAdviceHandler identity.GetIdentityPolicyAdviceHandler
 	// IdentityGetIdentityPostureDataHandler sets the operation handler for the get identity posture data operation
 	IdentityGetIdentityPostureDataHandler identity.GetIdentityPostureDataHandler
+	// AscodeImportAscodeHandler sets the operation handler for the import ascode operation
+	AscodeImportAscodeHandler ascode.ImportAscodeHandler
 	// APISessionListAPISessionsHandler sets the operation handler for the list API sessions operation
 	APISessionListAPISessionsHandler api_session.ListAPISessionsHandler
 	// AuthPolicyListAuthPoliciesHandler sets the operation handler for the list auth policies operation
@@ -1489,6 +1500,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.CurrentIdentityEnrollMfaHandler == nil {
 		unregistered = append(unregistered, "current_identity.EnrollMfaHandler")
 	}
+	if o.AscodeExportAscodeHandler == nil {
+		unregistered = append(unregistered, "ascode.ExportAscodeHandler")
+	}
 	if o.CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler == nil {
 		unregistered = append(unregistered, "current_api_session.ExtendCurrentIdentityAuthenticatorHandler")
 	}
@@ -1521,6 +1535,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.IdentityGetIdentityPostureDataHandler == nil {
 		unregistered = append(unregistered, "identity.GetIdentityPostureDataHandler")
+	}
+	if o.AscodeImportAscodeHandler == nil {
+		unregistered = append(unregistered, "ascode.ImportAscodeHandler")
 	}
 	if o.APISessionListAPISessionsHandler == nil {
 		unregistered = append(unregistered, "api_session.ListAPISessionsHandler")
@@ -2265,6 +2282,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/ascode/export"] = ascode.NewExportAscode(o.context, o.AscodeExportAscodeHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/current-identity/authenticators/{id}/extend"] = current_api_session.NewExtendCurrentIdentityAuthenticator(o.context, o.CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -2306,6 +2327,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/identities/{id}/posture-data"] = identity.NewGetIdentityPostureData(o.context, o.IdentityGetIdentityPostureDataHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/ascode/import"] = ascode.NewImportAscode(o.context, o.AscodeImportAscodeHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

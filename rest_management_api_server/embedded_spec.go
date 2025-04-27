@@ -488,6 +488,101 @@ func init() {
         }
       ]
     },
+    "/ascode/export": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "Ascode"
+        ],
+        "summary": "Export network bundle",
+        "operationId": "exportAscode",
+        "parameters": [
+          {
+            "description": "Export options",
+            "name": "exportRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string",
+                  "enum": [
+                    "yaml",
+                    "json"
+                  ]
+                },
+                "types": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network configuration bundle exported"
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ascode/import": {
+      "post": {
+        "tags": [
+          "Ascode"
+        ],
+        "summary": "Import a network bundle",
+        "operationId": "importAscode",
+        "parameters": [
+          {
+            "type": "boolean",
+            "description": "If true, the import is validated but not persisted",
+            "name": "dryRun",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Base empty response",
+            "schema": {
+              "$ref": "#/definitions/empty"
+            }
+          },
+          "422": {
+            "description": "The entity could not be processed due to semantic errors in the payload",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
+          }
+        }
+      }
+    },
     "/auth-policies": {
       "get": {
         "security": [
@@ -31523,6 +31618,101 @@ func init() {
           "required": true
         }
       ]
+    },
+    "/ascode/export": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "Ascode"
+        ],
+        "summary": "Export network bundle",
+        "operationId": "exportAscode",
+        "parameters": [
+          {
+            "description": "Export options",
+            "name": "exportRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string",
+                  "enum": [
+                    "yaml",
+                    "json"
+                  ]
+                },
+                "types": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network configuration bundle exported"
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ascode/import": {
+      "post": {
+        "tags": [
+          "Ascode"
+        ],
+        "summary": "Import a network bundle",
+        "operationId": "importAscode",
+        "parameters": [
+          {
+            "type": "boolean",
+            "description": "If true, the import is validated but not persisted",
+            "name": "dryRun",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Base empty response",
+            "schema": {
+              "$ref": "#/definitions/empty"
+            }
+          },
+          "422": {
+            "description": "The entity could not be processed due to semantic errors in the payload",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            }
+          }
+        }
+      }
     },
     "/auth-policies": {
       "get": {
