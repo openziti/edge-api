@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,6 +47,9 @@ type AuthenticatorDetail struct {
 
 	// cert pem
 	CertPem string `json:"certPem,omitempty"`
+
+	// extend log
+	ExtendLog []*ExtendEntry `json:"extendLog"`
 
 	// fingerprint
 	Fingerprint string `json:"fingerprint,omitempty"`
@@ -82,6 +86,8 @@ func (m *AuthenticatorDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO1 struct {
 		CertPem string `json:"certPem,omitempty"`
 
+		ExtendLog []*ExtendEntry `json:"extendLog"`
+
 		Fingerprint string `json:"fingerprint,omitempty"`
 
 		Identity *EntityRef `json:"identity"`
@@ -99,6 +105,8 @@ func (m *AuthenticatorDetail) UnmarshalJSON(raw []byte) error {
 	}
 
 	m.CertPem = dataAO1.CertPem
+
+	m.ExtendLog = dataAO1.ExtendLog
 
 	m.Fingerprint = dataAO1.Fingerprint
 
@@ -127,6 +135,8 @@ func (m AuthenticatorDetail) MarshalJSON() ([]byte, error) {
 	var dataAO1 struct {
 		CertPem string `json:"certPem,omitempty"`
 
+		ExtendLog []*ExtendEntry `json:"extendLog"`
+
 		Fingerprint string `json:"fingerprint,omitempty"`
 
 		Identity *EntityRef `json:"identity"`
@@ -141,6 +151,8 @@ func (m AuthenticatorDetail) MarshalJSON() ([]byte, error) {
 	}
 
 	dataAO1.CertPem = m.CertPem
+
+	dataAO1.ExtendLog = m.ExtendLog
 
 	dataAO1.Fingerprint = m.Fingerprint
 
@@ -171,6 +183,10 @@ func (m *AuthenticatorDetail) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateExtendLog(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIdentity(formats); err != nil {
 		res = append(res, err)
 	}
@@ -186,6 +202,33 @@ func (m *AuthenticatorDetail) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AuthenticatorDetail) validateExtendLog(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ExtendLog) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ExtendLog); i++ {
+		if swag.IsZero(m.ExtendLog[i]) { // not required
+			continue
+		}
+
+		if m.ExtendLog[i] != nil {
+			if err := m.ExtendLog[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("extendLog" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("extendLog" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -236,6 +279,10 @@ func (m *AuthenticatorDetail) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateExtendLog(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateIdentity(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -243,6 +290,26 @@ func (m *AuthenticatorDetail) ContextValidate(ctx context.Context, formats strfm
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AuthenticatorDetail) contextValidateExtendLog(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ExtendLog); i++ {
+
+		if m.ExtendLog[i] != nil {
+			if err := m.ExtendLog[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("extendLog" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("extendLog" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

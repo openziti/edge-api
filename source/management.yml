@@ -55,6 +55,8 @@ paths:
     $ref: 'management/authenticators.yml#/paths/authenticators-id'
   '/authenticators/{id}/re-enroll':
     $ref: 'management/authenticators.yml#/paths/authenticators-id-re-enroll'
+  '/authenticators/{id}/request-extend':
+    $ref: 'management/authenticators.yml#/paths/authenticators-id-request-extend'
 
   '/auth-policies':
     $ref: 'management/auth-policies.yml#/paths/auth-policies'
@@ -189,6 +191,8 @@ paths:
     $ref: 'management/identities.yml#/paths/identities-id-mfa'
   '/identities/{id}/trace':
     $ref: 'management/identities.yml#/paths/identities-id-trace'
+  '/identities/{id}/request-extend':
+    $ref: 'management/identities.yml#/paths/identity-id-request-extend-all-certs'
 
   '/identity-role-attributes':
     $ref: 'management/role-attributes.yml#/paths/identity-role-attributes'

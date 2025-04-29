@@ -5896,6 +5896,12 @@ func init() {
             "certPem": {
               "type": "string"
             },
+            "extendLog": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/extendEntry"
+              }
+            },
             "fingerprint": {
               "type": "string"
             },
@@ -6676,6 +6682,31 @@ func init() {
           "type": "string"
         },
         "token": {
+          "type": "string"
+        }
+      }
+    },
+    "extendEntry": {
+      "description": "A log record of an authenticator extend event",
+      "type": "object",
+      "required": [
+        "extendedAt",
+        "previousCert",
+        "newCert",
+        "isNewPrivateKey"
+      ],
+      "properties": {
+        "extendedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isNewPrivateKey": {
+          "type": "boolean"
+        },
+        "newCert": {
+          "type": "string"
+        },
+        "previousCert": {
           "type": "string"
         }
       }
@@ -14219,6 +14250,12 @@ func init() {
             "certPem": {
               "type": "string"
             },
+            "extendLog": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/extendEntry"
+              }
+            },
             "fingerprint": {
               "type": "string"
             },
@@ -15000,6 +15037,31 @@ func init() {
           "type": "string"
         },
         "token": {
+          "type": "string"
+        }
+      }
+    },
+    "extendEntry": {
+      "description": "A log record of an authenticator extend event",
+      "type": "object",
+      "required": [
+        "extendedAt",
+        "previousCert",
+        "newCert",
+        "isNewPrivateKey"
+      ],
+      "properties": {
+        "extendedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isNewPrivateKey": {
+          "type": "boolean"
+        },
+        "newCert": {
+          "type": "string"
+        },
+        "previousCert": {
           "type": "string"
         }
       }
