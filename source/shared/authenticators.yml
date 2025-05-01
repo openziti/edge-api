@@ -84,6 +84,36 @@ definitions:
             type: string
           isIssuedByNetwork:
             type: boolean
+          isExtendRequested:
+            type: boolean
+          isKeyRollRequested:
+            type: boolean
+          extendRequestedAt:
+            type: string
+            format: date-time
+            x-nullable: true
+          extendLog:
+            type: array
+            items:
+              $ref: '#/definitions/extendEntry'
+  extendEntry:
+      type: object
+      description: A log record of an authenticator extend event
+      required:
+        - extendedAt
+        - previousCert
+        - newCert
+        - isNewPrivateKey
+      properties:
+        extendedAt:
+          type: string
+          format: date-time
+        previousCert:
+          type: string
+        newCert:
+          type: string
+        isNewPrivateKey:
+          type: boolean
   authenticatorUpdate:
     description: All of the fields on an authenticator that will be updated
     type: object
@@ -129,3 +159,8 @@ definitions:
         properties:
           currentPassword:
             $ref: 'authenticate.yml#/definitions/password'
+  requestExtendAuthenticator:
+    type: object
+    properties:
+      rollKeys:
+        type: boolean

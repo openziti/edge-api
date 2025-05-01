@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.42"
+    "version": "0.26.43"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5753,7 +5753,13 @@ func init() {
             "ipAddress": {
               "type": "string"
             },
+            "isCertExtendRequested": {
+              "type": "boolean"
+            },
             "isCertExtendable": {
+              "type": "boolean"
+            },
+            "isCertKeyRollRequested": {
               "type": "boolean"
             },
             "isMfaComplete": {
@@ -5896,6 +5902,17 @@ func init() {
             "certPem": {
               "type": "string"
             },
+            "extendLog": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/extendEntry"
+              }
+            },
+            "extendRequestedAt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
             "fingerprint": {
               "type": "string"
             },
@@ -5905,7 +5922,13 @@ func init() {
             "identityId": {
               "type": "string"
             },
+            "isExtendRequested": {
+              "type": "boolean"
+            },
             "isIssuedByNetwork": {
+              "type": "boolean"
+            },
+            "isKeyRollRequested": {
               "type": "boolean"
             },
             "method": {
@@ -6676,6 +6699,31 @@ func init() {
           "type": "string"
         },
         "token": {
+          "type": "string"
+        }
+      }
+    },
+    "extendEntry": {
+      "description": "A log record of an authenticator extend event",
+      "type": "object",
+      "required": [
+        "extendedAt",
+        "previousCert",
+        "newCert",
+        "isNewPrivateKey"
+      ],
+      "properties": {
+        "extendedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isNewPrivateKey": {
+          "type": "boolean"
+        },
+        "newCert": {
+          "type": "string"
+        },
+        "previousCert": {
           "type": "string"
         }
       }
@@ -8305,7 +8353,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.42"
+    "version": "0.26.43"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -14076,7 +14124,13 @@ func init() {
             "ipAddress": {
               "type": "string"
             },
+            "isCertExtendRequested": {
+              "type": "boolean"
+            },
             "isCertExtendable": {
+              "type": "boolean"
+            },
+            "isCertKeyRollRequested": {
               "type": "boolean"
             },
             "isMfaComplete": {
@@ -14219,6 +14273,17 @@ func init() {
             "certPem": {
               "type": "string"
             },
+            "extendLog": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/extendEntry"
+              }
+            },
+            "extendRequestedAt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
             "fingerprint": {
               "type": "string"
             },
@@ -14228,7 +14293,13 @@ func init() {
             "identityId": {
               "type": "string"
             },
+            "isExtendRequested": {
+              "type": "boolean"
+            },
             "isIssuedByNetwork": {
+              "type": "boolean"
+            },
+            "isKeyRollRequested": {
               "type": "boolean"
             },
             "method": {
@@ -15000,6 +15071,31 @@ func init() {
           "type": "string"
         },
         "token": {
+          "type": "string"
+        }
+      }
+    },
+    "extendEntry": {
+      "description": "A log record of an authenticator extend event",
+      "type": "object",
+      "required": [
+        "extendedAt",
+        "previousCert",
+        "newCert",
+        "isNewPrivateKey"
+      ],
+      "properties": {
+        "extendedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isNewPrivateKey": {
+          "type": "boolean"
+        },
+        "newCert": {
+          "type": "string"
+        },
+        "previousCert": {
           "type": "string"
         }
       }

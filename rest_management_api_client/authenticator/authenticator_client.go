@@ -66,6 +66,10 @@ type ClientService interface {
 
 	ReEnrollAuthenticator(params *ReEnrollAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReEnrollAuthenticatorCreated, error)
 
+	RequestExtendAllCertAuthenticators(params *RequestExtendAllCertAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestExtendAllCertAuthenticatorsOK, error)
+
+	RequestExtendAuthenticator(params *RequestExtendAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestExtendAuthenticatorOK, error)
+
 	UpdateAuthenticator(params *UpdateAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAuthenticatorOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -323,6 +327,100 @@ func (a *Client) ReEnrollAuthenticator(params *ReEnrollAuthenticatorParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for reEnrollAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  RequestExtendAllCertAuthenticators indicates all certificate authenticators for the identity should be extended and optionally key rolled on next authentication
+
+  Allows all certificate authenticators on an identity to be flagged for early extension and optionally private
+key rolling. Connecting clients will receive flags in their API Session indicating that an early extension is
+request and a hint on whether private keys should be rolled. Clients that do not support extension or cannot
+roll keys may ignore one or both flags.
+
+If this request is made against an identity with zero certificate authenticators, a 403 will be returned.
+
+*/
+func (a *Client) RequestExtendAllCertAuthenticators(params *RequestExtendAllCertAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestExtendAllCertAuthenticatorsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRequestExtendAllCertAuthenticatorsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "requestExtendAllCertAuthenticators",
+		Method:             "POST",
+		PathPattern:        "/identities/{id}/request-extend",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &RequestExtendAllCertAuthenticatorsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RequestExtendAllCertAuthenticatorsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for requestExtendAllCertAuthenticators: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  RequestExtendAuthenticator indicates a certificate authenticator should be extended and optionally key rolled on next authentication
+
+  Allows a certificate authenticator to be flagged for early extension and optionally private key rolling.
+Connecting clients will receive flags in their API Session indicating that an early extension is request and
+a hint on whether private keys should be rolled. Clients that do not support extension or cannot roll keys
+may ignore one or both flags.
+
+If this request is made against a non-certificate based authenticator, it will return a 403-forbidden error.
+
+*/
+func (a *Client) RequestExtendAuthenticator(params *RequestExtendAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestExtendAuthenticatorOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRequestExtendAuthenticatorParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "requestExtendAuthenticator",
+		Method:             "POST",
+		PathPattern:        "/authenticators/{id}/request-extend",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &RequestExtendAuthenticatorReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RequestExtendAuthenticatorOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for requestExtendAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

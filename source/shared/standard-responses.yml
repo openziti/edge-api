@@ -47,6 +47,10 @@ responses:
         meta:
           apiEnrollmentVersion: 0.0.1
           apiVersion: 0.0.1
+  permanentStateConflict:
+    description: The request could not be completed and will never complete due to unchangeable state or conflicts.
+    schema:
+      $ref: '#/definitions/apiErrorEnvelope'
   conflictResponse:
     description: The request could not be completed due to a conflict of configuration or state
     schema:

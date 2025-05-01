@@ -71,3 +71,7 @@ definitions:
             type: string
           isCertExtendable:
             type: boolean
+          isCertExtendRequested:
+            type: boolean
+          isCertKeyRollRequested:
+            type: boolean
