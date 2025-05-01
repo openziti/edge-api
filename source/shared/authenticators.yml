@@ -84,6 +84,14 @@ definitions:
             type: string
           isIssuedByNetwork:
             type: boolean
+          isExtendRequested:
+            type: boolean
+          isKeyRollRequested:
+            type: boolean
+          extendRequestedAt:
+            type: string
+            format: date-time
+            x-nullable: true
           extendLog:
             type: array
             items:

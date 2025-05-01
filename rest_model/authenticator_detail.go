@@ -51,6 +51,10 @@ type AuthenticatorDetail struct {
 	// extend log
 	ExtendLog []*ExtendEntry `json:"extendLog"`
 
+	// extend requested at
+	// Format: date-time
+	ExtendRequestedAt *strfmt.DateTime `json:"extendRequestedAt,omitempty"`
+
 	// fingerprint
 	Fingerprint string `json:"fingerprint,omitempty"`
 
@@ -62,8 +66,14 @@ type AuthenticatorDetail struct {
 	// Required: true
 	IdentityID *string `json:"identityId"`
 
+	// is extend requested
+	IsExtendRequested bool `json:"isExtendRequested,omitempty"`
+
 	// is issued by network
 	IsIssuedByNetwork bool `json:"isIssuedByNetwork,omitempty"`
+
+	// is key roll requested
+	IsKeyRollRequested bool `json:"isKeyRollRequested,omitempty"`
 
 	// method
 	// Required: true
@@ -88,13 +98,19 @@ func (m *AuthenticatorDetail) UnmarshalJSON(raw []byte) error {
 
 		ExtendLog []*ExtendEntry `json:"extendLog"`
 
+		ExtendRequestedAt *strfmt.DateTime `json:"extendRequestedAt,omitempty"`
+
 		Fingerprint string `json:"fingerprint,omitempty"`
 
 		Identity *EntityRef `json:"identity"`
 
 		IdentityID *string `json:"identityId"`
 
+		IsExtendRequested bool `json:"isExtendRequested,omitempty"`
+
 		IsIssuedByNetwork bool `json:"isIssuedByNetwork,omitempty"`
+
+		IsKeyRollRequested bool `json:"isKeyRollRequested,omitempty"`
 
 		Method *string `json:"method"`
 
@@ -108,13 +124,19 @@ func (m *AuthenticatorDetail) UnmarshalJSON(raw []byte) error {
 
 	m.ExtendLog = dataAO1.ExtendLog
 
+	m.ExtendRequestedAt = dataAO1.ExtendRequestedAt
+
 	m.Fingerprint = dataAO1.Fingerprint
 
 	m.Identity = dataAO1.Identity
 
 	m.IdentityID = dataAO1.IdentityID
 
+	m.IsExtendRequested = dataAO1.IsExtendRequested
+
 	m.IsIssuedByNetwork = dataAO1.IsIssuedByNetwork
+
+	m.IsKeyRollRequested = dataAO1.IsKeyRollRequested
 
 	m.Method = dataAO1.Method
 
@@ -137,13 +159,19 @@ func (m AuthenticatorDetail) MarshalJSON() ([]byte, error) {
 
 		ExtendLog []*ExtendEntry `json:"extendLog"`
 
+		ExtendRequestedAt *strfmt.DateTime `json:"extendRequestedAt,omitempty"`
+
 		Fingerprint string `json:"fingerprint,omitempty"`
 
 		Identity *EntityRef `json:"identity"`
 
 		IdentityID *string `json:"identityId"`
 
+		IsExtendRequested bool `json:"isExtendRequested,omitempty"`
+
 		IsIssuedByNetwork bool `json:"isIssuedByNetwork,omitempty"`
+
+		IsKeyRollRequested bool `json:"isKeyRollRequested,omitempty"`
 
 		Method *string `json:"method"`
 
@@ -154,13 +182,19 @@ func (m AuthenticatorDetail) MarshalJSON() ([]byte, error) {
 
 	dataAO1.ExtendLog = m.ExtendLog
 
+	dataAO1.ExtendRequestedAt = m.ExtendRequestedAt
+
 	dataAO1.Fingerprint = m.Fingerprint
 
 	dataAO1.Identity = m.Identity
 
 	dataAO1.IdentityID = m.IdentityID
 
+	dataAO1.IsExtendRequested = m.IsExtendRequested
+
 	dataAO1.IsIssuedByNetwork = m.IsIssuedByNetwork
+
+	dataAO1.IsKeyRollRequested = m.IsKeyRollRequested
 
 	dataAO1.Method = m.Method
 
@@ -184,6 +218,10 @@ func (m *AuthenticatorDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateExtendLog(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExtendRequestedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -227,6 +265,19 @@ func (m *AuthenticatorDetail) validateExtendLog(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AuthenticatorDetail) validateExtendRequestedAt(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ExtendRequestedAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("extendRequestedAt", "body", "date-time", m.ExtendRequestedAt.String(), formats); err != nil {
+		return err
 	}
 
 	return nil

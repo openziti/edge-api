@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.42"
+    "version": "0.26.43"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -5753,7 +5753,13 @@ func init() {
             "ipAddress": {
               "type": "string"
             },
+            "isCertExtendRequested": {
+              "type": "boolean"
+            },
             "isCertExtendable": {
+              "type": "boolean"
+            },
+            "isCertKeyRollRequested": {
               "type": "boolean"
             },
             "isMfaComplete": {
@@ -5902,6 +5908,11 @@ func init() {
                 "$ref": "#/definitions/extendEntry"
               }
             },
+            "extendRequestedAt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
             "fingerprint": {
               "type": "string"
             },
@@ -5911,7 +5922,13 @@ func init() {
             "identityId": {
               "type": "string"
             },
+            "isExtendRequested": {
+              "type": "boolean"
+            },
             "isIssuedByNetwork": {
+              "type": "boolean"
+            },
+            "isKeyRollRequested": {
               "type": "boolean"
             },
             "method": {
@@ -8336,7 +8353,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.42"
+    "version": "0.26.43"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -14107,7 +14124,13 @@ func init() {
             "ipAddress": {
               "type": "string"
             },
+            "isCertExtendRequested": {
+              "type": "boolean"
+            },
             "isCertExtendable": {
+              "type": "boolean"
+            },
+            "isCertKeyRollRequested": {
               "type": "boolean"
             },
             "isMfaComplete": {
@@ -14256,6 +14279,11 @@ func init() {
                 "$ref": "#/definitions/extendEntry"
               }
             },
+            "extendRequestedAt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
+            },
             "fingerprint": {
               "type": "string"
             },
@@ -14265,7 +14293,13 @@ func init() {
             "identityId": {
               "type": "string"
             },
+            "isExtendRequested": {
+              "type": "boolean"
+            },
             "isIssuedByNetwork": {
+              "type": "boolean"
+            },
+            "isKeyRollRequested": {
               "type": "boolean"
             },
             "method": {
