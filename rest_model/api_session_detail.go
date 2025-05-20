@@ -68,6 +68,9 @@ type APISessionDetail struct {
 	// Required: true
 	IdentityID *string `json:"identityId"`
 
+	// improper client cert chain
+	ImproperClientCertChain bool `json:"improperClientCertChain,omitempty"`
+
 	// ip address
 	// Required: true
 	IPAddress *string `json:"ipAddress"`
@@ -122,6 +125,8 @@ func (m *APISessionDetail) UnmarshalJSON(raw []byte) error {
 
 		IdentityID *string `json:"identityId"`
 
+		ImproperClientCertChain bool `json:"improperClientCertChain,omitempty"`
+
 		IPAddress *string `json:"ipAddress"`
 
 		IsCertExtendRequested bool `json:"isCertExtendRequested,omitempty"`
@@ -153,6 +158,8 @@ func (m *APISessionDetail) UnmarshalJSON(raw []byte) error {
 	m.Identity = dataAO1.Identity
 
 	m.IdentityID = dataAO1.IdentityID
+
+	m.ImproperClientCertChain = dataAO1.ImproperClientCertChain
 
 	m.IPAddress = dataAO1.IPAddress
 
@@ -195,6 +202,8 @@ func (m APISessionDetail) MarshalJSON() ([]byte, error) {
 
 		IdentityID *string `json:"identityId"`
 
+		ImproperClientCertChain bool `json:"improperClientCertChain,omitempty"`
+
 		IPAddress *string `json:"ipAddress"`
 
 		IsCertExtendRequested bool `json:"isCertExtendRequested,omitempty"`
@@ -223,6 +232,8 @@ func (m APISessionDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.Identity = m.Identity
 
 	dataAO1.IdentityID = m.IdentityID
+
+	dataAO1.ImproperClientCertChain = m.ImproperClientCertChain
 
 	dataAO1.IPAddress = m.IPAddress
 

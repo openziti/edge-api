@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.43"
+    "version": "0.26.44"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -24804,6 +24804,9 @@ func init() {
             "identityId": {
               "type": "string"
             },
+            "improperClientCertChain": {
+              "type": "boolean"
+            },
             "ipAddress": {
               "type": "string"
             },
@@ -31422,7 +31425,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.43"
+    "version": "0.26.44"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -56274,6 +56277,9 @@ func init() {
             },
             "identityId": {
               "type": "string"
+            },
+            "improperClientCertChain": {
+              "type": "boolean"
             },
             "ipAddress": {
               "type": "string"

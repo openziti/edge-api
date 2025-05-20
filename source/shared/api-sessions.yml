@@ -75,3 +75,5 @@ definitions:
             type: boolean
           isCertKeyRollRequested:
             type: boolean
+          improperClientCertChain:
+            type: boolean
