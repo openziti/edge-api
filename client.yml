@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.26.44
+  version: 0.26.45
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -4333,10 +4333,6 @@ definitions:
       properties:
         certPem:
           type: string
-        extendLog:
-          type: array
-          items:
-            $ref: '#/definitions/extendEntry'
         extendRequestedAt:
           type: string
           format: date-time
@@ -4352,6 +4348,10 @@ definitions:
         isIssuedByNetwork:
           type: boolean
         isKeyRollRequested:
+          type: boolean
+        lastAuthResolvedToRoot:
+          type: boolean
+        lastExtendRolledKeys:
           type: boolean
         method:
           type: string
@@ -4855,24 +4855,6 @@ definitions:
       serverCsr:
         type: string
       token:
-        type: string
-  extendEntry:
-    description: A log record of an authenticator extend event
-    type: object
-    required:
-    - extendedAt
-    - previousCert
-    - newCert
-    - isNewPrivateKey
-    properties:
-      extendedAt:
-        type: string
-        format: date-time
-      isNewPrivateKey:
-        type: boolean
-      newCert:
-        type: string
-      previousCert:
         type: string
   genericEnroll:
     type: object

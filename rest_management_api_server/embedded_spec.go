@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.44"
+    "version": "0.26.45"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -25291,12 +25291,6 @@ func init() {
             "certPem": {
               "type": "string"
             },
-            "extendLog": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/extendEntry"
-              }
-            },
             "extendRequestedAt": {
               "type": "string",
               "format": "date-time",
@@ -25318,6 +25312,12 @@ func init() {
               "type": "boolean"
             },
             "isKeyRollRequested": {
+              "type": "boolean"
+            },
+            "lastAuthResolvedToRoot": {
+              "type": "boolean"
+            },
+            "lastExtendRolledKeys": {
               "type": "boolean"
             },
             "method": {
@@ -27246,31 +27246,6 @@ func init() {
         "osVersion": {
           "type": "string",
           "maxLength": 255
-        }
-      }
-    },
-    "extendEntry": {
-      "description": "A log record of an authenticator extend event",
-      "type": "object",
-      "required": [
-        "extendedAt",
-        "previousCert",
-        "newCert",
-        "isNewPrivateKey"
-      ],
-      "properties": {
-        "extendedAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isNewPrivateKey": {
-          "type": "boolean"
-        },
-        "newCert": {
-          "type": "string"
-        },
-        "previousCert": {
-          "type": "string"
         }
       }
     },
@@ -31425,7 +31400,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.44"
+    "version": "0.26.45"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -56765,12 +56740,6 @@ func init() {
             "certPem": {
               "type": "string"
             },
-            "extendLog": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/extendEntry"
-              }
-            },
             "extendRequestedAt": {
               "type": "string",
               "format": "date-time",
@@ -56792,6 +56761,12 @@ func init() {
               "type": "boolean"
             },
             "isKeyRollRequested": {
+              "type": "boolean"
+            },
+            "lastAuthResolvedToRoot": {
+              "type": "boolean"
+            },
+            "lastExtendRolledKeys": {
               "type": "boolean"
             },
             "method": {
@@ -58724,31 +58699,6 @@ func init() {
         "osVersion": {
           "type": "string",
           "maxLength": 255
-        }
-      }
-    },
-    "extendEntry": {
-      "description": "A log record of an authenticator extend event",
-      "type": "object",
-      "required": [
-        "extendedAt",
-        "previousCert",
-        "newCert",
-        "isNewPrivateKey"
-      ],
-      "properties": {
-        "extendedAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isNewPrivateKey": {
-          "type": "boolean"
-        },
-        "newCert": {
-          "type": "string"
-        },
-        "previousCert": {
-          "type": "string"
         }
       }
     },
