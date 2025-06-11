@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -71,6 +72,9 @@ type RouterDetail struct {
 	// fingerprint
 	// Required: true
 	Fingerprint *string `json:"fingerprint"`
+
+	// interfaces
+	Interfaces []*Interface `json:"interfaces"`
 
 	// is online
 	// Required: true
@@ -120,6 +124,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 
 		Fingerprint *string `json:"fingerprint"`
 
+		Interfaces []*Interface `json:"interfaces"`
+
 		IsOnline *bool `json:"isOnline"`
 
 		IsVerified *bool `json:"isVerified"`
@@ -149,6 +155,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 	m.EnrollmentToken = dataAO1.EnrollmentToken
 
 	m.Fingerprint = dataAO1.Fingerprint
+
+	m.Interfaces = dataAO1.Interfaces
 
 	m.IsOnline = dataAO1.IsOnline
 
@@ -189,6 +197,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 
 		Fingerprint *string `json:"fingerprint"`
 
+		Interfaces []*Interface `json:"interfaces"`
+
 		IsOnline *bool `json:"isOnline"`
 
 		IsVerified *bool `json:"isVerified"`
@@ -215,6 +225,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.EnrollmentToken = m.EnrollmentToken
 
 	dataAO1.Fingerprint = m.Fingerprint
+
+	dataAO1.Interfaces = m.Interfaces
 
 	dataAO1.IsOnline = m.IsOnline
 
@@ -262,6 +274,10 @@ func (m *RouterDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFingerprint(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInterfaces(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -348,6 +364,33 @@ func (m *RouterDetail) validateFingerprint(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *RouterDetail) validateInterfaces(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Interfaces) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Interfaces); i++ {
+		if swag.IsZero(m.Interfaces[i]) { // not required
+			continue
+		}
+
+		if m.Interfaces[i] != nil {
+			if err := m.Interfaces[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *RouterDetail) validateIsOnline(formats strfmt.Registry) error {
 
 	if err := validate.Required("isOnline", "body", m.IsOnline); err != nil {
@@ -393,9 +436,33 @@ func (m *RouterDetail) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInterfaces(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RouterDetail) contextValidateInterfaces(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Interfaces); i++ {
+
+		if m.Interfaces[i] != nil {
+			if err := m.Interfaces[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

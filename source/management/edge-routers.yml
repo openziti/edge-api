@@ -466,6 +466,11 @@ definitions:
             $ref: '../shared/version.yml#/definitions/versionInfo'
           isTunnelerEnabled:
             type: boolean
+          interfaces:
+            type: array
+            items:
+              $ref: '../shared/interfaces.yml#/definitions/interface'
+
     example:
       id: b0766b8d-bd1a-4d28-8415-639b29d3c83d
       createdAt: '2020-03-16T17:13:31.5807454Z'
