@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.45"
+    "version": "0.26.46"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -6844,6 +6844,12 @@ func init() {
             "hasEdgeRouterConnection": {
               "type": "boolean"
             },
+            "interfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/interface"
+              }
+            },
             "isAdmin": {
               "type": "boolean"
             },
@@ -6986,6 +6992,56 @@ func init() {
       "properties": {
         "clientCert": {
           "description": "A PEM encoded client certificate previously returned after an extension request",
+          "type": "string"
+        }
+      }
+    },
+    "interface": {
+      "description": "A resource describing a network interface",
+      "type": "object",
+      "required": [
+        "name",
+        "hardwareAddress",
+        "mtu",
+        "index",
+        "isUp",
+        "isRunning",
+        "isLoopback",
+        "isBroadcast",
+        "isMulticast"
+      ],
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hardwareAddress": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer"
+        },
+        "isBroadcast": {
+          "type": "boolean"
+        },
+        "isLoopback": {
+          "type": "boolean"
+        },
+        "isMulticast": {
+          "type": "boolean"
+        },
+        "isRunning": {
+          "type": "boolean"
+        },
+        "isUp": {
+          "type": "boolean"
+        },
+        "mtu": {
+          "type": "integer"
+        },
+        "name": {
           "type": "string"
         }
       }
@@ -8331,7 +8387,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.45"
+    "version": "0.26.46"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -15194,6 +15250,12 @@ func init() {
             "hasEdgeRouterConnection": {
               "type": "boolean"
             },
+            "interfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/interface"
+              }
+            },
             "isAdmin": {
               "type": "boolean"
             },
@@ -15336,6 +15398,58 @@ func init() {
       "properties": {
         "clientCert": {
           "description": "A PEM encoded client certificate previously returned after an extension request",
+          "type": "string"
+        }
+      }
+    },
+    "interface": {
+      "description": "A resource describing a network interface",
+      "type": "object",
+      "required": [
+        "name",
+        "hardwareAddress",
+        "mtu",
+        "index",
+        "isUp",
+        "isRunning",
+        "isLoopback",
+        "isBroadcast",
+        "isMulticast"
+      ],
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hardwareAddress": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isBroadcast": {
+          "type": "boolean"
+        },
+        "isLoopback": {
+          "type": "boolean"
+        },
+        "isMulticast": {
+          "type": "boolean"
+        },
+        "isRunning": {
+          "type": "boolean"
+        },
+        "isUp": {
+          "type": "boolean"
+        },
+        "mtu": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "name": {
           "type": "string"
         }
       }

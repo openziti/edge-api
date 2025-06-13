@@ -94,6 +94,11 @@ definitions:
             type: string
             format: date-time
             x-nullable: true
+          interfaces:
+            type: array
+            items:
+              $ref: '../shared/interfaces.yml#/definitions/interface'
+
   identityAuthenticators:
     type: object
     properties:

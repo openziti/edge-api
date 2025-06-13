@@ -32,6 +32,7 @@ package rest_model
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -103,6 +104,9 @@ type IdentityDetail struct {
 	// has edge router connection
 	// Required: true
 	HasEdgeRouterConnection *bool `json:"hasEdgeRouterConnection"`
+
+	// interfaces
+	Interfaces []*Interface `json:"interfaces"`
 
 	// is admin
 	// Required: true
@@ -186,6 +190,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 
 		HasEdgeRouterConnection *bool `json:"hasEdgeRouterConnection"`
 
+		Interfaces []*Interface `json:"interfaces"`
+
 		IsAdmin *bool `json:"isAdmin"`
 
 		IsDefaultAdmin *bool `json:"isDefaultAdmin"`
@@ -239,6 +245,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 	m.HasAPISession = dataAO1.HasAPISession
 
 	m.HasEdgeRouterConnection = dataAO1.HasEdgeRouterConnection
+
+	m.Interfaces = dataAO1.Interfaces
 
 	m.IsAdmin = dataAO1.IsAdmin
 
@@ -303,6 +311,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 
 		HasEdgeRouterConnection *bool `json:"hasEdgeRouterConnection"`
 
+		Interfaces []*Interface `json:"interfaces"`
+
 		IsAdmin *bool `json:"isAdmin"`
 
 		IsDefaultAdmin *bool `json:"isDefaultAdmin"`
@@ -353,6 +363,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.HasAPISession = m.HasAPISession
 
 	dataAO1.HasEdgeRouterConnection = m.HasEdgeRouterConnection
+
+	dataAO1.Interfaces = m.Interfaces
 
 	dataAO1.IsAdmin = m.IsAdmin
 
@@ -448,6 +460,10 @@ func (m *IdentityDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateHasEdgeRouterConnection(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInterfaces(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -744,6 +760,33 @@ func (m *IdentityDetail) validateHasEdgeRouterConnection(formats strfmt.Registry
 	return nil
 }
 
+func (m *IdentityDetail) validateInterfaces(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Interfaces) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Interfaces); i++ {
+		if swag.IsZero(m.Interfaces[i]) { // not required
+			continue
+		}
+
+		if m.Interfaces[i] != nil {
+			if err := m.Interfaces[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *IdentityDetail) validateIsAdmin(formats strfmt.Registry) error {
 
 	if err := validate.Required("isAdmin", "body", m.IsAdmin); err != nil {
@@ -926,6 +969,10 @@ func (m *IdentityDetail) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInterfaces(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRoleAttributes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1057,6 +1104,26 @@ func (m *IdentityDetail) contextValidateEnvInfo(ctx context.Context, formats str
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *IdentityDetail) contextValidateInterfaces(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Interfaces); i++ {
+
+		if m.Interfaces[i] != nil {
+			if err := m.Interfaces[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

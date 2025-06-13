@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -66,6 +67,9 @@ type EdgeRouterDetail struct {
 
 	// fingerprint
 	Fingerprint string `json:"fingerprint,omitempty"`
+
+	// interfaces
+	Interfaces []*Interface `json:"interfaces"`
 
 	// is tunneler enabled
 	// Required: true
@@ -119,6 +123,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 
 		Fingerprint string `json:"fingerprint,omitempty"`
 
+		Interfaces []*Interface `json:"interfaces"`
+
 		IsTunnelerEnabled *bool `json:"isTunnelerEnabled"`
 
 		IsVerified *bool `json:"isVerified"`
@@ -146,6 +152,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 	m.EnrollmentToken = dataAO2.EnrollmentToken
 
 	m.Fingerprint = dataAO2.Fingerprint
+
+	m.Interfaces = dataAO2.Interfaces
 
 	m.IsTunnelerEnabled = dataAO2.IsTunnelerEnabled
 
@@ -190,6 +198,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 
 		Fingerprint string `json:"fingerprint,omitempty"`
 
+		Interfaces []*Interface `json:"interfaces"`
+
 		IsTunnelerEnabled *bool `json:"isTunnelerEnabled"`
 
 		IsVerified *bool `json:"isVerified"`
@@ -214,6 +224,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 	dataAO2.EnrollmentToken = m.EnrollmentToken
 
 	dataAO2.Fingerprint = m.Fingerprint
+
+	dataAO2.Interfaces = m.Interfaces
 
 	dataAO2.IsTunnelerEnabled = m.IsTunnelerEnabled
 
@@ -253,6 +265,10 @@ func (m *EdgeRouterDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEnrollmentExpiresAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInterfaces(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -299,6 +315,33 @@ func (m *EdgeRouterDetail) validateEnrollmentExpiresAt(formats strfmt.Registry) 
 
 	if err := validate.FormatOf("enrollmentExpiresAt", "body", "date-time", m.EnrollmentExpiresAt.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *EdgeRouterDetail) validateInterfaces(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Interfaces) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Interfaces); i++ {
+		if swag.IsZero(m.Interfaces[i]) { // not required
+			continue
+		}
+
+		if m.Interfaces[i] != nil {
+			if err := m.Interfaces[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -375,6 +418,10 @@ func (m *EdgeRouterDetail) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInterfaces(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRoleAttributes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -386,6 +433,26 @@ func (m *EdgeRouterDetail) ContextValidate(ctx context.Context, formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EdgeRouterDetail) contextValidateInterfaces(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Interfaces); i++ {
+
+		if m.Interfaces[i] != nil {
+			if err := m.Interfaces[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

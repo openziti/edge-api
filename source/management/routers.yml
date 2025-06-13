@@ -414,6 +414,11 @@ definitions:
             type: boolean
           disabled:
             type: boolean
+          interfaces:
+            type: array
+            items:
+              $ref: '../shared/interfaces.yml#/definitions/interface'
+
   routerCreate:
     type: object
     required:
