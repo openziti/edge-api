@@ -58,6 +58,9 @@ type AuthQueryDetail struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// is totp enrolled
+	IsTotpEnrolled bool `json:"isTotpEnrolled,omitempty"`
+
 	// max length
 	MaxLength int64 `json:"maxLength,omitempty"`
 

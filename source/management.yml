@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.46
+  version: 0.26.47
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
