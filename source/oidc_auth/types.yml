@@ -1,0 +1,46 @@
+---
+
+definitions:
+  oidcUpdbCredentials:
+    type: object
+    description: OIDC authentication credentials
+    required:
+      - authRequestId
+    properties:
+      authRequestId:
+        type: string
+        description: The authentication request ID
+      username:
+        $ref: '../shared/authenticate.yml#/definitions/username'
+      password:
+        $ref: '../shared/authenticate.yml#/definitions/password'
+      envInfo:
+        $ref: '../shared/authenticate.yml#/definitions/envInfo'
+      sdkInfo:
+        $ref: '../shared/authenticate.yml#/definitions/sdkInfo'
+      configTypes:
+        $ref: '../shared/config-types.yml#/definitions/configTypes'
+
+  authRequestBody:
+    type: object
+    description: Authentication request body for OIDC flows
+    required:
+      - authRequestId
+    properties:
+      authRequestId:
+        type: string
+        description: The authentication request ID
+
+  totpRequestBody:
+    type: object
+    description: TOTP verification request
+    required:
+      - authRequestId
+      - code
+    properties:
+      authRequestId:
+        type: string
+        description: The authentication request ID
+      code:
+        type: string
+        description: The TOTP code to verify
