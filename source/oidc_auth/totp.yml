@@ -1,0 +1,115 @@
+---
+
+paths:
+  totp-verify:
+    post:
+      summary: Verify TOTP code
+      description: Verifies a TOTP code for OIDC authentication
+      security: [ ]
+      tags:
+        - OIDC Authentication
+        - MFA
+      operationId: verifyTotp
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: totpRequest
+          in: body
+          required: true
+          schema:
+            $ref: 'types.yml#/definitions/totpRequestBody'
+      responses:
+        '302':
+          description: Redirect to callback URL on successful verification
+          headers:
+            Location:
+              type: string
+              description: Callback URL
+        '200':
+          description: TOTP verification result (HTML response)
+          schema:
+            type: string
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/invalidAuthResponse'
+
+  totp-enroll:
+    post:
+      summary: Start TOTP enrollment
+      description: Initiates TOTP enrollment for the current authentication session
+      security: [ ]
+      tags:
+        - OIDC Authentication
+        - MFA
+      operationId: startTotpEnrollment
+      consumes:
+        - application/json
+      parameters:
+        - name: authRequest
+          in: body
+          required: true
+          schema:
+            $ref: 'types.yml#/definitions/authRequestBody'
+      responses:
+        '201':
+          description: TOTP enrollment started successfully
+          schema:
+            $ref: '../shared/current-identity-mfa.yml#/definitions/detailMfa'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/invalidAuthResponse'
+    delete:
+      summary: Cancel TOTP enrollment
+      description: Cancels an ongoing TOTP enrollment
+      security: [ ]
+      tags:
+        - OIDC Authentication
+        - MFA
+      operationId: deleteTotpEnrollment
+      consumes:
+        - application/json
+      parameters:
+        - name: totpRequest
+          in: body
+          required: true
+          schema:
+            $ref: 'types.yml#/definitions/totpRequestBody'
+      responses:
+        '200':
+          description: TOTP enrollment cancelled successfully
+          schema:
+            $ref: '../shared/standard-responses.yml#/definitions/empty'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/invalidAuthResponse'
+
+  totp-enroll-verify:
+    post:
+      summary: Complete TOTP enrollment
+      description: Completes TOTP enrollment by verifying the enrollment code
+      security: [ ]
+      tags:
+        - OIDC Authentication
+        - MFA
+      operationId: completeTotpEnrollment
+      consumes:
+        - application/json
+      parameters:
+        - name: totpRequest
+          in: body
+          required: true
+          schema:
+            $ref: 'types.yml#/definitions/totpRequestBody'
+      responses:
+        '200':
+          description: TOTP enrollment completed successfully
+          schema:
+            $ref: '../shared/standard-responses.yml#/definitions/empty'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/invalidAuthResponse'
