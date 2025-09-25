@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.47
+  version: 0.26.48
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -191,8 +191,6 @@ paths:
     $ref: 'management/identities.yml#/paths/identities-id-mfa'
   '/identities/{id}/trace':
     $ref: 'management/identities.yml#/paths/identities-id-trace'
-  '/identities/{id}/request-extend':
-    $ref: 'management/identities.yml#/paths/identity-id-request-extend-all-certs'
 
   '/identity-role-attributes':
     $ref: 'management/role-attributes.yml#/paths/identity-role-attributes'

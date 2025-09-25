@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.47"
+    "version": "0.26.48"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -14508,139 +14508,6 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
-            }
-          },
-          "404": {
-            "description": "The requested resource does not exist",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {
-                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
-                    }
-                  },
-                  "cause": null,
-                  "causeMessage": "",
-                  "code": "NOT_FOUND",
-                  "message": "The resource requested was not found or is no longer available",
-                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
-                },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "The resource requested is rate limited and the rate limit has been exceeded",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {}
-                  },
-                  "causeMessage": "you have hit a rate limit in the requested operation",
-                  "code": "RATE_LIMITED",
-                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
-                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
-                },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "type": "string",
-          "description": "The id of the requested resource",
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ]
-    },
-    "/identities/{id}/request-extend": {
-      "post": {
-        "security": [
-          {
-            "ztSession": []
-          },
-          {
-            "oauth2": [
-              "openid"
-            ]
-          }
-        ],
-        "description": "Allows all certificate authenticators on an identity to be flagged for early extension and optionally private \nkey rolling. Connecting clients will receive flags in their API Session indicating that an early extension is \nrequest and a hint on whether private keys should be rolled. Clients that do not support extension or cannot \nroll keys may ignore one or both flags.\n\nIf this request is made against an identity with zero certificate authenticators, a 403 will be returned.\n",
-        "tags": [
-          "Authenticator"
-        ],
-        "summary": "Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.",
-        "operationId": "requestExtendAllCertAuthenticators",
-        "parameters": [
-          {
-            "description": "A request to flag a certificate authenticator for early extension/key rolling.",
-            "name": "requestExtendAuthenticator",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/requestExtendAuthenticator"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Base empty response",
-            "schema": {
-              "$ref": "#/definitions/empty"
-            }
-          },
-          "401": {
-            "description": "The supplied session does not have the correct access rights to request this resource",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {}
-                  },
-                  "cause": "",
-                  "causeMessage": "",
-                  "code": "UNAUTHORIZED",
-                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
-                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
-                },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The request could not be completed and will never complete due to unchangeable state or conflicts.",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
             }
           },
           "404": {
@@ -31471,7 +31338,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.47"
+    "version": "0.26.48"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -45915,139 +45782,6 @@ func init() {
                   "apiVersion": "0.0.1"
                 }
               }
-            }
-          },
-          "404": {
-            "description": "The requested resource does not exist",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {
-                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
-                    }
-                  },
-                  "cause": null,
-                  "causeMessage": "",
-                  "code": "NOT_FOUND",
-                  "message": "The resource requested was not found or is no longer available",
-                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
-                },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "The resource requested is rate limited and the rate limit has been exceeded",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {}
-                  },
-                  "causeMessage": "you have hit a rate limit in the requested operation",
-                  "code": "RATE_LIMITED",
-                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
-                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
-                },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "type": "string",
-          "description": "The id of the requested resource",
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ]
-    },
-    "/identities/{id}/request-extend": {
-      "post": {
-        "security": [
-          {
-            "ztSession": []
-          },
-          {
-            "oauth2": [
-              "openid"
-            ]
-          }
-        ],
-        "description": "Allows all certificate authenticators on an identity to be flagged for early extension and optionally private \nkey rolling. Connecting clients will receive flags in their API Session indicating that an early extension is \nrequest and a hint on whether private keys should be rolled. Clients that do not support extension or cannot \nroll keys may ignore one or both flags.\n\nIf this request is made against an identity with zero certificate authenticators, a 403 will be returned.\n",
-        "tags": [
-          "Authenticator"
-        ],
-        "summary": "Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.",
-        "operationId": "requestExtendAllCertAuthenticators",
-        "parameters": [
-          {
-            "description": "A request to flag a certificate authenticator for early extension/key rolling.",
-            "name": "requestExtendAuthenticator",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/requestExtendAuthenticator"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Base empty response",
-            "schema": {
-              "$ref": "#/definitions/empty"
-            }
-          },
-          "401": {
-            "description": "The supplied session does not have the correct access rights to request this resource",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {}
-                  },
-                  "cause": "",
-                  "causeMessage": "",
-                  "code": "UNAUTHORIZED",
-                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
-                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
-                },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The request could not be completed and will never complete due to unchangeable state or conflicts.",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
             }
           },
           "404": {
