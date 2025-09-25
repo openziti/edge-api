@@ -982,11 +982,6 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation identity.RemoveIdentityMfa has not yet been implemented")
 		})
 	}
-	if api.AuthenticatorRequestExtendAllCertAuthenticatorsHandler == nil {
-		api.AuthenticatorRequestExtendAllCertAuthenticatorsHandler = authenticator.RequestExtendAllCertAuthenticatorsHandlerFunc(func(params authenticator.RequestExtendAllCertAuthenticatorsParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation authenticator.RequestExtendAllCertAuthenticators has not yet been implemented")
-		})
-	}
 	if api.AuthenticatorRequestExtendAuthenticatorHandler == nil {
 		api.AuthenticatorRequestExtendAuthenticatorHandler = authenticator.RequestExtendAuthenticatorHandlerFunc(func(params authenticator.RequestExtendAuthenticatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation authenticator.RequestExtendAuthenticator has not yet been implemented")
