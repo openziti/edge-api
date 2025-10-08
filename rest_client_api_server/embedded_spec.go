@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.49"
+    "version": "v0.26.50"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -1177,6 +1177,96 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            }
+          }
+        }
+      }
+    },
+    "/current-api-session/totp-token": {
+      "post": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Creates a TOTP token that proves TOTP validation occurred at a specific time. Used in posture response for posture checks.\n",
+        "tags": [
+          "Current API Session",
+          "MFA"
+        ],
+        "summary": "Create an MFA TOTP token that proves TOTP code checking has passed as a specific time for posture checks.",
+        "operationId": "createTotpToken",
+        "parameters": [
+          {
+            "description": "An MFA TOTP validation request",
+            "name": "mfaValidation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mfaCode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A TOTP token create response, contains a token used to satisfy posture checks",
+            "schema": {
+              "$ref": "#/definitions/totpTokenEnvelope"
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "cause": null,
+                  "causeMessage": "",
+                  "code": "NOT_FOUND",
+                  "message": "The resource requested was not found or is no longer available",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           }
         }
@@ -8301,6 +8391,32 @@ func init() {
         "$ref": "#/definitions/terminatorPrecedence"
       }
     },
+    "totpToken": {
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "totpTokenEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/totpToken"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "username": {
       "type": "string",
       "maxLength": 100,
@@ -8390,7 +8506,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.49"
+    "version": "v0.26.50"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -9503,6 +9619,96 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            }
+          }
+        }
+      }
+    },
+    "/current-api-session/totp-token": {
+      "post": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Creates a TOTP token that proves TOTP validation occurred at a specific time. Used in posture response for posture checks.\n",
+        "tags": [
+          "Current API Session",
+          "MFA"
+        ],
+        "summary": "Create an MFA TOTP token that proves TOTP code checking has passed as a specific time for posture checks.",
+        "operationId": "createTotpToken",
+        "parameters": [
+          {
+            "description": "An MFA TOTP validation request",
+            "name": "mfaValidation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mfaCode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A TOTP token create response, contains a token used to satisfy posture checks",
+            "schema": {
+              "$ref": "#/definitions/totpTokenEnvelope"
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "cause": null,
+                  "causeMessage": "",
+                  "code": "NOT_FOUND",
+                  "message": "The resource requested was not found or is no longer available",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
             }
           }
         }
@@ -16711,6 +16917,32 @@ func init() {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/terminatorPrecedence"
+      }
+    },
+    "totpToken": {
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "totpTokenEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/totpToken"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
       }
     },
     "username": {

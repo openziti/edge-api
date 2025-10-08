@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.26.49
+  version: 0.26.50
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -91,6 +91,8 @@ paths:
 
   '/current-api-session':
     $ref: 'shared/current-api-session.yml#/paths/current-api-session'
+  '/current-api-session/totp-token':
+    $ref: 'shared/current-api-session.yml#/paths/current-api-session-create-totp-token'
 
   '/current-identity':
     $ref: 'shared/current-identity.yml#/paths/current-identity'

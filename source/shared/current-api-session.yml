@@ -28,8 +28,38 @@ paths:
           $ref: 'standard-responses.yml#/responses/emptyResponse'
         401:
           $ref: 'standard-responses.yml#/responses/unauthorizedResponse'
-
+  current-api-session-create-totp-token:
+    post:
+      summary: Create an MFA TOTP token that proves TOTP code checking has passed as a specific time for posture checks.
+      description: >
+        Creates a TOTP token that proves TOTP validation occurred at a specific time. Used in posture response for posture
+        checks.
+      security:
+        - ztSession: []
+        - oauth2: [openid]
+      tags:
+        - Current API Session
+        - MFA
+      operationId: createTotpToken
+      parameters:
+        - name: mfaValidation
+          in: body
+          required: true
+          description: 'An MFA TOTP validation request'
+          schema:
+            $ref: 'authenticate.yml#/definitions/mfaCode'
+      responses:
+        '200':
+          $ref: '#/responses/totpTokenResponse'
+        '401':
+          $ref: 'standard-responses.yml#/responses/unauthorizedResponse'
+        '404':
+          $ref: 'standard-responses.yml#/responses/notFoundResponse'
 responses:
+  totpTokenResponse:
+    description: A TOTP token create response, contains a token used to satisfy posture checks
+    schema:
+      $ref: '#/definitions/totpTokenEnvelope'
   detailCurrentAPISession:
     description: The API session associated with the session used to issue the request
     schema:
@@ -59,6 +89,23 @@ responses:
           configTypes: [ ]
 
 definitions:
+  totpTokenEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: 'standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/totpToken'
+  totpToken:
+    type: object
+    required:
+      - token
+    properties:
+      token:
+        type: string
   detailApiSessionEnvelope:
     required:
       - meta
