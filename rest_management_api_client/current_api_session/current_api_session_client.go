@@ -56,6 +56,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	DeleteCurrentAPISession(params *DeleteCurrentAPISessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCurrentAPISessionOK, error)
 
+	CreateTotpToken(params *CreateTotpTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTotpTokenOK, error)
+
 	DetailCurrentIdentityAuthenticator(params *DetailCurrentIdentityAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailCurrentIdentityAuthenticatorOK, error)
 
 	ExtendCurrentIdentityAuthenticator(params *ExtendCurrentIdentityAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExtendCurrentIdentityAuthenticatorOK, error)
@@ -111,6 +113,48 @@ func (a *Client) DeleteCurrentAPISession(params *DeleteCurrentAPISessionParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteCurrentAPISession: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  CreateTotpToken creates an m f a t o t p token that proves t o t p code checking has passed as a specific time for posture checks
+
+  Creates a TOTP token that proves TOTP validation occurred at a specific time. Used in posture response for posture checks.
+
+*/
+func (a *Client) CreateTotpToken(params *CreateTotpTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTotpTokenOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateTotpTokenParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createTotpToken",
+		Method:             "POST",
+		PathPattern:        "/current-api-session/totp-token",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateTotpTokenReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateTotpTokenOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createTotpToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

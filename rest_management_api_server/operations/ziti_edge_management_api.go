@@ -177,6 +177,9 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		TerminatorCreateTerminatorHandler: terminator.CreateTerminatorHandlerFunc(func(params terminator.CreateTerminatorParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation terminator.CreateTerminator has not yet been implemented")
 		}),
+		CurrentAPISessionCreateTotpTokenHandler: current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation current_api_session.CreateTotpToken has not yet been implemented")
+		}),
 		RouterCreateTransitRouterHandler: router.CreateTransitRouterHandlerFunc(func(params router.CreateTransitRouterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation router.CreateTransitRouter has not yet been implemented")
 		}),
@@ -813,6 +816,8 @@ type ZitiEdgeManagementAPI struct {
 	ServicePolicyCreateServicePolicyHandler service_policy.CreateServicePolicyHandler
 	// TerminatorCreateTerminatorHandler sets the operation handler for the create terminator operation
 	TerminatorCreateTerminatorHandler terminator.CreateTerminatorHandler
+	// CurrentAPISessionCreateTotpTokenHandler sets the operation handler for the create totp token operation
+	CurrentAPISessionCreateTotpTokenHandler current_api_session.CreateTotpTokenHandler
 	// RouterCreateTransitRouterHandler sets the operation handler for the create transit router operation
 	RouterCreateTransitRouterHandler router.CreateTransitRouterHandler
 	// DatabaseDataIntegrityResultsHandler sets the operation handler for the data integrity results operation
@@ -1327,6 +1332,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.TerminatorCreateTerminatorHandler == nil {
 		unregistered = append(unregistered, "terminator.CreateTerminatorHandler")
+	}
+	if o.CurrentAPISessionCreateTotpTokenHandler == nil {
+		unregistered = append(unregistered, "current_api_session.CreateTotpTokenHandler")
 	}
 	if o.RouterCreateTransitRouterHandler == nil {
 		unregistered = append(unregistered, "router.CreateTransitRouterHandler")
@@ -2050,6 +2058,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/terminators"] = terminator.NewCreateTerminator(o.context, o.TerminatorCreateTerminatorHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/current-api-session/totp-token"] = current_api_session.NewCreateTotpToken(o.context, o.CurrentAPISessionCreateTotpTokenHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

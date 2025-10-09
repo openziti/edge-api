@@ -237,6 +237,11 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation terminator.CreateTerminator has not yet been implemented")
 		})
 	}
+	if api.CurrentAPISessionCreateTotpTokenHandler == nil {
+		api.CurrentAPISessionCreateTotpTokenHandler = current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation current_api_session.CreateTotpToken has not yet been implemented")
+		})
+	}
 	if api.RouterCreateTransitRouterHandler == nil {
 		api.RouterCreateTransitRouterHandler = router.CreateTransitRouterHandlerFunc(func(params router.CreateTransitRouterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation router.CreateTransitRouter has not yet been implemented")

@@ -55,6 +55,15 @@ type PostureQuery struct {
 	// processes
 	Processes []*PostureQueryProcess `json:"processes"`
 
+	// prompt grace period seconds
+	PromptGracePeriodSeconds int64 `json:"promptGracePeriodSeconds,omitempty"`
+
+	// prompt on unlock
+	PromptOnUnlock bool `json:"promptOnUnlock,omitempty"`
+
+	// prompt on wake
+	PromptOnWake bool `json:"promptOnWake,omitempty"`
+
 	// query type
 	// Required: true
 	QueryType *PostureCheckType `json:"queryType"`
@@ -62,6 +71,10 @@ type PostureQuery struct {
 	// timeout
 	// Required: true
 	Timeout *int64 `json:"timeout"`
+
+	// timeout at
+	// Format: date-time
+	TimeoutAt *strfmt.DateTime `json:"timeoutAt,omitempty"`
 
 	// timeout remaining
 	// Required: true
@@ -85,9 +98,17 @@ func (m *PostureQuery) UnmarshalJSON(raw []byte) error {
 
 		Processes []*PostureQueryProcess `json:"processes"`
 
+		PromptGracePeriodSeconds int64 `json:"promptGracePeriodSeconds,omitempty"`
+
+		PromptOnUnlock bool `json:"promptOnUnlock,omitempty"`
+
+		PromptOnWake bool `json:"promptOnWake,omitempty"`
+
 		QueryType *PostureCheckType `json:"queryType"`
 
 		Timeout *int64 `json:"timeout"`
+
+		TimeoutAt *strfmt.DateTime `json:"timeoutAt,omitempty"`
 
 		TimeoutRemaining *int64 `json:"timeoutRemaining"`
 	}
@@ -101,9 +122,17 @@ func (m *PostureQuery) UnmarshalJSON(raw []byte) error {
 
 	m.Processes = dataAO1.Processes
 
+	m.PromptGracePeriodSeconds = dataAO1.PromptGracePeriodSeconds
+
+	m.PromptOnUnlock = dataAO1.PromptOnUnlock
+
+	m.PromptOnWake = dataAO1.PromptOnWake
+
 	m.QueryType = dataAO1.QueryType
 
 	m.Timeout = dataAO1.Timeout
+
+	m.TimeoutAt = dataAO1.TimeoutAt
 
 	m.TimeoutRemaining = dataAO1.TimeoutRemaining
 
@@ -126,9 +155,17 @@ func (m PostureQuery) MarshalJSON() ([]byte, error) {
 
 		Processes []*PostureQueryProcess `json:"processes"`
 
+		PromptGracePeriodSeconds int64 `json:"promptGracePeriodSeconds,omitempty"`
+
+		PromptOnUnlock bool `json:"promptOnUnlock,omitempty"`
+
+		PromptOnWake bool `json:"promptOnWake,omitempty"`
+
 		QueryType *PostureCheckType `json:"queryType"`
 
 		Timeout *int64 `json:"timeout"`
+
+		TimeoutAt *strfmt.DateTime `json:"timeoutAt,omitempty"`
 
 		TimeoutRemaining *int64 `json:"timeoutRemaining"`
 	}
@@ -139,9 +176,17 @@ func (m PostureQuery) MarshalJSON() ([]byte, error) {
 
 	dataAO1.Processes = m.Processes
 
+	dataAO1.PromptGracePeriodSeconds = m.PromptGracePeriodSeconds
+
+	dataAO1.PromptOnUnlock = m.PromptOnUnlock
+
+	dataAO1.PromptOnWake = m.PromptOnWake
+
 	dataAO1.QueryType = m.QueryType
 
 	dataAO1.Timeout = m.Timeout
+
+	dataAO1.TimeoutAt = m.TimeoutAt
 
 	dataAO1.TimeoutRemaining = m.TimeoutRemaining
 
@@ -179,6 +224,10 @@ func (m *PostureQuery) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTimeout(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTimeoutAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -275,6 +324,19 @@ func (m *PostureQuery) validateQueryType(formats strfmt.Registry) error {
 func (m *PostureQuery) validateTimeout(formats strfmt.Registry) error {
 
 	if err := validate.Required("timeout", "body", m.Timeout); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PostureQuery) validateTimeoutAt(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TimeoutAt) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("timeoutAt", "body", "date-time", m.TimeoutAt.String(), formats); err != nil {
 		return err
 	}
 

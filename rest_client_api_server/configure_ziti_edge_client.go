@@ -146,6 +146,11 @@ func configureAPI(api *operations.ZitiEdgeClientAPI) http.Handler {
 			return middleware.NotImplemented("operation session.CreateSession has not yet been implemented")
 		})
 	}
+	if api.CurrentAPISessionCreateTotpTokenHandler == nil {
+		api.CurrentAPISessionCreateTotpTokenHandler = current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation current_api_session.CreateTotpToken has not yet been implemented")
+		})
+	}
 	if api.CurrentAPISessionDeleteCurrentAPISessionCertificateHandler == nil {
 		api.CurrentAPISessionDeleteCurrentAPISessionCertificateHandler = current_api_session.DeleteCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.DeleteCurrentAPISessionCertificate has not yet been implemented")

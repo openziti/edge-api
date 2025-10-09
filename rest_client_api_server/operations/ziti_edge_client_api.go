@@ -118,6 +118,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		SessionCreateSessionHandler: session.CreateSessionHandlerFunc(func(params session.CreateSessionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation session.CreateSession has not yet been implemented")
 		}),
+		CurrentAPISessionCreateTotpTokenHandler: current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation current_api_session.CreateTotpToken has not yet been implemented")
+		}),
 		CurrentAPISessionDeleteCurrentAPISessionCertificateHandler: current_api_session.DeleteCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation current_api_session.DeleteCurrentAPISessionCertificate has not yet been implemented")
 		}),
@@ -356,6 +359,8 @@ type ZitiEdgeClientAPI struct {
 	PostureChecksCreatePostureResponseBulkHandler posture_checks.CreatePostureResponseBulkHandler
 	// SessionCreateSessionHandler sets the operation handler for the create session operation
 	SessionCreateSessionHandler session.CreateSessionHandler
+	// CurrentAPISessionCreateTotpTokenHandler sets the operation handler for the create totp token operation
+	CurrentAPISessionCreateTotpTokenHandler current_api_session.CreateTotpTokenHandler
 	// CurrentAPISessionDeleteCurrentAPISessionCertificateHandler sets the operation handler for the delete current Api session certificate operation
 	CurrentAPISessionDeleteCurrentAPISessionCertificateHandler current_api_session.DeleteCurrentAPISessionCertificateHandler
 	// CurrentIdentityDeleteMfaHandler sets the operation handler for the delete mfa operation
@@ -579,6 +584,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.SessionCreateSessionHandler == nil {
 		unregistered = append(unregistered, "session.CreateSessionHandler")
+	}
+	if o.CurrentAPISessionCreateTotpTokenHandler == nil {
+		unregistered = append(unregistered, "current_api_session.CreateTotpTokenHandler")
 	}
 	if o.CurrentAPISessionDeleteCurrentAPISessionCertificateHandler == nil {
 		unregistered = append(unregistered, "current_api_session.DeleteCurrentAPISessionCertificateHandler")
@@ -871,6 +879,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/sessions"] = session.NewCreateSession(o.context, o.SessionCreateSessionHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/current-api-session/totp-token"] = current_api_session.NewCreateTotpToken(o.context, o.CurrentAPISessionCreateTotpTokenHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
