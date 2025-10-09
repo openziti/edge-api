@@ -35,6 +35,16 @@ definitions:
             type: integer
           timeoutRemaining:
             type: integer
+          timeoutAt:
+            type: string
+            format: date-time
+            x-nullable: true
+          promptOnWake:
+            type: boolean
+          promptOnUnlock:
+            type: boolean
+          promptGracePeriodSeconds:
+            type: integer
           queryType:
             $ref: 'posture-checks.yml#/definitions/postureCheckType'
           process:

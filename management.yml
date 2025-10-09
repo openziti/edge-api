@@ -21722,10 +21722,20 @@ definitions:
           type: array
           items:
             $ref: '#/definitions/postureQueryProcess'
+        promptGracePeriodSeconds:
+          type: integer
+        promptOnUnlock:
+          type: boolean
+        promptOnWake:
+          type: boolean
         queryType:
           $ref: '#/definitions/postureCheckType'
         timeout:
           type: integer
+        timeoutAt:
+          type: string
+          format: date-time
+          x-nullable: true
         timeoutRemaining:
           type: integer
   postureQueryProcess:
@@ -22517,7 +22527,11 @@ definitions:
     type: object
     required:
     - token
+    - issuedAt
     properties:
+      issuedAt:
+        type: string
+        format: date-time
       token:
         type: string
   totpTokenEnvelope:

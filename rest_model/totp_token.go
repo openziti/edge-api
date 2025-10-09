@@ -43,6 +43,11 @@ import (
 // swagger:model totpToken
 type TotpToken struct {
 
+	// issued at
+	// Required: true
+	// Format: date-time
+	IssuedAt *strfmt.DateTime `json:"issuedAt"`
+
 	// token
 	// Required: true
 	Token *string `json:"token"`
@@ -52,6 +57,10 @@ type TotpToken struct {
 func (m *TotpToken) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateIssuedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateToken(formats); err != nil {
 		res = append(res, err)
 	}
@@ -59,6 +68,19 @@ func (m *TotpToken) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *TotpToken) validateIssuedAt(formats strfmt.Registry) error {
+
+	if err := validate.Required("issuedAt", "body", m.IssuedAt); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("issuedAt", "body", "date-time", m.IssuedAt.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

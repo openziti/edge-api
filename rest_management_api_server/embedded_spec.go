@@ -30221,11 +30221,25 @@ func init() {
                 "$ref": "#/definitions/postureQueryProcess"
               }
             },
+            "promptGracePeriodSeconds": {
+              "type": "integer"
+            },
+            "promptOnUnlock": {
+              "type": "boolean"
+            },
+            "promptOnWake": {
+              "type": "boolean"
+            },
             "queryType": {
               "$ref": "#/definitions/postureCheckType"
             },
             "timeout": {
               "type": "integer"
+            },
+            "timeoutAt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
             },
             "timeoutRemaining": {
               "type": "integer"
@@ -31398,9 +31412,14 @@ func init() {
     "totpToken": {
       "type": "object",
       "required": [
-        "token"
+        "token",
+        "issuedAt"
       ],
       "properties": {
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "token": {
           "type": "string"
         }
@@ -61863,11 +61882,25 @@ func init() {
                 "$ref": "#/definitions/postureQueryProcess"
               }
             },
+            "promptGracePeriodSeconds": {
+              "type": "integer"
+            },
+            "promptOnUnlock": {
+              "type": "boolean"
+            },
+            "promptOnWake": {
+              "type": "boolean"
+            },
             "queryType": {
               "$ref": "#/definitions/postureCheckType"
             },
             "timeout": {
               "type": "integer"
+            },
+            "timeoutAt": {
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true
             },
             "timeoutRemaining": {
               "type": "integer"
@@ -63045,9 +63078,14 @@ func init() {
     "totpToken": {
       "type": "object",
       "required": [
-        "token"
+        "token",
+        "issuedAt"
       ],
       "properties": {
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "token": {
           "type": "string"
         }
