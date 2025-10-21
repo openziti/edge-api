@@ -178,6 +178,9 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		EnrollEnrollOttCaHandler: enroll.EnrollOttCaHandlerFunc(func(params enroll.EnrollOttCaParams) middleware.Responder {
 			return middleware.NotImplemented("operation enroll.EnrollOttCa has not yet been implemented")
 		}),
+		EnrollEnrollTokenHandler: enroll.EnrollTokenHandlerFunc(func(params enroll.EnrollTokenParams) middleware.Responder {
+			return middleware.NotImplemented("operation enroll.EnrollToken has not yet been implemented")
+		}),
 		EnrollEnrollUpdbHandler: enroll.EnrollUpdbHandlerFunc(func(params enroll.EnrollUpdbParams) middleware.Responder {
 			return middleware.NotImplemented("operation enroll.EnrollUpdb has not yet been implemented")
 		}),
@@ -399,6 +402,8 @@ type ZitiEdgeClientAPI struct {
 	EnrollEnrollOttHandler enroll.EnrollOttHandler
 	// EnrollEnrollOttCaHandler sets the operation handler for the enroll ott ca operation
 	EnrollEnrollOttCaHandler enroll.EnrollOttCaHandler
+	// EnrollEnrollTokenHandler sets the operation handler for the enroll token operation
+	EnrollEnrollTokenHandler enroll.EnrollTokenHandler
 	// EnrollEnrollUpdbHandler sets the operation handler for the enroll updb operation
 	EnrollEnrollUpdbHandler enroll.EnrollUpdbHandler
 	// EnrollEnrollmentChallengeHandler sets the operation handler for the enrollment challenge operation
@@ -644,6 +649,9 @@ func (o *ZitiEdgeClientAPI) Validate() error {
 	}
 	if o.EnrollEnrollOttCaHandler == nil {
 		unregistered = append(unregistered, "enroll.EnrollOttCaHandler")
+	}
+	if o.EnrollEnrollTokenHandler == nil {
+		unregistered = append(unregistered, "enroll.EnrollTokenHandler")
 	}
 	if o.EnrollEnrollUpdbHandler == nil {
 		unregistered = append(unregistered, "enroll.EnrollUpdbHandler")
@@ -959,6 +967,10 @@ func (o *ZitiEdgeClientAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/enroll/ottca"] = enroll.NewEnrollOttCa(o.context, o.EnrollEnrollOttCaHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/enroll/token"] = enroll.NewEnrollToken(o.context, o.EnrollEnrollTokenHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

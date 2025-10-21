@@ -169,6 +169,94 @@ func (o *EnrollNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.
 	}
 }
 
+// EnrollConflictCode is the HTTP code returned for type EnrollConflict
+const EnrollConflictCode int = 409
+
+/*EnrollConflict The request could not be completed due to a conflict of configuration or state
+
+swagger:response enrollConflict
+*/
+type EnrollConflict struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollConflict creates EnrollConflict with default headers values
+func NewEnrollConflict() *EnrollConflict {
+
+	return &EnrollConflict{}
+}
+
+// WithPayload adds the payload to the enroll conflict response
+func (o *EnrollConflict) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollConflict {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll conflict response
+func (o *EnrollConflict) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollConflict) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(409)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
+// EnrollGoneCode is the HTTP code returned for type EnrollGone
+const EnrollGoneCode int = 410
+
+/*EnrollGone The request could not be completed as the resource is no longer available
+
+swagger:response enrollGone
+*/
+type EnrollGone struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *rest_model.APIErrorEnvelope `json:"body,omitempty"`
+}
+
+// NewEnrollGone creates EnrollGone with default headers values
+func NewEnrollGone() *EnrollGone {
+
+	return &EnrollGone{}
+}
+
+// WithPayload adds the payload to the enroll gone response
+func (o *EnrollGone) WithPayload(payload *rest_model.APIErrorEnvelope) *EnrollGone {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the enroll gone response
+func (o *EnrollGone) SetPayload(payload *rest_model.APIErrorEnvelope) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *EnrollGone) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(410)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // EnrollTooManyRequestsCode is the HTTP code returned for type EnrollTooManyRequests
 const EnrollTooManyRequestsCode int = 429
 

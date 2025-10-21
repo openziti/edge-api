@@ -50,6 +50,12 @@ type ClientExternalJWTSignerDetail struct {
 	// client Id
 	ClientID *string `json:"clientId,omitempty"`
 
+	// enroll to cert enabled
+	EnrollToCertEnabled bool `json:"enrollToCertEnabled,omitempty"`
+
+	// enroll to token enabled
+	EnrollToTokenEnabled bool `json:"enrollToTokenEnabled,omitempty"`
+
 	// external auth Url
 	// Required: true
 	ExternalAuthURL *string `json:"externalAuthUrl"`
@@ -84,6 +90,10 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 
 		ClientID *string `json:"clientId,omitempty"`
 
+		EnrollToCertEnabled bool `json:"enrollToCertEnabled,omitempty"`
+
+		EnrollToTokenEnabled bool `json:"enrollToTokenEnabled,omitempty"`
+
 		ExternalAuthURL *string `json:"externalAuthUrl"`
 
 		Name *string `json:"name"`
@@ -101,6 +111,10 @@ func (m *ClientExternalJWTSignerDetail) UnmarshalJSON(raw []byte) error {
 	m.Audience = dataAO1.Audience
 
 	m.ClientID = dataAO1.ClientID
+
+	m.EnrollToCertEnabled = dataAO1.EnrollToCertEnabled
+
+	m.EnrollToTokenEnabled = dataAO1.EnrollToTokenEnabled
 
 	m.ExternalAuthURL = dataAO1.ExternalAuthURL
 
@@ -129,6 +143,10 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 
 		ClientID *string `json:"clientId,omitempty"`
 
+		EnrollToCertEnabled bool `json:"enrollToCertEnabled,omitempty"`
+
+		EnrollToTokenEnabled bool `json:"enrollToTokenEnabled,omitempty"`
+
 		ExternalAuthURL *string `json:"externalAuthUrl"`
 
 		Name *string `json:"name"`
@@ -143,6 +161,10 @@ func (m ClientExternalJWTSignerDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.Audience = m.Audience
 
 	dataAO1.ClientID = m.ClientID
+
+	dataAO1.EnrollToCertEnabled = m.EnrollToCertEnabled
+
+	dataAO1.EnrollToTokenEnabled = m.EnrollToTokenEnabled
 
 	dataAO1.ExternalAuthURL = m.ExternalAuthURL
 
