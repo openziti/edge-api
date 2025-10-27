@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.50"
+    "version": "0.26.51"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -27473,6 +27473,21 @@ func init() {
         "enabled": {
           "type": "boolean"
         },
+        "enrollAttributeClaimsSelector": {
+          "type": "string"
+        },
+        "enrollAuthPolicyId": {
+          "type": "string"
+        },
+        "enrollNameClaimsSelector": {
+          "type": "string"
+        },
+        "enrollToCertEnabled": {
+          "type": "boolean"
+        },
+        "enrollToTokenEnabled": {
+          "type": "boolean"
+        },
         "externalAuthUrl": {
           "type": "string",
           "format": "url",
@@ -27561,6 +27576,21 @@ func init() {
             "enabled": {
               "type": "boolean"
             },
+            "enrollAttributeClaimsSelector": {
+              "type": "string"
+            },
+            "enrollAuthPolicyId": {
+              "type": "string"
+            },
+            "enrollNameClaimsSelector": {
+              "type": "string"
+            },
+            "enrollToCertEnabled": {
+              "type": "boolean"
+            },
+            "enrollToTokenEnabled": {
+              "type": "boolean"
+            },
             "externalAuthUrl": {
               "type": "string",
               "format": "url"
@@ -27637,6 +27667,26 @@ func init() {
           "type": "boolean",
           "x-nullable": true
         },
+        "enrollAttributeClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollAuthPolicyId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollNameClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollToCertEnabled": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "enrollToTokenEnabled": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "externalAuthUrl": {
           "type": "string",
           "format": "url",
@@ -27705,6 +27755,26 @@ func init() {
         },
         "enabled": {
           "type": "boolean"
+        },
+        "enrollAttributeClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollAuthPolicyId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollNameClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollToCertEnabled": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "enrollToTokenEnabled": {
+          "type": "boolean",
+          "x-nullable": true
         },
         "externalAuthUrl": {
           "type": "string",
@@ -31606,7 +31676,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.50"
+    "version": "0.26.51"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -59132,6 +59202,21 @@ func init() {
         "enabled": {
           "type": "boolean"
         },
+        "enrollAttributeClaimsSelector": {
+          "type": "string"
+        },
+        "enrollAuthPolicyId": {
+          "type": "string"
+        },
+        "enrollNameClaimsSelector": {
+          "type": "string"
+        },
+        "enrollToCertEnabled": {
+          "type": "boolean"
+        },
+        "enrollToTokenEnabled": {
+          "type": "boolean"
+        },
         "externalAuthUrl": {
           "type": "string",
           "format": "url",
@@ -59220,6 +59305,21 @@ func init() {
             "enabled": {
               "type": "boolean"
             },
+            "enrollAttributeClaimsSelector": {
+              "type": "string"
+            },
+            "enrollAuthPolicyId": {
+              "type": "string"
+            },
+            "enrollNameClaimsSelector": {
+              "type": "string"
+            },
+            "enrollToCertEnabled": {
+              "type": "boolean"
+            },
+            "enrollToTokenEnabled": {
+              "type": "boolean"
+            },
             "externalAuthUrl": {
               "type": "string",
               "format": "url"
@@ -59296,6 +59396,26 @@ func init() {
           "type": "boolean",
           "x-nullable": true
         },
+        "enrollAttributeClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollAuthPolicyId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollNameClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollToCertEnabled": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "enrollToTokenEnabled": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "externalAuthUrl": {
           "type": "string",
           "format": "url",
@@ -59364,6 +59484,26 @@ func init() {
         },
         "enabled": {
           "type": "boolean"
+        },
+        "enrollAttributeClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollAuthPolicyId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollNameClaimsSelector": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "enrollToCertEnabled": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "enrollToTokenEnabled": {
+          "type": "boolean",
+          "x-nullable": true
         },
         "externalAuthUrl": {
           "type": "string",

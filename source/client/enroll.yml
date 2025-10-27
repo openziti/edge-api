@@ -32,6 +32,10 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
         '503':
           $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+        '409':
+          $ref: '../shared/standard-responses.yml#/responses/conflictResponse'
+        '410':
+          $ref: '../shared/standard-responses.yml#/responses/goneResponse'
 
   enroll-ca:
     post:
@@ -116,7 +120,54 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
         '503':
           $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
-
+  enroll-token:
+    summary: Enroll an identity via external tokens (e.g. OAuth2).
+    description: |
+      Enroll an identity via external tokens (e.g. OAuth2). If a CSR is provided, the identity will be created with
+      a certificate. If no CSR is provided, the identity will perform future authentication via tokens. The
+      backing external JWT signer must be configured to allow enrollment.
+    operationId: enrollToken
+    tags:
+      - Enroll
+    post:
+      parameters:
+        - name: ziti-token-issuer-id
+          in: header
+          description: The id of the token issuer to use for enrollment, optional as long the the token is not opaque
+          required: false
+          type: string
+        - name: Authorization
+          in: header
+          description: An identifying token to enroll with
+          required: true
+          type: string
+        - name: tokenEnrollmentRequest
+          in: body
+          required: true
+          description: |
+            A  enrollment request with or without a CSR. Including a CSR indicated an attempt to enroll with certificate 
+            credentials. If no CSR is included, the request is assumed to be a token enrollment request that will
+            authenticate via tokens.
+          schema:
+            $ref: '#/definitions/tokenEnrollmentRequest'
+      operationId: enrollToken
+      tags:
+        - Enroll
+      responses:
+        '200':
+          $ref: '#/responses/enrollmentCerts'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+        '409':
+          $ref: '../shared/standard-responses.yml#/responses/conflictResponse'
+        '410':
+          $ref: '../shared/standard-responses.yml#/responses/goneResponse'
   enroll-updb:
     parameters:
       - $ref: '../shared/parameters.yml#/token'
@@ -289,7 +340,11 @@ definitions:
         type: string
       certCsr:
         type: string
-
+  tokenEnrollmentRequest:
+    type: object
+    properties:
+      clientCsr:
+        type: string
   ottEnrollmentRequest:
     type: object
     properties:

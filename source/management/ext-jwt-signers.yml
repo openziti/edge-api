@@ -265,6 +265,16 @@ definitions:
               type: string
           targetToken:
               $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
+          enrollToCertEnabled:
+            type: boolean
+          enrollToTokenEnabled:
+            type: boolean
+          enrollAttributeClaimsSelector:
+            type: string
+          enrollAuthPolicyId:
+            type: string
+          enrollNameClaimsSelector:
+            type: string
   externalJwtSignerCreate:
     description: A create Certificate Authority (CA) object
     type: object
@@ -316,6 +326,16 @@ definitions:
         $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      enrollToCertEnabled:
+        type: boolean
+      enrollToTokenEnabled:
+        type: boolean
+      enrollAttributeClaimsSelector:
+        type: string
+      enrollAuthPolicyId:
+        type: string
+      enrollNameClaimsSelector:
+        type: string
   externalJwtSignerUpdate:
     type: object
     required:
@@ -366,6 +386,21 @@ definitions:
         $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      enrollToCertEnabled:
+        type: boolean
+        x-nullable: true
+      enrollToTokenEnabled:
+        type: boolean
+        x-nullable: true
+      enrollAttributeClaimsSelector:
+        type: string
+        x-nullable: true
+      enrollAuthPolicyId:
+        type: string
+        x-nullable: true
+      enrollNameClaimsSelector:
+        type: string
+        x-nullable: true
   externalJwtSignerPatch:
     type: object
     properties:
@@ -413,3 +448,18 @@ definitions:
         $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      enrollToCertEnabled:
+        type: boolean
+        x-nullable: true
+      enrollToTokenEnabled:
+        type: boolean
+        x-nullable: true
+      enrollAttributeClaimsSelector:
+        type: string
+        x-nullable: true
+      enrollAuthPolicyId:
+        type: string
+        x-nullable: true
+      enrollNameClaimsSelector:
+        type: string
+        x-nullable: true

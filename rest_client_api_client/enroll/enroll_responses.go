@@ -65,6 +65,18 @@ func (o *EnrollReader) ReadResponse(response runtime.ClientResponse, consumer ru
 			return nil, err
 		}
 		return nil, result
+	case 409:
+		result := NewEnrollConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 410:
+		result := NewEnrollGone()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 429:
 		result := NewEnrollTooManyRequests()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -167,6 +179,70 @@ func (o *EnrollNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 }
 
 func (o *EnrollNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewEnrollConflict creates a EnrollConflict with default headers values
+func NewEnrollConflict() *EnrollConflict {
+	return &EnrollConflict{}
+}
+
+/* EnrollConflict describes a response with status code 409, with default header values.
+
+The request could not be completed due to a conflict of configuration or state
+*/
+type EnrollConflict struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *EnrollConflict) Error() string {
+	return fmt.Sprintf("[POST /enroll][%d] enrollConflict  %+v", 409, o.Payload)
+}
+func (o *EnrollConflict) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *EnrollConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(rest_model.APIErrorEnvelope)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewEnrollGone creates a EnrollGone with default headers values
+func NewEnrollGone() *EnrollGone {
+	return &EnrollGone{}
+}
+
+/* EnrollGone describes a response with status code 410, with default header values.
+
+The request could not be completed as the resource is no longer available
+*/
+type EnrollGone struct {
+	Payload *rest_model.APIErrorEnvelope
+}
+
+func (o *EnrollGone) Error() string {
+	return fmt.Sprintf("[POST /enroll][%d] enrollGone  %+v", 410, o.Payload)
+}
+func (o *EnrollGone) GetPayload() *rest_model.APIErrorEnvelope {
+	return o.Payload
+}
+
+func (o *EnrollGone) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(rest_model.APIErrorEnvelope)
 

@@ -75,3 +75,7 @@ definitions:
             x-nullable: true
           targetToken:
             $ref: "../shared/ext-jwt-signers.yml#/definitions/targetToken"
+          enrollToCertEnabled:
+            type: boolean
+          enrollToTokenEnabled:
+            type: boolean

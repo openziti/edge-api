@@ -64,6 +64,8 @@ type ClientService interface {
 
 	EnrollOttCa(params *EnrollOttCaParams, opts ...ClientOption) (*EnrollOttCaOK, error)
 
+	EnrollToken(params *EnrollTokenParams, opts ...ClientOption) (*EnrollTokenOK, error)
+
 	EnrollUpdb(params *EnrollUpdbParams, opts ...ClientOption) (*EnrollUpdbOK, error)
 
 	EnrollmentChallenge(params *EnrollmentChallengeParams, opts ...ClientOption) (*EnrollmentChallengeOK, error)
@@ -287,6 +289,44 @@ func (a *Client) EnrollOttCa(params *EnrollOttCaParams, opts ...ClientOption) (*
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for enrollOttCa: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  EnrollToken enroll token API
+*/
+func (a *Client) EnrollToken(params *EnrollTokenParams, opts ...ClientOption) (*EnrollTokenOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEnrollTokenParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "enrollToken",
+		Method:             "POST",
+		PathPattern:        "/enroll/token",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &EnrollTokenReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EnrollTokenOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for enrollToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

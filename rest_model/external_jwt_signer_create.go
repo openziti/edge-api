@@ -60,6 +60,21 @@ type ExternalJWTSignerCreate struct {
 	// Required: true
 	Enabled *bool `json:"enabled"`
 
+	// enroll attribute claims selector
+	EnrollAttributeClaimsSelector string `json:"enrollAttributeClaimsSelector,omitempty"`
+
+	// enroll auth policy Id
+	EnrollAuthPolicyID string `json:"enrollAuthPolicyId,omitempty"`
+
+	// enroll name claims selector
+	EnrollNameClaimsSelector string `json:"enrollNameClaimsSelector,omitempty"`
+
+	// enroll to cert enabled
+	EnrollToCertEnabled bool `json:"enrollToCertEnabled,omitempty"`
+
+	// enroll to token enabled
+	EnrollToTokenEnabled bool `json:"enrollToTokenEnabled,omitempty"`
+
 	// external auth Url
 	ExternalAuthURL *string `json:"externalAuthUrl,omitempty"`
 

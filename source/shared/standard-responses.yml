@@ -55,6 +55,10 @@ responses:
     description: The request could not be completed due to a conflict of configuration or state
     schema:
       $ref: '#/definitions/apiErrorEnvelope'
+  goneResponse:
+    description: The request could not be completed as the resource is no longer available
+    schema:
+      $ref: '#/definitions/apiErrorEnvelope'
   serverUnavailableResponse:
     description: The request could not be completed due to the server being busy or in a temporarily bad state
     schema:
