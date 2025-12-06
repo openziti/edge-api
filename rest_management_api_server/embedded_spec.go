@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.51"
+    "version": "0.26.52"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -24970,7 +24970,7 @@ func init() {
       }
     },
     "attributes": {
-      "description": "A set of strings used to loosly couple this resource to policies",
+      "description": "A set of strings used to loosely couple this resource to policies",
       "type": "array",
       "items": {
         "type": "string"
@@ -27952,6 +27952,9 @@ func init() {
         "name": {
           "type": "string"
         },
+        "permissions": {
+          "$ref": "#/definitions/permissions"
+        },
         "roleAttributes": {
           "$ref": "#/definitions/attributes"
         },
@@ -27999,7 +28002,8 @@ func init() {
             "authPolicyId",
             "authPolicy",
             "externalId",
-            "disabled"
+            "disabled",
+            "permissions"
           ],
           "properties": {
             "appData": {
@@ -28074,6 +28078,9 @@ func init() {
             },
             "name": {
               "type": "string"
+            },
+            "permissions": {
+              "$ref": "#/definitions/permissions"
             },
             "roleAttributes": {
               "$ref": "#/definitions/attributes"
@@ -28244,6 +28251,9 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "permissions": {
+          "$ref": "#/definitions/permissions"
+        },
         "roleAttributes": {
           "$ref": "#/definitions/attributes"
         },
@@ -28323,6 +28333,9 @@ func init() {
         },
         "name": {
           "type": "string"
+        },
+        "permissions": {
+          "$ref": "#/definitions/permissions"
         },
         "roleAttributes": {
           "$ref": "#/definitions/attributes"
@@ -29014,6 +29027,15 @@ func init() {
       "maxLength": 100,
       "minLength": 5,
       "x-nullable": true
+    },
+    "permissions": {
+      "description": "A set of strings used to define which types of resources this resource can acccess",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "x-nullable": true,
+      "x-omitempty": true
     },
     "policyAdvice": {
       "type": "object",
@@ -31676,7 +31698,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.51"
+    "version": "0.26.52"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -56695,7 +56717,7 @@ func init() {
       }
     },
     "attributes": {
-      "description": "A set of strings used to loosly couple this resource to policies",
+      "description": "A set of strings used to loosely couple this resource to policies",
       "type": "array",
       "items": {
         "type": "string"
@@ -59681,6 +59703,9 @@ func init() {
         "name": {
           "type": "string"
         },
+        "permissions": {
+          "$ref": "#/definitions/permissions"
+        },
         "roleAttributes": {
           "$ref": "#/definitions/attributes"
         },
@@ -59728,7 +59753,8 @@ func init() {
             "authPolicyId",
             "authPolicy",
             "externalId",
-            "disabled"
+            "disabled",
+            "permissions"
           ],
           "properties": {
             "appData": {
@@ -59803,6 +59829,9 @@ func init() {
             },
             "name": {
               "type": "string"
+            },
+            "permissions": {
+              "$ref": "#/definitions/permissions"
             },
             "roleAttributes": {
               "$ref": "#/definitions/attributes"
@@ -59973,6 +60002,9 @@ func init() {
           "type": "string",
           "x-nullable": true
         },
+        "permissions": {
+          "$ref": "#/definitions/permissions"
+        },
         "roleAttributes": {
           "$ref": "#/definitions/attributes"
         },
@@ -60052,6 +60084,9 @@ func init() {
         },
         "name": {
           "type": "string"
+        },
+        "permissions": {
+          "$ref": "#/definitions/permissions"
         },
         "roleAttributes": {
           "$ref": "#/definitions/attributes"
@@ -60745,6 +60780,15 @@ func init() {
       "maxLength": 100,
       "minLength": 5,
       "x-nullable": true
+    },
+    "permissions": {
+      "description": "A set of strings used to define which types of resources this resource can acccess",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "x-nullable": true,
+      "x-omitempty": true
     },
     "policyAdvice": {
       "type": "object",

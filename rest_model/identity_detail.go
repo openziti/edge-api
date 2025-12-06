@@ -124,6 +124,10 @@ type IdentityDetail struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// permissions
+	// Required: true
+	Permissions *Permissions `json:"permissions"`
+
 	// role attributes
 	// Required: true
 	RoleAttributes *Attributes `json:"roleAttributes"`
@@ -200,6 +204,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 
 		Name *string `json:"name"`
 
+		Permissions *Permissions `json:"permissions"`
+
 		RoleAttributes *Attributes `json:"roleAttributes"`
 
 		SdkInfo *SdkInfo `json:"sdkInfo"`
@@ -255,6 +261,8 @@ func (m *IdentityDetail) UnmarshalJSON(raw []byte) error {
 	m.IsMfaEnabled = dataAO1.IsMfaEnabled
 
 	m.Name = dataAO1.Name
+
+	m.Permissions = dataAO1.Permissions
 
 	m.RoleAttributes = dataAO1.RoleAttributes
 
@@ -321,6 +329,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 
 		Name *string `json:"name"`
 
+		Permissions *Permissions `json:"permissions"`
+
 		RoleAttributes *Attributes `json:"roleAttributes"`
 
 		SdkInfo *SdkInfo `json:"sdkInfo"`
@@ -373,6 +383,8 @@ func (m IdentityDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.IsMfaEnabled = m.IsMfaEnabled
 
 	dataAO1.Name = m.Name
+
+	dataAO1.Permissions = m.Permissions
 
 	dataAO1.RoleAttributes = m.RoleAttributes
 
@@ -480,6 +492,10 @@ func (m *IdentityDetail) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePermissions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -823,6 +839,26 @@ func (m *IdentityDetail) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *IdentityDetail) validatePermissions(formats strfmt.Registry) error {
+
+	if err := validate.Required("permissions", "body", m.Permissions); err != nil {
+		return err
+	}
+
+	if m.Permissions != nil {
+		if err := m.Permissions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IdentityDetail) validateRoleAttributes(formats strfmt.Registry) error {
 
 	if err := validate.Required("roleAttributes", "body", m.RoleAttributes); err != nil {
@@ -970,6 +1006,10 @@ func (m *IdentityDetail) ContextValidate(ctx context.Context, formats strfmt.Reg
 	}
 
 	if err := m.contextValidateInterfaces(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePermissions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1124,6 +1164,22 @@ func (m *IdentityDetail) contextValidateInterfaces(ctx context.Context, formats 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *IdentityDetail) contextValidatePermissions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Permissions != nil {
+		if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
 	}
 
 	return nil

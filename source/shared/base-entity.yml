@@ -63,7 +63,14 @@ definitions:
       type: object
     }
   attributes:
-    description: A set of strings used to loosly couple this resource to policies
+    description: A set of strings used to loosely couple this resource to policies
+    type: array
+    x-omitempty: true
+    x-nullable: true
+    items:
+      type: string
+  permissions:
+    description: A set of strings used to define which types of resources this resource can acccess
     type: array
     x-omitempty: true
     x-nullable: true
