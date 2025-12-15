@@ -76,6 +76,97 @@ definitions:
     x-nullable: true
     items:
       type: string
+      enum:
+        - "admin_readonly"
+
+        - "auth-policy"
+        - "auth-policy.read"
+        - "auth-policy.create"
+        - "auth-policy.update"
+        - "auth-policy.delete"
+
+        - "ca"
+        - "ca.read"
+        - "ca.create"
+        - "ca.update"
+        - "ca.delete"
+
+        - "config"
+        - "config.read"
+        - "config.create"
+        - "config.update"
+        - "config.delete"
+
+        - "config-type"
+        - "config-type.read"
+        - "config-type.create"
+        - "config-type.update"
+        - "config-type.delete"
+
+        - "edge-router-policy"
+        - "edge-router-policy.read"
+        - "edge-router-policy.create"
+        - "edge-router-policy.update"
+        - "edge-router-policy.delete"
+
+        - "enrollment"
+        - "enrollment.read"
+        - "enrollment.create"
+        - "enrollment.update"
+        - "enrollment.delete"
+
+        - "external-jwt-signer"
+        - "external-jwt-signer.read"
+        - "external-jwt-signer.create"
+        - "external-jwt-signer.update"
+        - "external-jwt-signer.delete"
+
+        - "identity"
+        - "identity.read"
+        - "identity.create"
+        - "identity.update"
+        - "identity.delete"
+
+        - "ops"
+        - "ops.read"
+        - "ops.update"
+        - "ops.delete"
+
+        - "posture-check"
+        - "posture-check.read"
+        - "posture-check.create"
+        - "posture-check.update"
+        - "posture-check.delete"
+
+        - "router"
+        - "router.read"
+        - "router.create"
+        - "router.update"
+        - "router.delete"
+
+        - "service"
+        - "service.read"
+        - "service.create"
+        - "service.update"
+        - "service.delete"
+
+        - "service-edge-router-policy"
+        - "service-edge-router-policy.read"
+        - "service-edge-router-policy.create"
+        - "service-edge-router-policy.update"
+        - "service-edge-router-policy.delete"
+
+        - "service-policy"
+        - "service-policy.read"
+        - "service-policy.create"
+        - "service-policy.update"
+        - "service-policy.delete"
+
+        - "terminator"
+        - "terminator.read"
+        - "terminator.create"
+        - "terminator.update"
+        - "terminator.delete"
   roles:
     type: array
     x-omitempty: false
