@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.51"
+    "version": "0.26.52"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -6049,7 +6049,7 @@ func init() {
       }
     },
     "attributes": {
-      "description": "A set of strings used to loosly couple this resource to policies",
+      "description": "A set of strings used to loosely couple this resource to policies",
       "type": "array",
       "items": {
         "type": "string"
@@ -7041,7 +7041,8 @@ func init() {
             "authPolicyId",
             "authPolicy",
             "externalId",
-            "disabled"
+            "disabled",
+            "permissions"
           ],
           "properties": {
             "appData": {
@@ -7116,6 +7117,9 @@ func init() {
             },
             "name": {
               "type": "string"
+            },
+            "permissions": {
+              "$ref": "#/definitions/permissions"
             },
             "roleAttributes": {
               "$ref": "#/definitions/attributes"
@@ -7854,6 +7858,92 @@ func init() {
       "maxLength": 100,
       "minLength": 5,
       "x-nullable": true
+    },
+    "permissions": {
+      "description": "A set of strings used to define which types of resources this resource can acccess",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "admin_readonly",
+          "auth-policy",
+          "auth-policy.read",
+          "auth-policy.create",
+          "auth-policy.update",
+          "auth-policy.delete",
+          "ca",
+          "ca.read",
+          "ca.create",
+          "ca.update",
+          "ca.delete",
+          "config",
+          "config.read",
+          "config.create",
+          "config.update",
+          "config.delete",
+          "config-type",
+          "config-type.read",
+          "config-type.create",
+          "config-type.update",
+          "config-type.delete",
+          "edge-router-policy",
+          "edge-router-policy.read",
+          "edge-router-policy.create",
+          "edge-router-policy.update",
+          "edge-router-policy.delete",
+          "enrollment",
+          "enrollment.read",
+          "enrollment.create",
+          "enrollment.update",
+          "enrollment.delete",
+          "external-jwt-signer",
+          "external-jwt-signer.read",
+          "external-jwt-signer.create",
+          "external-jwt-signer.update",
+          "external-jwt-signer.delete",
+          "identity",
+          "identity.read",
+          "identity.create",
+          "identity.update",
+          "identity.delete",
+          "ops",
+          "ops.read",
+          "ops.update",
+          "ops.delete",
+          "posture-check",
+          "posture-check.read",
+          "posture-check.create",
+          "posture-check.update",
+          "posture-check.delete",
+          "router",
+          "router.read",
+          "router.create",
+          "router.update",
+          "router.delete",
+          "service",
+          "service.read",
+          "service.create",
+          "service.update",
+          "service.delete",
+          "service-edge-router-policy",
+          "service-edge-router-policy.read",
+          "service-edge-router-policy.create",
+          "service-edge-router-policy.update",
+          "service-edge-router-policy.delete",
+          "service-policy",
+          "service-policy.read",
+          "service-policy.create",
+          "service-policy.update",
+          "service-policy.delete",
+          "terminator",
+          "terminator.read",
+          "terminator.create",
+          "terminator.update",
+          "terminator.delete"
+        ]
+      },
+      "x-nullable": true,
+      "x-omitempty": true
     },
     "postureCheckType": {
       "type": "string",
@@ -8695,7 +8785,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.51"
+    "version": "0.26.52"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -14762,7 +14852,7 @@ func init() {
       }
     },
     "attributes": {
-      "description": "A set of strings used to loosly couple this resource to policies",
+      "description": "A set of strings used to loosely couple this resource to policies",
       "type": "array",
       "items": {
         "type": "string"
@@ -15755,7 +15845,8 @@ func init() {
             "authPolicyId",
             "authPolicy",
             "externalId",
-            "disabled"
+            "disabled",
+            "permissions"
           ],
           "properties": {
             "appData": {
@@ -15830,6 +15921,9 @@ func init() {
             },
             "name": {
               "type": "string"
+            },
+            "permissions": {
+              "$ref": "#/definitions/permissions"
             },
             "roleAttributes": {
               "$ref": "#/definitions/attributes"
@@ -16570,6 +16664,92 @@ func init() {
       "maxLength": 100,
       "minLength": 5,
       "x-nullable": true
+    },
+    "permissions": {
+      "description": "A set of strings used to define which types of resources this resource can acccess",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "admin_readonly",
+          "auth-policy",
+          "auth-policy.read",
+          "auth-policy.create",
+          "auth-policy.update",
+          "auth-policy.delete",
+          "ca",
+          "ca.read",
+          "ca.create",
+          "ca.update",
+          "ca.delete",
+          "config",
+          "config.read",
+          "config.create",
+          "config.update",
+          "config.delete",
+          "config-type",
+          "config-type.read",
+          "config-type.create",
+          "config-type.update",
+          "config-type.delete",
+          "edge-router-policy",
+          "edge-router-policy.read",
+          "edge-router-policy.create",
+          "edge-router-policy.update",
+          "edge-router-policy.delete",
+          "enrollment",
+          "enrollment.read",
+          "enrollment.create",
+          "enrollment.update",
+          "enrollment.delete",
+          "external-jwt-signer",
+          "external-jwt-signer.read",
+          "external-jwt-signer.create",
+          "external-jwt-signer.update",
+          "external-jwt-signer.delete",
+          "identity",
+          "identity.read",
+          "identity.create",
+          "identity.update",
+          "identity.delete",
+          "ops",
+          "ops.read",
+          "ops.update",
+          "ops.delete",
+          "posture-check",
+          "posture-check.read",
+          "posture-check.create",
+          "posture-check.update",
+          "posture-check.delete",
+          "router",
+          "router.read",
+          "router.create",
+          "router.update",
+          "router.delete",
+          "service",
+          "service.read",
+          "service.create",
+          "service.update",
+          "service.delete",
+          "service-edge-router-policy",
+          "service-edge-router-policy.read",
+          "service-edge-router-policy.create",
+          "service-edge-router-policy.update",
+          "service-edge-router-policy.delete",
+          "service-policy",
+          "service-policy.read",
+          "service-policy.create",
+          "service-policy.update",
+          "service-policy.delete",
+          "terminator",
+          "terminator.read",
+          "terminator.create",
+          "terminator.update",
+          "terminator.delete"
+        ]
+      },
+      "x-nullable": true,
+      "x-omitempty": true
     },
     "postureCheckType": {
       "type": "string",

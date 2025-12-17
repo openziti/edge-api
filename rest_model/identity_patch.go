@@ -63,6 +63,9 @@ type IdentityPatch struct {
 	// name
 	Name *string `json:"name,omitempty"`
 
+	// permissions
+	Permissions *Permissions `json:"permissions,omitempty"`
+
 	// role attributes
 	RoleAttributes *Attributes `json:"roleAttributes,omitempty"`
 
@@ -92,6 +95,10 @@ func (m *IdentityPatch) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDefaultHostingPrecedence(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePermissions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,6 +178,25 @@ func (m *IdentityPatch) validateDefaultHostingPrecedence(formats strfmt.Registry
 			return ce.ValidateName("defaultHostingPrecedence")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *IdentityPatch) validatePermissions(formats strfmt.Registry) error {
+	if swag.IsZero(m.Permissions) { // not required
+		return nil
+	}
+
+	if m.Permissions != nil {
+		if err := m.Permissions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -285,6 +311,10 @@ func (m *IdentityPatch) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePermissions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRoleAttributes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -352,6 +382,22 @@ func (m *IdentityPatch) contextValidateDefaultHostingPrecedence(ctx context.Cont
 			return ce.ValidateName("defaultHostingPrecedence")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *IdentityPatch) contextValidatePermissions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Permissions != nil {
+		if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
 	}
 
 	return nil

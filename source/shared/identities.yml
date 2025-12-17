@@ -34,6 +34,7 @@ definitions:
           - authPolicy
           - externalId
           - disabled
+          - permissions
         properties:
           name:
             type: string
@@ -98,6 +99,8 @@ definitions:
             type: array
             items:
               $ref: '../shared/interfaces.yml#/definitions/interface'
+          permissions:
+            $ref: '../shared/base-entity.yml#/definitions/permissions'
 
   identityAuthenticators:
     type: object

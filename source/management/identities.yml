@@ -749,6 +749,8 @@ definitions:
         $ref: '../shared/terminators.yml#/definitions/terminatorCostMap'
       appData:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      permissions:
+        $ref: '../shared/base-entity.yml#/definitions/permissions'
   identityUpdate:
     type: object
     required:
@@ -782,6 +784,8 @@ definitions:
         $ref: '../shared/terminators.yml#/definitions/terminatorCostMap'
       appData:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      permissions:
+        $ref: '../shared/base-entity.yml#/definitions/permissions'
   identityPatch:
     type: object
     properties:
@@ -814,6 +818,8 @@ definitions:
         $ref: '../shared/terminators.yml#/definitions/terminatorCostMap'
       appData:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      permissions:
+        $ref: '../shared/base-entity.yml#/definitions/permissions'
   getIdentityPolicyAdviceEnvelope:
     type: object
     required:
