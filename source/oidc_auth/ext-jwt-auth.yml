@@ -1,0 +1,63 @@
+---
+
+paths:
+  ext-jwt-auth:
+    get:
+      summary: External JWT authentication endpoint
+      description: Handles external JWT-based authentication for OIDC flow
+      security: [ ]
+      tags:
+        - OIDC Authentication
+      operationId: showExtJwtAuth
+      parameters:
+        - name: authRequestID
+          in: query
+          required: true
+          type: string
+          description: Authentication request ID
+      responses:
+        '200':
+          description: Authentication prompt
+          schema:
+            type: string
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+    post:
+      summary: Authenticate with external JWT
+      description: Authenticates a user via external JWT for OIDC flow
+      security: [ ]
+      tags:
+        - OIDC Authentication
+      operationId: authenticateExtJwt
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: credentials
+          in: body
+          required: true
+          schema:
+            $ref: 'types.yml#/definitions/oidcUpdbCredentials'
+      responses:
+        '302':
+          description: Redirect to callback URL
+          headers:
+            Location:
+              type: string
+              description: Callback URL
+            totp-required:
+              type: string
+              description: Indicates if TOTP is required
+        '200':
+          description: Authentication queries or TOTP required
+          schema:
+            type: object
+            properties:
+              authQueries:
+                type: array
+                items:
+                  $ref: 'shared/auth-query.yml#/definitions/authQueryDetail'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/invalidAuthResponse'

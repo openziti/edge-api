@@ -1,0 +1,31 @@
+---
+
+paths:
+  auth-queries:
+    get:
+      summary: List authentication queries
+      description: Returns authentication queries for the specified auth request ID
+      security: [ ]
+      tags:
+        - OIDC Authentication
+      operationId: listAuthQueries
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: string
+          description: Authentication request ID
+      responses:
+        '200':
+          description: A list of authentication queries
+          schema:
+            type: object
+            properties:
+              authQueries:
+                type: array
+                items:
+                  $ref: 'shared/auth-query.yml#/definitions/authQueryDetail'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/invalidAuthResponse'

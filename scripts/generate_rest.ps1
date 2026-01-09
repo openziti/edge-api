@@ -36,10 +36,20 @@ try
         throw "Failed to flatten management.yml. See above."
     }
 
+    "...generating Open API 2.0 specs from source: oidc_auth.yml"
+
+    swagger flatten .\oidc_auth.yml -o ..\oidc_auth.yml --format yaml
+    if (-not$?)
+    {
+        Pop-Location
+        throw "Failed to flatten oidc_auth.yml. See above."
+    }
+
     "flatten complete"
 
     $clientSpec = Join-Path $rootDir "/client.yml" -Resolve
     $managementSpec = Join-Path $rootDir "/management.yml" -Resolve
+    $oidcAuthSpec = Join-Path $rootDir "/oidc_auth.yml" -Resolve
 
     $codeTarget = $rootDir
 
@@ -62,6 +72,16 @@ try
     "...removing any existing client from $managementClientOutDir"
     Remove-Item $managementClientOutDir -Recurse -Force -ErrorAction "SilentlyContinue" | Out-Null
     New-Item -ItemType "directory" -Path $managementClientOutDir -ErrorAction "SilentlyContinue" | Out-Null
+
+    $oidcAuthServerOutDir = Join-Path $codeTarget "/rest_oidc_auth_api_server"
+    "...removing any existing server from $oidcAuthServerOutDir"
+    Remove-Item $oidcAuthServerOutDir -Recurse -Force -ErrorAction "SilentlyContinue" | Out-Null
+    New-Item -ItemType "directory" -Path $oidcAuthServerOutDir -ErrorAction "SilentlyContinue" | Out-Null
+
+    $oidcAuthClientOutDir = Join-Path $codeTarget "/rest_oidc_auth_api_client"
+    "...removing any existing client from $oidcAuthClientOutDir"
+    Remove-Item $oidcAuthClientOutDir -Recurse -Force -ErrorAction "SilentlyContinue" | Out-Null
+    New-Item -ItemType "directory" -Path $oidcAuthClientOutDir -ErrorAction "SilentlyContinue" | Out-Null
 
     $modelPath = Join-Path $codeTarget "/rest_model"
     "...removing any existing model from $modelPath"
@@ -96,6 +116,20 @@ try
         throw "Failed to generate Management API Client. See above."
     }
 
+    "...generating OIDC Auth API server"
+    swagger generate server --exclude-main --additional-initialism=jwt -f $oidcAuthSpec -s rest_oidc_auth_api_server -t $codeTarget -r $copyrightFile -m "rest_model"
+    if (-not$?)
+    {
+        throw "Failed to generate OIDC Auth API Server. See above."
+    }
+
+    "...generating OIDC Auth API client"
+    swagger generate client -f $oidcAuthSpec --additional-initialism=jwt -c rest_oidc_auth_api_client -t $codeTarget -r $copyrightFile -m "rest_model"
+    if (-not$?)
+    {
+        throw "Failed to generate OIDC Auth API Client. See above."
+    }
+
     "...fixing up windows slashes"
     # The server files have the command used to generate the server in it w/ paths. The path sep is OS specific.
     # On Windows this causes this one file to show changes depending on the OS that generated it. This
@@ -118,6 +152,21 @@ try
     $content | Set-Content $configureFile -nonewline
 
     $configureFile = Join-Path $clientServerOutDir "/configure_ziti_edge_client.go" -Resolve
+
+    $content = ""
+    foreach ($line in Get-Content $configureFile)
+    {
+        if ($line -match "^//go:generate swagger generate server")
+        {
+            $line = $line -replace "\\", "/"
+        }
+
+        $content = $content + $line + "`n"
+    }
+
+    $content | Set-Content $configureFile -nonewline
+
+    $configureFile = Join-Path $oidcAuthServerOutDir "/configure_ziti_edge_o_id_c_auth.go" -Resolve
 
     $content = ""
     foreach ($line in Get-Content $configureFile)

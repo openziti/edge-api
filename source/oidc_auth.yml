@@ -1,0 +1,73 @@
+---
+swagger: '2.0'
+info:
+  version: 0.26.47
+  title: Ziti Edge OIDC Auth
+  description: OpenZiti Edge OIDC Authentication API
+  contact:
+    name: OpenZiti
+    url: https://openziti.discourse.group
+    email: help@openziti.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+host: demo.ziti.dev
+basePath: /oidc/login
+schemes:
+  - https
+consumes:
+  - application/json
+  - application/x-www-form-urlencoded
+produces:
+  - application/json
+  - text/html
+
+
+paths:
+  '/auth-queries':
+    $ref: 'oidc_auth/auth-queries.yml#/paths/auth-queries'
+
+  '/password':
+    $ref: 'oidc_auth/password-auth.yml#/paths/password-auth'
+
+  '/username':
+    $ref: 'oidc_auth/password-auth.yml#/paths/username-auth'
+
+  '/cert':
+    $ref: 'oidc_auth/cert-auth.yml#/paths/cert-auth'
+
+  '/ext-jwt':
+    $ref: 'oidc_auth/ext-jwt-auth.yml#/paths/ext-jwt-auth'
+
+  '/totp':
+    $ref: 'oidc_auth/totp.yml#/paths/totp-verify'
+
+  '/totp/enroll':
+    $ref: 'oidc_auth/totp.yml#/paths/totp-enroll'
+
+  '/totp/enroll/verify':
+    $ref: 'oidc_auth/totp.yml#/paths/totp-enroll-verify'
+
+definitions:
+  # Import shared types from client API that are needed for OIDC auth
+  authenticate:
+    $ref: 'shared/authenticate.yml#/definitions/authenticate'
+
+  # OIDC-specific request/response types
+  oidcUpdbCredentials:
+    $ref: 'oidc_auth/types.yml#/definitions/oidcUpdbCredentials'
+
+  authRequestBody:
+    $ref: 'oidc_auth/types.yml#/definitions/authRequestBody'
+
+  totpRequestBody:
+    $ref: 'oidc_auth/types.yml#/definitions/totpRequestBody'
+
+  authQueryDetail:
+    $ref: 'shared/auth-query.yml#/definitions/authQueryDetail'
+
+  detailMfa:
+    $ref: 'shared/current-identity-mfa.yml#/definitions/detailMfa'
+
+  empty:
+    $ref: 'shared/standard-responses.yml#/definitions/empty'
