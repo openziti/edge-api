@@ -82,6 +82,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -24742,6 +24751,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -31793,6 +31811,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -56453,6 +56480,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }

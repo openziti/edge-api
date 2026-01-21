@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,6 +46,10 @@ const ListRootOKCode int = 200
 swagger:response listRootOK
 */
 type ListRootOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +61,17 @@ type ListRootOK struct {
 func NewListRootOK() *ListRootOK {
 
 	return &ListRootOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list root o k response
+func (o *ListRootOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListRootOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list root o k response
+func (o *ListRootOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list root o k response
@@ -71,6 +87,23 @@ func (o *ListRootOK) SetPayload(payload *rest_model.ListVersionEnvelope) {
 
 // WriteResponse to the client
 func (o *ListRootOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(200)
 	if o.Payload != nil {

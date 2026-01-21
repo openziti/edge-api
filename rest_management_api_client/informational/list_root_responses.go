@@ -35,6 +35,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -68,6 +69,11 @@ func NewListRootOK() *ListRootOK {
 Version information for the controller
 */
 type ListRootOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListVersionEnvelope
 }
 
@@ -80,6 +86,20 @@ func (o *ListRootOK) GetPayload() *rest_model.ListVersionEnvelope {
 
 func (o *ListRootOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListVersionEnvelope)
 
 	// response payload
@@ -88,4 +108,24 @@ func (o *ListRootOK) readResponse(response runtime.ClientResponse, consumer runt
 	}
 
 	return nil
+}
+
+// bindHeaderListRootOK binds the response header WWW-Authenticate
+func (o *ListRootOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
