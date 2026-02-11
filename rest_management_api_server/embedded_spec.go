@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.53"
+    "version": "0.26.54"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -35496,6 +35496,13 @@ func init() {
           "maximum": 65535,
           "x-nullable": true
         },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
         "disabled": {
           "type": "boolean",
           "x-nullable": true
@@ -35545,6 +35552,12 @@ func init() {
               "type": "string",
               "x-nullable": true,
               "x-omitempty": false
+            },
+            "ctrlChanListeners": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "enrollmentCreatedAt": {
               "type": "string",
@@ -35648,6 +35661,13 @@ func init() {
         "cost": {
           "type": "integer",
           "maximum": 65535,
+          "x-nullable": true
+        },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "disabled": {
@@ -35800,6 +35820,13 @@ func init() {
         "cost": {
           "type": "integer",
           "maximum": 65535,
+          "x-nullable": true
+        },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "disabled": {
@@ -39200,6 +39227,13 @@ func init() {
           "maximum": 65535,
           "x-nullable": true
         },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
         "disabled": {
           "type": "boolean",
           "x-nullable": true
@@ -39237,6 +39271,12 @@ func init() {
             "cost": {
               "type": "integer",
               "maximum": 65535
+            },
+            "ctrlChanListeners": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "disabled": {
               "type": "boolean"
@@ -39327,6 +39367,13 @@ func init() {
           "maximum": 65535,
           "x-nullable": true
         },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
         "disabled": {
           "type": "boolean",
           "x-nullable": true
@@ -39352,6 +39399,13 @@ func init() {
         "cost": {
           "type": "integer",
           "maximum": 65535,
+          "x-nullable": true
+        },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "disabled": {
@@ -40451,7 +40505,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.53"
+    "version": "0.26.54"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -75998,6 +76052,13 @@ func init() {
           "minimum": 0,
           "x-nullable": true
         },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
         "disabled": {
           "type": "boolean",
           "x-nullable": true
@@ -76047,6 +76108,12 @@ func init() {
               "type": "string",
               "x-nullable": true,
               "x-omitempty": false
+            },
+            "ctrlChanListeners": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "enrollmentCreatedAt": {
               "type": "string",
@@ -76151,6 +76218,13 @@ func init() {
           "type": "integer",
           "maximum": 65535,
           "minimum": 0,
+          "x-nullable": true
+        },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "disabled": {
@@ -76304,6 +76378,13 @@ func init() {
           "type": "integer",
           "maximum": 65535,
           "minimum": 0,
+          "x-nullable": true
+        },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "disabled": {
@@ -79707,6 +79788,13 @@ func init() {
           "minimum": 0,
           "x-nullable": true
         },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
         "disabled": {
           "type": "boolean",
           "x-nullable": true
@@ -79745,6 +79833,12 @@ func init() {
               "type": "integer",
               "maximum": 65535,
               "minimum": 0
+            },
+            "ctrlChanListeners": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "disabled": {
               "type": "boolean"
@@ -79836,6 +79930,13 @@ func init() {
           "minimum": 0,
           "x-nullable": true
         },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
         "disabled": {
           "type": "boolean",
           "x-nullable": true
@@ -79862,6 +79963,13 @@ func init() {
           "type": "integer",
           "maximum": 65535,
           "minimum": 0,
+          "x-nullable": true
+        },
+        "ctrlChanListeners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true
         },
         "disabled": {

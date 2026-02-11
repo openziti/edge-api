@@ -52,6 +52,9 @@ type EdgeRouterDetail struct {
 	// cert pem
 	CertPem *string `json:"certPem"`
 
+	// ctrl chan listeners
+	CtrlChanListeners []string `json:"ctrlChanListeners"`
+
 	// enrollment created at
 	// Format: date-time
 	EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
@@ -114,6 +117,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO2 struct {
 		CertPem *string `json:"certPem"`
 
+		CtrlChanListeners []string `json:"ctrlChanListeners"`
+
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
 
 		EnrollmentExpiresAt *strfmt.DateTime `json:"enrollmentExpiresAt,omitempty"`
@@ -143,6 +148,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 	}
 
 	m.CertPem = dataAO2.CertPem
+
+	m.CtrlChanListeners = dataAO2.CtrlChanListeners
 
 	m.EnrollmentCreatedAt = dataAO2.EnrollmentCreatedAt
 
@@ -189,6 +196,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 	var dataAO2 struct {
 		CertPem *string `json:"certPem"`
 
+		CtrlChanListeners []string `json:"ctrlChanListeners"`
+
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
 
 		EnrollmentExpiresAt *strfmt.DateTime `json:"enrollmentExpiresAt,omitempty"`
@@ -215,6 +224,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 	}
 
 	dataAO2.CertPem = m.CertPem
+
+	dataAO2.CtrlChanListeners = m.CtrlChanListeners
 
 	dataAO2.EnrollmentCreatedAt = m.EnrollmentCreatedAt
 
