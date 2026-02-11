@@ -36,16 +36,16 @@ import (
 )
 
 // ListEdgeRouterEdgeRouterPoliciesHandlerFunc turns a function with the right signature into a list edge router edge router policies handler
-type ListEdgeRouterEdgeRouterPoliciesHandlerFunc func(ListEdgeRouterEdgeRouterPoliciesParams, interface{}) middleware.Responder
+type ListEdgeRouterEdgeRouterPoliciesHandlerFunc func(ListEdgeRouterEdgeRouterPoliciesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListEdgeRouterEdgeRouterPoliciesHandlerFunc) Handle(params ListEdgeRouterEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+func (fn ListEdgeRouterEdgeRouterPoliciesHandlerFunc) Handle(params ListEdgeRouterEdgeRouterPoliciesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListEdgeRouterEdgeRouterPoliciesHandler interface for that can handle valid list edge router edge router policies params
 type ListEdgeRouterEdgeRouterPoliciesHandler interface {
-	Handle(ListEdgeRouterEdgeRouterPoliciesParams, interface{}) middleware.Responder
+	Handle(ListEdgeRouterEdgeRouterPoliciesParams, any) middleware.Responder
 }
 
 // NewListEdgeRouterEdgeRouterPolicies creates a new http.Handler for the list edge router edge router policies operation
@@ -53,12 +53,12 @@ func NewListEdgeRouterEdgeRouterPolicies(ctx *middleware.Context, handler ListEd
 	return &ListEdgeRouterEdgeRouterPolicies{Context: ctx, Handler: handler}
 }
 
-/* ListEdgeRouterEdgeRouterPolicies swagger:route GET /edge-routers/{id}/edge-router-policies Edge Router listEdgeRouterEdgeRouterPolicies
+/*
+	ListEdgeRouterEdgeRouterPolicies swagger:route GET /edge-routers/{id}/edge-router-policies Edge Router listEdgeRouterEdgeRouterPolicies
 
-List the edge router policies that affect an edge router
+# List the edge router policies that affect an edge router
 
 Retrieves a list of edge router policies that apply to the specified edge router.
-
 */
 type ListEdgeRouterEdgeRouterPolicies struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListEdgeRouterEdgeRouterPolicies) ServeHTTP(rw http.ResponseWriter, r *
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListEdgeRouterEdgeRouterPolicies) ServeHTTP(rw http.ResponseWriter, r *
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // ReEnrollAuthenticatorHandlerFunc turns a function with the right signature into a re enroll authenticator handler
-type ReEnrollAuthenticatorHandlerFunc func(ReEnrollAuthenticatorParams, interface{}) middleware.Responder
+type ReEnrollAuthenticatorHandlerFunc func(ReEnrollAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ReEnrollAuthenticatorHandlerFunc) Handle(params ReEnrollAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn ReEnrollAuthenticatorHandlerFunc) Handle(params ReEnrollAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ReEnrollAuthenticatorHandler interface for that can handle valid re enroll authenticator params
 type ReEnrollAuthenticatorHandler interface {
-	Handle(ReEnrollAuthenticatorParams, interface{}) middleware.Responder
+	Handle(ReEnrollAuthenticatorParams, any) middleware.Responder
 }
 
 // NewReEnrollAuthenticator creates a new http.Handler for the re enroll authenticator operation
@@ -53,16 +53,15 @@ func NewReEnrollAuthenticator(ctx *middleware.Context, handler ReEnrollAuthentic
 	return &ReEnrollAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* ReEnrollAuthenticator swagger:route POST /authenticators/{id}/re-enroll Authenticator reEnrollAuthenticator
+/*
+	ReEnrollAuthenticator swagger:route POST /authenticators/{id}/re-enroll Authenticator reEnrollAuthenticator
 
-Reverts an authenticator to an enrollment
+# Reverts an authenticator to an enrollment
 
 Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the
 created enrollment record response is provided and the source authenticator record will be deleted. The
 enrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT
 authenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.
-
-
 */
 type ReEnrollAuthenticator struct {
 	Context *middleware.Context
@@ -83,9 +82,9 @@ func (o *ReEnrollAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -94,6 +93,7 @@ func (o *ReEnrollAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

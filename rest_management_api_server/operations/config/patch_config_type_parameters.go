@@ -30,7 +30,7 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -56,7 +56,6 @@ func NewPatchConfigTypeParams() PatchConfigTypeParams {
 //
 // swagger:parameters patchConfigType
 type PatchConfigTypeParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -65,6 +64,7 @@ type PatchConfigTypeParams struct {
 	  In: body
 	*/
 	ConfigType *rest_model.ConfigTypePatch
+
 	/*The id of the requested resource
 	  Required: true
 	  In: path
@@ -82,10 +82,12 @@ func (o *PatchConfigTypeParams) BindRequest(r *http.Request, route *middleware.M
 	o.HTTPRequest = r
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.ConfigTypePatch
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("configType", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("configType", "body", "", err))
@@ -96,7 +98,7 @@ func (o *PatchConfigTypeParams) BindRequest(r *http.Request, route *middleware.M
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

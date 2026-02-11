@@ -41,7 +41,8 @@ import (
 // ListRootOKCode is the HTTP code returned for type ListRootOK
 const ListRootOKCode int = 200
 
-/*ListRootOK Version information for the controller
+/*
+ListRootOK Version information for the controller
 
 swagger:response listRootOK
 */

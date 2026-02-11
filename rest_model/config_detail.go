@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -54,7 +55,7 @@ type ConfigDetail struct {
 
 	// The data section of a config is based on the schema of its type
 	// Required: true
-	Data interface{} `json:"data"`
+	Data any `json:"data"`
 
 	// name
 	// Required: true
@@ -76,7 +77,7 @@ func (m *ConfigDetail) UnmarshalJSON(raw []byte) error {
 
 		ConfigTypeID *string `json:"configTypeId"`
 
-		Data interface{} `json:"data"`
+		Data any `json:"data"`
 
 		Name *string `json:"name"`
 	}
@@ -109,7 +110,7 @@ func (m ConfigDetail) MarshalJSON() ([]byte, error) {
 
 		ConfigTypeID *string `json:"configTypeId"`
 
-		Data interface{} `json:"data"`
+		Data any `json:"data"`
 
 		Name *string `json:"name"`
 	}
@@ -169,11 +170,15 @@ func (m *ConfigDetail) validateConfigType(formats strfmt.Registry) error {
 
 	if m.ConfigType != nil {
 		if err := m.ConfigType.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configType")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configType")
 			}
+
 			return err
 		}
 	}
@@ -230,12 +235,17 @@ func (m *ConfigDetail) ContextValidate(ctx context.Context, formats strfmt.Regis
 func (m *ConfigDetail) contextValidateConfigType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ConfigType != nil {
+
 		if err := m.ConfigType.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configType")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configType")
 			}
+
 			return err
 		}
 	}

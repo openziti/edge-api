@@ -30,11 +30,14 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListRoutersReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListRoutersReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListRoutersReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListRoutersOK()
@@ -78,7 +81,7 @@ func (o *ListRoutersReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /routers] listRouters", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListRoutersOK() *ListRoutersOK {
 	return &ListRoutersOK{}
 }
 
-/* ListRoutersOK describes a response with status code 200, with default header values.
+/*
+ListRoutersOK describes a response with status code 200, with default header values.
 
 A list of specifications
 */
 type ListRoutersOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListRoutersEnvelope
 }
 
-func (o *ListRoutersOK) Error() string {
-	return fmt.Sprintf("[GET /routers][%d] listRoutersOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list routers o k response has a 2xx status code
+func (o *ListRoutersOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list routers o k response has a 3xx status code
+func (o *ListRoutersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list routers o k response has a 4xx status code
+func (o *ListRoutersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list routers o k response has a 5xx status code
+func (o *ListRoutersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list routers o k response a status code equal to that given
+func (o *ListRoutersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list routers o k response
+func (o *ListRoutersOK) Code() int {
+	return 200
+}
+
+func (o *ListRoutersOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersOK %s", 200, payload)
+}
+
+func (o *ListRoutersOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersOK %s", 200, payload)
+}
+
 func (o *ListRoutersOK) GetPayload() *rest_model.ListRoutersEnvelope {
 	return o.Payload
 }
 
 func (o *ListRoutersOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListRoutersEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListRoutersOK binds the response header WWW-Authenticate
+func (o *ListRoutersOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListRoutersBadRequest creates a ListRoutersBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewListRoutersBadRequest() *ListRoutersBadRequest {
 	return &ListRoutersBadRequest{}
 }
 
-/* ListRoutersBadRequest describes a response with status code 400, with default header values.
+/*
+ListRoutersBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type ListRoutersBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListRoutersBadRequest) Error() string {
-	return fmt.Sprintf("[GET /routers][%d] listRoutersBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list routers bad request response has a 2xx status code
+func (o *ListRoutersBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list routers bad request response has a 3xx status code
+func (o *ListRoutersBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list routers bad request response has a 4xx status code
+func (o *ListRoutersBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list routers bad request response has a 5xx status code
+func (o *ListRoutersBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list routers bad request response a status code equal to that given
+func (o *ListRoutersBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list routers bad request response
+func (o *ListRoutersBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListRoutersBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersBadRequest %s", 400, payload)
+}
+
+func (o *ListRoutersBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersBadRequest %s", 400, payload)
+}
+
 func (o *ListRoutersBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListRoutersBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListRoutersBadRequest binds the response header WWW-Authenticate
+func (o *ListRoutersBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListRoutersUnauthorized creates a ListRoutersUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewListRoutersUnauthorized() *ListRoutersUnauthorized {
 	return &ListRoutersUnauthorized{}
 }
 
-/* ListRoutersUnauthorized describes a response with status code 401, with default header values.
+/*
+ListRoutersUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListRoutersUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListRoutersUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /routers][%d] listRoutersUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list routers unauthorized response has a 2xx status code
+func (o *ListRoutersUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list routers unauthorized response has a 3xx status code
+func (o *ListRoutersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list routers unauthorized response has a 4xx status code
+func (o *ListRoutersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list routers unauthorized response has a 5xx status code
+func (o *ListRoutersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list routers unauthorized response a status code equal to that given
+func (o *ListRoutersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list routers unauthorized response
+func (o *ListRoutersUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListRoutersUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersUnauthorized %s", 401, payload)
+}
+
+func (o *ListRoutersUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersUnauthorized %s", 401, payload)
+}
+
 func (o *ListRoutersUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListRoutersUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListRoutersUnauthorized binds the response header WWW-Authenticate
+func (o *ListRoutersUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListRoutersTooManyRequests creates a ListRoutersTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListRoutersTooManyRequests() *ListRoutersTooManyRequests {
 	return &ListRoutersTooManyRequests{}
 }
 
-/* ListRoutersTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListRoutersTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListRoutersTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListRoutersTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /routers][%d] listRoutersTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list routers too many requests response has a 2xx status code
+func (o *ListRoutersTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list routers too many requests response has a 3xx status code
+func (o *ListRoutersTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list routers too many requests response has a 4xx status code
+func (o *ListRoutersTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list routers too many requests response has a 5xx status code
+func (o *ListRoutersTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list routers too many requests response a status code equal to that given
+func (o *ListRoutersTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list routers too many requests response
+func (o *ListRoutersTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListRoutersTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersTooManyRequests %s", 429, payload)
+}
+
+func (o *ListRoutersTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersTooManyRequests %s", 429, payload)
+}
+
 func (o *ListRoutersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListRoutersTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListRoutersTooManyRequests binds the response header WWW-Authenticate
+func (o *ListRoutersTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListRoutersServiceUnavailable creates a ListRoutersServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListRoutersServiceUnavailable() *ListRoutersServiceUnavailable {
 	return &ListRoutersServiceUnavailable{}
 }
 
-/* ListRoutersServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListRoutersServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListRoutersServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListRoutersServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /routers][%d] listRoutersServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list routers service unavailable response has a 2xx status code
+func (o *ListRoutersServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list routers service unavailable response has a 3xx status code
+func (o *ListRoutersServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list routers service unavailable response has a 4xx status code
+func (o *ListRoutersServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list routers service unavailable response has a 5xx status code
+func (o *ListRoutersServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list routers service unavailable response a status code equal to that given
+func (o *ListRoutersServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list routers service unavailable response
+func (o *ListRoutersServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListRoutersServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListRoutersServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /routers][%d] listRoutersServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListRoutersServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListRoutersServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListRoutersServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListRoutersServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

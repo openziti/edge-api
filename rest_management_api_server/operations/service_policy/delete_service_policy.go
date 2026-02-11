@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteServicePolicyHandlerFunc turns a function with the right signature into a delete service policy handler
-type DeleteServicePolicyHandlerFunc func(DeleteServicePolicyParams, interface{}) middleware.Responder
+type DeleteServicePolicyHandlerFunc func(DeleteServicePolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteServicePolicyHandlerFunc) Handle(params DeleteServicePolicyParams, principal interface{}) middleware.Responder {
+func (fn DeleteServicePolicyHandlerFunc) Handle(params DeleteServicePolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteServicePolicyHandler interface for that can handle valid delete service policy params
 type DeleteServicePolicyHandler interface {
-	Handle(DeleteServicePolicyParams, interface{}) middleware.Responder
+	Handle(DeleteServicePolicyParams, any) middleware.Responder
 }
 
 // NewDeleteServicePolicy creates a new http.Handler for the delete service policy operation
@@ -53,12 +53,12 @@ func NewDeleteServicePolicy(ctx *middleware.Context, handler DeleteServicePolicy
 	return &DeleteServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* DeleteServicePolicy swagger:route DELETE /service-policies/{id} Service Policy deleteServicePolicy
+/*
+	DeleteServicePolicy swagger:route DELETE /service-policies/{id} Service Policy deleteServicePolicy
 
-Delete a service policy
+# Delete a service policy
 
 Delete a service policy by id. Requires admin access.
-
 */
 type DeleteServicePolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteServicePolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteServicePolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

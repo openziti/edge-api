@@ -30,11 +30,14 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateMfaRecoveryCodesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateMfaRecoveryCodesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateMfaRecoveryCodesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewCreateMfaRecoveryCodesOK()
@@ -66,7 +69,7 @@ func (o *CreateMfaRecoveryCodesReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /current-identity/mfa/recovery-codes] createMfaRecoveryCodes", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewCreateMfaRecoveryCodesOK() *CreateMfaRecoveryCodesOK {
 	return &CreateMfaRecoveryCodesOK{}
 }
 
-/* CreateMfaRecoveryCodesOK describes a response with status code 200, with default header values.
+/*
+CreateMfaRecoveryCodesOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type CreateMfaRecoveryCodesOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *CreateMfaRecoveryCodesOK) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this create mfa recovery codes o k response has a 2xx status code
+func (o *CreateMfaRecoveryCodesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create mfa recovery codes o k response has a 3xx status code
+func (o *CreateMfaRecoveryCodesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mfa recovery codes o k response has a 4xx status code
+func (o *CreateMfaRecoveryCodesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create mfa recovery codes o k response has a 5xx status code
+func (o *CreateMfaRecoveryCodesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mfa recovery codes o k response a status code equal to that given
+func (o *CreateMfaRecoveryCodesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the create mfa recovery codes o k response
+func (o *CreateMfaRecoveryCodesOK) Code() int {
+	return 200
+}
+
+func (o *CreateMfaRecoveryCodesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesOK %s", 200, payload)
+}
+
+func (o *CreateMfaRecoveryCodesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesOK %s", 200, payload)
+}
+
 func (o *CreateMfaRecoveryCodesOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *CreateMfaRecoveryCodesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateMfaRecoveryCodesOK binds the response header WWW-Authenticate
+func (o *CreateMfaRecoveryCodesOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateMfaRecoveryCodesUnauthorized creates a CreateMfaRecoveryCodesUnauthorized with default headers values
@@ -107,31 +187,108 @@ func NewCreateMfaRecoveryCodesUnauthorized() *CreateMfaRecoveryCodesUnauthorized
 	return &CreateMfaRecoveryCodesUnauthorized{}
 }
 
-/* CreateMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateMfaRecoveryCodesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateMfaRecoveryCodesUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateMfaRecoveryCodesUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create mfa recovery codes unauthorized response has a 2xx status code
+func (o *CreateMfaRecoveryCodesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create mfa recovery codes unauthorized response has a 3xx status code
+func (o *CreateMfaRecoveryCodesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mfa recovery codes unauthorized response has a 4xx status code
+func (o *CreateMfaRecoveryCodesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mfa recovery codes unauthorized response has a 5xx status code
+func (o *CreateMfaRecoveryCodesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mfa recovery codes unauthorized response a status code equal to that given
+func (o *CreateMfaRecoveryCodesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create mfa recovery codes unauthorized response
+func (o *CreateMfaRecoveryCodesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateMfaRecoveryCodesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesUnauthorized %s", 401, payload)
+}
+
+func (o *CreateMfaRecoveryCodesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesUnauthorized %s", 401, payload)
+}
+
 func (o *CreateMfaRecoveryCodesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateMfaRecoveryCodesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateMfaRecoveryCodesUnauthorized binds the response header WWW-Authenticate
+func (o *CreateMfaRecoveryCodesUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateMfaRecoveryCodesNotFound creates a CreateMfaRecoveryCodesNotFound with default headers values
@@ -139,29 +296,106 @@ func NewCreateMfaRecoveryCodesNotFound() *CreateMfaRecoveryCodesNotFound {
 	return &CreateMfaRecoveryCodesNotFound{}
 }
 
-/* CreateMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
+/*
+CreateMfaRecoveryCodesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type CreateMfaRecoveryCodesNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateMfaRecoveryCodesNotFound) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this create mfa recovery codes not found response has a 2xx status code
+func (o *CreateMfaRecoveryCodesNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create mfa recovery codes not found response has a 3xx status code
+func (o *CreateMfaRecoveryCodesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mfa recovery codes not found response has a 4xx status code
+func (o *CreateMfaRecoveryCodesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mfa recovery codes not found response has a 5xx status code
+func (o *CreateMfaRecoveryCodesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mfa recovery codes not found response a status code equal to that given
+func (o *CreateMfaRecoveryCodesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create mfa recovery codes not found response
+func (o *CreateMfaRecoveryCodesNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateMfaRecoveryCodesNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesNotFound %s", 404, payload)
+}
+
+func (o *CreateMfaRecoveryCodesNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/recovery-codes][%d] createMfaRecoveryCodesNotFound %s", 404, payload)
+}
+
 func (o *CreateMfaRecoveryCodesNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateMfaRecoveryCodesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateMfaRecoveryCodesNotFound binds the response header WWW-Authenticate
+func (o *CreateMfaRecoveryCodesNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

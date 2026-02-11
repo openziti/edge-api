@@ -74,7 +74,7 @@ const (
 )
 
 // for schema
-var osTypeEnum []interface{}
+var osTypeEnum []any
 
 func init() {
 	var res []OsType

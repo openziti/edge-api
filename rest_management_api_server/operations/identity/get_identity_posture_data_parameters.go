@@ -50,7 +50,6 @@ func NewGetIdentityPostureDataParams() GetIdentityPostureDataParams {
 //
 // swagger:parameters getIdentityPostureData
 type GetIdentityPostureDataParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -50,7 +50,6 @@ func NewDeleteConfigTypeParams() DeleteConfigTypeParams {
 //
 // swagger:parameters deleteConfigType
 type DeleteConfigTypeParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

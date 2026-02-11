@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailTerminatorOKCode is the HTTP code returned for type DetailTerminatorOK
 const DetailTerminatorOKCode int = 200
 
-/*DetailTerminatorOK A single terminator
+/*
+DetailTerminatorOK A single terminator
 
 swagger:response detailTerminatorOK
 */
 type DetailTerminatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailTerminatorOK struct {
 func NewDetailTerminatorOK() *DetailTerminatorOK {
 
 	return &DetailTerminatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail terminator o k response
+func (o *DetailTerminatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTerminatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail terminator o k response
+func (o *DetailTerminatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail terminator o k response
@@ -72,6 +89,23 @@ func (o *DetailTerminatorOK) SetPayload(payload *rest_model.DetailTerminatorEnve
 // WriteResponse to the client
 func (o *DetailTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DetailTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DetailTerminatorUnauthorizedCode is the HTTP code returned for type DetailTerminatorUnauthorized
 const DetailTerminatorUnauthorizedCode int = 401
 
-/*DetailTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailTerminatorUnauthorized
 */
 type DetailTerminatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DetailTerminatorUnauthorized struct {
 func NewDetailTerminatorUnauthorized() *DetailTerminatorUnauthorized {
 
 	return &DetailTerminatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail terminator unauthorized response
+func (o *DetailTerminatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTerminatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail terminator unauthorized response
+func (o *DetailTerminatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail terminator unauthorized response
@@ -116,6 +166,23 @@ func (o *DetailTerminatorUnauthorized) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *DetailTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DetailTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DetailTerminatorNotFoundCode is the HTTP code returned for type DetailTerminatorNotFound
 const DetailTerminatorNotFoundCode int = 404
 
-/*DetailTerminatorNotFound The requested resource does not exist
+/*
+DetailTerminatorNotFound The requested resource does not exist
 
 swagger:response detailTerminatorNotFound
 */
 type DetailTerminatorNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DetailTerminatorNotFound struct {
 func NewDetailTerminatorNotFound() *DetailTerminatorNotFound {
 
 	return &DetailTerminatorNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail terminator not found response
+func (o *DetailTerminatorNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTerminatorNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail terminator not found response
+func (o *DetailTerminatorNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail terminator not found response
@@ -160,6 +243,23 @@ func (o *DetailTerminatorNotFound) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *DetailTerminatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DetailTerminatorNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DetailTerminatorTooManyRequestsCode is the HTTP code returned for type DetailTerminatorTooManyRequests
 const DetailTerminatorTooManyRequestsCode int = 429
 
-/*DetailTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailTerminatorTooManyRequests
 */
 type DetailTerminatorTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DetailTerminatorTooManyRequests struct {
 func NewDetailTerminatorTooManyRequests() *DetailTerminatorTooManyRequests {
 
 	return &DetailTerminatorTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail terminator too many requests response
+func (o *DetailTerminatorTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTerminatorTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail terminator too many requests response
+func (o *DetailTerminatorTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail terminator too many requests response
@@ -204,6 +320,23 @@ func (o *DetailTerminatorTooManyRequests) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DetailTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DetailTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 // DetailTerminatorServiceUnavailableCode is the HTTP code returned for type DetailTerminatorServiceUnavailable
 const DetailTerminatorServiceUnavailableCode int = 503
 
-/*DetailTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DetailTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response detailTerminatorServiceUnavailable
 */
 type DetailTerminatorServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DetailTerminatorServiceUnavailable struct {
 func NewDetailTerminatorServiceUnavailable() *DetailTerminatorServiceUnavailable {
 
 	return &DetailTerminatorServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail terminator service unavailable response
+func (o *DetailTerminatorServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTerminatorServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail terminator service unavailable response
+func (o *DetailTerminatorServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail terminator service unavailable response
@@ -247,6 +396,23 @@ func (o *DetailTerminatorServiceUnavailable) SetPayload(payload *rest_model.APIE
 
 // WriteResponse to the client
 func (o *DetailTerminatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

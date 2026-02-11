@@ -215,10 +215,22 @@ paths:
 responses:
   listServiceEdgeRouterPolicies:
     description: A list of service edge router policies
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listServiceEdgeRouterPoliciesEnvelope'
   detailServiceEdgePolicy:
     description: A single service edge router policy
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailServiceEdgePolicyEnvelope'
 

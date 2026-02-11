@@ -50,7 +50,6 @@ func NewListIdentityServicePoliciesParams() ListIdentityServicePoliciesParams {
 //
 // swagger:parameters listIdentityServicePolicies
 type ListIdentityServicePoliciesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

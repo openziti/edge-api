@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListExternalJWTSignersOKCode is the HTTP code returned for type ListExternalJWTSignersOK
 const ListExternalJWTSignersOKCode int = 200
 
-/*ListExternalJWTSignersOK A list of External JWT Signers
+/*
+ListExternalJWTSignersOK A list of External JWT Signers
 
 swagger:response listExternalJwtSignersOK
 */
 type ListExternalJWTSignersOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListExternalJWTSignersOK struct {
 func NewListExternalJWTSignersOK() *ListExternalJWTSignersOK {
 
 	return &ListExternalJWTSignersOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list external Jwt signers o k response
+func (o *ListExternalJWTSignersOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListExternalJWTSignersOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list external Jwt signers o k response
+func (o *ListExternalJWTSignersOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list external Jwt signers o k response
@@ -72,6 +89,23 @@ func (o *ListExternalJWTSignersOK) SetPayload(payload *rest_model.ListExternalJW
 // WriteResponse to the client
 func (o *ListExternalJWTSignersOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListExternalJWTSignersOK) WriteResponse(rw http.ResponseWriter, produce
 // ListExternalJWTSignersBadRequestCode is the HTTP code returned for type ListExternalJWTSignersBadRequest
 const ListExternalJWTSignersBadRequestCode int = 400
 
-/*ListExternalJWTSignersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListExternalJWTSignersBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listExternalJwtSignersBadRequest
 */
 type ListExternalJWTSignersBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListExternalJWTSignersBadRequest struct {
 func NewListExternalJWTSignersBadRequest() *ListExternalJWTSignersBadRequest {
 
 	return &ListExternalJWTSignersBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list external Jwt signers bad request response
+func (o *ListExternalJWTSignersBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListExternalJWTSignersBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list external Jwt signers bad request response
+func (o *ListExternalJWTSignersBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list external Jwt signers bad request response
@@ -116,6 +166,23 @@ func (o *ListExternalJWTSignersBadRequest) SetPayload(payload *rest_model.APIErr
 // WriteResponse to the client
 func (o *ListExternalJWTSignersBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListExternalJWTSignersBadRequest) WriteResponse(rw http.ResponseWriter,
 // ListExternalJWTSignersUnauthorizedCode is the HTTP code returned for type ListExternalJWTSignersUnauthorized
 const ListExternalJWTSignersUnauthorizedCode int = 401
 
-/*ListExternalJWTSignersUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListExternalJWTSignersUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listExternalJwtSignersUnauthorized
 */
 type ListExternalJWTSignersUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListExternalJWTSignersUnauthorized struct {
 func NewListExternalJWTSignersUnauthorized() *ListExternalJWTSignersUnauthorized {
 
 	return &ListExternalJWTSignersUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list external Jwt signers unauthorized response
+func (o *ListExternalJWTSignersUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListExternalJWTSignersUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list external Jwt signers unauthorized response
+func (o *ListExternalJWTSignersUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list external Jwt signers unauthorized response
@@ -160,6 +243,23 @@ func (o *ListExternalJWTSignersUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *ListExternalJWTSignersUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListExternalJWTSignersUnauthorized) WriteResponse(rw http.ResponseWrite
 // ListExternalJWTSignersTooManyRequestsCode is the HTTP code returned for type ListExternalJWTSignersTooManyRequests
 const ListExternalJWTSignersTooManyRequestsCode int = 429
 
-/*ListExternalJWTSignersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListExternalJWTSignersTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listExternalJwtSignersTooManyRequests
 */
 type ListExternalJWTSignersTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListExternalJWTSignersTooManyRequests struct {
 func NewListExternalJWTSignersTooManyRequests() *ListExternalJWTSignersTooManyRequests {
 
 	return &ListExternalJWTSignersTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list external Jwt signers too many requests response
+func (o *ListExternalJWTSignersTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListExternalJWTSignersTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list external Jwt signers too many requests response
+func (o *ListExternalJWTSignersTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list external Jwt signers too many requests response
@@ -204,6 +320,23 @@ func (o *ListExternalJWTSignersTooManyRequests) SetPayload(payload *rest_model.A
 // WriteResponse to the client
 func (o *ListExternalJWTSignersTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *ListExternalJWTSignersTooManyRequests) WriteResponse(rw http.ResponseWr
 // ListExternalJWTSignersServiceUnavailableCode is the HTTP code returned for type ListExternalJWTSignersServiceUnavailable
 const ListExternalJWTSignersServiceUnavailableCode int = 503
 
-/*ListExternalJWTSignersServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListExternalJWTSignersServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listExternalJwtSignersServiceUnavailable
 */
 type ListExternalJWTSignersServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type ListExternalJWTSignersServiceUnavailable struct {
 func NewListExternalJWTSignersServiceUnavailable() *ListExternalJWTSignersServiceUnavailable {
 
 	return &ListExternalJWTSignersServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list external Jwt signers service unavailable response
+func (o *ListExternalJWTSignersServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListExternalJWTSignersServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list external Jwt signers service unavailable response
+func (o *ListExternalJWTSignersServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list external Jwt signers service unavailable response
@@ -247,6 +396,23 @@ func (o *ListExternalJWTSignersServiceUnavailable) SetPayload(payload *rest_mode
 
 // WriteResponse to the client
 func (o *ListExternalJWTSignersServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

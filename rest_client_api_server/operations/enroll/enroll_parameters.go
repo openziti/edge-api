@@ -30,7 +30,6 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -55,7 +54,6 @@ func NewEnrollParams() EnrollParams {
 //
 // swagger:parameters enroll
 type EnrollParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -63,10 +61,12 @@ type EnrollParams struct {
 	  In: body
 	*/
 	Body *rest_model.GenericEnroll
+
 	/*
 	  In: query
 	*/
 	Method *string
+
 	/*
 	  In: query
 	*/
@@ -81,11 +81,12 @@ func (o *EnrollParams) BindRequest(r *http.Request, route *middleware.MatchedRou
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.GenericEnroll
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			res = append(res, errors.NewParseError("body", "body", "", err))
@@ -95,7 +96,7 @@ func (o *EnrollParams) BindRequest(r *http.Request, route *middleware.MatchedRou
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}
@@ -167,7 +168,7 @@ func (o *EnrollParams) bindToken(rawData []string, hasKey bool, formats strfmt.R
 	return nil
 }
 
-// validateToken carries on validations for parameter Token
+// validateToken carries out validations for parameter Token
 func (o *EnrollParams) validateToken(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("token", "query", "uuid", o.Token.String(), formats); err != nil {

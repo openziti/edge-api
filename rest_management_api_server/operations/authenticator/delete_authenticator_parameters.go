@@ -50,7 +50,6 @@ func NewDeleteAuthenticatorParams() DeleteAuthenticatorParams {
 //
 // swagger:parameters deleteAuthenticator
 type DeleteAuthenticatorParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

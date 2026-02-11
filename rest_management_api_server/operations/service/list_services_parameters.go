@@ -52,7 +52,6 @@ func NewListServicesParams() ListServicesParams {
 //
 // swagger:parameters listServices
 type ListServicesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -61,23 +60,28 @@ type ListServicesParams struct {
 	  Collection Format: multi
 	*/
 	ConfigTypes []string
+
 	/*
 	  In: query
 	*/
 	Filter *string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
 	Offset *int64
+
 	/*
 	  In: query
 	  Collection Format: multi
 	*/
 	RoleFilter []string
+
 	/*
 	  In: query
 	*/
@@ -92,7 +96,6 @@ func (o *ListServicesParams) BindRequest(r *http.Request, route *middleware.Matc
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qConfigTypes, qhkConfigTypes, _ := qs.GetOK("configTypes")

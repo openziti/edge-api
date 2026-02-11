@@ -50,7 +50,6 @@ func NewDetailCurrentIdentityAuthenticatorParams() DetailCurrentIdentityAuthenti
 //
 // swagger:parameters detailCurrentIdentityAuthenticator
 type DetailCurrentIdentityAuthenticatorParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

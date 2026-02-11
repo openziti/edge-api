@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -82,11 +83,15 @@ func (m *DetailSpecBodyEnvelope) validateData(formats strfmt.Registry) error {
 
 	if m.Data != nil {
 		if err := m.Data.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("data")
 			}
+
 			return err
 		}
 	}
@@ -102,11 +107,15 @@ func (m *DetailSpecBodyEnvelope) validateMeta(formats strfmt.Registry) error {
 
 	if m.Meta != nil {
 		if err := m.Meta.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}
@@ -135,12 +144,17 @@ func (m *DetailSpecBodyEnvelope) ContextValidate(ctx context.Context, formats st
 func (m *DetailSpecBodyEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
+
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("data")
 			}
+
 			return err
 		}
 	}
@@ -151,12 +165,17 @@ func (m *DetailSpecBodyEnvelope) contextValidateData(ctx context.Context, format
 func (m *DetailSpecBodyEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}

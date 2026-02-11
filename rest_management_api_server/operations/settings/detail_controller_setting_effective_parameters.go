@@ -50,7 +50,6 @@ func NewDetailControllerSettingEffectiveParams() DetailControllerSettingEffectiv
 //
 // swagger:parameters detailControllerSettingEffective
 type DetailControllerSettingEffectiveParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

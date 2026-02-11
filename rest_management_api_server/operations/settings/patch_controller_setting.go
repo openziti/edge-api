@@ -36,16 +36,16 @@ import (
 )
 
 // PatchControllerSettingHandlerFunc turns a function with the right signature into a patch controller setting handler
-type PatchControllerSettingHandlerFunc func(PatchControllerSettingParams, interface{}) middleware.Responder
+type PatchControllerSettingHandlerFunc func(PatchControllerSettingParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn PatchControllerSettingHandlerFunc) Handle(params PatchControllerSettingParams, principal interface{}) middleware.Responder {
+func (fn PatchControllerSettingHandlerFunc) Handle(params PatchControllerSettingParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // PatchControllerSettingHandler interface for that can handle valid patch controller setting params
 type PatchControllerSettingHandler interface {
-	Handle(PatchControllerSettingParams, interface{}) middleware.Responder
+	Handle(PatchControllerSettingParams, any) middleware.Responder
 }
 
 // NewPatchControllerSetting creates a new http.Handler for the patch controller setting operation
@@ -53,12 +53,12 @@ func NewPatchControllerSetting(ctx *middleware.Context, handler PatchControllerS
 	return &PatchControllerSetting{Context: ctx, Handler: handler}
 }
 
-/* PatchControllerSetting swagger:route PATCH /controller-settings/{id}/effective Settings patchControllerSetting
+/*
+	PatchControllerSetting swagger:route PATCH /controller-settings/{id}/effective Settings patchControllerSetting
 
-Update the supplied fields on a controller setting object
+# Update the supplied fields on a controller setting object
 
 Update the supplied fields on a controller setting object. Requires admin access.
-
 */
 type PatchControllerSetting struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *PatchControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *PatchControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

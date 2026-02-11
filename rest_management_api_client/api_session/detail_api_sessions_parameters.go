@@ -76,10 +76,12 @@ func NewDetailAPISessionsParamsWithHTTPClient(client *http.Client) *DetailAPISes
 	}
 }
 
-/* DetailAPISessionsParams contains all the parameters to send to the API endpoint
-   for the detail API sessions operation.
+/*
+DetailAPISessionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail API sessions operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailAPISessionsParams struct {
 

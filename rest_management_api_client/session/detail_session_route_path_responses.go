@@ -30,11 +30,14 @@ package session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailSessionRoutePathReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailSessionRoutePathReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailSessionRoutePathReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailSessionRoutePathOK()
@@ -78,7 +81,7 @@ func (o *DetailSessionRoutePathReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sessions/{id}/route-path] detailSessionRoutePath", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailSessionRoutePathOK() *DetailSessionRoutePathOK {
 	return &DetailSessionRoutePathOK{}
 }
 
-/* DetailSessionRoutePathOK describes a response with status code 200, with default header values.
+/*
+DetailSessionRoutePathOK describes a response with status code 200, with default header values.
 
 A single session's route path
 */
 type DetailSessionRoutePathOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailSessionRoutePathEnvelope
 }
 
-func (o *DetailSessionRoutePathOK) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail session route path o k response has a 2xx status code
+func (o *DetailSessionRoutePathOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail session route path o k response has a 3xx status code
+func (o *DetailSessionRoutePathOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path o k response has a 4xx status code
+func (o *DetailSessionRoutePathOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail session route path o k response has a 5xx status code
+func (o *DetailSessionRoutePathOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path o k response a status code equal to that given
+func (o *DetailSessionRoutePathOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail session route path o k response
+func (o *DetailSessionRoutePathOK) Code() int {
+	return 200
+}
+
+func (o *DetailSessionRoutePathOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathOK %s", 200, payload)
+}
+
+func (o *DetailSessionRoutePathOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathOK %s", 200, payload)
+}
+
 func (o *DetailSessionRoutePathOK) GetPayload() *rest_model.DetailSessionRoutePathEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionRoutePathOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailSessionRoutePathEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionRoutePathOK binds the response header WWW-Authenticate
+func (o *DetailSessionRoutePathOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionRoutePathUnauthorized creates a DetailSessionRoutePathUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailSessionRoutePathUnauthorized() *DetailSessionRoutePathUnauthorized
 	return &DetailSessionRoutePathUnauthorized{}
 }
 
-/* DetailSessionRoutePathUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailSessionRoutePathUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailSessionRoutePathUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail session route path unauthorized response has a 2xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path unauthorized response has a 3xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path unauthorized response has a 4xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session route path unauthorized response has a 5xx status code
+func (o *DetailSessionRoutePathUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path unauthorized response a status code equal to that given
+func (o *DetailSessionRoutePathUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail session route path unauthorized response
+func (o *DetailSessionRoutePathUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailSessionRoutePathUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathUnauthorized %s", 401, payload)
+}
+
+func (o *DetailSessionRoutePathUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathUnauthorized %s", 401, payload)
+}
+
 func (o *DetailSessionRoutePathUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionRoutePathUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionRoutePathUnauthorized binds the response header WWW-Authenticate
+func (o *DetailSessionRoutePathUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionRoutePathNotFound creates a DetailSessionRoutePathNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailSessionRoutePathNotFound() *DetailSessionRoutePathNotFound {
 	return &DetailSessionRoutePathNotFound{}
 }
 
-/* DetailSessionRoutePathNotFound describes a response with status code 404, with default header values.
+/*
+DetailSessionRoutePathNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailSessionRoutePathNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathNotFound) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail session route path not found response has a 2xx status code
+func (o *DetailSessionRoutePathNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path not found response has a 3xx status code
+func (o *DetailSessionRoutePathNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path not found response has a 4xx status code
+func (o *DetailSessionRoutePathNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session route path not found response has a 5xx status code
+func (o *DetailSessionRoutePathNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path not found response a status code equal to that given
+func (o *DetailSessionRoutePathNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail session route path not found response
+func (o *DetailSessionRoutePathNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailSessionRoutePathNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathNotFound %s", 404, payload)
+}
+
+func (o *DetailSessionRoutePathNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathNotFound %s", 404, payload)
+}
+
 func (o *DetailSessionRoutePathNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionRoutePathNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionRoutePathNotFound binds the response header WWW-Authenticate
+func (o *DetailSessionRoutePathNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionRoutePathTooManyRequests creates a DetailSessionRoutePathTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailSessionRoutePathTooManyRequests() *DetailSessionRoutePathTooManyRe
 	return &DetailSessionRoutePathTooManyRequests{}
 }
 
-/* DetailSessionRoutePathTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailSessionRoutePathTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailSessionRoutePathTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail session route path too many requests response has a 2xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path too many requests response has a 3xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path too many requests response has a 4xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session route path too many requests response has a 5xx status code
+func (o *DetailSessionRoutePathTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session route path too many requests response a status code equal to that given
+func (o *DetailSessionRoutePathTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail session route path too many requests response
+func (o *DetailSessionRoutePathTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailSessionRoutePathTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailSessionRoutePathTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailSessionRoutePathTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionRoutePathTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionRoutePathTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailSessionRoutePathTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionRoutePathServiceUnavailable creates a DetailSessionRoutePathServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailSessionRoutePathServiceUnavailable() *DetailSessionRoutePathServic
 	return &DetailSessionRoutePathServiceUnavailable{}
 }
 
-/* DetailSessionRoutePathServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailSessionRoutePathServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailSessionRoutePathServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionRoutePathServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail session route path service unavailable response has a 2xx status code
+func (o *DetailSessionRoutePathServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session route path service unavailable response has a 3xx status code
+func (o *DetailSessionRoutePathServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session route path service unavailable response has a 4xx status code
+func (o *DetailSessionRoutePathServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail session route path service unavailable response has a 5xx status code
+func (o *DetailSessionRoutePathServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail session route path service unavailable response a status code equal to that given
+func (o *DetailSessionRoutePathServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail session route path service unavailable response
+func (o *DetailSessionRoutePathServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailSessionRoutePathServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailSessionRoutePathServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}/route-path][%d] detailSessionRoutePathServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailSessionRoutePathServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionRoutePathServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionRoutePathServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailSessionRoutePathServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

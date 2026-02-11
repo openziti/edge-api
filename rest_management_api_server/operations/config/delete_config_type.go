@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteConfigTypeHandlerFunc turns a function with the right signature into a delete config type handler
-type DeleteConfigTypeHandlerFunc func(DeleteConfigTypeParams, interface{}) middleware.Responder
+type DeleteConfigTypeHandlerFunc func(DeleteConfigTypeParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteConfigTypeHandlerFunc) Handle(params DeleteConfigTypeParams, principal interface{}) middleware.Responder {
+func (fn DeleteConfigTypeHandlerFunc) Handle(params DeleteConfigTypeParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteConfigTypeHandler interface for that can handle valid delete config type params
 type DeleteConfigTypeHandler interface {
-	Handle(DeleteConfigTypeParams, interface{}) middleware.Responder
+	Handle(DeleteConfigTypeParams, any) middleware.Responder
 }
 
 // NewDeleteConfigType creates a new http.Handler for the delete config type operation
@@ -53,12 +53,12 @@ func NewDeleteConfigType(ctx *middleware.Context, handler DeleteConfigTypeHandle
 	return &DeleteConfigType{Context: ctx, Handler: handler}
 }
 
-/* DeleteConfigType swagger:route DELETE /config-types/{id} Config deleteConfigType
+/*
+	DeleteConfigType swagger:route DELETE /config-types/{id} Config deleteConfigType
 
-Delete a config-type
+# Delete a config-type
 
 Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
-
 */
 type DeleteConfigType struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteConfigType) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteConfigType) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

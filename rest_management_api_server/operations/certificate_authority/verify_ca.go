@@ -36,16 +36,16 @@ import (
 )
 
 // VerifyCaHandlerFunc turns a function with the right signature into a verify ca handler
-type VerifyCaHandlerFunc func(VerifyCaParams, interface{}) middleware.Responder
+type VerifyCaHandlerFunc func(VerifyCaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn VerifyCaHandlerFunc) Handle(params VerifyCaParams, principal interface{}) middleware.Responder {
+func (fn VerifyCaHandlerFunc) Handle(params VerifyCaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // VerifyCaHandler interface for that can handle valid verify ca params
 type VerifyCaHandler interface {
-	Handle(VerifyCaParams, interface{}) middleware.Responder
+	Handle(VerifyCaParams, any) middleware.Responder
 }
 
 // NewVerifyCa creates a new http.Handler for the verify ca operation
@@ -53,15 +53,14 @@ func NewVerifyCa(ctx *middleware.Context, handler VerifyCaHandler) *VerifyCa {
 	return &VerifyCa{Context: ctx, Handler: handler}
 }
 
-/* VerifyCa swagger:route POST /cas/{id}/verify Certificate Authority verifyCa
+/*
+	VerifyCa swagger:route POST /cas/{id}/verify Certificate Authority verifyCa
 
-Verify a CA
+# Verify a CA
 
 Allows a CA to become verified by submitting a certificate in PEM format that has been signed by the target CA.
 The common name on the certificate must match the verificationToken property of the CA. Unverfieid CAs can not
 be used for enrollment/authentication. Requires admin access.
-
-
 */
 type VerifyCa struct {
 	Context *middleware.Context
@@ -82,9 +81,9 @@ func (o *VerifyCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -93,6 +92,7 @@ func (o *VerifyCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -30,11 +30,14 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteControllerSettingReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteControllerSettingOK()
@@ -78,7 +81,7 @@ func (o *DeleteControllerSettingReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /controller-settings/{id}/effective] deleteControllerSetting", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDeleteControllerSettingOK() *DeleteControllerSettingOK {
 	return &DeleteControllerSettingOK{}
 }
 
-/* DeleteControllerSettingOK describes a response with status code 200, with default header values.
+/*
+DeleteControllerSettingOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteControllerSettingOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteControllerSettingOK) Error() string {
-	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete controller setting o k response has a 2xx status code
+func (o *DeleteControllerSettingOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete controller setting o k response has a 3xx status code
+func (o *DeleteControllerSettingOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete controller setting o k response has a 4xx status code
+func (o *DeleteControllerSettingOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete controller setting o k response has a 5xx status code
+func (o *DeleteControllerSettingOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete controller setting o k response a status code equal to that given
+func (o *DeleteControllerSettingOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete controller setting o k response
+func (o *DeleteControllerSettingOK) Code() int {
+	return 200
+}
+
+func (o *DeleteControllerSettingOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingOK %s", 200, payload)
+}
+
+func (o *DeleteControllerSettingOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingOK %s", 200, payload)
+}
+
 func (o *DeleteControllerSettingOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteControllerSettingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteControllerSettingOK binds the response header WWW-Authenticate
+func (o *DeleteControllerSettingOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteControllerSettingBadRequest creates a DeleteControllerSettingBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewDeleteControllerSettingBadRequest() *DeleteControllerSettingBadRequest {
 	return &DeleteControllerSettingBadRequest{}
 }
 
-/* DeleteControllerSettingBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteControllerSettingBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteControllerSettingBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteControllerSettingBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete controller setting bad request response has a 2xx status code
+func (o *DeleteControllerSettingBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete controller setting bad request response has a 3xx status code
+func (o *DeleteControllerSettingBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete controller setting bad request response has a 4xx status code
+func (o *DeleteControllerSettingBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete controller setting bad request response has a 5xx status code
+func (o *DeleteControllerSettingBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete controller setting bad request response a status code equal to that given
+func (o *DeleteControllerSettingBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete controller setting bad request response
+func (o *DeleteControllerSettingBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteControllerSettingBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingBadRequest %s", 400, payload)
+}
+
+func (o *DeleteControllerSettingBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingBadRequest %s", 400, payload)
+}
+
 func (o *DeleteControllerSettingBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteControllerSettingBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteControllerSettingBadRequest binds the response header WWW-Authenticate
+func (o *DeleteControllerSettingBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteControllerSettingUnauthorized creates a DeleteControllerSettingUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewDeleteControllerSettingUnauthorized() *DeleteControllerSettingUnauthoriz
 	return &DeleteControllerSettingUnauthorized{}
 }
 
-/* DeleteControllerSettingUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteControllerSettingUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteControllerSettingUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteControllerSettingUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete controller setting unauthorized response has a 2xx status code
+func (o *DeleteControllerSettingUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete controller setting unauthorized response has a 3xx status code
+func (o *DeleteControllerSettingUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete controller setting unauthorized response has a 4xx status code
+func (o *DeleteControllerSettingUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete controller setting unauthorized response has a 5xx status code
+func (o *DeleteControllerSettingUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete controller setting unauthorized response a status code equal to that given
+func (o *DeleteControllerSettingUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete controller setting unauthorized response
+func (o *DeleteControllerSettingUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteControllerSettingUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteControllerSettingUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteControllerSettingUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteControllerSettingUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteControllerSettingUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteControllerSettingUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteControllerSettingConflict creates a DeleteControllerSettingConflict with default headers values
@@ -183,31 +417,108 @@ func NewDeleteControllerSettingConflict() *DeleteControllerSettingConflict {
 	return &DeleteControllerSettingConflict{}
 }
 
-/* DeleteControllerSettingConflict describes a response with status code 409, with default header values.
+/*
+DeleteControllerSettingConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
 type DeleteControllerSettingConflict struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteControllerSettingConflict) Error() string {
-	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete controller setting conflict response has a 2xx status code
+func (o *DeleteControllerSettingConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete controller setting conflict response has a 3xx status code
+func (o *DeleteControllerSettingConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete controller setting conflict response has a 4xx status code
+func (o *DeleteControllerSettingConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete controller setting conflict response has a 5xx status code
+func (o *DeleteControllerSettingConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete controller setting conflict response a status code equal to that given
+func (o *DeleteControllerSettingConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete controller setting conflict response
+func (o *DeleteControllerSettingConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteControllerSettingConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingConflict %s", 409, payload)
+}
+
+func (o *DeleteControllerSettingConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingConflict %s", 409, payload)
+}
+
 func (o *DeleteControllerSettingConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteControllerSettingConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteControllerSettingConflict binds the response header WWW-Authenticate
+func (o *DeleteControllerSettingConflict) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteControllerSettingTooManyRequests creates a DeleteControllerSettingTooManyRequests with default headers values
@@ -215,29 +526,106 @@ func NewDeleteControllerSettingTooManyRequests() *DeleteControllerSettingTooMany
 	return &DeleteControllerSettingTooManyRequests{}
 }
 
-/* DeleteControllerSettingTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteControllerSettingTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteControllerSettingTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteControllerSettingTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete controller setting too many requests response has a 2xx status code
+func (o *DeleteControllerSettingTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete controller setting too many requests response has a 3xx status code
+func (o *DeleteControllerSettingTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete controller setting too many requests response has a 4xx status code
+func (o *DeleteControllerSettingTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete controller setting too many requests response has a 5xx status code
+func (o *DeleteControllerSettingTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete controller setting too many requests response a status code equal to that given
+func (o *DeleteControllerSettingTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete controller setting too many requests response
+func (o *DeleteControllerSettingTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteControllerSettingTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteControllerSettingTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /controller-settings/{id}/effective][%d] deleteControllerSettingTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteControllerSettingTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteControllerSettingTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteControllerSettingTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteControllerSettingTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

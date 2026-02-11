@@ -30,11 +30,14 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateCurrentAPISessionCertificateReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateCurrentAPISessionCertificateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateCurrentAPISessionCertificateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateCurrentAPISessionCertificateCreated()
@@ -78,7 +81,7 @@ func (o *CreateCurrentAPISessionCertificateReader) ReadResponse(response runtime
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /current-api-session/certificates] createCurrentApiSessionCertificate", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewCreateCurrentAPISessionCertificateCreated() *CreateCurrentAPISessionCert
 	return &CreateCurrentAPISessionCertificateCreated{}
 }
 
-/* CreateCurrentAPISessionCertificateCreated describes a response with status code 201, with default header values.
+/*
+CreateCurrentAPISessionCertificateCreated describes a response with status code 201, with default header values.
 
 A response of a create API Session certificate
 */
 type CreateCurrentAPISessionCertificateCreated struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.CreateCurrentAPISessionCertificateEnvelope
 }
 
-func (o *CreateCurrentAPISessionCertificateCreated) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create current Api session certificate created response has a 2xx status code
+func (o *CreateCurrentAPISessionCertificateCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create current Api session certificate created response has a 3xx status code
+func (o *CreateCurrentAPISessionCertificateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create current Api session certificate created response has a 4xx status code
+func (o *CreateCurrentAPISessionCertificateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create current Api session certificate created response has a 5xx status code
+func (o *CreateCurrentAPISessionCertificateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create current Api session certificate created response a status code equal to that given
+func (o *CreateCurrentAPISessionCertificateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create current Api session certificate created response
+func (o *CreateCurrentAPISessionCertificateCreated) Code() int {
+	return 201
+}
+
+func (o *CreateCurrentAPISessionCertificateCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateCreated %s", 201, payload)
+}
+
+func (o *CreateCurrentAPISessionCertificateCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateCreated %s", 201, payload)
+}
+
 func (o *CreateCurrentAPISessionCertificateCreated) GetPayload() *rest_model.CreateCurrentAPISessionCertificateEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCurrentAPISessionCertificateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.CreateCurrentAPISessionCertificateEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCurrentAPISessionCertificateCreated binds the response header WWW-Authenticate
+func (o *CreateCurrentAPISessionCertificateCreated) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCurrentAPISessionCertificateBadRequest creates a CreateCurrentAPISessionCertificateBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewCreateCurrentAPISessionCertificateBadRequest() *CreateCurrentAPISessionC
 	return &CreateCurrentAPISessionCertificateBadRequest{}
 }
 
-/* CreateCurrentAPISessionCertificateBadRequest describes a response with status code 400, with default header values.
+/*
+CreateCurrentAPISessionCertificateBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type CreateCurrentAPISessionCertificateBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCurrentAPISessionCertificateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create current Api session certificate bad request response has a 2xx status code
+func (o *CreateCurrentAPISessionCertificateBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create current Api session certificate bad request response has a 3xx status code
+func (o *CreateCurrentAPISessionCertificateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create current Api session certificate bad request response has a 4xx status code
+func (o *CreateCurrentAPISessionCertificateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create current Api session certificate bad request response has a 5xx status code
+func (o *CreateCurrentAPISessionCertificateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create current Api session certificate bad request response a status code equal to that given
+func (o *CreateCurrentAPISessionCertificateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create current Api session certificate bad request response
+func (o *CreateCurrentAPISessionCertificateBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateCurrentAPISessionCertificateBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateBadRequest %s", 400, payload)
+}
+
+func (o *CreateCurrentAPISessionCertificateBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateBadRequest %s", 400, payload)
+}
+
 func (o *CreateCurrentAPISessionCertificateBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCurrentAPISessionCertificateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCurrentAPISessionCertificateBadRequest binds the response header WWW-Authenticate
+func (o *CreateCurrentAPISessionCertificateBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCurrentAPISessionCertificateUnauthorized creates a CreateCurrentAPISessionCertificateUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewCreateCurrentAPISessionCertificateUnauthorized() *CreateCurrentAPISessio
 	return &CreateCurrentAPISessionCertificateUnauthorized{}
 }
 
-/* CreateCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateCurrentAPISessionCertificateUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateCurrentAPISessionCertificateUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCurrentAPISessionCertificateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create current Api session certificate unauthorized response has a 2xx status code
+func (o *CreateCurrentAPISessionCertificateUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create current Api session certificate unauthorized response has a 3xx status code
+func (o *CreateCurrentAPISessionCertificateUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create current Api session certificate unauthorized response has a 4xx status code
+func (o *CreateCurrentAPISessionCertificateUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create current Api session certificate unauthorized response has a 5xx status code
+func (o *CreateCurrentAPISessionCertificateUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create current Api session certificate unauthorized response a status code equal to that given
+func (o *CreateCurrentAPISessionCertificateUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create current Api session certificate unauthorized response
+func (o *CreateCurrentAPISessionCertificateUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateCurrentAPISessionCertificateUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateUnauthorized %s", 401, payload)
+}
+
+func (o *CreateCurrentAPISessionCertificateUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateUnauthorized %s", 401, payload)
+}
+
 func (o *CreateCurrentAPISessionCertificateUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCurrentAPISessionCertificateUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCurrentAPISessionCertificateUnauthorized binds the response header WWW-Authenticate
+func (o *CreateCurrentAPISessionCertificateUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCurrentAPISessionCertificateTooManyRequests creates a CreateCurrentAPISessionCertificateTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewCreateCurrentAPISessionCertificateTooManyRequests() *CreateCurrentAPISes
 	return &CreateCurrentAPISessionCertificateTooManyRequests{}
 }
 
-/* CreateCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateCurrentAPISessionCertificateTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreateCurrentAPISessionCertificateTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCurrentAPISessionCertificateTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create current Api session certificate too many requests response has a 2xx status code
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create current Api session certificate too many requests response has a 3xx status code
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create current Api session certificate too many requests response has a 4xx status code
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create current Api session certificate too many requests response has a 5xx status code
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create current Api session certificate too many requests response a status code equal to that given
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create current Api session certificate too many requests response
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateCurrentAPISessionCertificateTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCurrentAPISessionCertificateTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCurrentAPISessionCertificateTooManyRequests binds the response header WWW-Authenticate
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCurrentAPISessionCertificateServiceUnavailable creates a CreateCurrentAPISessionCertificateServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewCreateCurrentAPISessionCertificateServiceUnavailable() *CreateCurrentAPI
 	return &CreateCurrentAPISessionCertificateServiceUnavailable{}
 }
 
-/* CreateCurrentAPISessionCertificateServiceUnavailable describes a response with status code 503, with default header values.
+/*
+CreateCurrentAPISessionCertificateServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type CreateCurrentAPISessionCertificateServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCurrentAPISessionCertificateServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this create current Api session certificate service unavailable response has a 2xx status code
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create current Api session certificate service unavailable response has a 3xx status code
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create current Api session certificate service unavailable response has a 4xx status code
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create current Api session certificate service unavailable response has a 5xx status code
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create current Api session certificate service unavailable response a status code equal to that given
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the create current Api session certificate service unavailable response
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateServiceUnavailable %s", 503, payload)
+}
+
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/certificates][%d] createCurrentApiSessionCertificateServiceUnavailable %s", 503, payload)
+}
+
 func (o *CreateCurrentAPISessionCertificateServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCurrentAPISessionCertificateServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCurrentAPISessionCertificateServiceUnavailable binds the response header WWW-Authenticate
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

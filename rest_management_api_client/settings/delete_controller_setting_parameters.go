@@ -76,10 +76,12 @@ func NewDeleteControllerSettingParamsWithHTTPClient(client *http.Client) *Delete
 	}
 }
 
-/* DeleteControllerSettingParams contains all the parameters to send to the API endpoint
-   for the delete controller setting operation.
+/*
+DeleteControllerSettingParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete controller setting operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteControllerSettingParams struct {
 

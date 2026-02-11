@@ -71,7 +71,7 @@ const (
 )
 
 // for schema
-var identityTypeEnum []interface{}
+var identityTypeEnum []any
 
 func init() {
 	var res []IdentityType

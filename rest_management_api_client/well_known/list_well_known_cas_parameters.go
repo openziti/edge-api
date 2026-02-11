@@ -76,10 +76,12 @@ func NewListWellKnownCasParamsWithHTTPClient(client *http.Client) *ListWellKnown
 	}
 }
 
-/* ListWellKnownCasParams contains all the parameters to send to the API endpoint
-   for the list well known cas operation.
+/*
+ListWellKnownCasParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list well known cas operation.
+
+	Typically these are written to a http.Request.
 */
 type ListWellKnownCasParams struct {
 	timeout    time.Duration

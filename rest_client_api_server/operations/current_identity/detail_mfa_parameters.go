@@ -49,7 +49,6 @@ func NewDetailMfaParams() DetailMfaParams {
 //
 // swagger:parameters detailMfa
 type DetailMfaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

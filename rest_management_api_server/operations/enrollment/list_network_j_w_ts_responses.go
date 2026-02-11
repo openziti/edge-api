@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListNetworkJWTsOKCode is the HTTP code returned for type ListNetworkJWTsOK
 const ListNetworkJWTsOKCode int = 200
 
-/*ListNetworkJWTsOK A list of network JWTs
+/*
+ListNetworkJWTsOK A list of network JWTs
 
 swagger:response listNetworkJWTsOK
 */
 type ListNetworkJWTsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListNetworkJWTsOK struct {
 func NewListNetworkJWTsOK() *ListNetworkJWTsOK {
 
 	return &ListNetworkJWTsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list network j w ts o k response
+func (o *ListNetworkJWTsOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListNetworkJWTsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list network j w ts o k response
+func (o *ListNetworkJWTsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list network j w ts o k response
@@ -72,6 +89,23 @@ func (o *ListNetworkJWTsOK) SetPayload(payload *rest_model.ListNetworkJWTsEnvelo
 // WriteResponse to the client
 func (o *ListNetworkJWTsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListNetworkJWTsOK) WriteResponse(rw http.ResponseWriter, producer runti
 // ListNetworkJWTsBadRequestCode is the HTTP code returned for type ListNetworkJWTsBadRequest
 const ListNetworkJWTsBadRequestCode int = 400
 
-/*ListNetworkJWTsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListNetworkJWTsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listNetworkJWTsBadRequest
 */
 type ListNetworkJWTsBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListNetworkJWTsBadRequest struct {
 func NewListNetworkJWTsBadRequest() *ListNetworkJWTsBadRequest {
 
 	return &ListNetworkJWTsBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list network j w ts bad request response
+func (o *ListNetworkJWTsBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListNetworkJWTsBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list network j w ts bad request response
+func (o *ListNetworkJWTsBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list network j w ts bad request response
@@ -116,6 +166,23 @@ func (o *ListNetworkJWTsBadRequest) SetPayload(payload *rest_model.APIErrorEnvel
 // WriteResponse to the client
 func (o *ListNetworkJWTsBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListNetworkJWTsBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // ListNetworkJWTsTooManyRequestsCode is the HTTP code returned for type ListNetworkJWTsTooManyRequests
 const ListNetworkJWTsTooManyRequestsCode int = 429
 
-/*ListNetworkJWTsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListNetworkJWTsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listNetworkJWTsTooManyRequests
 */
 type ListNetworkJWTsTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListNetworkJWTsTooManyRequests struct {
 func NewListNetworkJWTsTooManyRequests() *ListNetworkJWTsTooManyRequests {
 
 	return &ListNetworkJWTsTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list network j w ts too many requests response
+func (o *ListNetworkJWTsTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListNetworkJWTsTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list network j w ts too many requests response
+func (o *ListNetworkJWTsTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list network j w ts too many requests response
@@ -159,6 +242,23 @@ func (o *ListNetworkJWTsTooManyRequests) SetPayload(payload *rest_model.APIError
 
 // WriteResponse to the client
 func (o *ListNetworkJWTsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -134,11 +135,15 @@ func (m *ControllerSettingEffective) validateEffective(formats strfmt.Registry) 
 
 	if m.Effective != nil {
 		if err := m.Effective.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("effective")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("effective")
 			}
+
 			return err
 		}
 	}
@@ -154,11 +159,15 @@ func (m *ControllerSettingEffective) validateInstance(formats strfmt.Registry) e
 
 	if m.Instance != nil {
 		if err := m.Instance.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("instance")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("instance")
 			}
+
 			return err
 		}
 	}
@@ -192,12 +201,21 @@ func (m *ControllerSettingEffective) ContextValidate(ctx context.Context, format
 func (m *ControllerSettingEffective) contextValidateEffective(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Effective != nil {
+
+		if swag.IsZero(m.Effective) { // not required
+			return nil
+		}
+
 		if err := m.Effective.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("effective")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("effective")
 			}
+
 			return err
 		}
 	}
@@ -208,12 +226,21 @@ func (m *ControllerSettingEffective) contextValidateEffective(ctx context.Contex
 func (m *ControllerSettingEffective) contextValidateInstance(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Instance != nil {
+
+		if swag.IsZero(m.Instance) { // not required
+			return nil
+		}
+
 		if err := m.Instance.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("instance")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("instance")
 			}
+
 			return err
 		}
 	}

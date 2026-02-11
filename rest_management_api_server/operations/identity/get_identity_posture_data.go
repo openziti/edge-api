@@ -36,16 +36,16 @@ import (
 )
 
 // GetIdentityPostureDataHandlerFunc turns a function with the right signature into a get identity posture data handler
-type GetIdentityPostureDataHandlerFunc func(GetIdentityPostureDataParams, interface{}) middleware.Responder
+type GetIdentityPostureDataHandlerFunc func(GetIdentityPostureDataParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetIdentityPostureDataHandlerFunc) Handle(params GetIdentityPostureDataParams, principal interface{}) middleware.Responder {
+func (fn GetIdentityPostureDataHandlerFunc) Handle(params GetIdentityPostureDataParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetIdentityPostureDataHandler interface for that can handle valid get identity posture data params
 type GetIdentityPostureDataHandler interface {
-	Handle(GetIdentityPostureDataParams, interface{}) middleware.Responder
+	Handle(GetIdentityPostureDataParams, any) middleware.Responder
 }
 
 // NewGetIdentityPostureData creates a new http.Handler for the get identity posture data operation
@@ -53,14 +53,13 @@ func NewGetIdentityPostureData(ctx *middleware.Context, handler GetIdentityPostu
 	return &GetIdentityPostureData{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityPostureData swagger:route GET /identities/{id}/posture-data Identity getIdentityPostureData
+/*
+	GetIdentityPostureData swagger:route GET /identities/{id}/posture-data Identity getIdentityPostureData
 
 Retrieve the curent posture data for a specific identity.
 
 Returns a nested map data represeting the posture data of the identity.
 This data should be considered volatile.
-
-
 */
 type GetIdentityPostureData struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *GetIdentityPostureData) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *GetIdentityPostureData) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

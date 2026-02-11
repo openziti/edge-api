@@ -52,7 +52,6 @@ func NewListControllerSettingsParams() ListControllerSettingsParams {
 //
 // swagger:parameters listControllerSettings
 type ListControllerSettingsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,10 +59,12 @@ type ListControllerSettingsParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
@@ -78,7 +79,6 @@ func (o *ListControllerSettingsParams) BindRequest(r *http.Request, route *middl
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

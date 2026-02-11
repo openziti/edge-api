@@ -50,7 +50,6 @@ func NewDetailTransitRouterParams() DetailTransitRouterParams {
 //
 // swagger:parameters detailTransitRouter
 type DetailTransitRouterParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

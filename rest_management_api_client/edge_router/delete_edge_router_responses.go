@@ -30,11 +30,14 @@ package edge_router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteEdgeRouterReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteEdgeRouterOK()
@@ -90,7 +93,7 @@ func (o *DeleteEdgeRouterReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge-routers/{id}] deleteEdgeRouter", response, response.Code())
 	}
 }
 
@@ -99,31 +102,108 @@ func NewDeleteEdgeRouterOK() *DeleteEdgeRouterOK {
 	return &DeleteEdgeRouterOK{}
 }
 
-/* DeleteEdgeRouterOK describes a response with status code 200, with default header values.
+/*
+DeleteEdgeRouterOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteEdgeRouterOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteEdgeRouterOK) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete edge router o k response has a 2xx status code
+func (o *DeleteEdgeRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete edge router o k response has a 3xx status code
+func (o *DeleteEdgeRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router o k response has a 4xx status code
+func (o *DeleteEdgeRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete edge router o k response has a 5xx status code
+func (o *DeleteEdgeRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router o k response a status code equal to that given
+func (o *DeleteEdgeRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete edge router o k response
+func (o *DeleteEdgeRouterOK) Code() int {
+	return 200
+}
+
+func (o *DeleteEdgeRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterOK %s", 200, payload)
+}
+
+func (o *DeleteEdgeRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterOK %s", 200, payload)
+}
+
 func (o *DeleteEdgeRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterOK binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteEdgeRouterBadRequest creates a DeleteEdgeRouterBadRequest with default headers values
@@ -131,31 +211,108 @@ func NewDeleteEdgeRouterBadRequest() *DeleteEdgeRouterBadRequest {
 	return &DeleteEdgeRouterBadRequest{}
 }
 
-/* DeleteEdgeRouterBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteEdgeRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteEdgeRouterBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete edge router bad request response has a 2xx status code
+func (o *DeleteEdgeRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router bad request response has a 3xx status code
+func (o *DeleteEdgeRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router bad request response has a 4xx status code
+func (o *DeleteEdgeRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router bad request response has a 5xx status code
+func (o *DeleteEdgeRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router bad request response a status code equal to that given
+func (o *DeleteEdgeRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete edge router bad request response
+func (o *DeleteEdgeRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteEdgeRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterBadRequest %s", 400, payload)
+}
+
+func (o *DeleteEdgeRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterBadRequest %s", 400, payload)
+}
+
 func (o *DeleteEdgeRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterBadRequest binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteEdgeRouterUnauthorized creates a DeleteEdgeRouterUnauthorized with default headers values
@@ -163,31 +320,108 @@ func NewDeleteEdgeRouterUnauthorized() *DeleteEdgeRouterUnauthorized {
 	return &DeleteEdgeRouterUnauthorized{}
 }
 
-/* DeleteEdgeRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteEdgeRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteEdgeRouterUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete edge router unauthorized response has a 2xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router unauthorized response has a 3xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router unauthorized response has a 4xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router unauthorized response has a 5xx status code
+func (o *DeleteEdgeRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router unauthorized response a status code equal to that given
+func (o *DeleteEdgeRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete edge router unauthorized response
+func (o *DeleteEdgeRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteEdgeRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteEdgeRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteEdgeRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteEdgeRouterNotFound creates a DeleteEdgeRouterNotFound with default headers values
@@ -195,31 +429,108 @@ func NewDeleteEdgeRouterNotFound() *DeleteEdgeRouterNotFound {
 	return &DeleteEdgeRouterNotFound{}
 }
 
-/* DeleteEdgeRouterNotFound describes a response with status code 404, with default header values.
+/*
+DeleteEdgeRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeleteEdgeRouterNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete edge router not found response has a 2xx status code
+func (o *DeleteEdgeRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router not found response has a 3xx status code
+func (o *DeleteEdgeRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router not found response has a 4xx status code
+func (o *DeleteEdgeRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router not found response has a 5xx status code
+func (o *DeleteEdgeRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router not found response a status code equal to that given
+func (o *DeleteEdgeRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete edge router not found response
+func (o *DeleteEdgeRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteEdgeRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterNotFound %s", 404, payload)
+}
+
+func (o *DeleteEdgeRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterNotFound %s", 404, payload)
+}
+
 func (o *DeleteEdgeRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterNotFound binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteEdgeRouterConflict creates a DeleteEdgeRouterConflict with default headers values
@@ -227,31 +538,108 @@ func NewDeleteEdgeRouterConflict() *DeleteEdgeRouterConflict {
 	return &DeleteEdgeRouterConflict{}
 }
 
-/* DeleteEdgeRouterConflict describes a response with status code 409, with default header values.
+/*
+DeleteEdgeRouterConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
 type DeleteEdgeRouterConflict struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterConflict) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete edge router conflict response has a 2xx status code
+func (o *DeleteEdgeRouterConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router conflict response has a 3xx status code
+func (o *DeleteEdgeRouterConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router conflict response has a 4xx status code
+func (o *DeleteEdgeRouterConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router conflict response has a 5xx status code
+func (o *DeleteEdgeRouterConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router conflict response a status code equal to that given
+func (o *DeleteEdgeRouterConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete edge router conflict response
+func (o *DeleteEdgeRouterConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteEdgeRouterConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterConflict %s", 409, payload)
+}
+
+func (o *DeleteEdgeRouterConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterConflict %s", 409, payload)
+}
+
 func (o *DeleteEdgeRouterConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterConflict binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterConflict) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteEdgeRouterTooManyRequests creates a DeleteEdgeRouterTooManyRequests with default headers values
@@ -259,31 +647,108 @@ func NewDeleteEdgeRouterTooManyRequests() *DeleteEdgeRouterTooManyRequests {
 	return &DeleteEdgeRouterTooManyRequests{}
 }
 
-/* DeleteEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteEdgeRouterTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete edge router too many requests response has a 2xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router too many requests response has a 3xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router too many requests response has a 4xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete edge router too many requests response has a 5xx status code
+func (o *DeleteEdgeRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete edge router too many requests response a status code equal to that given
+func (o *DeleteEdgeRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete edge router too many requests response
+func (o *DeleteEdgeRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteEdgeRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteEdgeRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteEdgeRouterServiceUnavailable creates a DeleteEdgeRouterServiceUnavailable with default headers values
@@ -291,29 +756,106 @@ func NewDeleteEdgeRouterServiceUnavailable() *DeleteEdgeRouterServiceUnavailable
 	return &DeleteEdgeRouterServiceUnavailable{}
 }
 
-/* DeleteEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeleteEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeleteEdgeRouterServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteEdgeRouterServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete edge router service unavailable response has a 2xx status code
+func (o *DeleteEdgeRouterServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete edge router service unavailable response has a 3xx status code
+func (o *DeleteEdgeRouterServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete edge router service unavailable response has a 4xx status code
+func (o *DeleteEdgeRouterServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete edge router service unavailable response has a 5xx status code
+func (o *DeleteEdgeRouterServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete edge router service unavailable response a status code equal to that given
+func (o *DeleteEdgeRouterServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete edge router service unavailable response
+func (o *DeleteEdgeRouterServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeleteEdgeRouterServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeleteEdgeRouterServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge-routers/{id}][%d] deleteEdgeRouterServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeleteEdgeRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteEdgeRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteEdgeRouterServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeleteEdgeRouterServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

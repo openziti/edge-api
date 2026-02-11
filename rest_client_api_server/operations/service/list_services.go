@@ -36,16 +36,16 @@ import (
 )
 
 // ListServicesHandlerFunc turns a function with the right signature into a list services handler
-type ListServicesHandlerFunc func(ListServicesParams, interface{}) middleware.Responder
+type ListServicesHandlerFunc func(ListServicesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServicesHandlerFunc) Handle(params ListServicesParams, principal interface{}) middleware.Responder {
+func (fn ListServicesHandlerFunc) Handle(params ListServicesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServicesHandler interface for that can handle valid list services params
 type ListServicesHandler interface {
-	Handle(ListServicesParams, interface{}) middleware.Responder
+	Handle(ListServicesParams, any) middleware.Responder
 }
 
 // NewListServices creates a new http.Handler for the list services operation
@@ -53,13 +53,12 @@ func NewListServices(ctx *middleware.Context, handler ListServicesHandler) *List
 	return &ListServices{Context: ctx, Handler: handler}
 }
 
-/* ListServices swagger:route GET /services Service listServices
+/*
+	ListServices swagger:route GET /services Service listServices
 
-List services
+# List services
 
 Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServices struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServices) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServices) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

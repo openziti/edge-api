@@ -36,16 +36,16 @@ import (
 )
 
 // GetCurrentAPISessionHandlerFunc turns a function with the right signature into a get current API session handler
-type GetCurrentAPISessionHandlerFunc func(GetCurrentAPISessionParams, interface{}) middleware.Responder
+type GetCurrentAPISessionHandlerFunc func(GetCurrentAPISessionParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetCurrentAPISessionHandlerFunc) Handle(params GetCurrentAPISessionParams, principal interface{}) middleware.Responder {
+func (fn GetCurrentAPISessionHandlerFunc) Handle(params GetCurrentAPISessionParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetCurrentAPISessionHandler interface for that can handle valid get current API session params
 type GetCurrentAPISessionHandler interface {
-	Handle(GetCurrentAPISessionParams, interface{}) middleware.Responder
+	Handle(GetCurrentAPISessionParams, any) middleware.Responder
 }
 
 // NewGetCurrentAPISession creates a new http.Handler for the get current API session operation
@@ -53,12 +53,12 @@ func NewGetCurrentAPISession(ctx *middleware.Context, handler GetCurrentAPISessi
 	return &GetCurrentAPISession{Context: ctx, Handler: handler}
 }
 
-/* GetCurrentAPISession swagger:route GET /current-api-session Current API Session getCurrentApiSession
+/*
+	GetCurrentAPISession swagger:route GET /current-api-session Current API Session getCurrentApiSession
 
-Return the current API session
+# Return the current API session
 
 Retrieves the API session that was used to issue the current request
-
 */
 type GetCurrentAPISession struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *GetCurrentAPISession) ServeHTTP(rw http.ResponseWriter, r *http.Request
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *GetCurrentAPISession) ServeHTTP(rw http.ResponseWriter, r *http.Request
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

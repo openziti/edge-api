@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CheckDataIntegrityAcceptedCode is the HTTP code returned for type CheckDataIntegrityAccepted
 const CheckDataIntegrityAcceptedCode int = 202
 
-/*CheckDataIntegrityAccepted Base empty response
+/*
+CheckDataIntegrityAccepted Base empty response
 
 swagger:response checkDataIntegrityAccepted
 */
 type CheckDataIntegrityAccepted struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CheckDataIntegrityAccepted struct {
 func NewCheckDataIntegrityAccepted() *CheckDataIntegrityAccepted {
 
 	return &CheckDataIntegrityAccepted{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the check data integrity accepted response
+func (o *CheckDataIntegrityAccepted) WithWWWAuthenticate(wWWAuthenticate []string) *CheckDataIntegrityAccepted {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the check data integrity accepted response
+func (o *CheckDataIntegrityAccepted) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the check data integrity accepted response
@@ -72,6 +89,23 @@ func (o *CheckDataIntegrityAccepted) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *CheckDataIntegrityAccepted) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(202)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CheckDataIntegrityAccepted) WriteResponse(rw http.ResponseWriter, produ
 // CheckDataIntegrityUnauthorizedCode is the HTTP code returned for type CheckDataIntegrityUnauthorized
 const CheckDataIntegrityUnauthorizedCode int = 401
 
-/*CheckDataIntegrityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CheckDataIntegrityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response checkDataIntegrityUnauthorized
 */
 type CheckDataIntegrityUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CheckDataIntegrityUnauthorized struct {
 func NewCheckDataIntegrityUnauthorized() *CheckDataIntegrityUnauthorized {
 
 	return &CheckDataIntegrityUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the check data integrity unauthorized response
+func (o *CheckDataIntegrityUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CheckDataIntegrityUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the check data integrity unauthorized response
+func (o *CheckDataIntegrityUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the check data integrity unauthorized response
@@ -116,6 +166,23 @@ func (o *CheckDataIntegrityUnauthorized) SetPayload(payload *rest_model.APIError
 // WriteResponse to the client
 func (o *CheckDataIntegrityUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CheckDataIntegrityUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // CheckDataIntegrityTooManyRequestsCode is the HTTP code returned for type CheckDataIntegrityTooManyRequests
 const CheckDataIntegrityTooManyRequestsCode int = 429
 
-/*CheckDataIntegrityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CheckDataIntegrityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response checkDataIntegrityTooManyRequests
 */
 type CheckDataIntegrityTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CheckDataIntegrityTooManyRequests struct {
 func NewCheckDataIntegrityTooManyRequests() *CheckDataIntegrityTooManyRequests {
 
 	return &CheckDataIntegrityTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the check data integrity too many requests response
+func (o *CheckDataIntegrityTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *CheckDataIntegrityTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the check data integrity too many requests response
+func (o *CheckDataIntegrityTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the check data integrity too many requests response
@@ -159,6 +242,23 @@ func (o *CheckDataIntegrityTooManyRequests) SetPayload(payload *rest_model.APIEr
 
 // WriteResponse to the client
 func (o *CheckDataIntegrityTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

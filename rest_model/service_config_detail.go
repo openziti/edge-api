@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -95,11 +96,15 @@ func (m *ServiceConfigDetail) validateConfig(formats strfmt.Registry) error {
 
 	if m.Config != nil {
 		if err := m.Config.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("config")
 			}
+
 			return err
 		}
 	}
@@ -124,11 +129,15 @@ func (m *ServiceConfigDetail) validateService(formats strfmt.Registry) error {
 
 	if m.Service != nil {
 		if err := m.Service.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("service")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("service")
 			}
+
 			return err
 		}
 	}
@@ -166,12 +175,17 @@ func (m *ServiceConfigDetail) ContextValidate(ctx context.Context, formats strfm
 func (m *ServiceConfigDetail) contextValidateConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Config != nil {
+
 		if err := m.Config.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("config")
 			}
+
 			return err
 		}
 	}
@@ -182,12 +196,17 @@ func (m *ServiceConfigDetail) contextValidateConfig(ctx context.Context, formats
 func (m *ServiceConfigDetail) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
+
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("service")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("service")
 			}
+
 			return err
 		}
 	}

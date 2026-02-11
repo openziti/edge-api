@@ -36,16 +36,16 @@ import (
 )
 
 // ListIdentitysServiceConfigsHandlerFunc turns a function with the right signature into a list identitys service configs handler
-type ListIdentitysServiceConfigsHandlerFunc func(ListIdentitysServiceConfigsParams, interface{}) middleware.Responder
+type ListIdentitysServiceConfigsHandlerFunc func(ListIdentitysServiceConfigsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListIdentitysServiceConfigsHandlerFunc) Handle(params ListIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
+func (fn ListIdentitysServiceConfigsHandlerFunc) Handle(params ListIdentitysServiceConfigsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListIdentitysServiceConfigsHandler interface for that can handle valid list identitys service configs params
 type ListIdentitysServiceConfigsHandler interface {
-	Handle(ListIdentitysServiceConfigsParams, interface{}) middleware.Responder
+	Handle(ListIdentitysServiceConfigsParams, any) middleware.Responder
 }
 
 // NewListIdentitysServiceConfigs creates a new http.Handler for the list identitys service configs operation
@@ -53,12 +53,12 @@ func NewListIdentitysServiceConfigs(ctx *middleware.Context, handler ListIdentit
 	return &ListIdentitysServiceConfigs{Context: ctx, Handler: handler}
 }
 
-/* ListIdentitysServiceConfigs swagger:route GET /identities/{id}/service-configs Identity listIdentitysServiceConfigs
+/*
+	ListIdentitysServiceConfigs swagger:route GET /identities/{id}/service-configs Identity listIdentitysServiceConfigs
 
-List the service configs associated a specific identity
+# List the service configs associated a specific identity
 
 Retrieves a list of service configs associated to a specific identity
-
 */
 type ListIdentitysServiceConfigs struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListIdentitysServiceConfigs) ServeHTTP(rw http.ResponseWriter, r *http.
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListIdentitysServiceConfigs) ServeHTTP(rw http.ResponseWriter, r *http.
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

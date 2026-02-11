@@ -30,11 +30,14 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailMfaReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailMfaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailMfaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailMfaOK()
@@ -66,7 +69,7 @@ func (o *DetailMfaReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-identity/mfa] detailMfa", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewDetailMfaOK() *DetailMfaOK {
 	return &DetailMfaOK{}
 }
 
-/* DetailMfaOK describes a response with status code 200, with default header values.
+/*
+DetailMfaOK describes a response with status code 200, with default header values.
 
 The details of an MFA enrollment
 */
 type DetailMfaOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailMfaEnvelope
 }
 
-func (o *DetailMfaOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail mfa o k response has a 2xx status code
+func (o *DetailMfaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail mfa o k response has a 3xx status code
+func (o *DetailMfaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail mfa o k response has a 4xx status code
+func (o *DetailMfaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail mfa o k response has a 5xx status code
+func (o *DetailMfaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail mfa o k response a status code equal to that given
+func (o *DetailMfaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail mfa o k response
+func (o *DetailMfaOK) Code() int {
+	return 200
+}
+
+func (o *DetailMfaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaOK %s", 200, payload)
+}
+
+func (o *DetailMfaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaOK %s", 200, payload)
+}
+
 func (o *DetailMfaOK) GetPayload() *rest_model.DetailMfaEnvelope {
 	return o.Payload
 }
 
 func (o *DetailMfaOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailMfaEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailMfaOK binds the response header WWW-Authenticate
+func (o *DetailMfaOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailMfaUnauthorized creates a DetailMfaUnauthorized with default headers values
@@ -107,31 +187,108 @@ func NewDetailMfaUnauthorized() *DetailMfaUnauthorized {
 	return &DetailMfaUnauthorized{}
 }
 
-/* DetailMfaUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailMfaUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailMfaUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail mfa unauthorized response has a 2xx status code
+func (o *DetailMfaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail mfa unauthorized response has a 3xx status code
+func (o *DetailMfaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail mfa unauthorized response has a 4xx status code
+func (o *DetailMfaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail mfa unauthorized response has a 5xx status code
+func (o *DetailMfaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail mfa unauthorized response a status code equal to that given
+func (o *DetailMfaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail mfa unauthorized response
+func (o *DetailMfaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailMfaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaUnauthorized %s", 401, payload)
+}
+
+func (o *DetailMfaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaUnauthorized %s", 401, payload)
+}
+
 func (o *DetailMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailMfaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailMfaUnauthorized binds the response header WWW-Authenticate
+func (o *DetailMfaUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailMfaNotFound creates a DetailMfaNotFound with default headers values
@@ -139,29 +296,106 @@ func NewDetailMfaNotFound() *DetailMfaNotFound {
 	return &DetailMfaNotFound{}
 }
 
-/* DetailMfaNotFound describes a response with status code 404, with default header values.
+/*
+DetailMfaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailMfaNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailMfaNotFound) Error() string {
-	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail mfa not found response has a 2xx status code
+func (o *DetailMfaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail mfa not found response has a 3xx status code
+func (o *DetailMfaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail mfa not found response has a 4xx status code
+func (o *DetailMfaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail mfa not found response has a 5xx status code
+func (o *DetailMfaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail mfa not found response a status code equal to that given
+func (o *DetailMfaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail mfa not found response
+func (o *DetailMfaNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailMfaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaNotFound %s", 404, payload)
+}
+
+func (o *DetailMfaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/mfa][%d] detailMfaNotFound %s", 404, payload)
+}
+
 func (o *DetailMfaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailMfaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailMfaNotFound binds the response header WWW-Authenticate
+func (o *DetailMfaNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

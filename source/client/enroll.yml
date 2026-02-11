@@ -178,9 +178,9 @@ paths:
           type: object
           properties:
             username:
-              $ref: 'shared/authenticate.yml#/definitions/username'
+              $ref: '../shared/authenticate.yml#/definitions/username'
             password:
-              $ref: 'shared/authenticate.yml#/definitions/password'
+              $ref: '../shared/authenticate.yml#/definitions/password'
     post:
       summary: Enroll an identity via one-time-token
       description: |
@@ -297,22 +297,52 @@ paths:
 responses:
   erOttResponse:
     description: A response containing the edge routers signed certificates (server chain, server cert, CAs).
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
   routerExtendEnrollmentResponse:
     description: A response containing the edge routers new signed certificates (server chain, server cert, CAs).
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
   enrollmentCerts:
     description: A response containing and identities client certificate chains
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
   getJwksResponse:
     description: A JWKS response for enrollment.
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '../shared/jwks.yml#/definitions/jwks'
   nonceChallengeResponse:
     description: A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/nonceSignature'
 

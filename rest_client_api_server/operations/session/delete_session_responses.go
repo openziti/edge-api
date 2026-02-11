@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteSessionOKCode is the HTTP code returned for type DeleteSessionOK
 const DeleteSessionOKCode int = 200
 
-/*DeleteSessionOK The delete request was successful and the resource has been removed
+/*
+DeleteSessionOK The delete request was successful and the resource has been removed
 
 swagger:response deleteSessionOK
 */
 type DeleteSessionOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteSessionOK struct {
 func NewDeleteSessionOK() *DeleteSessionOK {
 
 	return &DeleteSessionOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete session o k response
+func (o *DeleteSessionOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteSessionOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete session o k response
+func (o *DeleteSessionOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete session o k response
@@ -72,6 +89,23 @@ func (o *DeleteSessionOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteSessionOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteSessionOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // DeleteSessionBadRequestCode is the HTTP code returned for type DeleteSessionBadRequest
 const DeleteSessionBadRequestCode int = 400
 
-/*DeleteSessionBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteSessionBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteSessionBadRequest
 */
 type DeleteSessionBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteSessionBadRequest struct {
 func NewDeleteSessionBadRequest() *DeleteSessionBadRequest {
 
 	return &DeleteSessionBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete session bad request response
+func (o *DeleteSessionBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteSessionBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete session bad request response
+func (o *DeleteSessionBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete session bad request response
@@ -116,6 +166,23 @@ func (o *DeleteSessionBadRequest) SetPayload(payload *rest_model.APIErrorEnvelop
 // WriteResponse to the client
 func (o *DeleteSessionBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteSessionBadRequest) WriteResponse(rw http.ResponseWriter, producer
 // DeleteSessionUnauthorizedCode is the HTTP code returned for type DeleteSessionUnauthorized
 const DeleteSessionUnauthorizedCode int = 401
 
-/*DeleteSessionUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteSessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteSessionUnauthorized
 */
 type DeleteSessionUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteSessionUnauthorized struct {
 func NewDeleteSessionUnauthorized() *DeleteSessionUnauthorized {
 
 	return &DeleteSessionUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete session unauthorized response
+func (o *DeleteSessionUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteSessionUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete session unauthorized response
+func (o *DeleteSessionUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete session unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteSessionUnauthorized) SetPayload(payload *rest_model.APIErrorEnvel
 // WriteResponse to the client
 func (o *DeleteSessionUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteSessionUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 // DeleteSessionConflictCode is the HTTP code returned for type DeleteSessionConflict
 const DeleteSessionConflictCode int = 409
 
-/*DeleteSessionConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*
+DeleteSessionConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteSessionConflict
 */
 type DeleteSessionConflict struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteSessionConflict struct {
 func NewDeleteSessionConflict() *DeleteSessionConflict {
 
 	return &DeleteSessionConflict{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete session conflict response
+func (o *DeleteSessionConflict) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteSessionConflict {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete session conflict response
+func (o *DeleteSessionConflict) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete session conflict response
@@ -204,6 +320,23 @@ func (o *DeleteSessionConflict) SetPayload(payload *rest_model.APIErrorEnvelope)
 // WriteResponse to the client
 func (o *DeleteSessionConflict) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(409)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteSessionConflict) WriteResponse(rw http.ResponseWriter, producer r
 // DeleteSessionTooManyRequestsCode is the HTTP code returned for type DeleteSessionTooManyRequests
 const DeleteSessionTooManyRequestsCode int = 429
 
-/*DeleteSessionTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteSessionTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteSessionTooManyRequests
 */
 type DeleteSessionTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteSessionTooManyRequests struct {
 func NewDeleteSessionTooManyRequests() *DeleteSessionTooManyRequests {
 
 	return &DeleteSessionTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete session too many requests response
+func (o *DeleteSessionTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteSessionTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete session too many requests response
+func (o *DeleteSessionTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete session too many requests response
@@ -248,6 +397,23 @@ func (o *DeleteSessionTooManyRequests) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *DeleteSessionTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *DeleteSessionTooManyRequests) WriteResponse(rw http.ResponseWriter, pro
 // DeleteSessionServiceUnavailableCode is the HTTP code returned for type DeleteSessionServiceUnavailable
 const DeleteSessionServiceUnavailableCode int = 503
 
-/*DeleteSessionServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeleteSessionServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deleteSessionServiceUnavailable
 */
 type DeleteSessionServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type DeleteSessionServiceUnavailable struct {
 func NewDeleteSessionServiceUnavailable() *DeleteSessionServiceUnavailable {
 
 	return &DeleteSessionServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete session service unavailable response
+func (o *DeleteSessionServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteSessionServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete session service unavailable response
+func (o *DeleteSessionServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete session service unavailable response
@@ -291,6 +473,23 @@ func (o *DeleteSessionServiceUnavailable) SetPayload(payload *rest_model.APIErro
 
 // WriteResponse to the client
 func (o *DeleteSessionServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

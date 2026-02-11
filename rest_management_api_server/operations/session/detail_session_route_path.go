@@ -36,16 +36,16 @@ import (
 )
 
 // DetailSessionRoutePathHandlerFunc turns a function with the right signature into a detail session route path handler
-type DetailSessionRoutePathHandlerFunc func(DetailSessionRoutePathParams, interface{}) middleware.Responder
+type DetailSessionRoutePathHandlerFunc func(DetailSessionRoutePathParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailSessionRoutePathHandlerFunc) Handle(params DetailSessionRoutePathParams, principal interface{}) middleware.Responder {
+func (fn DetailSessionRoutePathHandlerFunc) Handle(params DetailSessionRoutePathParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailSessionRoutePathHandler interface for that can handle valid detail session route path params
 type DetailSessionRoutePathHandler interface {
-	Handle(DetailSessionRoutePathParams, interface{}) middleware.Responder
+	Handle(DetailSessionRoutePathParams, any) middleware.Responder
 }
 
 // NewDetailSessionRoutePath creates a new http.Handler for the detail session route path operation
@@ -53,12 +53,12 @@ func NewDetailSessionRoutePath(ctx *middleware.Context, handler DetailSessionRou
 	return &DetailSessionRoutePath{Context: ctx, Handler: handler}
 }
 
-/* DetailSessionRoutePath swagger:route GET /sessions/{id}/route-path Session detailSessionRoutePath
+/*
+	DetailSessionRoutePath swagger:route GET /sessions/{id}/route-path Session detailSessionRoutePath
 
-Retrieves a single session's router path
+# Retrieves a single session's router path
 
 Retrieves a single session's route path by id. Requires admin access.
-
 */
 type DetailSessionRoutePath struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailSessionRoutePath) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailSessionRoutePath) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

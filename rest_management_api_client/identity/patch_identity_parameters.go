@@ -78,10 +78,12 @@ func NewPatchIdentityParamsWithHTTPClient(client *http.Client) *PatchIdentityPar
 	}
 }
 
-/* PatchIdentityParams contains all the parameters to send to the API endpoint
-   for the patch identity operation.
+/*
+PatchIdentityParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the patch identity operation.
+
+	Typically these are written to a http.Request.
 */
 type PatchIdentityParams struct {
 

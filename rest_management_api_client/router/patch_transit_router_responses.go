@@ -30,11 +30,14 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type PatchTransitRouterReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *PatchTransitRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *PatchTransitRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewPatchTransitRouterOK()
@@ -84,7 +87,7 @@ func (o *PatchTransitRouterReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /transit-routers/{id}] patchTransitRouter", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewPatchTransitRouterOK() *PatchTransitRouterOK {
 	return &PatchTransitRouterOK{}
 }
 
-/* PatchTransitRouterOK describes a response with status code 200, with default header values.
+/*
+PatchTransitRouterOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
 type PatchTransitRouterOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *PatchTransitRouterOK) Error() string {
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch transit router o k response has a 2xx status code
+func (o *PatchTransitRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch transit router o k response has a 3xx status code
+func (o *PatchTransitRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch transit router o k response has a 4xx status code
+func (o *PatchTransitRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch transit router o k response has a 5xx status code
+func (o *PatchTransitRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch transit router o k response a status code equal to that given
+func (o *PatchTransitRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch transit router o k response
+func (o *PatchTransitRouterOK) Code() int {
+	return 200
+}
+
+func (o *PatchTransitRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterOK %s", 200, payload)
+}
+
+func (o *PatchTransitRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterOK %s", 200, payload)
+}
+
 func (o *PatchTransitRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *PatchTransitRouterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchTransitRouterOK binds the response header WWW-Authenticate
+func (o *PatchTransitRouterOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchTransitRouterBadRequest creates a PatchTransitRouterBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewPatchTransitRouterBadRequest() *PatchTransitRouterBadRequest {
 	return &PatchTransitRouterBadRequest{}
 }
 
-/* PatchTransitRouterBadRequest describes a response with status code 400, with default header values.
+/*
+PatchTransitRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type PatchTransitRouterBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTransitRouterBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch transit router bad request response has a 2xx status code
+func (o *PatchTransitRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch transit router bad request response has a 3xx status code
+func (o *PatchTransitRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch transit router bad request response has a 4xx status code
+func (o *PatchTransitRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch transit router bad request response has a 5xx status code
+func (o *PatchTransitRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch transit router bad request response a status code equal to that given
+func (o *PatchTransitRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch transit router bad request response
+func (o *PatchTransitRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchTransitRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterBadRequest %s", 400, payload)
+}
+
+func (o *PatchTransitRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterBadRequest %s", 400, payload)
+}
+
 func (o *PatchTransitRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchTransitRouterBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchTransitRouterBadRequest binds the response header WWW-Authenticate
+func (o *PatchTransitRouterBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchTransitRouterUnauthorized creates a PatchTransitRouterUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewPatchTransitRouterUnauthorized() *PatchTransitRouterUnauthorized {
 	return &PatchTransitRouterUnauthorized{}
 }
 
-/* PatchTransitRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchTransitRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type PatchTransitRouterUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTransitRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch transit router unauthorized response has a 2xx status code
+func (o *PatchTransitRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch transit router unauthorized response has a 3xx status code
+func (o *PatchTransitRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch transit router unauthorized response has a 4xx status code
+func (o *PatchTransitRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch transit router unauthorized response has a 5xx status code
+func (o *PatchTransitRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch transit router unauthorized response a status code equal to that given
+func (o *PatchTransitRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch transit router unauthorized response
+func (o *PatchTransitRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchTransitRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterUnauthorized %s", 401, payload)
+}
+
+func (o *PatchTransitRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterUnauthorized %s", 401, payload)
+}
+
 func (o *PatchTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchTransitRouterUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchTransitRouterUnauthorized binds the response header WWW-Authenticate
+func (o *PatchTransitRouterUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchTransitRouterNotFound creates a PatchTransitRouterNotFound with default headers values
@@ -189,31 +423,108 @@ func NewPatchTransitRouterNotFound() *PatchTransitRouterNotFound {
 	return &PatchTransitRouterNotFound{}
 }
 
-/* PatchTransitRouterNotFound describes a response with status code 404, with default header values.
+/*
+PatchTransitRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type PatchTransitRouterNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTransitRouterNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch transit router not found response has a 2xx status code
+func (o *PatchTransitRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch transit router not found response has a 3xx status code
+func (o *PatchTransitRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch transit router not found response has a 4xx status code
+func (o *PatchTransitRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch transit router not found response has a 5xx status code
+func (o *PatchTransitRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch transit router not found response a status code equal to that given
+func (o *PatchTransitRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch transit router not found response
+func (o *PatchTransitRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchTransitRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterNotFound %s", 404, payload)
+}
+
+func (o *PatchTransitRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterNotFound %s", 404, payload)
+}
+
 func (o *PatchTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchTransitRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchTransitRouterNotFound binds the response header WWW-Authenticate
+func (o *PatchTransitRouterNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchTransitRouterTooManyRequests creates a PatchTransitRouterTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewPatchTransitRouterTooManyRequests() *PatchTransitRouterTooManyRequests {
 	return &PatchTransitRouterTooManyRequests{}
 }
 
-/* PatchTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchTransitRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type PatchTransitRouterTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTransitRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch transit router too many requests response has a 2xx status code
+func (o *PatchTransitRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch transit router too many requests response has a 3xx status code
+func (o *PatchTransitRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch transit router too many requests response has a 4xx status code
+func (o *PatchTransitRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch transit router too many requests response has a 5xx status code
+func (o *PatchTransitRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch transit router too many requests response a status code equal to that given
+func (o *PatchTransitRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch transit router too many requests response
+func (o *PatchTransitRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchTransitRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchTransitRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchTransitRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchTransitRouterTooManyRequests binds the response header WWW-Authenticate
+func (o *PatchTransitRouterTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchTransitRouterServiceUnavailable creates a PatchTransitRouterServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewPatchTransitRouterServiceUnavailable() *PatchTransitRouterServiceUnavail
 	return &PatchTransitRouterServiceUnavailable{}
 }
 
-/* PatchTransitRouterServiceUnavailable describes a response with status code 503, with default header values.
+/*
+PatchTransitRouterServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type PatchTransitRouterServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchTransitRouterServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this patch transit router service unavailable response has a 2xx status code
+func (o *PatchTransitRouterServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch transit router service unavailable response has a 3xx status code
+func (o *PatchTransitRouterServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch transit router service unavailable response has a 4xx status code
+func (o *PatchTransitRouterServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch transit router service unavailable response has a 5xx status code
+func (o *PatchTransitRouterServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this patch transit router service unavailable response a status code equal to that given
+func (o *PatchTransitRouterServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the patch transit router service unavailable response
+func (o *PatchTransitRouterServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *PatchTransitRouterServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterServiceUnavailable %s", 503, payload)
+}
+
+func (o *PatchTransitRouterServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /transit-routers/{id}][%d] patchTransitRouterServiceUnavailable %s", 503, payload)
+}
+
 func (o *PatchTransitRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchTransitRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchTransitRouterServiceUnavailable binds the response header WWW-Authenticate
+func (o *PatchTransitRouterServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

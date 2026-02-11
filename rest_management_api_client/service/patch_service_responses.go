@@ -30,11 +30,14 @@ package service
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type PatchServiceReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *PatchServiceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *PatchServiceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewPatchServiceOK()
@@ -84,7 +87,7 @@ func (o *PatchServiceReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /services/{id}] patchService", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewPatchServiceOK() *PatchServiceOK {
 	return &PatchServiceOK{}
 }
 
-/* PatchServiceOK describes a response with status code 200, with default header values.
+/*
+PatchServiceOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
 type PatchServiceOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *PatchServiceOK) Error() string {
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch service o k response has a 2xx status code
+func (o *PatchServiceOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch service o k response has a 3xx status code
+func (o *PatchServiceOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch service o k response has a 4xx status code
+func (o *PatchServiceOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch service o k response has a 5xx status code
+func (o *PatchServiceOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch service o k response a status code equal to that given
+func (o *PatchServiceOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch service o k response
+func (o *PatchServiceOK) Code() int {
+	return 200
+}
+
+func (o *PatchServiceOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceOK %s", 200, payload)
+}
+
+func (o *PatchServiceOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceOK %s", 200, payload)
+}
+
 func (o *PatchServiceOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *PatchServiceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchServiceOK binds the response header WWW-Authenticate
+func (o *PatchServiceOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchServiceBadRequest creates a PatchServiceBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewPatchServiceBadRequest() *PatchServiceBadRequest {
 	return &PatchServiceBadRequest{}
 }
 
-/* PatchServiceBadRequest describes a response with status code 400, with default header values.
+/*
+PatchServiceBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type PatchServiceBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchServiceBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch service bad request response has a 2xx status code
+func (o *PatchServiceBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch service bad request response has a 3xx status code
+func (o *PatchServiceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch service bad request response has a 4xx status code
+func (o *PatchServiceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch service bad request response has a 5xx status code
+func (o *PatchServiceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch service bad request response a status code equal to that given
+func (o *PatchServiceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch service bad request response
+func (o *PatchServiceBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchServiceBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceBadRequest %s", 400, payload)
+}
+
+func (o *PatchServiceBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceBadRequest %s", 400, payload)
+}
+
 func (o *PatchServiceBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchServiceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchServiceBadRequest binds the response header WWW-Authenticate
+func (o *PatchServiceBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchServiceUnauthorized creates a PatchServiceUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewPatchServiceUnauthorized() *PatchServiceUnauthorized {
 	return &PatchServiceUnauthorized{}
 }
 
-/* PatchServiceUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchServiceUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type PatchServiceUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchServiceUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch service unauthorized response has a 2xx status code
+func (o *PatchServiceUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch service unauthorized response has a 3xx status code
+func (o *PatchServiceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch service unauthorized response has a 4xx status code
+func (o *PatchServiceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch service unauthorized response has a 5xx status code
+func (o *PatchServiceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch service unauthorized response a status code equal to that given
+func (o *PatchServiceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch service unauthorized response
+func (o *PatchServiceUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchServiceUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceUnauthorized %s", 401, payload)
+}
+
+func (o *PatchServiceUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceUnauthorized %s", 401, payload)
+}
+
 func (o *PatchServiceUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchServiceUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchServiceUnauthorized binds the response header WWW-Authenticate
+func (o *PatchServiceUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchServiceNotFound creates a PatchServiceNotFound with default headers values
@@ -189,31 +423,108 @@ func NewPatchServiceNotFound() *PatchServiceNotFound {
 	return &PatchServiceNotFound{}
 }
 
-/* PatchServiceNotFound describes a response with status code 404, with default header values.
+/*
+PatchServiceNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type PatchServiceNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchServiceNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch service not found response has a 2xx status code
+func (o *PatchServiceNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch service not found response has a 3xx status code
+func (o *PatchServiceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch service not found response has a 4xx status code
+func (o *PatchServiceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch service not found response has a 5xx status code
+func (o *PatchServiceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch service not found response a status code equal to that given
+func (o *PatchServiceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch service not found response
+func (o *PatchServiceNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchServiceNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceNotFound %s", 404, payload)
+}
+
+func (o *PatchServiceNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceNotFound %s", 404, payload)
+}
+
 func (o *PatchServiceNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchServiceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchServiceNotFound binds the response header WWW-Authenticate
+func (o *PatchServiceNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchServiceTooManyRequests creates a PatchServiceTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewPatchServiceTooManyRequests() *PatchServiceTooManyRequests {
 	return &PatchServiceTooManyRequests{}
 }
 
-/* PatchServiceTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchServiceTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type PatchServiceTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchServiceTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch service too many requests response has a 2xx status code
+func (o *PatchServiceTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch service too many requests response has a 3xx status code
+func (o *PatchServiceTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch service too many requests response has a 4xx status code
+func (o *PatchServiceTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch service too many requests response has a 5xx status code
+func (o *PatchServiceTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch service too many requests response a status code equal to that given
+func (o *PatchServiceTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch service too many requests response
+func (o *PatchServiceTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchServiceTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchServiceTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchServiceTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchServiceTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchServiceTooManyRequests binds the response header WWW-Authenticate
+func (o *PatchServiceTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchServiceServiceUnavailable creates a PatchServiceServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewPatchServiceServiceUnavailable() *PatchServiceServiceUnavailable {
 	return &PatchServiceServiceUnavailable{}
 }
 
-/* PatchServiceServiceUnavailable describes a response with status code 503, with default header values.
+/*
+PatchServiceServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type PatchServiceServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchServiceServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this patch service service unavailable response has a 2xx status code
+func (o *PatchServiceServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch service service unavailable response has a 3xx status code
+func (o *PatchServiceServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch service service unavailable response has a 4xx status code
+func (o *PatchServiceServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch service service unavailable response has a 5xx status code
+func (o *PatchServiceServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this patch service service unavailable response a status code equal to that given
+func (o *PatchServiceServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the patch service service unavailable response
+func (o *PatchServiceServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *PatchServiceServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceServiceUnavailable %s", 503, payload)
+}
+
+func (o *PatchServiceServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /services/{id}][%d] patchServiceServiceUnavailable %s", 503, payload)
+}
+
 func (o *PatchServiceServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchServiceServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchServiceServiceUnavailable binds the response header WWW-Authenticate
+func (o *PatchServiceServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

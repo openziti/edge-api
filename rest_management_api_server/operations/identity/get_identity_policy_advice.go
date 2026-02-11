@@ -36,16 +36,16 @@ import (
 )
 
 // GetIdentityPolicyAdviceHandlerFunc turns a function with the right signature into a get identity policy advice handler
-type GetIdentityPolicyAdviceHandlerFunc func(GetIdentityPolicyAdviceParams, interface{}) middleware.Responder
+type GetIdentityPolicyAdviceHandlerFunc func(GetIdentityPolicyAdviceParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetIdentityPolicyAdviceHandlerFunc) Handle(params GetIdentityPolicyAdviceParams, principal interface{}) middleware.Responder {
+func (fn GetIdentityPolicyAdviceHandlerFunc) Handle(params GetIdentityPolicyAdviceParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetIdentityPolicyAdviceHandler interface for that can handle valid get identity policy advice params
 type GetIdentityPolicyAdviceHandler interface {
-	Handle(GetIdentityPolicyAdviceParams, interface{}) middleware.Responder
+	Handle(GetIdentityPolicyAdviceParams, any) middleware.Responder
 }
 
 // NewGetIdentityPolicyAdvice creates a new http.Handler for the get identity policy advice operation
@@ -53,16 +53,15 @@ func NewGetIdentityPolicyAdvice(ctx *middleware.Context, handler GetIdentityPoli
 	return &GetIdentityPolicyAdvice{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityPolicyAdvice swagger:route GET /identities/{id}/policy-advice/{serviceId} Identity getIdentityPolicyAdvice
+/*
+	GetIdentityPolicyAdvice swagger:route GET /identities/{id}/policy-advice/{serviceId} Identity getIdentityPolicyAdvice
 
-Analyze policies relating the given identity and service
+# Analyze policies relating the given identity and service
 
 Analyzes policies to see if the given identity should be able to dial or bind the given service. |
 Will check services policies to see if the identity can access the service. Will check edge router policies |
 to check if the identity and service have access to common edge routers so that a connnection can be made. |
 Will also check if at least one edge router is on-line. Requires admin access.
-
-
 */
 type GetIdentityPolicyAdvice struct {
 	Context *middleware.Context
@@ -83,9 +82,9 @@ func (o *GetIdentityPolicyAdvice) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -94,6 +93,7 @@ func (o *GetIdentityPolicyAdvice) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

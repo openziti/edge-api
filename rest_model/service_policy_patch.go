@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -104,11 +105,15 @@ func (m *ServicePolicyPatch) validateIdentityRoles(formats strfmt.Registry) erro
 	}
 
 	if err := m.IdentityRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("identityRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("identityRoles")
 		}
+
 		return err
 	}
 
@@ -121,11 +126,15 @@ func (m *ServicePolicyPatch) validatePostureCheckRoles(formats strfmt.Registry) 
 	}
 
 	if err := m.PostureCheckRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("postureCheckRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("postureCheckRoles")
 		}
+
 		return err
 	}
 
@@ -138,11 +147,15 @@ func (m *ServicePolicyPatch) validateSemantic(formats strfmt.Registry) error {
 	}
 
 	if err := m.Semantic.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("semantic")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("semantic")
 		}
+
 		return err
 	}
 
@@ -155,11 +168,15 @@ func (m *ServicePolicyPatch) validateServiceRoles(formats strfmt.Registry) error
 	}
 
 	if err := m.ServiceRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("serviceRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("serviceRoles")
 		}
+
 		return err
 	}
 
@@ -173,11 +190,15 @@ func (m *ServicePolicyPatch) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -191,11 +212,15 @@ func (m *ServicePolicyPatch) validateType(formats strfmt.Registry) error {
 	}
 
 	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("type")
 		}
+
 		return err
 	}
 
@@ -239,11 +264,15 @@ func (m *ServicePolicyPatch) ContextValidate(ctx context.Context, formats strfmt
 func (m *ServicePolicyPatch) contextValidateIdentityRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.IdentityRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("identityRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("identityRoles")
 		}
+
 		return err
 	}
 
@@ -253,11 +282,15 @@ func (m *ServicePolicyPatch) contextValidateIdentityRoles(ctx context.Context, f
 func (m *ServicePolicyPatch) contextValidatePostureCheckRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.PostureCheckRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("postureCheckRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("postureCheckRoles")
 		}
+
 		return err
 	}
 
@@ -266,12 +299,20 @@ func (m *ServicePolicyPatch) contextValidatePostureCheckRoles(ctx context.Contex
 
 func (m *ServicePolicyPatch) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Semantic) { // not required
+		return nil
+	}
+
 	if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("semantic")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("semantic")
 		}
+
 		return err
 	}
 
@@ -281,11 +322,15 @@ func (m *ServicePolicyPatch) contextValidateSemantic(ctx context.Context, format
 func (m *ServicePolicyPatch) contextValidateServiceRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.ServiceRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("serviceRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("serviceRoles")
 		}
+
 		return err
 	}
 
@@ -295,12 +340,21 @@ func (m *ServicePolicyPatch) contextValidateServiceRoles(ctx context.Context, fo
 func (m *ServicePolicyPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -310,12 +364,20 @@ func (m *ServicePolicyPatch) contextValidateTags(ctx context.Context, formats st
 
 func (m *ServicePolicyPatch) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
 	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("type")
 		}
+
 		return err
 	}
 

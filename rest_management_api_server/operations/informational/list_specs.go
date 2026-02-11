@@ -53,12 +53,12 @@ func NewListSpecs(ctx *middleware.Context, handler ListSpecsHandler) *ListSpecs 
 	return &ListSpecs{Context: ctx, Handler: handler}
 }
 
-/* ListSpecs swagger:route GET /specs Informational listSpecs
+/*
+	ListSpecs swagger:route GET /specs Informational listSpecs
 
-Returns a list of API specs
+# Returns a list of API specs
 
 Returns a list of spec files embedded within the controller for consumption/documentation/code geneartion
-
 */
 type ListSpecs struct {
 	Context *middleware.Context
@@ -77,6 +77,7 @@ func (o *ListSpecs) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

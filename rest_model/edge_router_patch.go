@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -103,11 +104,15 @@ func (m *EdgeRouterPatch) validateAppData(formats strfmt.Registry) error {
 
 	if m.AppData != nil {
 		if err := m.AppData.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("appData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("appData")
 			}
+
 			return err
 		}
 	}
@@ -138,11 +143,15 @@ func (m *EdgeRouterPatch) validateRoleAttributes(formats strfmt.Registry) error 
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -157,11 +166,15 @@ func (m *EdgeRouterPatch) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -194,12 +207,21 @@ func (m *EdgeRouterPatch) ContextValidate(ctx context.Context, formats strfmt.Re
 func (m *EdgeRouterPatch) contextValidateAppData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppData != nil {
+
+		if swag.IsZero(m.AppData) { // not required
+			return nil
+		}
+
 		if err := m.AppData.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("appData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("appData")
 			}
+
 			return err
 		}
 	}
@@ -211,11 +233,15 @@ func (m *EdgeRouterPatch) contextValidateRoleAttributes(ctx context.Context, for
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -226,12 +252,21 @@ func (m *EdgeRouterPatch) contextValidateRoleAttributes(ctx context.Context, for
 func (m *EdgeRouterPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}

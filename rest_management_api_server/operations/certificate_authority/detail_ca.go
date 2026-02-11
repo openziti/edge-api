@@ -36,16 +36,16 @@ import (
 )
 
 // DetailCaHandlerFunc turns a function with the right signature into a detail ca handler
-type DetailCaHandlerFunc func(DetailCaParams, interface{}) middleware.Responder
+type DetailCaHandlerFunc func(DetailCaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailCaHandlerFunc) Handle(params DetailCaParams, principal interface{}) middleware.Responder {
+func (fn DetailCaHandlerFunc) Handle(params DetailCaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailCaHandler interface for that can handle valid detail ca params
 type DetailCaHandler interface {
-	Handle(DetailCaParams, interface{}) middleware.Responder
+	Handle(DetailCaParams, any) middleware.Responder
 }
 
 // NewDetailCa creates a new http.Handler for the detail ca operation
@@ -53,12 +53,12 @@ func NewDetailCa(ctx *middleware.Context, handler DetailCaHandler) *DetailCa {
 	return &DetailCa{Context: ctx, Handler: handler}
 }
 
-/* DetailCa swagger:route GET /cas/{id} Certificate Authority detailCa
+/*
+	DetailCa swagger:route GET /cas/{id} Certificate Authority detailCa
 
-Retrieves a single CA
+# Retrieves a single CA
 
 Retrieves a single CA by id. Requires admin access.
-
 */
 type DetailCa struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

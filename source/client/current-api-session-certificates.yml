@@ -105,14 +105,32 @@ paths:
 responses:
   listCurrentApiSessionCertificates:
     description: A list of the current API Session's certificate
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listCurrentAPISessionCertificatesEnvelope'
   createCurrentApiSessionCertificateResponse:
     description: A response of a create API Session certificate
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/createCurrentApiSessionCertificateEnvelope'
   detailCurrentApiSessionCertificate:
     description: A response containing a single API Session certificate
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailCurrentApiSessionCertificateEnvelope'
 

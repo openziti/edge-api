@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -74,11 +75,15 @@ func (m *EnrollmentCertsEnvelope) validateData(formats strfmt.Registry) error {
 
 	if m.Data != nil {
 		if err := m.Data.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("data")
 			}
+
 			return err
 		}
 	}
@@ -93,11 +98,15 @@ func (m *EnrollmentCertsEnvelope) validateMeta(formats strfmt.Registry) error {
 
 	if m.Meta != nil {
 		if err := m.Meta.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}
@@ -126,12 +135,21 @@ func (m *EnrollmentCertsEnvelope) ContextValidate(ctx context.Context, formats s
 func (m *EnrollmentCertsEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
+
+		if swag.IsZero(m.Data) { // not required
+			return nil
+		}
+
 		if err := m.Data.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("data")
 			}
+
 			return err
 		}
 	}
@@ -142,12 +160,21 @@ func (m *EnrollmentCertsEnvelope) contextValidateData(ctx context.Context, forma
 func (m *EnrollmentCertsEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
+		if swag.IsZero(m.Meta) { // not required
+			return nil
+		}
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}

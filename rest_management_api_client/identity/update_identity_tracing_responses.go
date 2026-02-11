@@ -30,11 +30,14 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type UpdateIdentityTracingReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateIdentityTracingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateIdentityTracingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateIdentityTracingOK()
@@ -84,7 +87,7 @@ func (o *UpdateIdentityTracingReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /identities/{id}/trace] updateIdentityTracing", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewUpdateIdentityTracingOK() *UpdateIdentityTracingOK {
 	return &UpdateIdentityTracingOK{}
 }
 
-/* UpdateIdentityTracingOK describes a response with status code 200, with default header values.
+/*
+UpdateIdentityTracingOK describes a response with status code 200, with default header values.
 
 Returns the document that represents the trace state
 */
 type UpdateIdentityTracingOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.TraceDetailEnvelope
 }
 
-func (o *UpdateIdentityTracingOK) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update identity tracing o k response has a 2xx status code
+func (o *UpdateIdentityTracingOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update identity tracing o k response has a 3xx status code
+func (o *UpdateIdentityTracingOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity tracing o k response has a 4xx status code
+func (o *UpdateIdentityTracingOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update identity tracing o k response has a 5xx status code
+func (o *UpdateIdentityTracingOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity tracing o k response a status code equal to that given
+func (o *UpdateIdentityTracingOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update identity tracing o k response
+func (o *UpdateIdentityTracingOK) Code() int {
+	return 200
+}
+
+func (o *UpdateIdentityTracingOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingOK %s", 200, payload)
+}
+
+func (o *UpdateIdentityTracingOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingOK %s", 200, payload)
+}
+
 func (o *UpdateIdentityTracingOK) GetPayload() *rest_model.TraceDetailEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateIdentityTracingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.TraceDetailEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateIdentityTracingOK binds the response header WWW-Authenticate
+func (o *UpdateIdentityTracingOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateIdentityTracingBadRequest creates a UpdateIdentityTracingBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewUpdateIdentityTracingBadRequest() *UpdateIdentityTracingBadRequest {
 	return &UpdateIdentityTracingBadRequest{}
 }
 
-/* UpdateIdentityTracingBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateIdentityTracingBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type UpdateIdentityTracingBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityTracingBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update identity tracing bad request response has a 2xx status code
+func (o *UpdateIdentityTracingBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity tracing bad request response has a 3xx status code
+func (o *UpdateIdentityTracingBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity tracing bad request response has a 4xx status code
+func (o *UpdateIdentityTracingBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity tracing bad request response has a 5xx status code
+func (o *UpdateIdentityTracingBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity tracing bad request response a status code equal to that given
+func (o *UpdateIdentityTracingBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update identity tracing bad request response
+func (o *UpdateIdentityTracingBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateIdentityTracingBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingBadRequest %s", 400, payload)
+}
+
+func (o *UpdateIdentityTracingBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingBadRequest %s", 400, payload)
+}
+
 func (o *UpdateIdentityTracingBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateIdentityTracingBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateIdentityTracingBadRequest binds the response header WWW-Authenticate
+func (o *UpdateIdentityTracingBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateIdentityTracingUnauthorized creates a UpdateIdentityTracingUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewUpdateIdentityTracingUnauthorized() *UpdateIdentityTracingUnauthorized {
 	return &UpdateIdentityTracingUnauthorized{}
 }
 
-/* UpdateIdentityTracingUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateIdentityTracingUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type UpdateIdentityTracingUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityTracingUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update identity tracing unauthorized response has a 2xx status code
+func (o *UpdateIdentityTracingUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity tracing unauthorized response has a 3xx status code
+func (o *UpdateIdentityTracingUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity tracing unauthorized response has a 4xx status code
+func (o *UpdateIdentityTracingUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity tracing unauthorized response has a 5xx status code
+func (o *UpdateIdentityTracingUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity tracing unauthorized response a status code equal to that given
+func (o *UpdateIdentityTracingUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update identity tracing unauthorized response
+func (o *UpdateIdentityTracingUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateIdentityTracingUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateIdentityTracingUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateIdentityTracingUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateIdentityTracingUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateIdentityTracingUnauthorized binds the response header WWW-Authenticate
+func (o *UpdateIdentityTracingUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateIdentityTracingNotFound creates a UpdateIdentityTracingNotFound with default headers values
@@ -189,31 +423,108 @@ func NewUpdateIdentityTracingNotFound() *UpdateIdentityTracingNotFound {
 	return &UpdateIdentityTracingNotFound{}
 }
 
-/* UpdateIdentityTracingNotFound describes a response with status code 404, with default header values.
+/*
+UpdateIdentityTracingNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type UpdateIdentityTracingNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityTracingNotFound) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update identity tracing not found response has a 2xx status code
+func (o *UpdateIdentityTracingNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity tracing not found response has a 3xx status code
+func (o *UpdateIdentityTracingNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity tracing not found response has a 4xx status code
+func (o *UpdateIdentityTracingNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity tracing not found response has a 5xx status code
+func (o *UpdateIdentityTracingNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity tracing not found response a status code equal to that given
+func (o *UpdateIdentityTracingNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update identity tracing not found response
+func (o *UpdateIdentityTracingNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateIdentityTracingNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingNotFound %s", 404, payload)
+}
+
+func (o *UpdateIdentityTracingNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingNotFound %s", 404, payload)
+}
+
 func (o *UpdateIdentityTracingNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateIdentityTracingNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateIdentityTracingNotFound binds the response header WWW-Authenticate
+func (o *UpdateIdentityTracingNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateIdentityTracingTooManyRequests creates a UpdateIdentityTracingTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewUpdateIdentityTracingTooManyRequests() *UpdateIdentityTracingTooManyRequ
 	return &UpdateIdentityTracingTooManyRequests{}
 }
 
-/* UpdateIdentityTracingTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateIdentityTracingTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type UpdateIdentityTracingTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityTracingTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update identity tracing too many requests response has a 2xx status code
+func (o *UpdateIdentityTracingTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity tracing too many requests response has a 3xx status code
+func (o *UpdateIdentityTracingTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity tracing too many requests response has a 4xx status code
+func (o *UpdateIdentityTracingTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update identity tracing too many requests response has a 5xx status code
+func (o *UpdateIdentityTracingTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update identity tracing too many requests response a status code equal to that given
+func (o *UpdateIdentityTracingTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update identity tracing too many requests response
+func (o *UpdateIdentityTracingTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateIdentityTracingTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateIdentityTracingTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateIdentityTracingTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateIdentityTracingTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateIdentityTracingTooManyRequests binds the response header WWW-Authenticate
+func (o *UpdateIdentityTracingTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateIdentityTracingServiceUnavailable creates a UpdateIdentityTracingServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewUpdateIdentityTracingServiceUnavailable() *UpdateIdentityTracingServiceU
 	return &UpdateIdentityTracingServiceUnavailable{}
 }
 
-/* UpdateIdentityTracingServiceUnavailable describes a response with status code 503, with default header values.
+/*
+UpdateIdentityTracingServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type UpdateIdentityTracingServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateIdentityTracingServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this update identity tracing service unavailable response has a 2xx status code
+func (o *UpdateIdentityTracingServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update identity tracing service unavailable response has a 3xx status code
+func (o *UpdateIdentityTracingServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update identity tracing service unavailable response has a 4xx status code
+func (o *UpdateIdentityTracingServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update identity tracing service unavailable response has a 5xx status code
+func (o *UpdateIdentityTracingServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update identity tracing service unavailable response a status code equal to that given
+func (o *UpdateIdentityTracingServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the update identity tracing service unavailable response
+func (o *UpdateIdentityTracingServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *UpdateIdentityTracingServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingServiceUnavailable %s", 503, payload)
+}
+
+func (o *UpdateIdentityTracingServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /identities/{id}/trace][%d] updateIdentityTracingServiceUnavailable %s", 503, payload)
+}
+
 func (o *UpdateIdentityTracingServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateIdentityTracingServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateIdentityTracingServiceUnavailable binds the response header WWW-Authenticate
+func (o *UpdateIdentityTracingServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

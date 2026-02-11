@@ -76,10 +76,12 @@ func NewEnrollUpdbParamsWithHTTPClient(client *http.Client) *EnrollUpdbParams {
 	}
 }
 
-/* EnrollUpdbParams contains all the parameters to send to the API endpoint
-   for the enroll updb operation.
+/*
+EnrollUpdbParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the enroll updb operation.
+
+	Typically these are written to a http.Request.
 */
 type EnrollUpdbParams struct {
 

@@ -36,16 +36,16 @@ import (
 )
 
 // ListControllerSettingsHandlerFunc turns a function with the right signature into a list controller settings handler
-type ListControllerSettingsHandlerFunc func(ListControllerSettingsParams, interface{}) middleware.Responder
+type ListControllerSettingsHandlerFunc func(ListControllerSettingsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListControllerSettingsHandlerFunc) Handle(params ListControllerSettingsParams, principal interface{}) middleware.Responder {
+func (fn ListControllerSettingsHandlerFunc) Handle(params ListControllerSettingsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListControllerSettingsHandler interface for that can handle valid list controller settings params
 type ListControllerSettingsHandler interface {
-	Handle(ListControllerSettingsParams, interface{}) middleware.Responder
+	Handle(ListControllerSettingsParams, any) middleware.Responder
 }
 
 // NewListControllerSettings creates a new http.Handler for the list controller settings operation
@@ -53,13 +53,12 @@ func NewListControllerSettings(ctx *middleware.Context, handler ListControllerSe
 	return &ListControllerSettings{Context: ctx, Handler: handler}
 }
 
-/* ListControllerSettings swagger:route GET /controller-settings Settings listControllerSettings
+/*
+	ListControllerSettings swagger:route GET /controller-settings Settings listControllerSettings
 
-List controller settings
+# List controller settings
 
 Retrieves a list controller settings including the base `global` settings object and any overriding controller specific settings.
-
-
 */
 type ListControllerSettings struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListControllerSettings) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListControllerSettings) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

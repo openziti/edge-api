@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteCurrentAPISessionCertificateOKCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateOK
 const DeleteCurrentAPISessionCertificateOKCode int = 200
 
-/*DeleteCurrentAPISessionCertificateOK The delete request was successful and the resource has been removed
+/*
+DeleteCurrentAPISessionCertificateOK The delete request was successful and the resource has been removed
 
 swagger:response deleteCurrentApiSessionCertificateOK
 */
 type DeleteCurrentAPISessionCertificateOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteCurrentAPISessionCertificateOK struct {
 func NewDeleteCurrentAPISessionCertificateOK() *DeleteCurrentAPISessionCertificateOK {
 
 	return &DeleteCurrentAPISessionCertificateOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session certificate o k response
+func (o *DeleteCurrentAPISessionCertificateOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionCertificateOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session certificate o k response
+func (o *DeleteCurrentAPISessionCertificateOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session certificate o k response
@@ -72,6 +89,23 @@ func (o *DeleteCurrentAPISessionCertificateOK) SetPayload(payload *rest_model.Em
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionCertificateOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteCurrentAPISessionCertificateOK) WriteResponse(rw http.ResponseWri
 // DeleteCurrentAPISessionCertificateBadRequestCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateBadRequest
 const DeleteCurrentAPISessionCertificateBadRequestCode int = 400
 
-/*DeleteCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteCurrentApiSessionCertificateBadRequest
 */
 type DeleteCurrentAPISessionCertificateBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteCurrentAPISessionCertificateBadRequest struct {
 func NewDeleteCurrentAPISessionCertificateBadRequest() *DeleteCurrentAPISessionCertificateBadRequest {
 
 	return &DeleteCurrentAPISessionCertificateBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session certificate bad request response
+func (o *DeleteCurrentAPISessionCertificateBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionCertificateBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session certificate bad request response
+func (o *DeleteCurrentAPISessionCertificateBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session certificate bad request response
@@ -116,6 +166,23 @@ func (o *DeleteCurrentAPISessionCertificateBadRequest) SetPayload(payload *rest_
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.Res
 // DeleteCurrentAPISessionCertificateUnauthorizedCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateUnauthorized
 const DeleteCurrentAPISessionCertificateUnauthorizedCode int = 401
 
-/*DeleteCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteCurrentApiSessionCertificateUnauthorized
 */
 type DeleteCurrentAPISessionCertificateUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteCurrentAPISessionCertificateUnauthorized struct {
 func NewDeleteCurrentAPISessionCertificateUnauthorized() *DeleteCurrentAPISessionCertificateUnauthorized {
 
 	return &DeleteCurrentAPISessionCertificateUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session certificate unauthorized response
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionCertificateUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session certificate unauthorized response
+func (o *DeleteCurrentAPISessionCertificateUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session certificate unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteCurrentAPISessionCertificateUnauthorized) SetPayload(payload *res
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionCertificateUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteCurrentAPISessionCertificateUnauthorized) WriteResponse(rw http.R
 // DeleteCurrentAPISessionCertificateTooManyRequestsCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateTooManyRequests
 const DeleteCurrentAPISessionCertificateTooManyRequestsCode int = 429
 
-/*DeleteCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteCurrentApiSessionCertificateTooManyRequests
 */
 type DeleteCurrentAPISessionCertificateTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteCurrentAPISessionCertificateTooManyRequests struct {
 func NewDeleteCurrentAPISessionCertificateTooManyRequests() *DeleteCurrentAPISessionCertificateTooManyRequests {
 
 	return &DeleteCurrentAPISessionCertificateTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session certificate too many requests response
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionCertificateTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session certificate too many requests response
+func (o *DeleteCurrentAPISessionCertificateTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session certificate too many requests response
@@ -204,6 +320,23 @@ func (o *DeleteCurrentAPISessionCertificateTooManyRequests) SetPayload(payload *
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw htt
 // DeleteCurrentAPISessionCertificateServiceUnavailableCode is the HTTP code returned for type DeleteCurrentAPISessionCertificateServiceUnavailable
 const DeleteCurrentAPISessionCertificateServiceUnavailableCode int = 503
 
-/*DeleteCurrentAPISessionCertificateServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeleteCurrentAPISessionCertificateServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deleteCurrentApiSessionCertificateServiceUnavailable
 */
 type DeleteCurrentAPISessionCertificateServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteCurrentAPISessionCertificateServiceUnavailable struct {
 func NewDeleteCurrentAPISessionCertificateServiceUnavailable() *DeleteCurrentAPISessionCertificateServiceUnavailable {
 
 	return &DeleteCurrentAPISessionCertificateServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session certificate service unavailable response
+func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionCertificateServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session certificate service unavailable response
+func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session certificate service unavailable response
@@ -247,6 +396,23 @@ func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) SetPayload(payloa
 
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionCertificateServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

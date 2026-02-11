@@ -50,7 +50,6 @@ func NewDeleteSessionParams() DeleteSessionParams {
 //
 // swagger:parameters deleteSession
 type DeleteSessionParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

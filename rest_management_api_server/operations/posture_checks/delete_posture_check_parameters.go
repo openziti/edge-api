@@ -50,7 +50,6 @@ func NewDeletePostureCheckParams() DeletePostureCheckParams {
 //
 // swagger:parameters deletePostureCheck
 type DeletePostureCheckParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

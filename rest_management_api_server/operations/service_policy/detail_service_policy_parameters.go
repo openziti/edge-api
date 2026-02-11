@@ -50,7 +50,6 @@ func NewDetailServicePolicyParams() DetailServicePolicyParams {
 //
 // swagger:parameters detailServicePolicy
 type DetailServicePolicyParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

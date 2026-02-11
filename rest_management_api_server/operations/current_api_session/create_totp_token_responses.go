@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CreateTotpTokenOKCode is the HTTP code returned for type CreateTotpTokenOK
 const CreateTotpTokenOKCode int = 200
 
-/*CreateTotpTokenOK A TOTP token create response, contains a token used to satisfy posture checks
+/*
+CreateTotpTokenOK A TOTP token create response, contains a token used to satisfy posture checks
 
 swagger:response createTotpTokenOK
 */
 type CreateTotpTokenOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CreateTotpTokenOK struct {
 func NewCreateTotpTokenOK() *CreateTotpTokenOK {
 
 	return &CreateTotpTokenOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create totp token o k response
+func (o *CreateTotpTokenOK) WithWWWAuthenticate(wWWAuthenticate []string) *CreateTotpTokenOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create totp token o k response
+func (o *CreateTotpTokenOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create totp token o k response
@@ -72,6 +89,23 @@ func (o *CreateTotpTokenOK) SetPayload(payload *rest_model.TotpTokenEnvelope) {
 // WriteResponse to the client
 func (o *CreateTotpTokenOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CreateTotpTokenOK) WriteResponse(rw http.ResponseWriter, producer runti
 // CreateTotpTokenUnauthorizedCode is the HTTP code returned for type CreateTotpTokenUnauthorized
 const CreateTotpTokenUnauthorizedCode int = 401
 
-/*CreateTotpTokenUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateTotpTokenUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createTotpTokenUnauthorized
 */
 type CreateTotpTokenUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CreateTotpTokenUnauthorized struct {
 func NewCreateTotpTokenUnauthorized() *CreateTotpTokenUnauthorized {
 
 	return &CreateTotpTokenUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create totp token unauthorized response
+func (o *CreateTotpTokenUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CreateTotpTokenUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create totp token unauthorized response
+func (o *CreateTotpTokenUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create totp token unauthorized response
@@ -116,6 +166,23 @@ func (o *CreateTotpTokenUnauthorized) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *CreateTotpTokenUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CreateTotpTokenUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // CreateTotpTokenNotFoundCode is the HTTP code returned for type CreateTotpTokenNotFound
 const CreateTotpTokenNotFoundCode int = 404
 
-/*CreateTotpTokenNotFound The requested resource does not exist
+/*
+CreateTotpTokenNotFound The requested resource does not exist
 
 swagger:response createTotpTokenNotFound
 */
 type CreateTotpTokenNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CreateTotpTokenNotFound struct {
 func NewCreateTotpTokenNotFound() *CreateTotpTokenNotFound {
 
 	return &CreateTotpTokenNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create totp token not found response
+func (o *CreateTotpTokenNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *CreateTotpTokenNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create totp token not found response
+func (o *CreateTotpTokenNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create totp token not found response
@@ -159,6 +242,23 @@ func (o *CreateTotpTokenNotFound) SetPayload(payload *rest_model.APIErrorEnvelop
 
 // WriteResponse to the client
 func (o *CreateTotpTokenNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(404)
 	if o.Payload != nil {

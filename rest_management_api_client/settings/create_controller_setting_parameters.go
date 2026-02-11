@@ -78,10 +78,12 @@ func NewCreateControllerSettingParamsWithHTTPClient(client *http.Client) *Create
 	}
 }
 
-/* CreateControllerSettingParams contains all the parameters to send to the API endpoint
-   for the create controller setting operation.
+/*
+CreateControllerSettingParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create controller setting operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateControllerSettingParams struct {
 

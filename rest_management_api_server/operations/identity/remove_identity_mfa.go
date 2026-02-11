@@ -36,16 +36,16 @@ import (
 )
 
 // RemoveIdentityMfaHandlerFunc turns a function with the right signature into a remove identity mfa handler
-type RemoveIdentityMfaHandlerFunc func(RemoveIdentityMfaParams, interface{}) middleware.Responder
+type RemoveIdentityMfaHandlerFunc func(RemoveIdentityMfaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn RemoveIdentityMfaHandlerFunc) Handle(params RemoveIdentityMfaParams, principal interface{}) middleware.Responder {
+func (fn RemoveIdentityMfaHandlerFunc) Handle(params RemoveIdentityMfaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // RemoveIdentityMfaHandler interface for that can handle valid remove identity mfa params
 type RemoveIdentityMfaHandler interface {
-	Handle(RemoveIdentityMfaParams, interface{}) middleware.Responder
+	Handle(RemoveIdentityMfaParams, any) middleware.Responder
 }
 
 // NewRemoveIdentityMfa creates a new http.Handler for the remove identity mfa operation
@@ -53,13 +53,12 @@ func NewRemoveIdentityMfa(ctx *middleware.Context, handler RemoveIdentityMfaHand
 	return &RemoveIdentityMfa{Context: ctx, Handler: handler}
 }
 
-/* RemoveIdentityMfa swagger:route DELETE /identities/{id}/mfa Identity MFA removeIdentityMfa
+/*
+	RemoveIdentityMfa swagger:route DELETE /identities/{id}/mfa Identity MFA removeIdentityMfa
 
-Remove MFA from an identitity
+# Remove MFA from an identitity
 
 Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
-
-
 */
 type RemoveIdentityMfa struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *RemoveIdentityMfa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *RemoveIdentityMfa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

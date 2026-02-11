@@ -78,10 +78,12 @@ func NewCreateEdgeRouterParamsWithHTTPClient(client *http.Client) *CreateEdgeRou
 	}
 }
 
-/* CreateEdgeRouterParams contains all the parameters to send to the API endpoint
-   for the create edge router operation.
+/*
+CreateEdgeRouterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create edge router operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateEdgeRouterParams struct {
 

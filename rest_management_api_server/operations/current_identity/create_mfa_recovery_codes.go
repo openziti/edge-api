@@ -36,16 +36,16 @@ import (
 )
 
 // CreateMfaRecoveryCodesHandlerFunc turns a function with the right signature into a create mfa recovery codes handler
-type CreateMfaRecoveryCodesHandlerFunc func(CreateMfaRecoveryCodesParams, interface{}) middleware.Responder
+type CreateMfaRecoveryCodesHandlerFunc func(CreateMfaRecoveryCodesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateMfaRecoveryCodesHandlerFunc) Handle(params CreateMfaRecoveryCodesParams, principal interface{}) middleware.Responder {
+func (fn CreateMfaRecoveryCodesHandlerFunc) Handle(params CreateMfaRecoveryCodesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateMfaRecoveryCodesHandler interface for that can handle valid create mfa recovery codes params
 type CreateMfaRecoveryCodesHandler interface {
-	Handle(CreateMfaRecoveryCodesParams, interface{}) middleware.Responder
+	Handle(CreateMfaRecoveryCodesParams, any) middleware.Responder
 }
 
 // NewCreateMfaRecoveryCodes creates a new http.Handler for the create mfa recovery codes operation
@@ -53,13 +53,12 @@ func NewCreateMfaRecoveryCodes(ctx *middleware.Context, handler CreateMfaRecover
 	return &CreateMfaRecoveryCodes{Context: ctx, Handler: handler}
 }
 
-/* CreateMfaRecoveryCodes swagger:route POST /current-identity/mfa/recovery-codes Current Identity MFA createMfaRecoveryCodes
+/*
+	CreateMfaRecoveryCodes swagger:route POST /current-identity/mfa/recovery-codes Current Identity MFA createMfaRecoveryCodes
 
-For a completed MFA enrollment regenerate the recovery codes
+# For a completed MFA enrollment regenerate the recovery codes
 
 Allows regeneration of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment. This replaces all existing recovery codes.
-
-
 */
 type CreateMfaRecoveryCodes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *CreateMfaRecoveryCodes) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *CreateMfaRecoveryCodes) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

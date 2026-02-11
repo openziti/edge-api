@@ -50,7 +50,6 @@ func NewListConfigsForConfigTypeParams() ListConfigsForConfigTypeParams {
 //
 // swagger:parameters listConfigsForConfigType
 type ListConfigsForConfigTypeParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

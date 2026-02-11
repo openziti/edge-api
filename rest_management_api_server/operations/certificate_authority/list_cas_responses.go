@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListCasOKCode is the HTTP code returned for type ListCasOK
 const ListCasOKCode int = 200
 
-/*ListCasOK A list of Certificate Authorities (CAs)
+/*
+ListCasOK A list of Certificate Authorities (CAs)
 
 swagger:response listCasOK
 */
 type ListCasOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListCasOK struct {
 func NewListCasOK() *ListCasOK {
 
 	return &ListCasOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list cas o k response
+func (o *ListCasOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListCasOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list cas o k response
+func (o *ListCasOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list cas o k response
@@ -72,6 +89,23 @@ func (o *ListCasOK) SetPayload(payload *rest_model.ListCasEnvelope) {
 // WriteResponse to the client
 func (o *ListCasOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListCasOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produ
 // ListCasBadRequestCode is the HTTP code returned for type ListCasBadRequest
 const ListCasBadRequestCode int = 400
 
-/*ListCasBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListCasBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listCasBadRequest
 */
 type ListCasBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListCasBadRequest struct {
 func NewListCasBadRequest() *ListCasBadRequest {
 
 	return &ListCasBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list cas bad request response
+func (o *ListCasBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListCasBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list cas bad request response
+func (o *ListCasBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list cas bad request response
@@ -116,6 +166,23 @@ func (o *ListCasBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *ListCasBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListCasBadRequest) WriteResponse(rw http.ResponseWriter, producer runti
 // ListCasUnauthorizedCode is the HTTP code returned for type ListCasUnauthorized
 const ListCasUnauthorizedCode int = 401
 
-/*ListCasUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListCasUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listCasUnauthorized
 */
 type ListCasUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListCasUnauthorized struct {
 func NewListCasUnauthorized() *ListCasUnauthorized {
 
 	return &ListCasUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list cas unauthorized response
+func (o *ListCasUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListCasUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list cas unauthorized response
+func (o *ListCasUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list cas unauthorized response
@@ -160,6 +243,23 @@ func (o *ListCasUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *ListCasUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListCasUnauthorized) WriteResponse(rw http.ResponseWriter, producer run
 // ListCasTooManyRequestsCode is the HTTP code returned for type ListCasTooManyRequests
 const ListCasTooManyRequestsCode int = 429
 
-/*ListCasTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListCasTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listCasTooManyRequests
 */
 type ListCasTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListCasTooManyRequests struct {
 func NewListCasTooManyRequests() *ListCasTooManyRequests {
 
 	return &ListCasTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list cas too many requests response
+func (o *ListCasTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListCasTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list cas too many requests response
+func (o *ListCasTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list cas too many requests response
@@ -204,6 +320,23 @@ func (o *ListCasTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelope
 // WriteResponse to the client
 func (o *ListCasTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *ListCasTooManyRequests) WriteResponse(rw http.ResponseWriter, producer 
 // ListCasServiceUnavailableCode is the HTTP code returned for type ListCasServiceUnavailable
 const ListCasServiceUnavailableCode int = 503
 
-/*ListCasServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListCasServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listCasServiceUnavailable
 */
 type ListCasServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type ListCasServiceUnavailable struct {
 func NewListCasServiceUnavailable() *ListCasServiceUnavailable {
 
 	return &ListCasServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list cas service unavailable response
+func (o *ListCasServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListCasServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list cas service unavailable response
+func (o *ListCasServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list cas service unavailable response
@@ -247,6 +396,23 @@ func (o *ListCasServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnvel
 
 // WriteResponse to the client
 func (o *ListCasServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

@@ -76,10 +76,12 @@ func NewDetailIdentityParamsWithHTTPClient(client *http.Client) *DetailIdentityP
 	}
 }
 
-/* DetailIdentityParams contains all the parameters to send to the API endpoint
-   for the detail identity operation.
+/*
+DetailIdentityParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail identity operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailIdentityParams struct {
 

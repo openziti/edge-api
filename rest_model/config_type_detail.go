@@ -51,7 +51,7 @@ type ConfigTypeDetail struct {
 
 	// A JSON schema to enforce configuration against
 	// Required: true
-	Schema interface{} `json:"schema"`
+	Schema any `json:"schema"`
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
@@ -67,7 +67,7 @@ func (m *ConfigTypeDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO1 struct {
 		Name *string `json:"name"`
 
-		Schema interface{} `json:"schema"`
+		Schema any `json:"schema"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
@@ -92,7 +92,7 @@ func (m ConfigTypeDetail) MarshalJSON() ([]byte, error) {
 	var dataAO1 struct {
 		Name *string `json:"name"`
 
-		Schema interface{} `json:"schema"`
+		Schema any `json:"schema"`
 	}
 
 	dataAO1.Name = m.Name

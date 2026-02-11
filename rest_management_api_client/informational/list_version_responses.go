@@ -30,6 +30,8 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -46,7 +48,7 @@ type ListVersionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListVersionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListVersionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListVersionOK()
@@ -55,7 +57,7 @@ func (o *ListVersionReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /version] listVersion", response, response.Code())
 	}
 }
 
@@ -64,7 +66,8 @@ func NewListVersionOK() *ListVersionOK {
 	return &ListVersionOK{}
 }
 
-/* ListVersionOK describes a response with status code 200, with default header values.
+/*
+ListVersionOK describes a response with status code 200, with default header values.
 
 Version information for the controller
 */
@@ -77,9 +80,46 @@ type ListVersionOK struct {
 	Payload *rest_model.ListVersionEnvelope
 }
 
-func (o *ListVersionOK) Error() string {
-	return fmt.Sprintf("[GET /version][%d] listVersionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list version o k response has a 2xx status code
+func (o *ListVersionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list version o k response has a 3xx status code
+func (o *ListVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list version o k response has a 4xx status code
+func (o *ListVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list version o k response has a 5xx status code
+func (o *ListVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list version o k response a status code equal to that given
+func (o *ListVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list version o k response
+func (o *ListVersionOK) Code() int {
+	return 200
+}
+
+func (o *ListVersionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /version][%d] listVersionOK %s", 200, payload)
+}
+
+func (o *ListVersionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /version][%d] listVersionOK %s", 200, payload)
+}
+
 func (o *ListVersionOK) GetPayload() *rest_model.ListVersionEnvelope {
 	return o.Payload
 }
@@ -103,7 +143,7 @@ func (o *ListVersionOK) readResponse(response runtime.ClientResponse, consumer r
 	o.Payload = new(rest_model.ListVersionEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

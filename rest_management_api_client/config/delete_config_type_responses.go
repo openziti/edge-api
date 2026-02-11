@@ -30,11 +30,14 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteConfigTypeReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteConfigTypeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteConfigTypeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteConfigTypeOK()
@@ -90,7 +93,7 @@ func (o *DeleteConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /config-types/{id}] deleteConfigType", response, response.Code())
 	}
 }
 
@@ -99,31 +102,108 @@ func NewDeleteConfigTypeOK() *DeleteConfigTypeOK {
 	return &DeleteConfigTypeOK{}
 }
 
-/* DeleteConfigTypeOK describes a response with status code 200, with default header values.
+/*
+DeleteConfigTypeOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteConfigTypeOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteConfigTypeOK) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete config type o k response has a 2xx status code
+func (o *DeleteConfigTypeOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete config type o k response has a 3xx status code
+func (o *DeleteConfigTypeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type o k response has a 4xx status code
+func (o *DeleteConfigTypeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete config type o k response has a 5xx status code
+func (o *DeleteConfigTypeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete config type o k response a status code equal to that given
+func (o *DeleteConfigTypeOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete config type o k response
+func (o *DeleteConfigTypeOK) Code() int {
+	return 200
+}
+
+func (o *DeleteConfigTypeOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeOK %s", 200, payload)
+}
+
+func (o *DeleteConfigTypeOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeOK %s", 200, payload)
+}
+
 func (o *DeleteConfigTypeOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeOK binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteConfigTypeBadRequest creates a DeleteConfigTypeBadRequest with default headers values
@@ -131,31 +211,108 @@ func NewDeleteConfigTypeBadRequest() *DeleteConfigTypeBadRequest {
 	return &DeleteConfigTypeBadRequest{}
 }
 
-/* DeleteConfigTypeBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteConfigTypeBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteConfigTypeBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteConfigTypeBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete config type bad request response has a 2xx status code
+func (o *DeleteConfigTypeBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete config type bad request response has a 3xx status code
+func (o *DeleteConfigTypeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type bad request response has a 4xx status code
+func (o *DeleteConfigTypeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete config type bad request response has a 5xx status code
+func (o *DeleteConfigTypeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete config type bad request response a status code equal to that given
+func (o *DeleteConfigTypeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete config type bad request response
+func (o *DeleteConfigTypeBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteConfigTypeBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeBadRequest %s", 400, payload)
+}
+
+func (o *DeleteConfigTypeBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeBadRequest %s", 400, payload)
+}
+
 func (o *DeleteConfigTypeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeBadRequest binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteConfigTypeUnauthorized creates a DeleteConfigTypeUnauthorized with default headers values
@@ -163,31 +320,108 @@ func NewDeleteConfigTypeUnauthorized() *DeleteConfigTypeUnauthorized {
 	return &DeleteConfigTypeUnauthorized{}
 }
 
-/* DeleteConfigTypeUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteConfigTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteConfigTypeUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteConfigTypeUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete config type unauthorized response has a 2xx status code
+func (o *DeleteConfigTypeUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete config type unauthorized response has a 3xx status code
+func (o *DeleteConfigTypeUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type unauthorized response has a 4xx status code
+func (o *DeleteConfigTypeUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete config type unauthorized response has a 5xx status code
+func (o *DeleteConfigTypeUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete config type unauthorized response a status code equal to that given
+func (o *DeleteConfigTypeUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete config type unauthorized response
+func (o *DeleteConfigTypeUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteConfigTypeUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteConfigTypeUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteConfigTypeNotFound creates a DeleteConfigTypeNotFound with default headers values
@@ -195,31 +429,108 @@ func NewDeleteConfigTypeNotFound() *DeleteConfigTypeNotFound {
 	return &DeleteConfigTypeNotFound{}
 }
 
-/* DeleteConfigTypeNotFound describes a response with status code 404, with default header values.
+/*
+DeleteConfigTypeNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeleteConfigTypeNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteConfigTypeNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete config type not found response has a 2xx status code
+func (o *DeleteConfigTypeNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete config type not found response has a 3xx status code
+func (o *DeleteConfigTypeNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type not found response has a 4xx status code
+func (o *DeleteConfigTypeNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete config type not found response has a 5xx status code
+func (o *DeleteConfigTypeNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete config type not found response a status code equal to that given
+func (o *DeleteConfigTypeNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete config type not found response
+func (o *DeleteConfigTypeNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteConfigTypeNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeNotFound %s", 404, payload)
+}
+
+func (o *DeleteConfigTypeNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeNotFound %s", 404, payload)
+}
+
 func (o *DeleteConfigTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeNotFound binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteConfigTypeConflict creates a DeleteConfigTypeConflict with default headers values
@@ -227,31 +538,108 @@ func NewDeleteConfigTypeConflict() *DeleteConfigTypeConflict {
 	return &DeleteConfigTypeConflict{}
 }
 
-/* DeleteConfigTypeConflict describes a response with status code 409, with default header values.
+/*
+DeleteConfigTypeConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
 type DeleteConfigTypeConflict struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteConfigTypeConflict) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete config type conflict response has a 2xx status code
+func (o *DeleteConfigTypeConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete config type conflict response has a 3xx status code
+func (o *DeleteConfigTypeConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type conflict response has a 4xx status code
+func (o *DeleteConfigTypeConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete config type conflict response has a 5xx status code
+func (o *DeleteConfigTypeConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete config type conflict response a status code equal to that given
+func (o *DeleteConfigTypeConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete config type conflict response
+func (o *DeleteConfigTypeConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteConfigTypeConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeConflict %s", 409, payload)
+}
+
+func (o *DeleteConfigTypeConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeConflict %s", 409, payload)
+}
+
 func (o *DeleteConfigTypeConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeConflict binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeConflict) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteConfigTypeTooManyRequests creates a DeleteConfigTypeTooManyRequests with default headers values
@@ -259,31 +647,108 @@ func NewDeleteConfigTypeTooManyRequests() *DeleteConfigTypeTooManyRequests {
 	return &DeleteConfigTypeTooManyRequests{}
 }
 
-/* DeleteConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteConfigTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteConfigTypeTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteConfigTypeTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete config type too many requests response has a 2xx status code
+func (o *DeleteConfigTypeTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete config type too many requests response has a 3xx status code
+func (o *DeleteConfigTypeTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type too many requests response has a 4xx status code
+func (o *DeleteConfigTypeTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete config type too many requests response has a 5xx status code
+func (o *DeleteConfigTypeTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete config type too many requests response a status code equal to that given
+func (o *DeleteConfigTypeTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete config type too many requests response
+func (o *DeleteConfigTypeTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteConfigTypeTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteConfigTypeTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteConfigTypeServiceUnavailable creates a DeleteConfigTypeServiceUnavailable with default headers values
@@ -291,29 +756,106 @@ func NewDeleteConfigTypeServiceUnavailable() *DeleteConfigTypeServiceUnavailable
 	return &DeleteConfigTypeServiceUnavailable{}
 }
 
-/* DeleteConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeleteConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeleteConfigTypeServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteConfigTypeServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete config type service unavailable response has a 2xx status code
+func (o *DeleteConfigTypeServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete config type service unavailable response has a 3xx status code
+func (o *DeleteConfigTypeServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete config type service unavailable response has a 4xx status code
+func (o *DeleteConfigTypeServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete config type service unavailable response has a 5xx status code
+func (o *DeleteConfigTypeServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete config type service unavailable response a status code equal to that given
+func (o *DeleteConfigTypeServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete config type service unavailable response
+func (o *DeleteConfigTypeServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeleteConfigTypeServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeleteConfigTypeServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /config-types/{id}][%d] deleteConfigTypeServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeleteConfigTypeServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteConfigTypeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteConfigTypeServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeleteConfigTypeServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

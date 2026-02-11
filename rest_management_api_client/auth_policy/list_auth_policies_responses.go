@@ -30,11 +30,14 @@ package auth_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListAuthPoliciesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListAuthPoliciesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListAuthPoliciesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListAuthPoliciesOK()
@@ -78,7 +81,7 @@ func (o *ListAuthPoliciesReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /auth-policies] listAuthPolicies", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListAuthPoliciesOK() *ListAuthPoliciesOK {
 	return &ListAuthPoliciesOK{}
 }
 
-/* ListAuthPoliciesOK describes a response with status code 200, with default header values.
+/*
+ListAuthPoliciesOK describes a response with status code 200, with default header values.
 
 A list of Auth Policies
 */
 type ListAuthPoliciesOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListAuthPoliciesEnvelope
 }
 
-func (o *ListAuthPoliciesOK) Error() string {
-	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list auth policies o k response has a 2xx status code
+func (o *ListAuthPoliciesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list auth policies o k response has a 3xx status code
+func (o *ListAuthPoliciesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list auth policies o k response has a 4xx status code
+func (o *ListAuthPoliciesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list auth policies o k response has a 5xx status code
+func (o *ListAuthPoliciesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list auth policies o k response a status code equal to that given
+func (o *ListAuthPoliciesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list auth policies o k response
+func (o *ListAuthPoliciesOK) Code() int {
+	return 200
+}
+
+func (o *ListAuthPoliciesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesOK %s", 200, payload)
+}
+
+func (o *ListAuthPoliciesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesOK %s", 200, payload)
+}
+
 func (o *ListAuthPoliciesOK) GetPayload() *rest_model.ListAuthPoliciesEnvelope {
 	return o.Payload
 }
 
 func (o *ListAuthPoliciesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListAuthPoliciesEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAuthPoliciesOK binds the response header WWW-Authenticate
+func (o *ListAuthPoliciesOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAuthPoliciesBadRequest creates a ListAuthPoliciesBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewListAuthPoliciesBadRequest() *ListAuthPoliciesBadRequest {
 	return &ListAuthPoliciesBadRequest{}
 }
 
-/* ListAuthPoliciesBadRequest describes a response with status code 400, with default header values.
+/*
+ListAuthPoliciesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type ListAuthPoliciesBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAuthPoliciesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list auth policies bad request response has a 2xx status code
+func (o *ListAuthPoliciesBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list auth policies bad request response has a 3xx status code
+func (o *ListAuthPoliciesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list auth policies bad request response has a 4xx status code
+func (o *ListAuthPoliciesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list auth policies bad request response has a 5xx status code
+func (o *ListAuthPoliciesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list auth policies bad request response a status code equal to that given
+func (o *ListAuthPoliciesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list auth policies bad request response
+func (o *ListAuthPoliciesBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListAuthPoliciesBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesBadRequest %s", 400, payload)
+}
+
+func (o *ListAuthPoliciesBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesBadRequest %s", 400, payload)
+}
+
 func (o *ListAuthPoliciesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAuthPoliciesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAuthPoliciesBadRequest binds the response header WWW-Authenticate
+func (o *ListAuthPoliciesBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAuthPoliciesUnauthorized creates a ListAuthPoliciesUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewListAuthPoliciesUnauthorized() *ListAuthPoliciesUnauthorized {
 	return &ListAuthPoliciesUnauthorized{}
 }
 
-/* ListAuthPoliciesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListAuthPoliciesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListAuthPoliciesUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAuthPoliciesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list auth policies unauthorized response has a 2xx status code
+func (o *ListAuthPoliciesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list auth policies unauthorized response has a 3xx status code
+func (o *ListAuthPoliciesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list auth policies unauthorized response has a 4xx status code
+func (o *ListAuthPoliciesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list auth policies unauthorized response has a 5xx status code
+func (o *ListAuthPoliciesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list auth policies unauthorized response a status code equal to that given
+func (o *ListAuthPoliciesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list auth policies unauthorized response
+func (o *ListAuthPoliciesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListAuthPoliciesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesUnauthorized %s", 401, payload)
+}
+
+func (o *ListAuthPoliciesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesUnauthorized %s", 401, payload)
+}
+
 func (o *ListAuthPoliciesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAuthPoliciesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAuthPoliciesUnauthorized binds the response header WWW-Authenticate
+func (o *ListAuthPoliciesUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAuthPoliciesTooManyRequests creates a ListAuthPoliciesTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListAuthPoliciesTooManyRequests() *ListAuthPoliciesTooManyRequests {
 	return &ListAuthPoliciesTooManyRequests{}
 }
 
-/* ListAuthPoliciesTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListAuthPoliciesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListAuthPoliciesTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAuthPoliciesTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list auth policies too many requests response has a 2xx status code
+func (o *ListAuthPoliciesTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list auth policies too many requests response has a 3xx status code
+func (o *ListAuthPoliciesTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list auth policies too many requests response has a 4xx status code
+func (o *ListAuthPoliciesTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list auth policies too many requests response has a 5xx status code
+func (o *ListAuthPoliciesTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list auth policies too many requests response a status code equal to that given
+func (o *ListAuthPoliciesTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list auth policies too many requests response
+func (o *ListAuthPoliciesTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListAuthPoliciesTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesTooManyRequests %s", 429, payload)
+}
+
+func (o *ListAuthPoliciesTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesTooManyRequests %s", 429, payload)
+}
+
 func (o *ListAuthPoliciesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAuthPoliciesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAuthPoliciesTooManyRequests binds the response header WWW-Authenticate
+func (o *ListAuthPoliciesTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAuthPoliciesServiceUnavailable creates a ListAuthPoliciesServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListAuthPoliciesServiceUnavailable() *ListAuthPoliciesServiceUnavailable
 	return &ListAuthPoliciesServiceUnavailable{}
 }
 
-/* ListAuthPoliciesServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListAuthPoliciesServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListAuthPoliciesServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAuthPoliciesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list auth policies service unavailable response has a 2xx status code
+func (o *ListAuthPoliciesServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list auth policies service unavailable response has a 3xx status code
+func (o *ListAuthPoliciesServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list auth policies service unavailable response has a 4xx status code
+func (o *ListAuthPoliciesServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list auth policies service unavailable response has a 5xx status code
+func (o *ListAuthPoliciesServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list auth policies service unavailable response a status code equal to that given
+func (o *ListAuthPoliciesServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list auth policies service unavailable response
+func (o *ListAuthPoliciesServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListAuthPoliciesServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListAuthPoliciesServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /auth-policies][%d] listAuthPoliciesServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListAuthPoliciesServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAuthPoliciesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAuthPoliciesServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListAuthPoliciesServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

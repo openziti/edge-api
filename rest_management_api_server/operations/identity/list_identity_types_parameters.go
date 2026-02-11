@@ -52,7 +52,6 @@ func NewListIdentityTypesParams() ListIdentityTypesParams {
 //
 // swagger:parameters listIdentityTypes
 type ListIdentityTypesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,10 +59,12 @@ type ListIdentityTypesParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
@@ -78,7 +79,6 @@ func (o *ListIdentityTypesParams) BindRequest(r *http.Request, route *middleware
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

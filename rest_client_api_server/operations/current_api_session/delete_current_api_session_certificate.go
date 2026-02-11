@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteCurrentAPISessionCertificateHandlerFunc turns a function with the right signature into a delete current Api session certificate handler
-type DeleteCurrentAPISessionCertificateHandlerFunc func(DeleteCurrentAPISessionCertificateParams, interface{}) middleware.Responder
+type DeleteCurrentAPISessionCertificateHandlerFunc func(DeleteCurrentAPISessionCertificateParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteCurrentAPISessionCertificateHandlerFunc) Handle(params DeleteCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
+func (fn DeleteCurrentAPISessionCertificateHandlerFunc) Handle(params DeleteCurrentAPISessionCertificateParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteCurrentAPISessionCertificateHandler interface for that can handle valid delete current Api session certificate params
 type DeleteCurrentAPISessionCertificateHandler interface {
-	Handle(DeleteCurrentAPISessionCertificateParams, interface{}) middleware.Responder
+	Handle(DeleteCurrentAPISessionCertificateParams, any) middleware.Responder
 }
 
 // NewDeleteCurrentAPISessionCertificate creates a new http.Handler for the delete current Api session certificate operation
@@ -53,13 +53,12 @@ func NewDeleteCurrentAPISessionCertificate(ctx *middleware.Context, handler Dele
 	return &DeleteCurrentAPISessionCertificate{Context: ctx, Handler: handler}
 }
 
-/* DeleteCurrentAPISessionCertificate swagger:route DELETE /current-api-session/certificates/{id} Current API Session deleteCurrentApiSessionCertificate
+/*
+	DeleteCurrentAPISessionCertificate swagger:route DELETE /current-api-session/certificates/{id} Current API Session deleteCurrentApiSessionCertificate
 
-Delete an ephemeral certificate
+# Delete an ephemeral certificate
 
 Delete an ephemeral certificateby id
-
-
 */
 type DeleteCurrentAPISessionCertificate struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DeleteCurrentAPISessionCertificate) ServeHTTP(rw http.ResponseWriter, r
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DeleteCurrentAPISessionCertificate) ServeHTTP(rw http.ResponseWriter, r
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

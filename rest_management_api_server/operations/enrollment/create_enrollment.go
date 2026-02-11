@@ -36,16 +36,16 @@ import (
 )
 
 // CreateEnrollmentHandlerFunc turns a function with the right signature into a create enrollment handler
-type CreateEnrollmentHandlerFunc func(CreateEnrollmentParams, interface{}) middleware.Responder
+type CreateEnrollmentHandlerFunc func(CreateEnrollmentParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateEnrollmentHandlerFunc) Handle(params CreateEnrollmentParams, principal interface{}) middleware.Responder {
+func (fn CreateEnrollmentHandlerFunc) Handle(params CreateEnrollmentParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateEnrollmentHandler interface for that can handle valid create enrollment params
 type CreateEnrollmentHandler interface {
-	Handle(CreateEnrollmentParams, interface{}) middleware.Responder
+	Handle(CreateEnrollmentParams, any) middleware.Responder
 }
 
 // NewCreateEnrollment creates a new http.Handler for the create enrollment operation
@@ -53,12 +53,12 @@ func NewCreateEnrollment(ctx *middleware.Context, handler CreateEnrollmentHandle
 	return &CreateEnrollment{Context: ctx, Handler: handler}
 }
 
-/* CreateEnrollment swagger:route POST /enrollments Enrollment createEnrollment
+/*
+	CreateEnrollment swagger:route POST /enrollments Enrollment createEnrollment
 
-Create an outstanding enrollment for an identity
+# Create an outstanding enrollment for an identity
 
 Creates a new OTT, OTTCA, or UPDB enrollment for a specific identity. If an enrollment of the same type is already outstanding the request will fail with a 409 conflict. If desired, an existing enrollment can be refreshed by `enrollments/:id/refresh` or deleted.
-
 */
 type CreateEnrollment struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateEnrollment) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateEnrollment) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

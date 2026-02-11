@@ -50,7 +50,6 @@ func NewDetailExternalJWTSignerParams() DetailExternalJWTSignerParams {
 //
 // swagger:parameters detailExternalJwtSigner
 type DetailExternalJWTSignerParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

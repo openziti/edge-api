@@ -49,7 +49,6 @@ func NewListSummaryParams() ListSummaryParams {
 //
 // swagger:parameters listSummary
 type ListSummaryParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

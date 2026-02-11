@@ -167,10 +167,22 @@ paths:
 responses:
   listTerminators:
     description: A list of terminators
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listTerminatorsEnvelope'
   detailTerminator:
     description: A single terminator
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailTerminatorEnvelope'
 

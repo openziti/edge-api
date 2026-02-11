@@ -50,7 +50,6 @@ func NewGetIdentityAuthenticatorsParams() GetIdentityAuthenticatorsParams {
 //
 // swagger:parameters getIdentityAuthenticators
 type GetIdentityAuthenticatorsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

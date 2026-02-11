@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -216,11 +217,15 @@ func (m *PostureCheckProcessPatch) validateRoleAttributes(formats strfmt.Registr
 
 	if m.RoleAttributes() != nil {
 		if err := m.RoleAttributes().Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -236,11 +241,15 @@ func (m *PostureCheckProcessPatch) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
 		if err := m.Tags().Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -256,11 +265,15 @@ func (m *PostureCheckProcessPatch) validateProcess(formats strfmt.Registry) erro
 
 	if m.Process != nil {
 		if err := m.Process.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("process")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("process")
 			}
+
 			return err
 		}
 	}
@@ -294,11 +307,15 @@ func (m *PostureCheckProcessPatch) contextValidateRoleAttributes(ctx context.Con
 
 	if m.RoleAttributes() != nil {
 		if err := m.RoleAttributes().ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -309,12 +326,21 @@ func (m *PostureCheckProcessPatch) contextValidateRoleAttributes(ctx context.Con
 func (m *PostureCheckProcessPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
+
+		if swag.IsZero(m.Tags()) { // not required
+			return nil
+		}
+
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -325,11 +351,15 @@ func (m *PostureCheckProcessPatch) contextValidateTags(ctx context.Context, form
 func (m *PostureCheckProcessPatch) contextValidateTypeID(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.TypeID().ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("typeId")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("typeId")
 		}
+
 		return err
 	}
 
@@ -339,12 +369,21 @@ func (m *PostureCheckProcessPatch) contextValidateTypeID(ctx context.Context, fo
 func (m *PostureCheckProcessPatch) contextValidateProcess(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Process != nil {
+
+		if swag.IsZero(m.Process) { // not required
+			return nil
+		}
+
 		if err := m.Process.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("process")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("process")
 			}
+
 			return err
 		}
 	}

@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"io"
 
 	"github.com/go-openapi/errors"
@@ -79,7 +80,7 @@ func (m *DetailPostureCheckEnvelope) UnmarshalJSON(raw []byte) error {
 	}
 
 	propData, err := UnmarshalPostureCheckDetail(bytes.NewBuffer(data.Data), runtime.JSONConsumer())
-	if err != nil && err != io.EOF {
+	if err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -147,11 +148,15 @@ func (m *DetailPostureCheckEnvelope) validateData(formats strfmt.Registry) error
 	}
 
 	if err := m.Data().Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("data")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("data")
 		}
+
 		return err
 	}
 
@@ -166,11 +171,15 @@ func (m *DetailPostureCheckEnvelope) validateMeta(formats strfmt.Registry) error
 
 	if m.Meta != nil {
 		if err := m.Meta.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}
@@ -199,11 +208,15 @@ func (m *DetailPostureCheckEnvelope) ContextValidate(ctx context.Context, format
 func (m *DetailPostureCheckEnvelope) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.Data().ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("data")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("data")
 		}
+
 		return err
 	}
 
@@ -213,12 +226,17 @@ func (m *DetailPostureCheckEnvelope) contextValidateData(ctx context.Context, fo
 func (m *DetailPostureCheckEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}

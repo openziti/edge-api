@@ -49,7 +49,6 @@ func NewGetCurrentIdentityParams() GetCurrentIdentityParams {
 //
 // swagger:parameters getCurrentIdentity
 type GetCurrentIdentityParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

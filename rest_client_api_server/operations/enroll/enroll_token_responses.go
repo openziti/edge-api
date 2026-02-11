@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // EnrollTokenOKCode is the HTTP code returned for type EnrollTokenOK
 const EnrollTokenOKCode int = 200
 
-/*EnrollTokenOK A response containing and identities client certificate chains
+/*
+EnrollTokenOK A response containing and identities client certificate chains
 
 swagger:response enrollTokenOK
 */
 type EnrollTokenOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type EnrollTokenOK struct {
 func NewEnrollTokenOK() *EnrollTokenOK {
 
 	return &EnrollTokenOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token o k response
+func (o *EnrollTokenOK) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token o k response
+func (o *EnrollTokenOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token o k response
@@ -72,6 +89,23 @@ func (o *EnrollTokenOK) SetPayload(payload *rest_model.EnrollmentCertsEnvelope) 
 // WriteResponse to the client
 func (o *EnrollTokenOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *EnrollTokenOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // EnrollTokenBadRequestCode is the HTTP code returned for type EnrollTokenBadRequest
 const EnrollTokenBadRequestCode int = 400
 
-/*EnrollTokenBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+EnrollTokenBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response enrollTokenBadRequest
 */
 type EnrollTokenBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type EnrollTokenBadRequest struct {
 func NewEnrollTokenBadRequest() *EnrollTokenBadRequest {
 
 	return &EnrollTokenBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token bad request response
+func (o *EnrollTokenBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token bad request response
+func (o *EnrollTokenBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token bad request response
@@ -116,6 +166,23 @@ func (o *EnrollTokenBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope)
 // WriteResponse to the client
 func (o *EnrollTokenBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *EnrollTokenBadRequest) WriteResponse(rw http.ResponseWriter, producer r
 // EnrollTokenNotFoundCode is the HTTP code returned for type EnrollTokenNotFound
 const EnrollTokenNotFoundCode int = 404
 
-/*EnrollTokenNotFound The requested resource does not exist
+/*
+EnrollTokenNotFound The requested resource does not exist
 
 swagger:response enrollTokenNotFound
 */
 type EnrollTokenNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type EnrollTokenNotFound struct {
 func NewEnrollTokenNotFound() *EnrollTokenNotFound {
 
 	return &EnrollTokenNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token not found response
+func (o *EnrollTokenNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token not found response
+func (o *EnrollTokenNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token not found response
@@ -160,6 +243,23 @@ func (o *EnrollTokenNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *EnrollTokenNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *EnrollTokenNotFound) WriteResponse(rw http.ResponseWriter, producer run
 // EnrollTokenConflictCode is the HTTP code returned for type EnrollTokenConflict
 const EnrollTokenConflictCode int = 409
 
-/*EnrollTokenConflict The request could not be completed due to a conflict of configuration or state
+/*
+EnrollTokenConflict The request could not be completed due to a conflict of configuration or state
 
 swagger:response enrollTokenConflict
 */
 type EnrollTokenConflict struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type EnrollTokenConflict struct {
 func NewEnrollTokenConflict() *EnrollTokenConflict {
 
 	return &EnrollTokenConflict{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token conflict response
+func (o *EnrollTokenConflict) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenConflict {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token conflict response
+func (o *EnrollTokenConflict) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token conflict response
@@ -204,6 +320,23 @@ func (o *EnrollTokenConflict) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *EnrollTokenConflict) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(409)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *EnrollTokenConflict) WriteResponse(rw http.ResponseWriter, producer run
 // EnrollTokenGoneCode is the HTTP code returned for type EnrollTokenGone
 const EnrollTokenGoneCode int = 410
 
-/*EnrollTokenGone The request could not be completed as the resource is no longer available
+/*
+EnrollTokenGone The request could not be completed as the resource is no longer available
 
 swagger:response enrollTokenGone
 */
 type EnrollTokenGone struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type EnrollTokenGone struct {
 func NewEnrollTokenGone() *EnrollTokenGone {
 
 	return &EnrollTokenGone{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token gone response
+func (o *EnrollTokenGone) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenGone {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token gone response
+func (o *EnrollTokenGone) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token gone response
@@ -248,6 +397,23 @@ func (o *EnrollTokenGone) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *EnrollTokenGone) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(410)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *EnrollTokenGone) WriteResponse(rw http.ResponseWriter, producer runtime
 // EnrollTokenTooManyRequestsCode is the HTTP code returned for type EnrollTokenTooManyRequests
 const EnrollTokenTooManyRequestsCode int = 429
 
-/*EnrollTokenTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+EnrollTokenTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enrollTokenTooManyRequests
 */
 type EnrollTokenTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type EnrollTokenTooManyRequests struct {
 func NewEnrollTokenTooManyRequests() *EnrollTokenTooManyRequests {
 
 	return &EnrollTokenTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token too many requests response
+func (o *EnrollTokenTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token too many requests response
+func (o *EnrollTokenTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token too many requests response
@@ -292,6 +474,23 @@ func (o *EnrollTokenTooManyRequests) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *EnrollTokenTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -304,11 +503,16 @@ func (o *EnrollTokenTooManyRequests) WriteResponse(rw http.ResponseWriter, produ
 // EnrollTokenServiceUnavailableCode is the HTTP code returned for type EnrollTokenServiceUnavailable
 const EnrollTokenServiceUnavailableCode int = 503
 
-/*EnrollTokenServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+EnrollTokenServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response enrollTokenServiceUnavailable
 */
 type EnrollTokenServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -320,6 +524,17 @@ type EnrollTokenServiceUnavailable struct {
 func NewEnrollTokenServiceUnavailable() *EnrollTokenServiceUnavailable {
 
 	return &EnrollTokenServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enroll token service unavailable response
+func (o *EnrollTokenServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *EnrollTokenServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enroll token service unavailable response
+func (o *EnrollTokenServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enroll token service unavailable response
@@ -335,6 +550,23 @@ func (o *EnrollTokenServiceUnavailable) SetPayload(payload *rest_model.APIErrorE
 
 // WriteResponse to the client
 func (o *EnrollTokenServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

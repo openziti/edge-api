@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ExtendCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type ExtendCurrentIdentityAuthenticatorOK
 const ExtendCurrentIdentityAuthenticatorOKCode int = 200
 
-/*ExtendCurrentIdentityAuthenticatorOK A response containg the identity's new certificate
+/*
+ExtendCurrentIdentityAuthenticatorOK A response containg the identity's new certificate
 
 swagger:response extendCurrentIdentityAuthenticatorOK
 */
 type ExtendCurrentIdentityAuthenticatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ExtendCurrentIdentityAuthenticatorOK struct {
 func NewExtendCurrentIdentityAuthenticatorOK() *ExtendCurrentIdentityAuthenticatorOK {
 
 	return &ExtendCurrentIdentityAuthenticatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend current identity authenticator o k response
+func (o *ExtendCurrentIdentityAuthenticatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendCurrentIdentityAuthenticatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend current identity authenticator o k response
+func (o *ExtendCurrentIdentityAuthenticatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend current identity authenticator o k response
@@ -72,6 +89,23 @@ func (o *ExtendCurrentIdentityAuthenticatorOK) SetPayload(payload *rest_model.Id
 // WriteResponse to the client
 func (o *ExtendCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ExtendCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // ExtendCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type ExtendCurrentIdentityAuthenticatorUnauthorized
 const ExtendCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*ExtendCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ExtendCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendCurrentIdentityAuthenticatorUnauthorized
 */
 type ExtendCurrentIdentityAuthenticatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ExtendCurrentIdentityAuthenticatorUnauthorized struct {
 func NewExtendCurrentIdentityAuthenticatorUnauthorized() *ExtendCurrentIdentityAuthenticatorUnauthorized {
 
 	return &ExtendCurrentIdentityAuthenticatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend current identity authenticator unauthorized response
+func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendCurrentIdentityAuthenticatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend current identity authenticator unauthorized response
+func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend current identity authenticator unauthorized response
@@ -115,6 +165,23 @@ func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) SetPayload(payload *res
 
 // WriteResponse to the client
 func (o *ExtendCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(401)
 	if o.Payload != nil {

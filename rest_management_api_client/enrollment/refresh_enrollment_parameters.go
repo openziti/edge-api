@@ -78,10 +78,12 @@ func NewRefreshEnrollmentParamsWithHTTPClient(client *http.Client) *RefreshEnrol
 	}
 }
 
-/* RefreshEnrollmentParams contains all the parameters to send to the API endpoint
-   for the refresh enrollment operation.
+/*
+RefreshEnrollmentParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the refresh enrollment operation.
+
+	Typically these are written to a http.Request.
 */
 type RefreshEnrollmentParams struct {
 

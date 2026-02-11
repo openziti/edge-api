@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListEdgeRouterServicesOKCode is the HTTP code returned for type ListEdgeRouterServicesOK
 const ListEdgeRouterServicesOKCode int = 200
 
-/*ListEdgeRouterServicesOK A list of services
+/*
+ListEdgeRouterServicesOK A list of services
 
 swagger:response listEdgeRouterServicesOK
 */
 type ListEdgeRouterServicesOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListEdgeRouterServicesOK struct {
 func NewListEdgeRouterServicesOK() *ListEdgeRouterServicesOK {
 
 	return &ListEdgeRouterServicesOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list edge router services o k response
+func (o *ListEdgeRouterServicesOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListEdgeRouterServicesOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list edge router services o k response
+func (o *ListEdgeRouterServicesOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list edge router services o k response
@@ -72,6 +89,23 @@ func (o *ListEdgeRouterServicesOK) SetPayload(payload *rest_model.ListServicesEn
 // WriteResponse to the client
 func (o *ListEdgeRouterServicesOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListEdgeRouterServicesOK) WriteResponse(rw http.ResponseWriter, produce
 // ListEdgeRouterServicesUnauthorizedCode is the HTTP code returned for type ListEdgeRouterServicesUnauthorized
 const ListEdgeRouterServicesUnauthorizedCode int = 401
 
-/*ListEdgeRouterServicesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListEdgeRouterServicesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listEdgeRouterServicesUnauthorized
 */
 type ListEdgeRouterServicesUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListEdgeRouterServicesUnauthorized struct {
 func NewListEdgeRouterServicesUnauthorized() *ListEdgeRouterServicesUnauthorized {
 
 	return &ListEdgeRouterServicesUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list edge router services unauthorized response
+func (o *ListEdgeRouterServicesUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListEdgeRouterServicesUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list edge router services unauthorized response
+func (o *ListEdgeRouterServicesUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list edge router services unauthorized response
@@ -116,6 +166,23 @@ func (o *ListEdgeRouterServicesUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *ListEdgeRouterServicesUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListEdgeRouterServicesUnauthorized) WriteResponse(rw http.ResponseWrite
 // ListEdgeRouterServicesNotFoundCode is the HTTP code returned for type ListEdgeRouterServicesNotFound
 const ListEdgeRouterServicesNotFoundCode int = 404
 
-/*ListEdgeRouterServicesNotFound The requested resource does not exist
+/*
+ListEdgeRouterServicesNotFound The requested resource does not exist
 
 swagger:response listEdgeRouterServicesNotFound
 */
 type ListEdgeRouterServicesNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListEdgeRouterServicesNotFound struct {
 func NewListEdgeRouterServicesNotFound() *ListEdgeRouterServicesNotFound {
 
 	return &ListEdgeRouterServicesNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list edge router services not found response
+func (o *ListEdgeRouterServicesNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *ListEdgeRouterServicesNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list edge router services not found response
+func (o *ListEdgeRouterServicesNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list edge router services not found response
@@ -160,6 +243,23 @@ func (o *ListEdgeRouterServicesNotFound) SetPayload(payload *rest_model.APIError
 // WriteResponse to the client
 func (o *ListEdgeRouterServicesNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListEdgeRouterServicesNotFound) WriteResponse(rw http.ResponseWriter, p
 // ListEdgeRouterServicesTooManyRequestsCode is the HTTP code returned for type ListEdgeRouterServicesTooManyRequests
 const ListEdgeRouterServicesTooManyRequestsCode int = 429
 
-/*ListEdgeRouterServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListEdgeRouterServicesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listEdgeRouterServicesTooManyRequests
 */
 type ListEdgeRouterServicesTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListEdgeRouterServicesTooManyRequests struct {
 func NewListEdgeRouterServicesTooManyRequests() *ListEdgeRouterServicesTooManyRequests {
 
 	return &ListEdgeRouterServicesTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list edge router services too many requests response
+func (o *ListEdgeRouterServicesTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListEdgeRouterServicesTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list edge router services too many requests response
+func (o *ListEdgeRouterServicesTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list edge router services too many requests response
@@ -204,6 +320,23 @@ func (o *ListEdgeRouterServicesTooManyRequests) SetPayload(payload *rest_model.A
 // WriteResponse to the client
 func (o *ListEdgeRouterServicesTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *ListEdgeRouterServicesTooManyRequests) WriteResponse(rw http.ResponseWr
 // ListEdgeRouterServicesServiceUnavailableCode is the HTTP code returned for type ListEdgeRouterServicesServiceUnavailable
 const ListEdgeRouterServicesServiceUnavailableCode int = 503
 
-/*ListEdgeRouterServicesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListEdgeRouterServicesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listEdgeRouterServicesServiceUnavailable
 */
 type ListEdgeRouterServicesServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type ListEdgeRouterServicesServiceUnavailable struct {
 func NewListEdgeRouterServicesServiceUnavailable() *ListEdgeRouterServicesServiceUnavailable {
 
 	return &ListEdgeRouterServicesServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list edge router services service unavailable response
+func (o *ListEdgeRouterServicesServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListEdgeRouterServicesServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list edge router services service unavailable response
+func (o *ListEdgeRouterServicesServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list edge router services service unavailable response
@@ -247,6 +396,23 @@ func (o *ListEdgeRouterServicesServiceUnavailable) SetPayload(payload *rest_mode
 
 // WriteResponse to the client
 func (o *ListEdgeRouterServicesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

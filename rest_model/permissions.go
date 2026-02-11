@@ -44,7 +44,7 @@ import (
 // swagger:model permissions
 type Permissions []string
 
-var permissionsItemsEnum []interface{}
+var permissionsItemsEnum []any
 
 func init() {
 	var res []string

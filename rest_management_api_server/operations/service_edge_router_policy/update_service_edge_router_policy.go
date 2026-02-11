@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateServiceEdgeRouterPolicyHandlerFunc turns a function with the right signature into a update service edge router policy handler
-type UpdateServiceEdgeRouterPolicyHandlerFunc func(UpdateServiceEdgeRouterPolicyParams, interface{}) middleware.Responder
+type UpdateServiceEdgeRouterPolicyHandlerFunc func(UpdateServiceEdgeRouterPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateServiceEdgeRouterPolicyHandlerFunc) Handle(params UpdateServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+func (fn UpdateServiceEdgeRouterPolicyHandlerFunc) Handle(params UpdateServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateServiceEdgeRouterPolicyHandler interface for that can handle valid update service edge router policy params
 type UpdateServiceEdgeRouterPolicyHandler interface {
-	Handle(UpdateServiceEdgeRouterPolicyParams, interface{}) middleware.Responder
+	Handle(UpdateServiceEdgeRouterPolicyParams, any) middleware.Responder
 }
 
 // NewUpdateServiceEdgeRouterPolicy creates a new http.Handler for the update service edge router policy operation
@@ -53,12 +53,12 @@ func NewUpdateServiceEdgeRouterPolicy(ctx *middleware.Context, handler UpdateSer
 	return &UpdateServiceEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* UpdateServiceEdgeRouterPolicy swagger:route PUT /service-edge-router-policies/{id} Service Edge Router Policy updateServiceEdgeRouterPolicy
+/*
+	UpdateServiceEdgeRouterPolicy swagger:route PUT /service-edge-router-policies/{id} Service Edge Router Policy updateServiceEdgeRouterPolicy
 
-Update all fields on a service edge policy
+# Update all fields on a service edge policy
 
 Update all fields on a service edge policy by id. Requires admin access.
-
 */
 type UpdateServiceEdgeRouterPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateServiceEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *htt
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateServiceEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *htt
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

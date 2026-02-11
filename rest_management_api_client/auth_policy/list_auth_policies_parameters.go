@@ -77,10 +77,12 @@ func NewListAuthPoliciesParamsWithHTTPClient(client *http.Client) *ListAuthPolic
 	}
 }
 
-/* ListAuthPoliciesParams contains all the parameters to send to the API endpoint
-   for the list auth policies operation.
+/*
+ListAuthPoliciesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list auth policies operation.
+
+	Typically these are written to a http.Request.
 */
 type ListAuthPoliciesParams struct {
 

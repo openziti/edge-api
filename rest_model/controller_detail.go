@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -212,11 +213,15 @@ func (m *ControllerDetail) validateAPIAddresses(formats strfmt.Registry) error {
 
 	if m.APIAddresses != nil {
 		if err := m.APIAddresses.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("apiAddresses")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("apiAddresses")
 			}
+
 			return err
 		}
 	}
@@ -294,12 +299,20 @@ func (m *ControllerDetail) ContextValidate(ctx context.Context, formats strfmt.R
 
 func (m *ControllerDetail) contextValidateAPIAddresses(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.APIAddresses) { // not required
+		return nil
+	}
+
 	if err := m.APIAddresses.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("apiAddresses")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("apiAddresses")
 		}
+
 		return err
 	}
 

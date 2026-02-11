@@ -36,16 +36,16 @@ import (
 )
 
 // CreateTotpTokenHandlerFunc turns a function with the right signature into a create totp token handler
-type CreateTotpTokenHandlerFunc func(CreateTotpTokenParams, interface{}) middleware.Responder
+type CreateTotpTokenHandlerFunc func(CreateTotpTokenParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateTotpTokenHandlerFunc) Handle(params CreateTotpTokenParams, principal interface{}) middleware.Responder {
+func (fn CreateTotpTokenHandlerFunc) Handle(params CreateTotpTokenParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateTotpTokenHandler interface for that can handle valid create totp token params
 type CreateTotpTokenHandler interface {
-	Handle(CreateTotpTokenParams, interface{}) middleware.Responder
+	Handle(CreateTotpTokenParams, any) middleware.Responder
 }
 
 // NewCreateTotpToken creates a new http.Handler for the create totp token operation
@@ -53,13 +53,12 @@ func NewCreateTotpToken(ctx *middleware.Context, handler CreateTotpTokenHandler)
 	return &CreateTotpToken{Context: ctx, Handler: handler}
 }
 
-/* CreateTotpToken swagger:route POST /current-api-session/totp-token Current API Session MFA createTotpToken
+/*
+	CreateTotpToken swagger:route POST /current-api-session/totp-token Current API Session MFA createTotpToken
 
 Create an MFA TOTP token that proves TOTP code checking has passed as a specific time for posture checks.
 
 Creates a TOTP token that proves TOTP validation occurred at a specific time. Used in posture response for posture checks.
-
-
 */
 type CreateTotpToken struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *CreateTotpToken) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *CreateTotpToken) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // AssociateIdentitysServiceConfigsHandlerFunc turns a function with the right signature into a associate identitys service configs handler
-type AssociateIdentitysServiceConfigsHandlerFunc func(AssociateIdentitysServiceConfigsParams, interface{}) middleware.Responder
+type AssociateIdentitysServiceConfigsHandlerFunc func(AssociateIdentitysServiceConfigsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn AssociateIdentitysServiceConfigsHandlerFunc) Handle(params AssociateIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
+func (fn AssociateIdentitysServiceConfigsHandlerFunc) Handle(params AssociateIdentitysServiceConfigsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // AssociateIdentitysServiceConfigsHandler interface for that can handle valid associate identitys service configs params
 type AssociateIdentitysServiceConfigsHandler interface {
-	Handle(AssociateIdentitysServiceConfigsParams, interface{}) middleware.Responder
+	Handle(AssociateIdentitysServiceConfigsParams, any) middleware.Responder
 }
 
 // NewAssociateIdentitysServiceConfigs creates a new http.Handler for the associate identitys service configs operation
@@ -53,12 +53,12 @@ func NewAssociateIdentitysServiceConfigs(ctx *middleware.Context, handler Associ
 	return &AssociateIdentitysServiceConfigs{Context: ctx, Handler: handler}
 }
 
-/* AssociateIdentitysServiceConfigs swagger:route POST /identities/{id}/service-configs Identity associateIdentitysServiceConfigs
+/*
+	AssociateIdentitysServiceConfigs swagger:route POST /identities/{id}/service-configs Identity associateIdentitysServiceConfigs
 
-Associate service configs for a specific identity
+# Associate service configs for a specific identity
 
 Associate service configs to a specific identity
-
 */
 type AssociateIdentitysServiceConfigs struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *AssociateIdentitysServiceConfigs) ServeHTTP(rw http.ResponseWriter, r *
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *AssociateIdentitysServiceConfigs) ServeHTTP(rw http.ResponseWriter, r *
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

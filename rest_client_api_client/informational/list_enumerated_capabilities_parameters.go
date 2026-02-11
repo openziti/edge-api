@@ -76,10 +76,12 @@ func NewListEnumeratedCapabilitiesParamsWithHTTPClient(client *http.Client) *Lis
 	}
 }
 
-/* ListEnumeratedCapabilitiesParams contains all the parameters to send to the API endpoint
-   for the list enumerated capabilities operation.
+/*
+ListEnumeratedCapabilitiesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list enumerated capabilities operation.
+
+	Typically these are written to a http.Request.
 */
 type ListEnumeratedCapabilitiesParams struct {
 	timeout    time.Duration

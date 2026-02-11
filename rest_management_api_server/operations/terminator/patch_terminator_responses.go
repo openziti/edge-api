@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // PatchTerminatorOKCode is the HTTP code returned for type PatchTerminatorOK
 const PatchTerminatorOKCode int = 200
 
-/*PatchTerminatorOK The patch request was successful and the resource has been altered
+/*
+PatchTerminatorOK The patch request was successful and the resource has been altered
 
 swagger:response patchTerminatorOK
 */
 type PatchTerminatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type PatchTerminatorOK struct {
 func NewPatchTerminatorOK() *PatchTerminatorOK {
 
 	return &PatchTerminatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the patch terminator o k response
+func (o *PatchTerminatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *PatchTerminatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the patch terminator o k response
+func (o *PatchTerminatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the patch terminator o k response
@@ -72,6 +89,23 @@ func (o *PatchTerminatorOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *PatchTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *PatchTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runti
 // PatchTerminatorBadRequestCode is the HTTP code returned for type PatchTerminatorBadRequest
 const PatchTerminatorBadRequestCode int = 400
 
-/*PatchTerminatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+PatchTerminatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response patchTerminatorBadRequest
 */
 type PatchTerminatorBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type PatchTerminatorBadRequest struct {
 func NewPatchTerminatorBadRequest() *PatchTerminatorBadRequest {
 
 	return &PatchTerminatorBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the patch terminator bad request response
+func (o *PatchTerminatorBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *PatchTerminatorBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the patch terminator bad request response
+func (o *PatchTerminatorBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the patch terminator bad request response
@@ -116,6 +166,23 @@ func (o *PatchTerminatorBadRequest) SetPayload(payload *rest_model.APIErrorEnvel
 // WriteResponse to the client
 func (o *PatchTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *PatchTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produc
 // PatchTerminatorUnauthorizedCode is the HTTP code returned for type PatchTerminatorUnauthorized
 const PatchTerminatorUnauthorizedCode int = 401
 
-/*PatchTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+PatchTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response patchTerminatorUnauthorized
 */
 type PatchTerminatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type PatchTerminatorUnauthorized struct {
 func NewPatchTerminatorUnauthorized() *PatchTerminatorUnauthorized {
 
 	return &PatchTerminatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the patch terminator unauthorized response
+func (o *PatchTerminatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *PatchTerminatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the patch terminator unauthorized response
+func (o *PatchTerminatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the patch terminator unauthorized response
@@ -160,6 +243,23 @@ func (o *PatchTerminatorUnauthorized) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *PatchTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *PatchTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // PatchTerminatorNotFoundCode is the HTTP code returned for type PatchTerminatorNotFound
 const PatchTerminatorNotFoundCode int = 404
 
-/*PatchTerminatorNotFound The requested resource does not exist
+/*
+PatchTerminatorNotFound The requested resource does not exist
 
 swagger:response patchTerminatorNotFound
 */
 type PatchTerminatorNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type PatchTerminatorNotFound struct {
 func NewPatchTerminatorNotFound() *PatchTerminatorNotFound {
 
 	return &PatchTerminatorNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the patch terminator not found response
+func (o *PatchTerminatorNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *PatchTerminatorNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the patch terminator not found response
+func (o *PatchTerminatorNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the patch terminator not found response
@@ -204,6 +320,23 @@ func (o *PatchTerminatorNotFound) SetPayload(payload *rest_model.APIErrorEnvelop
 // WriteResponse to the client
 func (o *PatchTerminatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *PatchTerminatorNotFound) WriteResponse(rw http.ResponseWriter, producer
 // PatchTerminatorTooManyRequestsCode is the HTTP code returned for type PatchTerminatorTooManyRequests
 const PatchTerminatorTooManyRequestsCode int = 429
 
-/*PatchTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+PatchTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response patchTerminatorTooManyRequests
 */
 type PatchTerminatorTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type PatchTerminatorTooManyRequests struct {
 func NewPatchTerminatorTooManyRequests() *PatchTerminatorTooManyRequests {
 
 	return &PatchTerminatorTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the patch terminator too many requests response
+func (o *PatchTerminatorTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *PatchTerminatorTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the patch terminator too many requests response
+func (o *PatchTerminatorTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the patch terminator too many requests response
@@ -248,6 +397,23 @@ func (o *PatchTerminatorTooManyRequests) SetPayload(payload *rest_model.APIError
 // WriteResponse to the client
 func (o *PatchTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *PatchTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, p
 // PatchTerminatorServiceUnavailableCode is the HTTP code returned for type PatchTerminatorServiceUnavailable
 const PatchTerminatorServiceUnavailableCode int = 503
 
-/*PatchTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+PatchTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response patchTerminatorServiceUnavailable
 */
 type PatchTerminatorServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type PatchTerminatorServiceUnavailable struct {
 func NewPatchTerminatorServiceUnavailable() *PatchTerminatorServiceUnavailable {
 
 	return &PatchTerminatorServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the patch terminator service unavailable response
+func (o *PatchTerminatorServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *PatchTerminatorServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the patch terminator service unavailable response
+func (o *PatchTerminatorServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the patch terminator service unavailable response
@@ -291,6 +473,23 @@ func (o *PatchTerminatorServiceUnavailable) SetPayload(payload *rest_model.APIEr
 
 // WriteResponse to the client
 func (o *PatchTerminatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

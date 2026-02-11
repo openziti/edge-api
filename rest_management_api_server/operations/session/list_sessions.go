@@ -36,16 +36,16 @@ import (
 )
 
 // ListSessionsHandlerFunc turns a function with the right signature into a list sessions handler
-type ListSessionsHandlerFunc func(ListSessionsParams, interface{}) middleware.Responder
+type ListSessionsHandlerFunc func(ListSessionsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListSessionsHandlerFunc) Handle(params ListSessionsParams, principal interface{}) middleware.Responder {
+func (fn ListSessionsHandlerFunc) Handle(params ListSessionsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListSessionsHandler interface for that can handle valid list sessions params
 type ListSessionsHandler interface {
-	Handle(ListSessionsParams, interface{}) middleware.Responder
+	Handle(ListSessionsParams, any) middleware.Responder
 }
 
 // NewListSessions creates a new http.Handler for the list sessions operation
@@ -53,16 +53,15 @@ func NewListSessions(ctx *middleware.Context, handler ListSessionsHandler) *List
 	return &ListSessions{Context: ctx, Handler: handler}
 }
 
-/* ListSessions swagger:route GET /sessions Session listSessions
+/*
+	ListSessions swagger:route GET /sessions Session listSessions
 
-List sessions
+# List sessions
 
 Retrieves a list of active sessions resources; supports filtering, sorting, and pagination. Requires admin access.
 
 Sessions are tied to an API session and are moved when an API session times out or logs out. Active sessions
 (i.e. Ziti SDK connected to an edge router) will keep the session and API session marked as active.
-
-
 */
 type ListSessions struct {
 	Context *middleware.Context
@@ -83,9 +82,9 @@ func (o *ListSessions) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -94,6 +93,7 @@ func (o *ListSessions) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

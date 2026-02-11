@@ -38,7 +38,7 @@ import (
 // ControllerSettingsList controller settings list
 //
 // swagger:model controllerSettingsList
-type ControllerSettingsList []interface{}
+type ControllerSettingsList []any
 
 // Validate validates this controller settings list
 func (m ControllerSettingsList) Validate(formats strfmt.Registry) error {

@@ -36,16 +36,16 @@ import (
 )
 
 // PatchAuthPolicyHandlerFunc turns a function with the right signature into a patch auth policy handler
-type PatchAuthPolicyHandlerFunc func(PatchAuthPolicyParams, interface{}) middleware.Responder
+type PatchAuthPolicyHandlerFunc func(PatchAuthPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn PatchAuthPolicyHandlerFunc) Handle(params PatchAuthPolicyParams, principal interface{}) middleware.Responder {
+func (fn PatchAuthPolicyHandlerFunc) Handle(params PatchAuthPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // PatchAuthPolicyHandler interface for that can handle valid patch auth policy params
 type PatchAuthPolicyHandler interface {
-	Handle(PatchAuthPolicyParams, interface{}) middleware.Responder
+	Handle(PatchAuthPolicyParams, any) middleware.Responder
 }
 
 // NewPatchAuthPolicy creates a new http.Handler for the patch auth policy operation
@@ -53,12 +53,12 @@ func NewPatchAuthPolicy(ctx *middleware.Context, handler PatchAuthPolicyHandler)
 	return &PatchAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/* PatchAuthPolicy swagger:route PATCH /auth-policies/{id} Auth Policy patchAuthPolicy
+/*
+	PatchAuthPolicy swagger:route PATCH /auth-policies/{id} Auth Policy patchAuthPolicy
 
-Update the supplied fields on an Auth Policy
+# Update the supplied fields on an Auth Policy
 
 Update only the supplied fields on an Auth Policy by id. Requires admin access.
-
 */
 type PatchAuthPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *PatchAuthPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *PatchAuthPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

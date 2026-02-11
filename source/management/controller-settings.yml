@@ -174,14 +174,32 @@ paths:
 responses:
   listControllerSettings:
     description: A list of controller setting objects
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listControllerSettingEnvelope'
   detailControllerSetting:
     description: A singular controller setting object
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailControllerSettingEnvelope'
   detailControllerSettingEffective:
     description: A singular controller's effective setting object
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailControllerSettingEffectiveEnvelope'
 

@@ -50,7 +50,6 @@ func NewDeleteCaParams() DeleteCaParams {
 //
 // swagger:parameters deleteCa
 type DeleteCaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -269,11 +270,15 @@ func (m *EnrollmentDetail) validateEdgeRouter(formats strfmt.Registry) error {
 
 	if m.EdgeRouter != nil {
 		if err := m.EdgeRouter.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("edgeRouter")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("edgeRouter")
 			}
+
 			return err
 		}
 	}
@@ -302,11 +307,15 @@ func (m *EnrollmentDetail) validateIdentity(formats strfmt.Registry) error {
 
 	if m.Identity != nil {
 		if err := m.Identity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("identity")
 			}
+
 			return err
 		}
 	}
@@ -340,11 +349,15 @@ func (m *EnrollmentDetail) validateTransitRouter(formats strfmt.Registry) error 
 
 	if m.TransitRouter != nil {
 		if err := m.TransitRouter.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("transitRouter")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("transitRouter")
 			}
+
 			return err
 		}
 	}
@@ -382,12 +395,21 @@ func (m *EnrollmentDetail) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *EnrollmentDetail) contextValidateEdgeRouter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EdgeRouter != nil {
+
+		if swag.IsZero(m.EdgeRouter) { // not required
+			return nil
+		}
+
 		if err := m.EdgeRouter.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("edgeRouter")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("edgeRouter")
 			}
+
 			return err
 		}
 	}
@@ -398,12 +420,21 @@ func (m *EnrollmentDetail) contextValidateEdgeRouter(ctx context.Context, format
 func (m *EnrollmentDetail) contextValidateIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Identity != nil {
+
+		if swag.IsZero(m.Identity) { // not required
+			return nil
+		}
+
 		if err := m.Identity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("identity")
 			}
+
 			return err
 		}
 	}
@@ -414,12 +445,21 @@ func (m *EnrollmentDetail) contextValidateIdentity(ctx context.Context, formats 
 func (m *EnrollmentDetail) contextValidateTransitRouter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TransitRouter != nil {
+
+		if swag.IsZero(m.TransitRouter) { // not required
+			return nil
+		}
+
 		if err := m.TransitRouter.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("transitRouter")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("transitRouter")
 			}
+
 			return err
 		}
 	}

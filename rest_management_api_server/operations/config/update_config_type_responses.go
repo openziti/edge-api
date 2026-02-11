@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // UpdateConfigTypeOKCode is the HTTP code returned for type UpdateConfigTypeOK
 const UpdateConfigTypeOKCode int = 200
 
-/*UpdateConfigTypeOK The update request was successful and the resource has been altered
+/*
+UpdateConfigTypeOK The update request was successful and the resource has been altered
 
 swagger:response updateConfigTypeOK
 */
 type UpdateConfigTypeOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type UpdateConfigTypeOK struct {
 func NewUpdateConfigTypeOK() *UpdateConfigTypeOK {
 
 	return &UpdateConfigTypeOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update config type o k response
+func (o *UpdateConfigTypeOK) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateConfigTypeOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update config type o k response
+func (o *UpdateConfigTypeOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update config type o k response
@@ -72,6 +89,23 @@ func (o *UpdateConfigTypeOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *UpdateConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *UpdateConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateConfigTypeBadRequestCode is the HTTP code returned for type UpdateConfigTypeBadRequest
 const UpdateConfigTypeBadRequestCode int = 400
 
-/*UpdateConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateConfigTypeBadRequest
 */
 type UpdateConfigTypeBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type UpdateConfigTypeBadRequest struct {
 func NewUpdateConfigTypeBadRequest() *UpdateConfigTypeBadRequest {
 
 	return &UpdateConfigTypeBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update config type bad request response
+func (o *UpdateConfigTypeBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateConfigTypeBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update config type bad request response
+func (o *UpdateConfigTypeBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update config type bad request response
@@ -116,6 +166,23 @@ func (o *UpdateConfigTypeBadRequest) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *UpdateConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *UpdateConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateConfigTypeUnauthorizedCode is the HTTP code returned for type UpdateConfigTypeUnauthorized
 const UpdateConfigTypeUnauthorizedCode int = 401
 
-/*UpdateConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateConfigTypeUnauthorized
 */
 type UpdateConfigTypeUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type UpdateConfigTypeUnauthorized struct {
 func NewUpdateConfigTypeUnauthorized() *UpdateConfigTypeUnauthorized {
 
 	return &UpdateConfigTypeUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update config type unauthorized response
+func (o *UpdateConfigTypeUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateConfigTypeUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update config type unauthorized response
+func (o *UpdateConfigTypeUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update config type unauthorized response
@@ -160,6 +243,23 @@ func (o *UpdateConfigTypeUnauthorized) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *UpdateConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *UpdateConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // UpdateConfigTypeNotFoundCode is the HTTP code returned for type UpdateConfigTypeNotFound
 const UpdateConfigTypeNotFoundCode int = 404
 
-/*UpdateConfigTypeNotFound The requested resource does not exist
+/*
+UpdateConfigTypeNotFound The requested resource does not exist
 
 swagger:response updateConfigTypeNotFound
 */
 type UpdateConfigTypeNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type UpdateConfigTypeNotFound struct {
 func NewUpdateConfigTypeNotFound() *UpdateConfigTypeNotFound {
 
 	return &UpdateConfigTypeNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update config type not found response
+func (o *UpdateConfigTypeNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateConfigTypeNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update config type not found response
+func (o *UpdateConfigTypeNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update config type not found response
@@ -204,6 +320,23 @@ func (o *UpdateConfigTypeNotFound) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *UpdateConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *UpdateConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, produce
 // UpdateConfigTypeTooManyRequestsCode is the HTTP code returned for type UpdateConfigTypeTooManyRequests
 const UpdateConfigTypeTooManyRequestsCode int = 429
 
-/*UpdateConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateConfigTypeTooManyRequests
 */
 type UpdateConfigTypeTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type UpdateConfigTypeTooManyRequests struct {
 func NewUpdateConfigTypeTooManyRequests() *UpdateConfigTypeTooManyRequests {
 
 	return &UpdateConfigTypeTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update config type too many requests response
+func (o *UpdateConfigTypeTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateConfigTypeTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update config type too many requests response
+func (o *UpdateConfigTypeTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update config type too many requests response
@@ -248,6 +397,23 @@ func (o *UpdateConfigTypeTooManyRequests) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *UpdateConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *UpdateConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 // UpdateConfigTypeServiceUnavailableCode is the HTTP code returned for type UpdateConfigTypeServiceUnavailable
 const UpdateConfigTypeServiceUnavailableCode int = 503
 
-/*UpdateConfigTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+UpdateConfigTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response updateConfigTypeServiceUnavailable
 */
 type UpdateConfigTypeServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type UpdateConfigTypeServiceUnavailable struct {
 func NewUpdateConfigTypeServiceUnavailable() *UpdateConfigTypeServiceUnavailable {
 
 	return &UpdateConfigTypeServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update config type service unavailable response
+func (o *UpdateConfigTypeServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateConfigTypeServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update config type service unavailable response
+func (o *UpdateConfigTypeServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update config type service unavailable response
@@ -291,6 +473,23 @@ func (o *UpdateConfigTypeServiceUnavailable) SetPayload(payload *rest_model.APIE
 
 // WriteResponse to the client
 func (o *UpdateConfigTypeServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new config API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new config API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new config API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -86,12 +112,12 @@ type ClientService interface {
 }
 
 /*
-  CreateConfig creates a config resource
+CreateConfig creates a config resource
 
-  Create a config resource. Requires admin access.
+Create a config resource. Requires admin access.
 */
 func (a *Client) CreateConfig(params *CreateConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateConfigParams()
 	}
@@ -111,26 +137,31 @@ func (a *Client) CreateConfig(params *CreateConfigParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  CreateConfigType creates a config type requires admin access
+CreateConfigType creates a config type requires admin access
 */
 func (a *Client) CreateConfigType(params *CreateConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateConfigTypeCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateConfigTypeParams()
 	}
@@ -150,28 +181,33 @@ func (a *Client) CreateConfigType(params *CreateConfigTypeParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateConfigTypeCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteConfig deletes a config
+DeleteConfig deletes a config
 
-  Delete a config by id. Requires admin access.
+Delete a config by id. Requires admin access.
 */
 func (a *Client) DeleteConfig(params *DeleteConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteConfigParams()
 	}
@@ -191,28 +227,33 @@ func (a *Client) DeleteConfig(params *DeleteConfigParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteConfigType deletes a config type
+DeleteConfigType deletes a config type
 
-  Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
+Delete a config-type by id. Removing a configuration type that are in use will result in a 409 conflict HTTP status code and error. All configurations of a type must be removed first.
 */
 func (a *Client) DeleteConfigType(params *DeleteConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteConfigTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteConfigTypeParams()
 	}
@@ -232,28 +273,33 @@ func (a *Client) DeleteConfigType(params *DeleteConfigTypeParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteConfigTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailConfig retrieves a single config
+DetailConfig retrieves a single config
 
-  Retrieves a single config by id. Requires admin access.
+Retrieves a single config by id. Requires admin access.
 */
 func (a *Client) DetailConfig(params *DetailConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailConfigParams()
 	}
@@ -273,28 +319,33 @@ func (a *Client) DetailConfig(params *DetailConfigParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailConfigType retrieves a single config type
+DetailConfigType retrieves a single config type
 
-  Retrieves a single config-type by id. Requires admin access.
+Retrieves a single config-type by id. Requires admin access.
 */
 func (a *Client) DetailConfigType(params *DetailConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailConfigTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailConfigTypeParams()
 	}
@@ -314,29 +365,33 @@ func (a *Client) DetailConfigType(params *DetailConfigTypeParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailConfigTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListConfigServices lists services referenced by a config
+ListConfigServices lists services referenced by a config
 
-  Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListConfigServices(params *ListConfigServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigServicesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListConfigServicesParams()
 	}
@@ -356,29 +411,33 @@ func (a *Client) ListConfigServices(params *ListConfigServicesParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListConfigServicesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listConfigServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListConfigTypes lists config types
+ListConfigTypes lists config types
 
-  Retrieves a list of config-type resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of config-type resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListConfigTypes(params *ListConfigTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigTypesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListConfigTypesParams()
 	}
@@ -398,29 +457,33 @@ func (a *Client) ListConfigTypes(params *ListConfigTypesParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListConfigTypesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listConfigTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListConfigs lists configs
+ListConfigs lists configs
 
-  Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of config resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListConfigs(params *ListConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListConfigsParams()
 	}
@@ -440,28 +503,33 @@ func (a *Client) ListConfigs(params *ListConfigsParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListConfigsForConfigType lists the configs of a specific config type
+ListConfigsForConfigType lists the configs of a specific config type
 
-  Lists the configs associated to a config-type. Requires admin access.
+Lists the configs associated to a config-type. Requires admin access.
 */
 func (a *Client) ListConfigsForConfigType(params *ListConfigsForConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigsForConfigTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListConfigsForConfigTypeParams()
 	}
@@ -481,28 +549,33 @@ func (a *Client) ListConfigsForConfigType(params *ListConfigsForConfigTypeParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListConfigsForConfigTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listConfigsForConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchConfig updates the supplied fields on a config
+PatchConfig updates the supplied fields on a config
 
-  Update the supplied fields on a config. Requires admin access.
+Update the supplied fields on a config. Requires admin access.
 */
 func (a *Client) PatchConfig(params *PatchConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchConfigParams()
 	}
@@ -522,28 +595,33 @@ func (a *Client) PatchConfig(params *PatchConfigParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchConfigType updates the supplied fields on a config type
+PatchConfigType updates the supplied fields on a config type
 
-  Update the supplied fields on a config-type. Requires admin access.
+Update the supplied fields on a config-type. Requires admin access.
 */
 func (a *Client) PatchConfigType(params *PatchConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchConfigTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchConfigTypeParams()
 	}
@@ -563,28 +641,33 @@ func (a *Client) PatchConfigType(params *PatchConfigTypeParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchConfigTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateConfig updates all fields on a config
+UpdateConfig updates all fields on a config
 
-  Update all fields on a config by id. Requires admin access.
+Update all fields on a config by id. Requires admin access.
 */
 func (a *Client) UpdateConfig(params *UpdateConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateConfigParams()
 	}
@@ -604,28 +687,33 @@ func (a *Client) UpdateConfig(params *UpdateConfigParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateConfigType updates all fields on a config type
+UpdateConfigType updates all fields on a config type
 
-  Update all fields on a config-type by id. Requires admin access.
+Update all fields on a config-type by id. Requires admin access.
 */
 func (a *Client) UpdateConfigType(params *UpdateConfigTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateConfigTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateConfigTypeParams()
 	}
@@ -645,17 +733,22 @@ func (a *Client) UpdateConfigType(params *UpdateConfigTypeParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateConfigTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateConfigType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

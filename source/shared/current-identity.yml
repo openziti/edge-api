@@ -18,6 +18,12 @@ paths:
 responses:
   detailCurrentIdentity:
     description: The identity associated with the API Session used to issue the request
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/currentIdentityDetailEnvelope'
     examples:

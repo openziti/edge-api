@@ -30,11 +30,14 @@ package auth_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateAuthPolicyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAuthPolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAuthPolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAuthPolicyCreated()
@@ -78,7 +81,7 @@ func (o *CreateAuthPolicyReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /auth-policies] createAuthPolicy", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewCreateAuthPolicyCreated() *CreateAuthPolicyCreated {
 	return &CreateAuthPolicyCreated{}
 }
 
-/* CreateAuthPolicyCreated describes a response with status code 201, with default header values.
+/*
+CreateAuthPolicyCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
 type CreateAuthPolicyCreated struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateAuthPolicyCreated) Error() string {
-	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create auth policy created response has a 2xx status code
+func (o *CreateAuthPolicyCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create auth policy created response has a 3xx status code
+func (o *CreateAuthPolicyCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create auth policy created response has a 4xx status code
+func (o *CreateAuthPolicyCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create auth policy created response has a 5xx status code
+func (o *CreateAuthPolicyCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create auth policy created response a status code equal to that given
+func (o *CreateAuthPolicyCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create auth policy created response
+func (o *CreateAuthPolicyCreated) Code() int {
+	return 201
+}
+
+func (o *CreateAuthPolicyCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyCreated %s", 201, payload)
+}
+
+func (o *CreateAuthPolicyCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyCreated %s", 201, payload)
+}
+
 func (o *CreateAuthPolicyCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
 
 func (o *CreateAuthPolicyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.CreateEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateAuthPolicyCreated binds the response header WWW-Authenticate
+func (o *CreateAuthPolicyCreated) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateAuthPolicyBadRequest creates a CreateAuthPolicyBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewCreateAuthPolicyBadRequest() *CreateAuthPolicyBadRequest {
 	return &CreateAuthPolicyBadRequest{}
 }
 
-/* CreateAuthPolicyBadRequest describes a response with status code 400, with default header values.
+/*
+CreateAuthPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type CreateAuthPolicyBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateAuthPolicyBadRequest) Error() string {
-	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create auth policy bad request response has a 2xx status code
+func (o *CreateAuthPolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create auth policy bad request response has a 3xx status code
+func (o *CreateAuthPolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create auth policy bad request response has a 4xx status code
+func (o *CreateAuthPolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create auth policy bad request response has a 5xx status code
+func (o *CreateAuthPolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create auth policy bad request response a status code equal to that given
+func (o *CreateAuthPolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create auth policy bad request response
+func (o *CreateAuthPolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateAuthPolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyBadRequest %s", 400, payload)
+}
+
+func (o *CreateAuthPolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyBadRequest %s", 400, payload)
+}
+
 func (o *CreateAuthPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateAuthPolicyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateAuthPolicyBadRequest binds the response header WWW-Authenticate
+func (o *CreateAuthPolicyBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateAuthPolicyUnauthorized creates a CreateAuthPolicyUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewCreateAuthPolicyUnauthorized() *CreateAuthPolicyUnauthorized {
 	return &CreateAuthPolicyUnauthorized{}
 }
 
-/* CreateAuthPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateAuthPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateAuthPolicyUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateAuthPolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create auth policy unauthorized response has a 2xx status code
+func (o *CreateAuthPolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create auth policy unauthorized response has a 3xx status code
+func (o *CreateAuthPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create auth policy unauthorized response has a 4xx status code
+func (o *CreateAuthPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create auth policy unauthorized response has a 5xx status code
+func (o *CreateAuthPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create auth policy unauthorized response a status code equal to that given
+func (o *CreateAuthPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create auth policy unauthorized response
+func (o *CreateAuthPolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateAuthPolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyUnauthorized %s", 401, payload)
+}
+
+func (o *CreateAuthPolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyUnauthorized %s", 401, payload)
+}
+
 func (o *CreateAuthPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateAuthPolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateAuthPolicyUnauthorized binds the response header WWW-Authenticate
+func (o *CreateAuthPolicyUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateAuthPolicyTooManyRequests creates a CreateAuthPolicyTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewCreateAuthPolicyTooManyRequests() *CreateAuthPolicyTooManyRequests {
 	return &CreateAuthPolicyTooManyRequests{}
 }
 
-/* CreateAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreateAuthPolicyTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateAuthPolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create auth policy too many requests response has a 2xx status code
+func (o *CreateAuthPolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create auth policy too many requests response has a 3xx status code
+func (o *CreateAuthPolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create auth policy too many requests response has a 4xx status code
+func (o *CreateAuthPolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create auth policy too many requests response has a 5xx status code
+func (o *CreateAuthPolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create auth policy too many requests response a status code equal to that given
+func (o *CreateAuthPolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create auth policy too many requests response
+func (o *CreateAuthPolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateAuthPolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateAuthPolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateAuthPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateAuthPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateAuthPolicyTooManyRequests binds the response header WWW-Authenticate
+func (o *CreateAuthPolicyTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateAuthPolicyServiceUnavailable creates a CreateAuthPolicyServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewCreateAuthPolicyServiceUnavailable() *CreateAuthPolicyServiceUnavailable
 	return &CreateAuthPolicyServiceUnavailable{}
 }
 
-/* CreateAuthPolicyServiceUnavailable describes a response with status code 503, with default header values.
+/*
+CreateAuthPolicyServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type CreateAuthPolicyServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateAuthPolicyServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this create auth policy service unavailable response has a 2xx status code
+func (o *CreateAuthPolicyServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create auth policy service unavailable response has a 3xx status code
+func (o *CreateAuthPolicyServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create auth policy service unavailable response has a 4xx status code
+func (o *CreateAuthPolicyServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create auth policy service unavailable response has a 5xx status code
+func (o *CreateAuthPolicyServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create auth policy service unavailable response a status code equal to that given
+func (o *CreateAuthPolicyServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the create auth policy service unavailable response
+func (o *CreateAuthPolicyServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *CreateAuthPolicyServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyServiceUnavailable %s", 503, payload)
+}
+
+func (o *CreateAuthPolicyServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth-policies][%d] createAuthPolicyServiceUnavailable %s", 503, payload)
+}
+
 func (o *CreateAuthPolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateAuthPolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateAuthPolicyServiceUnavailable binds the response header WWW-Authenticate
+func (o *CreateAuthPolicyServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

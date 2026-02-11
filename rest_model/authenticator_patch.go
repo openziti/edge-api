@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -81,11 +82,15 @@ func (m *AuthenticatorPatch) validatePassword(formats strfmt.Registry) error {
 
 	if m.Password != nil {
 		if err := m.Password.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("password")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("password")
 			}
+
 			return err
 		}
 	}
@@ -100,11 +105,15 @@ func (m *AuthenticatorPatch) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -119,11 +128,15 @@ func (m *AuthenticatorPatch) validateUsername(formats strfmt.Registry) error {
 
 	if m.Username != nil {
 		if err := m.Username.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("username")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("username")
 			}
+
 			return err
 		}
 	}
@@ -156,12 +169,21 @@ func (m *AuthenticatorPatch) ContextValidate(ctx context.Context, formats strfmt
 func (m *AuthenticatorPatch) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Password != nil {
+
+		if swag.IsZero(m.Password) { // not required
+			return nil
+		}
+
 		if err := m.Password.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("password")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("password")
 			}
+
 			return err
 		}
 	}
@@ -172,12 +194,21 @@ func (m *AuthenticatorPatch) contextValidatePassword(ctx context.Context, format
 func (m *AuthenticatorPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -188,12 +219,21 @@ func (m *AuthenticatorPatch) contextValidateTags(ctx context.Context, formats st
 func (m *AuthenticatorPatch) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Username != nil {
+
+		if swag.IsZero(m.Username) { // not required
+			return nil
+		}
+
 		if err := m.Username.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("username")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("username")
 			}
+
 			return err
 		}
 	}

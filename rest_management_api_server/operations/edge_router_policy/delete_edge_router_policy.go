@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteEdgeRouterPolicyHandlerFunc turns a function with the right signature into a delete edge router policy handler
-type DeleteEdgeRouterPolicyHandlerFunc func(DeleteEdgeRouterPolicyParams, interface{}) middleware.Responder
+type DeleteEdgeRouterPolicyHandlerFunc func(DeleteEdgeRouterPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteEdgeRouterPolicyHandlerFunc) Handle(params DeleteEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+func (fn DeleteEdgeRouterPolicyHandlerFunc) Handle(params DeleteEdgeRouterPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteEdgeRouterPolicyHandler interface for that can handle valid delete edge router policy params
 type DeleteEdgeRouterPolicyHandler interface {
-	Handle(DeleteEdgeRouterPolicyParams, interface{}) middleware.Responder
+	Handle(DeleteEdgeRouterPolicyParams, any) middleware.Responder
 }
 
 // NewDeleteEdgeRouterPolicy creates a new http.Handler for the delete edge router policy operation
@@ -53,12 +53,12 @@ func NewDeleteEdgeRouterPolicy(ctx *middleware.Context, handler DeleteEdgeRouter
 	return &DeleteEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* DeleteEdgeRouterPolicy swagger:route DELETE /edge-router-policies/{id} Edge Router Policy deleteEdgeRouterPolicy
+/*
+	DeleteEdgeRouterPolicy swagger:route DELETE /edge-router-policies/{id} Edge Router Policy deleteEdgeRouterPolicy
 
-Delete an edge router policy
+# Delete an edge router policy
 
 Delete an edge router policy by id. Requires admin access.
-
 */
 type DeleteEdgeRouterPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -30,11 +30,14 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListSummaryReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListSummaryReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListSummaryReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListSummaryOK()
@@ -72,7 +75,7 @@ func (o *ListSummaryReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /summary] listSummary", response, response.Code())
 	}
 }
 
@@ -81,31 +84,108 @@ func NewListSummaryOK() *ListSummaryOK {
 	return &ListSummaryOK{}
 }
 
-/* ListSummaryOK describes a response with status code 200, with default header values.
+/*
+ListSummaryOK describes a response with status code 200, with default header values.
 
 Entity counts scopped to the current identitie's access
 */
 type ListSummaryOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListSummaryCountsEnvelope
 }
 
-func (o *ListSummaryOK) Error() string {
-	return fmt.Sprintf("[GET /summary][%d] listSummaryOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list summary o k response has a 2xx status code
+func (o *ListSummaryOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list summary o k response has a 3xx status code
+func (o *ListSummaryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list summary o k response has a 4xx status code
+func (o *ListSummaryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list summary o k response has a 5xx status code
+func (o *ListSummaryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list summary o k response a status code equal to that given
+func (o *ListSummaryOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list summary o k response
+func (o *ListSummaryOK) Code() int {
+	return 200
+}
+
+func (o *ListSummaryOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryOK %s", 200, payload)
+}
+
+func (o *ListSummaryOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryOK %s", 200, payload)
+}
+
 func (o *ListSummaryOK) GetPayload() *rest_model.ListSummaryCountsEnvelope {
 	return o.Payload
 }
 
 func (o *ListSummaryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListSummaryCountsEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListSummaryOK binds the response header WWW-Authenticate
+func (o *ListSummaryOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListSummaryUnauthorized creates a ListSummaryUnauthorized with default headers values
@@ -113,31 +193,108 @@ func NewListSummaryUnauthorized() *ListSummaryUnauthorized {
 	return &ListSummaryUnauthorized{}
 }
 
-/* ListSummaryUnauthorized describes a response with status code 401, with default header values.
+/*
+ListSummaryUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListSummaryUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListSummaryUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /summary][%d] listSummaryUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list summary unauthorized response has a 2xx status code
+func (o *ListSummaryUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list summary unauthorized response has a 3xx status code
+func (o *ListSummaryUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list summary unauthorized response has a 4xx status code
+func (o *ListSummaryUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list summary unauthorized response has a 5xx status code
+func (o *ListSummaryUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list summary unauthorized response a status code equal to that given
+func (o *ListSummaryUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list summary unauthorized response
+func (o *ListSummaryUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListSummaryUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryUnauthorized %s", 401, payload)
+}
+
+func (o *ListSummaryUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryUnauthorized %s", 401, payload)
+}
+
 func (o *ListSummaryUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListSummaryUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListSummaryUnauthorized binds the response header WWW-Authenticate
+func (o *ListSummaryUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListSummaryTooManyRequests creates a ListSummaryTooManyRequests with default headers values
@@ -145,31 +302,108 @@ func NewListSummaryTooManyRequests() *ListSummaryTooManyRequests {
 	return &ListSummaryTooManyRequests{}
 }
 
-/* ListSummaryTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListSummaryTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListSummaryTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListSummaryTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /summary][%d] listSummaryTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list summary too many requests response has a 2xx status code
+func (o *ListSummaryTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list summary too many requests response has a 3xx status code
+func (o *ListSummaryTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list summary too many requests response has a 4xx status code
+func (o *ListSummaryTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list summary too many requests response has a 5xx status code
+func (o *ListSummaryTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list summary too many requests response a status code equal to that given
+func (o *ListSummaryTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list summary too many requests response
+func (o *ListSummaryTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListSummaryTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryTooManyRequests %s", 429, payload)
+}
+
+func (o *ListSummaryTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryTooManyRequests %s", 429, payload)
+}
+
 func (o *ListSummaryTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListSummaryTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListSummaryTooManyRequests binds the response header WWW-Authenticate
+func (o *ListSummaryTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListSummaryServiceUnavailable creates a ListSummaryServiceUnavailable with default headers values
@@ -177,29 +411,106 @@ func NewListSummaryServiceUnavailable() *ListSummaryServiceUnavailable {
 	return &ListSummaryServiceUnavailable{}
 }
 
-/* ListSummaryServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListSummaryServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListSummaryServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListSummaryServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /summary][%d] listSummaryServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list summary service unavailable response has a 2xx status code
+func (o *ListSummaryServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list summary service unavailable response has a 3xx status code
+func (o *ListSummaryServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list summary service unavailable response has a 4xx status code
+func (o *ListSummaryServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list summary service unavailable response has a 5xx status code
+func (o *ListSummaryServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list summary service unavailable response a status code equal to that given
+func (o *ListSummaryServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list summary service unavailable response
+func (o *ListSummaryServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListSummaryServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListSummaryServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /summary][%d] listSummaryServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListSummaryServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListSummaryServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListSummaryServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListSummaryServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

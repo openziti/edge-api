@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailTransitRouterOKCode is the HTTP code returned for type DetailTransitRouterOK
 const DetailTransitRouterOKCode int = 200
 
-/*DetailTransitRouterOK A single router
+/*
+DetailTransitRouterOK A single router
 
 swagger:response detailTransitRouterOK
 */
 type DetailTransitRouterOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailTransitRouterOK struct {
 func NewDetailTransitRouterOK() *DetailTransitRouterOK {
 
 	return &DetailTransitRouterOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail transit router o k response
+func (o *DetailTransitRouterOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTransitRouterOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail transit router o k response
+func (o *DetailTransitRouterOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail transit router o k response
@@ -72,6 +89,23 @@ func (o *DetailTransitRouterOK) SetPayload(payload *rest_model.DetailRouterEnvel
 // WriteResponse to the client
 func (o *DetailTransitRouterOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DetailTransitRouterOK) WriteResponse(rw http.ResponseWriter, producer r
 // DetailTransitRouterUnauthorizedCode is the HTTP code returned for type DetailTransitRouterUnauthorized
 const DetailTransitRouterUnauthorizedCode int = 401
 
-/*DetailTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailTransitRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailTransitRouterUnauthorized
 */
 type DetailTransitRouterUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DetailTransitRouterUnauthorized struct {
 func NewDetailTransitRouterUnauthorized() *DetailTransitRouterUnauthorized {
 
 	return &DetailTransitRouterUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail transit router unauthorized response
+func (o *DetailTransitRouterUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTransitRouterUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail transit router unauthorized response
+func (o *DetailTransitRouterUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail transit router unauthorized response
@@ -116,6 +166,23 @@ func (o *DetailTransitRouterUnauthorized) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DetailTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DetailTransitRouterUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // DetailTransitRouterNotFoundCode is the HTTP code returned for type DetailTransitRouterNotFound
 const DetailTransitRouterNotFoundCode int = 404
 
-/*DetailTransitRouterNotFound The requested resource does not exist
+/*
+DetailTransitRouterNotFound The requested resource does not exist
 
 swagger:response detailTransitRouterNotFound
 */
 type DetailTransitRouterNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DetailTransitRouterNotFound struct {
 func NewDetailTransitRouterNotFound() *DetailTransitRouterNotFound {
 
 	return &DetailTransitRouterNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail transit router not found response
+func (o *DetailTransitRouterNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTransitRouterNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail transit router not found response
+func (o *DetailTransitRouterNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail transit router not found response
@@ -160,6 +243,23 @@ func (o *DetailTransitRouterNotFound) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *DetailTransitRouterNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DetailTransitRouterNotFound) WriteResponse(rw http.ResponseWriter, prod
 // DetailTransitRouterTooManyRequestsCode is the HTTP code returned for type DetailTransitRouterTooManyRequests
 const DetailTransitRouterTooManyRequestsCode int = 429
 
-/*DetailTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailTransitRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailTransitRouterTooManyRequests
 */
 type DetailTransitRouterTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DetailTransitRouterTooManyRequests struct {
 func NewDetailTransitRouterTooManyRequests() *DetailTransitRouterTooManyRequests {
 
 	return &DetailTransitRouterTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail transit router too many requests response
+func (o *DetailTransitRouterTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTransitRouterTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail transit router too many requests response
+func (o *DetailTransitRouterTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail transit router too many requests response
@@ -204,6 +320,23 @@ func (o *DetailTransitRouterTooManyRequests) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *DetailTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DetailTransitRouterTooManyRequests) WriteResponse(rw http.ResponseWrite
 // DetailTransitRouterServiceUnavailableCode is the HTTP code returned for type DetailTransitRouterServiceUnavailable
 const DetailTransitRouterServiceUnavailableCode int = 503
 
-/*DetailTransitRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DetailTransitRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response detailTransitRouterServiceUnavailable
 */
 type DetailTransitRouterServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DetailTransitRouterServiceUnavailable struct {
 func NewDetailTransitRouterServiceUnavailable() *DetailTransitRouterServiceUnavailable {
 
 	return &DetailTransitRouterServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail transit router service unavailable response
+func (o *DetailTransitRouterServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DetailTransitRouterServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail transit router service unavailable response
+func (o *DetailTransitRouterServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail transit router service unavailable response
@@ -247,6 +396,23 @@ func (o *DetailTransitRouterServiceUnavailable) SetPayload(payload *rest_model.A
 
 // WriteResponse to the client
 func (o *DetailTransitRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

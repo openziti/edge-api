@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // RequestExtendAllCertAuthenticatorsOKCode is the HTTP code returned for type RequestExtendAllCertAuthenticatorsOK
 const RequestExtendAllCertAuthenticatorsOKCode int = 200
 
-/*RequestExtendAllCertAuthenticatorsOK Base empty response
+/*
+RequestExtendAllCertAuthenticatorsOK Base empty response
 
 swagger:response requestExtendAllCertAuthenticatorsOK
 */
 type RequestExtendAllCertAuthenticatorsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type RequestExtendAllCertAuthenticatorsOK struct {
 func NewRequestExtendAllCertAuthenticatorsOK() *RequestExtendAllCertAuthenticatorsOK {
 
 	return &RequestExtendAllCertAuthenticatorsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the request extend all cert authenticators o k response
+func (o *RequestExtendAllCertAuthenticatorsOK) WithWWWAuthenticate(wWWAuthenticate []string) *RequestExtendAllCertAuthenticatorsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the request extend all cert authenticators o k response
+func (o *RequestExtendAllCertAuthenticatorsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the request extend all cert authenticators o k response
@@ -72,6 +89,23 @@ func (o *RequestExtendAllCertAuthenticatorsOK) SetPayload(payload *rest_model.Em
 // WriteResponse to the client
 func (o *RequestExtendAllCertAuthenticatorsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *RequestExtendAllCertAuthenticatorsOK) WriteResponse(rw http.ResponseWri
 // RequestExtendAllCertAuthenticatorsUnauthorizedCode is the HTTP code returned for type RequestExtendAllCertAuthenticatorsUnauthorized
 const RequestExtendAllCertAuthenticatorsUnauthorizedCode int = 401
 
-/*RequestExtendAllCertAuthenticatorsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+RequestExtendAllCertAuthenticatorsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response requestExtendAllCertAuthenticatorsUnauthorized
 */
 type RequestExtendAllCertAuthenticatorsUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type RequestExtendAllCertAuthenticatorsUnauthorized struct {
 func NewRequestExtendAllCertAuthenticatorsUnauthorized() *RequestExtendAllCertAuthenticatorsUnauthorized {
 
 	return &RequestExtendAllCertAuthenticatorsUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the request extend all cert authenticators unauthorized response
+func (o *RequestExtendAllCertAuthenticatorsUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *RequestExtendAllCertAuthenticatorsUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the request extend all cert authenticators unauthorized response
+func (o *RequestExtendAllCertAuthenticatorsUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the request extend all cert authenticators unauthorized response
@@ -116,6 +166,23 @@ func (o *RequestExtendAllCertAuthenticatorsUnauthorized) SetPayload(payload *res
 // WriteResponse to the client
 func (o *RequestExtendAllCertAuthenticatorsUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *RequestExtendAllCertAuthenticatorsUnauthorized) WriteResponse(rw http.R
 // RequestExtendAllCertAuthenticatorsForbiddenCode is the HTTP code returned for type RequestExtendAllCertAuthenticatorsForbidden
 const RequestExtendAllCertAuthenticatorsForbiddenCode int = 403
 
-/*RequestExtendAllCertAuthenticatorsForbidden The request could not be completed and will never complete due to unchangeable state or conflicts.
+/*
+RequestExtendAllCertAuthenticatorsForbidden The request could not be completed and will never complete due to unchangeable state or conflicts.
 
 swagger:response requestExtendAllCertAuthenticatorsForbidden
 */
 type RequestExtendAllCertAuthenticatorsForbidden struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type RequestExtendAllCertAuthenticatorsForbidden struct {
 func NewRequestExtendAllCertAuthenticatorsForbidden() *RequestExtendAllCertAuthenticatorsForbidden {
 
 	return &RequestExtendAllCertAuthenticatorsForbidden{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the request extend all cert authenticators forbidden response
+func (o *RequestExtendAllCertAuthenticatorsForbidden) WithWWWAuthenticate(wWWAuthenticate []string) *RequestExtendAllCertAuthenticatorsForbidden {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the request extend all cert authenticators forbidden response
+func (o *RequestExtendAllCertAuthenticatorsForbidden) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the request extend all cert authenticators forbidden response
@@ -160,6 +243,23 @@ func (o *RequestExtendAllCertAuthenticatorsForbidden) SetPayload(payload *rest_m
 // WriteResponse to the client
 func (o *RequestExtendAllCertAuthenticatorsForbidden) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(403)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *RequestExtendAllCertAuthenticatorsForbidden) WriteResponse(rw http.Resp
 // RequestExtendAllCertAuthenticatorsNotFoundCode is the HTTP code returned for type RequestExtendAllCertAuthenticatorsNotFound
 const RequestExtendAllCertAuthenticatorsNotFoundCode int = 404
 
-/*RequestExtendAllCertAuthenticatorsNotFound The requested resource does not exist
+/*
+RequestExtendAllCertAuthenticatorsNotFound The requested resource does not exist
 
 swagger:response requestExtendAllCertAuthenticatorsNotFound
 */
 type RequestExtendAllCertAuthenticatorsNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type RequestExtendAllCertAuthenticatorsNotFound struct {
 func NewRequestExtendAllCertAuthenticatorsNotFound() *RequestExtendAllCertAuthenticatorsNotFound {
 
 	return &RequestExtendAllCertAuthenticatorsNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the request extend all cert authenticators not found response
+func (o *RequestExtendAllCertAuthenticatorsNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *RequestExtendAllCertAuthenticatorsNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the request extend all cert authenticators not found response
+func (o *RequestExtendAllCertAuthenticatorsNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the request extend all cert authenticators not found response
@@ -204,6 +320,23 @@ func (o *RequestExtendAllCertAuthenticatorsNotFound) SetPayload(payload *rest_mo
 // WriteResponse to the client
 func (o *RequestExtendAllCertAuthenticatorsNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *RequestExtendAllCertAuthenticatorsNotFound) WriteResponse(rw http.Respo
 // RequestExtendAllCertAuthenticatorsTooManyRequestsCode is the HTTP code returned for type RequestExtendAllCertAuthenticatorsTooManyRequests
 const RequestExtendAllCertAuthenticatorsTooManyRequestsCode int = 429
 
-/*RequestExtendAllCertAuthenticatorsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+RequestExtendAllCertAuthenticatorsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response requestExtendAllCertAuthenticatorsTooManyRequests
 */
 type RequestExtendAllCertAuthenticatorsTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type RequestExtendAllCertAuthenticatorsTooManyRequests struct {
 func NewRequestExtendAllCertAuthenticatorsTooManyRequests() *RequestExtendAllCertAuthenticatorsTooManyRequests {
 
 	return &RequestExtendAllCertAuthenticatorsTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the request extend all cert authenticators too many requests response
+func (o *RequestExtendAllCertAuthenticatorsTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *RequestExtendAllCertAuthenticatorsTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the request extend all cert authenticators too many requests response
+func (o *RequestExtendAllCertAuthenticatorsTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the request extend all cert authenticators too many requests response
@@ -248,6 +397,23 @@ func (o *RequestExtendAllCertAuthenticatorsTooManyRequests) SetPayload(payload *
 // WriteResponse to the client
 func (o *RequestExtendAllCertAuthenticatorsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *RequestExtendAllCertAuthenticatorsTooManyRequests) WriteResponse(rw htt
 // RequestExtendAllCertAuthenticatorsServiceUnavailableCode is the HTTP code returned for type RequestExtendAllCertAuthenticatorsServiceUnavailable
 const RequestExtendAllCertAuthenticatorsServiceUnavailableCode int = 503
 
-/*RequestExtendAllCertAuthenticatorsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+RequestExtendAllCertAuthenticatorsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response requestExtendAllCertAuthenticatorsServiceUnavailable
 */
 type RequestExtendAllCertAuthenticatorsServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type RequestExtendAllCertAuthenticatorsServiceUnavailable struct {
 func NewRequestExtendAllCertAuthenticatorsServiceUnavailable() *RequestExtendAllCertAuthenticatorsServiceUnavailable {
 
 	return &RequestExtendAllCertAuthenticatorsServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the request extend all cert authenticators service unavailable response
+func (o *RequestExtendAllCertAuthenticatorsServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *RequestExtendAllCertAuthenticatorsServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the request extend all cert authenticators service unavailable response
+func (o *RequestExtendAllCertAuthenticatorsServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the request extend all cert authenticators service unavailable response
@@ -291,6 +473,23 @@ func (o *RequestExtendAllCertAuthenticatorsServiceUnavailable) SetPayload(payloa
 
 // WriteResponse to the client
 func (o *RequestExtendAllCertAuthenticatorsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

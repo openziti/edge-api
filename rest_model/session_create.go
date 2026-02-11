@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -77,11 +78,15 @@ func (m *SessionCreate) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -95,11 +100,15 @@ func (m *SessionCreate) validateType(formats strfmt.Registry) error {
 	}
 
 	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("type")
 		}
+
 		return err
 	}
 
@@ -127,12 +136,21 @@ func (m *SessionCreate) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *SessionCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -142,12 +160,20 @@ func (m *SessionCreate) contextValidateTags(ctx context.Context, formats strfmt.
 
 func (m *SessionCreate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
 	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("type")
 		}
+
 		return err
 	}
 

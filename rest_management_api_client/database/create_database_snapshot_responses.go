@@ -30,11 +30,14 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateDatabaseSnapshotReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateDatabaseSnapshotReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateDatabaseSnapshotReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewCreateDatabaseSnapshotOK()
@@ -66,7 +69,7 @@ func (o *CreateDatabaseSnapshotReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /database/snapshot] createDatabaseSnapshot", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewCreateDatabaseSnapshotOK() *CreateDatabaseSnapshotOK {
 	return &CreateDatabaseSnapshotOK{}
 }
 
-/* CreateDatabaseSnapshotOK describes a response with status code 200, with default header values.
+/*
+CreateDatabaseSnapshotOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type CreateDatabaseSnapshotOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *CreateDatabaseSnapshotOK) Error() string {
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this create database snapshot o k response has a 2xx status code
+func (o *CreateDatabaseSnapshotOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create database snapshot o k response has a 3xx status code
+func (o *CreateDatabaseSnapshotOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create database snapshot o k response has a 4xx status code
+func (o *CreateDatabaseSnapshotOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create database snapshot o k response has a 5xx status code
+func (o *CreateDatabaseSnapshotOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create database snapshot o k response a status code equal to that given
+func (o *CreateDatabaseSnapshotOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the create database snapshot o k response
+func (o *CreateDatabaseSnapshotOK) Code() int {
+	return 200
+}
+
+func (o *CreateDatabaseSnapshotOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotOK %s", 200, payload)
+}
+
+func (o *CreateDatabaseSnapshotOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotOK %s", 200, payload)
+}
+
 func (o *CreateDatabaseSnapshotOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *CreateDatabaseSnapshotOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateDatabaseSnapshotOK binds the response header WWW-Authenticate
+func (o *CreateDatabaseSnapshotOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateDatabaseSnapshotUnauthorized creates a CreateDatabaseSnapshotUnauthorized with default headers values
@@ -107,31 +187,108 @@ func NewCreateDatabaseSnapshotUnauthorized() *CreateDatabaseSnapshotUnauthorized
 	return &CreateDatabaseSnapshotUnauthorized{}
 }
 
-/* CreateDatabaseSnapshotUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateDatabaseSnapshotUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateDatabaseSnapshotUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateDatabaseSnapshotUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create database snapshot unauthorized response has a 2xx status code
+func (o *CreateDatabaseSnapshotUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create database snapshot unauthorized response has a 3xx status code
+func (o *CreateDatabaseSnapshotUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create database snapshot unauthorized response has a 4xx status code
+func (o *CreateDatabaseSnapshotUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create database snapshot unauthorized response has a 5xx status code
+func (o *CreateDatabaseSnapshotUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create database snapshot unauthorized response a status code equal to that given
+func (o *CreateDatabaseSnapshotUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create database snapshot unauthorized response
+func (o *CreateDatabaseSnapshotUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateDatabaseSnapshotUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotUnauthorized %s", 401, payload)
+}
+
+func (o *CreateDatabaseSnapshotUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotUnauthorized %s", 401, payload)
+}
+
 func (o *CreateDatabaseSnapshotUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateDatabaseSnapshotUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateDatabaseSnapshotUnauthorized binds the response header WWW-Authenticate
+func (o *CreateDatabaseSnapshotUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateDatabaseSnapshotTooManyRequests creates a CreateDatabaseSnapshotTooManyRequests with default headers values
@@ -139,29 +296,106 @@ func NewCreateDatabaseSnapshotTooManyRequests() *CreateDatabaseSnapshotTooManyRe
 	return &CreateDatabaseSnapshotTooManyRequests{}
 }
 
-/* CreateDatabaseSnapshotTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateDatabaseSnapshotTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreateDatabaseSnapshotTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateDatabaseSnapshotTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create database snapshot too many requests response has a 2xx status code
+func (o *CreateDatabaseSnapshotTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create database snapshot too many requests response has a 3xx status code
+func (o *CreateDatabaseSnapshotTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create database snapshot too many requests response has a 4xx status code
+func (o *CreateDatabaseSnapshotTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create database snapshot too many requests response has a 5xx status code
+func (o *CreateDatabaseSnapshotTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create database snapshot too many requests response a status code equal to that given
+func (o *CreateDatabaseSnapshotTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create database snapshot too many requests response
+func (o *CreateDatabaseSnapshotTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateDatabaseSnapshotTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateDatabaseSnapshotTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /database/snapshot][%d] createDatabaseSnapshotTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateDatabaseSnapshotTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateDatabaseSnapshotTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateDatabaseSnapshotTooManyRequests binds the response header WWW-Authenticate
+func (o *CreateDatabaseSnapshotTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

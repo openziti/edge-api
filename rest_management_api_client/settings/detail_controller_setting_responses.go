@@ -30,11 +30,14 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailControllerSettingReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailControllerSettingOK()
@@ -72,7 +75,7 @@ func (o *DetailControllerSettingReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /controller-settings/{id}] detailControllerSetting", response, response.Code())
 	}
 }
 
@@ -81,31 +84,108 @@ func NewDetailControllerSettingOK() *DetailControllerSettingOK {
 	return &DetailControllerSettingOK{}
 }
 
-/* DetailControllerSettingOK describes a response with status code 200, with default header values.
+/*
+DetailControllerSettingOK describes a response with status code 200, with default header values.
 
 A singular controller setting object
 */
 type DetailControllerSettingOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailControllerSettingEnvelope
 }
 
-func (o *DetailControllerSettingOK) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail controller setting o k response has a 2xx status code
+func (o *DetailControllerSettingOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail controller setting o k response has a 3xx status code
+func (o *DetailControllerSettingOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting o k response has a 4xx status code
+func (o *DetailControllerSettingOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail controller setting o k response has a 5xx status code
+func (o *DetailControllerSettingOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting o k response a status code equal to that given
+func (o *DetailControllerSettingOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail controller setting o k response
+func (o *DetailControllerSettingOK) Code() int {
+	return 200
+}
+
+func (o *DetailControllerSettingOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingOK %s", 200, payload)
+}
+
+func (o *DetailControllerSettingOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingOK %s", 200, payload)
+}
+
 func (o *DetailControllerSettingOK) GetPayload() *rest_model.DetailControllerSettingEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailControllerSettingEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingOK binds the response header WWW-Authenticate
+func (o *DetailControllerSettingOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailControllerSettingUnauthorized creates a DetailControllerSettingUnauthorized with default headers values
@@ -113,31 +193,108 @@ func NewDetailControllerSettingUnauthorized() *DetailControllerSettingUnauthoriz
 	return &DetailControllerSettingUnauthorized{}
 }
 
-/* DetailControllerSettingUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailControllerSettingUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailControllerSettingUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailControllerSettingUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail controller setting unauthorized response has a 2xx status code
+func (o *DetailControllerSettingUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail controller setting unauthorized response has a 3xx status code
+func (o *DetailControllerSettingUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting unauthorized response has a 4xx status code
+func (o *DetailControllerSettingUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail controller setting unauthorized response has a 5xx status code
+func (o *DetailControllerSettingUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting unauthorized response a status code equal to that given
+func (o *DetailControllerSettingUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail controller setting unauthorized response
+func (o *DetailControllerSettingUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailControllerSettingUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingUnauthorized %s", 401, payload)
+}
+
+func (o *DetailControllerSettingUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingUnauthorized %s", 401, payload)
+}
+
 func (o *DetailControllerSettingUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingUnauthorized binds the response header WWW-Authenticate
+func (o *DetailControllerSettingUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailControllerSettingNotFound creates a DetailControllerSettingNotFound with default headers values
@@ -145,31 +302,108 @@ func NewDetailControllerSettingNotFound() *DetailControllerSettingNotFound {
 	return &DetailControllerSettingNotFound{}
 }
 
-/* DetailControllerSettingNotFound describes a response with status code 404, with default header values.
+/*
+DetailControllerSettingNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailControllerSettingNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailControllerSettingNotFound) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail controller setting not found response has a 2xx status code
+func (o *DetailControllerSettingNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail controller setting not found response has a 3xx status code
+func (o *DetailControllerSettingNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting not found response has a 4xx status code
+func (o *DetailControllerSettingNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail controller setting not found response has a 5xx status code
+func (o *DetailControllerSettingNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting not found response a status code equal to that given
+func (o *DetailControllerSettingNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail controller setting not found response
+func (o *DetailControllerSettingNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailControllerSettingNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingNotFound %s", 404, payload)
+}
+
+func (o *DetailControllerSettingNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingNotFound %s", 404, payload)
+}
+
 func (o *DetailControllerSettingNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingNotFound binds the response header WWW-Authenticate
+func (o *DetailControllerSettingNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailControllerSettingTooManyRequests creates a DetailControllerSettingTooManyRequests with default headers values
@@ -177,29 +411,106 @@ func NewDetailControllerSettingTooManyRequests() *DetailControllerSettingTooMany
 	return &DetailControllerSettingTooManyRequests{}
 }
 
-/* DetailControllerSettingTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailControllerSettingTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailControllerSettingTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailControllerSettingTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail controller setting too many requests response has a 2xx status code
+func (o *DetailControllerSettingTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail controller setting too many requests response has a 3xx status code
+func (o *DetailControllerSettingTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting too many requests response has a 4xx status code
+func (o *DetailControllerSettingTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail controller setting too many requests response has a 5xx status code
+func (o *DetailControllerSettingTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting too many requests response a status code equal to that given
+func (o *DetailControllerSettingTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail controller setting too many requests response
+func (o *DetailControllerSettingTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailControllerSettingTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailControllerSettingTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}][%d] detailControllerSettingTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailControllerSettingTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailControllerSettingTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

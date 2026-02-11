@@ -36,16 +36,16 @@ import (
 )
 
 // CreateSessionHandlerFunc turns a function with the right signature into a create session handler
-type CreateSessionHandlerFunc func(CreateSessionParams, interface{}) middleware.Responder
+type CreateSessionHandlerFunc func(CreateSessionParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateSessionHandlerFunc) Handle(params CreateSessionParams, principal interface{}) middleware.Responder {
+func (fn CreateSessionHandlerFunc) Handle(params CreateSessionParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateSessionHandler interface for that can handle valid create session params
 type CreateSessionHandler interface {
-	Handle(CreateSessionParams, interface{}) middleware.Responder
+	Handle(CreateSessionParams, any) middleware.Responder
 }
 
 // NewCreateSession creates a new http.Handler for the create session operation
@@ -53,12 +53,12 @@ func NewCreateSession(ctx *middleware.Context, handler CreateSessionHandler) *Cr
 	return &CreateSession{Context: ctx, Handler: handler}
 }
 
-/* CreateSession swagger:route POST /sessions Session createSession
+/*
+	CreateSession swagger:route POST /sessions Session createSession
 
-Create a session resource
+# Create a session resource
 
 Create a session resource.
-
 */
 type CreateSession struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateSession) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateSession) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

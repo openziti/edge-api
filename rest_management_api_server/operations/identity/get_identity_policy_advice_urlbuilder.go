@@ -69,14 +69,14 @@ func (o *GetIdentityPolicyAdviceURL) Build() (*url.URL, error) {
 
 	id := o.ID
 	if id != "" {
-		_path = strings.Replace(_path, "{id}", id, -1)
+		_path = strings.ReplaceAll(_path, "{id}", id)
 	} else {
 		return nil, errors.New("id is required on GetIdentityPolicyAdviceURL")
 	}
 
 	serviceID := o.ServiceID
 	if serviceID != "" {
-		_path = strings.Replace(_path, "{serviceId}", serviceID, -1)
+		_path = strings.ReplaceAll(_path, "{serviceId}", serviceID)
 	} else {
 		return nil, errors.New("serviceId is required on GetIdentityPolicyAdviceURL")
 	}

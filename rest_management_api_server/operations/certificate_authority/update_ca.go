@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateCaHandlerFunc turns a function with the right signature into a update ca handler
-type UpdateCaHandlerFunc func(UpdateCaParams, interface{}) middleware.Responder
+type UpdateCaHandlerFunc func(UpdateCaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateCaHandlerFunc) Handle(params UpdateCaParams, principal interface{}) middleware.Responder {
+func (fn UpdateCaHandlerFunc) Handle(params UpdateCaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateCaHandler interface for that can handle valid update ca params
 type UpdateCaHandler interface {
-	Handle(UpdateCaParams, interface{}) middleware.Responder
+	Handle(UpdateCaParams, any) middleware.Responder
 }
 
 // NewUpdateCa creates a new http.Handler for the update ca operation
@@ -53,12 +53,12 @@ func NewUpdateCa(ctx *middleware.Context, handler UpdateCaHandler) *UpdateCa {
 	return &UpdateCa{Context: ctx, Handler: handler}
 }
 
-/* UpdateCa swagger:route PUT /cas/{id} Certificate Authority updateCa
+/*
+	UpdateCa swagger:route PUT /cas/{id} Certificate Authority updateCa
 
-Update all fields on a CA
+# Update all fields on a CA
 
 Update all fields on a CA by id. Requires admin access.
-
 */
 type UpdateCa struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

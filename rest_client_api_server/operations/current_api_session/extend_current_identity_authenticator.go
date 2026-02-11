@@ -36,16 +36,16 @@ import (
 )
 
 // ExtendCurrentIdentityAuthenticatorHandlerFunc turns a function with the right signature into a extend current identity authenticator handler
-type ExtendCurrentIdentityAuthenticatorHandlerFunc func(ExtendCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+type ExtendCurrentIdentityAuthenticatorHandlerFunc func(ExtendCurrentIdentityAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ExtendCurrentIdentityAuthenticatorHandlerFunc) Handle(params ExtendCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn ExtendCurrentIdentityAuthenticatorHandlerFunc) Handle(params ExtendCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ExtendCurrentIdentityAuthenticatorHandler interface for that can handle valid extend current identity authenticator params
 type ExtendCurrentIdentityAuthenticatorHandler interface {
-	Handle(ExtendCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+	Handle(ExtendCurrentIdentityAuthenticatorParams, any) middleware.Responder
 }
 
 // NewExtendCurrentIdentityAuthenticator creates a new http.Handler for the extend current identity authenticator operation
@@ -53,15 +53,15 @@ func NewExtendCurrentIdentityAuthenticator(ctx *middleware.Context, handler Exte
 	return &ExtendCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* ExtendCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend Current API Session Enroll Extend Enrollment extendCurrentIdentityAuthenticator
+/*
+	ExtendCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend Current API Session Enroll Extend Enrollment extendCurrentIdentityAuthenticator
 
-Allows the current identity to recieve a new certificate associated with a certificate based authenticator
+# Allows the current identity to recieve a new certificate associated with a certificate based authenticator
 
 This endpoint only functions for certificates issued by the controller. 3rd party certificates are not handled.
 Allows an identity to extend its certificate's expiration date by using its current and valid client certificate to submit a CSR. This CSR may be passed in using a new private key, thus allowing private key rotation.
 The response from this endpoint is a new client certificate which the client must  be verified via the /authenticators/{id}/extend-verify endpoint.
 After verification is completion any new connections must be made with new certificate. Prior to verification the old client certificate remains active.
-
 */
 type ExtendCurrentIdentityAuthenticator struct {
 	Context *middleware.Context
@@ -82,9 +82,9 @@ func (o *ExtendCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWriter, r
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -93,6 +93,7 @@ func (o *ExtendCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWriter, r
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

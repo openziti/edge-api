@@ -36,16 +36,16 @@ import (
 )
 
 // ListConfigsForConfigTypeHandlerFunc turns a function with the right signature into a list configs for config type handler
-type ListConfigsForConfigTypeHandlerFunc func(ListConfigsForConfigTypeParams, interface{}) middleware.Responder
+type ListConfigsForConfigTypeHandlerFunc func(ListConfigsForConfigTypeParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListConfigsForConfigTypeHandlerFunc) Handle(params ListConfigsForConfigTypeParams, principal interface{}) middleware.Responder {
+func (fn ListConfigsForConfigTypeHandlerFunc) Handle(params ListConfigsForConfigTypeParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListConfigsForConfigTypeHandler interface for that can handle valid list configs for config type params
 type ListConfigsForConfigTypeHandler interface {
-	Handle(ListConfigsForConfigTypeParams, interface{}) middleware.Responder
+	Handle(ListConfigsForConfigTypeParams, any) middleware.Responder
 }
 
 // NewListConfigsForConfigType creates a new http.Handler for the list configs for config type operation
@@ -53,12 +53,12 @@ func NewListConfigsForConfigType(ctx *middleware.Context, handler ListConfigsFor
 	return &ListConfigsForConfigType{Context: ctx, Handler: handler}
 }
 
-/* ListConfigsForConfigType swagger:route GET /config-types/{id}/configs Config listConfigsForConfigType
+/*
+	ListConfigsForConfigType swagger:route GET /config-types/{id}/configs Config listConfigsForConfigType
 
-Lists the configs of a specific config-type
+# Lists the configs of a specific config-type
 
 Lists the configs associated to a config-type. Requires admin access.
-
 */
 type ListConfigsForConfigType struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListConfigsForConfigType) ServeHTTP(rw http.ResponseWriter, r *http.Req
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListConfigsForConfigType) ServeHTTP(rw http.ResponseWriter, r *http.Req
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -50,7 +50,6 @@ func NewGetIdentityFailedServiceRequestsParams() GetIdentityFailedServiceRequest
 //
 // swagger:parameters getIdentityFailedServiceRequests
 type GetIdentityFailedServiceRequestsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CreateDatabaseSnapshotOKCode is the HTTP code returned for type CreateDatabaseSnapshotOK
 const CreateDatabaseSnapshotOKCode int = 200
 
-/*CreateDatabaseSnapshotOK Base empty response
+/*
+CreateDatabaseSnapshotOK Base empty response
 
 swagger:response createDatabaseSnapshotOK
 */
 type CreateDatabaseSnapshotOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CreateDatabaseSnapshotOK struct {
 func NewCreateDatabaseSnapshotOK() *CreateDatabaseSnapshotOK {
 
 	return &CreateDatabaseSnapshotOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create database snapshot o k response
+func (o *CreateDatabaseSnapshotOK) WithWWWAuthenticate(wWWAuthenticate []string) *CreateDatabaseSnapshotOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create database snapshot o k response
+func (o *CreateDatabaseSnapshotOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create database snapshot o k response
@@ -72,6 +89,23 @@ func (o *CreateDatabaseSnapshotOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *CreateDatabaseSnapshotOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CreateDatabaseSnapshotOK) WriteResponse(rw http.ResponseWriter, produce
 // CreateDatabaseSnapshotUnauthorizedCode is the HTTP code returned for type CreateDatabaseSnapshotUnauthorized
 const CreateDatabaseSnapshotUnauthorizedCode int = 401
 
-/*CreateDatabaseSnapshotUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateDatabaseSnapshotUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createDatabaseSnapshotUnauthorized
 */
 type CreateDatabaseSnapshotUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CreateDatabaseSnapshotUnauthorized struct {
 func NewCreateDatabaseSnapshotUnauthorized() *CreateDatabaseSnapshotUnauthorized {
 
 	return &CreateDatabaseSnapshotUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create database snapshot unauthorized response
+func (o *CreateDatabaseSnapshotUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CreateDatabaseSnapshotUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create database snapshot unauthorized response
+func (o *CreateDatabaseSnapshotUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create database snapshot unauthorized response
@@ -116,6 +166,23 @@ func (o *CreateDatabaseSnapshotUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *CreateDatabaseSnapshotUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CreateDatabaseSnapshotUnauthorized) WriteResponse(rw http.ResponseWrite
 // CreateDatabaseSnapshotTooManyRequestsCode is the HTTP code returned for type CreateDatabaseSnapshotTooManyRequests
 const CreateDatabaseSnapshotTooManyRequestsCode int = 429
 
-/*CreateDatabaseSnapshotTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateDatabaseSnapshotTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createDatabaseSnapshotTooManyRequests
 */
 type CreateDatabaseSnapshotTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CreateDatabaseSnapshotTooManyRequests struct {
 func NewCreateDatabaseSnapshotTooManyRequests() *CreateDatabaseSnapshotTooManyRequests {
 
 	return &CreateDatabaseSnapshotTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create database snapshot too many requests response
+func (o *CreateDatabaseSnapshotTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *CreateDatabaseSnapshotTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create database snapshot too many requests response
+func (o *CreateDatabaseSnapshotTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create database snapshot too many requests response
@@ -159,6 +242,23 @@ func (o *CreateDatabaseSnapshotTooManyRequests) SetPayload(payload *rest_model.A
 
 // WriteResponse to the client
 func (o *CreateDatabaseSnapshotTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

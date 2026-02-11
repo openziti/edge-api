@@ -241,10 +241,22 @@ paths:
 responses:
   listCas:
     description: A list of Certificate Authorities (CAs)
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listCasEnvelope'
   detailCa:
     description: A singular Certificate Authority (CA) resource
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailCaEnvelope'
 

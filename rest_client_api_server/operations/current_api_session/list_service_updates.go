@@ -36,16 +36,16 @@ import (
 )
 
 // ListServiceUpdatesHandlerFunc turns a function with the right signature into a list service updates handler
-type ListServiceUpdatesHandlerFunc func(ListServiceUpdatesParams, interface{}) middleware.Responder
+type ListServiceUpdatesHandlerFunc func(ListServiceUpdatesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServiceUpdatesHandlerFunc) Handle(params ListServiceUpdatesParams, principal interface{}) middleware.Responder {
+func (fn ListServiceUpdatesHandlerFunc) Handle(params ListServiceUpdatesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServiceUpdatesHandler interface for that can handle valid list service updates params
 type ListServiceUpdatesHandler interface {
-	Handle(ListServiceUpdatesParams, interface{}) middleware.Responder
+	Handle(ListServiceUpdatesParams, any) middleware.Responder
 }
 
 // NewListServiceUpdates creates a new http.Handler for the list service updates operation
@@ -53,14 +53,13 @@ func NewListServiceUpdates(ctx *middleware.Context, handler ListServiceUpdatesHa
 	return &ListServiceUpdates{Context: ctx, Handler: handler}
 }
 
-/* ListServiceUpdates swagger:route GET /current-api-session/service-updates Current API Session Services listServiceUpdates
+/*
+	ListServiceUpdates swagger:route GET /current-api-session/service-updates Current API Session Services listServiceUpdates
 
-Returns data indicating whether a client should updates it service list
+# Returns data indicating whether a client should updates it service list
 
 Retrieves data indicating the last time data relevant to this API Session was altered that would necessitate
 service refreshes.
-
-
 */
 type ListServiceUpdates struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *ListServiceUpdates) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *ListServiceUpdates) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

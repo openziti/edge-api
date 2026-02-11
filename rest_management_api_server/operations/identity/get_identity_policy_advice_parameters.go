@@ -50,7 +50,6 @@ func NewGetIdentityPolicyAdviceParams() GetIdentityPolicyAdviceParams {
 //
 // swagger:parameters getIdentityPolicyAdvice
 type GetIdentityPolicyAdviceParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -59,6 +58,7 @@ type GetIdentityPolicyAdviceParams struct {
 	  In: path
 	*/
 	ID string
+
 	/*The id of a service
 	  Required: true
 	  In: path

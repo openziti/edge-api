@@ -30,11 +30,14 @@ package api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListAPISessionsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListAPISessionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListAPISessionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListAPISessionsOK()
@@ -78,7 +81,7 @@ func (o *ListAPISessionsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api-sessions] listAPISessions", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListAPISessionsOK() *ListAPISessionsOK {
 	return &ListAPISessionsOK{}
 }
 
-/* ListAPISessionsOK describes a response with status code 200, with default header values.
+/*
+ListAPISessionsOK describes a response with status code 200, with default header values.
 
 A list of active API Sessions
 */
 type ListAPISessionsOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListAPISessionsEnvelope
 }
 
-func (o *ListAPISessionsOK) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list Api sessions o k response has a 2xx status code
+func (o *ListAPISessionsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list Api sessions o k response has a 3xx status code
+func (o *ListAPISessionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions o k response has a 4xx status code
+func (o *ListAPISessionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list Api sessions o k response has a 5xx status code
+func (o *ListAPISessionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions o k response a status code equal to that given
+func (o *ListAPISessionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list Api sessions o k response
+func (o *ListAPISessionsOK) Code() int {
+	return 200
+}
+
+func (o *ListAPISessionsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsOK %s", 200, payload)
+}
+
+func (o *ListAPISessionsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsOK %s", 200, payload)
+}
+
 func (o *ListAPISessionsOK) GetPayload() *rest_model.ListAPISessionsEnvelope {
 	return o.Payload
 }
 
 func (o *ListAPISessionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListAPISessionsEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAPISessionsOK binds the response header WWW-Authenticate
+func (o *ListAPISessionsOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAPISessionsBadRequest creates a ListAPISessionsBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewListAPISessionsBadRequest() *ListAPISessionsBadRequest {
 	return &ListAPISessionsBadRequest{}
 }
 
-/* ListAPISessionsBadRequest describes a response with status code 400, with default header values.
+/*
+ListAPISessionsBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type ListAPISessionsBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list Api sessions bad request response has a 2xx status code
+func (o *ListAPISessionsBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions bad request response has a 3xx status code
+func (o *ListAPISessionsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions bad request response has a 4xx status code
+func (o *ListAPISessionsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list Api sessions bad request response has a 5xx status code
+func (o *ListAPISessionsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions bad request response a status code equal to that given
+func (o *ListAPISessionsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list Api sessions bad request response
+func (o *ListAPISessionsBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListAPISessionsBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsBadRequest %s", 400, payload)
+}
+
+func (o *ListAPISessionsBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsBadRequest %s", 400, payload)
+}
+
 func (o *ListAPISessionsBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAPISessionsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAPISessionsBadRequest binds the response header WWW-Authenticate
+func (o *ListAPISessionsBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAPISessionsUnauthorized creates a ListAPISessionsUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewListAPISessionsUnauthorized() *ListAPISessionsUnauthorized {
 	return &ListAPISessionsUnauthorized{}
 }
 
-/* ListAPISessionsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListAPISessionsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListAPISessionsUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list Api sessions unauthorized response has a 2xx status code
+func (o *ListAPISessionsUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions unauthorized response has a 3xx status code
+func (o *ListAPISessionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions unauthorized response has a 4xx status code
+func (o *ListAPISessionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list Api sessions unauthorized response has a 5xx status code
+func (o *ListAPISessionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions unauthorized response a status code equal to that given
+func (o *ListAPISessionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list Api sessions unauthorized response
+func (o *ListAPISessionsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListAPISessionsUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsUnauthorized %s", 401, payload)
+}
+
+func (o *ListAPISessionsUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsUnauthorized %s", 401, payload)
+}
+
 func (o *ListAPISessionsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAPISessionsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAPISessionsUnauthorized binds the response header WWW-Authenticate
+func (o *ListAPISessionsUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAPISessionsTooManyRequests creates a ListAPISessionsTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListAPISessionsTooManyRequests() *ListAPISessionsTooManyRequests {
 	return &ListAPISessionsTooManyRequests{}
 }
 
-/* ListAPISessionsTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListAPISessionsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListAPISessionsTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list Api sessions too many requests response has a 2xx status code
+func (o *ListAPISessionsTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions too many requests response has a 3xx status code
+func (o *ListAPISessionsTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions too many requests response has a 4xx status code
+func (o *ListAPISessionsTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list Api sessions too many requests response has a 5xx status code
+func (o *ListAPISessionsTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list Api sessions too many requests response a status code equal to that given
+func (o *ListAPISessionsTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list Api sessions too many requests response
+func (o *ListAPISessionsTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListAPISessionsTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests %s", 429, payload)
+}
+
+func (o *ListAPISessionsTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsTooManyRequests %s", 429, payload)
+}
+
 func (o *ListAPISessionsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAPISessionsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAPISessionsTooManyRequests binds the response header WWW-Authenticate
+func (o *ListAPISessionsTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListAPISessionsServiceUnavailable creates a ListAPISessionsServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListAPISessionsServiceUnavailable() *ListAPISessionsServiceUnavailable {
 	return &ListAPISessionsServiceUnavailable{}
 }
 
-/* ListAPISessionsServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListAPISessionsServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListAPISessionsServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListAPISessionsServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list Api sessions service unavailable response has a 2xx status code
+func (o *ListAPISessionsServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list Api sessions service unavailable response has a 3xx status code
+func (o *ListAPISessionsServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list Api sessions service unavailable response has a 4xx status code
+func (o *ListAPISessionsServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list Api sessions service unavailable response has a 5xx status code
+func (o *ListAPISessionsServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list Api sessions service unavailable response a status code equal to that given
+func (o *ListAPISessionsServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list Api sessions service unavailable response
+func (o *ListAPISessionsServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListAPISessionsServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListAPISessionsServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api-sessions][%d] listApiSessionsServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListAPISessionsServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListAPISessionsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListAPISessionsServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListAPISessionsServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

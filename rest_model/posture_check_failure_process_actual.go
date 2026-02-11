@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -112,11 +113,15 @@ func (m *PostureCheckFailureProcessActual) validateOsType(formats strfmt.Registr
 	}
 
 	if err := m.OsType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("osType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("osType")
 		}
+
 		return err
 	}
 
@@ -148,12 +153,20 @@ func (m *PostureCheckFailureProcessActual) ContextValidate(ctx context.Context, 
 
 func (m *PostureCheckFailureProcessActual) contextValidateOsType(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.OsType) { // not required
+		return nil
+	}
+
 	if err := m.OsType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("osType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("osType")
 		}
+
 		return err
 	}
 

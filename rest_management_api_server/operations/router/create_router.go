@@ -36,16 +36,16 @@ import (
 )
 
 // CreateRouterHandlerFunc turns a function with the right signature into a create router handler
-type CreateRouterHandlerFunc func(CreateRouterParams, interface{}) middleware.Responder
+type CreateRouterHandlerFunc func(CreateRouterParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateRouterHandlerFunc) Handle(params CreateRouterParams, principal interface{}) middleware.Responder {
+func (fn CreateRouterHandlerFunc) Handle(params CreateRouterParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateRouterHandler interface for that can handle valid create router params
 type CreateRouterHandler interface {
-	Handle(CreateRouterParams, interface{}) middleware.Responder
+	Handle(CreateRouterParams, any) middleware.Responder
 }
 
 // NewCreateRouter creates a new http.Handler for the create router operation
@@ -53,12 +53,12 @@ func NewCreateRouter(ctx *middleware.Context, handler CreateRouterHandler) *Crea
 	return &CreateRouter{Context: ctx, Handler: handler}
 }
 
-/* CreateRouter swagger:route POST /routers Router createRouter
+/*
+	CreateRouter swagger:route POST /routers Router createRouter
 
-Create a router resource
+# Create a router resource
 
 Create a router resource. Requires admin access.
-
 */
 type CreateRouter struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

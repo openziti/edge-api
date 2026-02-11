@@ -78,10 +78,12 @@ func NewPatchAuthPolicyParamsWithHTTPClient(client *http.Client) *PatchAuthPolic
 	}
 }
 
-/* PatchAuthPolicyParams contains all the parameters to send to the API endpoint
-   for the patch auth policy operation.
+/*
+PatchAuthPolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the patch auth policy operation.
+
+	Typically these are written to a http.Request.
 */
 type PatchAuthPolicyParams struct {
 

@@ -76,10 +76,12 @@ func NewDetailControllerSettingParamsWithHTTPClient(client *http.Client) *Detail
 	}
 }
 
-/* DetailControllerSettingParams contains all the parameters to send to the API endpoint
-   for the detail controller setting operation.
+/*
+DetailControllerSettingParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail controller setting operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailControllerSettingParams struct {
 

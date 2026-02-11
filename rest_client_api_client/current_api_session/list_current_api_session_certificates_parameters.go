@@ -77,10 +77,12 @@ func NewListCurrentAPISessionCertificatesParamsWithHTTPClient(client *http.Clien
 	}
 }
 
-/* ListCurrentAPISessionCertificatesParams contains all the parameters to send to the API endpoint
-   for the list current Api session certificates operation.
+/*
+ListCurrentAPISessionCertificatesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list current Api session certificates operation.
+
+	Typically these are written to a http.Request.
 */
 type ListCurrentAPISessionCertificatesParams struct {
 

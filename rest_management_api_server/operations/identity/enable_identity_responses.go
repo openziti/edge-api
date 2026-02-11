@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // EnableIdentityOKCode is the HTTP code returned for type EnableIdentityOK
 const EnableIdentityOKCode int = 200
 
-/*EnableIdentityOK Base empty response
+/*
+EnableIdentityOK Base empty response
 
 swagger:response enableIdentityOK
 */
 type EnableIdentityOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type EnableIdentityOK struct {
 func NewEnableIdentityOK() *EnableIdentityOK {
 
 	return &EnableIdentityOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enable identity o k response
+func (o *EnableIdentityOK) WithWWWAuthenticate(wWWAuthenticate []string) *EnableIdentityOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enable identity o k response
+func (o *EnableIdentityOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enable identity o k response
@@ -72,6 +89,23 @@ func (o *EnableIdentityOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *EnableIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *EnableIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtim
 // EnableIdentityUnauthorizedCode is the HTTP code returned for type EnableIdentityUnauthorized
 const EnableIdentityUnauthorizedCode int = 401
 
-/*EnableIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+EnableIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response enableIdentityUnauthorized
 */
 type EnableIdentityUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type EnableIdentityUnauthorized struct {
 func NewEnableIdentityUnauthorized() *EnableIdentityUnauthorized {
 
 	return &EnableIdentityUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enable identity unauthorized response
+func (o *EnableIdentityUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *EnableIdentityUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enable identity unauthorized response
+func (o *EnableIdentityUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enable identity unauthorized response
@@ -116,6 +166,23 @@ func (o *EnableIdentityUnauthorized) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *EnableIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *EnableIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, produ
 // EnableIdentityNotFoundCode is the HTTP code returned for type EnableIdentityNotFound
 const EnableIdentityNotFoundCode int = 404
 
-/*EnableIdentityNotFound The requested resource does not exist
+/*
+EnableIdentityNotFound The requested resource does not exist
 
 swagger:response enableIdentityNotFound
 */
 type EnableIdentityNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type EnableIdentityNotFound struct {
 func NewEnableIdentityNotFound() *EnableIdentityNotFound {
 
 	return &EnableIdentityNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enable identity not found response
+func (o *EnableIdentityNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *EnableIdentityNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enable identity not found response
+func (o *EnableIdentityNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enable identity not found response
@@ -160,6 +243,23 @@ func (o *EnableIdentityNotFound) SetPayload(payload *rest_model.APIErrorEnvelope
 // WriteResponse to the client
 func (o *EnableIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *EnableIdentityNotFound) WriteResponse(rw http.ResponseWriter, producer 
 // EnableIdentityTooManyRequestsCode is the HTTP code returned for type EnableIdentityTooManyRequests
 const EnableIdentityTooManyRequestsCode int = 429
 
-/*EnableIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+EnableIdentityTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response enableIdentityTooManyRequests
 */
 type EnableIdentityTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type EnableIdentityTooManyRequests struct {
 func NewEnableIdentityTooManyRequests() *EnableIdentityTooManyRequests {
 
 	return &EnableIdentityTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enable identity too many requests response
+func (o *EnableIdentityTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *EnableIdentityTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enable identity too many requests response
+func (o *EnableIdentityTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enable identity too many requests response
@@ -204,6 +320,23 @@ func (o *EnableIdentityTooManyRequests) SetPayload(payload *rest_model.APIErrorE
 // WriteResponse to the client
 func (o *EnableIdentityTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *EnableIdentityTooManyRequests) WriteResponse(rw http.ResponseWriter, pr
 // EnableIdentityServiceUnavailableCode is the HTTP code returned for type EnableIdentityServiceUnavailable
 const EnableIdentityServiceUnavailableCode int = 503
 
-/*EnableIdentityServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+EnableIdentityServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response enableIdentityServiceUnavailable
 */
 type EnableIdentityServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type EnableIdentityServiceUnavailable struct {
 func NewEnableIdentityServiceUnavailable() *EnableIdentityServiceUnavailable {
 
 	return &EnableIdentityServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the enable identity service unavailable response
+func (o *EnableIdentityServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *EnableIdentityServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the enable identity service unavailable response
+func (o *EnableIdentityServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the enable identity service unavailable response
@@ -247,6 +396,23 @@ func (o *EnableIdentityServiceUnavailable) SetPayload(payload *rest_model.APIErr
 
 // WriteResponse to the client
 func (o *EnableIdentityServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

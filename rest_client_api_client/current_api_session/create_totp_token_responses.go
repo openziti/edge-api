@@ -30,11 +30,14 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateTotpTokenReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateTotpTokenReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateTotpTokenReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewCreateTotpTokenOK()
@@ -66,7 +69,7 @@ func (o *CreateTotpTokenReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /current-api-session/totp-token] createTotpToken", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewCreateTotpTokenOK() *CreateTotpTokenOK {
 	return &CreateTotpTokenOK{}
 }
 
-/* CreateTotpTokenOK describes a response with status code 200, with default header values.
+/*
+CreateTotpTokenOK describes a response with status code 200, with default header values.
 
 A TOTP token create response, contains a token used to satisfy posture checks
 */
 type CreateTotpTokenOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.TotpTokenEnvelope
 }
 
-func (o *CreateTotpTokenOK) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this create totp token o k response has a 2xx status code
+func (o *CreateTotpTokenOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create totp token o k response has a 3xx status code
+func (o *CreateTotpTokenOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create totp token o k response has a 4xx status code
+func (o *CreateTotpTokenOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create totp token o k response has a 5xx status code
+func (o *CreateTotpTokenOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create totp token o k response a status code equal to that given
+func (o *CreateTotpTokenOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the create totp token o k response
+func (o *CreateTotpTokenOK) Code() int {
+	return 200
+}
+
+func (o *CreateTotpTokenOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenOK %s", 200, payload)
+}
+
+func (o *CreateTotpTokenOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenOK %s", 200, payload)
+}
+
 func (o *CreateTotpTokenOK) GetPayload() *rest_model.TotpTokenEnvelope {
 	return o.Payload
 }
 
 func (o *CreateTotpTokenOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.TotpTokenEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateTotpTokenOK binds the response header WWW-Authenticate
+func (o *CreateTotpTokenOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateTotpTokenUnauthorized creates a CreateTotpTokenUnauthorized with default headers values
@@ -107,31 +187,108 @@ func NewCreateTotpTokenUnauthorized() *CreateTotpTokenUnauthorized {
 	return &CreateTotpTokenUnauthorized{}
 }
 
-/* CreateTotpTokenUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateTotpTokenUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateTotpTokenUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateTotpTokenUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create totp token unauthorized response has a 2xx status code
+func (o *CreateTotpTokenUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create totp token unauthorized response has a 3xx status code
+func (o *CreateTotpTokenUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create totp token unauthorized response has a 4xx status code
+func (o *CreateTotpTokenUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create totp token unauthorized response has a 5xx status code
+func (o *CreateTotpTokenUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create totp token unauthorized response a status code equal to that given
+func (o *CreateTotpTokenUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create totp token unauthorized response
+func (o *CreateTotpTokenUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateTotpTokenUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenUnauthorized %s", 401, payload)
+}
+
+func (o *CreateTotpTokenUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenUnauthorized %s", 401, payload)
+}
+
 func (o *CreateTotpTokenUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateTotpTokenUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateTotpTokenUnauthorized binds the response header WWW-Authenticate
+func (o *CreateTotpTokenUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateTotpTokenNotFound creates a CreateTotpTokenNotFound with default headers values
@@ -139,29 +296,106 @@ func NewCreateTotpTokenNotFound() *CreateTotpTokenNotFound {
 	return &CreateTotpTokenNotFound{}
 }
 
-/* CreateTotpTokenNotFound describes a response with status code 404, with default header values.
+/*
+CreateTotpTokenNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type CreateTotpTokenNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateTotpTokenNotFound) Error() string {
-	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this create totp token not found response has a 2xx status code
+func (o *CreateTotpTokenNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create totp token not found response has a 3xx status code
+func (o *CreateTotpTokenNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create totp token not found response has a 4xx status code
+func (o *CreateTotpTokenNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create totp token not found response has a 5xx status code
+func (o *CreateTotpTokenNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create totp token not found response a status code equal to that given
+func (o *CreateTotpTokenNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create totp token not found response
+func (o *CreateTotpTokenNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateTotpTokenNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenNotFound %s", 404, payload)
+}
+
+func (o *CreateTotpTokenNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-api-session/totp-token][%d] createTotpTokenNotFound %s", 404, payload)
+}
+
 func (o *CreateTotpTokenNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateTotpTokenNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateTotpTokenNotFound binds the response header WWW-Authenticate
+func (o *CreateTotpTokenNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

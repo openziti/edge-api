@@ -52,7 +52,6 @@ func NewListEdgeRoutersParams() ListEdgeRoutersParams {
 //
 // swagger:parameters listEdgeRouters
 type ListEdgeRoutersParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,19 +59,23 @@ type ListEdgeRoutersParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
 	Offset *int64
+
 	/*
 	  In: query
 	  Collection Format: multi
 	*/
 	RoleFilter []string
+
 	/*
 	  In: query
 	*/
@@ -87,7 +90,6 @@ func (o *ListEdgeRoutersParams) BindRequest(r *http.Request, route *middleware.M
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

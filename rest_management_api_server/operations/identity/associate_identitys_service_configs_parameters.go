@@ -30,7 +30,7 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -56,7 +56,6 @@ func NewAssociateIdentitysServiceConfigsParams() AssociateIdentitysServiceConfig
 //
 // swagger:parameters associateIdentitysServiceConfigs
 type AssociateIdentitysServiceConfigsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -65,6 +64,7 @@ type AssociateIdentitysServiceConfigsParams struct {
 	  In: path
 	*/
 	ID string
+
 	/*A service config patch object
 	  Required: true
 	  In: body
@@ -87,10 +87,12 @@ func (o *AssociateIdentitysServiceConfigsParams) BindRequest(r *http.Request, ro
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.ServiceConfigsAssignList
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("serviceConfigs", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("serviceConfigs", "body", "", err))
@@ -101,7 +103,7 @@ func (o *AssociateIdentitysServiceConfigsParams) BindRequest(r *http.Request, ro
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

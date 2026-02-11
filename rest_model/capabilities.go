@@ -62,7 +62,7 @@ const (
 )
 
 // for schema
-var capabilitiesEnum []interface{}
+var capabilitiesEnum []any
 
 func init() {
 	var res []Capabilities

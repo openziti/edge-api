@@ -30,7 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -54,7 +54,6 @@ func NewEnrollUpdbParams() EnrollUpdbParams {
 //
 // swagger:parameters enrollUpdb
 type EnrollUpdbParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -63,6 +62,7 @@ type EnrollUpdbParams struct {
 	  In: query
 	*/
 	Token strfmt.UUID
+
 	/*
 	  Required: true
 	  In: body
@@ -78,7 +78,6 @@ func (o *EnrollUpdbParams) BindRequest(r *http.Request, route *middleware.Matche
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qToken, qhkToken, _ := qs.GetOK("token")
@@ -87,10 +86,12 @@ func (o *EnrollUpdbParams) BindRequest(r *http.Request, route *middleware.Matche
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body EnrollUpdbBody
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("updbCredentials", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("updbCredentials", "body", "", err))
@@ -101,7 +102,7 @@ func (o *EnrollUpdbParams) BindRequest(r *http.Request, route *middleware.Matche
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}
@@ -150,7 +151,7 @@ func (o *EnrollUpdbParams) bindToken(rawData []string, hasKey bool, formats strf
 	return nil
 }
 
-// validateToken carries on validations for parameter Token
+// validateToken carries out validations for parameter Token
 func (o *EnrollUpdbParams) validateToken(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("token", "query", "uuid", o.Token.String(), formats); err != nil {

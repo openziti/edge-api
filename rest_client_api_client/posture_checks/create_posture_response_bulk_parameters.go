@@ -78,10 +78,12 @@ func NewCreatePostureResponseBulkParamsWithHTTPClient(client *http.Client) *Crea
 	}
 }
 
-/* CreatePostureResponseBulkParams contains all the parameters to send to the API endpoint
-   for the create posture response bulk operation.
+/*
+CreatePostureResponseBulkParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create posture response bulk operation.
+
+	Typically these are written to a http.Request.
 */
 type CreatePostureResponseBulkParams struct {
 

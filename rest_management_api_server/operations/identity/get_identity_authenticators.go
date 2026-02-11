@@ -36,16 +36,16 @@ import (
 )
 
 // GetIdentityAuthenticatorsHandlerFunc turns a function with the right signature into a get identity authenticators handler
-type GetIdentityAuthenticatorsHandlerFunc func(GetIdentityAuthenticatorsParams, interface{}) middleware.Responder
+type GetIdentityAuthenticatorsHandlerFunc func(GetIdentityAuthenticatorsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetIdentityAuthenticatorsHandlerFunc) Handle(params GetIdentityAuthenticatorsParams, principal interface{}) middleware.Responder {
+func (fn GetIdentityAuthenticatorsHandlerFunc) Handle(params GetIdentityAuthenticatorsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetIdentityAuthenticatorsHandler interface for that can handle valid get identity authenticators params
 type GetIdentityAuthenticatorsHandler interface {
-	Handle(GetIdentityAuthenticatorsParams, interface{}) middleware.Responder
+	Handle(GetIdentityAuthenticatorsParams, any) middleware.Responder
 }
 
 // NewGetIdentityAuthenticators creates a new http.Handler for the get identity authenticators operation
@@ -53,13 +53,12 @@ func NewGetIdentityAuthenticators(ctx *middleware.Context, handler GetIdentityAu
 	return &GetIdentityAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityAuthenticators swagger:route GET /identities/{id}/authenticators Identity getIdentityAuthenticators
+/*
+	GetIdentityAuthenticators swagger:route GET /identities/{id}/authenticators Identity getIdentityAuthenticators
 
-Retrieve the current authenticators of a specific identity
+# Retrieve the current authenticators of a specific identity
 
 Returns a list of authenticators associated to the identity specified
-
-
 */
 type GetIdentityAuthenticators struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *GetIdentityAuthenticators) ServeHTTP(rw http.ResponseWriter, r *http.Re
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *GetIdentityAuthenticators) ServeHTTP(rw http.ResponseWriter, r *http.Re
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

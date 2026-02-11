@@ -49,7 +49,6 @@ func NewDetailMfaQrCodeParams() DetailMfaQrCodeParams {
 //
 // swagger:parameters detailMfaQrCode
 type DetailMfaQrCodeParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

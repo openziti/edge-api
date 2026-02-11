@@ -93,615 +93,1407 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 		JSONConsumer: runtime.JSONConsumer(),
 		TxtConsumer:  runtime.TextConsumer(),
 
-		ApplicationJWTProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+		ApplicationJWTProducer: runtime.ProducerFunc(func(w io.Writer, data any) error {
+			_ = w
+			_ = data
+
 			return errors.NotImplemented("applicationJwt producer has not yet been implemented")
 		}),
-		ApplicationPkcs7MimeProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+		ApplicationPkcs7MimeProducer: runtime.ProducerFunc(func(w io.Writer, data any) error {
+			_ = w
+			_ = data
+
 			return errors.NotImplemented("applicationPkcs7Mime producer has not yet been implemented")
 		}),
 		BinProducer:  runtime.ByteStreamProducer(),
 		JSONProducer: runtime.JSONProducer(),
-		TextYamlProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+		TextYamlProducer: runtime.ProducerFunc(func(w io.Writer, data any) error {
+			_ = w
+			_ = data
+
 			return errors.NotImplemented("textYaml producer has not yet been implemented")
 		}),
 
-		CurrentAPISessionDeleteCurrentAPISessionHandler: current_api_session.DeleteCurrentAPISessionHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionParams, principal interface{}) middleware.Responder {
+		CurrentAPISessionDeleteCurrentAPISessionHandler: current_api_session.DeleteCurrentAPISessionHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.DeleteCurrentAPISession has not yet been implemented")
 		}),
-		IdentityAssociateIdentitysServiceConfigsHandler: identity.AssociateIdentitysServiceConfigsHandlerFunc(func(params identity.AssociateIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
+
+		IdentityAssociateIdentitysServiceConfigsHandler: identity.AssociateIdentitysServiceConfigsHandlerFunc(func(params identity.AssociateIdentitysServiceConfigsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.AssociateIdentitysServiceConfigs has not yet been implemented")
 		}),
+
 		AuthenticationAuthenticateHandler: authentication.AuthenticateHandlerFunc(func(params authentication.AuthenticateParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation authentication.Authenticate has not yet been implemented")
 		}),
-		AuthenticationAuthenticateMfaHandler: authentication.AuthenticateMfaHandlerFunc(func(params authentication.AuthenticateMfaParams, principal interface{}) middleware.Responder {
+
+		AuthenticationAuthenticateMfaHandler: authentication.AuthenticateMfaHandlerFunc(func(params authentication.AuthenticateMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authentication.AuthenticateMfa has not yet been implemented")
 		}),
-		DatabaseCheckDataIntegrityHandler: database.CheckDataIntegrityHandlerFunc(func(params database.CheckDataIntegrityParams, principal interface{}) middleware.Responder {
+
+		DatabaseCheckDataIntegrityHandler: database.CheckDataIntegrityHandlerFunc(func(params database.CheckDataIntegrityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation database.CheckDataIntegrity has not yet been implemented")
 		}),
-		AuthPolicyCreateAuthPolicyHandler: auth_policy.CreateAuthPolicyHandlerFunc(func(params auth_policy.CreateAuthPolicyParams, principal interface{}) middleware.Responder {
+
+		AuthPolicyCreateAuthPolicyHandler: auth_policy.CreateAuthPolicyHandlerFunc(func(params auth_policy.CreateAuthPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation auth_policy.CreateAuthPolicy has not yet been implemented")
 		}),
-		AuthenticatorCreateAuthenticatorHandler: authenticator.CreateAuthenticatorHandlerFunc(func(params authenticator.CreateAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorCreateAuthenticatorHandler: authenticator.CreateAuthenticatorHandlerFunc(func(params authenticator.CreateAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.CreateAuthenticator has not yet been implemented")
 		}),
-		CertificateAuthorityCreateCaHandler: certificate_authority.CreateCaHandlerFunc(func(params certificate_authority.CreateCaParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityCreateCaHandler: certificate_authority.CreateCaHandlerFunc(func(params certificate_authority.CreateCaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.CreateCa has not yet been implemented")
 		}),
-		ConfigCreateConfigHandler: config.CreateConfigHandlerFunc(func(params config.CreateConfigParams, principal interface{}) middleware.Responder {
+
+		ConfigCreateConfigHandler: config.CreateConfigHandlerFunc(func(params config.CreateConfigParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.CreateConfig has not yet been implemented")
 		}),
-		ConfigCreateConfigTypeHandler: config.CreateConfigTypeHandlerFunc(func(params config.CreateConfigTypeParams, principal interface{}) middleware.Responder {
+
+		ConfigCreateConfigTypeHandler: config.CreateConfigTypeHandlerFunc(func(params config.CreateConfigTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.CreateConfigType has not yet been implemented")
 		}),
-		SettingsCreateControllerSettingHandler: settings.CreateControllerSettingHandlerFunc(func(params settings.CreateControllerSettingParams, principal interface{}) middleware.Responder {
+
+		SettingsCreateControllerSettingHandler: settings.CreateControllerSettingHandlerFunc(func(params settings.CreateControllerSettingParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.CreateControllerSetting has not yet been implemented")
 		}),
-		DatabaseCreateDatabaseSnapshotHandler: database.CreateDatabaseSnapshotHandlerFunc(func(params database.CreateDatabaseSnapshotParams, principal interface{}) middleware.Responder {
+
+		DatabaseCreateDatabaseSnapshotHandler: database.CreateDatabaseSnapshotHandlerFunc(func(params database.CreateDatabaseSnapshotParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation database.CreateDatabaseSnapshot has not yet been implemented")
 		}),
-		EdgeRouterCreateEdgeRouterHandler: edge_router.CreateEdgeRouterHandlerFunc(func(params edge_router.CreateEdgeRouterParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterCreateEdgeRouterHandler: edge_router.CreateEdgeRouterHandlerFunc(func(params edge_router.CreateEdgeRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.CreateEdgeRouter has not yet been implemented")
 		}),
-		EdgeRouterPolicyCreateEdgeRouterPolicyHandler: edge_router_policy.CreateEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.CreateEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyCreateEdgeRouterPolicyHandler: edge_router_policy.CreateEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.CreateEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.CreateEdgeRouterPolicy has not yet been implemented")
 		}),
-		EnrollmentCreateEnrollmentHandler: enrollment.CreateEnrollmentHandlerFunc(func(params enrollment.CreateEnrollmentParams, principal interface{}) middleware.Responder {
+
+		EnrollmentCreateEnrollmentHandler: enrollment.CreateEnrollmentHandlerFunc(func(params enrollment.CreateEnrollmentParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation enrollment.CreateEnrollment has not yet been implemented")
 		}),
-		ExternalJWTSignerCreateExternalJWTSignerHandler: external_jwt_signer.CreateExternalJWTSignerHandlerFunc(func(params external_jwt_signer.CreateExternalJWTSignerParams, principal interface{}) middleware.Responder {
+
+		ExternalJWTSignerCreateExternalJWTSignerHandler: external_jwt_signer.CreateExternalJWTSignerHandlerFunc(func(params external_jwt_signer.CreateExternalJWTSignerParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation external_jwt_signer.CreateExternalJWTSigner has not yet been implemented")
 		}),
-		IdentityCreateIdentityHandler: identity.CreateIdentityHandlerFunc(func(params identity.CreateIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityCreateIdentityHandler: identity.CreateIdentityHandlerFunc(func(params identity.CreateIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.CreateIdentity has not yet been implemented")
 		}),
-		CurrentIdentityCreateMfaRecoveryCodesHandler: current_identity.CreateMfaRecoveryCodesHandlerFunc(func(params current_identity.CreateMfaRecoveryCodesParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityCreateMfaRecoveryCodesHandler: current_identity.CreateMfaRecoveryCodesHandlerFunc(func(params current_identity.CreateMfaRecoveryCodesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.CreateMfaRecoveryCodes has not yet been implemented")
 		}),
-		PostureChecksCreatePostureCheckHandler: posture_checks.CreatePostureCheckHandlerFunc(func(params posture_checks.CreatePostureCheckParams, principal interface{}) middleware.Responder {
+
+		PostureChecksCreatePostureCheckHandler: posture_checks.CreatePostureCheckHandlerFunc(func(params posture_checks.CreatePostureCheckParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.CreatePostureCheck has not yet been implemented")
 		}),
-		RouterCreateRouterHandler: router.CreateRouterHandlerFunc(func(params router.CreateRouterParams, principal interface{}) middleware.Responder {
+
+		RouterCreateRouterHandler: router.CreateRouterHandlerFunc(func(params router.CreateRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.CreateRouter has not yet been implemented")
 		}),
-		ServiceCreateServiceHandler: service.CreateServiceHandlerFunc(func(params service.CreateServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceCreateServiceHandler: service.CreateServiceHandlerFunc(func(params service.CreateServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.CreateService has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyCreateServiceEdgeRouterPolicyHandler: service_edge_router_policy.CreateServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.CreateServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyCreateServiceEdgeRouterPolicyHandler: service_edge_router_policy.CreateServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.CreateServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.CreateServiceEdgeRouterPolicy has not yet been implemented")
 		}),
-		ServicePolicyCreateServicePolicyHandler: service_policy.CreateServicePolicyHandlerFunc(func(params service_policy.CreateServicePolicyParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyCreateServicePolicyHandler: service_policy.CreateServicePolicyHandlerFunc(func(params service_policy.CreateServicePolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.CreateServicePolicy has not yet been implemented")
 		}),
-		TerminatorCreateTerminatorHandler: terminator.CreateTerminatorHandlerFunc(func(params terminator.CreateTerminatorParams, principal interface{}) middleware.Responder {
+
+		TerminatorCreateTerminatorHandler: terminator.CreateTerminatorHandlerFunc(func(params terminator.CreateTerminatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation terminator.CreateTerminator has not yet been implemented")
 		}),
-		CurrentAPISessionCreateTotpTokenHandler: current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionCreateTotpTokenHandler: current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.CreateTotpToken has not yet been implemented")
 		}),
-		RouterCreateTransitRouterHandler: router.CreateTransitRouterHandlerFunc(func(params router.CreateTransitRouterParams, principal interface{}) middleware.Responder {
+
+		RouterCreateTransitRouterHandler: router.CreateTransitRouterHandlerFunc(func(params router.CreateTransitRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.CreateTransitRouter has not yet been implemented")
 		}),
-		DatabaseDataIntegrityResultsHandler: database.DataIntegrityResultsHandlerFunc(func(params database.DataIntegrityResultsParams, principal interface{}) middleware.Responder {
+
+		DatabaseDataIntegrityResultsHandler: database.DataIntegrityResultsHandlerFunc(func(params database.DataIntegrityResultsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation database.DataIntegrityResults has not yet been implemented")
 		}),
-		APISessionDeleteAPISessionsHandler: api_session.DeleteAPISessionsHandlerFunc(func(params api_session.DeleteAPISessionsParams, principal interface{}) middleware.Responder {
+
+		APISessionDeleteAPISessionsHandler: api_session.DeleteAPISessionsHandlerFunc(func(params api_session.DeleteAPISessionsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation api_session.DeleteAPISessions has not yet been implemented")
 		}),
-		AuthPolicyDeleteAuthPolicyHandler: auth_policy.DeleteAuthPolicyHandlerFunc(func(params auth_policy.DeleteAuthPolicyParams, principal interface{}) middleware.Responder {
+
+		AuthPolicyDeleteAuthPolicyHandler: auth_policy.DeleteAuthPolicyHandlerFunc(func(params auth_policy.DeleteAuthPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation auth_policy.DeleteAuthPolicy has not yet been implemented")
 		}),
-		AuthenticatorDeleteAuthenticatorHandler: authenticator.DeleteAuthenticatorHandlerFunc(func(params authenticator.DeleteAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorDeleteAuthenticatorHandler: authenticator.DeleteAuthenticatorHandlerFunc(func(params authenticator.DeleteAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.DeleteAuthenticator has not yet been implemented")
 		}),
-		CertificateAuthorityDeleteCaHandler: certificate_authority.DeleteCaHandlerFunc(func(params certificate_authority.DeleteCaParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityDeleteCaHandler: certificate_authority.DeleteCaHandlerFunc(func(params certificate_authority.DeleteCaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.DeleteCa has not yet been implemented")
 		}),
-		ConfigDeleteConfigHandler: config.DeleteConfigHandlerFunc(func(params config.DeleteConfigParams, principal interface{}) middleware.Responder {
+
+		ConfigDeleteConfigHandler: config.DeleteConfigHandlerFunc(func(params config.DeleteConfigParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.DeleteConfig has not yet been implemented")
 		}),
-		ConfigDeleteConfigTypeHandler: config.DeleteConfigTypeHandlerFunc(func(params config.DeleteConfigTypeParams, principal interface{}) middleware.Responder {
+
+		ConfigDeleteConfigTypeHandler: config.DeleteConfigTypeHandlerFunc(func(params config.DeleteConfigTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.DeleteConfigType has not yet been implemented")
 		}),
-		SettingsDeleteControllerSettingHandler: settings.DeleteControllerSettingHandlerFunc(func(params settings.DeleteControllerSettingParams, principal interface{}) middleware.Responder {
+
+		SettingsDeleteControllerSettingHandler: settings.DeleteControllerSettingHandlerFunc(func(params settings.DeleteControllerSettingParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.DeleteControllerSetting has not yet been implemented")
 		}),
-		EdgeRouterDeleteEdgeRouterHandler: edge_router.DeleteEdgeRouterHandlerFunc(func(params edge_router.DeleteEdgeRouterParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterDeleteEdgeRouterHandler: edge_router.DeleteEdgeRouterHandlerFunc(func(params edge_router.DeleteEdgeRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.DeleteEdgeRouter has not yet been implemented")
 		}),
-		EdgeRouterPolicyDeleteEdgeRouterPolicyHandler: edge_router_policy.DeleteEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.DeleteEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyDeleteEdgeRouterPolicyHandler: edge_router_policy.DeleteEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.DeleteEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.DeleteEdgeRouterPolicy has not yet been implemented")
 		}),
-		EnrollmentDeleteEnrollmentHandler: enrollment.DeleteEnrollmentHandlerFunc(func(params enrollment.DeleteEnrollmentParams, principal interface{}) middleware.Responder {
+
+		EnrollmentDeleteEnrollmentHandler: enrollment.DeleteEnrollmentHandlerFunc(func(params enrollment.DeleteEnrollmentParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation enrollment.DeleteEnrollment has not yet been implemented")
 		}),
-		ExternalJWTSignerDeleteExternalJWTSignerHandler: external_jwt_signer.DeleteExternalJWTSignerHandlerFunc(func(params external_jwt_signer.DeleteExternalJWTSignerParams, principal interface{}) middleware.Responder {
+
+		ExternalJWTSignerDeleteExternalJWTSignerHandler: external_jwt_signer.DeleteExternalJWTSignerHandlerFunc(func(params external_jwt_signer.DeleteExternalJWTSignerParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation external_jwt_signer.DeleteExternalJWTSigner has not yet been implemented")
 		}),
-		IdentityDeleteIdentityHandler: identity.DeleteIdentityHandlerFunc(func(params identity.DeleteIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityDeleteIdentityHandler: identity.DeleteIdentityHandlerFunc(func(params identity.DeleteIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.DeleteIdentity has not yet been implemented")
 		}),
-		CurrentIdentityDeleteMfaHandler: current_identity.DeleteMfaHandlerFunc(func(params current_identity.DeleteMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDeleteMfaHandler: current_identity.DeleteMfaHandlerFunc(func(params current_identity.DeleteMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DeleteMfa has not yet been implemented")
 		}),
-		PostureChecksDeletePostureCheckHandler: posture_checks.DeletePostureCheckHandlerFunc(func(params posture_checks.DeletePostureCheckParams, principal interface{}) middleware.Responder {
+
+		PostureChecksDeletePostureCheckHandler: posture_checks.DeletePostureCheckHandlerFunc(func(params posture_checks.DeletePostureCheckParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.DeletePostureCheck has not yet been implemented")
 		}),
-		RouterDeleteRouterHandler: router.DeleteRouterHandlerFunc(func(params router.DeleteRouterParams, principal interface{}) middleware.Responder {
+
+		RouterDeleteRouterHandler: router.DeleteRouterHandlerFunc(func(params router.DeleteRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.DeleteRouter has not yet been implemented")
 		}),
-		ServiceDeleteServiceHandler: service.DeleteServiceHandlerFunc(func(params service.DeleteServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceDeleteServiceHandler: service.DeleteServiceHandlerFunc(func(params service.DeleteServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.DeleteService has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyDeleteServiceEdgeRouterPolicyHandler: service_edge_router_policy.DeleteServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.DeleteServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyDeleteServiceEdgeRouterPolicyHandler: service_edge_router_policy.DeleteServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.DeleteServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.DeleteServiceEdgeRouterPolicy has not yet been implemented")
 		}),
-		ServicePolicyDeleteServicePolicyHandler: service_policy.DeleteServicePolicyHandlerFunc(func(params service_policy.DeleteServicePolicyParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyDeleteServicePolicyHandler: service_policy.DeleteServicePolicyHandlerFunc(func(params service_policy.DeleteServicePolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.DeleteServicePolicy has not yet been implemented")
 		}),
-		SessionDeleteSessionHandler: session.DeleteSessionHandlerFunc(func(params session.DeleteSessionParams, principal interface{}) middleware.Responder {
+
+		SessionDeleteSessionHandler: session.DeleteSessionHandlerFunc(func(params session.DeleteSessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.DeleteSession has not yet been implemented")
 		}),
-		TerminatorDeleteTerminatorHandler: terminator.DeleteTerminatorHandlerFunc(func(params terminator.DeleteTerminatorParams, principal interface{}) middleware.Responder {
+
+		TerminatorDeleteTerminatorHandler: terminator.DeleteTerminatorHandlerFunc(func(params terminator.DeleteTerminatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation terminator.DeleteTerminator has not yet been implemented")
 		}),
-		RouterDeleteTransitRouterHandler: router.DeleteTransitRouterHandlerFunc(func(params router.DeleteTransitRouterParams, principal interface{}) middleware.Responder {
+
+		RouterDeleteTransitRouterHandler: router.DeleteTransitRouterHandlerFunc(func(params router.DeleteTransitRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.DeleteTransitRouter has not yet been implemented")
 		}),
-		APISessionDetailAPISessionsHandler: api_session.DetailAPISessionsHandlerFunc(func(params api_session.DetailAPISessionsParams, principal interface{}) middleware.Responder {
+
+		APISessionDetailAPISessionsHandler: api_session.DetailAPISessionsHandlerFunc(func(params api_session.DetailAPISessionsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation api_session.DetailAPISessions has not yet been implemented")
 		}),
-		AuthPolicyDetailAuthPolicyHandler: auth_policy.DetailAuthPolicyHandlerFunc(func(params auth_policy.DetailAuthPolicyParams, principal interface{}) middleware.Responder {
+
+		AuthPolicyDetailAuthPolicyHandler: auth_policy.DetailAuthPolicyHandlerFunc(func(params auth_policy.DetailAuthPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation auth_policy.DetailAuthPolicy has not yet been implemented")
 		}),
-		AuthenticatorDetailAuthenticatorHandler: authenticator.DetailAuthenticatorHandlerFunc(func(params authenticator.DetailAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorDetailAuthenticatorHandler: authenticator.DetailAuthenticatorHandlerFunc(func(params authenticator.DetailAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.DetailAuthenticator has not yet been implemented")
 		}),
-		CertificateAuthorityDetailCaHandler: certificate_authority.DetailCaHandlerFunc(func(params certificate_authority.DetailCaParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityDetailCaHandler: certificate_authority.DetailCaHandlerFunc(func(params certificate_authority.DetailCaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.DetailCa has not yet been implemented")
 		}),
-		ConfigDetailConfigHandler: config.DetailConfigHandlerFunc(func(params config.DetailConfigParams, principal interface{}) middleware.Responder {
+
+		ConfigDetailConfigHandler: config.DetailConfigHandlerFunc(func(params config.DetailConfigParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.DetailConfig has not yet been implemented")
 		}),
-		ConfigDetailConfigTypeHandler: config.DetailConfigTypeHandlerFunc(func(params config.DetailConfigTypeParams, principal interface{}) middleware.Responder {
+
+		ConfigDetailConfigTypeHandler: config.DetailConfigTypeHandlerFunc(func(params config.DetailConfigTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.DetailConfigType has not yet been implemented")
 		}),
-		SettingsDetailControllerSettingHandler: settings.DetailControllerSettingHandlerFunc(func(params settings.DetailControllerSettingParams, principal interface{}) middleware.Responder {
+
+		SettingsDetailControllerSettingHandler: settings.DetailControllerSettingHandlerFunc(func(params settings.DetailControllerSettingParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.DetailControllerSetting has not yet been implemented")
 		}),
-		SettingsDetailControllerSettingEffectiveHandler: settings.DetailControllerSettingEffectiveHandlerFunc(func(params settings.DetailControllerSettingEffectiveParams, principal interface{}) middleware.Responder {
+
+		SettingsDetailControllerSettingEffectiveHandler: settings.DetailControllerSettingEffectiveHandlerFunc(func(params settings.DetailControllerSettingEffectiveParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.DetailControllerSettingEffective has not yet been implemented")
 		}),
-		CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler: current_api_session.DetailCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.DetailCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler: current_api_session.DetailCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.DetailCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.DetailCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		EdgeRouterDetailEdgeRouterHandler: edge_router.DetailEdgeRouterHandlerFunc(func(params edge_router.DetailEdgeRouterParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterDetailEdgeRouterHandler: edge_router.DetailEdgeRouterHandlerFunc(func(params edge_router.DetailEdgeRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.DetailEdgeRouter has not yet been implemented")
 		}),
-		EdgeRouterPolicyDetailEdgeRouterPolicyHandler: edge_router_policy.DetailEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.DetailEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyDetailEdgeRouterPolicyHandler: edge_router_policy.DetailEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.DetailEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.DetailEdgeRouterPolicy has not yet been implemented")
 		}),
-		EnrollmentDetailEnrollmentHandler: enrollment.DetailEnrollmentHandlerFunc(func(params enrollment.DetailEnrollmentParams, principal interface{}) middleware.Responder {
+
+		EnrollmentDetailEnrollmentHandler: enrollment.DetailEnrollmentHandlerFunc(func(params enrollment.DetailEnrollmentParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation enrollment.DetailEnrollment has not yet been implemented")
 		}),
-		ExternalJWTSignerDetailExternalJWTSignerHandler: external_jwt_signer.DetailExternalJWTSignerHandlerFunc(func(params external_jwt_signer.DetailExternalJWTSignerParams, principal interface{}) middleware.Responder {
+
+		ExternalJWTSignerDetailExternalJWTSignerHandler: external_jwt_signer.DetailExternalJWTSignerHandlerFunc(func(params external_jwt_signer.DetailExternalJWTSignerParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation external_jwt_signer.DetailExternalJWTSigner has not yet been implemented")
 		}),
-		IdentityDetailIdentityHandler: identity.DetailIdentityHandlerFunc(func(params identity.DetailIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityDetailIdentityHandler: identity.DetailIdentityHandlerFunc(func(params identity.DetailIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.DetailIdentity has not yet been implemented")
 		}),
-		IdentityDetailIdentityTypeHandler: identity.DetailIdentityTypeHandlerFunc(func(params identity.DetailIdentityTypeParams, principal interface{}) middleware.Responder {
+
+		IdentityDetailIdentityTypeHandler: identity.DetailIdentityTypeHandlerFunc(func(params identity.DetailIdentityTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.DetailIdentityType has not yet been implemented")
 		}),
-		CurrentIdentityDetailMfaHandler: current_identity.DetailMfaHandlerFunc(func(params current_identity.DetailMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDetailMfaHandler: current_identity.DetailMfaHandlerFunc(func(params current_identity.DetailMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DetailMfa has not yet been implemented")
 		}),
-		CurrentIdentityDetailMfaQrCodeHandler: current_identity.DetailMfaQrCodeHandlerFunc(func(params current_identity.DetailMfaQrCodeParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDetailMfaQrCodeHandler: current_identity.DetailMfaQrCodeHandlerFunc(func(params current_identity.DetailMfaQrCodeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DetailMfaQrCode has not yet been implemented")
 		}),
-		CurrentIdentityDetailMfaRecoveryCodesHandler: current_identity.DetailMfaRecoveryCodesHandlerFunc(func(params current_identity.DetailMfaRecoveryCodesParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDetailMfaRecoveryCodesHandler: current_identity.DetailMfaRecoveryCodesHandlerFunc(func(params current_identity.DetailMfaRecoveryCodesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DetailMfaRecoveryCodes has not yet been implemented")
 		}),
-		PostureChecksDetailPostureCheckHandler: posture_checks.DetailPostureCheckHandlerFunc(func(params posture_checks.DetailPostureCheckParams, principal interface{}) middleware.Responder {
+
+		PostureChecksDetailPostureCheckHandler: posture_checks.DetailPostureCheckHandlerFunc(func(params posture_checks.DetailPostureCheckParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.DetailPostureCheck has not yet been implemented")
 		}),
-		PostureChecksDetailPostureCheckTypeHandler: posture_checks.DetailPostureCheckTypeHandlerFunc(func(params posture_checks.DetailPostureCheckTypeParams, principal interface{}) middleware.Responder {
+
+		PostureChecksDetailPostureCheckTypeHandler: posture_checks.DetailPostureCheckTypeHandlerFunc(func(params posture_checks.DetailPostureCheckTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.DetailPostureCheckType has not yet been implemented")
 		}),
-		RouterDetailRouterHandler: router.DetailRouterHandlerFunc(func(params router.DetailRouterParams, principal interface{}) middleware.Responder {
+
+		RouterDetailRouterHandler: router.DetailRouterHandlerFunc(func(params router.DetailRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.DetailRouter has not yet been implemented")
 		}),
-		ServiceDetailServiceHandler: service.DetailServiceHandlerFunc(func(params service.DetailServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceDetailServiceHandler: service.DetailServiceHandlerFunc(func(params service.DetailServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.DetailService has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyDetailServiceEdgeRouterPolicyHandler: service_edge_router_policy.DetailServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.DetailServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyDetailServiceEdgeRouterPolicyHandler: service_edge_router_policy.DetailServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.DetailServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.DetailServiceEdgeRouterPolicy has not yet been implemented")
 		}),
-		ServicePolicyDetailServicePolicyHandler: service_policy.DetailServicePolicyHandlerFunc(func(params service_policy.DetailServicePolicyParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyDetailServicePolicyHandler: service_policy.DetailServicePolicyHandlerFunc(func(params service_policy.DetailServicePolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.DetailServicePolicy has not yet been implemented")
 		}),
-		SessionDetailSessionHandler: session.DetailSessionHandlerFunc(func(params session.DetailSessionParams, principal interface{}) middleware.Responder {
+
+		SessionDetailSessionHandler: session.DetailSessionHandlerFunc(func(params session.DetailSessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.DetailSession has not yet been implemented")
 		}),
-		SessionDetailSessionRoutePathHandler: session.DetailSessionRoutePathHandlerFunc(func(params session.DetailSessionRoutePathParams, principal interface{}) middleware.Responder {
+
+		SessionDetailSessionRoutePathHandler: session.DetailSessionRoutePathHandlerFunc(func(params session.DetailSessionRoutePathParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.DetailSessionRoutePath has not yet been implemented")
 		}),
+
 		InformationalDetailSpecHandler: informational.DetailSpecHandlerFunc(func(params informational.DetailSpecParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.DetailSpec has not yet been implemented")
 		}),
+
 		InformationalDetailSpecBodyHandler: informational.DetailSpecBodyHandlerFunc(func(params informational.DetailSpecBodyParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.DetailSpecBody has not yet been implemented")
 		}),
-		TerminatorDetailTerminatorHandler: terminator.DetailTerminatorHandlerFunc(func(params terminator.DetailTerminatorParams, principal interface{}) middleware.Responder {
+
+		TerminatorDetailTerminatorHandler: terminator.DetailTerminatorHandlerFunc(func(params terminator.DetailTerminatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation terminator.DetailTerminator has not yet been implemented")
 		}),
-		RouterDetailTransitRouterHandler: router.DetailTransitRouterHandlerFunc(func(params router.DetailTransitRouterParams, principal interface{}) middleware.Responder {
+
+		RouterDetailTransitRouterHandler: router.DetailTransitRouterHandlerFunc(func(params router.DetailTransitRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.DetailTransitRouter has not yet been implemented")
 		}),
-		IdentityDisableIdentityHandler: identity.DisableIdentityHandlerFunc(func(params identity.DisableIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityDisableIdentityHandler: identity.DisableIdentityHandlerFunc(func(params identity.DisableIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.DisableIdentity has not yet been implemented")
 		}),
-		IdentityDisassociateIdentitysServiceConfigsHandler: identity.DisassociateIdentitysServiceConfigsHandlerFunc(func(params identity.DisassociateIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
+
+		IdentityDisassociateIdentitysServiceConfigsHandler: identity.DisassociateIdentitysServiceConfigsHandlerFunc(func(params identity.DisassociateIdentitysServiceConfigsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.DisassociateIdentitysServiceConfigs has not yet been implemented")
 		}),
-		IdentityEnableIdentityHandler: identity.EnableIdentityHandlerFunc(func(params identity.EnableIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityEnableIdentityHandler: identity.EnableIdentityHandlerFunc(func(params identity.EnableIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.EnableIdentity has not yet been implemented")
 		}),
-		CurrentIdentityEnrollMfaHandler: current_identity.EnrollMfaHandlerFunc(func(params current_identity.EnrollMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityEnrollMfaHandler: current_identity.EnrollMfaHandlerFunc(func(params current_identity.EnrollMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.EnrollMfa has not yet been implemented")
 		}),
-		CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler: current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler: current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ExtendCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		CurrentAPISessionExtendVerifyCurrentIdentityAuthenticatorHandler: current_api_session.ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendVerifyCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionExtendVerifyCurrentIdentityAuthenticatorHandler: current_api_session.ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendVerifyCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ExtendVerifyCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		DatabaseFixDataIntegrityHandler: database.FixDataIntegrityHandlerFunc(func(params database.FixDataIntegrityParams, principal interface{}) middleware.Responder {
+
+		DatabaseFixDataIntegrityHandler: database.FixDataIntegrityHandlerFunc(func(params database.FixDataIntegrityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation database.FixDataIntegrity has not yet been implemented")
 		}),
-		CertificateAuthorityGetCaJWTHandler: certificate_authority.GetCaJWTHandlerFunc(func(params certificate_authority.GetCaJWTParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityGetCaJWTHandler: certificate_authority.GetCaJWTHandlerFunc(func(params certificate_authority.GetCaJWTParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.GetCaJWT has not yet been implemented")
 		}),
-		CurrentAPISessionGetCurrentAPISessionHandler: current_api_session.GetCurrentAPISessionHandlerFunc(func(params current_api_session.GetCurrentAPISessionParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionGetCurrentAPISessionHandler: current_api_session.GetCurrentAPISessionHandlerFunc(func(params current_api_session.GetCurrentAPISessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.GetCurrentAPISession has not yet been implemented")
 		}),
-		CurrentIdentityGetCurrentIdentityHandler: current_identity.GetCurrentIdentityHandlerFunc(func(params current_identity.GetCurrentIdentityParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityGetCurrentIdentityHandler: current_identity.GetCurrentIdentityHandlerFunc(func(params current_identity.GetCurrentIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.GetCurrentIdentity has not yet been implemented")
 		}),
-		IdentityGetIdentityAuthenticatorsHandler: identity.GetIdentityAuthenticatorsHandlerFunc(func(params identity.GetIdentityAuthenticatorsParams, principal interface{}) middleware.Responder {
+
+		IdentityGetIdentityAuthenticatorsHandler: identity.GetIdentityAuthenticatorsHandlerFunc(func(params identity.GetIdentityAuthenticatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.GetIdentityAuthenticators has not yet been implemented")
 		}),
-		IdentityGetIdentityEnrollmentsHandler: identity.GetIdentityEnrollmentsHandlerFunc(func(params identity.GetIdentityEnrollmentsParams, principal interface{}) middleware.Responder {
+
+		IdentityGetIdentityEnrollmentsHandler: identity.GetIdentityEnrollmentsHandlerFunc(func(params identity.GetIdentityEnrollmentsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.GetIdentityEnrollments has not yet been implemented")
 		}),
-		IdentityGetIdentityFailedServiceRequestsHandler: identity.GetIdentityFailedServiceRequestsHandlerFunc(func(params identity.GetIdentityFailedServiceRequestsParams, principal interface{}) middleware.Responder {
+
+		IdentityGetIdentityFailedServiceRequestsHandler: identity.GetIdentityFailedServiceRequestsHandlerFunc(func(params identity.GetIdentityFailedServiceRequestsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.GetIdentityFailedServiceRequests has not yet been implemented")
 		}),
-		IdentityGetIdentityPolicyAdviceHandler: identity.GetIdentityPolicyAdviceHandlerFunc(func(params identity.GetIdentityPolicyAdviceParams, principal interface{}) middleware.Responder {
+
+		IdentityGetIdentityPolicyAdviceHandler: identity.GetIdentityPolicyAdviceHandlerFunc(func(params identity.GetIdentityPolicyAdviceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.GetIdentityPolicyAdvice has not yet been implemented")
 		}),
-		IdentityGetIdentityPostureDataHandler: identity.GetIdentityPostureDataHandlerFunc(func(params identity.GetIdentityPostureDataParams, principal interface{}) middleware.Responder {
+
+		IdentityGetIdentityPostureDataHandler: identity.GetIdentityPostureDataHandlerFunc(func(params identity.GetIdentityPostureDataParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.GetIdentityPostureData has not yet been implemented")
 		}),
-		APISessionListAPISessionsHandler: api_session.ListAPISessionsHandlerFunc(func(params api_session.ListAPISessionsParams, principal interface{}) middleware.Responder {
+
+		APISessionListAPISessionsHandler: api_session.ListAPISessionsHandlerFunc(func(params api_session.ListAPISessionsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation api_session.ListAPISessions has not yet been implemented")
 		}),
-		AuthPolicyListAuthPoliciesHandler: auth_policy.ListAuthPoliciesHandlerFunc(func(params auth_policy.ListAuthPoliciesParams, principal interface{}) middleware.Responder {
+
+		AuthPolicyListAuthPoliciesHandler: auth_policy.ListAuthPoliciesHandlerFunc(func(params auth_policy.ListAuthPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation auth_policy.ListAuthPolicies has not yet been implemented")
 		}),
-		AuthenticatorListAuthenticatorsHandler: authenticator.ListAuthenticatorsHandlerFunc(func(params authenticator.ListAuthenticatorsParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorListAuthenticatorsHandler: authenticator.ListAuthenticatorsHandlerFunc(func(params authenticator.ListAuthenticatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.ListAuthenticators has not yet been implemented")
 		}),
-		CertificateAuthorityListCasHandler: certificate_authority.ListCasHandlerFunc(func(params certificate_authority.ListCasParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityListCasHandler: certificate_authority.ListCasHandlerFunc(func(params certificate_authority.ListCasParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.ListCas has not yet been implemented")
 		}),
-		ConfigListConfigServicesHandler: config.ListConfigServicesHandlerFunc(func(params config.ListConfigServicesParams, principal interface{}) middleware.Responder {
+
+		ConfigListConfigServicesHandler: config.ListConfigServicesHandlerFunc(func(params config.ListConfigServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.ListConfigServices has not yet been implemented")
 		}),
-		ConfigListConfigTypesHandler: config.ListConfigTypesHandlerFunc(func(params config.ListConfigTypesParams, principal interface{}) middleware.Responder {
+
+		ConfigListConfigTypesHandler: config.ListConfigTypesHandlerFunc(func(params config.ListConfigTypesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.ListConfigTypes has not yet been implemented")
 		}),
-		ConfigListConfigsHandler: config.ListConfigsHandlerFunc(func(params config.ListConfigsParams, principal interface{}) middleware.Responder {
+
+		ConfigListConfigsHandler: config.ListConfigsHandlerFunc(func(params config.ListConfigsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.ListConfigs has not yet been implemented")
 		}),
-		ConfigListConfigsForConfigTypeHandler: config.ListConfigsForConfigTypeHandlerFunc(func(params config.ListConfigsForConfigTypeParams, principal interface{}) middleware.Responder {
+
+		ConfigListConfigsForConfigTypeHandler: config.ListConfigsForConfigTypeHandlerFunc(func(params config.ListConfigsForConfigTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.ListConfigsForConfigType has not yet been implemented")
 		}),
-		SettingsListControllerSettingsHandler: settings.ListControllerSettingsHandlerFunc(func(params settings.ListControllerSettingsParams, principal interface{}) middleware.Responder {
+
+		SettingsListControllerSettingsHandler: settings.ListControllerSettingsHandlerFunc(func(params settings.ListControllerSettingsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.ListControllerSettings has not yet been implemented")
 		}),
-		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal interface{}) middleware.Responder {
+
+		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation controllers.ListControllers has not yet been implemented")
 		}),
-		CurrentAPISessionListCurrentIdentityAuthenticatorsHandler: current_api_session.ListCurrentIdentityAuthenticatorsHandlerFunc(func(params current_api_session.ListCurrentIdentityAuthenticatorsParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionListCurrentIdentityAuthenticatorsHandler: current_api_session.ListCurrentIdentityAuthenticatorsHandlerFunc(func(params current_api_session.ListCurrentIdentityAuthenticatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ListCurrentIdentityAuthenticators has not yet been implemented")
 		}),
-		EdgeRouterListEdgeRouterEdgeRouterPoliciesHandler: edge_router.ListEdgeRouterEdgeRouterPoliciesHandlerFunc(func(params edge_router.ListEdgeRouterEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterListEdgeRouterEdgeRouterPoliciesHandler: edge_router.ListEdgeRouterEdgeRouterPoliciesHandlerFunc(func(params edge_router.ListEdgeRouterEdgeRouterPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.ListEdgeRouterEdgeRouterPolicies has not yet been implemented")
 		}),
-		EdgeRouterListEdgeRouterIdentitiesHandler: edge_router.ListEdgeRouterIdentitiesHandlerFunc(func(params edge_router.ListEdgeRouterIdentitiesParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterListEdgeRouterIdentitiesHandler: edge_router.ListEdgeRouterIdentitiesHandlerFunc(func(params edge_router.ListEdgeRouterIdentitiesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.ListEdgeRouterIdentities has not yet been implemented")
 		}),
-		EdgeRouterPolicyListEdgeRouterPoliciesHandler: edge_router_policy.ListEdgeRouterPoliciesHandlerFunc(func(params edge_router_policy.ListEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyListEdgeRouterPoliciesHandler: edge_router_policy.ListEdgeRouterPoliciesHandlerFunc(func(params edge_router_policy.ListEdgeRouterPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.ListEdgeRouterPolicies has not yet been implemented")
 		}),
-		EdgeRouterPolicyListEdgeRouterPolicyEdgeRoutersHandler: edge_router_policy.ListEdgeRouterPolicyEdgeRoutersHandlerFunc(func(params edge_router_policy.ListEdgeRouterPolicyEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyListEdgeRouterPolicyEdgeRoutersHandler: edge_router_policy.ListEdgeRouterPolicyEdgeRoutersHandlerFunc(func(params edge_router_policy.ListEdgeRouterPolicyEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.ListEdgeRouterPolicyEdgeRouters has not yet been implemented")
 		}),
-		EdgeRouterPolicyListEdgeRouterPolicyIdentitiesHandler: edge_router_policy.ListEdgeRouterPolicyIdentitiesHandlerFunc(func(params edge_router_policy.ListEdgeRouterPolicyIdentitiesParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyListEdgeRouterPolicyIdentitiesHandler: edge_router_policy.ListEdgeRouterPolicyIdentitiesHandlerFunc(func(params edge_router_policy.ListEdgeRouterPolicyIdentitiesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.ListEdgeRouterPolicyIdentities has not yet been implemented")
 		}),
-		RoleAttributesListEdgeRouterRoleAttributesHandler: role_attributes.ListEdgeRouterRoleAttributesHandlerFunc(func(params role_attributes.ListEdgeRouterRoleAttributesParams, principal interface{}) middleware.Responder {
+
+		RoleAttributesListEdgeRouterRoleAttributesHandler: role_attributes.ListEdgeRouterRoleAttributesHandlerFunc(func(params role_attributes.ListEdgeRouterRoleAttributesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation role_attributes.ListEdgeRouterRoleAttributes has not yet been implemented")
 		}),
-		EdgeRouterListEdgeRouterServiceEdgeRouterPoliciesHandler: edge_router.ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc(func(params edge_router.ListEdgeRouterServiceEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterListEdgeRouterServiceEdgeRouterPoliciesHandler: edge_router.ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc(func(params edge_router.ListEdgeRouterServiceEdgeRouterPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.ListEdgeRouterServiceEdgeRouterPolicies has not yet been implemented")
 		}),
-		EdgeRouterListEdgeRouterServicesHandler: edge_router.ListEdgeRouterServicesHandlerFunc(func(params edge_router.ListEdgeRouterServicesParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterListEdgeRouterServicesHandler: edge_router.ListEdgeRouterServicesHandlerFunc(func(params edge_router.ListEdgeRouterServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.ListEdgeRouterServices has not yet been implemented")
 		}),
-		EdgeRouterListEdgeRoutersHandler: edge_router.ListEdgeRoutersHandlerFunc(func(params edge_router.ListEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterListEdgeRoutersHandler: edge_router.ListEdgeRoutersHandlerFunc(func(params edge_router.ListEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.ListEdgeRouters has not yet been implemented")
 		}),
-		EnrollmentListEnrollmentsHandler: enrollment.ListEnrollmentsHandlerFunc(func(params enrollment.ListEnrollmentsParams, principal interface{}) middleware.Responder {
+
+		EnrollmentListEnrollmentsHandler: enrollment.ListEnrollmentsHandlerFunc(func(params enrollment.ListEnrollmentsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation enrollment.ListEnrollments has not yet been implemented")
 		}),
+
 		InformationalListEnumeratedCapabilitiesHandler: informational.ListEnumeratedCapabilitiesHandlerFunc(func(params informational.ListEnumeratedCapabilitiesParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
 		}),
-		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal interface{}) middleware.Responder {
+
+		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
 		}),
-		IdentityListIdentitiesHandler: identity.ListIdentitiesHandlerFunc(func(params identity.ListIdentitiesParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentitiesHandler: identity.ListIdentitiesHandlerFunc(func(params identity.ListIdentitiesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentities has not yet been implemented")
 		}),
-		IdentityListIdentityEdgeRoutersHandler: identity.ListIdentityEdgeRoutersHandlerFunc(func(params identity.ListIdentityEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentityEdgeRoutersHandler: identity.ListIdentityEdgeRoutersHandlerFunc(func(params identity.ListIdentityEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentityEdgeRouters has not yet been implemented")
 		}),
-		RoleAttributesListIdentityRoleAttributesHandler: role_attributes.ListIdentityRoleAttributesHandlerFunc(func(params role_attributes.ListIdentityRoleAttributesParams, principal interface{}) middleware.Responder {
+
+		RoleAttributesListIdentityRoleAttributesHandler: role_attributes.ListIdentityRoleAttributesHandlerFunc(func(params role_attributes.ListIdentityRoleAttributesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation role_attributes.ListIdentityRoleAttributes has not yet been implemented")
 		}),
-		IdentityListIdentityServicePoliciesHandler: identity.ListIdentityServicePoliciesHandlerFunc(func(params identity.ListIdentityServicePoliciesParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentityServicePoliciesHandler: identity.ListIdentityServicePoliciesHandlerFunc(func(params identity.ListIdentityServicePoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentityServicePolicies has not yet been implemented")
 		}),
-		IdentityListIdentityServicesHandler: identity.ListIdentityServicesHandlerFunc(func(params identity.ListIdentityServicesParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentityServicesHandler: identity.ListIdentityServicesHandlerFunc(func(params identity.ListIdentityServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentityServices has not yet been implemented")
 		}),
-		IdentityListIdentityTypesHandler: identity.ListIdentityTypesHandlerFunc(func(params identity.ListIdentityTypesParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentityTypesHandler: identity.ListIdentityTypesHandlerFunc(func(params identity.ListIdentityTypesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentityTypes has not yet been implemented")
 		}),
-		IdentityListIdentitysEdgeRouterPoliciesHandler: identity.ListIdentitysEdgeRouterPoliciesHandlerFunc(func(params identity.ListIdentitysEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentitysEdgeRouterPoliciesHandler: identity.ListIdentitysEdgeRouterPoliciesHandlerFunc(func(params identity.ListIdentitysEdgeRouterPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentitysEdgeRouterPolicies has not yet been implemented")
 		}),
-		IdentityListIdentitysServiceConfigsHandler: identity.ListIdentitysServiceConfigsHandlerFunc(func(params identity.ListIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
+
+		IdentityListIdentitysServiceConfigsHandler: identity.ListIdentitysServiceConfigsHandlerFunc(func(params identity.ListIdentitysServiceConfigsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.ListIdentitysServiceConfigs has not yet been implemented")
 		}),
+
 		EnrollmentListNetworkJWTsHandler: enrollment.ListNetworkJWTsHandlerFunc(func(params enrollment.ListNetworkJWTsParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
 		}),
-		RoleAttributesListPostureCheckRoleAttributesHandler: role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal interface{}) middleware.Responder {
+
+		RoleAttributesListPostureCheckRoleAttributesHandler: role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributes has not yet been implemented")
 		}),
-		PostureChecksListPostureCheckTypesHandler: posture_checks.ListPostureCheckTypesHandlerFunc(func(params posture_checks.ListPostureCheckTypesParams, principal interface{}) middleware.Responder {
+
+		PostureChecksListPostureCheckTypesHandler: posture_checks.ListPostureCheckTypesHandlerFunc(func(params posture_checks.ListPostureCheckTypesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.ListPostureCheckTypes has not yet been implemented")
 		}),
-		PostureChecksListPostureChecksHandler: posture_checks.ListPostureChecksHandlerFunc(func(params posture_checks.ListPostureChecksParams, principal interface{}) middleware.Responder {
+
+		PostureChecksListPostureChecksHandler: posture_checks.ListPostureChecksHandlerFunc(func(params posture_checks.ListPostureChecksParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.ListPostureChecks has not yet been implemented")
 		}),
+
 		InformationalListRootHandler: informational.ListRootHandlerFunc(func(params informational.ListRootParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListRoot has not yet been implemented")
 		}),
-		RouterListRoutersHandler: router.ListRoutersHandlerFunc(func(params router.ListRoutersParams, principal interface{}) middleware.Responder {
+
+		RouterListRoutersHandler: router.ListRoutersHandlerFunc(func(params router.ListRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.ListRouters has not yet been implemented")
 		}),
-		ServiceListServiceConfigHandler: service.ListServiceConfigHandlerFunc(func(params service.ListServiceConfigParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceConfigHandler: service.ListServiceConfigHandlerFunc(func(params service.ListServiceConfigParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceConfig has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyListServiceEdgeRouterPoliciesHandler: service_edge_router_policy.ListServiceEdgeRouterPoliciesHandlerFunc(func(params service_edge_router_policy.ListServiceEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyListServiceEdgeRouterPoliciesHandler: service_edge_router_policy.ListServiceEdgeRouterPoliciesHandlerFunc(func(params service_edge_router_policy.ListServiceEdgeRouterPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.ListServiceEdgeRouterPolicies has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyListServiceEdgeRouterPolicyEdgeRoutersHandler: service_edge_router_policy.ListServiceEdgeRouterPolicyEdgeRoutersHandlerFunc(func(params service_edge_router_policy.ListServiceEdgeRouterPolicyEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyListServiceEdgeRouterPolicyEdgeRoutersHandler: service_edge_router_policy.ListServiceEdgeRouterPolicyEdgeRoutersHandlerFunc(func(params service_edge_router_policy.ListServiceEdgeRouterPolicyEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.ListServiceEdgeRouterPolicyEdgeRouters has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyListServiceEdgeRouterPolicyServicesHandler: service_edge_router_policy.ListServiceEdgeRouterPolicyServicesHandlerFunc(func(params service_edge_router_policy.ListServiceEdgeRouterPolicyServicesParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyListServiceEdgeRouterPolicyServicesHandler: service_edge_router_policy.ListServiceEdgeRouterPolicyServicesHandlerFunc(func(params service_edge_router_policy.ListServiceEdgeRouterPolicyServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.ListServiceEdgeRouterPolicyServices has not yet been implemented")
 		}),
-		ServiceListServiceEdgeRoutersHandler: service.ListServiceEdgeRoutersHandlerFunc(func(params service.ListServiceEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceEdgeRoutersHandler: service.ListServiceEdgeRoutersHandlerFunc(func(params service.ListServiceEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceEdgeRouters has not yet been implemented")
 		}),
-		ServiceListServiceIdentitiesHandler: service.ListServiceIdentitiesHandlerFunc(func(params service.ListServiceIdentitiesParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceIdentitiesHandler: service.ListServiceIdentitiesHandlerFunc(func(params service.ListServiceIdentitiesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceIdentities has not yet been implemented")
 		}),
-		ServicePolicyListServicePoliciesHandler: service_policy.ListServicePoliciesHandlerFunc(func(params service_policy.ListServicePoliciesParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyListServicePoliciesHandler: service_policy.ListServicePoliciesHandlerFunc(func(params service_policy.ListServicePoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.ListServicePolicies has not yet been implemented")
 		}),
-		ServicePolicyListServicePolicyIdentitiesHandler: service_policy.ListServicePolicyIdentitiesHandlerFunc(func(params service_policy.ListServicePolicyIdentitiesParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyListServicePolicyIdentitiesHandler: service_policy.ListServicePolicyIdentitiesHandlerFunc(func(params service_policy.ListServicePolicyIdentitiesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.ListServicePolicyIdentities has not yet been implemented")
 		}),
-		ServicePolicyListServicePolicyPostureChecksHandler: service_policy.ListServicePolicyPostureChecksHandlerFunc(func(params service_policy.ListServicePolicyPostureChecksParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyListServicePolicyPostureChecksHandler: service_policy.ListServicePolicyPostureChecksHandlerFunc(func(params service_policy.ListServicePolicyPostureChecksParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.ListServicePolicyPostureChecks has not yet been implemented")
 		}),
-		ServicePolicyListServicePolicyServicesHandler: service_policy.ListServicePolicyServicesHandlerFunc(func(params service_policy.ListServicePolicyServicesParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyListServicePolicyServicesHandler: service_policy.ListServicePolicyServicesHandlerFunc(func(params service_policy.ListServicePolicyServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.ListServicePolicyServices has not yet been implemented")
 		}),
-		RoleAttributesListServiceRoleAttributesHandler: role_attributes.ListServiceRoleAttributesHandlerFunc(func(params role_attributes.ListServiceRoleAttributesParams, principal interface{}) middleware.Responder {
+
+		RoleAttributesListServiceRoleAttributesHandler: role_attributes.ListServiceRoleAttributesHandlerFunc(func(params role_attributes.ListServiceRoleAttributesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation role_attributes.ListServiceRoleAttributes has not yet been implemented")
 		}),
-		ServiceListServiceServiceEdgeRouterPoliciesHandler: service.ListServiceServiceEdgeRouterPoliciesHandlerFunc(func(params service.ListServiceServiceEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceServiceEdgeRouterPoliciesHandler: service.ListServiceServiceEdgeRouterPoliciesHandlerFunc(func(params service.ListServiceServiceEdgeRouterPoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceServiceEdgeRouterPolicies has not yet been implemented")
 		}),
-		ServiceListServiceServicePoliciesHandler: service.ListServiceServicePoliciesHandlerFunc(func(params service.ListServiceServicePoliciesParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceServicePoliciesHandler: service.ListServiceServicePoliciesHandlerFunc(func(params service.ListServiceServicePoliciesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceServicePolicies has not yet been implemented")
 		}),
-		ServiceListServiceTerminatorsHandler: service.ListServiceTerminatorsHandlerFunc(func(params service.ListServiceTerminatorsParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceTerminatorsHandler: service.ListServiceTerminatorsHandlerFunc(func(params service.ListServiceTerminatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceTerminators has not yet been implemented")
 		}),
-		ServiceListServicesHandler: service.ListServicesHandlerFunc(func(params service.ListServicesParams, principal interface{}) middleware.Responder {
+
+		ServiceListServicesHandler: service.ListServicesHandlerFunc(func(params service.ListServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServices has not yet been implemented")
 		}),
-		SessionListSessionsHandler: session.ListSessionsHandlerFunc(func(params session.ListSessionsParams, principal interface{}) middleware.Responder {
+
+		SessionListSessionsHandler: session.ListSessionsHandlerFunc(func(params session.ListSessionsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.ListSessions has not yet been implemented")
 		}),
+
 		InformationalListSpecsHandler: informational.ListSpecsHandlerFunc(func(params informational.ListSpecsParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListSpecs has not yet been implemented")
 		}),
-		InformationalListSummaryHandler: informational.ListSummaryHandlerFunc(func(params informational.ListSummaryParams, principal interface{}) middleware.Responder {
+
+		InformationalListSummaryHandler: informational.ListSummaryHandlerFunc(func(params informational.ListSummaryParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation informational.ListSummary has not yet been implemented")
 		}),
-		TerminatorListTerminatorsHandler: terminator.ListTerminatorsHandlerFunc(func(params terminator.ListTerminatorsParams, principal interface{}) middleware.Responder {
+
+		TerminatorListTerminatorsHandler: terminator.ListTerminatorsHandlerFunc(func(params terminator.ListTerminatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation terminator.ListTerminators has not yet been implemented")
 		}),
-		RouterListTransitRoutersHandler: router.ListTransitRoutersHandlerFunc(func(params router.ListTransitRoutersParams, principal interface{}) middleware.Responder {
+
+		RouterListTransitRoutersHandler: router.ListTransitRoutersHandlerFunc(func(params router.ListTransitRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.ListTransitRouters has not yet been implemented")
 		}),
+
 		InformationalListVersionHandler: informational.ListVersionHandlerFunc(func(params informational.ListVersionParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListVersion has not yet been implemented")
 		}),
+
 		WellKnownListWellKnownCasHandler: well_known.ListWellKnownCasHandlerFunc(func(params well_known.ListWellKnownCasParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation well_known.ListWellKnownCas has not yet been implemented")
 		}),
-		AuthPolicyPatchAuthPolicyHandler: auth_policy.PatchAuthPolicyHandlerFunc(func(params auth_policy.PatchAuthPolicyParams, principal interface{}) middleware.Responder {
+
+		AuthPolicyPatchAuthPolicyHandler: auth_policy.PatchAuthPolicyHandlerFunc(func(params auth_policy.PatchAuthPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation auth_policy.PatchAuthPolicy has not yet been implemented")
 		}),
-		AuthenticatorPatchAuthenticatorHandler: authenticator.PatchAuthenticatorHandlerFunc(func(params authenticator.PatchAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorPatchAuthenticatorHandler: authenticator.PatchAuthenticatorHandlerFunc(func(params authenticator.PatchAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.PatchAuthenticator has not yet been implemented")
 		}),
-		CertificateAuthorityPatchCaHandler: certificate_authority.PatchCaHandlerFunc(func(params certificate_authority.PatchCaParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityPatchCaHandler: certificate_authority.PatchCaHandlerFunc(func(params certificate_authority.PatchCaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.PatchCa has not yet been implemented")
 		}),
-		ConfigPatchConfigHandler: config.PatchConfigHandlerFunc(func(params config.PatchConfigParams, principal interface{}) middleware.Responder {
+
+		ConfigPatchConfigHandler: config.PatchConfigHandlerFunc(func(params config.PatchConfigParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.PatchConfig has not yet been implemented")
 		}),
-		ConfigPatchConfigTypeHandler: config.PatchConfigTypeHandlerFunc(func(params config.PatchConfigTypeParams, principal interface{}) middleware.Responder {
+
+		ConfigPatchConfigTypeHandler: config.PatchConfigTypeHandlerFunc(func(params config.PatchConfigTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.PatchConfigType has not yet been implemented")
 		}),
-		SettingsPatchControllerSettingHandler: settings.PatchControllerSettingHandlerFunc(func(params settings.PatchControllerSettingParams, principal interface{}) middleware.Responder {
+
+		SettingsPatchControllerSettingHandler: settings.PatchControllerSettingHandlerFunc(func(params settings.PatchControllerSettingParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.PatchControllerSetting has not yet been implemented")
 		}),
-		CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler: current_api_session.PatchCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.PatchCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler: current_api_session.PatchCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.PatchCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.PatchCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		EdgeRouterPatchEdgeRouterHandler: edge_router.PatchEdgeRouterHandlerFunc(func(params edge_router.PatchEdgeRouterParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPatchEdgeRouterHandler: edge_router.PatchEdgeRouterHandlerFunc(func(params edge_router.PatchEdgeRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.PatchEdgeRouter has not yet been implemented")
 		}),
-		EdgeRouterPolicyPatchEdgeRouterPolicyHandler: edge_router_policy.PatchEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.PatchEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyPatchEdgeRouterPolicyHandler: edge_router_policy.PatchEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.PatchEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.PatchEdgeRouterPolicy has not yet been implemented")
 		}),
-		ExternalJWTSignerPatchExternalJWTSignerHandler: external_jwt_signer.PatchExternalJWTSignerHandlerFunc(func(params external_jwt_signer.PatchExternalJWTSignerParams, principal interface{}) middleware.Responder {
+
+		ExternalJWTSignerPatchExternalJWTSignerHandler: external_jwt_signer.PatchExternalJWTSignerHandlerFunc(func(params external_jwt_signer.PatchExternalJWTSignerParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation external_jwt_signer.PatchExternalJWTSigner has not yet been implemented")
 		}),
-		IdentityPatchIdentityHandler: identity.PatchIdentityHandlerFunc(func(params identity.PatchIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityPatchIdentityHandler: identity.PatchIdentityHandlerFunc(func(params identity.PatchIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.PatchIdentity has not yet been implemented")
 		}),
-		PostureChecksPatchPostureCheckHandler: posture_checks.PatchPostureCheckHandlerFunc(func(params posture_checks.PatchPostureCheckParams, principal interface{}) middleware.Responder {
+
+		PostureChecksPatchPostureCheckHandler: posture_checks.PatchPostureCheckHandlerFunc(func(params posture_checks.PatchPostureCheckParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.PatchPostureCheck has not yet been implemented")
 		}),
-		RouterPatchRouterHandler: router.PatchRouterHandlerFunc(func(params router.PatchRouterParams, principal interface{}) middleware.Responder {
+
+		RouterPatchRouterHandler: router.PatchRouterHandlerFunc(func(params router.PatchRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.PatchRouter has not yet been implemented")
 		}),
-		ServicePatchServiceHandler: service.PatchServiceHandlerFunc(func(params service.PatchServiceParams, principal interface{}) middleware.Responder {
+
+		ServicePatchServiceHandler: service.PatchServiceHandlerFunc(func(params service.PatchServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.PatchService has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyPatchServiceEdgeRouterPolicyHandler: service_edge_router_policy.PatchServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.PatchServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyPatchServiceEdgeRouterPolicyHandler: service_edge_router_policy.PatchServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.PatchServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.PatchServiceEdgeRouterPolicy has not yet been implemented")
 		}),
-		ServicePolicyPatchServicePolicyHandler: service_policy.PatchServicePolicyHandlerFunc(func(params service_policy.PatchServicePolicyParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyPatchServicePolicyHandler: service_policy.PatchServicePolicyHandlerFunc(func(params service_policy.PatchServicePolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.PatchServicePolicy has not yet been implemented")
 		}),
-		TerminatorPatchTerminatorHandler: terminator.PatchTerminatorHandlerFunc(func(params terminator.PatchTerminatorParams, principal interface{}) middleware.Responder {
+
+		TerminatorPatchTerminatorHandler: terminator.PatchTerminatorHandlerFunc(func(params terminator.PatchTerminatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation terminator.PatchTerminator has not yet been implemented")
 		}),
-		RouterPatchTransitRouterHandler: router.PatchTransitRouterHandlerFunc(func(params router.PatchTransitRouterParams, principal interface{}) middleware.Responder {
+
+		RouterPatchTransitRouterHandler: router.PatchTransitRouterHandlerFunc(func(params router.PatchTransitRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.PatchTransitRouter has not yet been implemented")
 		}),
-		AuthenticatorReEnrollAuthenticatorHandler: authenticator.ReEnrollAuthenticatorHandlerFunc(func(params authenticator.ReEnrollAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorReEnrollAuthenticatorHandler: authenticator.ReEnrollAuthenticatorHandlerFunc(func(params authenticator.ReEnrollAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.ReEnrollAuthenticator has not yet been implemented")
 		}),
-		EdgeRouterReEnrollEdgeRouterHandler: edge_router.ReEnrollEdgeRouterHandlerFunc(func(params edge_router.ReEnrollEdgeRouterParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterReEnrollEdgeRouterHandler: edge_router.ReEnrollEdgeRouterHandlerFunc(func(params edge_router.ReEnrollEdgeRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.ReEnrollEdgeRouter has not yet been implemented")
 		}),
-		EnrollmentRefreshEnrollmentHandler: enrollment.RefreshEnrollmentHandlerFunc(func(params enrollment.RefreshEnrollmentParams, principal interface{}) middleware.Responder {
+
+		EnrollmentRefreshEnrollmentHandler: enrollment.RefreshEnrollmentHandlerFunc(func(params enrollment.RefreshEnrollmentParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation enrollment.RefreshEnrollment has not yet been implemented")
 		}),
-		IdentityRemoveIdentityMfaHandler: identity.RemoveIdentityMfaHandlerFunc(func(params identity.RemoveIdentityMfaParams, principal interface{}) middleware.Responder {
+
+		IdentityRemoveIdentityMfaHandler: identity.RemoveIdentityMfaHandlerFunc(func(params identity.RemoveIdentityMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.RemoveIdentityMfa has not yet been implemented")
 		}),
-		AuthenticatorRequestExtendAllCertAuthenticatorsHandler: authenticator.RequestExtendAllCertAuthenticatorsHandlerFunc(func(params authenticator.RequestExtendAllCertAuthenticatorsParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorRequestExtendAllCertAuthenticatorsHandler: authenticator.RequestExtendAllCertAuthenticatorsHandlerFunc(func(params authenticator.RequestExtendAllCertAuthenticatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.RequestExtendAllCertAuthenticators has not yet been implemented")
 		}),
-		AuthenticatorRequestExtendAuthenticatorHandler: authenticator.RequestExtendAuthenticatorHandlerFunc(func(params authenticator.RequestExtendAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorRequestExtendAuthenticatorHandler: authenticator.RequestExtendAuthenticatorHandlerFunc(func(params authenticator.RequestExtendAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.RequestExtendAuthenticator has not yet been implemented")
 		}),
-		AuthPolicyUpdateAuthPolicyHandler: auth_policy.UpdateAuthPolicyHandlerFunc(func(params auth_policy.UpdateAuthPolicyParams, principal interface{}) middleware.Responder {
+
+		AuthPolicyUpdateAuthPolicyHandler: auth_policy.UpdateAuthPolicyHandlerFunc(func(params auth_policy.UpdateAuthPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation auth_policy.UpdateAuthPolicy has not yet been implemented")
 		}),
-		AuthenticatorUpdateAuthenticatorHandler: authenticator.UpdateAuthenticatorHandlerFunc(func(params authenticator.UpdateAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		AuthenticatorUpdateAuthenticatorHandler: authenticator.UpdateAuthenticatorHandlerFunc(func(params authenticator.UpdateAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authenticator.UpdateAuthenticator has not yet been implemented")
 		}),
-		CertificateAuthorityUpdateCaHandler: certificate_authority.UpdateCaHandlerFunc(func(params certificate_authority.UpdateCaParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityUpdateCaHandler: certificate_authority.UpdateCaHandlerFunc(func(params certificate_authority.UpdateCaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.UpdateCa has not yet been implemented")
 		}),
-		ConfigUpdateConfigHandler: config.UpdateConfigHandlerFunc(func(params config.UpdateConfigParams, principal interface{}) middleware.Responder {
+
+		ConfigUpdateConfigHandler: config.UpdateConfigHandlerFunc(func(params config.UpdateConfigParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.UpdateConfig has not yet been implemented")
 		}),
-		ConfigUpdateConfigTypeHandler: config.UpdateConfigTypeHandlerFunc(func(params config.UpdateConfigTypeParams, principal interface{}) middleware.Responder {
+
+		ConfigUpdateConfigTypeHandler: config.UpdateConfigTypeHandlerFunc(func(params config.UpdateConfigTypeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation config.UpdateConfigType has not yet been implemented")
 		}),
-		SettingsUpdateControllerSettingHandler: settings.UpdateControllerSettingHandlerFunc(func(params settings.UpdateControllerSettingParams, principal interface{}) middleware.Responder {
+
+		SettingsUpdateControllerSettingHandler: settings.UpdateControllerSettingHandlerFunc(func(params settings.UpdateControllerSettingParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation settings.UpdateControllerSetting has not yet been implemented")
 		}),
-		CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler: current_api_session.UpdateCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.UpdateCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler: current_api_session.UpdateCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.UpdateCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.UpdateCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		EdgeRouterUpdateEdgeRouterHandler: edge_router.UpdateEdgeRouterHandlerFunc(func(params edge_router.UpdateEdgeRouterParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterUpdateEdgeRouterHandler: edge_router.UpdateEdgeRouterHandlerFunc(func(params edge_router.UpdateEdgeRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router.UpdateEdgeRouter has not yet been implemented")
 		}),
-		EdgeRouterPolicyUpdateEdgeRouterPolicyHandler: edge_router_policy.UpdateEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.UpdateEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		EdgeRouterPolicyUpdateEdgeRouterPolicyHandler: edge_router_policy.UpdateEdgeRouterPolicyHandlerFunc(func(params edge_router_policy.UpdateEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation edge_router_policy.UpdateEdgeRouterPolicy has not yet been implemented")
 		}),
-		ExternalJWTSignerUpdateExternalJWTSignerHandler: external_jwt_signer.UpdateExternalJWTSignerHandlerFunc(func(params external_jwt_signer.UpdateExternalJWTSignerParams, principal interface{}) middleware.Responder {
+
+		ExternalJWTSignerUpdateExternalJWTSignerHandler: external_jwt_signer.UpdateExternalJWTSignerHandlerFunc(func(params external_jwt_signer.UpdateExternalJWTSignerParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation external_jwt_signer.UpdateExternalJWTSigner has not yet been implemented")
 		}),
-		IdentityUpdateIdentityHandler: identity.UpdateIdentityHandlerFunc(func(params identity.UpdateIdentityParams, principal interface{}) middleware.Responder {
+
+		IdentityUpdateIdentityHandler: identity.UpdateIdentityHandlerFunc(func(params identity.UpdateIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.UpdateIdentity has not yet been implemented")
 		}),
-		IdentityUpdateIdentityTracingHandler: identity.UpdateIdentityTracingHandlerFunc(func(params identity.UpdateIdentityTracingParams, principal interface{}) middleware.Responder {
+
+		IdentityUpdateIdentityTracingHandler: identity.UpdateIdentityTracingHandlerFunc(func(params identity.UpdateIdentityTracingParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation identity.UpdateIdentityTracing has not yet been implemented")
 		}),
-		PostureChecksUpdatePostureCheckHandler: posture_checks.UpdatePostureCheckHandlerFunc(func(params posture_checks.UpdatePostureCheckParams, principal interface{}) middleware.Responder {
+
+		PostureChecksUpdatePostureCheckHandler: posture_checks.UpdatePostureCheckHandlerFunc(func(params posture_checks.UpdatePostureCheckParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.UpdatePostureCheck has not yet been implemented")
 		}),
-		RouterUpdateRouterHandler: router.UpdateRouterHandlerFunc(func(params router.UpdateRouterParams, principal interface{}) middleware.Responder {
+
+		RouterUpdateRouterHandler: router.UpdateRouterHandlerFunc(func(params router.UpdateRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.UpdateRouter has not yet been implemented")
 		}),
-		ServiceUpdateServiceHandler: service.UpdateServiceHandlerFunc(func(params service.UpdateServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceUpdateServiceHandler: service.UpdateServiceHandlerFunc(func(params service.UpdateServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.UpdateService has not yet been implemented")
 		}),
-		ServiceEdgeRouterPolicyUpdateServiceEdgeRouterPolicyHandler: service_edge_router_policy.UpdateServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.UpdateServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+
+		ServiceEdgeRouterPolicyUpdateServiceEdgeRouterPolicyHandler: service_edge_router_policy.UpdateServiceEdgeRouterPolicyHandlerFunc(func(params service_edge_router_policy.UpdateServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_edge_router_policy.UpdateServiceEdgeRouterPolicy has not yet been implemented")
 		}),
-		ServicePolicyUpdateServicePolicyHandler: service_policy.UpdateServicePolicyHandlerFunc(func(params service_policy.UpdateServicePolicyParams, principal interface{}) middleware.Responder {
+
+		ServicePolicyUpdateServicePolicyHandler: service_policy.UpdateServicePolicyHandlerFunc(func(params service_policy.UpdateServicePolicyParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service_policy.UpdateServicePolicy has not yet been implemented")
 		}),
-		TerminatorUpdateTerminatorHandler: terminator.UpdateTerminatorHandlerFunc(func(params terminator.UpdateTerminatorParams, principal interface{}) middleware.Responder {
+
+		TerminatorUpdateTerminatorHandler: terminator.UpdateTerminatorHandlerFunc(func(params terminator.UpdateTerminatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation terminator.UpdateTerminator has not yet been implemented")
 		}),
-		RouterUpdateTransitRouterHandler: router.UpdateTransitRouterHandlerFunc(func(params router.UpdateTransitRouterParams, principal interface{}) middleware.Responder {
+
+		RouterUpdateTransitRouterHandler: router.UpdateTransitRouterHandlerFunc(func(params router.UpdateTransitRouterParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation router.UpdateTransitRouter has not yet been implemented")
 		}),
-		CertificateAuthorityVerifyCaHandler: certificate_authority.VerifyCaHandlerFunc(func(params certificate_authority.VerifyCaParams, principal interface{}) middleware.Responder {
+
+		CertificateAuthorityVerifyCaHandler: certificate_authority.VerifyCaHandlerFunc(func(params certificate_authority.VerifyCaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation certificate_authority.VerifyCa has not yet been implemented")
 		}),
-		CurrentIdentityVerifyMfaHandler: current_identity.VerifyMfaHandlerFunc(func(params current_identity.VerifyMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityVerifyMfaHandler: current_identity.VerifyMfaHandlerFunc(func(params current_identity.VerifyMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.VerifyMfa has not yet been implemented")
 		}),
 
-		Oauth2Auth: func(token string, scopes []string) (interface{}, error) {
+		Oauth2Auth: func(token string, scopes []string) (any, error) {
+			_ = token
+			_ = scopes
+
 			return nil, errors.NotImplemented("oauth2 bearer auth (oauth2) has not yet been implemented")
 		},
 		// Applies when the "zt-session" header is set
-		ZtSessionAuth: func(token string) (interface{}, error) {
+		ZtSessionAuth: func(token string) (any, error) {
+			_ = token
+
 			return nil, errors.NotImplemented("api key auth (ztSession) zt-session from header param [zt-session] has not yet been implemented")
 		},
 		// default authorizer is authorized meaning no requests are blocked
@@ -759,11 +1551,11 @@ type ZitiEdgeManagementAPI struct {
 
 	// Oauth2Auth registers a function that takes an access token and a collection of required scopes and returns a principal
 	// it performs authentication based on an oauth2 bearer token provided in the request
-	Oauth2Auth func(string, []string) (interface{}, error)
+	Oauth2Auth func(string, []string) (any, error)
 
 	// ZtSessionAuth registers a function that takes a token and returns a principal
 	// it performs authentication based on an api key zt-session provided in the header
-	ZtSessionAuth func(string) (interface{}, error)
+	ZtSessionAuth func(string) (any, error)
 
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
@@ -1179,7 +1971,7 @@ type ZitiEdgeManagementAPI struct {
 	CommandLineOptionsGroups []swag.CommandLineOptionsGroup
 
 	// User defined logger function.
-	Logger func(string, ...interface{})
+	Logger func(string, ...any)
 }
 
 // UseRedoc for documentation at /docs
@@ -1879,6 +2671,7 @@ func (o *ZitiEdgeManagementAPI) AuthenticatorsFor(schemes map[string]spec.Securi
 
 		}
 	}
+
 	return result
 }
 
@@ -1888,6 +2681,7 @@ func (o *ZitiEdgeManagementAPI) Authorizer() runtime.Authorizer {
 }
 
 // ConsumersFor gets the consumers for the specified media types.
+//
 // MIME type parameters are ignored here.
 func (o *ZitiEdgeManagementAPI) ConsumersFor(mediaTypes []string) map[string]runtime.Consumer {
 	result := make(map[string]runtime.Consumer, len(mediaTypes))
@@ -1903,10 +2697,12 @@ func (o *ZitiEdgeManagementAPI) ConsumersFor(mediaTypes []string) map[string]run
 			result[mt] = c
 		}
 	}
+
 	return result
 }
 
 // ProducersFor gets the producers for the specified media types.
+//
 // MIME type parameters are ignored here.
 func (o *ZitiEdgeManagementAPI) ProducersFor(mediaTypes []string) map[string]runtime.Producer {
 	result := make(map[string]runtime.Producer, len(mediaTypes))
@@ -1928,6 +2724,7 @@ func (o *ZitiEdgeManagementAPI) ProducersFor(mediaTypes []string) map[string]run
 			result[mt] = p
 		}
 	}
+
 	return result
 }
 
@@ -2791,6 +3588,6 @@ func (o *ZitiEdgeManagementAPI) AddMiddlewareFor(method, path string, builder mi
 	}
 	o.Init()
 	if h, ok := o.handlers[um][path]; ok {
-		o.handlers[method][path] = builder(h)
+		o.handlers[um][path] = builder(h)
 	}
 }

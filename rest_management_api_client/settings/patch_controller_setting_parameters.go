@@ -78,10 +78,12 @@ func NewPatchControllerSettingParamsWithHTTPClient(client *http.Client) *PatchCo
 	}
 }
 
-/* PatchControllerSettingParams contains all the parameters to send to the API endpoint
-   for the patch controller setting operation.
+/*
+PatchControllerSettingParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the patch controller setting operation.
+
+	Typically these are written to a http.Request.
 */
 type PatchControllerSettingParams struct {
 

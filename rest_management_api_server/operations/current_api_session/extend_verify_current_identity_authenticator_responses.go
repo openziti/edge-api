@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ExtendVerifyCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type ExtendVerifyCurrentIdentityAuthenticatorOK
 const ExtendVerifyCurrentIdentityAuthenticatorOKCode int = 200
 
-/*ExtendVerifyCurrentIdentityAuthenticatorOK Base empty response
+/*
+ExtendVerifyCurrentIdentityAuthenticatorOK Base empty response
 
 swagger:response extendVerifyCurrentIdentityAuthenticatorOK
 */
 type ExtendVerifyCurrentIdentityAuthenticatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ExtendVerifyCurrentIdentityAuthenticatorOK struct {
 func NewExtendVerifyCurrentIdentityAuthenticatorOK() *ExtendVerifyCurrentIdentityAuthenticatorOK {
 
 	return &ExtendVerifyCurrentIdentityAuthenticatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend verify current identity authenticator o k response
+func (o *ExtendVerifyCurrentIdentityAuthenticatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendVerifyCurrentIdentityAuthenticatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend verify current identity authenticator o k response
+func (o *ExtendVerifyCurrentIdentityAuthenticatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend verify current identity authenticator o k response
@@ -72,6 +89,23 @@ func (o *ExtendVerifyCurrentIdentityAuthenticatorOK) SetPayload(payload *rest_mo
 // WriteResponse to the client
 func (o *ExtendVerifyCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ExtendVerifyCurrentIdentityAuthenticatorOK) WriteResponse(rw http.Respo
 // ExtendVerifyCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type ExtendVerifyCurrentIdentityAuthenticatorUnauthorized
 const ExtendVerifyCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*ExtendVerifyCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ExtendVerifyCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendVerifyCurrentIdentityAuthenticatorUnauthorized
 */
 type ExtendVerifyCurrentIdentityAuthenticatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ExtendVerifyCurrentIdentityAuthenticatorUnauthorized struct {
 func NewExtendVerifyCurrentIdentityAuthenticatorUnauthorized() *ExtendVerifyCurrentIdentityAuthenticatorUnauthorized {
 
 	return &ExtendVerifyCurrentIdentityAuthenticatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend verify current identity authenticator unauthorized response
+func (o *ExtendVerifyCurrentIdentityAuthenticatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendVerifyCurrentIdentityAuthenticatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend verify current identity authenticator unauthorized response
+func (o *ExtendVerifyCurrentIdentityAuthenticatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend verify current identity authenticator unauthorized response
@@ -115,6 +165,23 @@ func (o *ExtendVerifyCurrentIdentityAuthenticatorUnauthorized) SetPayload(payloa
 
 // WriteResponse to the client
 func (o *ExtendVerifyCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(401)
 	if o.Payload != nil {

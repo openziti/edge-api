@@ -53,7 +53,6 @@ func NewListServiceIdentitiesParams() ListServiceIdentitiesParams {
 //
 // swagger:parameters listServiceIdentities
 type ListServiceIdentitiesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -61,19 +60,23 @@ type ListServiceIdentitiesParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*The id of the requested resource
 	  Required: true
 	  In: path
 	*/
 	ID string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
 	Offset *int64
+
 	/*
 	  In: query
 	*/
@@ -88,7 +91,6 @@ func (o *ListServiceIdentitiesParams) BindRequest(r *http.Request, route *middle
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")
@@ -221,10 +223,10 @@ func (o *ListServiceIdentitiesParams) bindPolicyType(rawData []string, hasKey bo
 	return nil
 }
 
-// validatePolicyType carries on validations for parameter PolicyType
+// validatePolicyType carries out validations for parameter PolicyType
 func (o *ListServiceIdentitiesParams) validatePolicyType(formats strfmt.Registry) error {
 
-	if err := validate.EnumCase("policyType", "query", *o.PolicyType, []interface{}{"dial", "bind"}, true); err != nil {
+	if err := validate.EnumCase("policyType", "query", *o.PolicyType, []any{"dial", "bind"}, true); err != nil {
 		return err
 	}
 

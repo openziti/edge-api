@@ -36,16 +36,16 @@ import (
 )
 
 // ListPostureCheckTypesHandlerFunc turns a function with the right signature into a list posture check types handler
-type ListPostureCheckTypesHandlerFunc func(ListPostureCheckTypesParams, interface{}) middleware.Responder
+type ListPostureCheckTypesHandlerFunc func(ListPostureCheckTypesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListPostureCheckTypesHandlerFunc) Handle(params ListPostureCheckTypesParams, principal interface{}) middleware.Responder {
+func (fn ListPostureCheckTypesHandlerFunc) Handle(params ListPostureCheckTypesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListPostureCheckTypesHandler interface for that can handle valid list posture check types params
 type ListPostureCheckTypesHandler interface {
-	Handle(ListPostureCheckTypesParams, interface{}) middleware.Responder
+	Handle(ListPostureCheckTypesParams, any) middleware.Responder
 }
 
 // NewListPostureCheckTypes creates a new http.Handler for the list posture check types operation
@@ -53,13 +53,12 @@ func NewListPostureCheckTypes(ctx *middleware.Context, handler ListPostureCheckT
 	return &ListPostureCheckTypes{Context: ctx, Handler: handler}
 }
 
-/* ListPostureCheckTypes swagger:route GET /posture-check-types Posture Checks listPostureCheckTypes
+/*
+	ListPostureCheckTypes swagger:route GET /posture-check-types Posture Checks listPostureCheckTypes
 
-List a subset of posture check types
+# List a subset of posture check types
 
 Retrieves a list of posture check types
-
-
 */
 type ListPostureCheckTypes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListPostureCheckTypes) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListPostureCheckTypes) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

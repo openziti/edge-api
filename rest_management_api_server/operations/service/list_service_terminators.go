@@ -36,16 +36,16 @@ import (
 )
 
 // ListServiceTerminatorsHandlerFunc turns a function with the right signature into a list service terminators handler
-type ListServiceTerminatorsHandlerFunc func(ListServiceTerminatorsParams, interface{}) middleware.Responder
+type ListServiceTerminatorsHandlerFunc func(ListServiceTerminatorsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServiceTerminatorsHandlerFunc) Handle(params ListServiceTerminatorsParams, principal interface{}) middleware.Responder {
+func (fn ListServiceTerminatorsHandlerFunc) Handle(params ListServiceTerminatorsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServiceTerminatorsHandler interface for that can handle valid list service terminators params
 type ListServiceTerminatorsHandler interface {
-	Handle(ListServiceTerminatorsParams, interface{}) middleware.Responder
+	Handle(ListServiceTerminatorsParams, any) middleware.Responder
 }
 
 // NewListServiceTerminators creates a new http.Handler for the list service terminators operation
@@ -53,13 +53,12 @@ func NewListServiceTerminators(ctx *middleware.Context, handler ListServiceTermi
 	return &ListServiceTerminators{Context: ctx, Handler: handler}
 }
 
-/* ListServiceTerminators swagger:route GET /services/{id}/terminators Service listServiceTerminators
+/*
+	ListServiceTerminators swagger:route GET /services/{id}/terminators Service listServiceTerminators
 
-List of terminators assigned to a service
+# List of terminators assigned to a service
 
 Retrieves a list of terminator resources that are assigned specific service; supports filtering, sorting, and pagination.
-
-
 */
 type ListServiceTerminators struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServiceTerminators) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServiceTerminators) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

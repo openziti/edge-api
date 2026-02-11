@@ -36,16 +36,16 @@ import (
 )
 
 // ReEnrollEdgeRouterHandlerFunc turns a function with the right signature into a re enroll edge router handler
-type ReEnrollEdgeRouterHandlerFunc func(ReEnrollEdgeRouterParams, interface{}) middleware.Responder
+type ReEnrollEdgeRouterHandlerFunc func(ReEnrollEdgeRouterParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ReEnrollEdgeRouterHandlerFunc) Handle(params ReEnrollEdgeRouterParams, principal interface{}) middleware.Responder {
+func (fn ReEnrollEdgeRouterHandlerFunc) Handle(params ReEnrollEdgeRouterParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ReEnrollEdgeRouterHandler interface for that can handle valid re enroll edge router params
 type ReEnrollEdgeRouterHandler interface {
-	Handle(ReEnrollEdgeRouterParams, interface{}) middleware.Responder
+	Handle(ReEnrollEdgeRouterParams, any) middleware.Responder
 }
 
 // NewReEnrollEdgeRouter creates a new http.Handler for the re enroll edge router operation
@@ -53,9 +53,10 @@ func NewReEnrollEdgeRouter(ctx *middleware.Context, handler ReEnrollEdgeRouterHa
 	return &ReEnrollEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/* ReEnrollEdgeRouter swagger:route POST /edge-routers/{id}/re-enroll Edge Router reEnrollEdgeRouter
+/*
+	ReEnrollEdgeRouter swagger:route POST /edge-routers/{id}/re-enroll Edge Router reEnrollEdgeRouter
 
-Re-enroll an edge router
+# Re-enroll an edge router
 
 Removes current certificate based authentication mechanisms and reverts the edge router into a state where enrollment must be performed.
 The router retains all other properties and associations. If the router is currently connected, it will be disconnected and any
@@ -63,8 +64,6 @@ attemps to reconnect will fail until the enrollment process is completed with th
 
 If the edge router has an existing outstanding enrollment JWT it will be replaced. The previous JWT will no longer be usable to
 complete the enrollment process.
-
-
 */
 type ReEnrollEdgeRouter struct {
 	Context *middleware.Context
@@ -85,9 +84,9 @@ func (o *ReEnrollEdgeRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -96,6 +95,7 @@ func (o *ReEnrollEdgeRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

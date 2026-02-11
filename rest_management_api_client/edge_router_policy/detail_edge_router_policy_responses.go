@@ -30,11 +30,14 @@ package edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailEdgeRouterPolicyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailEdgeRouterPolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailEdgeRouterPolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailEdgeRouterPolicyOK()
@@ -78,7 +81,7 @@ func (o *DetailEdgeRouterPolicyReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge-router-policies/{id}] detailEdgeRouterPolicy", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailEdgeRouterPolicyOK() *DetailEdgeRouterPolicyOK {
 	return &DetailEdgeRouterPolicyOK{}
 }
 
-/* DetailEdgeRouterPolicyOK describes a response with status code 200, with default header values.
+/*
+DetailEdgeRouterPolicyOK describes a response with status code 200, with default header values.
 
 A single edge router policy
 */
 type DetailEdgeRouterPolicyOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailEdgeRouterPolicyEnvelope
 }
 
-func (o *DetailEdgeRouterPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail edge router policy o k response has a 2xx status code
+func (o *DetailEdgeRouterPolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail edge router policy o k response has a 3xx status code
+func (o *DetailEdgeRouterPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail edge router policy o k response has a 4xx status code
+func (o *DetailEdgeRouterPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail edge router policy o k response has a 5xx status code
+func (o *DetailEdgeRouterPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail edge router policy o k response a status code equal to that given
+func (o *DetailEdgeRouterPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail edge router policy o k response
+func (o *DetailEdgeRouterPolicyOK) Code() int {
+	return 200
+}
+
+func (o *DetailEdgeRouterPolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyOK %s", 200, payload)
+}
+
+func (o *DetailEdgeRouterPolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyOK %s", 200, payload)
+}
+
 func (o *DetailEdgeRouterPolicyOK) GetPayload() *rest_model.DetailEdgeRouterPolicyEnvelope {
 	return o.Payload
 }
 
 func (o *DetailEdgeRouterPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailEdgeRouterPolicyEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailEdgeRouterPolicyOK binds the response header WWW-Authenticate
+func (o *DetailEdgeRouterPolicyOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailEdgeRouterPolicyUnauthorized creates a DetailEdgeRouterPolicyUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailEdgeRouterPolicyUnauthorized() *DetailEdgeRouterPolicyUnauthorized
 	return &DetailEdgeRouterPolicyUnauthorized{}
 }
 
-/* DetailEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailEdgeRouterPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailEdgeRouterPolicyUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailEdgeRouterPolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail edge router policy unauthorized response has a 2xx status code
+func (o *DetailEdgeRouterPolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail edge router policy unauthorized response has a 3xx status code
+func (o *DetailEdgeRouterPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail edge router policy unauthorized response has a 4xx status code
+func (o *DetailEdgeRouterPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail edge router policy unauthorized response has a 5xx status code
+func (o *DetailEdgeRouterPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail edge router policy unauthorized response a status code equal to that given
+func (o *DetailEdgeRouterPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail edge router policy unauthorized response
+func (o *DetailEdgeRouterPolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailEdgeRouterPolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DetailEdgeRouterPolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DetailEdgeRouterPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailEdgeRouterPolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailEdgeRouterPolicyUnauthorized binds the response header WWW-Authenticate
+func (o *DetailEdgeRouterPolicyUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailEdgeRouterPolicyNotFound creates a DetailEdgeRouterPolicyNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailEdgeRouterPolicyNotFound() *DetailEdgeRouterPolicyNotFound {
 	return &DetailEdgeRouterPolicyNotFound{}
 }
 
-/* DetailEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
+/*
+DetailEdgeRouterPolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailEdgeRouterPolicyNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailEdgeRouterPolicyNotFound) Error() string {
-	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail edge router policy not found response has a 2xx status code
+func (o *DetailEdgeRouterPolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail edge router policy not found response has a 3xx status code
+func (o *DetailEdgeRouterPolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail edge router policy not found response has a 4xx status code
+func (o *DetailEdgeRouterPolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail edge router policy not found response has a 5xx status code
+func (o *DetailEdgeRouterPolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail edge router policy not found response a status code equal to that given
+func (o *DetailEdgeRouterPolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail edge router policy not found response
+func (o *DetailEdgeRouterPolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailEdgeRouterPolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyNotFound %s", 404, payload)
+}
+
+func (o *DetailEdgeRouterPolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyNotFound %s", 404, payload)
+}
+
 func (o *DetailEdgeRouterPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailEdgeRouterPolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailEdgeRouterPolicyNotFound binds the response header WWW-Authenticate
+func (o *DetailEdgeRouterPolicyNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailEdgeRouterPolicyTooManyRequests creates a DetailEdgeRouterPolicyTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailEdgeRouterPolicyTooManyRequests() *DetailEdgeRouterPolicyTooManyRe
 	return &DetailEdgeRouterPolicyTooManyRequests{}
 }
 
-/* DetailEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailEdgeRouterPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailEdgeRouterPolicyTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailEdgeRouterPolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail edge router policy too many requests response has a 2xx status code
+func (o *DetailEdgeRouterPolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail edge router policy too many requests response has a 3xx status code
+func (o *DetailEdgeRouterPolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail edge router policy too many requests response has a 4xx status code
+func (o *DetailEdgeRouterPolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail edge router policy too many requests response has a 5xx status code
+func (o *DetailEdgeRouterPolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail edge router policy too many requests response a status code equal to that given
+func (o *DetailEdgeRouterPolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail edge router policy too many requests response
+func (o *DetailEdgeRouterPolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailEdgeRouterPolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailEdgeRouterPolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailEdgeRouterPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailEdgeRouterPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailEdgeRouterPolicyTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailEdgeRouterPolicyTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailEdgeRouterPolicyServiceUnavailable creates a DetailEdgeRouterPolicyServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailEdgeRouterPolicyServiceUnavailable() *DetailEdgeRouterPolicyServic
 	return &DetailEdgeRouterPolicyServiceUnavailable{}
 }
 
-/* DetailEdgeRouterPolicyServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailEdgeRouterPolicyServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailEdgeRouterPolicyServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailEdgeRouterPolicyServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail edge router policy service unavailable response has a 2xx status code
+func (o *DetailEdgeRouterPolicyServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail edge router policy service unavailable response has a 3xx status code
+func (o *DetailEdgeRouterPolicyServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail edge router policy service unavailable response has a 4xx status code
+func (o *DetailEdgeRouterPolicyServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail edge router policy service unavailable response has a 5xx status code
+func (o *DetailEdgeRouterPolicyServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail edge router policy service unavailable response a status code equal to that given
+func (o *DetailEdgeRouterPolicyServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail edge router policy service unavailable response
+func (o *DetailEdgeRouterPolicyServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailEdgeRouterPolicyServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailEdgeRouterPolicyServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-router-policies/{id}][%d] detailEdgeRouterPolicyServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailEdgeRouterPolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailEdgeRouterPolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailEdgeRouterPolicyServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailEdgeRouterPolicyServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

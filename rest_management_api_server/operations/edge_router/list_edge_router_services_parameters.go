@@ -50,7 +50,6 @@ func NewListEdgeRouterServicesParams() ListEdgeRouterServicesParams {
 //
 // swagger:parameters listEdgeRouterServices
 type ListEdgeRouterServicesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

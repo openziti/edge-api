@@ -330,10 +330,22 @@ paths:
 responses:
   listRouters:
     description: A list of specifications
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listRoutersEnvelope'
   detailRouter:
     description: A single router
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailRouterEnvelope'
 

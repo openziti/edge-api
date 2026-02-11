@@ -36,16 +36,16 @@ import (
 )
 
 // CreateAuthPolicyHandlerFunc turns a function with the right signature into a create auth policy handler
-type CreateAuthPolicyHandlerFunc func(CreateAuthPolicyParams, interface{}) middleware.Responder
+type CreateAuthPolicyHandlerFunc func(CreateAuthPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateAuthPolicyHandlerFunc) Handle(params CreateAuthPolicyParams, principal interface{}) middleware.Responder {
+func (fn CreateAuthPolicyHandlerFunc) Handle(params CreateAuthPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateAuthPolicyHandler interface for that can handle valid create auth policy params
 type CreateAuthPolicyHandler interface {
-	Handle(CreateAuthPolicyParams, interface{}) middleware.Responder
+	Handle(CreateAuthPolicyParams, any) middleware.Responder
 }
 
 // NewCreateAuthPolicy creates a new http.Handler for the create auth policy operation
@@ -53,12 +53,12 @@ func NewCreateAuthPolicy(ctx *middleware.Context, handler CreateAuthPolicyHandle
 	return &CreateAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/* CreateAuthPolicy swagger:route POST /auth-policies Auth Policy createAuthPolicy
+/*
+	CreateAuthPolicy swagger:route POST /auth-policies Auth Policy createAuthPolicy
 
-Creates an Auth Policy
+# Creates an Auth Policy
 
 Creates an Auth Policy. Requires admin access.
-
 */
 type CreateAuthPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateAuthPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateAuthPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

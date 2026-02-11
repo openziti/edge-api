@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateExternalJWTSignerHandlerFunc turns a function with the right signature into a update external Jwt signer handler
-type UpdateExternalJWTSignerHandlerFunc func(UpdateExternalJWTSignerParams, interface{}) middleware.Responder
+type UpdateExternalJWTSignerHandlerFunc func(UpdateExternalJWTSignerParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateExternalJWTSignerHandlerFunc) Handle(params UpdateExternalJWTSignerParams, principal interface{}) middleware.Responder {
+func (fn UpdateExternalJWTSignerHandlerFunc) Handle(params UpdateExternalJWTSignerParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateExternalJWTSignerHandler interface for that can handle valid update external Jwt signer params
 type UpdateExternalJWTSignerHandler interface {
-	Handle(UpdateExternalJWTSignerParams, interface{}) middleware.Responder
+	Handle(UpdateExternalJWTSignerParams, any) middleware.Responder
 }
 
 // NewUpdateExternalJWTSigner creates a new http.Handler for the update external Jwt signer operation
@@ -53,12 +53,12 @@ func NewUpdateExternalJWTSigner(ctx *middleware.Context, handler UpdateExternalJ
 	return &UpdateExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* UpdateExternalJWTSigner swagger:route PUT /external-jwt-signers/{id} External JWT Signer updateExternalJwtSigner
+/*
+	UpdateExternalJWTSigner swagger:route PUT /external-jwt-signers/{id} External JWT Signer updateExternalJwtSigner
 
-Update all fields on an External JWT Signer
+# Update all fields on an External JWT Signer
 
 Update all fields on an External JWT Signer by id. Requires admin access.
-
 */
 type UpdateExternalJWTSigner struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

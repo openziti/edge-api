@@ -36,16 +36,16 @@ import (
 )
 
 // ListAuthenticatorsHandlerFunc turns a function with the right signature into a list authenticators handler
-type ListAuthenticatorsHandlerFunc func(ListAuthenticatorsParams, interface{}) middleware.Responder
+type ListAuthenticatorsHandlerFunc func(ListAuthenticatorsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListAuthenticatorsHandlerFunc) Handle(params ListAuthenticatorsParams, principal interface{}) middleware.Responder {
+func (fn ListAuthenticatorsHandlerFunc) Handle(params ListAuthenticatorsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListAuthenticatorsHandler interface for that can handle valid list authenticators params
 type ListAuthenticatorsHandler interface {
-	Handle(ListAuthenticatorsParams, interface{}) middleware.Responder
+	Handle(ListAuthenticatorsParams, any) middleware.Responder
 }
 
 // NewListAuthenticators creates a new http.Handler for the list authenticators operation
@@ -53,14 +53,13 @@ func NewListAuthenticators(ctx *middleware.Context, handler ListAuthenticatorsHa
 	return &ListAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* ListAuthenticators swagger:route GET /authenticators Authenticator listAuthenticators
+/*
+	ListAuthenticators swagger:route GET /authenticators Authenticator listAuthenticators
 
-List authenticators
+# List authenticators
 
 Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
 This endpoint requires admin access.
-
-
 */
 type ListAuthenticators struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *ListAuthenticators) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *ListAuthenticators) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

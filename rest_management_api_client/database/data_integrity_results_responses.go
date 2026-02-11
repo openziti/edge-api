@@ -30,11 +30,14 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DataIntegrityResultsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DataIntegrityResultsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DataIntegrityResultsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDataIntegrityResultsOK()
@@ -72,7 +75,7 @@ func (o *DataIntegrityResultsReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /database/data-integrity-results] dataIntegrityResults", response, response.Code())
 	}
 }
 
@@ -81,31 +84,108 @@ func NewDataIntegrityResultsOK() *DataIntegrityResultsOK {
 	return &DataIntegrityResultsOK{}
 }
 
-/* DataIntegrityResultsOK describes a response with status code 200, with default header values.
+/*
+DataIntegrityResultsOK describes a response with status code 200, with default header values.
 
 A list of data integrity issues found
 */
 type DataIntegrityResultsOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DataIntegrityCheckResultEnvelope
 }
 
-func (o *DataIntegrityResultsOK) Error() string {
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this data integrity results o k response has a 2xx status code
+func (o *DataIntegrityResultsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this data integrity results o k response has a 3xx status code
+func (o *DataIntegrityResultsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this data integrity results o k response has a 4xx status code
+func (o *DataIntegrityResultsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this data integrity results o k response has a 5xx status code
+func (o *DataIntegrityResultsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this data integrity results o k response a status code equal to that given
+func (o *DataIntegrityResultsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the data integrity results o k response
+func (o *DataIntegrityResultsOK) Code() int {
+	return 200
+}
+
+func (o *DataIntegrityResultsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsOK %s", 200, payload)
+}
+
+func (o *DataIntegrityResultsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsOK %s", 200, payload)
+}
+
 func (o *DataIntegrityResultsOK) GetPayload() *rest_model.DataIntegrityCheckResultEnvelope {
 	return o.Payload
 }
 
 func (o *DataIntegrityResultsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DataIntegrityCheckResultEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDataIntegrityResultsOK binds the response header WWW-Authenticate
+func (o *DataIntegrityResultsOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDataIntegrityResultsUnauthorized creates a DataIntegrityResultsUnauthorized with default headers values
@@ -113,31 +193,108 @@ func NewDataIntegrityResultsUnauthorized() *DataIntegrityResultsUnauthorized {
 	return &DataIntegrityResultsUnauthorized{}
 }
 
-/* DataIntegrityResultsUnauthorized describes a response with status code 401, with default header values.
+/*
+DataIntegrityResultsUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DataIntegrityResultsUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DataIntegrityResultsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this data integrity results unauthorized response has a 2xx status code
+func (o *DataIntegrityResultsUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this data integrity results unauthorized response has a 3xx status code
+func (o *DataIntegrityResultsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this data integrity results unauthorized response has a 4xx status code
+func (o *DataIntegrityResultsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this data integrity results unauthorized response has a 5xx status code
+func (o *DataIntegrityResultsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this data integrity results unauthorized response a status code equal to that given
+func (o *DataIntegrityResultsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the data integrity results unauthorized response
+func (o *DataIntegrityResultsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DataIntegrityResultsUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsUnauthorized %s", 401, payload)
+}
+
+func (o *DataIntegrityResultsUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsUnauthorized %s", 401, payload)
+}
+
 func (o *DataIntegrityResultsUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DataIntegrityResultsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDataIntegrityResultsUnauthorized binds the response header WWW-Authenticate
+func (o *DataIntegrityResultsUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDataIntegrityResultsTooManyRequests creates a DataIntegrityResultsTooManyRequests with default headers values
@@ -145,31 +302,108 @@ func NewDataIntegrityResultsTooManyRequests() *DataIntegrityResultsTooManyReques
 	return &DataIntegrityResultsTooManyRequests{}
 }
 
-/* DataIntegrityResultsTooManyRequests describes a response with status code 429, with default header values.
+/*
+DataIntegrityResultsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DataIntegrityResultsTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DataIntegrityResultsTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this data integrity results too many requests response has a 2xx status code
+func (o *DataIntegrityResultsTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this data integrity results too many requests response has a 3xx status code
+func (o *DataIntegrityResultsTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this data integrity results too many requests response has a 4xx status code
+func (o *DataIntegrityResultsTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this data integrity results too many requests response has a 5xx status code
+func (o *DataIntegrityResultsTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this data integrity results too many requests response a status code equal to that given
+func (o *DataIntegrityResultsTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the data integrity results too many requests response
+func (o *DataIntegrityResultsTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DataIntegrityResultsTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsTooManyRequests %s", 429, payload)
+}
+
+func (o *DataIntegrityResultsTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsTooManyRequests %s", 429, payload)
+}
+
 func (o *DataIntegrityResultsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DataIntegrityResultsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDataIntegrityResultsTooManyRequests binds the response header WWW-Authenticate
+func (o *DataIntegrityResultsTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDataIntegrityResultsServiceUnavailable creates a DataIntegrityResultsServiceUnavailable with default headers values
@@ -177,29 +411,106 @@ func NewDataIntegrityResultsServiceUnavailable() *DataIntegrityResultsServiceUna
 	return &DataIntegrityResultsServiceUnavailable{}
 }
 
-/* DataIntegrityResultsServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DataIntegrityResultsServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DataIntegrityResultsServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DataIntegrityResultsServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this data integrity results service unavailable response has a 2xx status code
+func (o *DataIntegrityResultsServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this data integrity results service unavailable response has a 3xx status code
+func (o *DataIntegrityResultsServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this data integrity results service unavailable response has a 4xx status code
+func (o *DataIntegrityResultsServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this data integrity results service unavailable response has a 5xx status code
+func (o *DataIntegrityResultsServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this data integrity results service unavailable response a status code equal to that given
+func (o *DataIntegrityResultsServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the data integrity results service unavailable response
+func (o *DataIntegrityResultsServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DataIntegrityResultsServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsServiceUnavailable %s", 503, payload)
+}
+
+func (o *DataIntegrityResultsServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /database/data-integrity-results][%d] dataIntegrityResultsServiceUnavailable %s", 503, payload)
+}
+
 func (o *DataIntegrityResultsServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DataIntegrityResultsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDataIntegrityResultsServiceUnavailable binds the response header WWW-Authenticate
+func (o *DataIntegrityResultsServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

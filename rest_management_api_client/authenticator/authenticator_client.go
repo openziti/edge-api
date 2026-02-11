@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new authenticator API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new authenticator API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new authenticator API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -76,13 +102,12 @@ type ClientService interface {
 }
 
 /*
-  CreateAuthenticator creates an authenticator
+CreateAuthenticator creates an authenticator
 
-  Creates an authenticator for a specific identity. Requires admin access.
-
+Creates an authenticator for a specific identity. Requires admin access.
 */
 func (a *Client) CreateAuthenticator(params *CreateAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAuthenticatorCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAuthenticatorParams()
 	}
@@ -102,30 +127,35 @@ func (a *Client) CreateAuthenticator(params *CreateAuthenticatorParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAuthenticatorCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteAuthenticator deletes an authenticator
+	DeleteAuthenticator deletes an authenticator
 
-  Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
+	Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
+
 Requires admin access.
-
 */
 func (a *Client) DeleteAuthenticator(params *DeleteAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAuthenticatorOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteAuthenticatorParams()
 	}
@@ -145,28 +175,33 @@ func (a *Client) DeleteAuthenticator(params *DeleteAuthenticatorParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteAuthenticatorOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailAuthenticator retrieves a single authenticator
+DetailAuthenticator retrieves a single authenticator
 
-  Retrieves a single authenticator by id. Requires admin access.
+Retrieves a single authenticator by id. Requires admin access.
 */
 func (a *Client) DetailAuthenticator(params *DetailAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailAuthenticatorOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailAuthenticatorParams()
 	}
@@ -186,30 +221,35 @@ func (a *Client) DetailAuthenticator(params *DetailAuthenticatorParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailAuthenticatorOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListAuthenticators lists authenticators
+	ListAuthenticators lists authenticators
 
-  Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
+	Returns a list of authenticators associated to identities. The resources can be sorted, filtered, and paginated.
+
 This endpoint requires admin access.
-
 */
 func (a *Client) ListAuthenticators(params *ListAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAuthenticatorsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListAuthenticatorsParams()
 	}
@@ -229,28 +269,33 @@ func (a *Client) ListAuthenticators(params *ListAuthenticatorsParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListAuthenticatorsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listAuthenticators: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchAuthenticator updates the supplied fields on an authenticator
+PatchAuthenticator updates the supplied fields on an authenticator
 
-  Update the supplied fields on an authenticator by id. Requires admin access.
+Update the supplied fields on an authenticator by id. Requires admin access.
 */
 func (a *Client) PatchAuthenticator(params *PatchAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchAuthenticatorOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchAuthenticatorParams()
 	}
@@ -270,32 +315,37 @@ func (a *Client) PatchAuthenticator(params *PatchAuthenticatorParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchAuthenticatorOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ReEnrollAuthenticator reverts an authenticator to an enrollment
+	ReEnrollAuthenticator reverts an authenticator to an enrollment
 
-  Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the
+	Allows an authenticator to be reverted to an enrollment and allows re-enrollment to occur. On success the
+
 created enrollment record response is provided and the source authenticator record will be deleted. The
 enrollment created depends on the authenticator. UPDB authenticators result in UPDB enrollments, CERT
 authenticators result in OTT enrollments, CERT + CA authenticators result in OTTCA enrollments.
-
 */
 func (a *Client) ReEnrollAuthenticator(params *ReEnrollAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReEnrollAuthenticatorCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewReEnrollAuthenticatorParams()
 	}
@@ -315,34 +365,39 @@ func (a *Client) ReEnrollAuthenticator(params *ReEnrollAuthenticatorParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ReEnrollAuthenticatorCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for reEnrollAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  RequestExtendAllCertAuthenticators indicates all certificate authenticators for the identity should be extended and optionally key rolled on next authentication
+	RequestExtendAllCertAuthenticators indicates all certificate authenticators for the identity should be extended and optionally key rolled on next authentication
 
-  Allows all certificate authenticators on an identity to be flagged for early extension and optionally private
+	Allows all certificate authenticators on an identity to be flagged for early extension and optionally private
+
 key rolling. Connecting clients will receive flags in their API Session indicating that an early extension is
 request and a hint on whether private keys should be rolled. Clients that do not support extension or cannot
 roll keys may ignore one or both flags.
 
 If this request is made against an identity with zero certificate authenticators, a 403 will be returned.
-
 */
 func (a *Client) RequestExtendAllCertAuthenticators(params *RequestExtendAllCertAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestExtendAllCertAuthenticatorsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRequestExtendAllCertAuthenticatorsParams()
 	}
@@ -362,34 +417,39 @@ func (a *Client) RequestExtendAllCertAuthenticators(params *RequestExtendAllCert
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RequestExtendAllCertAuthenticatorsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for requestExtendAllCertAuthenticators: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  RequestExtendAuthenticator indicates a certificate authenticator should be extended and optionally key rolled on next authentication
+	RequestExtendAuthenticator indicates a certificate authenticator should be extended and optionally key rolled on next authentication
 
-  Allows a certificate authenticator to be flagged for early extension and optionally private key rolling.
+	Allows a certificate authenticator to be flagged for early extension and optionally private key rolling.
+
 Connecting clients will receive flags in their API Session indicating that an early extension is request and
 a hint on whether private keys should be rolled. Clients that do not support extension or cannot roll keys
 may ignore one or both flags.
 
 If this request is made against a non-certificate based authenticator, it will return a 403-forbidden error.
-
 */
 func (a *Client) RequestExtendAuthenticator(params *RequestExtendAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestExtendAuthenticatorOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRequestExtendAuthenticatorParams()
 	}
@@ -409,28 +469,33 @@ func (a *Client) RequestExtendAuthenticator(params *RequestExtendAuthenticatorPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RequestExtendAuthenticatorOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for requestExtendAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateAuthenticator updates all fields on an authenticator
+UpdateAuthenticator updates all fields on an authenticator
 
-  Update all fields on an authenticator by id. Requires admin access.
+Update all fields on an authenticator by id. Requires admin access.
 */
 func (a *Client) UpdateAuthenticator(params *UpdateAuthenticatorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAuthenticatorOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAuthenticatorParams()
 	}
@@ -450,17 +515,22 @@ func (a *Client) UpdateAuthenticator(params *UpdateAuthenticatorParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAuthenticatorOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateAuthenticator: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

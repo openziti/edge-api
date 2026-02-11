@@ -30,11 +30,14 @@ package auth_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteAuthPolicyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteAuthPolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteAuthPolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteAuthPolicyOK()
@@ -84,7 +87,7 @@ func (o *DeleteAuthPolicyReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /auth-policies/{id}] deleteAuthPolicy", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewDeleteAuthPolicyOK() *DeleteAuthPolicyOK {
 	return &DeleteAuthPolicyOK{}
 }
 
-/* DeleteAuthPolicyOK describes a response with status code 200, with default header values.
+/*
+DeleteAuthPolicyOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteAuthPolicyOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteAuthPolicyOK) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete auth policy o k response has a 2xx status code
+func (o *DeleteAuthPolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete auth policy o k response has a 3xx status code
+func (o *DeleteAuthPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy o k response has a 4xx status code
+func (o *DeleteAuthPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete auth policy o k response has a 5xx status code
+func (o *DeleteAuthPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy o k response a status code equal to that given
+func (o *DeleteAuthPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete auth policy o k response
+func (o *DeleteAuthPolicyOK) Code() int {
+	return 200
+}
+
+func (o *DeleteAuthPolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyOK %s", 200, payload)
+}
+
+func (o *DeleteAuthPolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyOK %s", 200, payload)
+}
+
 func (o *DeleteAuthPolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteAuthPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteAuthPolicyOK binds the response header WWW-Authenticate
+func (o *DeleteAuthPolicyOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteAuthPolicyBadRequest creates a DeleteAuthPolicyBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewDeleteAuthPolicyBadRequest() *DeleteAuthPolicyBadRequest {
 	return &DeleteAuthPolicyBadRequest{}
 }
 
-/* DeleteAuthPolicyBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteAuthPolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteAuthPolicyBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete auth policy bad request response has a 2xx status code
+func (o *DeleteAuthPolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy bad request response has a 3xx status code
+func (o *DeleteAuthPolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy bad request response has a 4xx status code
+func (o *DeleteAuthPolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy bad request response has a 5xx status code
+func (o *DeleteAuthPolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy bad request response a status code equal to that given
+func (o *DeleteAuthPolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete auth policy bad request response
+func (o *DeleteAuthPolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteAuthPolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyBadRequest %s", 400, payload)
+}
+
+func (o *DeleteAuthPolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyBadRequest %s", 400, payload)
+}
+
 func (o *DeleteAuthPolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteAuthPolicyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteAuthPolicyBadRequest binds the response header WWW-Authenticate
+func (o *DeleteAuthPolicyBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteAuthPolicyUnauthorized creates a DeleteAuthPolicyUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewDeleteAuthPolicyUnauthorized() *DeleteAuthPolicyUnauthorized {
 	return &DeleteAuthPolicyUnauthorized{}
 }
 
-/* DeleteAuthPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteAuthPolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteAuthPolicyUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete auth policy unauthorized response has a 2xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy unauthorized response has a 3xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy unauthorized response has a 4xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy unauthorized response has a 5xx status code
+func (o *DeleteAuthPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy unauthorized response a status code equal to that given
+func (o *DeleteAuthPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete auth policy unauthorized response
+func (o *DeleteAuthPolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteAuthPolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteAuthPolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteAuthPolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteAuthPolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteAuthPolicyUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteAuthPolicyUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteAuthPolicyNotFound creates a DeleteAuthPolicyNotFound with default headers values
@@ -189,31 +423,108 @@ func NewDeleteAuthPolicyNotFound() *DeleteAuthPolicyNotFound {
 	return &DeleteAuthPolicyNotFound{}
 }
 
-/* DeleteAuthPolicyNotFound describes a response with status code 404, with default header values.
+/*
+DeleteAuthPolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeleteAuthPolicyNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete auth policy not found response has a 2xx status code
+func (o *DeleteAuthPolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy not found response has a 3xx status code
+func (o *DeleteAuthPolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy not found response has a 4xx status code
+func (o *DeleteAuthPolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy not found response has a 5xx status code
+func (o *DeleteAuthPolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy not found response a status code equal to that given
+func (o *DeleteAuthPolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete auth policy not found response
+func (o *DeleteAuthPolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteAuthPolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyNotFound %s", 404, payload)
+}
+
+func (o *DeleteAuthPolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyNotFound %s", 404, payload)
+}
+
 func (o *DeleteAuthPolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteAuthPolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteAuthPolicyNotFound binds the response header WWW-Authenticate
+func (o *DeleteAuthPolicyNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteAuthPolicyTooManyRequests creates a DeleteAuthPolicyTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewDeleteAuthPolicyTooManyRequests() *DeleteAuthPolicyTooManyRequests {
 	return &DeleteAuthPolicyTooManyRequests{}
 }
 
-/* DeleteAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteAuthPolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteAuthPolicyTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete auth policy too many requests response has a 2xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy too many requests response has a 3xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy too many requests response has a 4xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete auth policy too many requests response has a 5xx status code
+func (o *DeleteAuthPolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete auth policy too many requests response a status code equal to that given
+func (o *DeleteAuthPolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete auth policy too many requests response
+func (o *DeleteAuthPolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteAuthPolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteAuthPolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteAuthPolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteAuthPolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteAuthPolicyTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteAuthPolicyTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteAuthPolicyServiceUnavailable creates a DeleteAuthPolicyServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewDeleteAuthPolicyServiceUnavailable() *DeleteAuthPolicyServiceUnavailable
 	return &DeleteAuthPolicyServiceUnavailable{}
 }
 
-/* DeleteAuthPolicyServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeleteAuthPolicyServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeleteAuthPolicyServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteAuthPolicyServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete auth policy service unavailable response has a 2xx status code
+func (o *DeleteAuthPolicyServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete auth policy service unavailable response has a 3xx status code
+func (o *DeleteAuthPolicyServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete auth policy service unavailable response has a 4xx status code
+func (o *DeleteAuthPolicyServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete auth policy service unavailable response has a 5xx status code
+func (o *DeleteAuthPolicyServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete auth policy service unavailable response a status code equal to that given
+func (o *DeleteAuthPolicyServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete auth policy service unavailable response
+func (o *DeleteAuthPolicyServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeleteAuthPolicyServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeleteAuthPolicyServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /auth-policies/{id}][%d] deleteAuthPolicyServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeleteAuthPolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteAuthPolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteAuthPolicyServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeleteAuthPolicyServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

@@ -50,7 +50,6 @@ func NewDeleteIdentityParams() DeleteIdentityParams {
 //
 // swagger:parameters deleteIdentity
 type DeleteIdentityParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

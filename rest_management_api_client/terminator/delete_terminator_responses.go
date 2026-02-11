@@ -30,11 +30,14 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteTerminatorReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteTerminatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteTerminatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteTerminatorOK()
@@ -90,7 +93,7 @@ func (o *DeleteTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /terminators/{id}] deleteTerminator", response, response.Code())
 	}
 }
 
@@ -99,31 +102,108 @@ func NewDeleteTerminatorOK() *DeleteTerminatorOK {
 	return &DeleteTerminatorOK{}
 }
 
-/* DeleteTerminatorOK describes a response with status code 200, with default header values.
+/*
+DeleteTerminatorOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteTerminatorOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteTerminatorOK) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete terminator o k response has a 2xx status code
+func (o *DeleteTerminatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete terminator o k response has a 3xx status code
+func (o *DeleteTerminatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator o k response has a 4xx status code
+func (o *DeleteTerminatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete terminator o k response has a 5xx status code
+func (o *DeleteTerminatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete terminator o k response a status code equal to that given
+func (o *DeleteTerminatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete terminator o k response
+func (o *DeleteTerminatorOK) Code() int {
+	return 200
+}
+
+func (o *DeleteTerminatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorOK %s", 200, payload)
+}
+
+func (o *DeleteTerminatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorOK %s", 200, payload)
+}
+
 func (o *DeleteTerminatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorOK binds the response header WWW-Authenticate
+func (o *DeleteTerminatorOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteTerminatorBadRequest creates a DeleteTerminatorBadRequest with default headers values
@@ -131,31 +211,108 @@ func NewDeleteTerminatorBadRequest() *DeleteTerminatorBadRequest {
 	return &DeleteTerminatorBadRequest{}
 }
 
-/* DeleteTerminatorBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteTerminatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteTerminatorBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteTerminatorBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete terminator bad request response has a 2xx status code
+func (o *DeleteTerminatorBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete terminator bad request response has a 3xx status code
+func (o *DeleteTerminatorBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator bad request response has a 4xx status code
+func (o *DeleteTerminatorBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete terminator bad request response has a 5xx status code
+func (o *DeleteTerminatorBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete terminator bad request response a status code equal to that given
+func (o *DeleteTerminatorBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete terminator bad request response
+func (o *DeleteTerminatorBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteTerminatorBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorBadRequest %s", 400, payload)
+}
+
+func (o *DeleteTerminatorBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorBadRequest %s", 400, payload)
+}
+
 func (o *DeleteTerminatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorBadRequest binds the response header WWW-Authenticate
+func (o *DeleteTerminatorBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteTerminatorUnauthorized creates a DeleteTerminatorUnauthorized with default headers values
@@ -163,31 +320,108 @@ func NewDeleteTerminatorUnauthorized() *DeleteTerminatorUnauthorized {
 	return &DeleteTerminatorUnauthorized{}
 }
 
-/* DeleteTerminatorUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteTerminatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteTerminatorUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteTerminatorUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete terminator unauthorized response has a 2xx status code
+func (o *DeleteTerminatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete terminator unauthorized response has a 3xx status code
+func (o *DeleteTerminatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator unauthorized response has a 4xx status code
+func (o *DeleteTerminatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete terminator unauthorized response has a 5xx status code
+func (o *DeleteTerminatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete terminator unauthorized response a status code equal to that given
+func (o *DeleteTerminatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete terminator unauthorized response
+func (o *DeleteTerminatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteTerminatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteTerminatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteTerminatorUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteTerminatorNotFound creates a DeleteTerminatorNotFound with default headers values
@@ -195,31 +429,108 @@ func NewDeleteTerminatorNotFound() *DeleteTerminatorNotFound {
 	return &DeleteTerminatorNotFound{}
 }
 
-/* DeleteTerminatorNotFound describes a response with status code 404, with default header values.
+/*
+DeleteTerminatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeleteTerminatorNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteTerminatorNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete terminator not found response has a 2xx status code
+func (o *DeleteTerminatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete terminator not found response has a 3xx status code
+func (o *DeleteTerminatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator not found response has a 4xx status code
+func (o *DeleteTerminatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete terminator not found response has a 5xx status code
+func (o *DeleteTerminatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete terminator not found response a status code equal to that given
+func (o *DeleteTerminatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete terminator not found response
+func (o *DeleteTerminatorNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteTerminatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorNotFound %s", 404, payload)
+}
+
+func (o *DeleteTerminatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorNotFound %s", 404, payload)
+}
+
 func (o *DeleteTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorNotFound binds the response header WWW-Authenticate
+func (o *DeleteTerminatorNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteTerminatorConflict creates a DeleteTerminatorConflict with default headers values
@@ -227,31 +538,108 @@ func NewDeleteTerminatorConflict() *DeleteTerminatorConflict {
 	return &DeleteTerminatorConflict{}
 }
 
-/* DeleteTerminatorConflict describes a response with status code 409, with default header values.
+/*
+DeleteTerminatorConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
 type DeleteTerminatorConflict struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteTerminatorConflict) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete terminator conflict response has a 2xx status code
+func (o *DeleteTerminatorConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete terminator conflict response has a 3xx status code
+func (o *DeleteTerminatorConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator conflict response has a 4xx status code
+func (o *DeleteTerminatorConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete terminator conflict response has a 5xx status code
+func (o *DeleteTerminatorConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete terminator conflict response a status code equal to that given
+func (o *DeleteTerminatorConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete terminator conflict response
+func (o *DeleteTerminatorConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteTerminatorConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorConflict %s", 409, payload)
+}
+
+func (o *DeleteTerminatorConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorConflict %s", 409, payload)
+}
+
 func (o *DeleteTerminatorConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorConflict binds the response header WWW-Authenticate
+func (o *DeleteTerminatorConflict) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteTerminatorTooManyRequests creates a DeleteTerminatorTooManyRequests with default headers values
@@ -259,31 +647,108 @@ func NewDeleteTerminatorTooManyRequests() *DeleteTerminatorTooManyRequests {
 	return &DeleteTerminatorTooManyRequests{}
 }
 
-/* DeleteTerminatorTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteTerminatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteTerminatorTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteTerminatorTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete terminator too many requests response has a 2xx status code
+func (o *DeleteTerminatorTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete terminator too many requests response has a 3xx status code
+func (o *DeleteTerminatorTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator too many requests response has a 4xx status code
+func (o *DeleteTerminatorTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete terminator too many requests response has a 5xx status code
+func (o *DeleteTerminatorTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete terminator too many requests response a status code equal to that given
+func (o *DeleteTerminatorTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete terminator too many requests response
+func (o *DeleteTerminatorTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteTerminatorTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteTerminatorTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteTerminatorTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteTerminatorServiceUnavailable creates a DeleteTerminatorServiceUnavailable with default headers values
@@ -291,29 +756,106 @@ func NewDeleteTerminatorServiceUnavailable() *DeleteTerminatorServiceUnavailable
 	return &DeleteTerminatorServiceUnavailable{}
 }
 
-/* DeleteTerminatorServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeleteTerminatorServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeleteTerminatorServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteTerminatorServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete terminator service unavailable response has a 2xx status code
+func (o *DeleteTerminatorServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete terminator service unavailable response has a 3xx status code
+func (o *DeleteTerminatorServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete terminator service unavailable response has a 4xx status code
+func (o *DeleteTerminatorServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete terminator service unavailable response has a 5xx status code
+func (o *DeleteTerminatorServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete terminator service unavailable response a status code equal to that given
+func (o *DeleteTerminatorServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete terminator service unavailable response
+func (o *DeleteTerminatorServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeleteTerminatorServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeleteTerminatorServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /terminators/{id}][%d] deleteTerminatorServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeleteTerminatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteTerminatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteTerminatorServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeleteTerminatorServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

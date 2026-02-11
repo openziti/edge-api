@@ -36,16 +36,16 @@ import (
 )
 
 // GetCurrentIdentityEdgeRoutersHandlerFunc turns a function with the right signature into a get current identity edge routers handler
-type GetCurrentIdentityEdgeRoutersHandlerFunc func(GetCurrentIdentityEdgeRoutersParams, interface{}) middleware.Responder
+type GetCurrentIdentityEdgeRoutersHandlerFunc func(GetCurrentIdentityEdgeRoutersParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetCurrentIdentityEdgeRoutersHandlerFunc) Handle(params GetCurrentIdentityEdgeRoutersParams, principal interface{}) middleware.Responder {
+func (fn GetCurrentIdentityEdgeRoutersHandlerFunc) Handle(params GetCurrentIdentityEdgeRoutersParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetCurrentIdentityEdgeRoutersHandler interface for that can handle valid get current identity edge routers params
 type GetCurrentIdentityEdgeRoutersHandler interface {
-	Handle(GetCurrentIdentityEdgeRoutersParams, interface{}) middleware.Responder
+	Handle(GetCurrentIdentityEdgeRoutersParams, any) middleware.Responder
 }
 
 // NewGetCurrentIdentityEdgeRouters creates a new http.Handler for the get current identity edge routers operation
@@ -53,14 +53,13 @@ func NewGetCurrentIdentityEdgeRouters(ctx *middleware.Context, handler GetCurren
 	return &GetCurrentIdentityEdgeRouters{Context: ctx, Handler: handler}
 }
 
-/* GetCurrentIdentityEdgeRouters swagger:route GET /current-identity/edge-routers Current Identity Edge Router getCurrentIdentityEdgeRouters
+/*
+	GetCurrentIdentityEdgeRouters swagger:route GET /current-identity/edge-routers Current Identity Edge Router getCurrentIdentityEdgeRouters
 
-Return this list of Edge Routers the identity has access to
+# Return this list of Edge Routers the identity has access to
 
 Lists the Edge Routers that the current identity has access to via policies. The data returned
 includes their address and online status
-
-
 */
 type GetCurrentIdentityEdgeRouters struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *GetCurrentIdentityEdgeRouters) ServeHTTP(rw http.ResponseWriter, r *htt
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *GetCurrentIdentityEdgeRouters) ServeHTTP(rw http.ResponseWriter, r *htt
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

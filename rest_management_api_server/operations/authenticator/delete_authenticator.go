@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteAuthenticatorHandlerFunc turns a function with the right signature into a delete authenticator handler
-type DeleteAuthenticatorHandlerFunc func(DeleteAuthenticatorParams, interface{}) middleware.Responder
+type DeleteAuthenticatorHandlerFunc func(DeleteAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteAuthenticatorHandlerFunc) Handle(params DeleteAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn DeleteAuthenticatorHandlerFunc) Handle(params DeleteAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteAuthenticatorHandler interface for that can handle valid delete authenticator params
 type DeleteAuthenticatorHandler interface {
-	Handle(DeleteAuthenticatorParams, interface{}) middleware.Responder
+	Handle(DeleteAuthenticatorParams, any) middleware.Responder
 }
 
 // NewDeleteAuthenticator creates a new http.Handler for the delete authenticator operation
@@ -53,14 +53,13 @@ func NewDeleteAuthenticator(ctx *middleware.Context, handler DeleteAuthenticator
 	return &DeleteAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* DeleteAuthenticator swagger:route DELETE /authenticators/{id} Authenticator deleteAuthenticator
+/*
+	DeleteAuthenticator swagger:route DELETE /authenticators/{id} Authenticator deleteAuthenticator
 
-Delete an Authenticator
+# Delete an Authenticator
 
 Delete an authenticator by id. Deleting all authenticators for an identity will make it impossible to log in.
 Requires admin access.
-
-
 */
 type DeleteAuthenticator struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *DeleteAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *DeleteAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

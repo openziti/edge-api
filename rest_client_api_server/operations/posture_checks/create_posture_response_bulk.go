@@ -36,16 +36,16 @@ import (
 )
 
 // CreatePostureResponseBulkHandlerFunc turns a function with the right signature into a create posture response bulk handler
-type CreatePostureResponseBulkHandlerFunc func(CreatePostureResponseBulkParams, interface{}) middleware.Responder
+type CreatePostureResponseBulkHandlerFunc func(CreatePostureResponseBulkParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreatePostureResponseBulkHandlerFunc) Handle(params CreatePostureResponseBulkParams, principal interface{}) middleware.Responder {
+func (fn CreatePostureResponseBulkHandlerFunc) Handle(params CreatePostureResponseBulkParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreatePostureResponseBulkHandler interface for that can handle valid create posture response bulk params
 type CreatePostureResponseBulkHandler interface {
-	Handle(CreatePostureResponseBulkParams, interface{}) middleware.Responder
+	Handle(CreatePostureResponseBulkParams, any) middleware.Responder
 }
 
 // NewCreatePostureResponseBulk creates a new http.Handler for the create posture response bulk operation
@@ -53,12 +53,12 @@ func NewCreatePostureResponseBulk(ctx *middleware.Context, handler CreatePosture
 	return &CreatePostureResponseBulk{Context: ctx, Handler: handler}
 }
 
-/* CreatePostureResponseBulk swagger:route POST /posture-response-bulk Posture Checks createPostureResponseBulk
+/*
+	CreatePostureResponseBulk swagger:route POST /posture-response-bulk Posture Checks createPostureResponseBulk
 
-Submit multiple posture responses
+# Submit multiple posture responses
 
 Submits posture responses
-
 */
 type CreatePostureResponseBulk struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreatePostureResponseBulk) ServeHTTP(rw http.ResponseWriter, r *http.Re
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreatePostureResponseBulk) ServeHTTP(rw http.ResponseWriter, r *http.Re
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -49,7 +49,6 @@ func NewListEnumeratedCapabilitiesParams() ListEnumeratedCapabilitiesParams {
 //
 // swagger:parameters listEnumeratedCapabilities
 type ListEnumeratedCapabilitiesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

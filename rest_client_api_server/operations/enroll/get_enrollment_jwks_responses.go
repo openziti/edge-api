@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // GetEnrollmentJwksOKCode is the HTTP code returned for type GetEnrollmentJwksOK
 const GetEnrollmentJwksOKCode int = 200
 
-/*GetEnrollmentJwksOK A JWKS response for enrollment.
+/*
+GetEnrollmentJwksOK A JWKS response for enrollment.
 
 swagger:response getEnrollmentJwksOK
 */
 type GetEnrollmentJwksOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type GetEnrollmentJwksOK struct {
 func NewGetEnrollmentJwksOK() *GetEnrollmentJwksOK {
 
 	return &GetEnrollmentJwksOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get enrollment jwks o k response
+func (o *GetEnrollmentJwksOK) WithWWWAuthenticate(wWWAuthenticate []string) *GetEnrollmentJwksOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get enrollment jwks o k response
+func (o *GetEnrollmentJwksOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get enrollment jwks o k response
@@ -71,6 +88,23 @@ func (o *GetEnrollmentJwksOK) SetPayload(payload *rest_model.Jwks) {
 
 // WriteResponse to the client
 func (o *GetEnrollmentJwksOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(200)
 	if o.Payload != nil {

@@ -30,11 +30,14 @@ package terminator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type UpdateTerminatorReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateTerminatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateTerminatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateTerminatorOK()
@@ -84,7 +87,7 @@ func (o *UpdateTerminatorReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /terminators/{id}] updateTerminator", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewUpdateTerminatorOK() *UpdateTerminatorOK {
 	return &UpdateTerminatorOK{}
 }
 
-/* UpdateTerminatorOK describes a response with status code 200, with default header values.
+/*
+UpdateTerminatorOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
 type UpdateTerminatorOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateTerminatorOK) Error() string {
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update terminator o k response has a 2xx status code
+func (o *UpdateTerminatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update terminator o k response has a 3xx status code
+func (o *UpdateTerminatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update terminator o k response has a 4xx status code
+func (o *UpdateTerminatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update terminator o k response has a 5xx status code
+func (o *UpdateTerminatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update terminator o k response a status code equal to that given
+func (o *UpdateTerminatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update terminator o k response
+func (o *UpdateTerminatorOK) Code() int {
+	return 200
+}
+
+func (o *UpdateTerminatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorOK %s", 200, payload)
+}
+
+func (o *UpdateTerminatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorOK %s", 200, payload)
+}
+
 func (o *UpdateTerminatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *UpdateTerminatorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTerminatorOK binds the response header WWW-Authenticate
+func (o *UpdateTerminatorOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTerminatorBadRequest creates a UpdateTerminatorBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewUpdateTerminatorBadRequest() *UpdateTerminatorBadRequest {
 	return &UpdateTerminatorBadRequest{}
 }
 
-/* UpdateTerminatorBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateTerminatorBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type UpdateTerminatorBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTerminatorBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update terminator bad request response has a 2xx status code
+func (o *UpdateTerminatorBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update terminator bad request response has a 3xx status code
+func (o *UpdateTerminatorBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update terminator bad request response has a 4xx status code
+func (o *UpdateTerminatorBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update terminator bad request response has a 5xx status code
+func (o *UpdateTerminatorBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update terminator bad request response a status code equal to that given
+func (o *UpdateTerminatorBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update terminator bad request response
+func (o *UpdateTerminatorBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateTerminatorBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorBadRequest %s", 400, payload)
+}
+
+func (o *UpdateTerminatorBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorBadRequest %s", 400, payload)
+}
+
 func (o *UpdateTerminatorBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTerminatorBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTerminatorBadRequest binds the response header WWW-Authenticate
+func (o *UpdateTerminatorBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTerminatorUnauthorized creates a UpdateTerminatorUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewUpdateTerminatorUnauthorized() *UpdateTerminatorUnauthorized {
 	return &UpdateTerminatorUnauthorized{}
 }
 
-/* UpdateTerminatorUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateTerminatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type UpdateTerminatorUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTerminatorUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update terminator unauthorized response has a 2xx status code
+func (o *UpdateTerminatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update terminator unauthorized response has a 3xx status code
+func (o *UpdateTerminatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update terminator unauthorized response has a 4xx status code
+func (o *UpdateTerminatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update terminator unauthorized response has a 5xx status code
+func (o *UpdateTerminatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update terminator unauthorized response a status code equal to that given
+func (o *UpdateTerminatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update terminator unauthorized response
+func (o *UpdateTerminatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateTerminatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateTerminatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateTerminatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTerminatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTerminatorUnauthorized binds the response header WWW-Authenticate
+func (o *UpdateTerminatorUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTerminatorNotFound creates a UpdateTerminatorNotFound with default headers values
@@ -189,31 +423,108 @@ func NewUpdateTerminatorNotFound() *UpdateTerminatorNotFound {
 	return &UpdateTerminatorNotFound{}
 }
 
-/* UpdateTerminatorNotFound describes a response with status code 404, with default header values.
+/*
+UpdateTerminatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type UpdateTerminatorNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTerminatorNotFound) Error() string {
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update terminator not found response has a 2xx status code
+func (o *UpdateTerminatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update terminator not found response has a 3xx status code
+func (o *UpdateTerminatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update terminator not found response has a 4xx status code
+func (o *UpdateTerminatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update terminator not found response has a 5xx status code
+func (o *UpdateTerminatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update terminator not found response a status code equal to that given
+func (o *UpdateTerminatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update terminator not found response
+func (o *UpdateTerminatorNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateTerminatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorNotFound %s", 404, payload)
+}
+
+func (o *UpdateTerminatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorNotFound %s", 404, payload)
+}
+
 func (o *UpdateTerminatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTerminatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTerminatorNotFound binds the response header WWW-Authenticate
+func (o *UpdateTerminatorNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTerminatorTooManyRequests creates a UpdateTerminatorTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewUpdateTerminatorTooManyRequests() *UpdateTerminatorTooManyRequests {
 	return &UpdateTerminatorTooManyRequests{}
 }
 
-/* UpdateTerminatorTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateTerminatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type UpdateTerminatorTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTerminatorTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update terminator too many requests response has a 2xx status code
+func (o *UpdateTerminatorTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update terminator too many requests response has a 3xx status code
+func (o *UpdateTerminatorTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update terminator too many requests response has a 4xx status code
+func (o *UpdateTerminatorTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update terminator too many requests response has a 5xx status code
+func (o *UpdateTerminatorTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update terminator too many requests response a status code equal to that given
+func (o *UpdateTerminatorTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update terminator too many requests response
+func (o *UpdateTerminatorTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateTerminatorTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateTerminatorTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateTerminatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTerminatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTerminatorTooManyRequests binds the response header WWW-Authenticate
+func (o *UpdateTerminatorTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTerminatorServiceUnavailable creates a UpdateTerminatorServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewUpdateTerminatorServiceUnavailable() *UpdateTerminatorServiceUnavailable
 	return &UpdateTerminatorServiceUnavailable{}
 }
 
-/* UpdateTerminatorServiceUnavailable describes a response with status code 503, with default header values.
+/*
+UpdateTerminatorServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type UpdateTerminatorServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTerminatorServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this update terminator service unavailable response has a 2xx status code
+func (o *UpdateTerminatorServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update terminator service unavailable response has a 3xx status code
+func (o *UpdateTerminatorServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update terminator service unavailable response has a 4xx status code
+func (o *UpdateTerminatorServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update terminator service unavailable response has a 5xx status code
+func (o *UpdateTerminatorServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update terminator service unavailable response a status code equal to that given
+func (o *UpdateTerminatorServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the update terminator service unavailable response
+func (o *UpdateTerminatorServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *UpdateTerminatorServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorServiceUnavailable %s", 503, payload)
+}
+
+func (o *UpdateTerminatorServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /terminators/{id}][%d] updateTerminatorServiceUnavailable %s", 503, payload)
+}
+
 func (o *UpdateTerminatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTerminatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTerminatorServiceUnavailable binds the response header WWW-Authenticate
+func (o *UpdateTerminatorServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

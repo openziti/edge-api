@@ -30,11 +30,14 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateConfigTypeReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateConfigTypeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateConfigTypeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateConfigTypeCreated()
@@ -78,7 +81,7 @@ func (o *CreateConfigTypeReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /config-types] createConfigType", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewCreateConfigTypeCreated() *CreateConfigTypeCreated {
 	return &CreateConfigTypeCreated{}
 }
 
-/* CreateConfigTypeCreated describes a response with status code 201, with default header values.
+/*
+CreateConfigTypeCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
 type CreateConfigTypeCreated struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateConfigTypeCreated) Error() string {
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create config type created response has a 2xx status code
+func (o *CreateConfigTypeCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create config type created response has a 3xx status code
+func (o *CreateConfigTypeCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config type created response has a 4xx status code
+func (o *CreateConfigTypeCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create config type created response has a 5xx status code
+func (o *CreateConfigTypeCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config type created response a status code equal to that given
+func (o *CreateConfigTypeCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create config type created response
+func (o *CreateConfigTypeCreated) Code() int {
+	return 201
+}
+
+func (o *CreateConfigTypeCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeCreated %s", 201, payload)
+}
+
+func (o *CreateConfigTypeCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeCreated %s", 201, payload)
+}
+
 func (o *CreateConfigTypeCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
 
 func (o *CreateConfigTypeCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.CreateEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateConfigTypeCreated binds the response header WWW-Authenticate
+func (o *CreateConfigTypeCreated) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateConfigTypeBadRequest creates a CreateConfigTypeBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewCreateConfigTypeBadRequest() *CreateConfigTypeBadRequest {
 	return &CreateConfigTypeBadRequest{}
 }
 
-/* CreateConfigTypeBadRequest describes a response with status code 400, with default header values.
+/*
+CreateConfigTypeBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type CreateConfigTypeBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigTypeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create config type bad request response has a 2xx status code
+func (o *CreateConfigTypeBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config type bad request response has a 3xx status code
+func (o *CreateConfigTypeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config type bad request response has a 4xx status code
+func (o *CreateConfigTypeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create config type bad request response has a 5xx status code
+func (o *CreateConfigTypeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config type bad request response a status code equal to that given
+func (o *CreateConfigTypeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create config type bad request response
+func (o *CreateConfigTypeBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateConfigTypeBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeBadRequest %s", 400, payload)
+}
+
+func (o *CreateConfigTypeBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeBadRequest %s", 400, payload)
+}
+
 func (o *CreateConfigTypeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateConfigTypeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateConfigTypeBadRequest binds the response header WWW-Authenticate
+func (o *CreateConfigTypeBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateConfigTypeUnauthorized creates a CreateConfigTypeUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewCreateConfigTypeUnauthorized() *CreateConfigTypeUnauthorized {
 	return &CreateConfigTypeUnauthorized{}
 }
 
-/* CreateConfigTypeUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateConfigTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateConfigTypeUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigTypeUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create config type unauthorized response has a 2xx status code
+func (o *CreateConfigTypeUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config type unauthorized response has a 3xx status code
+func (o *CreateConfigTypeUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config type unauthorized response has a 4xx status code
+func (o *CreateConfigTypeUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create config type unauthorized response has a 5xx status code
+func (o *CreateConfigTypeUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config type unauthorized response a status code equal to that given
+func (o *CreateConfigTypeUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create config type unauthorized response
+func (o *CreateConfigTypeUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateConfigTypeUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeUnauthorized %s", 401, payload)
+}
+
+func (o *CreateConfigTypeUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeUnauthorized %s", 401, payload)
+}
+
 func (o *CreateConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateConfigTypeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateConfigTypeUnauthorized binds the response header WWW-Authenticate
+func (o *CreateConfigTypeUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateConfigTypeTooManyRequests creates a CreateConfigTypeTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewCreateConfigTypeTooManyRequests() *CreateConfigTypeTooManyRequests {
 	return &CreateConfigTypeTooManyRequests{}
 }
 
-/* CreateConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateConfigTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreateConfigTypeTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigTypeTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create config type too many requests response has a 2xx status code
+func (o *CreateConfigTypeTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config type too many requests response has a 3xx status code
+func (o *CreateConfigTypeTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config type too many requests response has a 4xx status code
+func (o *CreateConfigTypeTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create config type too many requests response has a 5xx status code
+func (o *CreateConfigTypeTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create config type too many requests response a status code equal to that given
+func (o *CreateConfigTypeTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create config type too many requests response
+func (o *CreateConfigTypeTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateConfigTypeTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateConfigTypeTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateConfigTypeTooManyRequests binds the response header WWW-Authenticate
+func (o *CreateConfigTypeTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateConfigTypeServiceUnavailable creates a CreateConfigTypeServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewCreateConfigTypeServiceUnavailable() *CreateConfigTypeServiceUnavailable
 	return &CreateConfigTypeServiceUnavailable{}
 }
 
-/* CreateConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
+/*
+CreateConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type CreateConfigTypeServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateConfigTypeServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this create config type service unavailable response has a 2xx status code
+func (o *CreateConfigTypeServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create config type service unavailable response has a 3xx status code
+func (o *CreateConfigTypeServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create config type service unavailable response has a 4xx status code
+func (o *CreateConfigTypeServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create config type service unavailable response has a 5xx status code
+func (o *CreateConfigTypeServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create config type service unavailable response a status code equal to that given
+func (o *CreateConfigTypeServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the create config type service unavailable response
+func (o *CreateConfigTypeServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *CreateConfigTypeServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeServiceUnavailable %s", 503, payload)
+}
+
+func (o *CreateConfigTypeServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /config-types][%d] createConfigTypeServiceUnavailable %s", 503, payload)
+}
+
 func (o *CreateConfigTypeServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateConfigTypeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateConfigTypeServiceUnavailable binds the response header WWW-Authenticate
+func (o *CreateConfigTypeServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

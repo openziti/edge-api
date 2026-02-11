@@ -53,10 +53,10 @@ func NewListProtocols(ctx *middleware.Context, handler ListProtocolsHandler) *Li
 	return &ListProtocols{Context: ctx, Handler: handler}
 }
 
-/* ListProtocols swagger:route GET /protocols Informational listProtocols
+/*
+	ListProtocols swagger:route GET /protocols Informational listProtocols
 
 Return a list of the listening Edge protocols
-
 */
 type ListProtocols struct {
 	Context *middleware.Context
@@ -75,6 +75,7 @@ func (o *ListProtocols) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

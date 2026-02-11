@@ -76,10 +76,12 @@ func NewDetailEnrollmentParamsWithHTTPClient(client *http.Client) *DetailEnrollm
 	}
 }
 
-/* DetailEnrollmentParams contains all the parameters to send to the API endpoint
-   for the detail enrollment operation.
+/*
+DetailEnrollmentParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail enrollment operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailEnrollmentParams struct {
 

@@ -50,7 +50,6 @@ func NewListEdgeRouterPolicyIdentitiesParams() ListEdgeRouterPolicyIdentitiesPar
 //
 // swagger:parameters listEdgeRouterPolicyIdentities
 type ListEdgeRouterPolicyIdentitiesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

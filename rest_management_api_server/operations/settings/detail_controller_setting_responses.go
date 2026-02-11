@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailControllerSettingOKCode is the HTTP code returned for type DetailControllerSettingOK
 const DetailControllerSettingOKCode int = 200
 
-/*DetailControllerSettingOK A singular controller setting object
+/*
+DetailControllerSettingOK A singular controller setting object
 
 swagger:response detailControllerSettingOK
 */
 type DetailControllerSettingOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailControllerSettingOK struct {
 func NewDetailControllerSettingOK() *DetailControllerSettingOK {
 
 	return &DetailControllerSettingOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail controller setting o k response
+func (o *DetailControllerSettingOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailControllerSettingOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail controller setting o k response
+func (o *DetailControllerSettingOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail controller setting o k response
@@ -72,6 +89,23 @@ func (o *DetailControllerSettingOK) SetPayload(payload *rest_model.DetailControl
 // WriteResponse to the client
 func (o *DetailControllerSettingOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DetailControllerSettingOK) WriteResponse(rw http.ResponseWriter, produc
 // DetailControllerSettingUnauthorizedCode is the HTTP code returned for type DetailControllerSettingUnauthorized
 const DetailControllerSettingUnauthorizedCode int = 401
 
-/*DetailControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailControllerSettingUnauthorized
 */
 type DetailControllerSettingUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DetailControllerSettingUnauthorized struct {
 func NewDetailControllerSettingUnauthorized() *DetailControllerSettingUnauthorized {
 
 	return &DetailControllerSettingUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail controller setting unauthorized response
+func (o *DetailControllerSettingUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DetailControllerSettingUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail controller setting unauthorized response
+func (o *DetailControllerSettingUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail controller setting unauthorized response
@@ -116,6 +166,23 @@ func (o *DetailControllerSettingUnauthorized) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *DetailControllerSettingUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DetailControllerSettingUnauthorized) WriteResponse(rw http.ResponseWrit
 // DetailControllerSettingNotFoundCode is the HTTP code returned for type DetailControllerSettingNotFound
 const DetailControllerSettingNotFoundCode int = 404
 
-/*DetailControllerSettingNotFound The requested resource does not exist
+/*
+DetailControllerSettingNotFound The requested resource does not exist
 
 swagger:response detailControllerSettingNotFound
 */
 type DetailControllerSettingNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DetailControllerSettingNotFound struct {
 func NewDetailControllerSettingNotFound() *DetailControllerSettingNotFound {
 
 	return &DetailControllerSettingNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail controller setting not found response
+func (o *DetailControllerSettingNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DetailControllerSettingNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail controller setting not found response
+func (o *DetailControllerSettingNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail controller setting not found response
@@ -160,6 +243,23 @@ func (o *DetailControllerSettingNotFound) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DetailControllerSettingNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DetailControllerSettingNotFound) WriteResponse(rw http.ResponseWriter, 
 // DetailControllerSettingTooManyRequestsCode is the HTTP code returned for type DetailControllerSettingTooManyRequests
 const DetailControllerSettingTooManyRequestsCode int = 429
 
-/*DetailControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailControllerSettingTooManyRequests
 */
 type DetailControllerSettingTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DetailControllerSettingTooManyRequests struct {
 func NewDetailControllerSettingTooManyRequests() *DetailControllerSettingTooManyRequests {
 
 	return &DetailControllerSettingTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail controller setting too many requests response
+func (o *DetailControllerSettingTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DetailControllerSettingTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail controller setting too many requests response
+func (o *DetailControllerSettingTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail controller setting too many requests response
@@ -203,6 +319,23 @@ func (o *DetailControllerSettingTooManyRequests) SetPayload(payload *rest_model.
 
 // WriteResponse to the client
 func (o *DetailControllerSettingTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

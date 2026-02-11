@@ -36,16 +36,16 @@ import (
 )
 
 // RequestExtendAllCertAuthenticatorsHandlerFunc turns a function with the right signature into a request extend all cert authenticators handler
-type RequestExtendAllCertAuthenticatorsHandlerFunc func(RequestExtendAllCertAuthenticatorsParams, interface{}) middleware.Responder
+type RequestExtendAllCertAuthenticatorsHandlerFunc func(RequestExtendAllCertAuthenticatorsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn RequestExtendAllCertAuthenticatorsHandlerFunc) Handle(params RequestExtendAllCertAuthenticatorsParams, principal interface{}) middleware.Responder {
+func (fn RequestExtendAllCertAuthenticatorsHandlerFunc) Handle(params RequestExtendAllCertAuthenticatorsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // RequestExtendAllCertAuthenticatorsHandler interface for that can handle valid request extend all cert authenticators params
 type RequestExtendAllCertAuthenticatorsHandler interface {
-	Handle(RequestExtendAllCertAuthenticatorsParams, interface{}) middleware.Responder
+	Handle(RequestExtendAllCertAuthenticatorsParams, any) middleware.Responder
 }
 
 // NewRequestExtendAllCertAuthenticators creates a new http.Handler for the request extend all cert authenticators operation
@@ -53,7 +53,8 @@ func NewRequestExtendAllCertAuthenticators(ctx *middleware.Context, handler Requ
 	return &RequestExtendAllCertAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* RequestExtendAllCertAuthenticators swagger:route POST /identities/{id}/request-extend Authenticator requestExtendAllCertAuthenticators
+/*
+	RequestExtendAllCertAuthenticators swagger:route POST /identities/{id}/request-extend Authenticator requestExtendAllCertAuthenticators
 
 Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.
 
@@ -63,8 +64,6 @@ request and a hint on whether private keys should be rolled. Clients that do not
 roll keys may ignore one or both flags.
 
 If this request is made against an identity with zero certificate authenticators, a 403 will be returned.
-
-
 */
 type RequestExtendAllCertAuthenticators struct {
 	Context *middleware.Context
@@ -85,9 +84,9 @@ func (o *RequestExtendAllCertAuthenticators) ServeHTTP(rw http.ResponseWriter, r
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -96,6 +95,7 @@ func (o *RequestExtendAllCertAuthenticators) ServeHTTP(rw http.ResponseWriter, r
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

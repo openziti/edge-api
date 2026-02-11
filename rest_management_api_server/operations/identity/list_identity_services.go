@@ -36,16 +36,16 @@ import (
 )
 
 // ListIdentityServicesHandlerFunc turns a function with the right signature into a list identity services handler
-type ListIdentityServicesHandlerFunc func(ListIdentityServicesParams, interface{}) middleware.Responder
+type ListIdentityServicesHandlerFunc func(ListIdentityServicesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListIdentityServicesHandlerFunc) Handle(params ListIdentityServicesParams, principal interface{}) middleware.Responder {
+func (fn ListIdentityServicesHandlerFunc) Handle(params ListIdentityServicesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListIdentityServicesHandler interface for that can handle valid list identity services params
 type ListIdentityServicesHandler interface {
-	Handle(ListIdentityServicesParams, interface{}) middleware.Responder
+	Handle(ListIdentityServicesParams, any) middleware.Responder
 }
 
 // NewListIdentityServices creates a new http.Handler for the list identity services operation
@@ -53,13 +53,12 @@ func NewListIdentityServices(ctx *middleware.Context, handler ListIdentityServic
 	return &ListIdentityServices{Context: ctx, Handler: handler}
 }
 
-/* ListIdentityServices swagger:route GET /identities/{id}/services Identity listIdentityServices
+/*
+	ListIdentityServices swagger:route GET /identities/{id}/services Identity listIdentityServices
 
-List accessible services
+# List accessible services
 
 Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentityServices struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListIdentityServices) ServeHTTP(rw http.ResponseWriter, r *http.Request
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListIdentityServices) ServeHTTP(rw http.ResponseWriter, r *http.Request
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

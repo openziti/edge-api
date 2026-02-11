@@ -77,9 +77,21 @@ paths:
 responses:
   listAPISessions:
     description: A list of active API Sessions
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '../shared/api-sessions.yml#/definitions/listAPISessionsEnvelope'
   detailAPISession:
     description: Retrieves a singular API Session by id
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '../shared/api-sessions.yml#/definitions/detailApiSessionEnvelope'

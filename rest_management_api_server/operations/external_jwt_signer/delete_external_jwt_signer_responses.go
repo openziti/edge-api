@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteExternalJWTSignerOKCode is the HTTP code returned for type DeleteExternalJWTSignerOK
 const DeleteExternalJWTSignerOKCode int = 200
 
-/*DeleteExternalJWTSignerOK The delete request was successful and the resource has been removed
+/*
+DeleteExternalJWTSignerOK The delete request was successful and the resource has been removed
 
 swagger:response deleteExternalJwtSignerOK
 */
 type DeleteExternalJWTSignerOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteExternalJWTSignerOK struct {
 func NewDeleteExternalJWTSignerOK() *DeleteExternalJWTSignerOK {
 
 	return &DeleteExternalJWTSignerOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete external Jwt signer o k response
+func (o *DeleteExternalJWTSignerOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteExternalJWTSignerOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete external Jwt signer o k response
+func (o *DeleteExternalJWTSignerOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete external Jwt signer o k response
@@ -72,6 +89,23 @@ func (o *DeleteExternalJWTSignerOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteExternalJWTSignerOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteExternalJWTSignerOK) WriteResponse(rw http.ResponseWriter, produc
 // DeleteExternalJWTSignerBadRequestCode is the HTTP code returned for type DeleteExternalJWTSignerBadRequest
 const DeleteExternalJWTSignerBadRequestCode int = 400
 
-/*DeleteExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteExternalJWTSignerBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteExternalJwtSignerBadRequest
 */
 type DeleteExternalJWTSignerBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteExternalJWTSignerBadRequest struct {
 func NewDeleteExternalJWTSignerBadRequest() *DeleteExternalJWTSignerBadRequest {
 
 	return &DeleteExternalJWTSignerBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete external Jwt signer bad request response
+func (o *DeleteExternalJWTSignerBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteExternalJWTSignerBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete external Jwt signer bad request response
+func (o *DeleteExternalJWTSignerBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete external Jwt signer bad request response
@@ -116,6 +166,23 @@ func (o *DeleteExternalJWTSignerBadRequest) SetPayload(payload *rest_model.APIEr
 // WriteResponse to the client
 func (o *DeleteExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteExternalJWTSignerBadRequest) WriteResponse(rw http.ResponseWriter
 // DeleteExternalJWTSignerUnauthorizedCode is the HTTP code returned for type DeleteExternalJWTSignerUnauthorized
 const DeleteExternalJWTSignerUnauthorizedCode int = 401
 
-/*DeleteExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteExternalJWTSignerUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteExternalJwtSignerUnauthorized
 */
 type DeleteExternalJWTSignerUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteExternalJWTSignerUnauthorized struct {
 func NewDeleteExternalJWTSignerUnauthorized() *DeleteExternalJWTSignerUnauthorized {
 
 	return &DeleteExternalJWTSignerUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete external Jwt signer unauthorized response
+func (o *DeleteExternalJWTSignerUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteExternalJWTSignerUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete external Jwt signer unauthorized response
+func (o *DeleteExternalJWTSignerUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete external Jwt signer unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteExternalJWTSignerUnauthorized) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *DeleteExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteExternalJWTSignerUnauthorized) WriteResponse(rw http.ResponseWrit
 // DeleteExternalJWTSignerNotFoundCode is the HTTP code returned for type DeleteExternalJWTSignerNotFound
 const DeleteExternalJWTSignerNotFoundCode int = 404
 
-/*DeleteExternalJWTSignerNotFound The requested resource does not exist
+/*
+DeleteExternalJWTSignerNotFound The requested resource does not exist
 
 swagger:response deleteExternalJwtSignerNotFound
 */
 type DeleteExternalJWTSignerNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteExternalJWTSignerNotFound struct {
 func NewDeleteExternalJWTSignerNotFound() *DeleteExternalJWTSignerNotFound {
 
 	return &DeleteExternalJWTSignerNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete external Jwt signer not found response
+func (o *DeleteExternalJWTSignerNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteExternalJWTSignerNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete external Jwt signer not found response
+func (o *DeleteExternalJWTSignerNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete external Jwt signer not found response
@@ -204,6 +320,23 @@ func (o *DeleteExternalJWTSignerNotFound) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DeleteExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteExternalJWTSignerNotFound) WriteResponse(rw http.ResponseWriter, 
 // DeleteExternalJWTSignerTooManyRequestsCode is the HTTP code returned for type DeleteExternalJWTSignerTooManyRequests
 const DeleteExternalJWTSignerTooManyRequestsCode int = 429
 
-/*DeleteExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteExternalJWTSignerTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteExternalJwtSignerTooManyRequests
 */
 type DeleteExternalJWTSignerTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteExternalJWTSignerTooManyRequests struct {
 func NewDeleteExternalJWTSignerTooManyRequests() *DeleteExternalJWTSignerTooManyRequests {
 
 	return &DeleteExternalJWTSignerTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete external Jwt signer too many requests response
+func (o *DeleteExternalJWTSignerTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteExternalJWTSignerTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete external Jwt signer too many requests response
+func (o *DeleteExternalJWTSignerTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete external Jwt signer too many requests response
@@ -248,6 +397,23 @@ func (o *DeleteExternalJWTSignerTooManyRequests) SetPayload(payload *rest_model.
 // WriteResponse to the client
 func (o *DeleteExternalJWTSignerTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *DeleteExternalJWTSignerTooManyRequests) WriteResponse(rw http.ResponseW
 // DeleteExternalJWTSignerServiceUnavailableCode is the HTTP code returned for type DeleteExternalJWTSignerServiceUnavailable
 const DeleteExternalJWTSignerServiceUnavailableCode int = 503
 
-/*DeleteExternalJWTSignerServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeleteExternalJWTSignerServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deleteExternalJwtSignerServiceUnavailable
 */
 type DeleteExternalJWTSignerServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type DeleteExternalJWTSignerServiceUnavailable struct {
 func NewDeleteExternalJWTSignerServiceUnavailable() *DeleteExternalJWTSignerServiceUnavailable {
 
 	return &DeleteExternalJWTSignerServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete external Jwt signer service unavailable response
+func (o *DeleteExternalJWTSignerServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteExternalJWTSignerServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete external Jwt signer service unavailable response
+func (o *DeleteExternalJWTSignerServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete external Jwt signer service unavailable response
@@ -291,6 +473,23 @@ func (o *DeleteExternalJWTSignerServiceUnavailable) SetPayload(payload *rest_mod
 
 // WriteResponse to the client
 func (o *DeleteExternalJWTSignerServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

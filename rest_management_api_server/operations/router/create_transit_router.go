@@ -36,16 +36,16 @@ import (
 )
 
 // CreateTransitRouterHandlerFunc turns a function with the right signature into a create transit router handler
-type CreateTransitRouterHandlerFunc func(CreateTransitRouterParams, interface{}) middleware.Responder
+type CreateTransitRouterHandlerFunc func(CreateTransitRouterParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateTransitRouterHandlerFunc) Handle(params CreateTransitRouterParams, principal interface{}) middleware.Responder {
+func (fn CreateTransitRouterHandlerFunc) Handle(params CreateTransitRouterParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateTransitRouterHandler interface for that can handle valid create transit router params
 type CreateTransitRouterHandler interface {
-	Handle(CreateTransitRouterParams, interface{}) middleware.Responder
+	Handle(CreateTransitRouterParams, any) middleware.Responder
 }
 
 // NewCreateTransitRouter creates a new http.Handler for the create transit router operation
@@ -53,12 +53,12 @@ func NewCreateTransitRouter(ctx *middleware.Context, handler CreateTransitRouter
 	return &CreateTransitRouter{Context: ctx, Handler: handler}
 }
 
-/* CreateTransitRouter swagger:route POST /transit-routers Router createTransitRouter
+/*
+	CreateTransitRouter swagger:route POST /transit-routers Router createTransitRouter
 
-Create a router resource
+# Create a router resource
 
 Create a router resource. Requires admin access.
-
 */
 type CreateTransitRouter struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateTransitRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateTransitRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -30,7 +30,7 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -56,7 +56,6 @@ func NewEnrollTokenParams() EnrollTokenParams {
 //
 // swagger:parameters enrollToken
 type EnrollTokenParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -65,6 +64,7 @@ type EnrollTokenParams struct {
 	  In: header
 	*/
 	Authorization string
+
 	/*A  enrollment request with or without a CSR. Including a CSR indicated an attempt to enroll with certificate
 	credentials. If no CSR is included, the request is assumed to be a token enrollment request that will
 	authenticate via tokens.
@@ -73,6 +73,7 @@ type EnrollTokenParams struct {
 	  In: body
 	*/
 	TokenEnrollmentRequest *rest_model.TokenEnrollmentRequest
+
 	/*The id of the token issuer to use for enrollment, optional as long the the token is not opaque
 	  In: header
 	*/
@@ -93,10 +94,12 @@ func (o *EnrollTokenParams) BindRequest(r *http.Request, route *middleware.Match
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.TokenEnrollmentRequest
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("tokenEnrollmentRequest", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("tokenEnrollmentRequest", "body", "", err))
@@ -107,7 +110,7 @@ func (o *EnrollTokenParams) BindRequest(r *http.Request, route *middleware.Match
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

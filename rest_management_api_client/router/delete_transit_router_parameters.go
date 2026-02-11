@@ -76,10 +76,12 @@ func NewDeleteTransitRouterParamsWithHTTPClient(client *http.Client) *DeleteTran
 	}
 }
 
-/* DeleteTransitRouterParams contains all the parameters to send to the API endpoint
-   for the delete transit router operation.
+/*
+DeleteTransitRouterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete transit router operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteTransitRouterParams struct {
 

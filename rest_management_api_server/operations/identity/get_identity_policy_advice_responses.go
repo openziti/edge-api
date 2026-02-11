@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // GetIdentityPolicyAdviceOKCode is the HTTP code returned for type GetIdentityPolicyAdviceOK
 const GetIdentityPolicyAdviceOKCode int = 200
 
-/*GetIdentityPolicyAdviceOK Returns the document that represents the policy advice
+/*
+GetIdentityPolicyAdviceOK Returns the document that represents the policy advice
 
 swagger:response getIdentityPolicyAdviceOK
 */
 type GetIdentityPolicyAdviceOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type GetIdentityPolicyAdviceOK struct {
 func NewGetIdentityPolicyAdviceOK() *GetIdentityPolicyAdviceOK {
 
 	return &GetIdentityPolicyAdviceOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity policy advice o k response
+func (o *GetIdentityPolicyAdviceOK) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPolicyAdviceOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity policy advice o k response
+func (o *GetIdentityPolicyAdviceOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity policy advice o k response
@@ -72,6 +89,23 @@ func (o *GetIdentityPolicyAdviceOK) SetPayload(payload *rest_model.GetIdentityPo
 // WriteResponse to the client
 func (o *GetIdentityPolicyAdviceOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *GetIdentityPolicyAdviceOK) WriteResponse(rw http.ResponseWriter, produc
 // GetIdentityPolicyAdviceUnauthorizedCode is the HTTP code returned for type GetIdentityPolicyAdviceUnauthorized
 const GetIdentityPolicyAdviceUnauthorizedCode int = 401
 
-/*GetIdentityPolicyAdviceUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetIdentityPolicyAdviceUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityPolicyAdviceUnauthorized
 */
 type GetIdentityPolicyAdviceUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type GetIdentityPolicyAdviceUnauthorized struct {
 func NewGetIdentityPolicyAdviceUnauthorized() *GetIdentityPolicyAdviceUnauthorized {
 
 	return &GetIdentityPolicyAdviceUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity policy advice unauthorized response
+func (o *GetIdentityPolicyAdviceUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPolicyAdviceUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity policy advice unauthorized response
+func (o *GetIdentityPolicyAdviceUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity policy advice unauthorized response
@@ -116,6 +166,23 @@ func (o *GetIdentityPolicyAdviceUnauthorized) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *GetIdentityPolicyAdviceUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *GetIdentityPolicyAdviceUnauthorized) WriteResponse(rw http.ResponseWrit
 // GetIdentityPolicyAdviceNotFoundCode is the HTTP code returned for type GetIdentityPolicyAdviceNotFound
 const GetIdentityPolicyAdviceNotFoundCode int = 404
 
-/*GetIdentityPolicyAdviceNotFound The requested resource does not exist
+/*
+GetIdentityPolicyAdviceNotFound The requested resource does not exist
 
 swagger:response getIdentityPolicyAdviceNotFound
 */
 type GetIdentityPolicyAdviceNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type GetIdentityPolicyAdviceNotFound struct {
 func NewGetIdentityPolicyAdviceNotFound() *GetIdentityPolicyAdviceNotFound {
 
 	return &GetIdentityPolicyAdviceNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity policy advice not found response
+func (o *GetIdentityPolicyAdviceNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPolicyAdviceNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity policy advice not found response
+func (o *GetIdentityPolicyAdviceNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity policy advice not found response
@@ -160,6 +243,23 @@ func (o *GetIdentityPolicyAdviceNotFound) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *GetIdentityPolicyAdviceNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *GetIdentityPolicyAdviceNotFound) WriteResponse(rw http.ResponseWriter, 
 // GetIdentityPolicyAdviceTooManyRequestsCode is the HTTP code returned for type GetIdentityPolicyAdviceTooManyRequests
 const GetIdentityPolicyAdviceTooManyRequestsCode int = 429
 
-/*GetIdentityPolicyAdviceTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetIdentityPolicyAdviceTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityPolicyAdviceTooManyRequests
 */
 type GetIdentityPolicyAdviceTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type GetIdentityPolicyAdviceTooManyRequests struct {
 func NewGetIdentityPolicyAdviceTooManyRequests() *GetIdentityPolicyAdviceTooManyRequests {
 
 	return &GetIdentityPolicyAdviceTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity policy advice too many requests response
+func (o *GetIdentityPolicyAdviceTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPolicyAdviceTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity policy advice too many requests response
+func (o *GetIdentityPolicyAdviceTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity policy advice too many requests response
@@ -204,6 +320,23 @@ func (o *GetIdentityPolicyAdviceTooManyRequests) SetPayload(payload *rest_model.
 // WriteResponse to the client
 func (o *GetIdentityPolicyAdviceTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *GetIdentityPolicyAdviceTooManyRequests) WriteResponse(rw http.ResponseW
 // GetIdentityPolicyAdviceServiceUnavailableCode is the HTTP code returned for type GetIdentityPolicyAdviceServiceUnavailable
 const GetIdentityPolicyAdviceServiceUnavailableCode int = 503
 
-/*GetIdentityPolicyAdviceServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+GetIdentityPolicyAdviceServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response getIdentityPolicyAdviceServiceUnavailable
 */
 type GetIdentityPolicyAdviceServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type GetIdentityPolicyAdviceServiceUnavailable struct {
 func NewGetIdentityPolicyAdviceServiceUnavailable() *GetIdentityPolicyAdviceServiceUnavailable {
 
 	return &GetIdentityPolicyAdviceServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity policy advice service unavailable response
+func (o *GetIdentityPolicyAdviceServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPolicyAdviceServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity policy advice service unavailable response
+func (o *GetIdentityPolicyAdviceServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity policy advice service unavailable response
@@ -247,6 +396,23 @@ func (o *GetIdentityPolicyAdviceServiceUnavailable) SetPayload(payload *rest_mod
 
 // WriteResponse to the client
 func (o *GetIdentityPolicyAdviceServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

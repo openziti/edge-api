@@ -106,14 +106,32 @@ paths:
 responses:
   detailSessionRoutePath:
     description: A single session's route path
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailSessionRoutePathEnvelope'
   listSessionsManagement:
     description: A list of sessions
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listSessionsManagementEnvelope'
   detailSessionManagement:
     description: A single session
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailSessionManagementEnvelope'
 

@@ -45,14 +45,32 @@ paths:
 responses:
   listSpecs:
     description: A list of specifications
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listSpecsEnvelope'
   detailSpec:
     description: A single specification
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailSpecEnvelope'
   detailSpecBody:
     description: Returns the document that represents the specification
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailSpecBodyEnvelope'
 

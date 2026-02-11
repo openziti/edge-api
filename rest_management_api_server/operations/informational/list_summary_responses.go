@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListSummaryOKCode is the HTTP code returned for type ListSummaryOK
 const ListSummaryOKCode int = 200
 
-/*ListSummaryOK Entity counts scopped to the current identitie's access
+/*
+ListSummaryOK Entity counts scopped to the current identitie's access
 
 swagger:response listSummaryOK
 */
 type ListSummaryOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListSummaryOK struct {
 func NewListSummaryOK() *ListSummaryOK {
 
 	return &ListSummaryOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list summary o k response
+func (o *ListSummaryOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListSummaryOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list summary o k response
+func (o *ListSummaryOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list summary o k response
@@ -72,6 +89,23 @@ func (o *ListSummaryOK) SetPayload(payload *rest_model.ListSummaryCountsEnvelope
 // WriteResponse to the client
 func (o *ListSummaryOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListSummaryOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // ListSummaryUnauthorizedCode is the HTTP code returned for type ListSummaryUnauthorized
 const ListSummaryUnauthorizedCode int = 401
 
-/*ListSummaryUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListSummaryUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listSummaryUnauthorized
 */
 type ListSummaryUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListSummaryUnauthorized struct {
 func NewListSummaryUnauthorized() *ListSummaryUnauthorized {
 
 	return &ListSummaryUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list summary unauthorized response
+func (o *ListSummaryUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListSummaryUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list summary unauthorized response
+func (o *ListSummaryUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list summary unauthorized response
@@ -116,6 +166,23 @@ func (o *ListSummaryUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelop
 // WriteResponse to the client
 func (o *ListSummaryUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListSummaryUnauthorized) WriteResponse(rw http.ResponseWriter, producer
 // ListSummaryTooManyRequestsCode is the HTTP code returned for type ListSummaryTooManyRequests
 const ListSummaryTooManyRequestsCode int = 429
 
-/*ListSummaryTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListSummaryTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listSummaryTooManyRequests
 */
 type ListSummaryTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListSummaryTooManyRequests struct {
 func NewListSummaryTooManyRequests() *ListSummaryTooManyRequests {
 
 	return &ListSummaryTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list summary too many requests response
+func (o *ListSummaryTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListSummaryTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list summary too many requests response
+func (o *ListSummaryTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list summary too many requests response
@@ -160,6 +243,23 @@ func (o *ListSummaryTooManyRequests) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *ListSummaryTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListSummaryTooManyRequests) WriteResponse(rw http.ResponseWriter, produ
 // ListSummaryServiceUnavailableCode is the HTTP code returned for type ListSummaryServiceUnavailable
 const ListSummaryServiceUnavailableCode int = 503
 
-/*ListSummaryServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListSummaryServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listSummaryServiceUnavailable
 */
 type ListSummaryServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListSummaryServiceUnavailable struct {
 func NewListSummaryServiceUnavailable() *ListSummaryServiceUnavailable {
 
 	return &ListSummaryServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list summary service unavailable response
+func (o *ListSummaryServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListSummaryServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list summary service unavailable response
+func (o *ListSummaryServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list summary service unavailable response
@@ -203,6 +319,23 @@ func (o *ListSummaryServiceUnavailable) SetPayload(payload *rest_model.APIErrorE
 
 // WriteResponse to the client
 func (o *ListSummaryServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

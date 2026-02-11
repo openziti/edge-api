@@ -30,11 +30,14 @@ package external_jwt_signer
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListExternalJWTSignersReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListExternalJWTSignersReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListExternalJWTSignersReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListExternalJWTSignersOK()
@@ -78,7 +81,7 @@ func (o *ListExternalJWTSignersReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /external-jwt-signers] listExternalJwtSigners", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListExternalJWTSignersOK() *ListExternalJWTSignersOK {
 	return &ListExternalJWTSignersOK{}
 }
 
-/* ListExternalJWTSignersOK describes a response with status code 200, with default header values.
+/*
+ListExternalJWTSignersOK describes a response with status code 200, with default header values.
 
 A list of External JWT Signers
 */
 type ListExternalJWTSignersOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListExternalJWTSignersEnvelope
 }
 
-func (o *ListExternalJWTSignersOK) Error() string {
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list external Jwt signers o k response has a 2xx status code
+func (o *ListExternalJWTSignersOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list external Jwt signers o k response has a 3xx status code
+func (o *ListExternalJWTSignersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list external Jwt signers o k response has a 4xx status code
+func (o *ListExternalJWTSignersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list external Jwt signers o k response has a 5xx status code
+func (o *ListExternalJWTSignersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list external Jwt signers o k response a status code equal to that given
+func (o *ListExternalJWTSignersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list external Jwt signers o k response
+func (o *ListExternalJWTSignersOK) Code() int {
+	return 200
+}
+
+func (o *ListExternalJWTSignersOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersOK %s", 200, payload)
+}
+
+func (o *ListExternalJWTSignersOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersOK %s", 200, payload)
+}
+
 func (o *ListExternalJWTSignersOK) GetPayload() *rest_model.ListExternalJWTSignersEnvelope {
 	return o.Payload
 }
 
 func (o *ListExternalJWTSignersOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListExternalJWTSignersEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListExternalJWTSignersOK binds the response header WWW-Authenticate
+func (o *ListExternalJWTSignersOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListExternalJWTSignersBadRequest creates a ListExternalJWTSignersBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewListExternalJWTSignersBadRequest() *ListExternalJWTSignersBadRequest {
 	return &ListExternalJWTSignersBadRequest{}
 }
 
-/* ListExternalJWTSignersBadRequest describes a response with status code 400, with default header values.
+/*
+ListExternalJWTSignersBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type ListExternalJWTSignersBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListExternalJWTSignersBadRequest) Error() string {
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list external Jwt signers bad request response has a 2xx status code
+func (o *ListExternalJWTSignersBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list external Jwt signers bad request response has a 3xx status code
+func (o *ListExternalJWTSignersBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list external Jwt signers bad request response has a 4xx status code
+func (o *ListExternalJWTSignersBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list external Jwt signers bad request response has a 5xx status code
+func (o *ListExternalJWTSignersBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list external Jwt signers bad request response a status code equal to that given
+func (o *ListExternalJWTSignersBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list external Jwt signers bad request response
+func (o *ListExternalJWTSignersBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListExternalJWTSignersBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersBadRequest %s", 400, payload)
+}
+
+func (o *ListExternalJWTSignersBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersBadRequest %s", 400, payload)
+}
+
 func (o *ListExternalJWTSignersBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListExternalJWTSignersBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListExternalJWTSignersBadRequest binds the response header WWW-Authenticate
+func (o *ListExternalJWTSignersBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListExternalJWTSignersUnauthorized creates a ListExternalJWTSignersUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewListExternalJWTSignersUnauthorized() *ListExternalJWTSignersUnauthorized
 	return &ListExternalJWTSignersUnauthorized{}
 }
 
-/* ListExternalJWTSignersUnauthorized describes a response with status code 401, with default header values.
+/*
+ListExternalJWTSignersUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListExternalJWTSignersUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListExternalJWTSignersUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list external Jwt signers unauthorized response has a 2xx status code
+func (o *ListExternalJWTSignersUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list external Jwt signers unauthorized response has a 3xx status code
+func (o *ListExternalJWTSignersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list external Jwt signers unauthorized response has a 4xx status code
+func (o *ListExternalJWTSignersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list external Jwt signers unauthorized response has a 5xx status code
+func (o *ListExternalJWTSignersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list external Jwt signers unauthorized response a status code equal to that given
+func (o *ListExternalJWTSignersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list external Jwt signers unauthorized response
+func (o *ListExternalJWTSignersUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListExternalJWTSignersUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersUnauthorized %s", 401, payload)
+}
+
+func (o *ListExternalJWTSignersUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersUnauthorized %s", 401, payload)
+}
+
 func (o *ListExternalJWTSignersUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListExternalJWTSignersUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListExternalJWTSignersUnauthorized binds the response header WWW-Authenticate
+func (o *ListExternalJWTSignersUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListExternalJWTSignersTooManyRequests creates a ListExternalJWTSignersTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListExternalJWTSignersTooManyRequests() *ListExternalJWTSignersTooManyRe
 	return &ListExternalJWTSignersTooManyRequests{}
 }
 
-/* ListExternalJWTSignersTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListExternalJWTSignersTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListExternalJWTSignersTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListExternalJWTSignersTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list external Jwt signers too many requests response has a 2xx status code
+func (o *ListExternalJWTSignersTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list external Jwt signers too many requests response has a 3xx status code
+func (o *ListExternalJWTSignersTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list external Jwt signers too many requests response has a 4xx status code
+func (o *ListExternalJWTSignersTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list external Jwt signers too many requests response has a 5xx status code
+func (o *ListExternalJWTSignersTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list external Jwt signers too many requests response a status code equal to that given
+func (o *ListExternalJWTSignersTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list external Jwt signers too many requests response
+func (o *ListExternalJWTSignersTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListExternalJWTSignersTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersTooManyRequests %s", 429, payload)
+}
+
+func (o *ListExternalJWTSignersTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersTooManyRequests %s", 429, payload)
+}
+
 func (o *ListExternalJWTSignersTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListExternalJWTSignersTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListExternalJWTSignersTooManyRequests binds the response header WWW-Authenticate
+func (o *ListExternalJWTSignersTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListExternalJWTSignersServiceUnavailable creates a ListExternalJWTSignersServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListExternalJWTSignersServiceUnavailable() *ListExternalJWTSignersServic
 	return &ListExternalJWTSignersServiceUnavailable{}
 }
 
-/* ListExternalJWTSignersServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListExternalJWTSignersServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListExternalJWTSignersServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListExternalJWTSignersServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list external Jwt signers service unavailable response has a 2xx status code
+func (o *ListExternalJWTSignersServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list external Jwt signers service unavailable response has a 3xx status code
+func (o *ListExternalJWTSignersServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list external Jwt signers service unavailable response has a 4xx status code
+func (o *ListExternalJWTSignersServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list external Jwt signers service unavailable response has a 5xx status code
+func (o *ListExternalJWTSignersServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list external Jwt signers service unavailable response a status code equal to that given
+func (o *ListExternalJWTSignersServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list external Jwt signers service unavailable response
+func (o *ListExternalJWTSignersServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListExternalJWTSignersServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListExternalJWTSignersServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /external-jwt-signers][%d] listExternalJwtSignersServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListExternalJWTSignersServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListExternalJWTSignersServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListExternalJWTSignersServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListExternalJWTSignersServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

@@ -76,10 +76,12 @@ func NewGetCurrentAPISessionParamsWithHTTPClient(client *http.Client) *GetCurren
 	}
 }
 
-/* GetCurrentAPISessionParams contains all the parameters to send to the API endpoint
-   for the get current API session operation.
+/*
+GetCurrentAPISessionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get current API session operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCurrentAPISessionParams struct {
 	timeout    time.Duration

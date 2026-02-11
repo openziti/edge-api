@@ -30,11 +30,14 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailConfigOK()
@@ -78,7 +81,7 @@ func (o *DetailConfigReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /configs/{id}] detailConfig", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailConfigOK() *DetailConfigOK {
 	return &DetailConfigOK{}
 }
 
-/* DetailConfigOK describes a response with status code 200, with default header values.
+/*
+DetailConfigOK describes a response with status code 200, with default header values.
 
 A singular config resource
 */
 type DetailConfigOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailConfigEnvelope
 }
 
-func (o *DetailConfigOK) Error() string {
-	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail config o k response has a 2xx status code
+func (o *DetailConfigOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail config o k response has a 3xx status code
+func (o *DetailConfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail config o k response has a 4xx status code
+func (o *DetailConfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail config o k response has a 5xx status code
+func (o *DetailConfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail config o k response a status code equal to that given
+func (o *DetailConfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail config o k response
+func (o *DetailConfigOK) Code() int {
+	return 200
+}
+
+func (o *DetailConfigOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigOK %s", 200, payload)
+}
+
+func (o *DetailConfigOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigOK %s", 200, payload)
+}
+
 func (o *DetailConfigOK) GetPayload() *rest_model.DetailConfigEnvelope {
 	return o.Payload
 }
 
 func (o *DetailConfigOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailConfigEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailConfigOK binds the response header WWW-Authenticate
+func (o *DetailConfigOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailConfigUnauthorized creates a DetailConfigUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailConfigUnauthorized() *DetailConfigUnauthorized {
 	return &DetailConfigUnauthorized{}
 }
 
-/* DetailConfigUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailConfigUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailConfigUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail config unauthorized response has a 2xx status code
+func (o *DetailConfigUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail config unauthorized response has a 3xx status code
+func (o *DetailConfigUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail config unauthorized response has a 4xx status code
+func (o *DetailConfigUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail config unauthorized response has a 5xx status code
+func (o *DetailConfigUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail config unauthorized response a status code equal to that given
+func (o *DetailConfigUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail config unauthorized response
+func (o *DetailConfigUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailConfigUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigUnauthorized %s", 401, payload)
+}
+
+func (o *DetailConfigUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigUnauthorized %s", 401, payload)
+}
+
 func (o *DetailConfigUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailConfigUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailConfigUnauthorized binds the response header WWW-Authenticate
+func (o *DetailConfigUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailConfigNotFound creates a DetailConfigNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailConfigNotFound() *DetailConfigNotFound {
 	return &DetailConfigNotFound{}
 }
 
-/* DetailConfigNotFound describes a response with status code 404, with default header values.
+/*
+DetailConfigNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailConfigNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail config not found response has a 2xx status code
+func (o *DetailConfigNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail config not found response has a 3xx status code
+func (o *DetailConfigNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail config not found response has a 4xx status code
+func (o *DetailConfigNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail config not found response has a 5xx status code
+func (o *DetailConfigNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail config not found response a status code equal to that given
+func (o *DetailConfigNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail config not found response
+func (o *DetailConfigNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailConfigNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigNotFound %s", 404, payload)
+}
+
+func (o *DetailConfigNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigNotFound %s", 404, payload)
+}
+
 func (o *DetailConfigNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailConfigNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailConfigNotFound binds the response header WWW-Authenticate
+func (o *DetailConfigNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailConfigTooManyRequests creates a DetailConfigTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailConfigTooManyRequests() *DetailConfigTooManyRequests {
 	return &DetailConfigTooManyRequests{}
 }
 
-/* DetailConfigTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailConfigTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailConfigTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailConfigTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail config too many requests response has a 2xx status code
+func (o *DetailConfigTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail config too many requests response has a 3xx status code
+func (o *DetailConfigTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail config too many requests response has a 4xx status code
+func (o *DetailConfigTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail config too many requests response has a 5xx status code
+func (o *DetailConfigTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail config too many requests response a status code equal to that given
+func (o *DetailConfigTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail config too many requests response
+func (o *DetailConfigTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailConfigTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailConfigTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailConfigTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailConfigTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailConfigTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailConfigTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailConfigServiceUnavailable creates a DetailConfigServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailConfigServiceUnavailable() *DetailConfigServiceUnavailable {
 	return &DetailConfigServiceUnavailable{}
 }
 
-/* DetailConfigServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailConfigServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailConfigServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailConfigServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail config service unavailable response has a 2xx status code
+func (o *DetailConfigServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail config service unavailable response has a 3xx status code
+func (o *DetailConfigServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail config service unavailable response has a 4xx status code
+func (o *DetailConfigServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail config service unavailable response has a 5xx status code
+func (o *DetailConfigServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail config service unavailable response a status code equal to that given
+func (o *DetailConfigServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail config service unavailable response
+func (o *DetailConfigServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailConfigServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailConfigServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /configs/{id}][%d] detailConfigServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailConfigServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailConfigServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailConfigServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailConfigServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

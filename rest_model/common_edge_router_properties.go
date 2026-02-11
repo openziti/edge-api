@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -134,11 +135,15 @@ func (m *CommonEdgeRouterProperties) validateAppData(formats strfmt.Registry) er
 
 	if m.AppData != nil {
 		if err := m.AppData.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("appData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("appData")
 			}
+
 			return err
 		}
 	}
@@ -243,12 +248,21 @@ func (m *CommonEdgeRouterProperties) ContextValidate(ctx context.Context, format
 func (m *CommonEdgeRouterProperties) contextValidateAppData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppData != nil {
+
+		if swag.IsZero(m.AppData) { // not required
+			return nil
+		}
+
 		if err := m.AppData.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("appData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("appData")
 			}
+
 			return err
 		}
 	}

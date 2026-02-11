@@ -26,6 +26,12 @@ paths:
 responses:
   listClientExternalJwtSigners:
     description: A list of External JWT Signers
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listClientExternalJwtSignersEnvelope'
 

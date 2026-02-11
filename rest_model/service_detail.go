@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -47,7 +48,7 @@ type ServiceDetail struct {
 
 	// map of config data for this service keyed by the config type name. Only configs of the types requested will be returned.
 	// Required: true
-	Config map[string]map[string]interface{} `json:"config"`
+	Config map[string]map[string]any `json:"config"`
 
 	// configs
 	// Required: true
@@ -93,7 +94,7 @@ func (m *ServiceDetail) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
-		Config map[string]map[string]interface{} `json:"config"`
+		Config map[string]map[string]any `json:"config"`
 
 		Configs []string `json:"configs"`
 
@@ -146,7 +147,7 @@ func (m ServiceDetail) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO0)
 	var dataAO1 struct {
-		Config map[string]map[string]interface{} `json:"config"`
+		Config map[string]map[string]any `json:"config"`
 
 		Configs []string `json:"configs"`
 
@@ -254,7 +255,7 @@ func (m *ServiceDetail) validateConfig(formats strfmt.Registry) error {
 			return err
 		}
 
-		if err := validate.Required("config"+"."+k, "body", m.Config); err != nil {
+		if err := validate.Required("config"+"."+k, "body", m.Config[k]); err != nil {
 			return err
 		}
 
@@ -314,11 +315,15 @@ func (m *ServiceDetail) validatePermissions(formats strfmt.Registry) error {
 	}
 
 	if err := m.Permissions.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("permissions")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("permissions")
 		}
+
 		return err
 	}
 
@@ -338,11 +343,15 @@ func (m *ServiceDetail) validatePostureQueries(formats strfmt.Registry) error {
 
 		if m.PostureQueries[i] != nil {
 			if err := m.PostureQueries[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("postureQueries" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("postureQueries" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -360,11 +369,15 @@ func (m *ServiceDetail) validateRoleAttributes(formats strfmt.Registry) error {
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -411,11 +424,15 @@ func (m *ServiceDetail) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *ServiceDetail) contextValidatePermissions(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("permissions")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("permissions")
 		}
+
 		return err
 	}
 
@@ -427,12 +444,21 @@ func (m *ServiceDetail) contextValidatePostureQueries(ctx context.Context, forma
 	for i := 0; i < len(m.PostureQueries); i++ {
 
 		if m.PostureQueries[i] != nil {
+
+			if swag.IsZero(m.PostureQueries[i]) { // not required
+				return nil
+			}
+
 			if err := m.PostureQueries[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("postureQueries" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("postureQueries" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -446,11 +472,15 @@ func (m *ServiceDetail) contextValidateRoleAttributes(ctx context.Context, forma
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}

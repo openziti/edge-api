@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new identity API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new identity API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new identity API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -106,12 +132,12 @@ type ClientService interface {
 }
 
 /*
-  AssociateIdentitysServiceConfigs associates service configs for a specific identity
+AssociateIdentitysServiceConfigs associates service configs for a specific identity
 
-  Associate service configs to a specific identity
+Associate service configs to a specific identity
 */
 func (a *Client) AssociateIdentitysServiceConfigs(params *AssociateIdentitysServiceConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateIdentitysServiceConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewAssociateIdentitysServiceConfigsParams()
 	}
@@ -131,28 +157,33 @@ func (a *Client) AssociateIdentitysServiceConfigs(params *AssociateIdentitysServ
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*AssociateIdentitysServiceConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for associateIdentitysServiceConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  CreateIdentity creates an identity resource
+CreateIdentity creates an identity resource
 
-  Create an identity resource. Requires admin access.
+Create an identity resource. Requires admin access.
 */
 func (a *Client) CreateIdentity(params *CreateIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateIdentityCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateIdentityParams()
 	}
@@ -172,28 +203,33 @@ func (a *Client) CreateIdentity(params *CreateIdentityParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateIdentityCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteIdentity deletes an identity
+DeleteIdentity deletes an identity
 
-  Delete an identity by id. Requires admin access.
+Delete an identity by id. Requires admin access.
 */
 func (a *Client) DeleteIdentity(params *DeleteIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIdentityOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteIdentityParams()
 	}
@@ -213,28 +249,33 @@ func (a *Client) DeleteIdentity(params *DeleteIdentityParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteIdentityOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailIdentity retrieves a single identity
+DetailIdentity retrieves a single identity
 
-  Retrieves a single identity by id. Requires admin access.
+Retrieves a single identity by id. Requires admin access.
 */
 func (a *Client) DetailIdentity(params *DetailIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailIdentityOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailIdentityParams()
 	}
@@ -254,28 +295,33 @@ func (a *Client) DetailIdentity(params *DetailIdentityParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailIdentityOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailIdentityType retrieves a identity type
+DetailIdentityType retrieves a identity type
 
-  Retrieves a single identity type by id. Requires admin access.
+Retrieves a single identity type by id. Requires admin access.
 */
 func (a *Client) DetailIdentityType(params *DetailIdentityTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailIdentityTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailIdentityTypeParams()
 	}
@@ -295,29 +341,33 @@ func (a *Client) DetailIdentityType(params *DetailIdentityTypeParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailIdentityTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailIdentityType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DisableIdentity sets an identity as disabled
+DisableIdentity sets an identity as disabled
 
-  Reject an identity's API session requests for N minutes or indefinitely if 0.
-
+Reject an identity's API session requests for N minutes or indefinitely if 0.
 */
 func (a *Client) DisableIdentity(params *DisableIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisableIdentityOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDisableIdentityParams()
 	}
@@ -337,28 +387,33 @@ func (a *Client) DisableIdentity(params *DisableIdentityParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DisableIdentityOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for disableIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DisassociateIdentitysServiceConfigs removes associated service configs from a specific identity
+DisassociateIdentitysServiceConfigs removes associated service configs from a specific identity
 
-  Remove service configs from a specific identity
+Remove service configs from a specific identity
 */
 func (a *Client) DisassociateIdentitysServiceConfigs(params *DisassociateIdentitysServiceConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DisassociateIdentitysServiceConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDisassociateIdentitysServiceConfigsParams()
 	}
@@ -378,29 +433,33 @@ func (a *Client) DisassociateIdentitysServiceConfigs(params *DisassociateIdentit
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DisassociateIdentitysServiceConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for disassociateIdentitysServiceConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  EnableIdentity clears all disabled state from an identity
+EnableIdentity clears all disabled state from an identity
 
-  Allows an admin to remove disabled statuses from an identity.
-
+Allows an admin to remove disabled statuses from an identity.
 */
 func (a *Client) EnableIdentity(params *EnableIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableIdentityOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewEnableIdentityParams()
 	}
@@ -420,29 +479,33 @@ func (a *Client) EnableIdentity(params *EnableIdentityParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*EnableIdentityOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for enableIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  GetIdentityAuthenticators retrieves the current authenticators of a specific identity
+GetIdentityAuthenticators retrieves the current authenticators of a specific identity
 
-  Returns a list of authenticators associated to the identity specified
-
+Returns a list of authenticators associated to the identity specified
 */
 func (a *Client) GetIdentityAuthenticators(params *GetIdentityAuthenticatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIdentityAuthenticatorsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetIdentityAuthenticatorsParams()
 	}
@@ -462,29 +525,33 @@ func (a *Client) GetIdentityAuthenticators(params *GetIdentityAuthenticatorsPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetIdentityAuthenticatorsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getIdentityAuthenticators: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  GetIdentityEnrollments retrieves the current enrollments of a specific identity
+GetIdentityEnrollments retrieves the current enrollments of a specific identity
 
-  Returns a list of enrollments associated to the identity specified
-
+Returns a list of enrollments associated to the identity specified
 */
 func (a *Client) GetIdentityEnrollments(params *GetIdentityEnrollmentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIdentityEnrollmentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetIdentityEnrollmentsParams()
 	}
@@ -504,31 +571,36 @@ func (a *Client) GetIdentityEnrollments(params *GetIdentityEnrollmentsParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetIdentityEnrollmentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getIdentityEnrollments: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  GetIdentityFailedServiceRequests retrieves a list of the most recent service failure requests due to posture checks
+	GetIdentityFailedServiceRequests retrieves a list of the most recent service failure requests due to posture checks
 
-  Returns a list of service session requests that failed due to posture checks. The entries will contain
+	Returns a list of service session requests that failed due to posture checks. The entries will contain
+
 every policy that was verified against and every failed check in each policy. Each check will include
 the historical posture data and posture check configuration.
-
 */
 func (a *Client) GetIdentityFailedServiceRequests(params *GetIdentityFailedServiceRequestsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIdentityFailedServiceRequestsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetIdentityFailedServiceRequestsParams()
 	}
@@ -548,32 +620,37 @@ func (a *Client) GetIdentityFailedServiceRequests(params *GetIdentityFailedServi
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetIdentityFailedServiceRequestsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getIdentityFailedServiceRequests: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  GetIdentityPolicyAdvice analyzes policies relating the given identity and service
+	GetIdentityPolicyAdvice analyzes policies relating the given identity and service
 
-  Analyzes policies to see if the given identity should be able to dial or bind the given service. |
+	Analyzes policies to see if the given identity should be able to dial or bind the given service. |
+
 Will check services policies to see if the identity can access the service. Will check edge router policies |
 to check if the identity and service have access to common edge routers so that a connnection can be made. |
 Will also check if at least one edge router is on-line. Requires admin access.
-
 */
 func (a *Client) GetIdentityPolicyAdvice(params *GetIdentityPolicyAdviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIdentityPolicyAdviceOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetIdentityPolicyAdviceParams()
 	}
@@ -593,30 +670,35 @@ func (a *Client) GetIdentityPolicyAdvice(params *GetIdentityPolicyAdviceParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetIdentityPolicyAdviceOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getIdentityPolicyAdvice: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  GetIdentityPostureData retrieves the curent posture data for a specific identity
+	GetIdentityPostureData retrieves the curent posture data for a specific identity
 
-  Returns a nested map data represeting the posture data of the identity.
+	Returns a nested map data represeting the posture data of the identity.
+
 This data should be considered volatile.
-
 */
 func (a *Client) GetIdentityPostureData(params *GetIdentityPostureDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIdentityPostureDataOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetIdentityPostureDataParams()
 	}
@@ -636,29 +718,33 @@ func (a *Client) GetIdentityPostureData(params *GetIdentityPostureDataParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetIdentityPostureDataOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getIdentityPostureData: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentities lists identities
+ListIdentities lists identities
 
-  Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListIdentities(params *ListIdentitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentitiesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentitiesParams()
 	}
@@ -678,29 +764,33 @@ func (a *Client) ListIdentities(params *ListIdentitiesParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentitiesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentityEdgeRouters lists accessible edge routers
+ListIdentityEdgeRouters lists accessible edge routers
 
-  Retrieves a list of edge-routers that the given identity may use to access services. Supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of edge-routers that the given identity may use to access services. Supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListIdentityEdgeRouters(params *ListIdentityEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityEdgeRoutersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentityEdgeRoutersParams()
 	}
@@ -720,28 +810,33 @@ func (a *Client) ListIdentityEdgeRouters(params *ListIdentityEdgeRoutersParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentityEdgeRoutersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentityEdgeRouters: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentityServicePolicies lists the service policies that affect an identity
+ListIdentityServicePolicies lists the service policies that affect an identity
 
-  Retrieves a list of service policies that apply to the specified identity.
+Retrieves a list of service policies that apply to the specified identity.
 */
 func (a *Client) ListIdentityServicePolicies(params *ListIdentityServicePoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityServicePoliciesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentityServicePoliciesParams()
 	}
@@ -761,29 +856,33 @@ func (a *Client) ListIdentityServicePolicies(params *ListIdentityServicePolicies
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentityServicePoliciesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentityServicePolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentityServices lists accessible services
+ListIdentityServices lists accessible services
 
-  Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of services that the given identity has access to. Supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListIdentityServices(params *ListIdentityServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityServicesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentityServicesParams()
 	}
@@ -803,29 +902,33 @@ func (a *Client) ListIdentityServices(params *ListIdentityServicesParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentityServicesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentityServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentityTypes lists available identity types
+ListIdentityTypes lists available identity types
 
-  Retrieves a list of identity types; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of identity types; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListIdentityTypes(params *ListIdentityTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityTypesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentityTypesParams()
 	}
@@ -845,28 +948,33 @@ func (a *Client) ListIdentityTypes(params *ListIdentityTypesParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentityTypesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentityTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentitysEdgeRouterPolicies lists the edge router policies that affect an identity
+ListIdentitysEdgeRouterPolicies lists the edge router policies that affect an identity
 
-  Retrieves a list of edge router policies that apply to the specified identity.
+Retrieves a list of edge router policies that apply to the specified identity.
 */
 func (a *Client) ListIdentitysEdgeRouterPolicies(params *ListIdentitysEdgeRouterPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentitysEdgeRouterPoliciesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentitysEdgeRouterPoliciesParams()
 	}
@@ -886,28 +994,33 @@ func (a *Client) ListIdentitysEdgeRouterPolicies(params *ListIdentitysEdgeRouter
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentitysEdgeRouterPoliciesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentitysEdgeRouterPolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentitysServiceConfigs lists the service configs associated a specific identity
+ListIdentitysServiceConfigs lists the service configs associated a specific identity
 
-  Retrieves a list of service configs associated to a specific identity
+Retrieves a list of service configs associated to a specific identity
 */
 func (a *Client) ListIdentitysServiceConfigs(params *ListIdentitysServiceConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentitysServiceConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentitysServiceConfigsParams()
 	}
@@ -927,28 +1040,33 @@ func (a *Client) ListIdentitysServiceConfigs(params *ListIdentitysServiceConfigs
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentitysServiceConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentitysServiceConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchIdentity updates the supplied fields on an identity
+PatchIdentity updates the supplied fields on an identity
 
-  Update the supplied fields on an identity. Requires admin access.
+Update the supplied fields on an identity. Requires admin access.
 */
 func (a *Client) PatchIdentity(params *PatchIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchIdentityOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchIdentityParams()
 	}
@@ -968,29 +1086,33 @@ func (a *Client) PatchIdentity(params *PatchIdentityParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchIdentityOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  RemoveIdentityMfa removes m f a from an identitity
+RemoveIdentityMfa removes m f a from an identitity
 
-  Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
-
+Allows an admin to remove MFA enrollment from a specific identity. Requires admin.
 */
 func (a *Client) RemoveIdentityMfa(params *RemoveIdentityMfaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveIdentityMfaOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRemoveIdentityMfaParams()
 	}
@@ -1010,28 +1132,33 @@ func (a *Client) RemoveIdentityMfa(params *RemoveIdentityMfaParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RemoveIdentityMfaOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for removeIdentityMfa: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateIdentity updates all fields on an identity
+UpdateIdentity updates all fields on an identity
 
-  Update all fields on an identity by id. Requires admin access.
+Update all fields on an identity by id. Requires admin access.
 */
 func (a *Client) UpdateIdentity(params *UpdateIdentityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIdentityOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateIdentityParams()
 	}
@@ -1051,29 +1178,33 @@ func (a *Client) UpdateIdentity(params *UpdateIdentityParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateIdentityOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateIdentity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateIdentityTracing enables disable data flow tracing for an identity
+UpdateIdentityTracing enables disable data flow tracing for an identity
 
-  Allows an admin to enable/disable data flow tracing for an identity
-
+Allows an admin to enable/disable data flow tracing for an identity
 */
 func (a *Client) UpdateIdentityTracing(params *UpdateIdentityTracingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIdentityTracingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateIdentityTracingParams()
 	}
@@ -1093,17 +1224,22 @@ func (a *Client) UpdateIdentityTracing(params *UpdateIdentityTracingParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateIdentityTracingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateIdentityTracing: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

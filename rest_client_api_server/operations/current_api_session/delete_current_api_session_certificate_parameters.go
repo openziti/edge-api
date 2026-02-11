@@ -50,7 +50,6 @@ func NewDeleteCurrentAPISessionCertificateParams() DeleteCurrentAPISessionCertif
 //
 // swagger:parameters deleteCurrentApiSessionCertificate
 type DeleteCurrentAPISessionCertificateParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

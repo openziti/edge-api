@@ -49,7 +49,6 @@ func NewListServiceUpdatesParams() ListServiceUpdatesParams {
 //
 // swagger:parameters listServiceUpdates
 type ListServiceUpdatesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // CreateCurrentAPISessionCertificateHandlerFunc turns a function with the right signature into a create current Api session certificate handler
-type CreateCurrentAPISessionCertificateHandlerFunc func(CreateCurrentAPISessionCertificateParams, interface{}) middleware.Responder
+type CreateCurrentAPISessionCertificateHandlerFunc func(CreateCurrentAPISessionCertificateParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateCurrentAPISessionCertificateHandlerFunc) Handle(params CreateCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
+func (fn CreateCurrentAPISessionCertificateHandlerFunc) Handle(params CreateCurrentAPISessionCertificateParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateCurrentAPISessionCertificateHandler interface for that can handle valid create current Api session certificate params
 type CreateCurrentAPISessionCertificateHandler interface {
-	Handle(CreateCurrentAPISessionCertificateParams, interface{}) middleware.Responder
+	Handle(CreateCurrentAPISessionCertificateParams, any) middleware.Responder
 }
 
 // NewCreateCurrentAPISessionCertificate creates a new http.Handler for the create current Api session certificate operation
@@ -53,12 +53,12 @@ func NewCreateCurrentAPISessionCertificate(ctx *middleware.Context, handler Crea
 	return &CreateCurrentAPISessionCertificate{Context: ctx, Handler: handler}
 }
 
-/* CreateCurrentAPISessionCertificate swagger:route POST /current-api-session/certificates Current API Session createCurrentApiSessionCertificate
+/*
+	CreateCurrentAPISessionCertificate swagger:route POST /current-api-session/certificates Current API Session createCurrentApiSessionCertificate
 
-Creates an ephemeral certificate for the current API Session
+# Creates an ephemeral certificate for the current API Session
 
 Creates an ephemeral certificate for the current API Session. This endpoint expects a PEM encoded CSRs to be provided for fulfillment as a property of a JSON payload. It is up to the client to manage the private key backing the CSR request.
-
 */
 type CreateCurrentAPISessionCertificate struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateCurrentAPISessionCertificate) ServeHTTP(rw http.ResponseWriter, r
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateCurrentAPISessionCertificate) ServeHTTP(rw http.ResponseWriter, r
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

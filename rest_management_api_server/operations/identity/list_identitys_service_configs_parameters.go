@@ -50,7 +50,6 @@ func NewListIdentitysServiceConfigsParams() ListIdentitysServiceConfigsParams {
 //
 // swagger:parameters listIdentitysServiceConfigs
 type ListIdentitysServiceConfigsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

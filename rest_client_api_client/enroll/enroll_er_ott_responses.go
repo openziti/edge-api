@@ -30,11 +30,14 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type EnrollErOttReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *EnrollErOttReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *EnrollErOttReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewEnrollErOttOK()
@@ -72,7 +75,7 @@ func (o *EnrollErOttReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enroll/erott] enrollErOtt", response, response.Code())
 	}
 }
 
@@ -81,31 +84,108 @@ func NewEnrollErOttOK() *EnrollErOttOK {
 	return &EnrollErOttOK{}
 }
 
-/* EnrollErOttOK describes a response with status code 200, with default header values.
+/*
+EnrollErOttOK describes a response with status code 200, with default header values.
 
 A response containing the edge routers signed certificates (server chain, server cert, CAs).
 */
 type EnrollErOttOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.EnrollmentCertsEnvelope
 }
 
-func (o *EnrollErOttOK) Error() string {
-	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this enroll er ott o k response has a 2xx status code
+func (o *EnrollErOttOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this enroll er ott o k response has a 3xx status code
+func (o *EnrollErOttOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll er ott o k response has a 4xx status code
+func (o *EnrollErOttOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll er ott o k response has a 5xx status code
+func (o *EnrollErOttOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll er ott o k response a status code equal to that given
+func (o *EnrollErOttOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the enroll er ott o k response
+func (o *EnrollErOttOK) Code() int {
+	return 200
+}
+
+func (o *EnrollErOttOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttOK %s", 200, payload)
+}
+
+func (o *EnrollErOttOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttOK %s", 200, payload)
+}
+
 func (o *EnrollErOttOK) GetPayload() *rest_model.EnrollmentCertsEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollErOttOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.EnrollmentCertsEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollErOttOK binds the response header WWW-Authenticate
+func (o *EnrollErOttOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollErOttBadRequest creates a EnrollErOttBadRequest with default headers values
@@ -113,31 +193,108 @@ func NewEnrollErOttBadRequest() *EnrollErOttBadRequest {
 	return &EnrollErOttBadRequest{}
 }
 
-/* EnrollErOttBadRequest describes a response with status code 400, with default header values.
+/*
+EnrollErOttBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type EnrollErOttBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollErOttBadRequest) Error() string {
-	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this enroll er ott bad request response has a 2xx status code
+func (o *EnrollErOttBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll er ott bad request response has a 3xx status code
+func (o *EnrollErOttBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll er ott bad request response has a 4xx status code
+func (o *EnrollErOttBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll er ott bad request response has a 5xx status code
+func (o *EnrollErOttBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll er ott bad request response a status code equal to that given
+func (o *EnrollErOttBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the enroll er ott bad request response
+func (o *EnrollErOttBadRequest) Code() int {
+	return 400
+}
+
+func (o *EnrollErOttBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttBadRequest %s", 400, payload)
+}
+
+func (o *EnrollErOttBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttBadRequest %s", 400, payload)
+}
+
 func (o *EnrollErOttBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollErOttBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollErOttBadRequest binds the response header WWW-Authenticate
+func (o *EnrollErOttBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollErOttTooManyRequests creates a EnrollErOttTooManyRequests with default headers values
@@ -145,31 +302,108 @@ func NewEnrollErOttTooManyRequests() *EnrollErOttTooManyRequests {
 	return &EnrollErOttTooManyRequests{}
 }
 
-/* EnrollErOttTooManyRequests describes a response with status code 429, with default header values.
+/*
+EnrollErOttTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type EnrollErOttTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollErOttTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this enroll er ott too many requests response has a 2xx status code
+func (o *EnrollErOttTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll er ott too many requests response has a 3xx status code
+func (o *EnrollErOttTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll er ott too many requests response has a 4xx status code
+func (o *EnrollErOttTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll er ott too many requests response has a 5xx status code
+func (o *EnrollErOttTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll er ott too many requests response a status code equal to that given
+func (o *EnrollErOttTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the enroll er ott too many requests response
+func (o *EnrollErOttTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *EnrollErOttTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttTooManyRequests %s", 429, payload)
+}
+
+func (o *EnrollErOttTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttTooManyRequests %s", 429, payload)
+}
+
 func (o *EnrollErOttTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollErOttTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollErOttTooManyRequests binds the response header WWW-Authenticate
+func (o *EnrollErOttTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollErOttServiceUnavailable creates a EnrollErOttServiceUnavailable with default headers values
@@ -177,29 +411,106 @@ func NewEnrollErOttServiceUnavailable() *EnrollErOttServiceUnavailable {
 	return &EnrollErOttServiceUnavailable{}
 }
 
-/* EnrollErOttServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EnrollErOttServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type EnrollErOttServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollErOttServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this enroll er ott service unavailable response has a 2xx status code
+func (o *EnrollErOttServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll er ott service unavailable response has a 3xx status code
+func (o *EnrollErOttServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll er ott service unavailable response has a 4xx status code
+func (o *EnrollErOttServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll er ott service unavailable response has a 5xx status code
+func (o *EnrollErOttServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this enroll er ott service unavailable response a status code equal to that given
+func (o *EnrollErOttServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the enroll er ott service unavailable response
+func (o *EnrollErOttServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *EnrollErOttServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttServiceUnavailable %s", 503, payload)
+}
+
+func (o *EnrollErOttServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/erott][%d] enrollErOttServiceUnavailable %s", 503, payload)
+}
+
 func (o *EnrollErOttServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollErOttServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollErOttServiceUnavailable binds the response header WWW-Authenticate
+func (o *EnrollErOttServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

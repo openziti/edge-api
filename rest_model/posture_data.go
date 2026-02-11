@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -108,11 +109,15 @@ func (m *PostureData) validateAPISessionPostureData(formats strfmt.Registry) err
 		}
 		if val, ok := m.APISessionPostureData[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("apiSessionPostureData" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("apiSessionPostureData" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -130,11 +135,15 @@ func (m *PostureData) validateDomain(formats strfmt.Registry) error {
 
 	if m.Domain != nil {
 		if err := m.Domain.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("domain")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("domain")
 			}
+
 			return err
 		}
 	}
@@ -150,11 +159,15 @@ func (m *PostureData) validateMac(formats strfmt.Registry) error {
 
 	if m.Mac != nil {
 		if err := m.Mac.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("mac")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("mac")
 			}
+
 			return err
 		}
 	}
@@ -170,11 +183,15 @@ func (m *PostureData) validateOs(formats strfmt.Registry) error {
 
 	if m.Os != nil {
 		if err := m.Os.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("os")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("os")
 			}
+
 			return err
 		}
 	}
@@ -195,11 +212,15 @@ func (m *PostureData) validateProcesses(formats strfmt.Registry) error {
 
 		if m.Processes[i] != nil {
 			if err := m.Processes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("processes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -261,12 +282,17 @@ func (m *PostureData) contextValidateAPISessionPostureData(ctx context.Context, 
 func (m *PostureData) contextValidateDomain(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Domain != nil {
+
 		if err := m.Domain.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("domain")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("domain")
 			}
+
 			return err
 		}
 	}
@@ -277,12 +303,17 @@ func (m *PostureData) contextValidateDomain(ctx context.Context, formats strfmt.
 func (m *PostureData) contextValidateMac(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mac != nil {
+
 		if err := m.Mac.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("mac")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("mac")
 			}
+
 			return err
 		}
 	}
@@ -293,12 +324,17 @@ func (m *PostureData) contextValidateMac(ctx context.Context, formats strfmt.Reg
 func (m *PostureData) contextValidateOs(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Os != nil {
+
 		if err := m.Os.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("os")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("os")
 			}
+
 			return err
 		}
 	}
@@ -311,12 +347,21 @@ func (m *PostureData) contextValidateProcesses(ctx context.Context, formats strf
 	for i := 0; i < len(m.Processes); i++ {
 
 		if m.Processes[i] != nil {
+
+			if swag.IsZero(m.Processes[i]) { // not required
+				return nil
+			}
+
 			if err := m.Processes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("processes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

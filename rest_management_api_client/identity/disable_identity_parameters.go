@@ -78,10 +78,12 @@ func NewDisableIdentityParamsWithHTTPClient(client *http.Client) *DisableIdentit
 	}
 }
 
-/* DisableIdentityParams contains all the parameters to send to the API endpoint
-   for the disable identity operation.
+/*
+DisableIdentityParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the disable identity operation.
+
+	Typically these are written to a http.Request.
 */
 type DisableIdentityParams struct {
 

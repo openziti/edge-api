@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -256,11 +257,15 @@ func (m *PostureCheckFailureMfa) validateActualValue(formats strfmt.Registry) er
 
 	if m.ActualValue != nil {
 		if err := m.ActualValue.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actualValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actualValue")
 			}
+
 			return err
 		}
 	}
@@ -276,11 +281,15 @@ func (m *PostureCheckFailureMfa) validateCriteria(formats strfmt.Registry) error
 
 	if m.Criteria != nil {
 		if err := m.Criteria.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("criteria")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("criteria")
 			}
+
 			return err
 		}
 	}
@@ -296,11 +305,15 @@ func (m *PostureCheckFailureMfa) validateExpectedValue(formats strfmt.Registry) 
 
 	if m.ExpectedValue != nil {
 		if err := m.ExpectedValue.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("expectedValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("expectedValue")
 			}
+
 			return err
 		}
 	}
@@ -333,12 +346,17 @@ func (m *PostureCheckFailureMfa) ContextValidate(ctx context.Context, formats st
 func (m *PostureCheckFailureMfa) contextValidateActualValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ActualValue != nil {
+
 		if err := m.ActualValue.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actualValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actualValue")
 			}
+
 			return err
 		}
 	}
@@ -349,12 +367,17 @@ func (m *PostureCheckFailureMfa) contextValidateActualValue(ctx context.Context,
 func (m *PostureCheckFailureMfa) contextValidateCriteria(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Criteria != nil {
+
 		if err := m.Criteria.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("criteria")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("criteria")
 			}
+
 			return err
 		}
 	}
@@ -365,12 +388,17 @@ func (m *PostureCheckFailureMfa) contextValidateCriteria(ctx context.Context, fo
 func (m *PostureCheckFailureMfa) contextValidateExpectedValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExpectedValue != nil {
+
 		if err := m.ExpectedValue.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("expectedValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("expectedValue")
 			}
+
 			return err
 		}
 	}

@@ -36,16 +36,16 @@ import (
 )
 
 // GetCurrentIdentityHandlerFunc turns a function with the right signature into a get current identity handler
-type GetCurrentIdentityHandlerFunc func(GetCurrentIdentityParams, interface{}) middleware.Responder
+type GetCurrentIdentityHandlerFunc func(GetCurrentIdentityParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetCurrentIdentityHandlerFunc) Handle(params GetCurrentIdentityParams, principal interface{}) middleware.Responder {
+func (fn GetCurrentIdentityHandlerFunc) Handle(params GetCurrentIdentityParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetCurrentIdentityHandler interface for that can handle valid get current identity params
 type GetCurrentIdentityHandler interface {
-	Handle(GetCurrentIdentityParams, interface{}) middleware.Responder
+	Handle(GetCurrentIdentityParams, any) middleware.Responder
 }
 
 // NewGetCurrentIdentity creates a new http.Handler for the get current identity operation
@@ -53,12 +53,12 @@ func NewGetCurrentIdentity(ctx *middleware.Context, handler GetCurrentIdentityHa
 	return &GetCurrentIdentity{Context: ctx, Handler: handler}
 }
 
-/* GetCurrentIdentity swagger:route GET /current-identity Current Identity getCurrentIdentity
+/*
+	GetCurrentIdentity swagger:route GET /current-identity Current Identity getCurrentIdentity
 
-Return the current identity
+# Return the current identity
 
 Returns the identity associated with the API sessions used to issue the current request
-
 */
 type GetCurrentIdentity struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *GetCurrentIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *GetCurrentIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

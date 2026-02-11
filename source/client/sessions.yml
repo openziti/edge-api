@@ -105,6 +105,12 @@ paths:
 responses:
   sessionCreateResponse:
     description: The create request was successful and the resource has been added at the following location
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/sessionCreateEnvelope'
 

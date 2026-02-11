@@ -50,7 +50,6 @@ func NewDetailCaParams() DetailCaParams {
 //
 // swagger:parameters detailCa
 type DetailCaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

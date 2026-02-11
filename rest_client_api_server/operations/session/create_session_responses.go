@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CreateSessionCreatedCode is the HTTP code returned for type CreateSessionCreated
 const CreateSessionCreatedCode int = 201
 
-/*CreateSessionCreated The create request was successful and the resource has been added at the following location
+/*
+CreateSessionCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createSessionCreated
 */
 type CreateSessionCreated struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CreateSessionCreated struct {
 func NewCreateSessionCreated() *CreateSessionCreated {
 
 	return &CreateSessionCreated{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create session created response
+func (o *CreateSessionCreated) WithWWWAuthenticate(wWWAuthenticate []string) *CreateSessionCreated {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create session created response
+func (o *CreateSessionCreated) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create session created response
@@ -72,6 +89,23 @@ func (o *CreateSessionCreated) SetPayload(payload *rest_model.SessionCreateEnvel
 // WriteResponse to the client
 func (o *CreateSessionCreated) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(201)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CreateSessionCreated) WriteResponse(rw http.ResponseWriter, producer ru
 // CreateSessionBadRequestCode is the HTTP code returned for type CreateSessionBadRequest
 const CreateSessionBadRequestCode int = 400
 
-/*CreateSessionBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateSessionBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createSessionBadRequest
 */
 type CreateSessionBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CreateSessionBadRequest struct {
 func NewCreateSessionBadRequest() *CreateSessionBadRequest {
 
 	return &CreateSessionBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create session bad request response
+func (o *CreateSessionBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *CreateSessionBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create session bad request response
+func (o *CreateSessionBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create session bad request response
@@ -116,6 +166,23 @@ func (o *CreateSessionBadRequest) SetPayload(payload *rest_model.APIErrorEnvelop
 // WriteResponse to the client
 func (o *CreateSessionBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CreateSessionBadRequest) WriteResponse(rw http.ResponseWriter, producer
 // CreateSessionUnauthorizedCode is the HTTP code returned for type CreateSessionUnauthorized
 const CreateSessionUnauthorizedCode int = 401
 
-/*CreateSessionUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateSessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createSessionUnauthorized
 */
 type CreateSessionUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CreateSessionUnauthorized struct {
 func NewCreateSessionUnauthorized() *CreateSessionUnauthorized {
 
 	return &CreateSessionUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create session unauthorized response
+func (o *CreateSessionUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CreateSessionUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create session unauthorized response
+func (o *CreateSessionUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create session unauthorized response
@@ -160,6 +243,23 @@ func (o *CreateSessionUnauthorized) SetPayload(payload *rest_model.APIErrorEnvel
 // WriteResponse to the client
 func (o *CreateSessionUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *CreateSessionUnauthorized) WriteResponse(rw http.ResponseWriter, produc
 // CreateSessionNotFoundCode is the HTTP code returned for type CreateSessionNotFound
 const CreateSessionNotFoundCode int = 404
 
-/*CreateSessionNotFound The requested resource does not exist
+/*
+CreateSessionNotFound The requested resource does not exist
 
 swagger:response createSessionNotFound
 */
 type CreateSessionNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type CreateSessionNotFound struct {
 func NewCreateSessionNotFound() *CreateSessionNotFound {
 
 	return &CreateSessionNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create session not found response
+func (o *CreateSessionNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *CreateSessionNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create session not found response
+func (o *CreateSessionNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create session not found response
@@ -204,6 +320,23 @@ func (o *CreateSessionNotFound) SetPayload(payload *rest_model.APIErrorEnvelope)
 // WriteResponse to the client
 func (o *CreateSessionNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *CreateSessionNotFound) WriteResponse(rw http.ResponseWriter, producer r
 // CreateSessionTooManyRequestsCode is the HTTP code returned for type CreateSessionTooManyRequests
 const CreateSessionTooManyRequestsCode int = 429
 
-/*CreateSessionTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateSessionTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createSessionTooManyRequests
 */
 type CreateSessionTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type CreateSessionTooManyRequests struct {
 func NewCreateSessionTooManyRequests() *CreateSessionTooManyRequests {
 
 	return &CreateSessionTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create session too many requests response
+func (o *CreateSessionTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *CreateSessionTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create session too many requests response
+func (o *CreateSessionTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create session too many requests response
@@ -248,6 +397,23 @@ func (o *CreateSessionTooManyRequests) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *CreateSessionTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *CreateSessionTooManyRequests) WriteResponse(rw http.ResponseWriter, pro
 // CreateSessionServiceUnavailableCode is the HTTP code returned for type CreateSessionServiceUnavailable
 const CreateSessionServiceUnavailableCode int = 503
 
-/*CreateSessionServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+CreateSessionServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response createSessionServiceUnavailable
 */
 type CreateSessionServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type CreateSessionServiceUnavailable struct {
 func NewCreateSessionServiceUnavailable() *CreateSessionServiceUnavailable {
 
 	return &CreateSessionServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create session service unavailable response
+func (o *CreateSessionServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *CreateSessionServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create session service unavailable response
+func (o *CreateSessionServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create session service unavailable response
@@ -291,6 +473,23 @@ func (o *CreateSessionServiceUnavailable) SetPayload(payload *rest_model.APIErro
 
 // WriteResponse to the client
 func (o *CreateSessionServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

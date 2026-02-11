@@ -64,6 +64,12 @@ paths:
 responses:
   postureResponse:
     description: Contains a list of services that have had their timers altered
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/postureResponseEnvelope'
 

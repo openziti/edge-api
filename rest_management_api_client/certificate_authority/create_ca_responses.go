@@ -30,11 +30,14 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateCaReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateCaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateCaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateCaCreated()
@@ -78,7 +81,7 @@ func (o *CreateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cas] createCa", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewCreateCaCreated() *CreateCaCreated {
 	return &CreateCaCreated{}
 }
 
-/* CreateCaCreated describes a response with status code 201, with default header values.
+/*
+CreateCaCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
 type CreateCaCreated struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateCaCreated) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create ca created response has a 2xx status code
+func (o *CreateCaCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create ca created response has a 3xx status code
+func (o *CreateCaCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca created response has a 4xx status code
+func (o *CreateCaCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create ca created response has a 5xx status code
+func (o *CreateCaCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca created response a status code equal to that given
+func (o *CreateCaCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create ca created response
+func (o *CreateCaCreated) Code() int {
+	return 201
+}
+
+func (o *CreateCaCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaCreated %s", 201, payload)
+}
+
+func (o *CreateCaCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaCreated %s", 201, payload)
+}
+
 func (o *CreateCaCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCaCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.CreateEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCaCreated binds the response header WWW-Authenticate
+func (o *CreateCaCreated) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCaBadRequest creates a CreateCaBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewCreateCaBadRequest() *CreateCaBadRequest {
 	return &CreateCaBadRequest{}
 }
 
-/* CreateCaBadRequest describes a response with status code 400, with default header values.
+/*
+CreateCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type CreateCaBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create ca bad request response has a 2xx status code
+func (o *CreateCaBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca bad request response has a 3xx status code
+func (o *CreateCaBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca bad request response has a 4xx status code
+func (o *CreateCaBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ca bad request response has a 5xx status code
+func (o *CreateCaBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca bad request response a status code equal to that given
+func (o *CreateCaBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create ca bad request response
+func (o *CreateCaBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateCaBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaBadRequest %s", 400, payload)
+}
+
+func (o *CreateCaBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaBadRequest %s", 400, payload)
+}
+
 func (o *CreateCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCaBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCaBadRequest binds the response header WWW-Authenticate
+func (o *CreateCaBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCaUnauthorized creates a CreateCaUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewCreateCaUnauthorized() *CreateCaUnauthorized {
 	return &CreateCaUnauthorized{}
 }
 
-/* CreateCaUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateCaUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create ca unauthorized response has a 2xx status code
+func (o *CreateCaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca unauthorized response has a 3xx status code
+func (o *CreateCaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca unauthorized response has a 4xx status code
+func (o *CreateCaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ca unauthorized response has a 5xx status code
+func (o *CreateCaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca unauthorized response a status code equal to that given
+func (o *CreateCaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create ca unauthorized response
+func (o *CreateCaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateCaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaUnauthorized %s", 401, payload)
+}
+
+func (o *CreateCaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaUnauthorized %s", 401, payload)
+}
+
 func (o *CreateCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCaUnauthorized binds the response header WWW-Authenticate
+func (o *CreateCaUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCaTooManyRequests creates a CreateCaTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewCreateCaTooManyRequests() *CreateCaTooManyRequests {
 	return &CreateCaTooManyRequests{}
 }
 
-/* CreateCaTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreateCaTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create ca too many requests response has a 2xx status code
+func (o *CreateCaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca too many requests response has a 3xx status code
+func (o *CreateCaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca too many requests response has a 4xx status code
+func (o *CreateCaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ca too many requests response has a 5xx status code
+func (o *CreateCaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ca too many requests response a status code equal to that given
+func (o *CreateCaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create ca too many requests response
+func (o *CreateCaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateCaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateCaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCaTooManyRequests binds the response header WWW-Authenticate
+func (o *CreateCaTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateCaServiceUnavailable creates a CreateCaServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewCreateCaServiceUnavailable() *CreateCaServiceUnavailable {
 	return &CreateCaServiceUnavailable{}
 }
 
-/* CreateCaServiceUnavailable describes a response with status code 503, with default header values.
+/*
+CreateCaServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type CreateCaServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateCaServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cas][%d] createCaServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this create ca service unavailable response has a 2xx status code
+func (o *CreateCaServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create ca service unavailable response has a 3xx status code
+func (o *CreateCaServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ca service unavailable response has a 4xx status code
+func (o *CreateCaServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create ca service unavailable response has a 5xx status code
+func (o *CreateCaServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create ca service unavailable response a status code equal to that given
+func (o *CreateCaServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the create ca service unavailable response
+func (o *CreateCaServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *CreateCaServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaServiceUnavailable %s", 503, payload)
+}
+
+func (o *CreateCaServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas][%d] createCaServiceUnavailable %s", 503, payload)
+}
+
 func (o *CreateCaServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateCaServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateCaServiceUnavailable binds the response header WWW-Authenticate
+func (o *CreateCaServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

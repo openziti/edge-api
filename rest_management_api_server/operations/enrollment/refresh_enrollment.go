@@ -36,16 +36,16 @@ import (
 )
 
 // RefreshEnrollmentHandlerFunc turns a function with the right signature into a refresh enrollment handler
-type RefreshEnrollmentHandlerFunc func(RefreshEnrollmentParams, interface{}) middleware.Responder
+type RefreshEnrollmentHandlerFunc func(RefreshEnrollmentParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn RefreshEnrollmentHandlerFunc) Handle(params RefreshEnrollmentParams, principal interface{}) middleware.Responder {
+func (fn RefreshEnrollmentHandlerFunc) Handle(params RefreshEnrollmentParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // RefreshEnrollmentHandler interface for that can handle valid refresh enrollment params
 type RefreshEnrollmentHandler interface {
-	Handle(RefreshEnrollmentParams, interface{}) middleware.Responder
+	Handle(RefreshEnrollmentParams, any) middleware.Responder
 }
 
 // NewRefreshEnrollment creates a new http.Handler for the refresh enrollment operation
@@ -53,12 +53,12 @@ func NewRefreshEnrollment(ctx *middleware.Context, handler RefreshEnrollmentHand
 	return &RefreshEnrollment{Context: ctx, Handler: handler}
 }
 
-/* RefreshEnrollment swagger:route POST /enrollments/{id}/refresh Enrollment refreshEnrollment
+/*
+	RefreshEnrollment swagger:route POST /enrollments/{id}/refresh Enrollment refreshEnrollment
 
-Refreshes an enrollment record's expiration window
+# Refreshes an enrollment record's expiration window
 
 For expired or unexpired enrollments, reset the expiration window. A new JWT will be generated and must be used for the enrollment.
-
 */
 type RefreshEnrollment struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *RefreshEnrollment) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *RefreshEnrollment) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

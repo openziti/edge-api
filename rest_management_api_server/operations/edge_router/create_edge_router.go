@@ -36,16 +36,16 @@ import (
 )
 
 // CreateEdgeRouterHandlerFunc turns a function with the right signature into a create edge router handler
-type CreateEdgeRouterHandlerFunc func(CreateEdgeRouterParams, interface{}) middleware.Responder
+type CreateEdgeRouterHandlerFunc func(CreateEdgeRouterParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateEdgeRouterHandlerFunc) Handle(params CreateEdgeRouterParams, principal interface{}) middleware.Responder {
+func (fn CreateEdgeRouterHandlerFunc) Handle(params CreateEdgeRouterParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateEdgeRouterHandler interface for that can handle valid create edge router params
 type CreateEdgeRouterHandler interface {
-	Handle(CreateEdgeRouterParams, interface{}) middleware.Responder
+	Handle(CreateEdgeRouterParams, any) middleware.Responder
 }
 
 // NewCreateEdgeRouter creates a new http.Handler for the create edge router operation
@@ -53,12 +53,12 @@ func NewCreateEdgeRouter(ctx *middleware.Context, handler CreateEdgeRouterHandle
 	return &CreateEdgeRouter{Context: ctx, Handler: handler}
 }
 
-/* CreateEdgeRouter swagger:route POST /edge-routers Edge Router createEdgeRouter
+/*
+	CreateEdgeRouter swagger:route POST /edge-routers Edge Router createEdgeRouter
 
-Create an edge router
+# Create an edge router
 
 Create a edge router resource. Requires admin access.
-
 */
 type CreateEdgeRouter struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateEdgeRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateEdgeRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

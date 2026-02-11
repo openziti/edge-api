@@ -33,8 +33,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"io"
-	"io/ioutil"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -109,7 +109,7 @@ func UnmarshalPostureResponseCreateSlice(reader io.Reader, consumer runtime.Cons
 // UnmarshalPostureResponseCreate unmarshals polymorphic PostureResponseCreate
 func UnmarshalPostureResponseCreate(reader io.Reader, consumer runtime.Consumer) (PostureResponseCreate, error) {
 	// we need to read this twice, so first into a buffer
-	data, err := ioutil.ReadAll(reader)
+	data, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, err
 	}
@@ -214,11 +214,15 @@ func (m *postureResponseCreate) ContextValidate(ctx context.Context, formats str
 func (m *postureResponseCreate) contextValidateTypeID(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.TypeID().ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("typeId")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("typeId")
 		}
+
 		return err
 	}
 

@@ -36,16 +36,16 @@ import (
 )
 
 // ListCasHandlerFunc turns a function with the right signature into a list cas handler
-type ListCasHandlerFunc func(ListCasParams, interface{}) middleware.Responder
+type ListCasHandlerFunc func(ListCasParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListCasHandlerFunc) Handle(params ListCasParams, principal interface{}) middleware.Responder {
+func (fn ListCasHandlerFunc) Handle(params ListCasParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListCasHandler interface for that can handle valid list cas params
 type ListCasHandler interface {
-	Handle(ListCasParams, interface{}) middleware.Responder
+	Handle(ListCasParams, any) middleware.Responder
 }
 
 // NewListCas creates a new http.Handler for the list cas operation
@@ -53,12 +53,12 @@ func NewListCas(ctx *middleware.Context, handler ListCasHandler) *ListCas {
 	return &ListCas{Context: ctx, Handler: handler}
 }
 
-/* ListCas swagger:route GET /cas Certificate Authority listCas
+/*
+	ListCas swagger:route GET /cas Certificate Authority listCas
 
-List CAs
+# List CAs
 
 Retrieves a list of CA resources; supports filtering, sorting, and pagination. Requires admin access.
-
 */
 type ListCas struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListCas) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListCas) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteControllerSettingOKCode is the HTTP code returned for type DeleteControllerSettingOK
 const DeleteControllerSettingOKCode int = 200
 
-/*DeleteControllerSettingOK The delete request was successful and the resource has been removed
+/*
+DeleteControllerSettingOK The delete request was successful and the resource has been removed
 
 swagger:response deleteControllerSettingOK
 */
 type DeleteControllerSettingOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteControllerSettingOK struct {
 func NewDeleteControllerSettingOK() *DeleteControllerSettingOK {
 
 	return &DeleteControllerSettingOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete controller setting o k response
+func (o *DeleteControllerSettingOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteControllerSettingOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete controller setting o k response
+func (o *DeleteControllerSettingOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete controller setting o k response
@@ -72,6 +89,23 @@ func (o *DeleteControllerSettingOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteControllerSettingOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteControllerSettingOK) WriteResponse(rw http.ResponseWriter, produc
 // DeleteControllerSettingBadRequestCode is the HTTP code returned for type DeleteControllerSettingBadRequest
 const DeleteControllerSettingBadRequestCode int = 400
 
-/*DeleteControllerSettingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteControllerSettingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteControllerSettingBadRequest
 */
 type DeleteControllerSettingBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteControllerSettingBadRequest struct {
 func NewDeleteControllerSettingBadRequest() *DeleteControllerSettingBadRequest {
 
 	return &DeleteControllerSettingBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete controller setting bad request response
+func (o *DeleteControllerSettingBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteControllerSettingBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete controller setting bad request response
+func (o *DeleteControllerSettingBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete controller setting bad request response
@@ -116,6 +166,23 @@ func (o *DeleteControllerSettingBadRequest) SetPayload(payload *rest_model.APIEr
 // WriteResponse to the client
 func (o *DeleteControllerSettingBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteControllerSettingBadRequest) WriteResponse(rw http.ResponseWriter
 // DeleteControllerSettingUnauthorizedCode is the HTTP code returned for type DeleteControllerSettingUnauthorized
 const DeleteControllerSettingUnauthorizedCode int = 401
 
-/*DeleteControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteControllerSettingUnauthorized
 */
 type DeleteControllerSettingUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteControllerSettingUnauthorized struct {
 func NewDeleteControllerSettingUnauthorized() *DeleteControllerSettingUnauthorized {
 
 	return &DeleteControllerSettingUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete controller setting unauthorized response
+func (o *DeleteControllerSettingUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteControllerSettingUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete controller setting unauthorized response
+func (o *DeleteControllerSettingUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete controller setting unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteControllerSettingUnauthorized) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *DeleteControllerSettingUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteControllerSettingUnauthorized) WriteResponse(rw http.ResponseWrit
 // DeleteControllerSettingConflictCode is the HTTP code returned for type DeleteControllerSettingConflict
 const DeleteControllerSettingConflictCode int = 409
 
-/*DeleteControllerSettingConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*
+DeleteControllerSettingConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteControllerSettingConflict
 */
 type DeleteControllerSettingConflict struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteControllerSettingConflict struct {
 func NewDeleteControllerSettingConflict() *DeleteControllerSettingConflict {
 
 	return &DeleteControllerSettingConflict{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete controller setting conflict response
+func (o *DeleteControllerSettingConflict) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteControllerSettingConflict {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete controller setting conflict response
+func (o *DeleteControllerSettingConflict) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete controller setting conflict response
@@ -204,6 +320,23 @@ func (o *DeleteControllerSettingConflict) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DeleteControllerSettingConflict) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(409)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteControllerSettingConflict) WriteResponse(rw http.ResponseWriter, 
 // DeleteControllerSettingTooManyRequestsCode is the HTTP code returned for type DeleteControllerSettingTooManyRequests
 const DeleteControllerSettingTooManyRequestsCode int = 429
 
-/*DeleteControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteControllerSettingTooManyRequests
 */
 type DeleteControllerSettingTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteControllerSettingTooManyRequests struct {
 func NewDeleteControllerSettingTooManyRequests() *DeleteControllerSettingTooManyRequests {
 
 	return &DeleteControllerSettingTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete controller setting too many requests response
+func (o *DeleteControllerSettingTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteControllerSettingTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete controller setting too many requests response
+func (o *DeleteControllerSettingTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete controller setting too many requests response
@@ -247,6 +396,23 @@ func (o *DeleteControllerSettingTooManyRequests) SetPayload(payload *rest_model.
 
 // WriteResponse to the client
 func (o *DeleteControllerSettingTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

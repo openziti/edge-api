@@ -49,7 +49,6 @@ func NewListRootParams() ListRootParams {
 //
 // swagger:parameters listRoot
 type ListRootParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

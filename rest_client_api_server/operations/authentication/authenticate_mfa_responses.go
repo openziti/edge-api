@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // AuthenticateMfaOKCode is the HTTP code returned for type AuthenticateMfaOK
 const AuthenticateMfaOKCode int = 200
 
-/*AuthenticateMfaOK Base empty response
+/*
+AuthenticateMfaOK Base empty response
 
 swagger:response authenticateMfaOK
 */
 type AuthenticateMfaOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type AuthenticateMfaOK struct {
 func NewAuthenticateMfaOK() *AuthenticateMfaOK {
 
 	return &AuthenticateMfaOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the authenticate mfa o k response
+func (o *AuthenticateMfaOK) WithWWWAuthenticate(wWWAuthenticate []string) *AuthenticateMfaOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the authenticate mfa o k response
+func (o *AuthenticateMfaOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the authenticate mfa o k response
@@ -72,6 +89,23 @@ func (o *AuthenticateMfaOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *AuthenticateMfaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *AuthenticateMfaOK) WriteResponse(rw http.ResponseWriter, producer runti
 // AuthenticateMfaUnauthorizedCode is the HTTP code returned for type AuthenticateMfaUnauthorized
 const AuthenticateMfaUnauthorizedCode int = 401
 
-/*AuthenticateMfaUnauthorized Base empty response
+/*
+AuthenticateMfaUnauthorized Base empty response
 
 swagger:response authenticateMfaUnauthorized
 */
 type AuthenticateMfaUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type AuthenticateMfaUnauthorized struct {
 func NewAuthenticateMfaUnauthorized() *AuthenticateMfaUnauthorized {
 
 	return &AuthenticateMfaUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the authenticate mfa unauthorized response
+func (o *AuthenticateMfaUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *AuthenticateMfaUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the authenticate mfa unauthorized response
+func (o *AuthenticateMfaUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the authenticate mfa unauthorized response
@@ -116,6 +166,23 @@ func (o *AuthenticateMfaUnauthorized) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *AuthenticateMfaUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *AuthenticateMfaUnauthorized) WriteResponse(rw http.ResponseWriter, prod
 // AuthenticateMfaTooManyRequestsCode is the HTTP code returned for type AuthenticateMfaTooManyRequests
 const AuthenticateMfaTooManyRequestsCode int = 429
 
-/*AuthenticateMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+AuthenticateMfaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response authenticateMfaTooManyRequests
 */
 type AuthenticateMfaTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type AuthenticateMfaTooManyRequests struct {
 func NewAuthenticateMfaTooManyRequests() *AuthenticateMfaTooManyRequests {
 
 	return &AuthenticateMfaTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the authenticate mfa too many requests response
+func (o *AuthenticateMfaTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *AuthenticateMfaTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the authenticate mfa too many requests response
+func (o *AuthenticateMfaTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the authenticate mfa too many requests response
@@ -159,6 +242,23 @@ func (o *AuthenticateMfaTooManyRequests) SetPayload(payload *rest_model.APIError
 
 // WriteResponse to the client
 func (o *AuthenticateMfaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

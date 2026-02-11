@@ -36,16 +36,16 @@ import (
 )
 
 // ListCurrentAPISessionCertificatesHandlerFunc turns a function with the right signature into a list current Api session certificates handler
-type ListCurrentAPISessionCertificatesHandlerFunc func(ListCurrentAPISessionCertificatesParams, interface{}) middleware.Responder
+type ListCurrentAPISessionCertificatesHandlerFunc func(ListCurrentAPISessionCertificatesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListCurrentAPISessionCertificatesHandlerFunc) Handle(params ListCurrentAPISessionCertificatesParams, principal interface{}) middleware.Responder {
+func (fn ListCurrentAPISessionCertificatesHandlerFunc) Handle(params ListCurrentAPISessionCertificatesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListCurrentAPISessionCertificatesHandler interface for that can handle valid list current Api session certificates params
 type ListCurrentAPISessionCertificatesHandler interface {
-	Handle(ListCurrentAPISessionCertificatesParams, interface{}) middleware.Responder
+	Handle(ListCurrentAPISessionCertificatesParams, any) middleware.Responder
 }
 
 // NewListCurrentAPISessionCertificates creates a new http.Handler for the list current Api session certificates operation
@@ -53,12 +53,12 @@ func NewListCurrentAPISessionCertificates(ctx *middleware.Context, handler ListC
 	return &ListCurrentAPISessionCertificates{Context: ctx, Handler: handler}
 }
 
-/* ListCurrentAPISessionCertificates swagger:route GET /current-api-session/certificates Current API Session listCurrentApiSessionCertificates
+/*
+	ListCurrentAPISessionCertificates swagger:route GET /current-api-session/certificates Current API Session listCurrentApiSessionCertificates
 
-List the ephemeral certificates available for the current API Session
+# List the ephemeral certificates available for the current API Session
 
 Retrieves a list of certificate resources for the current API session; supports filtering, sorting, and pagination
-
 */
 type ListCurrentAPISessionCertificates struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListCurrentAPISessionCertificates) ServeHTTP(rw http.ResponseWriter, r 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListCurrentAPISessionCertificates) ServeHTTP(rw http.ResponseWriter, r 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // GetIdentityEnrollmentsHandlerFunc turns a function with the right signature into a get identity enrollments handler
-type GetIdentityEnrollmentsHandlerFunc func(GetIdentityEnrollmentsParams, interface{}) middleware.Responder
+type GetIdentityEnrollmentsHandlerFunc func(GetIdentityEnrollmentsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetIdentityEnrollmentsHandlerFunc) Handle(params GetIdentityEnrollmentsParams, principal interface{}) middleware.Responder {
+func (fn GetIdentityEnrollmentsHandlerFunc) Handle(params GetIdentityEnrollmentsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetIdentityEnrollmentsHandler interface for that can handle valid get identity enrollments params
 type GetIdentityEnrollmentsHandler interface {
-	Handle(GetIdentityEnrollmentsParams, interface{}) middleware.Responder
+	Handle(GetIdentityEnrollmentsParams, any) middleware.Responder
 }
 
 // NewGetIdentityEnrollments creates a new http.Handler for the get identity enrollments operation
@@ -53,13 +53,12 @@ func NewGetIdentityEnrollments(ctx *middleware.Context, handler GetIdentityEnrol
 	return &GetIdentityEnrollments{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityEnrollments swagger:route GET /identities/{id}/enrollments Identity getIdentityEnrollments
+/*
+	GetIdentityEnrollments swagger:route GET /identities/{id}/enrollments Identity getIdentityEnrollments
 
-Retrieve the current enrollments of a specific identity
+# Retrieve the current enrollments of a specific identity
 
 Returns a list of enrollments associated to the identity specified
-
-
 */
 type GetIdentityEnrollments struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *GetIdentityEnrollments) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *GetIdentityEnrollments) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

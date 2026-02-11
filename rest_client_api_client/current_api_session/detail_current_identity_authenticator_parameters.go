@@ -76,10 +76,12 @@ func NewDetailCurrentIdentityAuthenticatorParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* DetailCurrentIdentityAuthenticatorParams contains all the parameters to send to the API endpoint
-   for the detail current identity authenticator operation.
+/*
+DetailCurrentIdentityAuthenticatorParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail current identity authenticator operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailCurrentIdentityAuthenticatorParams struct {
 

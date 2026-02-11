@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DataIntegrityResultsOKCode is the HTTP code returned for type DataIntegrityResultsOK
 const DataIntegrityResultsOKCode int = 200
 
-/*DataIntegrityResultsOK A list of data integrity issues found
+/*
+DataIntegrityResultsOK A list of data integrity issues found
 
 swagger:response dataIntegrityResultsOK
 */
 type DataIntegrityResultsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DataIntegrityResultsOK struct {
 func NewDataIntegrityResultsOK() *DataIntegrityResultsOK {
 
 	return &DataIntegrityResultsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the data integrity results o k response
+func (o *DataIntegrityResultsOK) WithWWWAuthenticate(wWWAuthenticate []string) *DataIntegrityResultsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the data integrity results o k response
+func (o *DataIntegrityResultsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the data integrity results o k response
@@ -72,6 +89,23 @@ func (o *DataIntegrityResultsOK) SetPayload(payload *rest_model.DataIntegrityChe
 // WriteResponse to the client
 func (o *DataIntegrityResultsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DataIntegrityResultsOK) WriteResponse(rw http.ResponseWriter, producer 
 // DataIntegrityResultsUnauthorizedCode is the HTTP code returned for type DataIntegrityResultsUnauthorized
 const DataIntegrityResultsUnauthorizedCode int = 401
 
-/*DataIntegrityResultsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DataIntegrityResultsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response dataIntegrityResultsUnauthorized
 */
 type DataIntegrityResultsUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DataIntegrityResultsUnauthorized struct {
 func NewDataIntegrityResultsUnauthorized() *DataIntegrityResultsUnauthorized {
 
 	return &DataIntegrityResultsUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the data integrity results unauthorized response
+func (o *DataIntegrityResultsUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DataIntegrityResultsUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the data integrity results unauthorized response
+func (o *DataIntegrityResultsUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the data integrity results unauthorized response
@@ -116,6 +166,23 @@ func (o *DataIntegrityResultsUnauthorized) SetPayload(payload *rest_model.APIErr
 // WriteResponse to the client
 func (o *DataIntegrityResultsUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DataIntegrityResultsUnauthorized) WriteResponse(rw http.ResponseWriter,
 // DataIntegrityResultsTooManyRequestsCode is the HTTP code returned for type DataIntegrityResultsTooManyRequests
 const DataIntegrityResultsTooManyRequestsCode int = 429
 
-/*DataIntegrityResultsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DataIntegrityResultsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response dataIntegrityResultsTooManyRequests
 */
 type DataIntegrityResultsTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DataIntegrityResultsTooManyRequests struct {
 func NewDataIntegrityResultsTooManyRequests() *DataIntegrityResultsTooManyRequests {
 
 	return &DataIntegrityResultsTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the data integrity results too many requests response
+func (o *DataIntegrityResultsTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DataIntegrityResultsTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the data integrity results too many requests response
+func (o *DataIntegrityResultsTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the data integrity results too many requests response
@@ -160,6 +243,23 @@ func (o *DataIntegrityResultsTooManyRequests) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *DataIntegrityResultsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DataIntegrityResultsTooManyRequests) WriteResponse(rw http.ResponseWrit
 // DataIntegrityResultsServiceUnavailableCode is the HTTP code returned for type DataIntegrityResultsServiceUnavailable
 const DataIntegrityResultsServiceUnavailableCode int = 503
 
-/*DataIntegrityResultsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DataIntegrityResultsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response dataIntegrityResultsServiceUnavailable
 */
 type DataIntegrityResultsServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DataIntegrityResultsServiceUnavailable struct {
 func NewDataIntegrityResultsServiceUnavailable() *DataIntegrityResultsServiceUnavailable {
 
 	return &DataIntegrityResultsServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the data integrity results service unavailable response
+func (o *DataIntegrityResultsServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DataIntegrityResultsServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the data integrity results service unavailable response
+func (o *DataIntegrityResultsServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the data integrity results service unavailable response
@@ -203,6 +319,23 @@ func (o *DataIntegrityResultsServiceUnavailable) SetPayload(payload *rest_model.
 
 // WriteResponse to the client
 func (o *DataIntegrityResultsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

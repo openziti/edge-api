@@ -50,7 +50,6 @@ func NewDeleteControllerSettingParams() DeleteControllerSettingParams {
 //
 // swagger:parameters deleteControllerSetting
 type DeleteControllerSettingParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

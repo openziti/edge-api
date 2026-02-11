@@ -36,16 +36,16 @@ import (
 )
 
 // DisassociateIdentitysServiceConfigsHandlerFunc turns a function with the right signature into a disassociate identitys service configs handler
-type DisassociateIdentitysServiceConfigsHandlerFunc func(DisassociateIdentitysServiceConfigsParams, interface{}) middleware.Responder
+type DisassociateIdentitysServiceConfigsHandlerFunc func(DisassociateIdentitysServiceConfigsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DisassociateIdentitysServiceConfigsHandlerFunc) Handle(params DisassociateIdentitysServiceConfigsParams, principal interface{}) middleware.Responder {
+func (fn DisassociateIdentitysServiceConfigsHandlerFunc) Handle(params DisassociateIdentitysServiceConfigsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DisassociateIdentitysServiceConfigsHandler interface for that can handle valid disassociate identitys service configs params
 type DisassociateIdentitysServiceConfigsHandler interface {
-	Handle(DisassociateIdentitysServiceConfigsParams, interface{}) middleware.Responder
+	Handle(DisassociateIdentitysServiceConfigsParams, any) middleware.Responder
 }
 
 // NewDisassociateIdentitysServiceConfigs creates a new http.Handler for the disassociate identitys service configs operation
@@ -53,12 +53,12 @@ func NewDisassociateIdentitysServiceConfigs(ctx *middleware.Context, handler Dis
 	return &DisassociateIdentitysServiceConfigs{Context: ctx, Handler: handler}
 }
 
-/* DisassociateIdentitysServiceConfigs swagger:route DELETE /identities/{id}/service-configs Identity disassociateIdentitysServiceConfigs
+/*
+	DisassociateIdentitysServiceConfigs swagger:route DELETE /identities/{id}/service-configs Identity disassociateIdentitysServiceConfigs
 
-Remove associated service configs from a specific identity
+# Remove associated service configs from a specific identity
 
 Remove service configs from a specific identity
-
 */
 type DisassociateIdentitysServiceConfigs struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DisassociateIdentitysServiceConfigs) ServeHTTP(rw http.ResponseWriter, 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DisassociateIdentitysServiceConfigs) ServeHTTP(rw http.ResponseWriter, 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }
