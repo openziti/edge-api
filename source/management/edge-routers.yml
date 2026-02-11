@@ -359,6 +359,13 @@ definitions:
       disabled:
         type: boolean
         x-nullable: true
+      ctrlChanListeners:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+        x-nullable: true
       roleAttributes:
         $ref: '../shared/base-entity.yml#/definitions/attributes'
       tags:
@@ -387,6 +394,13 @@ definitions:
       disabled:
         type: boolean
         x-nullable: true
+      ctrlChanListeners:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+        x-nullable: true
       roleAttributes:
         $ref: '../shared/base-entity.yml#/definitions/attributes'
       tags:
@@ -413,6 +427,13 @@ definitions:
         x-nullable: true
       disabled:
         type: boolean
+        x-nullable: true
+      ctrlChanListeners:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
         x-nullable: true
       roleAttributes:
         $ref: '../shared/base-entity.yml#/definitions/attributes'
@@ -478,6 +499,12 @@ definitions:
             $ref: '../shared/version.yml#/definitions/versionInfo'
           isTunnelerEnabled:
             type: boolean
+          ctrlChanListeners:
+            type: object
+            additionalProperties:
+              type: array
+              items:
+                type: string
           interfaces:
             type: array
             items:
