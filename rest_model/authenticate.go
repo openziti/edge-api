@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -94,11 +95,15 @@ func (m *Authenticate) validateConfigTypes(formats strfmt.Registry) error {
 	}
 
 	if err := m.ConfigTypes.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("configTypes")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("configTypes")
 		}
+
 		return err
 	}
 
@@ -112,11 +117,15 @@ func (m *Authenticate) validateEnvInfo(formats strfmt.Registry) error {
 
 	if m.EnvInfo != nil {
 		if err := m.EnvInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("envInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("envInfo")
 			}
+
 			return err
 		}
 	}
@@ -130,11 +139,15 @@ func (m *Authenticate) validatePassword(formats strfmt.Registry) error {
 	}
 
 	if err := m.Password.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("password")
 		}
+
 		return err
 	}
 
@@ -148,11 +161,15 @@ func (m *Authenticate) validateSdkInfo(formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
 		if err := m.SdkInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sdkInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sdkInfo")
 			}
+
 			return err
 		}
 	}
@@ -166,11 +183,15 @@ func (m *Authenticate) validateUsername(formats strfmt.Registry) error {
 	}
 
 	if err := m.Username.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("username")
 		}
+
 		return err
 	}
 
@@ -210,11 +231,15 @@ func (m *Authenticate) ContextValidate(ctx context.Context, formats strfmt.Regis
 func (m *Authenticate) contextValidateConfigTypes(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.ConfigTypes.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("configTypes")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("configTypes")
 		}
+
 		return err
 	}
 
@@ -224,12 +249,21 @@ func (m *Authenticate) contextValidateConfigTypes(ctx context.Context, formats s
 func (m *Authenticate) contextValidateEnvInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EnvInfo != nil {
+
+		if swag.IsZero(m.EnvInfo) { // not required
+			return nil
+		}
+
 		if err := m.EnvInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("envInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("envInfo")
 			}
+
 			return err
 		}
 	}
@@ -239,12 +273,20 @@ func (m *Authenticate) contextValidateEnvInfo(ctx context.Context, formats strfm
 
 func (m *Authenticate) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Password) { // not required
+		return nil
+	}
+
 	if err := m.Password.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("password")
 		}
+
 		return err
 	}
 
@@ -254,12 +296,21 @@ func (m *Authenticate) contextValidatePassword(ctx context.Context, formats strf
 func (m *Authenticate) contextValidateSdkInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
+
+		if swag.IsZero(m.SdkInfo) { // not required
+			return nil
+		}
+
 		if err := m.SdkInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sdkInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sdkInfo")
 			}
+
 			return err
 		}
 	}
@@ -269,12 +320,20 @@ func (m *Authenticate) contextValidateSdkInfo(ctx context.Context, formats strfm
 
 func (m *Authenticate) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Username) { // not required
+		return nil
+	}
+
 	if err := m.Username.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("username")
 		}
+
 		return err
 	}
 

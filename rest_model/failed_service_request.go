@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -98,11 +99,15 @@ func (m *FailedServiceRequest) validatePolicyFailures(formats strfmt.Registry) e
 
 		if m.PolicyFailures[i] != nil {
 			if err := m.PolicyFailures[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("policyFailures" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("policyFailures" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -118,11 +123,15 @@ func (m *FailedServiceRequest) validateSessionType(formats strfmt.Registry) erro
 	}
 
 	if err := m.SessionType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("sessionType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("sessionType")
 		}
+
 		return err
 	}
 
@@ -164,12 +173,21 @@ func (m *FailedServiceRequest) contextValidatePolicyFailures(ctx context.Context
 	for i := 0; i < len(m.PolicyFailures); i++ {
 
 		if m.PolicyFailures[i] != nil {
+
+			if swag.IsZero(m.PolicyFailures[i]) { // not required
+				return nil
+			}
+
 			if err := m.PolicyFailures[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("policyFailures" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("policyFailures" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -181,12 +199,20 @@ func (m *FailedServiceRequest) contextValidatePolicyFailures(ctx context.Context
 
 func (m *FailedServiceRequest) contextValidateSessionType(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.SessionType) { // not required
+		return nil
+	}
+
 	if err := m.SessionType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("sessionType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("sessionType")
 		}
+
 		return err
 	}
 

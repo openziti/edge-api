@@ -30,11 +30,14 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailControllerSettingEffectiveReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailControllerSettingEffectiveReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailControllerSettingEffectiveReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailControllerSettingEffectiveOK()
@@ -72,7 +75,7 @@ func (o *DetailControllerSettingEffectiveReader) ReadResponse(response runtime.C
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /controller-settings/{id}/effective] detailControllerSettingEffective", response, response.Code())
 	}
 }
 
@@ -81,31 +84,108 @@ func NewDetailControllerSettingEffectiveOK() *DetailControllerSettingEffectiveOK
 	return &DetailControllerSettingEffectiveOK{}
 }
 
-/* DetailControllerSettingEffectiveOK describes a response with status code 200, with default header values.
+/*
+DetailControllerSettingEffectiveOK describes a response with status code 200, with default header values.
 
 A singular controller's effective setting object
 */
 type DetailControllerSettingEffectiveOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailControllerSettingEffectiveEnvelope
 }
 
-func (o *DetailControllerSettingEffectiveOK) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail controller setting effective o k response has a 2xx status code
+func (o *DetailControllerSettingEffectiveOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail controller setting effective o k response has a 3xx status code
+func (o *DetailControllerSettingEffectiveOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting effective o k response has a 4xx status code
+func (o *DetailControllerSettingEffectiveOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail controller setting effective o k response has a 5xx status code
+func (o *DetailControllerSettingEffectiveOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting effective o k response a status code equal to that given
+func (o *DetailControllerSettingEffectiveOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail controller setting effective o k response
+func (o *DetailControllerSettingEffectiveOK) Code() int {
+	return 200
+}
+
+func (o *DetailControllerSettingEffectiveOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveOK %s", 200, payload)
+}
+
+func (o *DetailControllerSettingEffectiveOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveOK %s", 200, payload)
+}
+
 func (o *DetailControllerSettingEffectiveOK) GetPayload() *rest_model.DetailControllerSettingEffectiveEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingEffectiveOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailControllerSettingEffectiveEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingEffectiveOK binds the response header WWW-Authenticate
+func (o *DetailControllerSettingEffectiveOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailControllerSettingEffectiveUnauthorized creates a DetailControllerSettingEffectiveUnauthorized with default headers values
@@ -113,31 +193,108 @@ func NewDetailControllerSettingEffectiveUnauthorized() *DetailControllerSettingE
 	return &DetailControllerSettingEffectiveUnauthorized{}
 }
 
-/* DetailControllerSettingEffectiveUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailControllerSettingEffectiveUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailControllerSettingEffectiveUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailControllerSettingEffectiveUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail controller setting effective unauthorized response has a 2xx status code
+func (o *DetailControllerSettingEffectiveUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail controller setting effective unauthorized response has a 3xx status code
+func (o *DetailControllerSettingEffectiveUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting effective unauthorized response has a 4xx status code
+func (o *DetailControllerSettingEffectiveUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail controller setting effective unauthorized response has a 5xx status code
+func (o *DetailControllerSettingEffectiveUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting effective unauthorized response a status code equal to that given
+func (o *DetailControllerSettingEffectiveUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail controller setting effective unauthorized response
+func (o *DetailControllerSettingEffectiveUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailControllerSettingEffectiveUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveUnauthorized %s", 401, payload)
+}
+
+func (o *DetailControllerSettingEffectiveUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveUnauthorized %s", 401, payload)
+}
+
 func (o *DetailControllerSettingEffectiveUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingEffectiveUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingEffectiveUnauthorized binds the response header WWW-Authenticate
+func (o *DetailControllerSettingEffectiveUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailControllerSettingEffectiveNotFound creates a DetailControllerSettingEffectiveNotFound with default headers values
@@ -145,31 +302,108 @@ func NewDetailControllerSettingEffectiveNotFound() *DetailControllerSettingEffec
 	return &DetailControllerSettingEffectiveNotFound{}
 }
 
-/* DetailControllerSettingEffectiveNotFound describes a response with status code 404, with default header values.
+/*
+DetailControllerSettingEffectiveNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailControllerSettingEffectiveNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailControllerSettingEffectiveNotFound) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail controller setting effective not found response has a 2xx status code
+func (o *DetailControllerSettingEffectiveNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail controller setting effective not found response has a 3xx status code
+func (o *DetailControllerSettingEffectiveNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting effective not found response has a 4xx status code
+func (o *DetailControllerSettingEffectiveNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail controller setting effective not found response has a 5xx status code
+func (o *DetailControllerSettingEffectiveNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting effective not found response a status code equal to that given
+func (o *DetailControllerSettingEffectiveNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail controller setting effective not found response
+func (o *DetailControllerSettingEffectiveNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailControllerSettingEffectiveNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveNotFound %s", 404, payload)
+}
+
+func (o *DetailControllerSettingEffectiveNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveNotFound %s", 404, payload)
+}
+
 func (o *DetailControllerSettingEffectiveNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingEffectiveNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingEffectiveNotFound binds the response header WWW-Authenticate
+func (o *DetailControllerSettingEffectiveNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailControllerSettingEffectiveTooManyRequests creates a DetailControllerSettingEffectiveTooManyRequests with default headers values
@@ -177,29 +411,106 @@ func NewDetailControllerSettingEffectiveTooManyRequests() *DetailControllerSetti
 	return &DetailControllerSettingEffectiveTooManyRequests{}
 }
 
-/* DetailControllerSettingEffectiveTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailControllerSettingEffectiveTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailControllerSettingEffectiveTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailControllerSettingEffectiveTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail controller setting effective too many requests response has a 2xx status code
+func (o *DetailControllerSettingEffectiveTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail controller setting effective too many requests response has a 3xx status code
+func (o *DetailControllerSettingEffectiveTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail controller setting effective too many requests response has a 4xx status code
+func (o *DetailControllerSettingEffectiveTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail controller setting effective too many requests response has a 5xx status code
+func (o *DetailControllerSettingEffectiveTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail controller setting effective too many requests response a status code equal to that given
+func (o *DetailControllerSettingEffectiveTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail controller setting effective too many requests response
+func (o *DetailControllerSettingEffectiveTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailControllerSettingEffectiveTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailControllerSettingEffectiveTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /controller-settings/{id}/effective][%d] detailControllerSettingEffectiveTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailControllerSettingEffectiveTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailControllerSettingEffectiveTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailControllerSettingEffectiveTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailControllerSettingEffectiveTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

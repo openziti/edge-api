@@ -36,16 +36,16 @@ import (
 )
 
 // DetailIdentityTypeHandlerFunc turns a function with the right signature into a detail identity type handler
-type DetailIdentityTypeHandlerFunc func(DetailIdentityTypeParams, interface{}) middleware.Responder
+type DetailIdentityTypeHandlerFunc func(DetailIdentityTypeParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailIdentityTypeHandlerFunc) Handle(params DetailIdentityTypeParams, principal interface{}) middleware.Responder {
+func (fn DetailIdentityTypeHandlerFunc) Handle(params DetailIdentityTypeParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailIdentityTypeHandler interface for that can handle valid detail identity type params
 type DetailIdentityTypeHandler interface {
-	Handle(DetailIdentityTypeParams, interface{}) middleware.Responder
+	Handle(DetailIdentityTypeParams, any) middleware.Responder
 }
 
 // NewDetailIdentityType creates a new http.Handler for the detail identity type operation
@@ -53,12 +53,12 @@ func NewDetailIdentityType(ctx *middleware.Context, handler DetailIdentityTypeHa
 	return &DetailIdentityType{Context: ctx, Handler: handler}
 }
 
-/* DetailIdentityType swagger:route GET /identity-types/{id} Identity detailIdentityType
+/*
+	DetailIdentityType swagger:route GET /identity-types/{id} Identity detailIdentityType
 
-Retrieves a identity type
+# Retrieves a identity type
 
 Retrieves a single identity type by id. Requires admin access.
-
 */
 type DetailIdentityType struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailIdentityType) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailIdentityType) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

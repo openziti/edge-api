@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateIdentityTracingHandlerFunc turns a function with the right signature into a update identity tracing handler
-type UpdateIdentityTracingHandlerFunc func(UpdateIdentityTracingParams, interface{}) middleware.Responder
+type UpdateIdentityTracingHandlerFunc func(UpdateIdentityTracingParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateIdentityTracingHandlerFunc) Handle(params UpdateIdentityTracingParams, principal interface{}) middleware.Responder {
+func (fn UpdateIdentityTracingHandlerFunc) Handle(params UpdateIdentityTracingParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateIdentityTracingHandler interface for that can handle valid update identity tracing params
 type UpdateIdentityTracingHandler interface {
-	Handle(UpdateIdentityTracingParams, interface{}) middleware.Responder
+	Handle(UpdateIdentityTracingParams, any) middleware.Responder
 }
 
 // NewUpdateIdentityTracing creates a new http.Handler for the update identity tracing operation
@@ -53,13 +53,12 @@ func NewUpdateIdentityTracing(ctx *middleware.Context, handler UpdateIdentityTra
 	return &UpdateIdentityTracing{Context: ctx, Handler: handler}
 }
 
-/* UpdateIdentityTracing swagger:route PUT /identities/{id}/trace Identity Tracing updateIdentityTracing
+/*
+	UpdateIdentityTracing swagger:route PUT /identities/{id}/trace Identity Tracing updateIdentityTracing
 
 Enable/disable data flow tracing for an identity
 
 Allows an admin to enable/disable data flow tracing for an identity
-
-
 */
 type UpdateIdentityTracing struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *UpdateIdentityTracing) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *UpdateIdentityTracing) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

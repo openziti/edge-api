@@ -36,16 +36,16 @@ import (
 )
 
 // DetailExternalJWTSignerHandlerFunc turns a function with the right signature into a detail external Jwt signer handler
-type DetailExternalJWTSignerHandlerFunc func(DetailExternalJWTSignerParams, interface{}) middleware.Responder
+type DetailExternalJWTSignerHandlerFunc func(DetailExternalJWTSignerParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailExternalJWTSignerHandlerFunc) Handle(params DetailExternalJWTSignerParams, principal interface{}) middleware.Responder {
+func (fn DetailExternalJWTSignerHandlerFunc) Handle(params DetailExternalJWTSignerParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailExternalJWTSignerHandler interface for that can handle valid detail external Jwt signer params
 type DetailExternalJWTSignerHandler interface {
-	Handle(DetailExternalJWTSignerParams, interface{}) middleware.Responder
+	Handle(DetailExternalJWTSignerParams, any) middleware.Responder
 }
 
 // NewDetailExternalJWTSigner creates a new http.Handler for the detail external Jwt signer operation
@@ -53,12 +53,12 @@ func NewDetailExternalJWTSigner(ctx *middleware.Context, handler DetailExternalJ
 	return &DetailExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* DetailExternalJWTSigner swagger:route GET /external-jwt-signers/{id} External JWT Signer detailExternalJwtSigner
+/*
+	DetailExternalJWTSigner swagger:route GET /external-jwt-signers/{id} External JWT Signer detailExternalJwtSigner
 
-Retrieves a single External JWT Signer
+# Retrieves a single External JWT Signer
 
 Retrieves a single External JWT Signer by id. Requires admin access.
-
 */
 type DetailExternalJWTSigner struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

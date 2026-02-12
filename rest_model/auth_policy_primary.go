@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -86,11 +87,15 @@ func (m *AuthPolicyPrimary) validateCert(formats strfmt.Registry) error {
 
 	if m.Cert != nil {
 		if err := m.Cert.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cert")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cert")
 			}
+
 			return err
 		}
 	}
@@ -106,11 +111,15 @@ func (m *AuthPolicyPrimary) validateExtJWT(formats strfmt.Registry) error {
 
 	if m.ExtJWT != nil {
 		if err := m.ExtJWT.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("extJwt")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("extJwt")
 			}
+
 			return err
 		}
 	}
@@ -126,11 +135,15 @@ func (m *AuthPolicyPrimary) validateUpdb(formats strfmt.Registry) error {
 
 	if m.Updb != nil {
 		if err := m.Updb.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("updb")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("updb")
 			}
+
 			return err
 		}
 	}
@@ -163,12 +176,17 @@ func (m *AuthPolicyPrimary) ContextValidate(ctx context.Context, formats strfmt.
 func (m *AuthPolicyPrimary) contextValidateCert(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cert != nil {
+
 		if err := m.Cert.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cert")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cert")
 			}
+
 			return err
 		}
 	}
@@ -179,12 +197,17 @@ func (m *AuthPolicyPrimary) contextValidateCert(ctx context.Context, formats str
 func (m *AuthPolicyPrimary) contextValidateExtJWT(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExtJWT != nil {
+
 		if err := m.ExtJWT.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("extJwt")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("extJwt")
 			}
+
 			return err
 		}
 	}
@@ -195,12 +218,17 @@ func (m *AuthPolicyPrimary) contextValidateExtJWT(ctx context.Context, formats s
 func (m *AuthPolicyPrimary) contextValidateUpdb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Updb != nil {
+
 		if err := m.Updb.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("updb")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("updb")
 			}
+
 			return err
 		}
 	}

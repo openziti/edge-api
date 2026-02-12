@@ -76,10 +76,12 @@ func NewListIdentitysEdgeRouterPoliciesParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* ListIdentitysEdgeRouterPoliciesParams contains all the parameters to send to the API endpoint
-   for the list identitys edge router policies operation.
+/*
+ListIdentitysEdgeRouterPoliciesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list identitys edge router policies operation.
+
+	Typically these are written to a http.Request.
 */
 type ListIdentitysEdgeRouterPoliciesParams struct {
 

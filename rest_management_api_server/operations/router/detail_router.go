@@ -36,16 +36,16 @@ import (
 )
 
 // DetailRouterHandlerFunc turns a function with the right signature into a detail router handler
-type DetailRouterHandlerFunc func(DetailRouterParams, interface{}) middleware.Responder
+type DetailRouterHandlerFunc func(DetailRouterParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailRouterHandlerFunc) Handle(params DetailRouterParams, principal interface{}) middleware.Responder {
+func (fn DetailRouterHandlerFunc) Handle(params DetailRouterParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailRouterHandler interface for that can handle valid detail router params
 type DetailRouterHandler interface {
-	Handle(DetailRouterParams, interface{}) middleware.Responder
+	Handle(DetailRouterParams, any) middleware.Responder
 }
 
 // NewDetailRouter creates a new http.Handler for the detail router operation
@@ -53,12 +53,12 @@ func NewDetailRouter(ctx *middleware.Context, handler DetailRouterHandler) *Deta
 	return &DetailRouter{Context: ctx, Handler: handler}
 }
 
-/* DetailRouter swagger:route GET /routers/{id} Router detailRouter
+/*
+	DetailRouter swagger:route GET /routers/{id} Router detailRouter
 
-Retrieves a single router
+# Retrieves a single router
 
 Retrieves a single router by id. Requires admin access.
-
 */
 type DetailRouter struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

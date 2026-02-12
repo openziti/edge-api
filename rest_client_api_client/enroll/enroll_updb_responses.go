@@ -31,6 +31,8 @@ package enroll
 
 import (
 	"context"
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -48,7 +50,7 @@ type EnrollUpdbReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *EnrollUpdbReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *EnrollUpdbReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewEnrollUpdbOK()
@@ -81,7 +83,7 @@ func (o *EnrollUpdbReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enroll/updb] enrollUpdb", response, response.Code())
 	}
 }
 
@@ -90,31 +92,108 @@ func NewEnrollUpdbOK() *EnrollUpdbOK {
 	return &EnrollUpdbOK{}
 }
 
-/* EnrollUpdbOK describes a response with status code 200, with default header values.
+/*
+EnrollUpdbOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type EnrollUpdbOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *EnrollUpdbOK) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this enroll updb o k response has a 2xx status code
+func (o *EnrollUpdbOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this enroll updb o k response has a 3xx status code
+func (o *EnrollUpdbOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb o k response has a 4xx status code
+func (o *EnrollUpdbOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll updb o k response has a 5xx status code
+func (o *EnrollUpdbOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb o k response a status code equal to that given
+func (o *EnrollUpdbOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the enroll updb o k response
+func (o *EnrollUpdbOK) Code() int {
+	return 200
+}
+
+func (o *EnrollUpdbOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK %s", 200, payload)
+}
+
+func (o *EnrollUpdbOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK %s", 200, payload)
+}
+
 func (o *EnrollUpdbOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *EnrollUpdbOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollUpdbOK binds the response header WWW-Authenticate
+func (o *EnrollUpdbOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollUpdbBadRequest creates a EnrollUpdbBadRequest with default headers values
@@ -122,31 +201,108 @@ func NewEnrollUpdbBadRequest() *EnrollUpdbBadRequest {
 	return &EnrollUpdbBadRequest{}
 }
 
-/* EnrollUpdbBadRequest describes a response with status code 400, with default header values.
+/*
+EnrollUpdbBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type EnrollUpdbBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollUpdbBadRequest) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this enroll updb bad request response has a 2xx status code
+func (o *EnrollUpdbBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll updb bad request response has a 3xx status code
+func (o *EnrollUpdbBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb bad request response has a 4xx status code
+func (o *EnrollUpdbBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll updb bad request response has a 5xx status code
+func (o *EnrollUpdbBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb bad request response a status code equal to that given
+func (o *EnrollUpdbBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the enroll updb bad request response
+func (o *EnrollUpdbBadRequest) Code() int {
+	return 400
+}
+
+func (o *EnrollUpdbBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbBadRequest %s", 400, payload)
+}
+
+func (o *EnrollUpdbBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbBadRequest %s", 400, payload)
+}
+
 func (o *EnrollUpdbBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollUpdbBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollUpdbBadRequest binds the response header WWW-Authenticate
+func (o *EnrollUpdbBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollUpdbNotFound creates a EnrollUpdbNotFound with default headers values
@@ -154,31 +310,108 @@ func NewEnrollUpdbNotFound() *EnrollUpdbNotFound {
 	return &EnrollUpdbNotFound{}
 }
 
-/* EnrollUpdbNotFound describes a response with status code 404, with default header values.
+/*
+EnrollUpdbNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type EnrollUpdbNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollUpdbNotFound) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this enroll updb not found response has a 2xx status code
+func (o *EnrollUpdbNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll updb not found response has a 3xx status code
+func (o *EnrollUpdbNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb not found response has a 4xx status code
+func (o *EnrollUpdbNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll updb not found response has a 5xx status code
+func (o *EnrollUpdbNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb not found response a status code equal to that given
+func (o *EnrollUpdbNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the enroll updb not found response
+func (o *EnrollUpdbNotFound) Code() int {
+	return 404
+}
+
+func (o *EnrollUpdbNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbNotFound %s", 404, payload)
+}
+
+func (o *EnrollUpdbNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbNotFound %s", 404, payload)
+}
+
 func (o *EnrollUpdbNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollUpdbNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollUpdbNotFound binds the response header WWW-Authenticate
+func (o *EnrollUpdbNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollUpdbTooManyRequests creates a EnrollUpdbTooManyRequests with default headers values
@@ -186,31 +419,108 @@ func NewEnrollUpdbTooManyRequests() *EnrollUpdbTooManyRequests {
 	return &EnrollUpdbTooManyRequests{}
 }
 
-/* EnrollUpdbTooManyRequests describes a response with status code 429, with default header values.
+/*
+EnrollUpdbTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type EnrollUpdbTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollUpdbTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this enroll updb too many requests response has a 2xx status code
+func (o *EnrollUpdbTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll updb too many requests response has a 3xx status code
+func (o *EnrollUpdbTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb too many requests response has a 4xx status code
+func (o *EnrollUpdbTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this enroll updb too many requests response has a 5xx status code
+func (o *EnrollUpdbTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this enroll updb too many requests response a status code equal to that given
+func (o *EnrollUpdbTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the enroll updb too many requests response
+func (o *EnrollUpdbTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *EnrollUpdbTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbTooManyRequests %s", 429, payload)
+}
+
+func (o *EnrollUpdbTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbTooManyRequests %s", 429, payload)
+}
+
 func (o *EnrollUpdbTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollUpdbTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderEnrollUpdbTooManyRequests binds the response header WWW-Authenticate
+func (o *EnrollUpdbTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewEnrollUpdbServiceUnavailable creates a EnrollUpdbServiceUnavailable with default headers values
@@ -218,34 +528,112 @@ func NewEnrollUpdbServiceUnavailable() *EnrollUpdbServiceUnavailable {
 	return &EnrollUpdbServiceUnavailable{}
 }
 
-/* EnrollUpdbServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EnrollUpdbServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type EnrollUpdbServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *EnrollUpdbServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this enroll updb service unavailable response has a 2xx status code
+func (o *EnrollUpdbServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this enroll updb service unavailable response has a 3xx status code
+func (o *EnrollUpdbServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this enroll updb service unavailable response has a 4xx status code
+func (o *EnrollUpdbServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this enroll updb service unavailable response has a 5xx status code
+func (o *EnrollUpdbServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this enroll updb service unavailable response a status code equal to that given
+func (o *EnrollUpdbServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the enroll updb service unavailable response
+func (o *EnrollUpdbServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *EnrollUpdbServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbServiceUnavailable %s", 503, payload)
+}
+
+func (o *EnrollUpdbServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbServiceUnavailable %s", 503, payload)
+}
+
 func (o *EnrollUpdbServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *EnrollUpdbServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
 }
 
-/*EnrollUpdbBody enroll updb body
+// bindHeaderEnrollUpdbServiceUnavailable binds the response header WWW-Authenticate
+func (o *EnrollUpdbServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
+}
+
+/*
+EnrollUpdbBody enroll updb body
 swagger:model EnrollUpdbBody
 */
 type EnrollUpdbBody struct {
@@ -281,11 +669,15 @@ func (o *EnrollUpdbBody) validatePassword(formats strfmt.Registry) error {
 	}
 
 	if err := o.Password.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "password")
 		}
+
 		return err
 	}
 
@@ -298,11 +690,15 @@ func (o *EnrollUpdbBody) validateUsername(formats strfmt.Registry) error {
 	}
 
 	if err := o.Username.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "username")
 		}
+
 		return err
 	}
 
@@ -329,12 +725,20 @@ func (o *EnrollUpdbBody) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(o.Password) { // not required
+		return nil
+	}
+
 	if err := o.Password.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "password")
 		}
+
 		return err
 	}
 
@@ -343,12 +747,20 @@ func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats st
 
 func (o *EnrollUpdbBody) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(o.Username) { // not required
+		return nil
+	}
+
 	if err := o.Username.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "username")
 		}
+
 		return err
 	}
 

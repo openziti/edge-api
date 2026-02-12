@@ -50,7 +50,6 @@ func NewRemoveIdentityMfaParams() RemoveIdentityMfaParams {
 //
 // swagger:parameters removeIdentityMfa
 type RemoveIdentityMfaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

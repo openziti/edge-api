@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -110,11 +111,15 @@ func (m *PostureQueries) validatePolicyType(formats strfmt.Registry) error {
 	}
 
 	if err := m.PolicyType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("policyType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("policyType")
 		}
+
 		return err
 	}
 
@@ -134,11 +139,15 @@ func (m *PostureQueries) validatePostureQueries(formats strfmt.Registry) error {
 
 		if m.PostureQueries[i] != nil {
 			if err := m.PostureQueries[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("postureQueries" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("postureQueries" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -168,12 +177,20 @@ func (m *PostureQueries) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (m *PostureQueries) contextValidatePolicyType(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.PolicyType) { // not required
+		return nil
+	}
+
 	if err := m.PolicyType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("policyType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("policyType")
 		}
+
 		return err
 	}
 
@@ -185,12 +202,21 @@ func (m *PostureQueries) contextValidatePostureQueries(ctx context.Context, form
 	for i := 0; i < len(m.PostureQueries); i++ {
 
 		if m.PostureQueries[i] != nil {
+
+			if swag.IsZero(m.PostureQueries[i]) { // not required
+				return nil
+			}
+
 			if err := m.PostureQueries[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("postureQueries" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("postureQueries" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

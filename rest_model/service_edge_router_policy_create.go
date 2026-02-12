@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -97,11 +98,15 @@ func (m *ServiceEdgeRouterPolicyCreate) validateEdgeRouterRoles(formats strfmt.R
 	}
 
 	if err := m.EdgeRouterRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("edgeRouterRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("edgeRouterRoles")
 		}
+
 		return err
 	}
 
@@ -129,11 +134,15 @@ func (m *ServiceEdgeRouterPolicyCreate) validateSemantic(formats strfmt.Registry
 
 	if m.Semantic != nil {
 		if err := m.Semantic.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("semantic")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("semantic")
 			}
+
 			return err
 		}
 	}
@@ -147,11 +156,15 @@ func (m *ServiceEdgeRouterPolicyCreate) validateServiceRoles(formats strfmt.Regi
 	}
 
 	if err := m.ServiceRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("serviceRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("serviceRoles")
 		}
+
 		return err
 	}
 
@@ -165,11 +178,15 @@ func (m *ServiceEdgeRouterPolicyCreate) validateTags(formats strfmt.Registry) er
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -206,11 +223,15 @@ func (m *ServiceEdgeRouterPolicyCreate) ContextValidate(ctx context.Context, for
 func (m *ServiceEdgeRouterPolicyCreate) contextValidateEdgeRouterRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.EdgeRouterRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("edgeRouterRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("edgeRouterRoles")
 		}
+
 		return err
 	}
 
@@ -220,12 +241,17 @@ func (m *ServiceEdgeRouterPolicyCreate) contextValidateEdgeRouterRoles(ctx conte
 func (m *ServiceEdgeRouterPolicyCreate) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
+
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("semantic")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("semantic")
 			}
+
 			return err
 		}
 	}
@@ -236,11 +262,15 @@ func (m *ServiceEdgeRouterPolicyCreate) contextValidateSemantic(ctx context.Cont
 func (m *ServiceEdgeRouterPolicyCreate) contextValidateServiceRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.ServiceRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("serviceRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("serviceRoles")
 		}
+
 		return err
 	}
 
@@ -250,12 +280,21 @@ func (m *ServiceEdgeRouterPolicyCreate) contextValidateServiceRoles(ctx context.
 func (m *ServiceEdgeRouterPolicyCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}

@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -94,11 +95,15 @@ func (m *Version) validateAPIVersions(formats strfmt.Registry) error {
 			}
 			if val, ok := m.APIVersions[k][kk]; ok {
 				if err := val.Validate(formats); err != nil {
-					if ve, ok := err.(*errors.Validation); ok {
+					ve := new(errors.Validation)
+					if stderrors.As(err, &ve) {
 						return ve.ValidateName("apiVersions" + "." + k + "." + kk)
-					} else if ce, ok := err.(*errors.CompositeError); ok {
+					}
+					ce := new(errors.CompositeError)
+					if stderrors.As(err, &ce) {
 						return ce.ValidateName("apiVersions" + "." + k + "." + kk)
 					}
+
 					return err
 				}
 			}

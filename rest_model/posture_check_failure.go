@@ -34,7 +34,6 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"io/ioutil"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -126,7 +125,7 @@ func UnmarshalPostureCheckFailureSlice(reader io.Reader, consumer runtime.Consum
 // UnmarshalPostureCheckFailure unmarshals polymorphic PostureCheckFailure
 func UnmarshalPostureCheckFailure(reader io.Reader, consumer runtime.Consumer) (PostureCheckFailure, error) {
 	// we need to read this twice, so first into a buffer
-	data, err := ioutil.ReadAll(reader)
+	data, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, err
 	}

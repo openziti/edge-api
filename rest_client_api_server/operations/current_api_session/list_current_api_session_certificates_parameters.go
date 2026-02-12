@@ -52,7 +52,6 @@ func NewListCurrentAPISessionCertificatesParams() ListCurrentAPISessionCertifica
 //
 // swagger:parameters listCurrentApiSessionCertificates
 type ListCurrentAPISessionCertificatesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,10 +59,12 @@ type ListCurrentAPISessionCertificatesParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
@@ -78,7 +79,6 @@ func (o *ListCurrentAPISessionCertificatesParams) BindRequest(r *http.Request, r
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

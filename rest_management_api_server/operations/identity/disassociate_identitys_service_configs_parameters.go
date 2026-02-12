@@ -30,7 +30,6 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -55,7 +54,6 @@ func NewDisassociateIdentitysServiceConfigsParams() DisassociateIdentitysService
 //
 // swagger:parameters disassociateIdentitysServiceConfigs
 type DisassociateIdentitysServiceConfigsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -64,6 +62,7 @@ type DisassociateIdentitysServiceConfigsParams struct {
 	  In: path
 	*/
 	ID string
+
 	/*An array of service and config id pairs to remove
 	  In: body
 	*/
@@ -85,7 +84,9 @@ func (o *DisassociateIdentitysServiceConfigsParams) BindRequest(r *http.Request,
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.ServiceConfigsAssignList
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			res = append(res, errors.NewParseError("serviceConfigIdPairs", "body", "", err))
@@ -95,7 +96,7 @@ func (o *DisassociateIdentitysServiceConfigsParams) BindRequest(r *http.Request,
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

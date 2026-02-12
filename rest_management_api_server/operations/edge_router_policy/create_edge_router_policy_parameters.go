@@ -30,7 +30,7 @@ package edge_router_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -55,7 +55,6 @@ func NewCreateEdgeRouterPolicyParams() CreateEdgeRouterPolicyParams {
 //
 // swagger:parameters createEdgeRouterPolicy
 type CreateEdgeRouterPolicyParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -76,10 +75,12 @@ func (o *CreateEdgeRouterPolicyParams) BindRequest(r *http.Request, route *middl
 	o.HTTPRequest = r
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.EdgeRouterPolicyCreate
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("policy", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("policy", "body", "", err))
@@ -90,7 +91,7 @@ func (o *CreateEdgeRouterPolicyParams) BindRequest(r *http.Request, route *middl
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

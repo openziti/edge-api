@@ -49,7 +49,6 @@ func NewListNetworkJWTsParams() ListNetworkJWTsParams {
 //
 // swagger:parameters listNetworkJWTs
 type ListNetworkJWTsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

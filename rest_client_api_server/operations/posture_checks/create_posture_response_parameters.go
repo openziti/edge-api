@@ -30,7 +30,7 @@ package posture_checks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -55,7 +55,6 @@ func NewCreatePostureResponseParams() CreatePostureResponseParams {
 //
 // swagger:parameters createPostureResponse
 type CreatePostureResponseParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -76,10 +75,12 @@ func (o *CreatePostureResponseParams) BindRequest(r *http.Request, route *middle
 	o.HTTPRequest = r
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		body, err := rest_model.UnmarshalPostureResponseCreate(r.Body, route.Consumer)
 		if err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				err = errors.Required("postureResponse", "body", "")
 			}
 			res = append(res, err)
@@ -89,7 +90,7 @@ func (o *CreatePostureResponseParams) BindRequest(r *http.Request, route *middle
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

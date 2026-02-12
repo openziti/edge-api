@@ -36,16 +36,16 @@ import (
 )
 
 // CreateControllerSettingHandlerFunc turns a function with the right signature into a create controller setting handler
-type CreateControllerSettingHandlerFunc func(CreateControllerSettingParams, interface{}) middleware.Responder
+type CreateControllerSettingHandlerFunc func(CreateControllerSettingParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateControllerSettingHandlerFunc) Handle(params CreateControllerSettingParams, principal interface{}) middleware.Responder {
+func (fn CreateControllerSettingHandlerFunc) Handle(params CreateControllerSettingParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateControllerSettingHandler interface for that can handle valid create controller setting params
 type CreateControllerSettingHandler interface {
-	Handle(CreateControllerSettingParams, interface{}) middleware.Responder
+	Handle(CreateControllerSettingParams, any) middleware.Responder
 }
 
 // NewCreateControllerSetting creates a new http.Handler for the create controller setting operation
@@ -53,12 +53,12 @@ func NewCreateControllerSetting(ctx *middleware.Context, handler CreateControlle
 	return &CreateControllerSetting{Context: ctx, Handler: handler}
 }
 
-/* CreateControllerSetting swagger:route POST /controller-settings Settings createControllerSetting
+/*
+	CreateControllerSetting swagger:route POST /controller-settings Settings createControllerSetting
 
-Create a controller specific setting
+# Create a controller specific setting
 
 Create a new controller specific settings object. Requires admin access.
-
 */
 type CreateControllerSetting struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

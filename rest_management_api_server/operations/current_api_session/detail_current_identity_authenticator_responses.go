@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type DetailCurrentIdentityAuthenticatorOK
 const DetailCurrentIdentityAuthenticatorOKCode int = 200
 
-/*DetailCurrentIdentityAuthenticatorOK A singular authenticator resource
+/*
+DetailCurrentIdentityAuthenticatorOK A singular authenticator resource
 
 swagger:response detailCurrentIdentityAuthenticatorOK
 */
 type DetailCurrentIdentityAuthenticatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailCurrentIdentityAuthenticatorOK struct {
 func NewDetailCurrentIdentityAuthenticatorOK() *DetailCurrentIdentityAuthenticatorOK {
 
 	return &DetailCurrentIdentityAuthenticatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail current identity authenticator o k response
+func (o *DetailCurrentIdentityAuthenticatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailCurrentIdentityAuthenticatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail current identity authenticator o k response
+func (o *DetailCurrentIdentityAuthenticatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail current identity authenticator o k response
@@ -72,6 +89,23 @@ func (o *DetailCurrentIdentityAuthenticatorOK) SetPayload(payload *rest_model.De
 // WriteResponse to the client
 func (o *DetailCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DetailCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // DetailCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type DetailCurrentIdentityAuthenticatorUnauthorized
 const DetailCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*DetailCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailCurrentIdentityAuthenticatorUnauthorized
 */
 type DetailCurrentIdentityAuthenticatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DetailCurrentIdentityAuthenticatorUnauthorized struct {
 func NewDetailCurrentIdentityAuthenticatorUnauthorized() *DetailCurrentIdentityAuthenticatorUnauthorized {
 
 	return &DetailCurrentIdentityAuthenticatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail current identity authenticator unauthorized response
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DetailCurrentIdentityAuthenticatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail current identity authenticator unauthorized response
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail current identity authenticator unauthorized response
@@ -116,6 +166,23 @@ func (o *DetailCurrentIdentityAuthenticatorUnauthorized) SetPayload(payload *res
 // WriteResponse to the client
 func (o *DetailCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DetailCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.R
 // DetailCurrentIdentityAuthenticatorNotFoundCode is the HTTP code returned for type DetailCurrentIdentityAuthenticatorNotFound
 const DetailCurrentIdentityAuthenticatorNotFoundCode int = 404
 
-/*DetailCurrentIdentityAuthenticatorNotFound The requested resource does not exist
+/*
+DetailCurrentIdentityAuthenticatorNotFound The requested resource does not exist
 
 swagger:response detailCurrentIdentityAuthenticatorNotFound
 */
 type DetailCurrentIdentityAuthenticatorNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DetailCurrentIdentityAuthenticatorNotFound struct {
 func NewDetailCurrentIdentityAuthenticatorNotFound() *DetailCurrentIdentityAuthenticatorNotFound {
 
 	return &DetailCurrentIdentityAuthenticatorNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail current identity authenticator not found response
+func (o *DetailCurrentIdentityAuthenticatorNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DetailCurrentIdentityAuthenticatorNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail current identity authenticator not found response
+func (o *DetailCurrentIdentityAuthenticatorNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail current identity authenticator not found response
@@ -159,6 +242,23 @@ func (o *DetailCurrentIdentityAuthenticatorNotFound) SetPayload(payload *rest_mo
 
 // WriteResponse to the client
 func (o *DetailCurrentIdentityAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(404)
 	if o.Payload != nil {

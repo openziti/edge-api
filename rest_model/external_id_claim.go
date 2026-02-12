@@ -50,12 +50,12 @@ type ExternalIDClaim struct {
 
 	// location
 	// Required: true
-	// Enum: [COMMON_NAME SAN_URI SAN_EMAIL]
+	// Enum: ["COMMON_NAME","SAN_URI","SAN_EMAIL"]
 	Location *string `json:"location"`
 
 	// matcher
 	// Required: true
-	// Enum: [ALL PREFIX SUFFIX SCHEME]
+	// Enum: ["ALL","PREFIX","SUFFIX","SCHEME"]
 	Matcher *string `json:"matcher"`
 
 	// matcher criteria
@@ -64,7 +64,7 @@ type ExternalIDClaim struct {
 
 	// parser
 	// Required: true
-	// Enum: [NONE SPLIT]
+	// Enum: ["NONE","SPLIT"]
 	Parser *string `json:"parser"`
 
 	// parser criteria
@@ -115,7 +115,7 @@ func (m *ExternalIDClaim) validateIndex(formats strfmt.Registry) error {
 	return nil
 }
 
-var externalIdClaimTypeLocationPropEnum []interface{}
+var externalIdClaimTypeLocationPropEnum []any
 
 func init() {
 	var res []string
@@ -161,7 +161,7 @@ func (m *ExternalIDClaim) validateLocation(formats strfmt.Registry) error {
 	return nil
 }
 
-var externalIdClaimTypeMatcherPropEnum []interface{}
+var externalIdClaimTypeMatcherPropEnum []any
 
 func init() {
 	var res []string
@@ -219,7 +219,7 @@ func (m *ExternalIDClaim) validateMatcherCriteria(formats strfmt.Registry) error
 	return nil
 }
 
-var externalIdClaimTypeParserPropEnum []interface{}
+var externalIdClaimTypeParserPropEnum []any
 
 func init() {
 	var res []string

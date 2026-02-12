@@ -30,11 +30,14 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListServicePolicyPostureChecksReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListServicePolicyPostureChecksReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListServicePolicyPostureChecksReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListServicePolicyPostureChecksOK()
@@ -78,7 +81,7 @@ func (o *ListServicePolicyPostureChecksReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /service-policies/{id}/posture-checks] listServicePolicyPostureChecks", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListServicePolicyPostureChecksOK() *ListServicePolicyPostureChecksOK {
 	return &ListServicePolicyPostureChecksOK{}
 }
 
-/* ListServicePolicyPostureChecksOK describes a response with status code 200, with default header values.
+/*
+ListServicePolicyPostureChecksOK describes a response with status code 200, with default header values.
 
 A list of posture checks
 */
 type ListServicePolicyPostureChecksOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListPostureCheckEnvelope
 }
 
-func (o *ListServicePolicyPostureChecksOK) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list service policy posture checks o k response has a 2xx status code
+func (o *ListServicePolicyPostureChecksOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list service policy posture checks o k response has a 3xx status code
+func (o *ListServicePolicyPostureChecksOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service policy posture checks o k response has a 4xx status code
+func (o *ListServicePolicyPostureChecksOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list service policy posture checks o k response has a 5xx status code
+func (o *ListServicePolicyPostureChecksOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service policy posture checks o k response a status code equal to that given
+func (o *ListServicePolicyPostureChecksOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list service policy posture checks o k response
+func (o *ListServicePolicyPostureChecksOK) Code() int {
+	return 200
+}
+
+func (o *ListServicePolicyPostureChecksOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksOK %s", 200, payload)
+}
+
+func (o *ListServicePolicyPostureChecksOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksOK %s", 200, payload)
+}
+
 func (o *ListServicePolicyPostureChecksOK) GetPayload() *rest_model.ListPostureCheckEnvelope {
 	return o.Payload
 }
 
 func (o *ListServicePolicyPostureChecksOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListPostureCheckEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListServicePolicyPostureChecksOK binds the response header WWW-Authenticate
+func (o *ListServicePolicyPostureChecksOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListServicePolicyPostureChecksBadRequest creates a ListServicePolicyPostureChecksBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewListServicePolicyPostureChecksBadRequest() *ListServicePolicyPostureChec
 	return &ListServicePolicyPostureChecksBadRequest{}
 }
 
-/* ListServicePolicyPostureChecksBadRequest describes a response with status code 400, with default header values.
+/*
+ListServicePolicyPostureChecksBadRequest describes a response with status code 400, with default header values.
 
 The requested resource does not exist
 */
 type ListServicePolicyPostureChecksBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListServicePolicyPostureChecksBadRequest) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list service policy posture checks bad request response has a 2xx status code
+func (o *ListServicePolicyPostureChecksBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list service policy posture checks bad request response has a 3xx status code
+func (o *ListServicePolicyPostureChecksBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service policy posture checks bad request response has a 4xx status code
+func (o *ListServicePolicyPostureChecksBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list service policy posture checks bad request response has a 5xx status code
+func (o *ListServicePolicyPostureChecksBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service policy posture checks bad request response a status code equal to that given
+func (o *ListServicePolicyPostureChecksBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list service policy posture checks bad request response
+func (o *ListServicePolicyPostureChecksBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListServicePolicyPostureChecksBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksBadRequest %s", 400, payload)
+}
+
+func (o *ListServicePolicyPostureChecksBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksBadRequest %s", 400, payload)
+}
+
 func (o *ListServicePolicyPostureChecksBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListServicePolicyPostureChecksBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListServicePolicyPostureChecksBadRequest binds the response header WWW-Authenticate
+func (o *ListServicePolicyPostureChecksBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListServicePolicyPostureChecksUnauthorized creates a ListServicePolicyPostureChecksUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewListServicePolicyPostureChecksUnauthorized() *ListServicePolicyPostureCh
 	return &ListServicePolicyPostureChecksUnauthorized{}
 }
 
-/* ListServicePolicyPostureChecksUnauthorized describes a response with status code 401, with default header values.
+/*
+ListServicePolicyPostureChecksUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListServicePolicyPostureChecksUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListServicePolicyPostureChecksUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list service policy posture checks unauthorized response has a 2xx status code
+func (o *ListServicePolicyPostureChecksUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list service policy posture checks unauthorized response has a 3xx status code
+func (o *ListServicePolicyPostureChecksUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service policy posture checks unauthorized response has a 4xx status code
+func (o *ListServicePolicyPostureChecksUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list service policy posture checks unauthorized response has a 5xx status code
+func (o *ListServicePolicyPostureChecksUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service policy posture checks unauthorized response a status code equal to that given
+func (o *ListServicePolicyPostureChecksUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list service policy posture checks unauthorized response
+func (o *ListServicePolicyPostureChecksUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListServicePolicyPostureChecksUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksUnauthorized %s", 401, payload)
+}
+
+func (o *ListServicePolicyPostureChecksUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksUnauthorized %s", 401, payload)
+}
+
 func (o *ListServicePolicyPostureChecksUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListServicePolicyPostureChecksUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListServicePolicyPostureChecksUnauthorized binds the response header WWW-Authenticate
+func (o *ListServicePolicyPostureChecksUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListServicePolicyPostureChecksTooManyRequests creates a ListServicePolicyPostureChecksTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListServicePolicyPostureChecksTooManyRequests() *ListServicePolicyPostur
 	return &ListServicePolicyPostureChecksTooManyRequests{}
 }
 
-/* ListServicePolicyPostureChecksTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListServicePolicyPostureChecksTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListServicePolicyPostureChecksTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListServicePolicyPostureChecksTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list service policy posture checks too many requests response has a 2xx status code
+func (o *ListServicePolicyPostureChecksTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list service policy posture checks too many requests response has a 3xx status code
+func (o *ListServicePolicyPostureChecksTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service policy posture checks too many requests response has a 4xx status code
+func (o *ListServicePolicyPostureChecksTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list service policy posture checks too many requests response has a 5xx status code
+func (o *ListServicePolicyPostureChecksTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list service policy posture checks too many requests response a status code equal to that given
+func (o *ListServicePolicyPostureChecksTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list service policy posture checks too many requests response
+func (o *ListServicePolicyPostureChecksTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListServicePolicyPostureChecksTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksTooManyRequests %s", 429, payload)
+}
+
+func (o *ListServicePolicyPostureChecksTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksTooManyRequests %s", 429, payload)
+}
+
 func (o *ListServicePolicyPostureChecksTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListServicePolicyPostureChecksTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListServicePolicyPostureChecksTooManyRequests binds the response header WWW-Authenticate
+func (o *ListServicePolicyPostureChecksTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListServicePolicyPostureChecksServiceUnavailable creates a ListServicePolicyPostureChecksServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListServicePolicyPostureChecksServiceUnavailable() *ListServicePolicyPos
 	return &ListServicePolicyPostureChecksServiceUnavailable{}
 }
 
-/* ListServicePolicyPostureChecksServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListServicePolicyPostureChecksServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListServicePolicyPostureChecksServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListServicePolicyPostureChecksServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list service policy posture checks service unavailable response has a 2xx status code
+func (o *ListServicePolicyPostureChecksServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list service policy posture checks service unavailable response has a 3xx status code
+func (o *ListServicePolicyPostureChecksServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list service policy posture checks service unavailable response has a 4xx status code
+func (o *ListServicePolicyPostureChecksServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list service policy posture checks service unavailable response has a 5xx status code
+func (o *ListServicePolicyPostureChecksServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list service policy posture checks service unavailable response a status code equal to that given
+func (o *ListServicePolicyPostureChecksServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list service policy posture checks service unavailable response
+func (o *ListServicePolicyPostureChecksServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListServicePolicyPostureChecksServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListServicePolicyPostureChecksServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}/posture-checks][%d] listServicePolicyPostureChecksServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListServicePolicyPostureChecksServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListServicePolicyPostureChecksServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListServicePolicyPostureChecksServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListServicePolicyPostureChecksServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

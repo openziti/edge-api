@@ -50,7 +50,6 @@ func NewDetailIdentityParams() DetailIdentityParams {
 //
 // swagger:parameters detailIdentity
 type DetailIdentityParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

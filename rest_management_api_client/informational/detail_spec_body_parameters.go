@@ -76,10 +76,12 @@ func NewDetailSpecBodyParamsWithHTTPClient(client *http.Client) *DetailSpecBodyP
 	}
 }
 
-/* DetailSpecBodyParams contains all the parameters to send to the API endpoint
-   for the detail spec body operation.
+/*
+DetailSpecBodyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail spec body operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailSpecBodyParams struct {
 

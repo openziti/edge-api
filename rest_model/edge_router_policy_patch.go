@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -90,11 +91,15 @@ func (m *EdgeRouterPolicyPatch) validateEdgeRouterRoles(formats strfmt.Registry)
 	}
 
 	if err := m.EdgeRouterRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("edgeRouterRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("edgeRouterRoles")
 		}
+
 		return err
 	}
 
@@ -107,11 +112,15 @@ func (m *EdgeRouterPolicyPatch) validateIdentityRoles(formats strfmt.Registry) e
 	}
 
 	if err := m.IdentityRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("identityRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("identityRoles")
 		}
+
 		return err
 	}
 
@@ -124,11 +133,15 @@ func (m *EdgeRouterPolicyPatch) validateSemantic(formats strfmt.Registry) error 
 	}
 
 	if err := m.Semantic.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("semantic")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("semantic")
 		}
+
 		return err
 	}
 
@@ -142,11 +155,15 @@ func (m *EdgeRouterPolicyPatch) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -183,11 +200,15 @@ func (m *EdgeRouterPolicyPatch) ContextValidate(ctx context.Context, formats str
 func (m *EdgeRouterPolicyPatch) contextValidateEdgeRouterRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.EdgeRouterRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("edgeRouterRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("edgeRouterRoles")
 		}
+
 		return err
 	}
 
@@ -197,11 +218,15 @@ func (m *EdgeRouterPolicyPatch) contextValidateEdgeRouterRoles(ctx context.Conte
 func (m *EdgeRouterPolicyPatch) contextValidateIdentityRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.IdentityRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("identityRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("identityRoles")
 		}
+
 		return err
 	}
 
@@ -210,12 +235,20 @@ func (m *EdgeRouterPolicyPatch) contextValidateIdentityRoles(ctx context.Context
 
 func (m *EdgeRouterPolicyPatch) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Semantic) { // not required
+		return nil
+	}
+
 	if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("semantic")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("semantic")
 		}
+
 		return err
 	}
 
@@ -225,12 +258,21 @@ func (m *EdgeRouterPolicyPatch) contextValidateSemantic(ctx context.Context, for
 func (m *EdgeRouterPolicyPatch) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}

@@ -36,16 +36,16 @@ import (
 )
 
 // PatchIdentityHandlerFunc turns a function with the right signature into a patch identity handler
-type PatchIdentityHandlerFunc func(PatchIdentityParams, interface{}) middleware.Responder
+type PatchIdentityHandlerFunc func(PatchIdentityParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn PatchIdentityHandlerFunc) Handle(params PatchIdentityParams, principal interface{}) middleware.Responder {
+func (fn PatchIdentityHandlerFunc) Handle(params PatchIdentityParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // PatchIdentityHandler interface for that can handle valid patch identity params
 type PatchIdentityHandler interface {
-	Handle(PatchIdentityParams, interface{}) middleware.Responder
+	Handle(PatchIdentityParams, any) middleware.Responder
 }
 
 // NewPatchIdentity creates a new http.Handler for the patch identity operation
@@ -53,12 +53,12 @@ func NewPatchIdentity(ctx *middleware.Context, handler PatchIdentityHandler) *Pa
 	return &PatchIdentity{Context: ctx, Handler: handler}
 }
 
-/* PatchIdentity swagger:route PATCH /identities/{id} Identity patchIdentity
+/*
+	PatchIdentity swagger:route PATCH /identities/{id} Identity patchIdentity
 
-Update the supplied fields on an identity
+# Update the supplied fields on an identity
 
 Update the supplied fields on an identity. Requires admin access.
-
 */
 type PatchIdentity struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *PatchIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *PatchIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

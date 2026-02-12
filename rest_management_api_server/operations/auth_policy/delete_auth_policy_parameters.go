@@ -50,7 +50,6 @@ func NewDeleteAuthPolicyParams() DeleteAuthPolicyParams {
 //
 // swagger:parameters deleteAuthPolicy
 type DeleteAuthPolicyParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

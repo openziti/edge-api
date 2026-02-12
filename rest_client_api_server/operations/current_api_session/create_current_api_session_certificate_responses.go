@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CreateCurrentAPISessionCertificateCreatedCode is the HTTP code returned for type CreateCurrentAPISessionCertificateCreated
 const CreateCurrentAPISessionCertificateCreatedCode int = 201
 
-/*CreateCurrentAPISessionCertificateCreated A response of a create API Session certificate
+/*
+CreateCurrentAPISessionCertificateCreated A response of a create API Session certificate
 
 swagger:response createCurrentApiSessionCertificateCreated
 */
 type CreateCurrentAPISessionCertificateCreated struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CreateCurrentAPISessionCertificateCreated struct {
 func NewCreateCurrentAPISessionCertificateCreated() *CreateCurrentAPISessionCertificateCreated {
 
 	return &CreateCurrentAPISessionCertificateCreated{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create current Api session certificate created response
+func (o *CreateCurrentAPISessionCertificateCreated) WithWWWAuthenticate(wWWAuthenticate []string) *CreateCurrentAPISessionCertificateCreated {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create current Api session certificate created response
+func (o *CreateCurrentAPISessionCertificateCreated) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create current Api session certificate created response
@@ -72,6 +89,23 @@ func (o *CreateCurrentAPISessionCertificateCreated) SetPayload(payload *rest_mod
 // WriteResponse to the client
 func (o *CreateCurrentAPISessionCertificateCreated) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(201)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CreateCurrentAPISessionCertificateCreated) WriteResponse(rw http.Respon
 // CreateCurrentAPISessionCertificateBadRequestCode is the HTTP code returned for type CreateCurrentAPISessionCertificateBadRequest
 const CreateCurrentAPISessionCertificateBadRequestCode int = 400
 
-/*CreateCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateCurrentAPISessionCertificateBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createCurrentApiSessionCertificateBadRequest
 */
 type CreateCurrentAPISessionCertificateBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CreateCurrentAPISessionCertificateBadRequest struct {
 func NewCreateCurrentAPISessionCertificateBadRequest() *CreateCurrentAPISessionCertificateBadRequest {
 
 	return &CreateCurrentAPISessionCertificateBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create current Api session certificate bad request response
+func (o *CreateCurrentAPISessionCertificateBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *CreateCurrentAPISessionCertificateBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create current Api session certificate bad request response
+func (o *CreateCurrentAPISessionCertificateBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create current Api session certificate bad request response
@@ -116,6 +166,23 @@ func (o *CreateCurrentAPISessionCertificateBadRequest) SetPayload(payload *rest_
 // WriteResponse to the client
 func (o *CreateCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CreateCurrentAPISessionCertificateBadRequest) WriteResponse(rw http.Res
 // CreateCurrentAPISessionCertificateUnauthorizedCode is the HTTP code returned for type CreateCurrentAPISessionCertificateUnauthorized
 const CreateCurrentAPISessionCertificateUnauthorizedCode int = 401
 
-/*CreateCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateCurrentAPISessionCertificateUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createCurrentApiSessionCertificateUnauthorized
 */
 type CreateCurrentAPISessionCertificateUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CreateCurrentAPISessionCertificateUnauthorized struct {
 func NewCreateCurrentAPISessionCertificateUnauthorized() *CreateCurrentAPISessionCertificateUnauthorized {
 
 	return &CreateCurrentAPISessionCertificateUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create current Api session certificate unauthorized response
+func (o *CreateCurrentAPISessionCertificateUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CreateCurrentAPISessionCertificateUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create current Api session certificate unauthorized response
+func (o *CreateCurrentAPISessionCertificateUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create current Api session certificate unauthorized response
@@ -160,6 +243,23 @@ func (o *CreateCurrentAPISessionCertificateUnauthorized) SetPayload(payload *res
 // WriteResponse to the client
 func (o *CreateCurrentAPISessionCertificateUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *CreateCurrentAPISessionCertificateUnauthorized) WriteResponse(rw http.R
 // CreateCurrentAPISessionCertificateTooManyRequestsCode is the HTTP code returned for type CreateCurrentAPISessionCertificateTooManyRequests
 const CreateCurrentAPISessionCertificateTooManyRequestsCode int = 429
 
-/*CreateCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateCurrentAPISessionCertificateTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createCurrentApiSessionCertificateTooManyRequests
 */
 type CreateCurrentAPISessionCertificateTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type CreateCurrentAPISessionCertificateTooManyRequests struct {
 func NewCreateCurrentAPISessionCertificateTooManyRequests() *CreateCurrentAPISessionCertificateTooManyRequests {
 
 	return &CreateCurrentAPISessionCertificateTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create current Api session certificate too many requests response
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *CreateCurrentAPISessionCertificateTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create current Api session certificate too many requests response
+func (o *CreateCurrentAPISessionCertificateTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create current Api session certificate too many requests response
@@ -204,6 +320,23 @@ func (o *CreateCurrentAPISessionCertificateTooManyRequests) SetPayload(payload *
 // WriteResponse to the client
 func (o *CreateCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *CreateCurrentAPISessionCertificateTooManyRequests) WriteResponse(rw htt
 // CreateCurrentAPISessionCertificateServiceUnavailableCode is the HTTP code returned for type CreateCurrentAPISessionCertificateServiceUnavailable
 const CreateCurrentAPISessionCertificateServiceUnavailableCode int = 503
 
-/*CreateCurrentAPISessionCertificateServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+CreateCurrentAPISessionCertificateServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response createCurrentApiSessionCertificateServiceUnavailable
 */
 type CreateCurrentAPISessionCertificateServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type CreateCurrentAPISessionCertificateServiceUnavailable struct {
 func NewCreateCurrentAPISessionCertificateServiceUnavailable() *CreateCurrentAPISessionCertificateServiceUnavailable {
 
 	return &CreateCurrentAPISessionCertificateServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create current Api session certificate service unavailable response
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *CreateCurrentAPISessionCertificateServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create current Api session certificate service unavailable response
+func (o *CreateCurrentAPISessionCertificateServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create current Api session certificate service unavailable response
@@ -247,6 +396,23 @@ func (o *CreateCurrentAPISessionCertificateServiceUnavailable) SetPayload(payloa
 
 // WriteResponse to the client
 func (o *CreateCurrentAPISessionCertificateServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

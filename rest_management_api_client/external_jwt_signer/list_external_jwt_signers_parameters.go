@@ -77,10 +77,12 @@ func NewListExternalJWTSignersParamsWithHTTPClient(client *http.Client) *ListExt
 	}
 }
 
-/* ListExternalJWTSignersParams contains all the parameters to send to the API endpoint
-   for the list external Jwt signers operation.
+/*
+ListExternalJWTSignersParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list external Jwt signers operation.
+
+	Typically these are written to a http.Request.
 */
 type ListExternalJWTSignersParams struct {
 

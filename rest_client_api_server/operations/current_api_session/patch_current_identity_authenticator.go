@@ -36,16 +36,16 @@ import (
 )
 
 // PatchCurrentIdentityAuthenticatorHandlerFunc turns a function with the right signature into a patch current identity authenticator handler
-type PatchCurrentIdentityAuthenticatorHandlerFunc func(PatchCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+type PatchCurrentIdentityAuthenticatorHandlerFunc func(PatchCurrentIdentityAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn PatchCurrentIdentityAuthenticatorHandlerFunc) Handle(params PatchCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn PatchCurrentIdentityAuthenticatorHandlerFunc) Handle(params PatchCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // PatchCurrentIdentityAuthenticatorHandler interface for that can handle valid patch current identity authenticator params
 type PatchCurrentIdentityAuthenticatorHandler interface {
-	Handle(PatchCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+	Handle(PatchCurrentIdentityAuthenticatorParams, any) middleware.Responder
 }
 
 // NewPatchCurrentIdentityAuthenticator creates a new http.Handler for the patch current identity authenticator operation
@@ -53,14 +53,13 @@ func NewPatchCurrentIdentityAuthenticator(ctx *middleware.Context, handler Patch
 	return &PatchCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* PatchCurrentIdentityAuthenticator swagger:route PATCH /current-identity/authenticators/{id} Current API Session patchCurrentIdentityAuthenticator
+/*
+	PatchCurrentIdentityAuthenticator swagger:route PATCH /current-identity/authenticators/{id} Current API Session patchCurrentIdentityAuthenticator
 
-Update the supplied fields on an authenticator of this identity
+# Update the supplied fields on an authenticator of this identity
 
 Update the supplied fields on an authenticator by id. Will only update authenticators assigned to the API
 session's identity.
-
-
 */
 type PatchCurrentIdentityAuthenticator struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *PatchCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWriter, r 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *PatchCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWriter, r 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

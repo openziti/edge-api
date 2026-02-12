@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -125,11 +126,15 @@ func (m *AuthenticatorPatchWithCurrent) validateCurrentPassword(formats strfmt.R
 
 	if m.CurrentPassword != nil {
 		if err := m.CurrentPassword.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("currentPassword")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("currentPassword")
 			}
+
 			return err
 		}
 	}
@@ -159,12 +164,17 @@ func (m *AuthenticatorPatchWithCurrent) ContextValidate(ctx context.Context, for
 func (m *AuthenticatorPatchWithCurrent) contextValidateCurrentPassword(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CurrentPassword != nil {
+
 		if err := m.CurrentPassword.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("currentPassword")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("currentPassword")
 			}
+
 			return err
 		}
 	}

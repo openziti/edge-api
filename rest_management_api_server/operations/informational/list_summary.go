@@ -36,16 +36,16 @@ import (
 )
 
 // ListSummaryHandlerFunc turns a function with the right signature into a list summary handler
-type ListSummaryHandlerFunc func(ListSummaryParams, interface{}) middleware.Responder
+type ListSummaryHandlerFunc func(ListSummaryParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListSummaryHandlerFunc) Handle(params ListSummaryParams, principal interface{}) middleware.Responder {
+func (fn ListSummaryHandlerFunc) Handle(params ListSummaryParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListSummaryHandler interface for that can handle valid list summary params
 type ListSummaryHandler interface {
-	Handle(ListSummaryParams, interface{}) middleware.Responder
+	Handle(ListSummaryParams, any) middleware.Responder
 }
 
 // NewListSummary creates a new http.Handler for the list summary operation
@@ -53,12 +53,12 @@ func NewListSummary(ctx *middleware.Context, handler ListSummaryHandler) *ListSu
 	return &ListSummary{Context: ctx, Handler: handler}
 }
 
-/* ListSummary swagger:route GET /summary Informational listSummary
+/*
+	ListSummary swagger:route GET /summary Informational listSummary
 
-Returns a list of accessible resource counts
+# Returns a list of accessible resource counts
 
 This endpoint is usefull for UIs that wish to display UI elements with counts.
-
 */
 type ListSummary struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListSummary) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListSummary) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

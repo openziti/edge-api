@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -106,11 +107,15 @@ func (m *AuthQueryDetail) validateFormat(formats strfmt.Registry) error {
 	}
 
 	if err := m.Format.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("format")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("format")
 		}
+
 		return err
 	}
 
@@ -129,11 +134,15 @@ func (m *AuthQueryDetail) validateProvider(formats strfmt.Registry) error {
 
 	if m.Provider != nil {
 		if err := m.Provider.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("provider")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("provider")
 			}
+
 			return err
 		}
 	}
@@ -147,11 +156,15 @@ func (m *AuthQueryDetail) validateTypeID(formats strfmt.Registry) error {
 	}
 
 	if err := m.TypeID.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("typeId")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("typeId")
 		}
+
 		return err
 	}
 
@@ -182,12 +195,20 @@ func (m *AuthQueryDetail) ContextValidate(ctx context.Context, formats strfmt.Re
 
 func (m *AuthQueryDetail) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Format) { // not required
+		return nil
+	}
+
 	if err := m.Format.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("format")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("format")
 		}
+
 		return err
 	}
 
@@ -197,12 +218,17 @@ func (m *AuthQueryDetail) contextValidateFormat(ctx context.Context, formats str
 func (m *AuthQueryDetail) contextValidateProvider(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Provider != nil {
+
 		if err := m.Provider.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("provider")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("provider")
 			}
+
 			return err
 		}
 	}
@@ -212,12 +238,20 @@ func (m *AuthQueryDetail) contextValidateProvider(ctx context.Context, formats s
 
 func (m *AuthQueryDetail) contextValidateTypeID(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.TypeID) { // not required
+		return nil
+	}
+
 	if err := m.TypeID.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("typeId")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("typeId")
 		}
+
 		return err
 	}
 

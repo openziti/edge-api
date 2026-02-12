@@ -143,10 +143,22 @@ paths:
 responses:
   listEnrollments:
     description: A list of enrollments
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listEnrollmentsEnvelope'
   detailEnrollment:
     description: A singular enrollment resource
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailEnrollmentEnvelope'
 

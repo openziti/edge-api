@@ -49,7 +49,6 @@ func NewGetCurrentIdentityEdgeRoutersParams() GetCurrentIdentityEdgeRoutersParam
 //
 // swagger:parameters getCurrentIdentityEdgeRouters
 type GetCurrentIdentityEdgeRoutersParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

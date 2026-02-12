@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteControllerSettingHandlerFunc turns a function with the right signature into a delete controller setting handler
-type DeleteControllerSettingHandlerFunc func(DeleteControllerSettingParams, interface{}) middleware.Responder
+type DeleteControllerSettingHandlerFunc func(DeleteControllerSettingParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteControllerSettingHandlerFunc) Handle(params DeleteControllerSettingParams, principal interface{}) middleware.Responder {
+func (fn DeleteControllerSettingHandlerFunc) Handle(params DeleteControllerSettingParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteControllerSettingHandler interface for that can handle valid delete controller setting params
 type DeleteControllerSettingHandler interface {
-	Handle(DeleteControllerSettingParams, interface{}) middleware.Responder
+	Handle(DeleteControllerSettingParams, any) middleware.Responder
 }
 
 // NewDeleteControllerSetting creates a new http.Handler for the delete controller setting operation
@@ -53,12 +53,12 @@ func NewDeleteControllerSetting(ctx *middleware.Context, handler DeleteControlle
 	return &DeleteControllerSetting{Context: ctx, Handler: handler}
 }
 
-/* DeleteControllerSetting swagger:route DELETE /controller-settings/{id}/effective Settings deleteControllerSetting
+/*
+	DeleteControllerSetting swagger:route DELETE /controller-settings/{id}/effective Settings deleteControllerSetting
 
-Delete a controller setting object
+# Delete a controller setting object
 
 Delete a controller setting object by id. Requires admin access.
-
 */
 type DeleteControllerSetting struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

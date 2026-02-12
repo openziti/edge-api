@@ -53,13 +53,12 @@ func NewAuthenticate(ctx *middleware.Context, handler AuthenticateHandler) *Auth
 	return &Authenticate{Context: ctx, Handler: handler}
 }
 
-/* Authenticate swagger:route POST /authenticate Authentication authenticate
+/*
+	Authenticate swagger:route POST /authenticate Authentication authenticate
 
-Authenticate via a method supplied via a query string parameter
+# Authenticate via a method supplied via a query string parameter
 
 Allowed authentication methods include "password", "cert", and "ext-jwt"
-
-
 */
 type Authenticate struct {
 	Context *middleware.Context
@@ -78,6 +77,7 @@ func (o *Authenticate) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

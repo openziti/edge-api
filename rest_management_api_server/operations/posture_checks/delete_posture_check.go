@@ -36,16 +36,16 @@ import (
 )
 
 // DeletePostureCheckHandlerFunc turns a function with the right signature into a delete posture check handler
-type DeletePostureCheckHandlerFunc func(DeletePostureCheckParams, interface{}) middleware.Responder
+type DeletePostureCheckHandlerFunc func(DeletePostureCheckParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeletePostureCheckHandlerFunc) Handle(params DeletePostureCheckParams, principal interface{}) middleware.Responder {
+func (fn DeletePostureCheckHandlerFunc) Handle(params DeletePostureCheckParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeletePostureCheckHandler interface for that can handle valid delete posture check params
 type DeletePostureCheckHandler interface {
-	Handle(DeletePostureCheckParams, interface{}) middleware.Responder
+	Handle(DeletePostureCheckParams, any) middleware.Responder
 }
 
 // NewDeletePostureCheck creates a new http.Handler for the delete posture check operation
@@ -53,12 +53,12 @@ func NewDeletePostureCheck(ctx *middleware.Context, handler DeletePostureCheckHa
 	return &DeletePostureCheck{Context: ctx, Handler: handler}
 }
 
-/* DeletePostureCheck swagger:route DELETE /posture-checks/{id} Posture Checks deletePostureCheck
+/*
+	DeletePostureCheck swagger:route DELETE /posture-checks/{id} Posture Checks deletePostureCheck
 
-Deletes an Posture Checks
+# Deletes an Posture Checks
 
 Deletes and Posture Checks by id
-
 */
 type DeletePostureCheck struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeletePostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeletePostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

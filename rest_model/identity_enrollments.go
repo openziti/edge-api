@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -82,11 +83,15 @@ func (m *IdentityEnrollments) validateOtt(formats strfmt.Registry) error {
 
 	if m.Ott != nil {
 		if err := m.Ott.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ott")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ott")
 			}
+
 			return err
 		}
 	}
@@ -101,11 +106,15 @@ func (m *IdentityEnrollments) validateOttca(formats strfmt.Registry) error {
 
 	if m.Ottca != nil {
 		if err := m.Ottca.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ottca")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ottca")
 			}
+
 			return err
 		}
 	}
@@ -120,11 +129,15 @@ func (m *IdentityEnrollments) validateUpdb(formats strfmt.Registry) error {
 
 	if m.Updb != nil {
 		if err := m.Updb.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("updb")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("updb")
 			}
+
 			return err
 		}
 	}
@@ -157,12 +170,21 @@ func (m *IdentityEnrollments) ContextValidate(ctx context.Context, formats strfm
 func (m *IdentityEnrollments) contextValidateOtt(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ott != nil {
+
+		if swag.IsZero(m.Ott) { // not required
+			return nil
+		}
+
 		if err := m.Ott.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ott")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ott")
 			}
+
 			return err
 		}
 	}
@@ -173,12 +195,21 @@ func (m *IdentityEnrollments) contextValidateOtt(ctx context.Context, formats st
 func (m *IdentityEnrollments) contextValidateOttca(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ottca != nil {
+
+		if swag.IsZero(m.Ottca) { // not required
+			return nil
+		}
+
 		if err := m.Ottca.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ottca")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ottca")
 			}
+
 			return err
 		}
 	}
@@ -189,12 +220,21 @@ func (m *IdentityEnrollments) contextValidateOttca(ctx context.Context, formats 
 func (m *IdentityEnrollments) contextValidateUpdb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Updb != nil {
+
+		if swag.IsZero(m.Updb) { // not required
+			return nil
+		}
+
 		if err := m.Updb.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("updb")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("updb")
 			}
+
 			return err
 		}
 	}
@@ -338,11 +378,15 @@ func (m *IdentityEnrollmentsOttca) validateCa(formats strfmt.Registry) error {
 
 	if m.Ca != nil {
 		if err := m.Ca.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ottca" + "." + "ca")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ottca" + "." + "ca")
 			}
+
 			return err
 		}
 	}
@@ -379,12 +423,21 @@ func (m *IdentityEnrollmentsOttca) ContextValidate(ctx context.Context, formats 
 func (m *IdentityEnrollmentsOttca) contextValidateCa(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ca != nil {
+
+		if swag.IsZero(m.Ca) { // not required
+			return nil
+		}
+
 		if err := m.Ca.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ottca" + "." + "ca")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ottca" + "." + "ca")
 			}
+
 			return err
 		}
 	}

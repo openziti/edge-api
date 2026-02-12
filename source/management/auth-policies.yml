@@ -166,10 +166,22 @@ paths:
 responses:
   listAuthPolicies:
     description: A list of Auth Policies
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listAuthPoliciesEnvelope'
   detailAuthPolicy:
     description: A singular Auth Policy resource
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailAuthPolicyEnvelope'
 

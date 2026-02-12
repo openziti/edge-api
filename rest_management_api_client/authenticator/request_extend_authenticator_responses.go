@@ -30,11 +30,14 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type RequestExtendAuthenticatorReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *RequestExtendAuthenticatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *RequestExtendAuthenticatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewRequestExtendAuthenticatorOK()
@@ -84,7 +87,7 @@ func (o *RequestExtendAuthenticatorReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /authenticators/{id}/request-extend] requestExtendAuthenticator", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewRequestExtendAuthenticatorOK() *RequestExtendAuthenticatorOK {
 	return &RequestExtendAuthenticatorOK{}
 }
 
-/* RequestExtendAuthenticatorOK describes a response with status code 200, with default header values.
+/*
+RequestExtendAuthenticatorOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type RequestExtendAuthenticatorOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *RequestExtendAuthenticatorOK) Error() string {
-	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this request extend authenticator o k response has a 2xx status code
+func (o *RequestExtendAuthenticatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this request extend authenticator o k response has a 3xx status code
+func (o *RequestExtendAuthenticatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this request extend authenticator o k response has a 4xx status code
+func (o *RequestExtendAuthenticatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this request extend authenticator o k response has a 5xx status code
+func (o *RequestExtendAuthenticatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this request extend authenticator o k response a status code equal to that given
+func (o *RequestExtendAuthenticatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the request extend authenticator o k response
+func (o *RequestExtendAuthenticatorOK) Code() int {
+	return 200
+}
+
+func (o *RequestExtendAuthenticatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorOK %s", 200, payload)
+}
+
+func (o *RequestExtendAuthenticatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorOK %s", 200, payload)
+}
+
 func (o *RequestExtendAuthenticatorOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *RequestExtendAuthenticatorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRequestExtendAuthenticatorOK binds the response header WWW-Authenticate
+func (o *RequestExtendAuthenticatorOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRequestExtendAuthenticatorUnauthorized creates a RequestExtendAuthenticatorUnauthorized with default headers values
@@ -125,31 +205,108 @@ func NewRequestExtendAuthenticatorUnauthorized() *RequestExtendAuthenticatorUnau
 	return &RequestExtendAuthenticatorUnauthorized{}
 }
 
-/* RequestExtendAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/*
+RequestExtendAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type RequestExtendAuthenticatorUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RequestExtendAuthenticatorUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this request extend authenticator unauthorized response has a 2xx status code
+func (o *RequestExtendAuthenticatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this request extend authenticator unauthorized response has a 3xx status code
+func (o *RequestExtendAuthenticatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this request extend authenticator unauthorized response has a 4xx status code
+func (o *RequestExtendAuthenticatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this request extend authenticator unauthorized response has a 5xx status code
+func (o *RequestExtendAuthenticatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this request extend authenticator unauthorized response a status code equal to that given
+func (o *RequestExtendAuthenticatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the request extend authenticator unauthorized response
+func (o *RequestExtendAuthenticatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *RequestExtendAuthenticatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorUnauthorized %s", 401, payload)
+}
+
+func (o *RequestExtendAuthenticatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorUnauthorized %s", 401, payload)
+}
+
 func (o *RequestExtendAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RequestExtendAuthenticatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRequestExtendAuthenticatorUnauthorized binds the response header WWW-Authenticate
+func (o *RequestExtendAuthenticatorUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRequestExtendAuthenticatorForbidden creates a RequestExtendAuthenticatorForbidden with default headers values
@@ -157,31 +314,108 @@ func NewRequestExtendAuthenticatorForbidden() *RequestExtendAuthenticatorForbidd
 	return &RequestExtendAuthenticatorForbidden{}
 }
 
-/* RequestExtendAuthenticatorForbidden describes a response with status code 403, with default header values.
+/*
+RequestExtendAuthenticatorForbidden describes a response with status code 403, with default header values.
 
 The request could not be completed and will never complete due to unchangeable state or conflicts.
 */
 type RequestExtendAuthenticatorForbidden struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RequestExtendAuthenticatorForbidden) Error() string {
-	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorForbidden  %+v", 403, o.Payload)
+// IsSuccess returns true when this request extend authenticator forbidden response has a 2xx status code
+func (o *RequestExtendAuthenticatorForbidden) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this request extend authenticator forbidden response has a 3xx status code
+func (o *RequestExtendAuthenticatorForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this request extend authenticator forbidden response has a 4xx status code
+func (o *RequestExtendAuthenticatorForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this request extend authenticator forbidden response has a 5xx status code
+func (o *RequestExtendAuthenticatorForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this request extend authenticator forbidden response a status code equal to that given
+func (o *RequestExtendAuthenticatorForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the request extend authenticator forbidden response
+func (o *RequestExtendAuthenticatorForbidden) Code() int {
+	return 403
+}
+
+func (o *RequestExtendAuthenticatorForbidden) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorForbidden %s", 403, payload)
+}
+
+func (o *RequestExtendAuthenticatorForbidden) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorForbidden %s", 403, payload)
+}
+
 func (o *RequestExtendAuthenticatorForbidden) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RequestExtendAuthenticatorForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRequestExtendAuthenticatorForbidden binds the response header WWW-Authenticate
+func (o *RequestExtendAuthenticatorForbidden) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRequestExtendAuthenticatorNotFound creates a RequestExtendAuthenticatorNotFound with default headers values
@@ -189,31 +423,108 @@ func NewRequestExtendAuthenticatorNotFound() *RequestExtendAuthenticatorNotFound
 	return &RequestExtendAuthenticatorNotFound{}
 }
 
-/* RequestExtendAuthenticatorNotFound describes a response with status code 404, with default header values.
+/*
+RequestExtendAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type RequestExtendAuthenticatorNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RequestExtendAuthenticatorNotFound) Error() string {
-	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this request extend authenticator not found response has a 2xx status code
+func (o *RequestExtendAuthenticatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this request extend authenticator not found response has a 3xx status code
+func (o *RequestExtendAuthenticatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this request extend authenticator not found response has a 4xx status code
+func (o *RequestExtendAuthenticatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this request extend authenticator not found response has a 5xx status code
+func (o *RequestExtendAuthenticatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this request extend authenticator not found response a status code equal to that given
+func (o *RequestExtendAuthenticatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the request extend authenticator not found response
+func (o *RequestExtendAuthenticatorNotFound) Code() int {
+	return 404
+}
+
+func (o *RequestExtendAuthenticatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorNotFound %s", 404, payload)
+}
+
+func (o *RequestExtendAuthenticatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorNotFound %s", 404, payload)
+}
+
 func (o *RequestExtendAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RequestExtendAuthenticatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRequestExtendAuthenticatorNotFound binds the response header WWW-Authenticate
+func (o *RequestExtendAuthenticatorNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRequestExtendAuthenticatorTooManyRequests creates a RequestExtendAuthenticatorTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewRequestExtendAuthenticatorTooManyRequests() *RequestExtendAuthenticatorT
 	return &RequestExtendAuthenticatorTooManyRequests{}
 }
 
-/* RequestExtendAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
+/*
+RequestExtendAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type RequestExtendAuthenticatorTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RequestExtendAuthenticatorTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this request extend authenticator too many requests response has a 2xx status code
+func (o *RequestExtendAuthenticatorTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this request extend authenticator too many requests response has a 3xx status code
+func (o *RequestExtendAuthenticatorTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this request extend authenticator too many requests response has a 4xx status code
+func (o *RequestExtendAuthenticatorTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this request extend authenticator too many requests response has a 5xx status code
+func (o *RequestExtendAuthenticatorTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this request extend authenticator too many requests response a status code equal to that given
+func (o *RequestExtendAuthenticatorTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the request extend authenticator too many requests response
+func (o *RequestExtendAuthenticatorTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *RequestExtendAuthenticatorTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorTooManyRequests %s", 429, payload)
+}
+
+func (o *RequestExtendAuthenticatorTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorTooManyRequests %s", 429, payload)
+}
+
 func (o *RequestExtendAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RequestExtendAuthenticatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRequestExtendAuthenticatorTooManyRequests binds the response header WWW-Authenticate
+func (o *RequestExtendAuthenticatorTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRequestExtendAuthenticatorServiceUnavailable creates a RequestExtendAuthenticatorServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewRequestExtendAuthenticatorServiceUnavailable() *RequestExtendAuthenticat
 	return &RequestExtendAuthenticatorServiceUnavailable{}
 }
 
-/* RequestExtendAuthenticatorServiceUnavailable describes a response with status code 503, with default header values.
+/*
+RequestExtendAuthenticatorServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type RequestExtendAuthenticatorServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RequestExtendAuthenticatorServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this request extend authenticator service unavailable response has a 2xx status code
+func (o *RequestExtendAuthenticatorServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this request extend authenticator service unavailable response has a 3xx status code
+func (o *RequestExtendAuthenticatorServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this request extend authenticator service unavailable response has a 4xx status code
+func (o *RequestExtendAuthenticatorServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this request extend authenticator service unavailable response has a 5xx status code
+func (o *RequestExtendAuthenticatorServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this request extend authenticator service unavailable response a status code equal to that given
+func (o *RequestExtendAuthenticatorServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the request extend authenticator service unavailable response
+func (o *RequestExtendAuthenticatorServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *RequestExtendAuthenticatorServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorServiceUnavailable %s", 503, payload)
+}
+
+func (o *RequestExtendAuthenticatorServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /authenticators/{id}/request-extend][%d] requestExtendAuthenticatorServiceUnavailable %s", 503, payload)
+}
+
 func (o *RequestExtendAuthenticatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RequestExtendAuthenticatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRequestExtendAuthenticatorServiceUnavailable binds the response header WWW-Authenticate
+func (o *RequestExtendAuthenticatorServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

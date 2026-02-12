@@ -49,7 +49,6 @@ func NewGetEnrollmentJwksParams() GetEnrollmentJwksParams {
 //
 // swagger:parameters getEnrollmentJwks
 type GetEnrollmentJwksParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

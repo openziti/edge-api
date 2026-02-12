@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailIdentityTypeOKCode is the HTTP code returned for type DetailIdentityTypeOK
 const DetailIdentityTypeOKCode int = 200
 
-/*DetailIdentityTypeOK A single identity type
+/*
+DetailIdentityTypeOK A single identity type
 
 swagger:response detailIdentityTypeOK
 */
 type DetailIdentityTypeOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailIdentityTypeOK struct {
 func NewDetailIdentityTypeOK() *DetailIdentityTypeOK {
 
 	return &DetailIdentityTypeOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail identity type o k response
+func (o *DetailIdentityTypeOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailIdentityTypeOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail identity type o k response
+func (o *DetailIdentityTypeOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail identity type o k response
@@ -72,6 +89,23 @@ func (o *DetailIdentityTypeOK) SetPayload(payload *rest_model.DetailIdentityType
 // WriteResponse to the client
 func (o *DetailIdentityTypeOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DetailIdentityTypeOK) WriteResponse(rw http.ResponseWriter, producer ru
 // DetailIdentityTypeUnauthorizedCode is the HTTP code returned for type DetailIdentityTypeUnauthorized
 const DetailIdentityTypeUnauthorizedCode int = 401
 
-/*DetailIdentityTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailIdentityTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailIdentityTypeUnauthorized
 */
 type DetailIdentityTypeUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DetailIdentityTypeUnauthorized struct {
 func NewDetailIdentityTypeUnauthorized() *DetailIdentityTypeUnauthorized {
 
 	return &DetailIdentityTypeUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail identity type unauthorized response
+func (o *DetailIdentityTypeUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DetailIdentityTypeUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail identity type unauthorized response
+func (o *DetailIdentityTypeUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail identity type unauthorized response
@@ -116,6 +166,23 @@ func (o *DetailIdentityTypeUnauthorized) SetPayload(payload *rest_model.APIError
 // WriteResponse to the client
 func (o *DetailIdentityTypeUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DetailIdentityTypeUnauthorized) WriteResponse(rw http.ResponseWriter, p
 // DetailIdentityTypeNotFoundCode is the HTTP code returned for type DetailIdentityTypeNotFound
 const DetailIdentityTypeNotFoundCode int = 404
 
-/*DetailIdentityTypeNotFound The requested resource does not exist
+/*
+DetailIdentityTypeNotFound The requested resource does not exist
 
 swagger:response detailIdentityTypeNotFound
 */
 type DetailIdentityTypeNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DetailIdentityTypeNotFound struct {
 func NewDetailIdentityTypeNotFound() *DetailIdentityTypeNotFound {
 
 	return &DetailIdentityTypeNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail identity type not found response
+func (o *DetailIdentityTypeNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DetailIdentityTypeNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail identity type not found response
+func (o *DetailIdentityTypeNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail identity type not found response
@@ -160,6 +243,23 @@ func (o *DetailIdentityTypeNotFound) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *DetailIdentityTypeNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DetailIdentityTypeNotFound) WriteResponse(rw http.ResponseWriter, produ
 // DetailIdentityTypeTooManyRequestsCode is the HTTP code returned for type DetailIdentityTypeTooManyRequests
 const DetailIdentityTypeTooManyRequestsCode int = 429
 
-/*DetailIdentityTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailIdentityTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailIdentityTypeTooManyRequests
 */
 type DetailIdentityTypeTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DetailIdentityTypeTooManyRequests struct {
 func NewDetailIdentityTypeTooManyRequests() *DetailIdentityTypeTooManyRequests {
 
 	return &DetailIdentityTypeTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail identity type too many requests response
+func (o *DetailIdentityTypeTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DetailIdentityTypeTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail identity type too many requests response
+func (o *DetailIdentityTypeTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail identity type too many requests response
@@ -204,6 +320,23 @@ func (o *DetailIdentityTypeTooManyRequests) SetPayload(payload *rest_model.APIEr
 // WriteResponse to the client
 func (o *DetailIdentityTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DetailIdentityTypeTooManyRequests) WriteResponse(rw http.ResponseWriter
 // DetailIdentityTypeServiceUnavailableCode is the HTTP code returned for type DetailIdentityTypeServiceUnavailable
 const DetailIdentityTypeServiceUnavailableCode int = 503
 
-/*DetailIdentityTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DetailIdentityTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response detailIdentityTypeServiceUnavailable
 */
 type DetailIdentityTypeServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DetailIdentityTypeServiceUnavailable struct {
 func NewDetailIdentityTypeServiceUnavailable() *DetailIdentityTypeServiceUnavailable {
 
 	return &DetailIdentityTypeServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail identity type service unavailable response
+func (o *DetailIdentityTypeServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DetailIdentityTypeServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail identity type service unavailable response
+func (o *DetailIdentityTypeServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail identity type service unavailable response
@@ -247,6 +396,23 @@ func (o *DetailIdentityTypeServiceUnavailable) SetPayload(payload *rest_model.AP
 
 // WriteResponse to the client
 func (o *DetailIdentityTypeServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

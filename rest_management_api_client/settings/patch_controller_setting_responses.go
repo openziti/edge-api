@@ -30,11 +30,14 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type PatchControllerSettingReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *PatchControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *PatchControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewPatchControllerSettingOK()
@@ -78,7 +81,7 @@ func (o *PatchControllerSettingReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /controller-settings/{id}/effective] patchControllerSetting", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewPatchControllerSettingOK() *PatchControllerSettingOK {
 	return &PatchControllerSettingOK{}
 }
 
-/* PatchControllerSettingOK describes a response with status code 200, with default header values.
+/*
+PatchControllerSettingOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
 type PatchControllerSettingOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *PatchControllerSettingOK) Error() string {
-	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch controller setting o k response has a 2xx status code
+func (o *PatchControllerSettingOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch controller setting o k response has a 3xx status code
+func (o *PatchControllerSettingOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch controller setting o k response has a 4xx status code
+func (o *PatchControllerSettingOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch controller setting o k response has a 5xx status code
+func (o *PatchControllerSettingOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch controller setting o k response a status code equal to that given
+func (o *PatchControllerSettingOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch controller setting o k response
+func (o *PatchControllerSettingOK) Code() int {
+	return 200
+}
+
+func (o *PatchControllerSettingOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingOK %s", 200, payload)
+}
+
+func (o *PatchControllerSettingOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingOK %s", 200, payload)
+}
+
 func (o *PatchControllerSettingOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *PatchControllerSettingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchControllerSettingOK binds the response header WWW-Authenticate
+func (o *PatchControllerSettingOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchControllerSettingBadRequest creates a PatchControllerSettingBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewPatchControllerSettingBadRequest() *PatchControllerSettingBadRequest {
 	return &PatchControllerSettingBadRequest{}
 }
 
-/* PatchControllerSettingBadRequest describes a response with status code 400, with default header values.
+/*
+PatchControllerSettingBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type PatchControllerSettingBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchControllerSettingBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch controller setting bad request response has a 2xx status code
+func (o *PatchControllerSettingBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch controller setting bad request response has a 3xx status code
+func (o *PatchControllerSettingBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch controller setting bad request response has a 4xx status code
+func (o *PatchControllerSettingBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch controller setting bad request response has a 5xx status code
+func (o *PatchControllerSettingBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch controller setting bad request response a status code equal to that given
+func (o *PatchControllerSettingBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch controller setting bad request response
+func (o *PatchControllerSettingBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchControllerSettingBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingBadRequest %s", 400, payload)
+}
+
+func (o *PatchControllerSettingBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingBadRequest %s", 400, payload)
+}
+
 func (o *PatchControllerSettingBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchControllerSettingBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchControllerSettingBadRequest binds the response header WWW-Authenticate
+func (o *PatchControllerSettingBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchControllerSettingUnauthorized creates a PatchControllerSettingUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewPatchControllerSettingUnauthorized() *PatchControllerSettingUnauthorized
 	return &PatchControllerSettingUnauthorized{}
 }
 
-/* PatchControllerSettingUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchControllerSettingUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type PatchControllerSettingUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchControllerSettingUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch controller setting unauthorized response has a 2xx status code
+func (o *PatchControllerSettingUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch controller setting unauthorized response has a 3xx status code
+func (o *PatchControllerSettingUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch controller setting unauthorized response has a 4xx status code
+func (o *PatchControllerSettingUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch controller setting unauthorized response has a 5xx status code
+func (o *PatchControllerSettingUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch controller setting unauthorized response a status code equal to that given
+func (o *PatchControllerSettingUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch controller setting unauthorized response
+func (o *PatchControllerSettingUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchControllerSettingUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingUnauthorized %s", 401, payload)
+}
+
+func (o *PatchControllerSettingUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingUnauthorized %s", 401, payload)
+}
+
 func (o *PatchControllerSettingUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchControllerSettingUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchControllerSettingUnauthorized binds the response header WWW-Authenticate
+func (o *PatchControllerSettingUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchControllerSettingNotFound creates a PatchControllerSettingNotFound with default headers values
@@ -183,31 +417,108 @@ func NewPatchControllerSettingNotFound() *PatchControllerSettingNotFound {
 	return &PatchControllerSettingNotFound{}
 }
 
-/* PatchControllerSettingNotFound describes a response with status code 404, with default header values.
+/*
+PatchControllerSettingNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type PatchControllerSettingNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchControllerSettingNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch controller setting not found response has a 2xx status code
+func (o *PatchControllerSettingNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch controller setting not found response has a 3xx status code
+func (o *PatchControllerSettingNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch controller setting not found response has a 4xx status code
+func (o *PatchControllerSettingNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch controller setting not found response has a 5xx status code
+func (o *PatchControllerSettingNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch controller setting not found response a status code equal to that given
+func (o *PatchControllerSettingNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch controller setting not found response
+func (o *PatchControllerSettingNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchControllerSettingNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingNotFound %s", 404, payload)
+}
+
+func (o *PatchControllerSettingNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingNotFound %s", 404, payload)
+}
+
 func (o *PatchControllerSettingNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchControllerSettingNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchControllerSettingNotFound binds the response header WWW-Authenticate
+func (o *PatchControllerSettingNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchControllerSettingTooManyRequests creates a PatchControllerSettingTooManyRequests with default headers values
@@ -215,29 +526,106 @@ func NewPatchControllerSettingTooManyRequests() *PatchControllerSettingTooManyRe
 	return &PatchControllerSettingTooManyRequests{}
 }
 
-/* PatchControllerSettingTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchControllerSettingTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type PatchControllerSettingTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchControllerSettingTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch controller setting too many requests response has a 2xx status code
+func (o *PatchControllerSettingTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch controller setting too many requests response has a 3xx status code
+func (o *PatchControllerSettingTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch controller setting too many requests response has a 4xx status code
+func (o *PatchControllerSettingTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch controller setting too many requests response has a 5xx status code
+func (o *PatchControllerSettingTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch controller setting too many requests response a status code equal to that given
+func (o *PatchControllerSettingTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch controller setting too many requests response
+func (o *PatchControllerSettingTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchControllerSettingTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchControllerSettingTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /controller-settings/{id}/effective][%d] patchControllerSettingTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchControllerSettingTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchControllerSettingTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchControllerSettingTooManyRequests binds the response header WWW-Authenticate
+func (o *PatchControllerSettingTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

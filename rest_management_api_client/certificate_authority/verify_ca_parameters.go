@@ -76,10 +76,12 @@ func NewVerifyCaParamsWithHTTPClient(client *http.Client) *VerifyCaParams {
 	}
 }
 
-/* VerifyCaParams contains all the parameters to send to the API endpoint
-   for the verify ca operation.
+/*
+VerifyCaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the verify ca operation.
+
+	Typically these are written to a http.Request.
 */
 type VerifyCaParams struct {
 

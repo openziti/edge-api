@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteEnrollmentOKCode is the HTTP code returned for type DeleteEnrollmentOK
 const DeleteEnrollmentOKCode int = 200
 
-/*DeleteEnrollmentOK The delete request was successful and the resource has been removed
+/*
+DeleteEnrollmentOK The delete request was successful and the resource has been removed
 
 swagger:response deleteEnrollmentOK
 */
 type DeleteEnrollmentOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteEnrollmentOK struct {
 func NewDeleteEnrollmentOK() *DeleteEnrollmentOK {
 
 	return &DeleteEnrollmentOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete enrollment o k response
+func (o *DeleteEnrollmentOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteEnrollmentOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete enrollment o k response
+func (o *DeleteEnrollmentOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete enrollment o k response
@@ -72,6 +89,23 @@ func (o *DeleteEnrollmentOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteEnrollmentOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteEnrollmentOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteEnrollmentBadRequestCode is the HTTP code returned for type DeleteEnrollmentBadRequest
 const DeleteEnrollmentBadRequestCode int = 400
 
-/*DeleteEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteEnrollmentBadRequest
 */
 type DeleteEnrollmentBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteEnrollmentBadRequest struct {
 func NewDeleteEnrollmentBadRequest() *DeleteEnrollmentBadRequest {
 
 	return &DeleteEnrollmentBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete enrollment bad request response
+func (o *DeleteEnrollmentBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteEnrollmentBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete enrollment bad request response
+func (o *DeleteEnrollmentBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete enrollment bad request response
@@ -116,6 +166,23 @@ func (o *DeleteEnrollmentBadRequest) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *DeleteEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // DeleteEnrollmentUnauthorizedCode is the HTTP code returned for type DeleteEnrollmentUnauthorized
 const DeleteEnrollmentUnauthorizedCode int = 401
 
-/*DeleteEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteEnrollmentUnauthorized
 */
 type DeleteEnrollmentUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteEnrollmentUnauthorized struct {
 func NewDeleteEnrollmentUnauthorized() *DeleteEnrollmentUnauthorized {
 
 	return &DeleteEnrollmentUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete enrollment unauthorized response
+func (o *DeleteEnrollmentUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteEnrollmentUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete enrollment unauthorized response
+func (o *DeleteEnrollmentUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete enrollment unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteEnrollmentUnauthorized) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *DeleteEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DeleteEnrollmentNotFoundCode is the HTTP code returned for type DeleteEnrollmentNotFound
 const DeleteEnrollmentNotFoundCode int = 404
 
-/*DeleteEnrollmentNotFound The requested resource does not exist
+/*
+DeleteEnrollmentNotFound The requested resource does not exist
 
 swagger:response deleteEnrollmentNotFound
 */
 type DeleteEnrollmentNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteEnrollmentNotFound struct {
 func NewDeleteEnrollmentNotFound() *DeleteEnrollmentNotFound {
 
 	return &DeleteEnrollmentNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete enrollment not found response
+func (o *DeleteEnrollmentNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteEnrollmentNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete enrollment not found response
+func (o *DeleteEnrollmentNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete enrollment not found response
@@ -204,6 +320,23 @@ func (o *DeleteEnrollmentNotFound) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *DeleteEnrollmentNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteEnrollmentNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DeleteEnrollmentTooManyRequestsCode is the HTTP code returned for type DeleteEnrollmentTooManyRequests
 const DeleteEnrollmentTooManyRequestsCode int = 429
 
-/*DeleteEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteEnrollmentTooManyRequests
 */
 type DeleteEnrollmentTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteEnrollmentTooManyRequests struct {
 func NewDeleteEnrollmentTooManyRequests() *DeleteEnrollmentTooManyRequests {
 
 	return &DeleteEnrollmentTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete enrollment too many requests response
+func (o *DeleteEnrollmentTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteEnrollmentTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete enrollment too many requests response
+func (o *DeleteEnrollmentTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete enrollment too many requests response
@@ -248,6 +397,23 @@ func (o *DeleteEnrollmentTooManyRequests) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DeleteEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *DeleteEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 // DeleteEnrollmentServiceUnavailableCode is the HTTP code returned for type DeleteEnrollmentServiceUnavailable
 const DeleteEnrollmentServiceUnavailableCode int = 503
 
-/*DeleteEnrollmentServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeleteEnrollmentServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deleteEnrollmentServiceUnavailable
 */
 type DeleteEnrollmentServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type DeleteEnrollmentServiceUnavailable struct {
 func NewDeleteEnrollmentServiceUnavailable() *DeleteEnrollmentServiceUnavailable {
 
 	return &DeleteEnrollmentServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete enrollment service unavailable response
+func (o *DeleteEnrollmentServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteEnrollmentServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete enrollment service unavailable response
+func (o *DeleteEnrollmentServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete enrollment service unavailable response
@@ -291,6 +473,23 @@ func (o *DeleteEnrollmentServiceUnavailable) SetPayload(payload *rest_model.APIE
 
 // WriteResponse to the client
 func (o *DeleteEnrollmentServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

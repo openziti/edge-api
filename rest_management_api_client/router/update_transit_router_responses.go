@@ -30,11 +30,14 @@ package router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type UpdateTransitRouterReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateTransitRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateTransitRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateTransitRouterOK()
@@ -84,7 +87,7 @@ func (o *UpdateTransitRouterReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /transit-routers/{id}] updateTransitRouter", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewUpdateTransitRouterOK() *UpdateTransitRouterOK {
 	return &UpdateTransitRouterOK{}
 }
 
-/* UpdateTransitRouterOK describes a response with status code 200, with default header values.
+/*
+UpdateTransitRouterOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
 type UpdateTransitRouterOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateTransitRouterOK) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update transit router o k response has a 2xx status code
+func (o *UpdateTransitRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update transit router o k response has a 3xx status code
+func (o *UpdateTransitRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router o k response has a 4xx status code
+func (o *UpdateTransitRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update transit router o k response has a 5xx status code
+func (o *UpdateTransitRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router o k response a status code equal to that given
+func (o *UpdateTransitRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update transit router o k response
+func (o *UpdateTransitRouterOK) Code() int {
+	return 200
+}
+
+func (o *UpdateTransitRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterOK %s", 200, payload)
+}
+
+func (o *UpdateTransitRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterOK %s", 200, payload)
+}
+
 func (o *UpdateTransitRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *UpdateTransitRouterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTransitRouterOK binds the response header WWW-Authenticate
+func (o *UpdateTransitRouterOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTransitRouterBadRequest creates a UpdateTransitRouterBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewUpdateTransitRouterBadRequest() *UpdateTransitRouterBadRequest {
 	return &UpdateTransitRouterBadRequest{}
 }
 
-/* UpdateTransitRouterBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateTransitRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type UpdateTransitRouterBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update transit router bad request response has a 2xx status code
+func (o *UpdateTransitRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router bad request response has a 3xx status code
+func (o *UpdateTransitRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router bad request response has a 4xx status code
+func (o *UpdateTransitRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router bad request response has a 5xx status code
+func (o *UpdateTransitRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router bad request response a status code equal to that given
+func (o *UpdateTransitRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update transit router bad request response
+func (o *UpdateTransitRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateTransitRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterBadRequest %s", 400, payload)
+}
+
+func (o *UpdateTransitRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterBadRequest %s", 400, payload)
+}
+
 func (o *UpdateTransitRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTransitRouterBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTransitRouterBadRequest binds the response header WWW-Authenticate
+func (o *UpdateTransitRouterBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTransitRouterUnauthorized creates a UpdateTransitRouterUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewUpdateTransitRouterUnauthorized() *UpdateTransitRouterUnauthorized {
 	return &UpdateTransitRouterUnauthorized{}
 }
 
-/* UpdateTransitRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateTransitRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type UpdateTransitRouterUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update transit router unauthorized response has a 2xx status code
+func (o *UpdateTransitRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router unauthorized response has a 3xx status code
+func (o *UpdateTransitRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router unauthorized response has a 4xx status code
+func (o *UpdateTransitRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router unauthorized response has a 5xx status code
+func (o *UpdateTransitRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router unauthorized response a status code equal to that given
+func (o *UpdateTransitRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update transit router unauthorized response
+func (o *UpdateTransitRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateTransitRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateTransitRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateTransitRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTransitRouterUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTransitRouterUnauthorized binds the response header WWW-Authenticate
+func (o *UpdateTransitRouterUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTransitRouterNotFound creates a UpdateTransitRouterNotFound with default headers values
@@ -189,31 +423,108 @@ func NewUpdateTransitRouterNotFound() *UpdateTransitRouterNotFound {
 	return &UpdateTransitRouterNotFound{}
 }
 
-/* UpdateTransitRouterNotFound describes a response with status code 404, with default header values.
+/*
+UpdateTransitRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type UpdateTransitRouterNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterNotFound) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update transit router not found response has a 2xx status code
+func (o *UpdateTransitRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router not found response has a 3xx status code
+func (o *UpdateTransitRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router not found response has a 4xx status code
+func (o *UpdateTransitRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router not found response has a 5xx status code
+func (o *UpdateTransitRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router not found response a status code equal to that given
+func (o *UpdateTransitRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update transit router not found response
+func (o *UpdateTransitRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateTransitRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterNotFound %s", 404, payload)
+}
+
+func (o *UpdateTransitRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterNotFound %s", 404, payload)
+}
+
 func (o *UpdateTransitRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTransitRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTransitRouterNotFound binds the response header WWW-Authenticate
+func (o *UpdateTransitRouterNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTransitRouterTooManyRequests creates a UpdateTransitRouterTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewUpdateTransitRouterTooManyRequests() *UpdateTransitRouterTooManyRequests
 	return &UpdateTransitRouterTooManyRequests{}
 }
 
-/* UpdateTransitRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateTransitRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type UpdateTransitRouterTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update transit router too many requests response has a 2xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router too many requests response has a 3xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router too many requests response has a 4xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update transit router too many requests response has a 5xx status code
+func (o *UpdateTransitRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update transit router too many requests response a status code equal to that given
+func (o *UpdateTransitRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update transit router too many requests response
+func (o *UpdateTransitRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateTransitRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateTransitRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateTransitRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTransitRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTransitRouterTooManyRequests binds the response header WWW-Authenticate
+func (o *UpdateTransitRouterTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateTransitRouterServiceUnavailable creates a UpdateTransitRouterServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewUpdateTransitRouterServiceUnavailable() *UpdateTransitRouterServiceUnava
 	return &UpdateTransitRouterServiceUnavailable{}
 }
 
-/* UpdateTransitRouterServiceUnavailable describes a response with status code 503, with default header values.
+/*
+UpdateTransitRouterServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type UpdateTransitRouterServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateTransitRouterServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this update transit router service unavailable response has a 2xx status code
+func (o *UpdateTransitRouterServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update transit router service unavailable response has a 3xx status code
+func (o *UpdateTransitRouterServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update transit router service unavailable response has a 4xx status code
+func (o *UpdateTransitRouterServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update transit router service unavailable response has a 5xx status code
+func (o *UpdateTransitRouterServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update transit router service unavailable response a status code equal to that given
+func (o *UpdateTransitRouterServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the update transit router service unavailable response
+func (o *UpdateTransitRouterServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *UpdateTransitRouterServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterServiceUnavailable %s", 503, payload)
+}
+
+func (o *UpdateTransitRouterServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /transit-routers/{id}][%d] updateTransitRouterServiceUnavailable %s", 503, payload)
+}
+
 func (o *UpdateTransitRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateTransitRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateTransitRouterServiceUnavailable binds the response header WWW-Authenticate
+func (o *UpdateTransitRouterServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

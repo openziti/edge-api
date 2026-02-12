@@ -36,16 +36,16 @@ import (
 )
 
 // ListPostureChecksHandlerFunc turns a function with the right signature into a list posture checks handler
-type ListPostureChecksHandlerFunc func(ListPostureChecksParams, interface{}) middleware.Responder
+type ListPostureChecksHandlerFunc func(ListPostureChecksParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListPostureChecksHandlerFunc) Handle(params ListPostureChecksParams, principal interface{}) middleware.Responder {
+func (fn ListPostureChecksHandlerFunc) Handle(params ListPostureChecksParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListPostureChecksHandler interface for that can handle valid list posture checks params
 type ListPostureChecksHandler interface {
-	Handle(ListPostureChecksParams, interface{}) middleware.Responder
+	Handle(ListPostureChecksParams, any) middleware.Responder
 }
 
 // NewListPostureChecks creates a new http.Handler for the list posture checks operation
@@ -53,13 +53,12 @@ func NewListPostureChecks(ctx *middleware.Context, handler ListPostureChecksHand
 	return &ListPostureChecks{Context: ctx, Handler: handler}
 }
 
-/* ListPostureChecks swagger:route GET /posture-checks Posture Checks listPostureChecks
+/*
+	ListPostureChecks swagger:route GET /posture-checks Posture Checks listPostureChecks
 
-List a subset of posture checks
+# List a subset of posture checks
 
 Retrieves a list of posture checks
-
-
 */
 type ListPostureChecks struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListPostureChecks) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListPostureChecks) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

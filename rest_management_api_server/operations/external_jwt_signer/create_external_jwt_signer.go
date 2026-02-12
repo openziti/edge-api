@@ -36,16 +36,16 @@ import (
 )
 
 // CreateExternalJWTSignerHandlerFunc turns a function with the right signature into a create external Jwt signer handler
-type CreateExternalJWTSignerHandlerFunc func(CreateExternalJWTSignerParams, interface{}) middleware.Responder
+type CreateExternalJWTSignerHandlerFunc func(CreateExternalJWTSignerParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateExternalJWTSignerHandlerFunc) Handle(params CreateExternalJWTSignerParams, principal interface{}) middleware.Responder {
+func (fn CreateExternalJWTSignerHandlerFunc) Handle(params CreateExternalJWTSignerParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateExternalJWTSignerHandler interface for that can handle valid create external Jwt signer params
 type CreateExternalJWTSignerHandler interface {
-	Handle(CreateExternalJWTSignerParams, interface{}) middleware.Responder
+	Handle(CreateExternalJWTSignerParams, any) middleware.Responder
 }
 
 // NewCreateExternalJWTSigner creates a new http.Handler for the create external Jwt signer operation
@@ -53,12 +53,12 @@ func NewCreateExternalJWTSigner(ctx *middleware.Context, handler CreateExternalJ
 	return &CreateExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* CreateExternalJWTSigner swagger:route POST /external-jwt-signers External JWT Signer createExternalJwtSigner
+/*
+	CreateExternalJWTSigner swagger:route POST /external-jwt-signers External JWT Signer createExternalJwtSigner
 
-Creates an External JWT Signer
+# Creates an External JWT Signer
 
 Creates an External JWT Signer. Requires admin access.
-
 */
 type CreateExternalJWTSigner struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

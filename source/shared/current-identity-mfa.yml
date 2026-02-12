@@ -175,6 +175,12 @@ paths:
 responses:
   alreadyMfaEnrolledResponse:
     description: The identity is already enrolled in MFA
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: 'standard-responses.yml#/definitions/apiErrorEnvelope'
     examples:
@@ -191,16 +197,34 @@ responses:
           apiVersion: 0.0.1
   mfaCreatedResponse:
     description: The create request was succesful and the response contains the location and details to complete MFA enrollment
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/mfaCreatedEnvelope'
 
   detailMfa:
     description: The details of an MFA enrollment
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailMfaEnvelope'
 
   detailMfaRecoveryCodes:
     description: The recovery codes of an MFA enrollment
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailMfaRecoveryCodesEnvelope'
 

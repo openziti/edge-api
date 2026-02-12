@@ -36,16 +36,16 @@ import (
 )
 
 // ListIdentitiesHandlerFunc turns a function with the right signature into a list identities handler
-type ListIdentitiesHandlerFunc func(ListIdentitiesParams, interface{}) middleware.Responder
+type ListIdentitiesHandlerFunc func(ListIdentitiesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListIdentitiesHandlerFunc) Handle(params ListIdentitiesParams, principal interface{}) middleware.Responder {
+func (fn ListIdentitiesHandlerFunc) Handle(params ListIdentitiesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListIdentitiesHandler interface for that can handle valid list identities params
 type ListIdentitiesHandler interface {
-	Handle(ListIdentitiesParams, interface{}) middleware.Responder
+	Handle(ListIdentitiesParams, any) middleware.Responder
 }
 
 // NewListIdentities creates a new http.Handler for the list identities operation
@@ -53,13 +53,12 @@ func NewListIdentities(ctx *middleware.Context, handler ListIdentitiesHandler) *
 	return &ListIdentities{Context: ctx, Handler: handler}
 }
 
-/* ListIdentities swagger:route GET /identities Identity listIdentities
+/*
+	ListIdentities swagger:route GET /identities Identity listIdentities
 
-List identities
+# List identities
 
 Retrieves a list of identity resources; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentities struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListIdentities) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListIdentities) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

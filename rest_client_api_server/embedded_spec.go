@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.52"
+    "version": "0.26.53"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -82,6 +82,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -134,6 +143,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/currentApiSessionDetailEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "default": {
                 "data": {
@@ -176,6 +194,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -213,6 +240,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -236,6 +272,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -306,18 +351,45 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -380,12 +452,30 @@ func init() {
             "description": "A list of controllers",
             "schema": {
               "$ref": "#/definitions/listControllersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -424,6 +514,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -447,6 +546,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -493,6 +601,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/currentApiSessionDetailEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "default": {
                 "data": {
@@ -534,6 +651,15 @@ func init() {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -577,12 +703,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -646,12 +790,30 @@ func init() {
             "description": "A list of the current API Session's certificate",
             "schema": {
               "$ref": "#/definitions/listCurrentApiSessionCertificatesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -690,6 +852,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -714,6 +885,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -736,6 +916,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -773,12 +962,30 @@ func init() {
             "description": "A response of a create API Session certificate",
             "schema": {
               "$ref": "#/definitions/createCurrentApiSessionCertificateEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -817,6 +1024,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -841,6 +1057,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -863,6 +1088,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -891,12 +1125,30 @@ func init() {
             "description": "A response containing a single API Session certificate",
             "schema": {
               "$ref": "#/definitions/detailCurrentApiSessionCertificateEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -921,6 +1173,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -948,6 +1209,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -970,6 +1240,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -996,12 +1275,30 @@ func init() {
             "description": "The delete request was successful and the resource has been removed",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1040,6 +1337,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -1064,6 +1370,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -1086,6 +1401,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -1124,12 +1448,30 @@ func init() {
             "description": "Data indicating necessary service updates",
             "schema": {
               "$ref": "#/definitions/listCurrentApiSessionServiceUpdatesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1155,6 +1497,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -1177,6 +1528,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -1217,12 +1577,30 @@ func init() {
             "description": "A TOTP token create response, contains a token used to satisfy posture checks",
             "schema": {
               "$ref": "#/definitions/totpTokenEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1247,6 +1625,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1296,6 +1683,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/currentIdentityDetailEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "default": {
                 "data": {
@@ -1343,6 +1739,15 @@ func init() {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1406,12 +1811,30 @@ func init() {
             "description": "A list of authenticators",
             "schema": {
               "$ref": "#/definitions/listAuthenticatorsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1449,6 +1872,15 @@ func init() {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1495,12 +1927,30 @@ func init() {
             "description": "A singular authenticator resource",
             "schema": {
               "$ref": "#/definitions/detailAuthenticatorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1525,6 +1975,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1582,12 +2041,30 @@ func init() {
             "description": "The update request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1626,6 +2103,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -1649,6 +2135,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1706,12 +2201,30 @@ func init() {
             "description": "The patch request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1750,6 +2263,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -1773,6 +2295,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1842,12 +2373,30 @@ func init() {
             "description": "A response containg the identity's new certificate",
             "schema": {
               "$ref": "#/definitions/identityExtendEnrollmentEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1915,12 +2464,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -1977,12 +2544,30 @@ func init() {
             "description": "A list of edge routers",
             "schema": {
               "$ref": "#/definitions/listCurrentIdentityEdgeRoutersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2008,6 +2593,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -2030,6 +2624,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -2059,12 +2662,30 @@ func init() {
             "description": "The details of an MFA enrollment",
             "schema": {
               "$ref": "#/definitions/detailMfaEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2089,6 +2710,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2136,12 +2766,30 @@ func init() {
             "description": "The create request was successful and the resource has been added at the following location",
             "schema": {
               "$ref": "#/definitions/createEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2166,6 +2814,15 @@ func init() {
             "description": "The identity is already enrolled in MFA",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2216,12 +2873,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2246,6 +2921,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2343,12 +3027,30 @@ func init() {
             "description": "The recovery codes of an MFA enrollment",
             "schema": {
               "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2373,6 +3075,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2431,12 +3142,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2461,6 +3190,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2521,12 +3259,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2551,6 +3307,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2598,12 +3363,30 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2642,6 +3425,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -2667,18 +3459,45 @@ func init() {
             "description": "The request could not be completed due to a conflict of configuration or state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "410": {
             "description": "The request could not be completed as the resource is no longer available",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2702,6 +3521,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -2740,12 +3568,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2784,6 +3630,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -2810,6 +3665,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -2832,6 +3696,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -2860,12 +3733,30 @@ func init() {
             "description": "A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.",
             "schema": {
               "$ref": "#/definitions/nonceSignature"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2903,6 +3794,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2938,12 +3838,30 @@ func init() {
             "description": "A response containing the edge routers signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -2982,6 +3900,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3004,6 +3931,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3044,12 +3980,30 @@ func init() {
             "description": "A response containing the edge routers new signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3088,6 +4042,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3111,6 +4074,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3146,6 +4118,15 @@ func init() {
             "description": "A JWKS response for enrollment.",
             "schema": {
               "$ref": "#/definitions/jwks"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3164,12 +4145,30 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3208,6 +4207,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3234,6 +4242,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3256,6 +4273,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3285,12 +4311,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3329,6 +4373,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3351,6 +4404,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3402,12 +4464,30 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3445,6 +4525,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3471,18 +4560,45 @@ func init() {
             "description": "The request could not be completed due to a conflict of configuration or state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "410": {
             "description": "The request could not be completed as the resource is no longer available",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3506,6 +4622,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3524,12 +4649,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3568,6 +4711,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3594,6 +4746,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3616,6 +4777,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3659,6 +4829,15 @@ func init() {
             "description": "A typed and enumerated list of capabilities",
             "schema": {
               "$ref": "#/definitions/listEnumeratedCapabilitiesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3694,12 +4873,30 @@ func init() {
             "description": "A list of External JWT Signers",
             "schema": {
               "$ref": "#/definitions/listClientExternalJwtSignersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3738,6 +4935,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3762,6 +4968,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3784,6 +4999,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -3802,12 +5026,30 @@ func init() {
             "description": "A list of network JWTs",
             "schema": {
               "$ref": "#/definitions/listNetworkJWTsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3845,6 +5087,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3901,12 +5152,30 @@ func init() {
             "description": "Contains a list of services that have had their timers altered",
             "schema": {
               "$ref": "#/definitions/postureResponseEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -3945,6 +5214,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3969,6 +5247,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -3991,6 +5278,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4033,12 +5329,30 @@ func init() {
             "description": "Contains a list of services that have had their timers altered",
             "schema": {
               "$ref": "#/definitions/postureResponseEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4077,6 +5391,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4101,52 +5424,14 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {}
-                  },
-                  "causeMessage": "you have hit a rate limit in the requested operation",
-                  "code": "RATE_LIMITED",
-                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
-                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
+                "description": "Denotes different type of security token related information"
               }
-            }
-          },
-          "503": {
-            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            }
-          }
-        }
-      }
-    },
-    "/protocols": {
-      "get": {
-        "security": [],
-        "tags": [
-          "Informational"
-        ],
-        "summary": "Return a list of the listening Edge protocols",
-        "operationId": "listProtocols",
-        "responses": {
-          "200": {
-            "description": "A list of supported Edge protocols",
-            "schema": {
-              "$ref": "#/definitions/listProtocolsEnvelope"
-            }
-          },
-          "429": {
-            "description": "The resource requested is rate limited and the rate limit has been exceeded",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
             },
             "examples": {
               "application/json": {
@@ -4170,6 +5455,89 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protocols": {
+      "get": {
+        "security": [],
+        "tags": [
+          "Informational"
+        ],
+        "summary": "Return a list of the listening Edge protocols",
+        "operationId": "listProtocols",
+        "responses": {
+          "200": {
+            "description": "A list of supported Edge protocols",
+            "schema": {
+              "$ref": "#/definitions/listProtocolsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4238,12 +5606,30 @@ func init() {
             "description": "A list of services",
             "schema": {
               "$ref": "#/definitions/listServicesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4282,6 +5668,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4306,6 +5701,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4328,6 +5732,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4356,12 +5769,30 @@ func init() {
             "description": "A single service",
             "schema": {
               "$ref": "#/definitions/detailServiceEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4386,6 +5817,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4413,6 +5853,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4435,6 +5884,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4472,12 +5930,30 @@ func init() {
             "description": "The update request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4516,6 +5992,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4539,6 +6024,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4566,6 +6060,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4588,6 +6091,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4614,12 +6126,30 @@ func init() {
             "description": "The delete request was successful and the resource has been removed",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4658,6 +6188,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4681,6 +6220,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4708,6 +6256,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4733,6 +6290,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4755,6 +6321,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4792,12 +6367,30 @@ func init() {
             "description": "The patch request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4836,6 +6429,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4859,6 +6461,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -4886,6 +6497,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -4908,6 +6528,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -4968,12 +6597,30 @@ func init() {
             "description": "A list of edge routers suitable for dialing or binding the specified service by the authenticated identity",
             "schema": {
               "$ref": "#/definitions/listServiceEdgeRoutersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5012,6 +6659,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5035,6 +6691,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5061,6 +6726,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5132,12 +6806,30 @@ func init() {
             "description": "A list of terminators",
             "schema": {
               "$ref": "#/definitions/listClientTerminatorsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5176,6 +6868,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5200,6 +6901,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5222,6 +6932,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5276,12 +6995,30 @@ func init() {
             "description": "A list of sessions",
             "schema": {
               "$ref": "#/definitions/listSessionsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5320,6 +7057,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5344,6 +7090,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5366,6 +7121,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5403,12 +7167,30 @@ func init() {
             "description": "The create request was successful and the resource has been added at the following location",
             "schema": {
               "$ref": "#/definitions/sessionCreateEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5447,6 +7229,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5470,6 +7261,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5497,6 +7297,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5519,6 +7328,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5547,12 +7365,30 @@ func init() {
             "description": "A single session",
             "schema": {
               "$ref": "#/definitions/detailSessionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5577,6 +7413,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5623,12 +7468,30 @@ func init() {
             "description": "The delete request was successful and the resource has been removed",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5667,6 +7530,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5690,6 +7562,15 @@ func init() {
             "description": "The resource requested to be removed/altered cannot be as it is referenced by another object.",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -5716,6 +7597,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -5738,6 +7628,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5766,6 +7665,15 @@ func init() {
             "description": "A list of specifications",
             "schema": {
               "$ref": "#/definitions/listSpecsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5785,6 +7693,15 @@ func init() {
             "description": "A single specification",
             "schema": {
               "$ref": "#/definitions/detailSpecEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5817,6 +7734,15 @@ func init() {
             "description": "Returns the document that represents the specification",
             "schema": {
               "$ref": "#/definitions/detailSpecBodyEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -5844,6 +7770,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -8785,7 +10720,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.26.52"
+    "version": "0.26.53"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -8803,6 +10738,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -8855,6 +10799,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/currentApiSessionDetailEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "default": {
                 "data": {
@@ -8897,6 +10850,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -8934,6 +10896,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -8957,6 +10928,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9027,18 +11007,45 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9101,12 +11108,30 @@ func init() {
             "description": "A list of controllers",
             "schema": {
               "$ref": "#/definitions/listControllersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9145,6 +11170,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9168,6 +11202,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9214,6 +11257,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/currentApiSessionDetailEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "default": {
                 "data": {
@@ -9255,6 +11307,15 @@ func init() {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9298,12 +11359,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9367,12 +11446,30 @@ func init() {
             "description": "A list of the current API Session's certificate",
             "schema": {
               "$ref": "#/definitions/listCurrentApiSessionCertificatesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9411,6 +11508,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9435,6 +11541,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9457,6 +11572,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -9494,12 +11618,30 @@ func init() {
             "description": "A response of a create API Session certificate",
             "schema": {
               "$ref": "#/definitions/createCurrentApiSessionCertificateEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9538,6 +11680,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9562,6 +11713,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9584,6 +11744,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -9612,12 +11781,30 @@ func init() {
             "description": "A response containing a single API Session certificate",
             "schema": {
               "$ref": "#/definitions/detailCurrentApiSessionCertificateEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9642,6 +11829,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9669,6 +11865,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9691,6 +11896,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -9717,12 +11931,30 @@ func init() {
             "description": "The delete request was successful and the resource has been removed",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9761,6 +11993,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9785,6 +12026,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9807,6 +12057,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -9845,12 +12104,30 @@ func init() {
             "description": "Data indicating necessary service updates",
             "schema": {
               "$ref": "#/definitions/listCurrentApiSessionServiceUpdatesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9876,6 +12153,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -9898,6 +12184,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -9938,12 +12233,30 @@ func init() {
             "description": "A TOTP token create response, contains a token used to satisfy posture checks",
             "schema": {
               "$ref": "#/definitions/totpTokenEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -9968,6 +12281,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10017,6 +12339,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/currentIdentityDetailEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "default": {
                 "data": {
@@ -10064,6 +12395,15 @@ func init() {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10127,12 +12467,30 @@ func init() {
             "description": "A list of authenticators",
             "schema": {
               "$ref": "#/definitions/listAuthenticatorsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10170,6 +12528,15 @@ func init() {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10216,12 +12583,30 @@ func init() {
             "description": "A singular authenticator resource",
             "schema": {
               "$ref": "#/definitions/detailAuthenticatorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10246,6 +12631,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10303,12 +12697,30 @@ func init() {
             "description": "The update request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10347,6 +12759,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -10370,6 +12791,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10427,12 +12857,30 @@ func init() {
             "description": "The patch request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10471,6 +12919,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -10494,6 +12951,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10563,12 +13029,30 @@ func init() {
             "description": "A response containg the identity's new certificate",
             "schema": {
               "$ref": "#/definitions/identityExtendEnrollmentEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10636,12 +13120,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10698,12 +13200,30 @@ func init() {
             "description": "A list of edge routers",
             "schema": {
               "$ref": "#/definitions/listCurrentIdentityEdgeRoutersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10729,6 +13249,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -10751,6 +13280,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -10780,12 +13318,30 @@ func init() {
             "description": "The details of an MFA enrollment",
             "schema": {
               "$ref": "#/definitions/detailMfaEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10810,6 +13366,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10857,12 +13422,30 @@ func init() {
             "description": "The create request was successful and the resource has been added at the following location",
             "schema": {
               "$ref": "#/definitions/createEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10887,6 +13470,15 @@ func init() {
             "description": "The identity is already enrolled in MFA",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10937,12 +13529,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -10967,6 +13577,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11006,8 +13625,8 @@ func init() {
         ],
         "description": "Shows an QR code image for unverified MFA enrollments. 404s if the MFA enrollment has been completed or not started.\n",
         "produces": [
-          "application/json",
-          "image/png"
+          "image/png",
+          "application/json"
         ],
         "tags": [
           "Current Identity",
@@ -11064,12 +13683,30 @@ func init() {
             "description": "The recovery codes of an MFA enrollment",
             "schema": {
               "$ref": "#/definitions/detailMfaRecoveryCodesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11094,6 +13731,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11152,12 +13798,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11182,6 +13846,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11242,12 +13915,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11272,6 +13963,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11301,8 +14001,8 @@ func init() {
       "post": {
         "description": "present a OTT and CSR to receive a long-lived client certificate",
         "consumes": [
-          "application/json",
           "application/pkcs7",
+          "application/json",
           "application/x-pem-file",
           "text/plain"
         ],
@@ -11319,12 +14019,30 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11363,6 +14081,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11388,18 +14115,45 @@ func init() {
             "description": "The request could not be completed due to a conflict of configuration or state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "410": {
             "description": "The request could not be completed as the resource is no longer available",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11423,6 +14177,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -11461,12 +14224,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11505,6 +14286,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11531,6 +14321,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11553,6 +14352,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -11581,12 +14389,30 @@ func init() {
             "description": "A nonce challenge response. The contents will be the signature of the nonce, the key id used, and algorithm used to produce the signature.",
             "schema": {
               "$ref": "#/definitions/nonceSignature"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11624,6 +14450,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11659,12 +14494,30 @@ func init() {
             "description": "A response containing the edge routers signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11703,6 +14556,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11725,6 +14587,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -11765,12 +14636,30 @@ func init() {
             "description": "A response containing the edge routers new signed certificates (server chain, server cert, CAs).",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11809,6 +14698,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11832,6 +14730,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11867,6 +14774,15 @@ func init() {
             "description": "A JWKS response for enrollment.",
             "schema": {
               "$ref": "#/definitions/jwks"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -11885,12 +14801,30 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -11929,6 +14863,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11955,6 +14898,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -11977,6 +14929,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12006,12 +14967,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12050,6 +15029,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12072,6 +15060,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12123,12 +15120,30 @@ func init() {
             "description": "A response containing and identities client certificate chains",
             "schema": {
               "$ref": "#/definitions/enrollmentCertsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12166,6 +15181,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12192,18 +15216,45 @@ func init() {
             "description": "The request could not be completed due to a conflict of configuration or state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "410": {
             "description": "The request could not be completed as the resource is no longer available",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "429": {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12227,6 +15278,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12245,12 +15305,30 @@ func init() {
             "description": "Base empty response",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12289,6 +15367,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12315,6 +15402,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12337,6 +15433,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12380,6 +15485,15 @@ func init() {
             "description": "A typed and enumerated list of capabilities",
             "schema": {
               "$ref": "#/definitions/listEnumeratedCapabilitiesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12415,12 +15529,30 @@ func init() {
             "description": "A list of External JWT Signers",
             "schema": {
               "$ref": "#/definitions/listClientExternalJwtSignersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12459,6 +15591,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12483,6 +15624,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12505,6 +15655,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12523,12 +15682,30 @@ func init() {
             "description": "A list of network JWTs",
             "schema": {
               "$ref": "#/definitions/listNetworkJWTsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12566,6 +15743,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12622,12 +15808,30 @@ func init() {
             "description": "Contains a list of services that have had their timers altered",
             "schema": {
               "$ref": "#/definitions/postureResponseEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12666,6 +15870,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12690,6 +15903,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12712,6 +15934,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12754,12 +15985,30 @@ func init() {
             "description": "Contains a list of services that have had their timers altered",
             "schema": {
               "$ref": "#/definitions/postureResponseEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -12798,6 +16047,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -12822,52 +16080,14 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "args": {
-                    "urlVars": {}
-                  },
-                  "causeMessage": "you have hit a rate limit in the requested operation",
-                  "code": "RATE_LIMITED",
-                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
-                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 },
-                "meta": {
-                  "apiEnrollmentVersion": "0.0.1",
-                  "apiVersion": "0.0.1"
-                }
+                "description": "Denotes different type of security token related information"
               }
-            }
-          },
-          "503": {
-            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
-            }
-          }
-        }
-      }
-    },
-    "/protocols": {
-      "get": {
-        "security": [],
-        "tags": [
-          "Informational"
-        ],
-        "summary": "Return a list of the listening Edge protocols",
-        "operationId": "listProtocols",
-        "responses": {
-          "200": {
-            "description": "A list of supported Edge protocols",
-            "schema": {
-              "$ref": "#/definitions/listProtocolsEnvelope"
-            }
-          },
-          "429": {
-            "description": "The resource requested is rate limited and the rate limit has been exceeded",
-            "schema": {
-              "$ref": "#/definitions/apiErrorEnvelope"
             },
             "examples": {
               "application/json": {
@@ -12891,6 +16111,89 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protocols": {
+      "get": {
+        "security": [],
+        "tags": [
+          "Informational"
+        ],
+        "summary": "Return a list of the listening Edge protocols",
+        "operationId": "listProtocols",
+        "responses": {
+          "200": {
+            "description": "A list of supported Edge protocols",
+            "schema": {
+              "$ref": "#/definitions/listProtocolsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -12959,12 +16262,30 @@ func init() {
             "description": "A list of services",
             "schema": {
               "$ref": "#/definitions/listServicesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13003,6 +16324,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13027,6 +16357,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13049,6 +16388,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -13077,12 +16425,30 @@ func init() {
             "description": "A single service",
             "schema": {
               "$ref": "#/definitions/detailServiceEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13107,6 +16473,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13134,6 +16509,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13156,6 +16540,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -13193,12 +16586,30 @@ func init() {
             "description": "The update request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13237,6 +16648,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13260,6 +16680,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13287,6 +16716,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13309,6 +16747,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -13335,12 +16782,30 @@ func init() {
             "description": "The delete request was successful and the resource has been removed",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13379,6 +16844,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13402,6 +16876,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13429,6 +16912,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13454,6 +16946,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13476,6 +16977,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -13513,12 +17023,30 @@ func init() {
             "description": "The patch request was successful and the resource has been altered",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13557,6 +17085,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13580,6 +17117,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13607,6 +17153,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13629,6 +17184,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -13689,12 +17253,30 @@ func init() {
             "description": "A list of edge routers suitable for dialing or binding the specified service by the authenticated identity",
             "schema": {
               "$ref": "#/definitions/listServiceEdgeRoutersEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13733,6 +17315,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13756,6 +17347,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13782,6 +17382,15 @@ func init() {
             "description": "The resource requested is rate limited and the rate limit has been exceeded",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13853,12 +17462,30 @@ func init() {
             "description": "A list of terminators",
             "schema": {
               "$ref": "#/definitions/listClientTerminatorsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -13897,6 +17524,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13921,6 +17557,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -13943,6 +17588,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -13997,12 +17651,30 @@ func init() {
             "description": "A list of sessions",
             "schema": {
               "$ref": "#/definitions/listSessionsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14041,6 +17713,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -14065,6 +17746,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -14087,6 +17777,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -14124,12 +17823,30 @@ func init() {
             "description": "The create request was successful and the resource has been added at the following location",
             "schema": {
               "$ref": "#/definitions/sessionCreateEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14168,6 +17885,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -14191,6 +17917,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14218,6 +17953,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -14240,6 +17984,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -14268,12 +18021,30 @@ func init() {
             "description": "A single session",
             "schema": {
               "$ref": "#/definitions/detailSessionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "401": {
             "description": "The supplied session does not have the correct access rights to request this resource",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14298,6 +18069,15 @@ func init() {
             "description": "The requested resource does not exist",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14344,12 +18124,30 @@ func init() {
             "description": "The delete request was successful and the resource has been removed",
             "schema": {
               "$ref": "#/definitions/empty"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           },
           "400": {
             "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14388,6 +18186,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -14411,6 +18218,15 @@ func init() {
             "description": "The resource requested to be removed/altered cannot be as it is referenced by another object.",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             },
             "examples": {
               "application/json": {
@@ -14437,6 +18253,15 @@ func init() {
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
             },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
             "examples": {
               "application/json": {
                 "error": {
@@ -14459,6 +18284,15 @@ func init() {
             "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
             "schema": {
               "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -14487,6 +18321,15 @@ func init() {
             "description": "A list of specifications",
             "schema": {
               "$ref": "#/definitions/listSpecsEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -14506,6 +18349,15 @@ func init() {
             "description": "A single specification",
             "schema": {
               "$ref": "#/definitions/detailSpecEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -14525,8 +18377,8 @@ func init() {
         "security": [],
         "description": "Return the body of the specification (i.e. Swagger, OpenAPI 2.0, 3.0, etc).",
         "produces": [
-          "application/json",
-          "text/yaml"
+          "text/yaml",
+          "application/json"
         ],
         "tags": [
           "Informational"
@@ -14538,6 +18390,15 @@ func init() {
             "description": "Returns the document that represents the specification",
             "schema": {
               "$ref": "#/definitions/detailSpecBodyEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }
@@ -14565,6 +18426,15 @@ func init() {
             "description": "Version information for the controller",
             "schema": {
               "$ref": "#/definitions/listVersionEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
             }
           }
         }

@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteCurrentAPISessionHandlerFunc turns a function with the right signature into a delete current API session handler
-type DeleteCurrentAPISessionHandlerFunc func(DeleteCurrentAPISessionParams, interface{}) middleware.Responder
+type DeleteCurrentAPISessionHandlerFunc func(DeleteCurrentAPISessionParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteCurrentAPISessionHandlerFunc) Handle(params DeleteCurrentAPISessionParams, principal interface{}) middleware.Responder {
+func (fn DeleteCurrentAPISessionHandlerFunc) Handle(params DeleteCurrentAPISessionParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteCurrentAPISessionHandler interface for that can handle valid delete current API session params
 type DeleteCurrentAPISessionHandler interface {
-	Handle(DeleteCurrentAPISessionParams, interface{}) middleware.Responder
+	Handle(DeleteCurrentAPISessionParams, any) middleware.Responder
 }
 
 // NewDeleteCurrentAPISession creates a new http.Handler for the delete current API session operation
@@ -53,12 +53,12 @@ func NewDeleteCurrentAPISession(ctx *middleware.Context, handler DeleteCurrentAP
 	return &DeleteCurrentAPISession{Context: ctx, Handler: handler}
 }
 
-/* DeleteCurrentAPISession swagger:route DELETE /current-api-session Current API Session deleteCurrentApiSession
+/*
+	DeleteCurrentAPISession swagger:route DELETE /current-api-session Current API Session deleteCurrentApiSession
 
-Logout
+# Logout
 
 Terminates the current API session
-
 */
 type DeleteCurrentAPISession struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteCurrentAPISession) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteCurrentAPISession) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

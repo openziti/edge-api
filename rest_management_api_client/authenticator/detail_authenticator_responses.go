@@ -30,11 +30,14 @@ package authenticator
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailAuthenticatorReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailAuthenticatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailAuthenticatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailAuthenticatorOK()
@@ -78,7 +81,7 @@ func (o *DetailAuthenticatorReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /authenticators/{id}] detailAuthenticator", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailAuthenticatorOK() *DetailAuthenticatorOK {
 	return &DetailAuthenticatorOK{}
 }
 
-/* DetailAuthenticatorOK describes a response with status code 200, with default header values.
+/*
+DetailAuthenticatorOK describes a response with status code 200, with default header values.
 
 A singular authenticator resource
 */
 type DetailAuthenticatorOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailAuthenticatorEnvelope
 }
 
-func (o *DetailAuthenticatorOK) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail authenticator o k response has a 2xx status code
+func (o *DetailAuthenticatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail authenticator o k response has a 3xx status code
+func (o *DetailAuthenticatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator o k response has a 4xx status code
+func (o *DetailAuthenticatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail authenticator o k response has a 5xx status code
+func (o *DetailAuthenticatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator o k response a status code equal to that given
+func (o *DetailAuthenticatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail authenticator o k response
+func (o *DetailAuthenticatorOK) Code() int {
+	return 200
+}
+
+func (o *DetailAuthenticatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK %s", 200, payload)
+}
+
+func (o *DetailAuthenticatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorOK %s", 200, payload)
+}
+
 func (o *DetailAuthenticatorOK) GetPayload() *rest_model.DetailAuthenticatorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailAuthenticatorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailAuthenticatorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailAuthenticatorOK binds the response header WWW-Authenticate
+func (o *DetailAuthenticatorOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailAuthenticatorUnauthorized creates a DetailAuthenticatorUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailAuthenticatorUnauthorized() *DetailAuthenticatorUnauthorized {
 	return &DetailAuthenticatorUnauthorized{}
 }
 
-/* DetailAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailAuthenticatorUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail authenticator unauthorized response has a 2xx status code
+func (o *DetailAuthenticatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator unauthorized response has a 3xx status code
+func (o *DetailAuthenticatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator unauthorized response has a 4xx status code
+func (o *DetailAuthenticatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail authenticator unauthorized response has a 5xx status code
+func (o *DetailAuthenticatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator unauthorized response a status code equal to that given
+func (o *DetailAuthenticatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail authenticator unauthorized response
+func (o *DetailAuthenticatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailAuthenticatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized %s", 401, payload)
+}
+
+func (o *DetailAuthenticatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorUnauthorized %s", 401, payload)
+}
+
 func (o *DetailAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailAuthenticatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailAuthenticatorUnauthorized binds the response header WWW-Authenticate
+func (o *DetailAuthenticatorUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailAuthenticatorNotFound creates a DetailAuthenticatorNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailAuthenticatorNotFound() *DetailAuthenticatorNotFound {
 	return &DetailAuthenticatorNotFound{}
 }
 
-/* DetailAuthenticatorNotFound describes a response with status code 404, with default header values.
+/*
+DetailAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailAuthenticatorNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorNotFound) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail authenticator not found response has a 2xx status code
+func (o *DetailAuthenticatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator not found response has a 3xx status code
+func (o *DetailAuthenticatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator not found response has a 4xx status code
+func (o *DetailAuthenticatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail authenticator not found response has a 5xx status code
+func (o *DetailAuthenticatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator not found response a status code equal to that given
+func (o *DetailAuthenticatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail authenticator not found response
+func (o *DetailAuthenticatorNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailAuthenticatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound %s", 404, payload)
+}
+
+func (o *DetailAuthenticatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorNotFound %s", 404, payload)
+}
+
 func (o *DetailAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailAuthenticatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailAuthenticatorNotFound binds the response header WWW-Authenticate
+func (o *DetailAuthenticatorNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailAuthenticatorTooManyRequests creates a DetailAuthenticatorTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailAuthenticatorTooManyRequests() *DetailAuthenticatorTooManyRequests
 	return &DetailAuthenticatorTooManyRequests{}
 }
 
-/* DetailAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailAuthenticatorTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailAuthenticatorTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail authenticator too many requests response has a 2xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator too many requests response has a 3xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator too many requests response has a 4xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail authenticator too many requests response has a 5xx status code
+func (o *DetailAuthenticatorTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail authenticator too many requests response a status code equal to that given
+func (o *DetailAuthenticatorTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail authenticator too many requests response
+func (o *DetailAuthenticatorTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailAuthenticatorTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailAuthenticatorTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailAuthenticatorTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailAuthenticatorTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailAuthenticatorTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailAuthenticatorTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailAuthenticatorServiceUnavailable creates a DetailAuthenticatorServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailAuthenticatorServiceUnavailable() *DetailAuthenticatorServiceUnava
 	return &DetailAuthenticatorServiceUnavailable{}
 }
 
-/* DetailAuthenticatorServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailAuthenticatorServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailAuthenticatorServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailAuthenticatorServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail authenticator service unavailable response has a 2xx status code
+func (o *DetailAuthenticatorServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail authenticator service unavailable response has a 3xx status code
+func (o *DetailAuthenticatorServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail authenticator service unavailable response has a 4xx status code
+func (o *DetailAuthenticatorServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail authenticator service unavailable response has a 5xx status code
+func (o *DetailAuthenticatorServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail authenticator service unavailable response a status code equal to that given
+func (o *DetailAuthenticatorServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail authenticator service unavailable response
+func (o *DetailAuthenticatorServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailAuthenticatorServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailAuthenticatorServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /authenticators/{id}][%d] detailAuthenticatorServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailAuthenticatorServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailAuthenticatorServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailAuthenticatorServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailAuthenticatorServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

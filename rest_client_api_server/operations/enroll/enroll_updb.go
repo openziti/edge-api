@@ -31,6 +31,7 @@ package enroll
 
 import (
 	"context"
+	stderrors "errors"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -59,13 +60,12 @@ func NewEnrollUpdb(ctx *middleware.Context, handler EnrollUpdbHandler) *EnrollUp
 	return &EnrollUpdb{Context: ctx, Handler: handler}
 }
 
-/* EnrollUpdb swagger:route POST /enroll/updb Enroll enrollUpdb
+/*
+	EnrollUpdb swagger:route POST /enroll/updb Enroll enrollUpdb
 
-Enroll an identity via one-time-token
+# Enroll an identity via one-time-token
 
 Enrolls an identity via a one-time-token to establish an initial username and password combination
-
-
 */
 type EnrollUpdb struct {
 	Context *middleware.Context
@@ -84,6 +84,7 @@ func (o *EnrollUpdb) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }
@@ -124,11 +125,15 @@ func (o *EnrollUpdbBody) validatePassword(formats strfmt.Registry) error {
 	}
 
 	if err := o.Password.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "password")
 		}
+
 		return err
 	}
 
@@ -141,11 +146,15 @@ func (o *EnrollUpdbBody) validateUsername(formats strfmt.Registry) error {
 	}
 
 	if err := o.Username.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "username")
 		}
+
 		return err
 	}
 
@@ -172,12 +181,20 @@ func (o *EnrollUpdbBody) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(o.Password) { // not required
+		return nil
+	}
+
 	if err := o.Password.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "password")
 		}
+
 		return err
 	}
 
@@ -186,12 +203,20 @@ func (o *EnrollUpdbBody) contextValidatePassword(ctx context.Context, formats st
 
 func (o *EnrollUpdbBody) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(o.Username) { // not required
+		return nil
+	}
+
 	if err := o.Username.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("updbCredentials" + "." + "username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("updbCredentials" + "." + "username")
 		}
+
 		return err
 	}
 

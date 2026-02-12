@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new role attributes API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new role attributes API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new role attributes API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -66,13 +92,12 @@ type ClientService interface {
 }
 
 /*
-  ListEdgeRouterRoleAttributes lists role attributes in use by edge routers
+ListEdgeRouterRoleAttributes lists role attributes in use by edge routers
 
-  Retrieves a list of role attributes in use by edge routers; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of role attributes in use by edge routers; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListEdgeRouterRoleAttributes(params *ListEdgeRouterRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterRoleAttributesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListEdgeRouterRoleAttributesParams()
 	}
@@ -92,29 +117,33 @@ func (a *Client) ListEdgeRouterRoleAttributes(params *ListEdgeRouterRoleAttribut
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListEdgeRouterRoleAttributesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listEdgeRouterRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListIdentityRoleAttributes lists role attributes in use by identities
+ListIdentityRoleAttributes lists role attributes in use by identities
 
-  Retrieves a list of role attributes in use by identities; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of role attributes in use by identities; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListIdentityRoleAttributes(params *ListIdentityRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityRoleAttributesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListIdentityRoleAttributesParams()
 	}
@@ -134,29 +163,33 @@ func (a *Client) ListIdentityRoleAttributes(params *ListIdentityRoleAttributesPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListIdentityRoleAttributesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listIdentityRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListPostureCheckRoleAttributes lists role attributes in use by posture checks
+ListPostureCheckRoleAttributes lists role attributes in use by posture checks
 
-  Retrieves a list of role attributes in use by posture checks; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of role attributes in use by posture checks; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListPostureCheckRoleAttributes(params *ListPostureCheckRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckRoleAttributesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListPostureCheckRoleAttributesParams()
 	}
@@ -176,29 +209,33 @@ func (a *Client) ListPostureCheckRoleAttributes(params *ListPostureCheckRoleAttr
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListPostureCheckRoleAttributesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listPostureCheckRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServiceRoleAttributes lists role attributes in use by services
+ListServiceRoleAttributes lists role attributes in use by services
 
-  Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServiceRoleAttributes(params *ListServiceRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceRoleAttributesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServiceRoleAttributesParams()
 	}
@@ -218,17 +255,22 @@ func (a *Client) ListServiceRoleAttributes(params *ListServiceRoleAttributesPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServiceRoleAttributesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServiceRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

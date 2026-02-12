@@ -50,7 +50,6 @@ func NewDeleteMfaParams() DeleteMfaParams {
 //
 // swagger:parameters deleteMfa
 type DeleteMfaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

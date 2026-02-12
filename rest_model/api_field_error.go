@@ -48,7 +48,7 @@ type APIFieldError struct {
 	Reason string `json:"reason,omitempty"`
 
 	// can be any value - string, number, boolean, array or object
-	Value interface{} `json:"value,omitempty"`
+	Value any `json:"value,omitempty"`
 }
 
 // Validate validates this api field error

@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateRouterHandlerFunc turns a function with the right signature into a update router handler
-type UpdateRouterHandlerFunc func(UpdateRouterParams, interface{}) middleware.Responder
+type UpdateRouterHandlerFunc func(UpdateRouterParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateRouterHandlerFunc) Handle(params UpdateRouterParams, principal interface{}) middleware.Responder {
+func (fn UpdateRouterHandlerFunc) Handle(params UpdateRouterParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateRouterHandler interface for that can handle valid update router params
 type UpdateRouterHandler interface {
-	Handle(UpdateRouterParams, interface{}) middleware.Responder
+	Handle(UpdateRouterParams, any) middleware.Responder
 }
 
 // NewUpdateRouter creates a new http.Handler for the update router operation
@@ -53,12 +53,12 @@ func NewUpdateRouter(ctx *middleware.Context, handler UpdateRouterHandler) *Upda
 	return &UpdateRouter{Context: ctx, Handler: handler}
 }
 
-/* UpdateRouter swagger:route PUT /routers/{id} Router updateRouter
+/*
+	UpdateRouter swagger:route PUT /routers/{id} Router updateRouter
 
-Update all fields on a router
+# Update all fields on a router
 
 Update all fields on a router by id. Requires admin access.
-
 */
 type UpdateRouter struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateRouter) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

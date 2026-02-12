@@ -33,10 +33,22 @@ paths:
 responses:
   listVersion:
     description: Version information for the controller
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listVersionEnvelope'
   listEnumeratedCapabilities:
     description: A typed and enumerated list of capabilities
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listEnumeratedCapabilitiesEnvelope'
 

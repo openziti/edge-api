@@ -36,16 +36,16 @@ import (
 )
 
 // DetailSessionHandlerFunc turns a function with the right signature into a detail session handler
-type DetailSessionHandlerFunc func(DetailSessionParams, interface{}) middleware.Responder
+type DetailSessionHandlerFunc func(DetailSessionParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailSessionHandlerFunc) Handle(params DetailSessionParams, principal interface{}) middleware.Responder {
+func (fn DetailSessionHandlerFunc) Handle(params DetailSessionParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailSessionHandler interface for that can handle valid detail session params
 type DetailSessionHandler interface {
-	Handle(DetailSessionParams, interface{}) middleware.Responder
+	Handle(DetailSessionParams, any) middleware.Responder
 }
 
 // NewDetailSession creates a new http.Handler for the detail session operation
@@ -53,12 +53,12 @@ func NewDetailSession(ctx *middleware.Context, handler DetailSessionHandler) *De
 	return &DetailSession{Context: ctx, Handler: handler}
 }
 
-/* DetailSession swagger:route GET /sessions/{id} Session detailSession
+/*
+	DetailSession swagger:route GET /sessions/{id} Session detailSession
 
-Retrieves a single session
+# Retrieves a single session
 
 Retrieves a single session by id.
-
 */
 type DetailSession struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailSession) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailSession) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

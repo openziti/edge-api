@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListEnumeratedCapabilitiesOKCode is the HTTP code returned for type ListEnumeratedCapabilitiesOK
 const ListEnumeratedCapabilitiesOKCode int = 200
 
-/*ListEnumeratedCapabilitiesOK A typed and enumerated list of capabilities
+/*
+ListEnumeratedCapabilitiesOK A typed and enumerated list of capabilities
 
 swagger:response listEnumeratedCapabilitiesOK
 */
 type ListEnumeratedCapabilitiesOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListEnumeratedCapabilitiesOK struct {
 func NewListEnumeratedCapabilitiesOK() *ListEnumeratedCapabilitiesOK {
 
 	return &ListEnumeratedCapabilitiesOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list enumerated capabilities o k response
+func (o *ListEnumeratedCapabilitiesOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListEnumeratedCapabilitiesOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list enumerated capabilities o k response
+func (o *ListEnumeratedCapabilitiesOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list enumerated capabilities o k response
@@ -71,6 +88,23 @@ func (o *ListEnumeratedCapabilitiesOK) SetPayload(payload *rest_model.ListEnumer
 
 // WriteResponse to the client
 func (o *ListEnumeratedCapabilitiesOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(200)
 	if o.Payload != nil {

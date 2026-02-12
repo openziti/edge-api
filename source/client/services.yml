@@ -120,10 +120,22 @@ paths:
 responses:
   listClientTerminators:
     description: A list of terminators
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listClientTerminatorsEnvelope'
   listServiceEdgeRouters:
     description: A list of edge routers suitable for dialing or binding the specified service by the authenticated identity
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listServiceEdgeRoutersEnvelope'
 

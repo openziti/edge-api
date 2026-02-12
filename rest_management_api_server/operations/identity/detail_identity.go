@@ -36,16 +36,16 @@ import (
 )
 
 // DetailIdentityHandlerFunc turns a function with the right signature into a detail identity handler
-type DetailIdentityHandlerFunc func(DetailIdentityParams, interface{}) middleware.Responder
+type DetailIdentityHandlerFunc func(DetailIdentityParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailIdentityHandlerFunc) Handle(params DetailIdentityParams, principal interface{}) middleware.Responder {
+func (fn DetailIdentityHandlerFunc) Handle(params DetailIdentityParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailIdentityHandler interface for that can handle valid detail identity params
 type DetailIdentityHandler interface {
-	Handle(DetailIdentityParams, interface{}) middleware.Responder
+	Handle(DetailIdentityParams, any) middleware.Responder
 }
 
 // NewDetailIdentity creates a new http.Handler for the detail identity operation
@@ -53,12 +53,12 @@ func NewDetailIdentity(ctx *middleware.Context, handler DetailIdentityHandler) *
 	return &DetailIdentity{Context: ctx, Handler: handler}
 }
 
-/* DetailIdentity swagger:route GET /identities/{id} Identity detailIdentity
+/*
+	DetailIdentity swagger:route GET /identities/{id} Identity detailIdentity
 
-Retrieves a single identity
+# Retrieves a single identity
 
 Retrieves a single identity by id. Requires admin access.
-
 */
 type DetailIdentity struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeletePostureCheckOKCode is the HTTP code returned for type DeletePostureCheckOK
 const DeletePostureCheckOKCode int = 200
 
-/*DeletePostureCheckOK The delete request was successful and the resource has been removed
+/*
+DeletePostureCheckOK The delete request was successful and the resource has been removed
 
 swagger:response deletePostureCheckOK
 */
 type DeletePostureCheckOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeletePostureCheckOK struct {
 func NewDeletePostureCheckOK() *DeletePostureCheckOK {
 
 	return &DeletePostureCheckOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete posture check o k response
+func (o *DeletePostureCheckOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeletePostureCheckOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete posture check o k response
+func (o *DeletePostureCheckOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete posture check o k response
@@ -72,6 +89,23 @@ func (o *DeletePostureCheckOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeletePostureCheckOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeletePostureCheckOK) WriteResponse(rw http.ResponseWriter, producer ru
 // DeletePostureCheckForbiddenCode is the HTTP code returned for type DeletePostureCheckForbidden
 const DeletePostureCheckForbiddenCode int = 403
 
-/*DeletePostureCheckForbidden The supplied session does not have the correct access rights to request this resource
+/*
+DeletePostureCheckForbidden The supplied session does not have the correct access rights to request this resource
 
 swagger:response deletePostureCheckForbidden
 */
 type DeletePostureCheckForbidden struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeletePostureCheckForbidden struct {
 func NewDeletePostureCheckForbidden() *DeletePostureCheckForbidden {
 
 	return &DeletePostureCheckForbidden{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete posture check forbidden response
+func (o *DeletePostureCheckForbidden) WithWWWAuthenticate(wWWAuthenticate []string) *DeletePostureCheckForbidden {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete posture check forbidden response
+func (o *DeletePostureCheckForbidden) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete posture check forbidden response
@@ -116,6 +166,23 @@ func (o *DeletePostureCheckForbidden) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *DeletePostureCheckForbidden) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(403)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeletePostureCheckForbidden) WriteResponse(rw http.ResponseWriter, prod
 // DeletePostureCheckNotFoundCode is the HTTP code returned for type DeletePostureCheckNotFound
 const DeletePostureCheckNotFoundCode int = 404
 
-/*DeletePostureCheckNotFound The requested resource does not exist
+/*
+DeletePostureCheckNotFound The requested resource does not exist
 
 swagger:response deletePostureCheckNotFound
 */
 type DeletePostureCheckNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeletePostureCheckNotFound struct {
 func NewDeletePostureCheckNotFound() *DeletePostureCheckNotFound {
 
 	return &DeletePostureCheckNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete posture check not found response
+func (o *DeletePostureCheckNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DeletePostureCheckNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete posture check not found response
+func (o *DeletePostureCheckNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete posture check not found response
@@ -160,6 +243,23 @@ func (o *DeletePostureCheckNotFound) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *DeletePostureCheckNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeletePostureCheckNotFound) WriteResponse(rw http.ResponseWriter, produ
 // DeletePostureCheckTooManyRequestsCode is the HTTP code returned for type DeletePostureCheckTooManyRequests
 const DeletePostureCheckTooManyRequestsCode int = 429
 
-/*DeletePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeletePostureCheckTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deletePostureCheckTooManyRequests
 */
 type DeletePostureCheckTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeletePostureCheckTooManyRequests struct {
 func NewDeletePostureCheckTooManyRequests() *DeletePostureCheckTooManyRequests {
 
 	return &DeletePostureCheckTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete posture check too many requests response
+func (o *DeletePostureCheckTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeletePostureCheckTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete posture check too many requests response
+func (o *DeletePostureCheckTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete posture check too many requests response
@@ -204,6 +320,23 @@ func (o *DeletePostureCheckTooManyRequests) SetPayload(payload *rest_model.APIEr
 // WriteResponse to the client
 func (o *DeletePostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeletePostureCheckTooManyRequests) WriteResponse(rw http.ResponseWriter
 // DeletePostureCheckServiceUnavailableCode is the HTTP code returned for type DeletePostureCheckServiceUnavailable
 const DeletePostureCheckServiceUnavailableCode int = 503
 
-/*DeletePostureCheckServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeletePostureCheckServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deletePostureCheckServiceUnavailable
 */
 type DeletePostureCheckServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeletePostureCheckServiceUnavailable struct {
 func NewDeletePostureCheckServiceUnavailable() *DeletePostureCheckServiceUnavailable {
 
 	return &DeletePostureCheckServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete posture check service unavailable response
+func (o *DeletePostureCheckServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeletePostureCheckServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete posture check service unavailable response
+func (o *DeletePostureCheckServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete posture check service unavailable response
@@ -247,6 +396,23 @@ func (o *DeletePostureCheckServiceUnavailable) SetPayload(payload *rest_model.AP
 
 // WriteResponse to the client
 func (o *DeletePostureCheckServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

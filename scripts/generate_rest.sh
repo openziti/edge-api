@@ -4,8 +4,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-GO_SWAGGER_VERSION="v0.29.0"
-GO_SWAGGER_HASH="09ae1192ca9a941bbb534aca09e6bdc562c95ef3"
+GO_SWAGGER_VERSION="v0.33.1"
+GO_SWAGGER_HASH="2af7725271cf99ace5d44ab134acb53bffcc5734"
 if ! command -v swagger &>/dev/null \
 || [[ "$(swagger version | awk '$1~/^version:/{print $2}')" != "${GO_SWAGGER_VERSION}" \
 || "$(swagger version | awk '$1~/^commit:/{print $2}')" != "${GO_SWAGGER_HASH}" ]]

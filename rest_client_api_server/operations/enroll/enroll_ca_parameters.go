@@ -49,7 +49,6 @@ func NewEnrollCaParams() EnrollCaParams {
 //
 // swagger:parameters enrollCa
 type EnrollCaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

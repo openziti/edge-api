@@ -76,10 +76,12 @@ func NewListSpecsParamsWithHTTPClient(client *http.Client) *ListSpecsParams {
 	}
 }
 
-/* ListSpecsParams contains all the parameters to send to the API endpoint
-   for the list specs operation.
+/*
+ListSpecsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list specs operation.
+
+	Typically these are written to a http.Request.
 */
 type ListSpecsParams struct {
 	timeout    time.Duration

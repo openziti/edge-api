@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -256,11 +257,15 @@ func (m *PostureCheckProcessMultiCreate) validateRoleAttributes(formats strfmt.R
 
 	if m.RoleAttributes() != nil {
 		if err := m.RoleAttributes().Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -276,11 +281,15 @@ func (m *PostureCheckProcessMultiCreate) validateTags(formats strfmt.Registry) e
 
 	if m.Tags() != nil {
 		if err := m.Tags().Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -307,11 +316,15 @@ func (m *PostureCheckProcessMultiCreate) validateProcesses(formats strfmt.Regist
 
 		if m.Processes[i] != nil {
 			if err := m.Processes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("processes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -333,11 +346,15 @@ func (m *PostureCheckProcessMultiCreate) validateSemantic(formats strfmt.Registr
 
 	if m.Semantic != nil {
 		if err := m.Semantic.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("semantic")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("semantic")
 			}
+
 			return err
 		}
 	}
@@ -375,11 +392,15 @@ func (m *PostureCheckProcessMultiCreate) contextValidateRoleAttributes(ctx conte
 
 	if m.RoleAttributes() != nil {
 		if err := m.RoleAttributes().ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -390,12 +411,21 @@ func (m *PostureCheckProcessMultiCreate) contextValidateRoleAttributes(ctx conte
 func (m *PostureCheckProcessMultiCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags() != nil {
+
+		if swag.IsZero(m.Tags()) { // not required
+			return nil
+		}
+
 		if err := m.Tags().ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -406,11 +436,15 @@ func (m *PostureCheckProcessMultiCreate) contextValidateTags(ctx context.Context
 func (m *PostureCheckProcessMultiCreate) contextValidateTypeID(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.TypeID().ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("typeId")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("typeId")
 		}
+
 		return err
 	}
 
@@ -422,12 +456,21 @@ func (m *PostureCheckProcessMultiCreate) contextValidateProcesses(ctx context.Co
 	for i := 0; i < len(m.Processes); i++ {
 
 		if m.Processes[i] != nil {
+
+			if swag.IsZero(m.Processes[i]) { // not required
+				return nil
+			}
+
 			if err := m.Processes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("processes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("processes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -440,12 +483,17 @@ func (m *PostureCheckProcessMultiCreate) contextValidateProcesses(ctx context.Co
 func (m *PostureCheckProcessMultiCreate) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
+
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("semantic")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("semantic")
 			}
+
 			return err
 		}
 	}

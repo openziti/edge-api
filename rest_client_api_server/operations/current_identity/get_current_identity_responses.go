@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // GetCurrentIdentityOKCode is the HTTP code returned for type GetCurrentIdentityOK
 const GetCurrentIdentityOKCode int = 200
 
-/*GetCurrentIdentityOK The identity associated with the API Session used to issue the request
+/*
+GetCurrentIdentityOK The identity associated with the API Session used to issue the request
 
 swagger:response getCurrentIdentityOK
 */
 type GetCurrentIdentityOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type GetCurrentIdentityOK struct {
 func NewGetCurrentIdentityOK() *GetCurrentIdentityOK {
 
 	return &GetCurrentIdentityOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get current identity o k response
+func (o *GetCurrentIdentityOK) WithWWWAuthenticate(wWWAuthenticate []string) *GetCurrentIdentityOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get current identity o k response
+func (o *GetCurrentIdentityOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get current identity o k response
@@ -72,6 +89,23 @@ func (o *GetCurrentIdentityOK) SetPayload(payload *rest_model.CurrentIdentityDet
 // WriteResponse to the client
 func (o *GetCurrentIdentityOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *GetCurrentIdentityOK) WriteResponse(rw http.ResponseWriter, producer ru
 // GetCurrentIdentityUnauthorizedCode is the HTTP code returned for type GetCurrentIdentityUnauthorized
 const GetCurrentIdentityUnauthorizedCode int = 401
 
-/*GetCurrentIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetCurrentIdentityUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCurrentIdentityUnauthorized
 */
 type GetCurrentIdentityUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type GetCurrentIdentityUnauthorized struct {
 func NewGetCurrentIdentityUnauthorized() *GetCurrentIdentityUnauthorized {
 
 	return &GetCurrentIdentityUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get current identity unauthorized response
+func (o *GetCurrentIdentityUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *GetCurrentIdentityUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get current identity unauthorized response
+func (o *GetCurrentIdentityUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get current identity unauthorized response
@@ -115,6 +165,23 @@ func (o *GetCurrentIdentityUnauthorized) SetPayload(payload *rest_model.APIError
 
 // WriteResponse to the client
 func (o *GetCurrentIdentityUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(401)
 	if o.Payload != nil {

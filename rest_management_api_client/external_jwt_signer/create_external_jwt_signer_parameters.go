@@ -78,10 +78,12 @@ func NewCreateExternalJWTSignerParamsWithHTTPClient(client *http.Client) *Create
 	}
 }
 
-/* CreateExternalJWTSignerParams contains all the parameters to send to the API endpoint
-   for the create external Jwt signer operation.
+/*
+CreateExternalJWTSignerParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create external Jwt signer operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateExternalJWTSignerParams struct {
 

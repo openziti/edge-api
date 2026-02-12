@@ -641,30 +641,72 @@ paths:
 responses:
   listIdentities:
     description: A list of identities
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listIdentitiesEnvelope'
   detailIdentity:
     description: A single identity
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailIdentityEnvelope'
   getIdentityPolicyAdvice:
     description: Returns the document that represents the policy advice
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/getIdentityPolicyAdviceEnvelope'
   getIdentityPostureData:
     description: Returns the document that represents posture data
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: 'posture-data.yml#/definitions/postureDataEnvelope'
   getIdentityFailedServiceRequest:
     description: Returns a list of service request failures
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: 'failed-service-request.yml#/definitions/failedServiceRequestEnvelope'
   listServiceConfigs:
     description: A list of service configs
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: 'service-configs.yml#/definitions/listServiceConfigsEnvelope'
   traceDetail:
     description: Returns the document that represents the trace state
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/traceDetailEnvelope'
 

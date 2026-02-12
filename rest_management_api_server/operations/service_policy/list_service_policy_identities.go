@@ -36,16 +36,16 @@ import (
 )
 
 // ListServicePolicyIdentitiesHandlerFunc turns a function with the right signature into a list service policy identities handler
-type ListServicePolicyIdentitiesHandlerFunc func(ListServicePolicyIdentitiesParams, interface{}) middleware.Responder
+type ListServicePolicyIdentitiesHandlerFunc func(ListServicePolicyIdentitiesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServicePolicyIdentitiesHandlerFunc) Handle(params ListServicePolicyIdentitiesParams, principal interface{}) middleware.Responder {
+func (fn ListServicePolicyIdentitiesHandlerFunc) Handle(params ListServicePolicyIdentitiesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServicePolicyIdentitiesHandler interface for that can handle valid list service policy identities params
 type ListServicePolicyIdentitiesHandler interface {
-	Handle(ListServicePolicyIdentitiesParams, interface{}) middleware.Responder
+	Handle(ListServicePolicyIdentitiesParams, any) middleware.Responder
 }
 
 // NewListServicePolicyIdentities creates a new http.Handler for the list service policy identities operation
@@ -53,13 +53,12 @@ func NewListServicePolicyIdentities(ctx *middleware.Context, handler ListService
 	return &ListServicePolicyIdentities{Context: ctx, Handler: handler}
 }
 
-/* ListServicePolicyIdentities swagger:route GET /service-policies/{id}/identities Service Policy listServicePolicyIdentities
+/*
+	ListServicePolicyIdentities swagger:route GET /service-policies/{id}/identities Service Policy listServicePolicyIdentities
 
-List identities a service policy affects
+# List identities a service policy affects
 
 Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServicePolicyIdentities struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServicePolicyIdentities) ServeHTTP(rw http.ResponseWriter, r *http.
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServicePolicyIdentities) ServeHTTP(rw http.ResponseWriter, r *http.
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

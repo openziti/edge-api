@@ -76,10 +76,12 @@ func NewListNetworkJWTsParamsWithHTTPClient(client *http.Client) *ListNetworkJWT
 	}
 }
 
-/* ListNetworkJWTsParams contains all the parameters to send to the API endpoint
-   for the list network j w ts operation.
+/*
+ListNetworkJWTsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list network j w ts operation.
+
+	Typically these are written to a http.Request.
 */
 type ListNetworkJWTsParams struct {
 	timeout    time.Duration

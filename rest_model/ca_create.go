@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -140,11 +141,15 @@ func (m *CaCreate) validateExternalIDClaim(formats strfmt.Registry) error {
 
 	if m.ExternalIDClaim != nil {
 		if err := m.ExternalIDClaim.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("externalIdClaim")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("externalIdClaim")
 			}
+
 			return err
 		}
 	}
@@ -159,11 +164,15 @@ func (m *CaCreate) validateIdentityRoles(formats strfmt.Registry) error {
 	}
 
 	if err := m.IdentityRoles.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("identityRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("identityRoles")
 		}
+
 		return err
 	}
 
@@ -213,11 +222,15 @@ func (m *CaCreate) validateTags(formats strfmt.Registry) error {
 
 	if m.Tags != nil {
 		if err := m.Tags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}
@@ -250,12 +263,21 @@ func (m *CaCreate) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *CaCreate) contextValidateExternalIDClaim(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExternalIDClaim != nil {
+
+		if swag.IsZero(m.ExternalIDClaim) { // not required
+			return nil
+		}
+
 		if err := m.ExternalIDClaim.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("externalIdClaim")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("externalIdClaim")
 			}
+
 			return err
 		}
 	}
@@ -266,11 +288,15 @@ func (m *CaCreate) contextValidateExternalIDClaim(ctx context.Context, formats s
 func (m *CaCreate) contextValidateIdentityRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.IdentityRoles.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("identityRoles")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("identityRoles")
 		}
+
 		return err
 	}
 
@@ -280,12 +306,21 @@ func (m *CaCreate) contextValidateIdentityRoles(ctx context.Context, formats str
 func (m *CaCreate) contextValidateTags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tags != nil {
+
+		if swag.IsZero(m.Tags) { // not required
+			return nil
+		}
+
 		if err := m.Tags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tags")
 			}
+
 			return err
 		}
 	}

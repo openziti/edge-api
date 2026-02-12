@@ -26,6 +26,12 @@ paths:
 responses:
   listCurrentIdentityEdgeRouters:
     description: A list of edge routers
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listCurrentIdentityEdgeRoutersEnvelope'
 

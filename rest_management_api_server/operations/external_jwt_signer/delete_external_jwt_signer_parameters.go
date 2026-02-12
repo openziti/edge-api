@@ -50,7 +50,6 @@ func NewDeleteExternalJWTSignerParams() DeleteExternalJWTSignerParams {
 //
 // swagger:parameters deleteExternalJwtSigner
 type DeleteExternalJWTSignerParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -30,11 +30,14 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type UpdateCaReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateCaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateCaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateCaOK()
@@ -84,7 +87,7 @@ func (o *UpdateCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /cas/{id}] updateCa", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewUpdateCaOK() *UpdateCaOK {
 	return &UpdateCaOK{}
 }
 
-/* UpdateCaOK describes a response with status code 200, with default header values.
+/*
+UpdateCaOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
 type UpdateCaOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateCaOK) Error() string {
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update ca o k response has a 2xx status code
+func (o *UpdateCaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update ca o k response has a 3xx status code
+func (o *UpdateCaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update ca o k response has a 4xx status code
+func (o *UpdateCaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update ca o k response has a 5xx status code
+func (o *UpdateCaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update ca o k response a status code equal to that given
+func (o *UpdateCaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update ca o k response
+func (o *UpdateCaOK) Code() int {
+	return 200
+}
+
+func (o *UpdateCaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaOK %s", 200, payload)
+}
+
+func (o *UpdateCaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaOK %s", 200, payload)
+}
+
 func (o *UpdateCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *UpdateCaOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateCaOK binds the response header WWW-Authenticate
+func (o *UpdateCaOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateCaBadRequest creates a UpdateCaBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewUpdateCaBadRequest() *UpdateCaBadRequest {
 	return &UpdateCaBadRequest{}
 }
 
-/* UpdateCaBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type UpdateCaBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateCaBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update ca bad request response has a 2xx status code
+func (o *UpdateCaBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update ca bad request response has a 3xx status code
+func (o *UpdateCaBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update ca bad request response has a 4xx status code
+func (o *UpdateCaBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update ca bad request response has a 5xx status code
+func (o *UpdateCaBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update ca bad request response a status code equal to that given
+func (o *UpdateCaBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update ca bad request response
+func (o *UpdateCaBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateCaBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaBadRequest %s", 400, payload)
+}
+
+func (o *UpdateCaBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaBadRequest %s", 400, payload)
+}
+
 func (o *UpdateCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateCaBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateCaBadRequest binds the response header WWW-Authenticate
+func (o *UpdateCaBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateCaUnauthorized creates a UpdateCaUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewUpdateCaUnauthorized() *UpdateCaUnauthorized {
 	return &UpdateCaUnauthorized{}
 }
 
-/* UpdateCaUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type UpdateCaUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateCaUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update ca unauthorized response has a 2xx status code
+func (o *UpdateCaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update ca unauthorized response has a 3xx status code
+func (o *UpdateCaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update ca unauthorized response has a 4xx status code
+func (o *UpdateCaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update ca unauthorized response has a 5xx status code
+func (o *UpdateCaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update ca unauthorized response a status code equal to that given
+func (o *UpdateCaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update ca unauthorized response
+func (o *UpdateCaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateCaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateCaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateCaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateCaUnauthorized binds the response header WWW-Authenticate
+func (o *UpdateCaUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateCaNotFound creates a UpdateCaNotFound with default headers values
@@ -189,31 +423,108 @@ func NewUpdateCaNotFound() *UpdateCaNotFound {
 	return &UpdateCaNotFound{}
 }
 
-/* UpdateCaNotFound describes a response with status code 404, with default header values.
+/*
+UpdateCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type UpdateCaNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateCaNotFound) Error() string {
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update ca not found response has a 2xx status code
+func (o *UpdateCaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update ca not found response has a 3xx status code
+func (o *UpdateCaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update ca not found response has a 4xx status code
+func (o *UpdateCaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update ca not found response has a 5xx status code
+func (o *UpdateCaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update ca not found response a status code equal to that given
+func (o *UpdateCaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update ca not found response
+func (o *UpdateCaNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateCaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaNotFound %s", 404, payload)
+}
+
+func (o *UpdateCaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaNotFound %s", 404, payload)
+}
+
 func (o *UpdateCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateCaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateCaNotFound binds the response header WWW-Authenticate
+func (o *UpdateCaNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateCaTooManyRequests creates a UpdateCaTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewUpdateCaTooManyRequests() *UpdateCaTooManyRequests {
 	return &UpdateCaTooManyRequests{}
 }
 
-/* UpdateCaTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type UpdateCaTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateCaTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update ca too many requests response has a 2xx status code
+func (o *UpdateCaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update ca too many requests response has a 3xx status code
+func (o *UpdateCaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update ca too many requests response has a 4xx status code
+func (o *UpdateCaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update ca too many requests response has a 5xx status code
+func (o *UpdateCaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update ca too many requests response a status code equal to that given
+func (o *UpdateCaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update ca too many requests response
+func (o *UpdateCaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateCaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateCaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateCaTooManyRequests binds the response header WWW-Authenticate
+func (o *UpdateCaTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateCaServiceUnavailable creates a UpdateCaServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewUpdateCaServiceUnavailable() *UpdateCaServiceUnavailable {
 	return &UpdateCaServiceUnavailable{}
 }
 
-/* UpdateCaServiceUnavailable describes a response with status code 503, with default header values.
+/*
+UpdateCaServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type UpdateCaServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateCaServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this update ca service unavailable response has a 2xx status code
+func (o *UpdateCaServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update ca service unavailable response has a 3xx status code
+func (o *UpdateCaServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update ca service unavailable response has a 4xx status code
+func (o *UpdateCaServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update ca service unavailable response has a 5xx status code
+func (o *UpdateCaServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update ca service unavailable response a status code equal to that given
+func (o *UpdateCaServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the update ca service unavailable response
+func (o *UpdateCaServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *UpdateCaServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaServiceUnavailable %s", 503, payload)
+}
+
+func (o *UpdateCaServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cas/{id}][%d] updateCaServiceUnavailable %s", 503, payload)
+}
+
 func (o *UpdateCaServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateCaServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateCaServiceUnavailable binds the response header WWW-Authenticate
+func (o *UpdateCaServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

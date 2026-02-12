@@ -36,16 +36,16 @@ import (
 )
 
 // DetailCurrentIdentityAuthenticatorHandlerFunc turns a function with the right signature into a detail current identity authenticator handler
-type DetailCurrentIdentityAuthenticatorHandlerFunc func(DetailCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+type DetailCurrentIdentityAuthenticatorHandlerFunc func(DetailCurrentIdentityAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailCurrentIdentityAuthenticatorHandlerFunc) Handle(params DetailCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn DetailCurrentIdentityAuthenticatorHandlerFunc) Handle(params DetailCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailCurrentIdentityAuthenticatorHandler interface for that can handle valid detail current identity authenticator params
 type DetailCurrentIdentityAuthenticatorHandler interface {
-	Handle(DetailCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+	Handle(DetailCurrentIdentityAuthenticatorParams, any) middleware.Responder
 }
 
 // NewDetailCurrentIdentityAuthenticator creates a new http.Handler for the detail current identity authenticator operation
@@ -53,12 +53,12 @@ func NewDetailCurrentIdentityAuthenticator(ctx *middleware.Context, handler Deta
 	return &DetailCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* DetailCurrentIdentityAuthenticator swagger:route GET /current-identity/authenticators/{id} Current API Session detailCurrentIdentityAuthenticator
+/*
+	DetailCurrentIdentityAuthenticator swagger:route GET /current-identity/authenticators/{id} Current API Session detailCurrentIdentityAuthenticator
 
-Retrieve an authenticator for the current identity
+# Retrieve an authenticator for the current identity
 
 Retrieves a single authenticator by id. Will only show authenticators assigned to the API session's identity.
-
 */
 type DetailCurrentIdentityAuthenticator struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWriter, r
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWriter, r
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

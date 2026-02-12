@@ -78,10 +78,12 @@ func NewRequestExtendAuthenticatorParamsWithHTTPClient(client *http.Client) *Req
 	}
 }
 
-/* RequestExtendAuthenticatorParams contains all the parameters to send to the API endpoint
-   for the request extend authenticator operation.
+/*
+RequestExtendAuthenticatorParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the request extend authenticator operation.
+
+	Typically these are written to a http.Request.
 */
 type RequestExtendAuthenticatorParams struct {
 

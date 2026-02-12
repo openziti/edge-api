@@ -20,7 +20,7 @@ for live deployments.
 The root-level `client.yml` and `management.yml` OpenAPI 2.0 specification  files are generated from the `source`
 directory. There are scripts in `./scripts/` for re-generating these specifications and the Go client and server
 libraries. The scripts require that a specific build of the `swagger` (aka "go-swagger") executable.
-[Download the Go-Swagger v0.29.0 binary](https://github.com/go-swagger/go-swagger/releases/tag/v0.29.0) from GitHub.
+[Download the Go-Swagger v0.33.1 binary](https://github.com/go-swagger/go-swagger/releases/tag/v0.33.1) from GitHub.
 
 Do not `go install` the binary because the rendering may introduce whitespace changes in many files.
 

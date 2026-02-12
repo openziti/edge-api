@@ -36,16 +36,16 @@ import (
 )
 
 // CreateConfigHandlerFunc turns a function with the right signature into a create config handler
-type CreateConfigHandlerFunc func(CreateConfigParams, interface{}) middleware.Responder
+type CreateConfigHandlerFunc func(CreateConfigParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateConfigHandlerFunc) Handle(params CreateConfigParams, principal interface{}) middleware.Responder {
+func (fn CreateConfigHandlerFunc) Handle(params CreateConfigParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateConfigHandler interface for that can handle valid create config params
 type CreateConfigHandler interface {
-	Handle(CreateConfigParams, interface{}) middleware.Responder
+	Handle(CreateConfigParams, any) middleware.Responder
 }
 
 // NewCreateConfig creates a new http.Handler for the create config operation
@@ -53,12 +53,12 @@ func NewCreateConfig(ctx *middleware.Context, handler CreateConfigHandler) *Crea
 	return &CreateConfig{Context: ctx, Handler: handler}
 }
 
-/* CreateConfig swagger:route POST /configs Config createConfig
+/*
+	CreateConfig swagger:route POST /configs Config createConfig
 
-Create a config resource
+# Create a config resource
 
 Create a config resource. Requires admin access.
-
 */
 type CreateConfig struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateConfig) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateConfig) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

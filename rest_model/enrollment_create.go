@@ -58,7 +58,7 @@ type EnrollmentCreate struct {
 
 	// method
 	// Required: true
-	// Enum: [ott ottca updb]
+	// Enum: ["ott","ottca","updb"]
 	Method *string `json:"method"`
 
 	// username
@@ -109,7 +109,7 @@ func (m *EnrollmentCreate) validateIdentityID(formats strfmt.Registry) error {
 	return nil
 }
 
-var enrollmentCreateTypeMethodPropEnum []interface{}
+var enrollmentCreateTypeMethodPropEnum []any
 
 func init() {
 	var res []string

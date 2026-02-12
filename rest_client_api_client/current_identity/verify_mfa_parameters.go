@@ -78,10 +78,12 @@ func NewVerifyMfaParamsWithHTTPClient(client *http.Client) *VerifyMfaParams {
 	}
 }
 
-/* VerifyMfaParams contains all the parameters to send to the API endpoint
-   for the verify mfa operation.
+/*
+VerifyMfaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the verify mfa operation.
+
+	Typically these are written to a http.Request.
 */
 type VerifyMfaParams struct {
 

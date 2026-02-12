@@ -36,16 +36,16 @@ import (
 )
 
 // DetailPostureCheckTypeHandlerFunc turns a function with the right signature into a detail posture check type handler
-type DetailPostureCheckTypeHandlerFunc func(DetailPostureCheckTypeParams, interface{}) middleware.Responder
+type DetailPostureCheckTypeHandlerFunc func(DetailPostureCheckTypeParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailPostureCheckTypeHandlerFunc) Handle(params DetailPostureCheckTypeParams, principal interface{}) middleware.Responder {
+func (fn DetailPostureCheckTypeHandlerFunc) Handle(params DetailPostureCheckTypeParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailPostureCheckTypeHandler interface for that can handle valid detail posture check type params
 type DetailPostureCheckTypeHandler interface {
-	Handle(DetailPostureCheckTypeParams, interface{}) middleware.Responder
+	Handle(DetailPostureCheckTypeParams, any) middleware.Responder
 }
 
 // NewDetailPostureCheckType creates a new http.Handler for the detail posture check type operation
@@ -53,12 +53,12 @@ func NewDetailPostureCheckType(ctx *middleware.Context, handler DetailPostureChe
 	return &DetailPostureCheckType{Context: ctx, Handler: handler}
 }
 
-/* DetailPostureCheckType swagger:route GET /posture-check-types/{id} Posture Checks detailPostureCheckType
+/*
+	DetailPostureCheckType swagger:route GET /posture-check-types/{id} Posture Checks detailPostureCheckType
 
-Retrieves a single posture check type
+# Retrieves a single posture check type
 
 Retrieves a single posture check type by id
-
 */
 type DetailPostureCheckType struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailPostureCheckType) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailPostureCheckType) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

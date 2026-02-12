@@ -30,11 +30,14 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListSpecsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListSpecsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListSpecsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListSpecsOK()
@@ -54,7 +57,7 @@ func (o *ListSpecsReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /specs] listSpecs", response, response.Code())
 	}
 }
 
@@ -63,29 +66,106 @@ func NewListSpecsOK() *ListSpecsOK {
 	return &ListSpecsOK{}
 }
 
-/* ListSpecsOK describes a response with status code 200, with default header values.
+/*
+ListSpecsOK describes a response with status code 200, with default header values.
 
 A list of specifications
 */
 type ListSpecsOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListSpecsEnvelope
 }
 
-func (o *ListSpecsOK) Error() string {
-	return fmt.Sprintf("[GET /specs][%d] listSpecsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list specs o k response has a 2xx status code
+func (o *ListSpecsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list specs o k response has a 3xx status code
+func (o *ListSpecsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list specs o k response has a 4xx status code
+func (o *ListSpecsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list specs o k response has a 5xx status code
+func (o *ListSpecsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list specs o k response a status code equal to that given
+func (o *ListSpecsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list specs o k response
+func (o *ListSpecsOK) Code() int {
+	return 200
+}
+
+func (o *ListSpecsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /specs][%d] listSpecsOK %s", 200, payload)
+}
+
+func (o *ListSpecsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /specs][%d] listSpecsOK %s", 200, payload)
+}
+
 func (o *ListSpecsOK) GetPayload() *rest_model.ListSpecsEnvelope {
 	return o.Payload
 }
 
 func (o *ListSpecsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListSpecsEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListSpecsOK binds the response header WWW-Authenticate
+func (o *ListSpecsOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

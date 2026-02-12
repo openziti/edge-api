@@ -49,7 +49,6 @@ func NewDeleteCurrentAPISessionParams() DeleteCurrentAPISessionParams {
 //
 // swagger:parameters DeleteCurrentAPISession
 type DeleteCurrentAPISessionParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

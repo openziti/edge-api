@@ -30,7 +30,6 @@ package authentication
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -55,7 +54,6 @@ func NewAuthenticateParams() AuthenticateParams {
 //
 // swagger:parameters authenticate
 type AuthenticateParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -63,6 +61,7 @@ type AuthenticateParams struct {
 	  In: body
 	*/
 	Auth *rest_model.Authenticate
+
 	/*
 	  Required: true
 	  In: query
@@ -78,11 +77,12 @@ func (o *AuthenticateParams) BindRequest(r *http.Request, route *middleware.Matc
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.Authenticate
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			res = append(res, errors.NewParseError("auth", "body", "", err))
@@ -92,7 +92,7 @@ func (o *AuthenticateParams) BindRequest(r *http.Request, route *middleware.Matc
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}
@@ -138,10 +138,10 @@ func (o *AuthenticateParams) bindMethod(rawData []string, hasKey bool, formats s
 	return nil
 }
 
-// validateMethod carries on validations for parameter Method
+// validateMethod carries out validations for parameter Method
 func (o *AuthenticateParams) validateMethod(formats strfmt.Registry) error {
 
-	if err := validate.EnumCase("method", "query", o.Method, []interface{}{"password", "cert", "ext-jwt"}, true); err != nil {
+	if err := validate.EnumCase("method", "query", o.Method, []any{"password", "cert", "ext-jwt"}, true); err != nil {
 		return err
 	}
 

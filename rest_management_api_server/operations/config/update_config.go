@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateConfigHandlerFunc turns a function with the right signature into a update config handler
-type UpdateConfigHandlerFunc func(UpdateConfigParams, interface{}) middleware.Responder
+type UpdateConfigHandlerFunc func(UpdateConfigParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateConfigHandlerFunc) Handle(params UpdateConfigParams, principal interface{}) middleware.Responder {
+func (fn UpdateConfigHandlerFunc) Handle(params UpdateConfigParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateConfigHandler interface for that can handle valid update config params
 type UpdateConfigHandler interface {
-	Handle(UpdateConfigParams, interface{}) middleware.Responder
+	Handle(UpdateConfigParams, any) middleware.Responder
 }
 
 // NewUpdateConfig creates a new http.Handler for the update config operation
@@ -53,12 +53,12 @@ func NewUpdateConfig(ctx *middleware.Context, handler UpdateConfigHandler) *Upda
 	return &UpdateConfig{Context: ctx, Handler: handler}
 }
 
-/* UpdateConfig swagger:route PUT /configs/{id} Config updateConfig
+/*
+	UpdateConfig swagger:route PUT /configs/{id} Config updateConfig
 
-Update all fields on a config
+# Update all fields on a config
 
 Update all fields on a config by id. Requires admin access.
-
 */
 type UpdateConfig struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateConfig) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateConfig) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

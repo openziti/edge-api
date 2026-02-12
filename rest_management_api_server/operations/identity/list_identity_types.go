@@ -36,16 +36,16 @@ import (
 )
 
 // ListIdentityTypesHandlerFunc turns a function with the right signature into a list identity types handler
-type ListIdentityTypesHandlerFunc func(ListIdentityTypesParams, interface{}) middleware.Responder
+type ListIdentityTypesHandlerFunc func(ListIdentityTypesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListIdentityTypesHandlerFunc) Handle(params ListIdentityTypesParams, principal interface{}) middleware.Responder {
+func (fn ListIdentityTypesHandlerFunc) Handle(params ListIdentityTypesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListIdentityTypesHandler interface for that can handle valid list identity types params
 type ListIdentityTypesHandler interface {
-	Handle(ListIdentityTypesParams, interface{}) middleware.Responder
+	Handle(ListIdentityTypesParams, any) middleware.Responder
 }
 
 // NewListIdentityTypes creates a new http.Handler for the list identity types operation
@@ -53,13 +53,12 @@ func NewListIdentityTypes(ctx *middleware.Context, handler ListIdentityTypesHand
 	return &ListIdentityTypes{Context: ctx, Handler: handler}
 }
 
-/* ListIdentityTypes swagger:route GET /identity-types Identity listIdentityTypes
+/*
+	ListIdentityTypes swagger:route GET /identity-types Identity listIdentityTypes
 
-List available identity types
+# List available identity types
 
 Retrieves a list of identity types; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListIdentityTypes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListIdentityTypes) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListIdentityTypes) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

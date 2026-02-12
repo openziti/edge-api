@@ -36,16 +36,16 @@ import (
 )
 
 // DetailControllerSettingHandlerFunc turns a function with the right signature into a detail controller setting handler
-type DetailControllerSettingHandlerFunc func(DetailControllerSettingParams, interface{}) middleware.Responder
+type DetailControllerSettingHandlerFunc func(DetailControllerSettingParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailControllerSettingHandlerFunc) Handle(params DetailControllerSettingParams, principal interface{}) middleware.Responder {
+func (fn DetailControllerSettingHandlerFunc) Handle(params DetailControllerSettingParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailControllerSettingHandler interface for that can handle valid detail controller setting params
 type DetailControllerSettingHandler interface {
-	Handle(DetailControllerSettingParams, interface{}) middleware.Responder
+	Handle(DetailControllerSettingParams, any) middleware.Responder
 }
 
 // NewDetailControllerSetting creates a new http.Handler for the detail controller setting operation
@@ -53,12 +53,12 @@ func NewDetailControllerSetting(ctx *middleware.Context, handler DetailControlle
 	return &DetailControllerSetting{Context: ctx, Handler: handler}
 }
 
-/* DetailControllerSetting swagger:route GET /controller-settings/{id} Settings detailControllerSetting
+/*
+	DetailControllerSetting swagger:route GET /controller-settings/{id} Settings detailControllerSetting
 
 Retrieves a single controller setting object.
 
 Retrieves a single controller setting object by id. Requires admin access.
-
 */
 type DetailControllerSetting struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailControllerSetting) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

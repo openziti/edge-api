@@ -50,7 +50,6 @@ func NewDeleteEnrollmentParams() DeleteEnrollmentParams {
 //
 // swagger:parameters deleteEnrollment
 type DeleteEnrollmentParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

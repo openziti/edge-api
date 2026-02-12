@@ -36,16 +36,16 @@ import (
 )
 
 // ListCurrentIdentityAuthenticatorsHandlerFunc turns a function with the right signature into a list current identity authenticators handler
-type ListCurrentIdentityAuthenticatorsHandlerFunc func(ListCurrentIdentityAuthenticatorsParams, interface{}) middleware.Responder
+type ListCurrentIdentityAuthenticatorsHandlerFunc func(ListCurrentIdentityAuthenticatorsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListCurrentIdentityAuthenticatorsHandlerFunc) Handle(params ListCurrentIdentityAuthenticatorsParams, principal interface{}) middleware.Responder {
+func (fn ListCurrentIdentityAuthenticatorsHandlerFunc) Handle(params ListCurrentIdentityAuthenticatorsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListCurrentIdentityAuthenticatorsHandler interface for that can handle valid list current identity authenticators params
 type ListCurrentIdentityAuthenticatorsHandler interface {
-	Handle(ListCurrentIdentityAuthenticatorsParams, interface{}) middleware.Responder
+	Handle(ListCurrentIdentityAuthenticatorsParams, any) middleware.Responder
 }
 
 // NewListCurrentIdentityAuthenticators creates a new http.Handler for the list current identity authenticators operation
@@ -53,12 +53,12 @@ func NewListCurrentIdentityAuthenticators(ctx *middleware.Context, handler ListC
 	return &ListCurrentIdentityAuthenticators{Context: ctx, Handler: handler}
 }
 
-/* ListCurrentIdentityAuthenticators swagger:route GET /current-identity/authenticators Current API Session listCurrentIdentityAuthenticators
+/*
+	ListCurrentIdentityAuthenticators swagger:route GET /current-identity/authenticators Current API Session listCurrentIdentityAuthenticators
 
-List authenticators for the current identity
+# List authenticators for the current identity
 
 Retrieves a list of authenticators assigned to the current API session's identity; supports filtering, sorting, and pagination.
-
 */
 type ListCurrentIdentityAuthenticators struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListCurrentIdentityAuthenticators) ServeHTTP(rw http.ResponseWriter, r 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListCurrentIdentityAuthenticators) ServeHTTP(rw http.ResponseWriter, r 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

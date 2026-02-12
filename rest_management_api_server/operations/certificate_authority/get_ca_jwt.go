@@ -36,16 +36,16 @@ import (
 )
 
 // GetCaJWTHandlerFunc turns a function with the right signature into a get ca Jwt handler
-type GetCaJWTHandlerFunc func(GetCaJWTParams, interface{}) middleware.Responder
+type GetCaJWTHandlerFunc func(GetCaJWTParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetCaJWTHandlerFunc) Handle(params GetCaJWTParams, principal interface{}) middleware.Responder {
+func (fn GetCaJWTHandlerFunc) Handle(params GetCaJWTParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetCaJWTHandler interface for that can handle valid get ca Jwt params
 type GetCaJWTHandler interface {
-	Handle(GetCaJWTParams, interface{}) middleware.Responder
+	Handle(GetCaJWTParams, any) middleware.Responder
 }
 
 // NewGetCaJWT creates a new http.Handler for the get ca Jwt operation
@@ -53,14 +53,13 @@ func NewGetCaJWT(ctx *middleware.Context, handler GetCaJWTHandler) *GetCaJWT {
 	return &GetCaJWT{Context: ctx, Handler: handler}
 }
 
-/* GetCaJWT swagger:route GET /cas/{id}/jwt Certificate Authority getCaJwt
+/*
+	GetCaJWT swagger:route GET /cas/{id}/jwt Certificate Authority getCaJwt
 
-Retrieve the enrollment JWT for a CA
+# Retrieve the enrollment JWT for a CA
 
 For CA auto enrollment, the enrollment JWT is static and provided on each CA resource. This endpoint provides
 the jwt as a text response.
-
-
 */
 type GetCaJWT struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *GetCaJWT) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *GetCaJWT) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

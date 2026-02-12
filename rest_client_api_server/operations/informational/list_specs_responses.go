@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListSpecsOKCode is the HTTP code returned for type ListSpecsOK
 const ListSpecsOKCode int = 200
 
-/*ListSpecsOK A list of specifications
+/*
+ListSpecsOK A list of specifications
 
 swagger:response listSpecsOK
 */
 type ListSpecsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListSpecsOK struct {
 func NewListSpecsOK() *ListSpecsOK {
 
 	return &ListSpecsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list specs o k response
+func (o *ListSpecsOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListSpecsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list specs o k response
+func (o *ListSpecsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list specs o k response
@@ -71,6 +88,23 @@ func (o *ListSpecsOK) SetPayload(payload *rest_model.ListSpecsEnvelope) {
 
 // WriteResponse to the client
 func (o *ListSpecsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(200)
 	if o.Payload != nil {

@@ -49,7 +49,6 @@ func NewListProtocolsParams() ListProtocolsParams {
 //
 // swagger:parameters listProtocols
 type ListProtocolsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

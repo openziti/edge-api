@@ -50,7 +50,6 @@ func NewDetailConfigTypeParams() DetailConfigTypeParams {
 //
 // swagger:parameters detailConfigType
 type DetailConfigTypeParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

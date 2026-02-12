@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new posture checks API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new posture checks API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new posture checks API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,8 +75,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithAccept allows the client to force the Accept header
+// to negotiate a specific Producer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithAccept(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ProducesMediaTypes = []string{mime}
+	}
+}
+
+// WithAcceptApplicationJSON sets the Accept header to "application/json".
+func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json"}
+}
+
+// WithAcceptApplicationJSONCharsetUTF8 sets the Accept header to "application/json; charset=utf-8".
+func WithAcceptApplicationJSONCharsetUTF8(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json; charset=utf-8"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -74,12 +124,12 @@ type ClientService interface {
 }
 
 /*
-  CreatePostureCheck creates a posture checks
+CreatePostureCheck creates a posture checks
 
-  Creates a Posture Checks
+Creates a Posture Checks
 */
 func (a *Client) CreatePostureCheck(params *CreatePostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostureCheckCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreatePostureCheckParams()
 	}
@@ -99,28 +149,33 @@ func (a *Client) CreatePostureCheck(params *CreatePostureCheckParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreatePostureCheckCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createPostureCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeletePostureCheck deletes an posture checks
+DeletePostureCheck deletes an posture checks
 
-  Deletes and Posture Checks by id
+Deletes and Posture Checks by id
 */
 func (a *Client) DeletePostureCheck(params *DeletePostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostureCheckOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeletePostureCheckParams()
 	}
@@ -140,28 +195,33 @@ func (a *Client) DeletePostureCheck(params *DeletePostureCheckParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeletePostureCheckOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deletePostureCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailPostureCheck retrieves a single posture checks
+DetailPostureCheck retrieves a single posture checks
 
-  Retrieves a single Posture Checks by id
+Retrieves a single Posture Checks by id
 */
 func (a *Client) DetailPostureCheck(params *DetailPostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailPostureCheckOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailPostureCheckParams()
 	}
@@ -181,28 +241,33 @@ func (a *Client) DetailPostureCheck(params *DetailPostureCheckParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailPostureCheckOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailPostureCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailPostureCheckType retrieves a single posture check type
+DetailPostureCheckType retrieves a single posture check type
 
-  Retrieves a single posture check type by id
+Retrieves a single posture check type by id
 */
 func (a *Client) DetailPostureCheckType(params *DetailPostureCheckTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailPostureCheckTypeOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailPostureCheckTypeParams()
 	}
@@ -222,29 +287,33 @@ func (a *Client) DetailPostureCheckType(params *DetailPostureCheckTypeParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailPostureCheckTypeOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailPostureCheckType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListPostureCheckTypes lists a subset of posture check types
+ListPostureCheckTypes lists a subset of posture check types
 
-  Retrieves a list of posture check types
-
+Retrieves a list of posture check types
 */
 func (a *Client) ListPostureCheckTypes(params *ListPostureCheckTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckTypesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListPostureCheckTypesParams()
 	}
@@ -264,29 +333,33 @@ func (a *Client) ListPostureCheckTypes(params *ListPostureCheckTypesParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListPostureCheckTypesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listPostureCheckTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListPostureChecks lists a subset of posture checks
+ListPostureChecks lists a subset of posture checks
 
-  Retrieves a list of posture checks
-
+Retrieves a list of posture checks
 */
 func (a *Client) ListPostureChecks(params *ListPostureChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureChecksOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListPostureChecksParams()
 	}
@@ -306,28 +379,33 @@ func (a *Client) ListPostureChecks(params *ListPostureChecksParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListPostureChecksOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listPostureChecks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchPostureCheck updates the supplied fields on a posture checks
+PatchPostureCheck updates the supplied fields on a posture checks
 
-  Update only the supplied fields on a Posture Checks by id
+Update only the supplied fields on a Posture Checks by id
 */
 func (a *Client) PatchPostureCheck(params *PatchPostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchPostureCheckOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchPostureCheckParams()
 	}
@@ -347,28 +425,33 @@ func (a *Client) PatchPostureCheck(params *PatchPostureCheckParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchPostureCheckOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchPostureCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdatePostureCheck updates all fields on a posture checks
+UpdatePostureCheck updates all fields on a posture checks
 
-  Update all fields on a Posture Checks by id
+Update all fields on a Posture Checks by id
 */
 func (a *Client) UpdatePostureCheck(params *UpdatePostureCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostureCheckOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdatePostureCheckParams()
 	}
@@ -388,17 +471,22 @@ func (a *Client) UpdatePostureCheck(params *UpdatePostureCheckParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdatePostureCheckOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updatePostureCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

@@ -30,11 +30,14 @@ package edge_router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type UpdateEdgeRouterReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateEdgeRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateEdgeRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateEdgeRouterOK()
@@ -84,7 +87,7 @@ func (o *UpdateEdgeRouterReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge-routers/{id}] updateEdgeRouter", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewUpdateEdgeRouterOK() *UpdateEdgeRouterOK {
 	return &UpdateEdgeRouterOK{}
 }
 
-/* UpdateEdgeRouterOK describes a response with status code 200, with default header values.
+/*
+UpdateEdgeRouterOK describes a response with status code 200, with default header values.
 
 The update request was successful and the resource has been altered
 */
 type UpdateEdgeRouterOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *UpdateEdgeRouterOK) Error() string {
-	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this update edge router o k response has a 2xx status code
+func (o *UpdateEdgeRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this update edge router o k response has a 3xx status code
+func (o *UpdateEdgeRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update edge router o k response has a 4xx status code
+func (o *UpdateEdgeRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update edge router o k response has a 5xx status code
+func (o *UpdateEdgeRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update edge router o k response a status code equal to that given
+func (o *UpdateEdgeRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update edge router o k response
+func (o *UpdateEdgeRouterOK) Code() int {
+	return 200
+}
+
+func (o *UpdateEdgeRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterOK %s", 200, payload)
+}
+
+func (o *UpdateEdgeRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterOK %s", 200, payload)
+}
+
 func (o *UpdateEdgeRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *UpdateEdgeRouterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateEdgeRouterOK binds the response header WWW-Authenticate
+func (o *UpdateEdgeRouterOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateEdgeRouterBadRequest creates a UpdateEdgeRouterBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewUpdateEdgeRouterBadRequest() *UpdateEdgeRouterBadRequest {
 	return &UpdateEdgeRouterBadRequest{}
 }
 
-/* UpdateEdgeRouterBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateEdgeRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type UpdateEdgeRouterBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateEdgeRouterBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this update edge router bad request response has a 2xx status code
+func (o *UpdateEdgeRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update edge router bad request response has a 3xx status code
+func (o *UpdateEdgeRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update edge router bad request response has a 4xx status code
+func (o *UpdateEdgeRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update edge router bad request response has a 5xx status code
+func (o *UpdateEdgeRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update edge router bad request response a status code equal to that given
+func (o *UpdateEdgeRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update edge router bad request response
+func (o *UpdateEdgeRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateEdgeRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterBadRequest %s", 400, payload)
+}
+
+func (o *UpdateEdgeRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterBadRequest %s", 400, payload)
+}
+
 func (o *UpdateEdgeRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateEdgeRouterBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateEdgeRouterBadRequest binds the response header WWW-Authenticate
+func (o *UpdateEdgeRouterBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateEdgeRouterUnauthorized creates a UpdateEdgeRouterUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewUpdateEdgeRouterUnauthorized() *UpdateEdgeRouterUnauthorized {
 	return &UpdateEdgeRouterUnauthorized{}
 }
 
-/* UpdateEdgeRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateEdgeRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type UpdateEdgeRouterUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateEdgeRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this update edge router unauthorized response has a 2xx status code
+func (o *UpdateEdgeRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update edge router unauthorized response has a 3xx status code
+func (o *UpdateEdgeRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update edge router unauthorized response has a 4xx status code
+func (o *UpdateEdgeRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update edge router unauthorized response has a 5xx status code
+func (o *UpdateEdgeRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update edge router unauthorized response a status code equal to that given
+func (o *UpdateEdgeRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update edge router unauthorized response
+func (o *UpdateEdgeRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateEdgeRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterUnauthorized %s", 401, payload)
+}
+
+func (o *UpdateEdgeRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterUnauthorized %s", 401, payload)
+}
+
 func (o *UpdateEdgeRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateEdgeRouterUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateEdgeRouterUnauthorized binds the response header WWW-Authenticate
+func (o *UpdateEdgeRouterUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateEdgeRouterNotFound creates a UpdateEdgeRouterNotFound with default headers values
@@ -189,31 +423,108 @@ func NewUpdateEdgeRouterNotFound() *UpdateEdgeRouterNotFound {
 	return &UpdateEdgeRouterNotFound{}
 }
 
-/* UpdateEdgeRouterNotFound describes a response with status code 404, with default header values.
+/*
+UpdateEdgeRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type UpdateEdgeRouterNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateEdgeRouterNotFound) Error() string {
-	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this update edge router not found response has a 2xx status code
+func (o *UpdateEdgeRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update edge router not found response has a 3xx status code
+func (o *UpdateEdgeRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update edge router not found response has a 4xx status code
+func (o *UpdateEdgeRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update edge router not found response has a 5xx status code
+func (o *UpdateEdgeRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update edge router not found response a status code equal to that given
+func (o *UpdateEdgeRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update edge router not found response
+func (o *UpdateEdgeRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateEdgeRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterNotFound %s", 404, payload)
+}
+
+func (o *UpdateEdgeRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterNotFound %s", 404, payload)
+}
+
 func (o *UpdateEdgeRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateEdgeRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateEdgeRouterNotFound binds the response header WWW-Authenticate
+func (o *UpdateEdgeRouterNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateEdgeRouterTooManyRequests creates a UpdateEdgeRouterTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewUpdateEdgeRouterTooManyRequests() *UpdateEdgeRouterTooManyRequests {
 	return &UpdateEdgeRouterTooManyRequests{}
 }
 
-/* UpdateEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+UpdateEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type UpdateEdgeRouterTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateEdgeRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this update edge router too many requests response has a 2xx status code
+func (o *UpdateEdgeRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update edge router too many requests response has a 3xx status code
+func (o *UpdateEdgeRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update edge router too many requests response has a 4xx status code
+func (o *UpdateEdgeRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update edge router too many requests response has a 5xx status code
+func (o *UpdateEdgeRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update edge router too many requests response a status code equal to that given
+func (o *UpdateEdgeRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the update edge router too many requests response
+func (o *UpdateEdgeRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *UpdateEdgeRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *UpdateEdgeRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *UpdateEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateEdgeRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateEdgeRouterTooManyRequests binds the response header WWW-Authenticate
+func (o *UpdateEdgeRouterTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewUpdateEdgeRouterServiceUnavailable creates a UpdateEdgeRouterServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewUpdateEdgeRouterServiceUnavailable() *UpdateEdgeRouterServiceUnavailable
 	return &UpdateEdgeRouterServiceUnavailable{}
 }
 
-/* UpdateEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
+/*
+UpdateEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type UpdateEdgeRouterServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *UpdateEdgeRouterServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this update edge router service unavailable response has a 2xx status code
+func (o *UpdateEdgeRouterServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this update edge router service unavailable response has a 3xx status code
+func (o *UpdateEdgeRouterServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update edge router service unavailable response has a 4xx status code
+func (o *UpdateEdgeRouterServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update edge router service unavailable response has a 5xx status code
+func (o *UpdateEdgeRouterServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update edge router service unavailable response a status code equal to that given
+func (o *UpdateEdgeRouterServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the update edge router service unavailable response
+func (o *UpdateEdgeRouterServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *UpdateEdgeRouterServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterServiceUnavailable %s", 503, payload)
+}
+
+func (o *UpdateEdgeRouterServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge-routers/{id}][%d] updateEdgeRouterServiceUnavailable %s", 503, payload)
+}
+
 func (o *UpdateEdgeRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *UpdateEdgeRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderUpdateEdgeRouterServiceUnavailable binds the response header WWW-Authenticate
+func (o *UpdateEdgeRouterServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

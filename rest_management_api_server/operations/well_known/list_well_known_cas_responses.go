@@ -38,7 +38,8 @@ import (
 // ListWellKnownCasOKCode is the HTTP code returned for type ListWellKnownCasOK
 const ListWellKnownCasOKCode int = 200
 
-/*ListWellKnownCasOK A base64 encoded PKCS7 store
+/*
+ListWellKnownCasOK A base64 encoded PKCS7 store
 
 swagger:response listWellKnownCasOK
 */

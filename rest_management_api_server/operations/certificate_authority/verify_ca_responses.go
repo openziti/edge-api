@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // VerifyCaOKCode is the HTTP code returned for type VerifyCaOK
 const VerifyCaOKCode int = 200
 
-/*VerifyCaOK Base empty response
+/*
+VerifyCaOK Base empty response
 
 swagger:response verifyCaOK
 */
 type VerifyCaOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type VerifyCaOK struct {
 func NewVerifyCaOK() *VerifyCaOK {
 
 	return &VerifyCaOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the verify ca o k response
+func (o *VerifyCaOK) WithWWWAuthenticate(wWWAuthenticate []string) *VerifyCaOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the verify ca o k response
+func (o *VerifyCaOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the verify ca o k response
@@ -72,6 +89,23 @@ func (o *VerifyCaOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *VerifyCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *VerifyCaOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // VerifyCaBadRequestCode is the HTTP code returned for type VerifyCaBadRequest
 const VerifyCaBadRequestCode int = 400
 
-/*VerifyCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+VerifyCaBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response verifyCaBadRequest
 */
 type VerifyCaBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type VerifyCaBadRequest struct {
 func NewVerifyCaBadRequest() *VerifyCaBadRequest {
 
 	return &VerifyCaBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the verify ca bad request response
+func (o *VerifyCaBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *VerifyCaBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the verify ca bad request response
+func (o *VerifyCaBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the verify ca bad request response
@@ -116,6 +166,23 @@ func (o *VerifyCaBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *VerifyCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *VerifyCaBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // VerifyCaUnauthorizedCode is the HTTP code returned for type VerifyCaUnauthorized
 const VerifyCaUnauthorizedCode int = 401
 
-/*VerifyCaUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+VerifyCaUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response verifyCaUnauthorized
 */
 type VerifyCaUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type VerifyCaUnauthorized struct {
 func NewVerifyCaUnauthorized() *VerifyCaUnauthorized {
 
 	return &VerifyCaUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the verify ca unauthorized response
+func (o *VerifyCaUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *VerifyCaUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the verify ca unauthorized response
+func (o *VerifyCaUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the verify ca unauthorized response
@@ -160,6 +243,23 @@ func (o *VerifyCaUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) 
 // WriteResponse to the client
 func (o *VerifyCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *VerifyCaUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // VerifyCaNotFoundCode is the HTTP code returned for type VerifyCaNotFound
 const VerifyCaNotFoundCode int = 404
 
-/*VerifyCaNotFound The requested resource does not exist
+/*
+VerifyCaNotFound The requested resource does not exist
 
 swagger:response verifyCaNotFound
 */
 type VerifyCaNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type VerifyCaNotFound struct {
 func NewVerifyCaNotFound() *VerifyCaNotFound {
 
 	return &VerifyCaNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the verify ca not found response
+func (o *VerifyCaNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *VerifyCaNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the verify ca not found response
+func (o *VerifyCaNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the verify ca not found response
@@ -204,6 +320,23 @@ func (o *VerifyCaNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *VerifyCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *VerifyCaNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // VerifyCaTooManyRequestsCode is the HTTP code returned for type VerifyCaTooManyRequests
 const VerifyCaTooManyRequestsCode int = 429
 
-/*VerifyCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+VerifyCaTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response verifyCaTooManyRequests
 */
 type VerifyCaTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type VerifyCaTooManyRequests struct {
 func NewVerifyCaTooManyRequests() *VerifyCaTooManyRequests {
 
 	return &VerifyCaTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the verify ca too many requests response
+func (o *VerifyCaTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *VerifyCaTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the verify ca too many requests response
+func (o *VerifyCaTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the verify ca too many requests response
@@ -248,6 +397,23 @@ func (o *VerifyCaTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelop
 // WriteResponse to the client
 func (o *VerifyCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *VerifyCaTooManyRequests) WriteResponse(rw http.ResponseWriter, producer
 // VerifyCaServiceUnavailableCode is the HTTP code returned for type VerifyCaServiceUnavailable
 const VerifyCaServiceUnavailableCode int = 503
 
-/*VerifyCaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+VerifyCaServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response verifyCaServiceUnavailable
 */
 type VerifyCaServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type VerifyCaServiceUnavailable struct {
 func NewVerifyCaServiceUnavailable() *VerifyCaServiceUnavailable {
 
 	return &VerifyCaServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the verify ca service unavailable response
+func (o *VerifyCaServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *VerifyCaServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the verify ca service unavailable response
+func (o *VerifyCaServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the verify ca service unavailable response
@@ -291,6 +473,23 @@ func (o *VerifyCaServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnve
 
 // WriteResponse to the client
 func (o *VerifyCaServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

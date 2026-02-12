@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateEdgeRouterPolicyHandlerFunc turns a function with the right signature into a update edge router policy handler
-type UpdateEdgeRouterPolicyHandlerFunc func(UpdateEdgeRouterPolicyParams, interface{}) middleware.Responder
+type UpdateEdgeRouterPolicyHandlerFunc func(UpdateEdgeRouterPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateEdgeRouterPolicyHandlerFunc) Handle(params UpdateEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+func (fn UpdateEdgeRouterPolicyHandlerFunc) Handle(params UpdateEdgeRouterPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateEdgeRouterPolicyHandler interface for that can handle valid update edge router policy params
 type UpdateEdgeRouterPolicyHandler interface {
-	Handle(UpdateEdgeRouterPolicyParams, interface{}) middleware.Responder
+	Handle(UpdateEdgeRouterPolicyParams, any) middleware.Responder
 }
 
 // NewUpdateEdgeRouterPolicy creates a new http.Handler for the update edge router policy operation
@@ -53,12 +53,12 @@ func NewUpdateEdgeRouterPolicy(ctx *middleware.Context, handler UpdateEdgeRouter
 	return &UpdateEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* UpdateEdgeRouterPolicy swagger:route PUT /edge-router-policies/{id} Edge Router Policy updateEdgeRouterPolicy
+/*
+	UpdateEdgeRouterPolicy swagger:route PUT /edge-router-policies/{id} Edge Router Policy updateEdgeRouterPolicy
 
-Update all fields on an edge router policy
+# Update all fields on an edge router policy
 
 Update all fields on an edge router policy by id. Requires admin access.
-
 */
 type UpdateEdgeRouterPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

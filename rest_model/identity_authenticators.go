@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -74,11 +75,15 @@ func (m *IdentityAuthenticators) validateCert(formats strfmt.Registry) error {
 
 	if m.Cert != nil {
 		if err := m.Cert.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cert")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cert")
 			}
+
 			return err
 		}
 	}
@@ -93,11 +98,15 @@ func (m *IdentityAuthenticators) validateUpdb(formats strfmt.Registry) error {
 
 	if m.Updb != nil {
 		if err := m.Updb.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("updb")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("updb")
 			}
+
 			return err
 		}
 	}
@@ -126,12 +135,21 @@ func (m *IdentityAuthenticators) ContextValidate(ctx context.Context, formats st
 func (m *IdentityAuthenticators) contextValidateCert(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cert != nil {
+
+		if swag.IsZero(m.Cert) { // not required
+			return nil
+		}
+
 		if err := m.Cert.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cert")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cert")
 			}
+
 			return err
 		}
 	}
@@ -142,12 +160,21 @@ func (m *IdentityAuthenticators) contextValidateCert(ctx context.Context, format
 func (m *IdentityAuthenticators) contextValidateUpdb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Updb != nil {
+
+		if swag.IsZero(m.Updb) { // not required
+			return nil
+		}
+
 		if err := m.Updb.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("updb")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("updb")
 			}
+
 			return err
 		}
 	}

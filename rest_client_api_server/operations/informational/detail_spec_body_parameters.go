@@ -50,7 +50,6 @@ func NewDetailSpecBodyParams() DetailSpecBodyParams {
 //
 // swagger:parameters detailSpecBody
 type DetailSpecBodyParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -49,7 +49,6 @@ func NewGetCurrentAPISessionParams() GetCurrentAPISessionParams {
 //
 // swagger:parameters getCurrentAPISession
 type GetCurrentAPISessionParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

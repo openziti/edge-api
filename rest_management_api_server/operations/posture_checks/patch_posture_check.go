@@ -36,16 +36,16 @@ import (
 )
 
 // PatchPostureCheckHandlerFunc turns a function with the right signature into a patch posture check handler
-type PatchPostureCheckHandlerFunc func(PatchPostureCheckParams, interface{}) middleware.Responder
+type PatchPostureCheckHandlerFunc func(PatchPostureCheckParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn PatchPostureCheckHandlerFunc) Handle(params PatchPostureCheckParams, principal interface{}) middleware.Responder {
+func (fn PatchPostureCheckHandlerFunc) Handle(params PatchPostureCheckParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // PatchPostureCheckHandler interface for that can handle valid patch posture check params
 type PatchPostureCheckHandler interface {
-	Handle(PatchPostureCheckParams, interface{}) middleware.Responder
+	Handle(PatchPostureCheckParams, any) middleware.Responder
 }
 
 // NewPatchPostureCheck creates a new http.Handler for the patch posture check operation
@@ -53,12 +53,12 @@ func NewPatchPostureCheck(ctx *middleware.Context, handler PatchPostureCheckHand
 	return &PatchPostureCheck{Context: ctx, Handler: handler}
 }
 
-/* PatchPostureCheck swagger:route PATCH /posture-checks/{id} Posture Checks patchPostureCheck
+/*
+	PatchPostureCheck swagger:route PATCH /posture-checks/{id} Posture Checks patchPostureCheck
 
-Update the supplied fields on a Posture Checks
+# Update the supplied fields on a Posture Checks
 
 Update only the supplied fields on a Posture Checks by id
-
 */
 type PatchPostureCheck struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *PatchPostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *PatchPostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

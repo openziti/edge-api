@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -333,11 +334,15 @@ func (m *EdgeRouterDetail) validateInterfaces(formats strfmt.Registry) error {
 
 		if m.Interfaces[i] != nil {
 			if err := m.Interfaces[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -373,11 +378,15 @@ func (m *EdgeRouterDetail) validateRoleAttributes(formats strfmt.Registry) error
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -393,11 +402,15 @@ func (m *EdgeRouterDetail) validateVersionInfo(formats strfmt.Registry) error {
 
 	if m.VersionInfo != nil {
 		if err := m.VersionInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("versionInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("versionInfo")
 			}
+
 			return err
 		}
 	}
@@ -441,12 +454,21 @@ func (m *EdgeRouterDetail) contextValidateInterfaces(ctx context.Context, format
 	for i := 0; i < len(m.Interfaces); i++ {
 
 		if m.Interfaces[i] != nil {
+
+			if swag.IsZero(m.Interfaces[i]) { // not required
+				return nil
+			}
+
 			if err := m.Interfaces[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -460,11 +482,15 @@ func (m *EdgeRouterDetail) contextValidateRoleAttributes(ctx context.Context, fo
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -475,12 +501,21 @@ func (m *EdgeRouterDetail) contextValidateRoleAttributes(ctx context.Context, fo
 func (m *EdgeRouterDetail) contextValidateVersionInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VersionInfo != nil {
+
+		if swag.IsZero(m.VersionInfo) { // not required
+			return nil
+		}
+
 		if err := m.VersionInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("versionInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("versionInfo")
 			}
+
 			return err
 		}
 	}

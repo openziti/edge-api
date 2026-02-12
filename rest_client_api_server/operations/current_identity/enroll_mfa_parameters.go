@@ -49,7 +49,6 @@ func NewEnrollMfaParams() EnrollMfaParams {
 //
 // swagger:parameters enrollMfa
 type EnrollMfaParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

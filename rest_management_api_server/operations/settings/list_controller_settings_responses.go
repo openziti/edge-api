@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListControllerSettingsOKCode is the HTTP code returned for type ListControllerSettingsOK
 const ListControllerSettingsOKCode int = 200
 
-/*ListControllerSettingsOK A list of controller setting objects
+/*
+ListControllerSettingsOK A list of controller setting objects
 
 swagger:response listControllerSettingsOK
 */
 type ListControllerSettingsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListControllerSettingsOK struct {
 func NewListControllerSettingsOK() *ListControllerSettingsOK {
 
 	return &ListControllerSettingsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list controller settings o k response
+func (o *ListControllerSettingsOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListControllerSettingsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list controller settings o k response
+func (o *ListControllerSettingsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list controller settings o k response
@@ -72,6 +89,23 @@ func (o *ListControllerSettingsOK) SetPayload(payload *rest_model.ListController
 // WriteResponse to the client
 func (o *ListControllerSettingsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListControllerSettingsOK) WriteResponse(rw http.ResponseWriter, produce
 // ListControllerSettingsBadRequestCode is the HTTP code returned for type ListControllerSettingsBadRequest
 const ListControllerSettingsBadRequestCode int = 400
 
-/*ListControllerSettingsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListControllerSettingsBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listControllerSettingsBadRequest
 */
 type ListControllerSettingsBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListControllerSettingsBadRequest struct {
 func NewListControllerSettingsBadRequest() *ListControllerSettingsBadRequest {
 
 	return &ListControllerSettingsBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list controller settings bad request response
+func (o *ListControllerSettingsBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListControllerSettingsBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list controller settings bad request response
+func (o *ListControllerSettingsBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list controller settings bad request response
@@ -116,6 +166,23 @@ func (o *ListControllerSettingsBadRequest) SetPayload(payload *rest_model.APIErr
 // WriteResponse to the client
 func (o *ListControllerSettingsBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListControllerSettingsBadRequest) WriteResponse(rw http.ResponseWriter,
 // ListControllerSettingsUnauthorizedCode is the HTTP code returned for type ListControllerSettingsUnauthorized
 const ListControllerSettingsUnauthorizedCode int = 401
 
-/*ListControllerSettingsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListControllerSettingsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listControllerSettingsUnauthorized
 */
 type ListControllerSettingsUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListControllerSettingsUnauthorized struct {
 func NewListControllerSettingsUnauthorized() *ListControllerSettingsUnauthorized {
 
 	return &ListControllerSettingsUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list controller settings unauthorized response
+func (o *ListControllerSettingsUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListControllerSettingsUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list controller settings unauthorized response
+func (o *ListControllerSettingsUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list controller settings unauthorized response
@@ -160,6 +243,23 @@ func (o *ListControllerSettingsUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *ListControllerSettingsUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListControllerSettingsUnauthorized) WriteResponse(rw http.ResponseWrite
 // ListControllerSettingsTooManyRequestsCode is the HTTP code returned for type ListControllerSettingsTooManyRequests
 const ListControllerSettingsTooManyRequestsCode int = 429
 
-/*ListControllerSettingsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListControllerSettingsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listControllerSettingsTooManyRequests
 */
 type ListControllerSettingsTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListControllerSettingsTooManyRequests struct {
 func NewListControllerSettingsTooManyRequests() *ListControllerSettingsTooManyRequests {
 
 	return &ListControllerSettingsTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list controller settings too many requests response
+func (o *ListControllerSettingsTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListControllerSettingsTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list controller settings too many requests response
+func (o *ListControllerSettingsTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list controller settings too many requests response
@@ -203,6 +319,23 @@ func (o *ListControllerSettingsTooManyRequests) SetPayload(payload *rest_model.A
 
 // WriteResponse to the client
 func (o *ListControllerSettingsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListPostureChecksOKCode is the HTTP code returned for type ListPostureChecksOK
 const ListPostureChecksOKCode int = 200
 
-/*ListPostureChecksOK A list of posture checks
+/*
+ListPostureChecksOK A list of posture checks
 
 swagger:response listPostureChecksOK
 */
 type ListPostureChecksOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListPostureChecksOK struct {
 func NewListPostureChecksOK() *ListPostureChecksOK {
 
 	return &ListPostureChecksOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list posture checks o k response
+func (o *ListPostureChecksOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListPostureChecksOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list posture checks o k response
+func (o *ListPostureChecksOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list posture checks o k response
@@ -72,6 +89,23 @@ func (o *ListPostureChecksOK) SetPayload(payload *rest_model.ListPostureCheckEnv
 // WriteResponse to the client
 func (o *ListPostureChecksOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListPostureChecksOK) WriteResponse(rw http.ResponseWriter, producer run
 // ListPostureChecksBadRequestCode is the HTTP code returned for type ListPostureChecksBadRequest
 const ListPostureChecksBadRequestCode int = 400
 
-/*ListPostureChecksBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListPostureChecksBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listPostureChecksBadRequest
 */
 type ListPostureChecksBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListPostureChecksBadRequest struct {
 func NewListPostureChecksBadRequest() *ListPostureChecksBadRequest {
 
 	return &ListPostureChecksBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list posture checks bad request response
+func (o *ListPostureChecksBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListPostureChecksBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list posture checks bad request response
+func (o *ListPostureChecksBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list posture checks bad request response
@@ -116,6 +166,23 @@ func (o *ListPostureChecksBadRequest) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *ListPostureChecksBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListPostureChecksBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // ListPostureChecksUnauthorizedCode is the HTTP code returned for type ListPostureChecksUnauthorized
 const ListPostureChecksUnauthorizedCode int = 401
 
-/*ListPostureChecksUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListPostureChecksUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listPostureChecksUnauthorized
 */
 type ListPostureChecksUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListPostureChecksUnauthorized struct {
 func NewListPostureChecksUnauthorized() *ListPostureChecksUnauthorized {
 
 	return &ListPostureChecksUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list posture checks unauthorized response
+func (o *ListPostureChecksUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListPostureChecksUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list posture checks unauthorized response
+func (o *ListPostureChecksUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list posture checks unauthorized response
@@ -160,6 +243,23 @@ func (o *ListPostureChecksUnauthorized) SetPayload(payload *rest_model.APIErrorE
 // WriteResponse to the client
 func (o *ListPostureChecksUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListPostureChecksUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // ListPostureChecksTooManyRequestsCode is the HTTP code returned for type ListPostureChecksTooManyRequests
 const ListPostureChecksTooManyRequestsCode int = 429
 
-/*ListPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListPostureChecksTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listPostureChecksTooManyRequests
 */
 type ListPostureChecksTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListPostureChecksTooManyRequests struct {
 func NewListPostureChecksTooManyRequests() *ListPostureChecksTooManyRequests {
 
 	return &ListPostureChecksTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list posture checks too many requests response
+func (o *ListPostureChecksTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListPostureChecksTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list posture checks too many requests response
+func (o *ListPostureChecksTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list posture checks too many requests response
@@ -204,6 +320,23 @@ func (o *ListPostureChecksTooManyRequests) SetPayload(payload *rest_model.APIErr
 // WriteResponse to the client
 func (o *ListPostureChecksTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *ListPostureChecksTooManyRequests) WriteResponse(rw http.ResponseWriter,
 // ListPostureChecksServiceUnavailableCode is the HTTP code returned for type ListPostureChecksServiceUnavailable
 const ListPostureChecksServiceUnavailableCode int = 503
 
-/*ListPostureChecksServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListPostureChecksServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listPostureChecksServiceUnavailable
 */
 type ListPostureChecksServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type ListPostureChecksServiceUnavailable struct {
 func NewListPostureChecksServiceUnavailable() *ListPostureChecksServiceUnavailable {
 
 	return &ListPostureChecksServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list posture checks service unavailable response
+func (o *ListPostureChecksServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListPostureChecksServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list posture checks service unavailable response
+func (o *ListPostureChecksServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list posture checks service unavailable response
@@ -247,6 +396,23 @@ func (o *ListPostureChecksServiceUnavailable) SetPayload(payload *rest_model.API
 
 // WriteResponse to the client
 func (o *ListPostureChecksServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

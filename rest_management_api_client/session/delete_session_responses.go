@@ -30,11 +30,14 @@ package session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteSessionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteSessionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteSessionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteSessionOK()
@@ -90,7 +93,7 @@ func (o *DeleteSessionReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /sessions/{id}] deleteSession", response, response.Code())
 	}
 }
 
@@ -99,31 +102,108 @@ func NewDeleteSessionOK() *DeleteSessionOK {
 	return &DeleteSessionOK{}
 }
 
-/* DeleteSessionOK describes a response with status code 200, with default header values.
+/*
+DeleteSessionOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteSessionOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteSessionOK) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete session o k response has a 2xx status code
+func (o *DeleteSessionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete session o k response has a 3xx status code
+func (o *DeleteSessionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session o k response has a 4xx status code
+func (o *DeleteSessionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete session o k response has a 5xx status code
+func (o *DeleteSessionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session o k response a status code equal to that given
+func (o *DeleteSessionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete session o k response
+func (o *DeleteSessionOK) Code() int {
+	return 200
+}
+
+func (o *DeleteSessionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionOK %s", 200, payload)
+}
+
+func (o *DeleteSessionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionOK %s", 200, payload)
+}
+
 func (o *DeleteSessionOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteSessionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionOK binds the response header WWW-Authenticate
+func (o *DeleteSessionOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteSessionBadRequest creates a DeleteSessionBadRequest with default headers values
@@ -131,31 +211,108 @@ func NewDeleteSessionBadRequest() *DeleteSessionBadRequest {
 	return &DeleteSessionBadRequest{}
 }
 
-/* DeleteSessionBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteSessionBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteSessionBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete session bad request response has a 2xx status code
+func (o *DeleteSessionBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session bad request response has a 3xx status code
+func (o *DeleteSessionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session bad request response has a 4xx status code
+func (o *DeleteSessionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session bad request response has a 5xx status code
+func (o *DeleteSessionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session bad request response a status code equal to that given
+func (o *DeleteSessionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete session bad request response
+func (o *DeleteSessionBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteSessionBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionBadRequest %s", 400, payload)
+}
+
+func (o *DeleteSessionBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionBadRequest %s", 400, payload)
+}
+
 func (o *DeleteSessionBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteSessionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionBadRequest binds the response header WWW-Authenticate
+func (o *DeleteSessionBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteSessionUnauthorized creates a DeleteSessionUnauthorized with default headers values
@@ -163,31 +320,108 @@ func NewDeleteSessionUnauthorized() *DeleteSessionUnauthorized {
 	return &DeleteSessionUnauthorized{}
 }
 
-/* DeleteSessionUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteSessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteSessionUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete session unauthorized response has a 2xx status code
+func (o *DeleteSessionUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session unauthorized response has a 3xx status code
+func (o *DeleteSessionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session unauthorized response has a 4xx status code
+func (o *DeleteSessionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session unauthorized response has a 5xx status code
+func (o *DeleteSessionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session unauthorized response a status code equal to that given
+func (o *DeleteSessionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete session unauthorized response
+func (o *DeleteSessionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteSessionUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteSessionUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteSessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteSessionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteSessionUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteSessionNotFound creates a DeleteSessionNotFound with default headers values
@@ -195,31 +429,108 @@ func NewDeleteSessionNotFound() *DeleteSessionNotFound {
 	return &DeleteSessionNotFound{}
 }
 
-/* DeleteSessionNotFound describes a response with status code 404, with default header values.
+/*
+DeleteSessionNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeleteSessionNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete session not found response has a 2xx status code
+func (o *DeleteSessionNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session not found response has a 3xx status code
+func (o *DeleteSessionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session not found response has a 4xx status code
+func (o *DeleteSessionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session not found response has a 5xx status code
+func (o *DeleteSessionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session not found response a status code equal to that given
+func (o *DeleteSessionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete session not found response
+func (o *DeleteSessionNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteSessionNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionNotFound %s", 404, payload)
+}
+
+func (o *DeleteSessionNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionNotFound %s", 404, payload)
+}
+
 func (o *DeleteSessionNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteSessionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionNotFound binds the response header WWW-Authenticate
+func (o *DeleteSessionNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteSessionConflict creates a DeleteSessionConflict with default headers values
@@ -227,31 +538,108 @@ func NewDeleteSessionConflict() *DeleteSessionConflict {
 	return &DeleteSessionConflict{}
 }
 
-/* DeleteSessionConflict describes a response with status code 409, with default header values.
+/*
+DeleteSessionConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
 type DeleteSessionConflict struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionConflict) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete session conflict response has a 2xx status code
+func (o *DeleteSessionConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session conflict response has a 3xx status code
+func (o *DeleteSessionConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session conflict response has a 4xx status code
+func (o *DeleteSessionConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session conflict response has a 5xx status code
+func (o *DeleteSessionConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session conflict response a status code equal to that given
+func (o *DeleteSessionConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete session conflict response
+func (o *DeleteSessionConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteSessionConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionConflict %s", 409, payload)
+}
+
+func (o *DeleteSessionConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionConflict %s", 409, payload)
+}
+
 func (o *DeleteSessionConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteSessionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionConflict binds the response header WWW-Authenticate
+func (o *DeleteSessionConflict) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteSessionTooManyRequests creates a DeleteSessionTooManyRequests with default headers values
@@ -259,31 +647,108 @@ func NewDeleteSessionTooManyRequests() *DeleteSessionTooManyRequests {
 	return &DeleteSessionTooManyRequests{}
 }
 
-/* DeleteSessionTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteSessionTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteSessionTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete session too many requests response has a 2xx status code
+func (o *DeleteSessionTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session too many requests response has a 3xx status code
+func (o *DeleteSessionTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session too many requests response has a 4xx status code
+func (o *DeleteSessionTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete session too many requests response has a 5xx status code
+func (o *DeleteSessionTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete session too many requests response a status code equal to that given
+func (o *DeleteSessionTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete session too many requests response
+func (o *DeleteSessionTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteSessionTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteSessionTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteSessionTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteSessionTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteSessionTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteSessionServiceUnavailable creates a DeleteSessionServiceUnavailable with default headers values
@@ -291,29 +756,106 @@ func NewDeleteSessionServiceUnavailable() *DeleteSessionServiceUnavailable {
 	return &DeleteSessionServiceUnavailable{}
 }
 
-/* DeleteSessionServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeleteSessionServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeleteSessionServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteSessionServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete session service unavailable response has a 2xx status code
+func (o *DeleteSessionServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete session service unavailable response has a 3xx status code
+func (o *DeleteSessionServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete session service unavailable response has a 4xx status code
+func (o *DeleteSessionServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete session service unavailable response has a 5xx status code
+func (o *DeleteSessionServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete session service unavailable response a status code equal to that given
+func (o *DeleteSessionServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete session service unavailable response
+func (o *DeleteSessionServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeleteSessionServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeleteSessionServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /sessions/{id}][%d] deleteSessionServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeleteSessionServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteSessionServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteSessionServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeleteSessionServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

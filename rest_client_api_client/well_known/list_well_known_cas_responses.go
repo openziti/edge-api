@@ -30,6 +30,8 @@ package well_known
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -43,7 +45,7 @@ type ListWellKnownCasReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListWellKnownCasReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListWellKnownCasReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListWellKnownCasOK()
@@ -52,7 +54,7 @@ func (o *ListWellKnownCasReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /.well-known/est/cacerts] listWellKnownCas", response, response.Code())
 	}
 }
 
@@ -61,7 +63,8 @@ func NewListWellKnownCasOK() *ListWellKnownCasOK {
 	return &ListWellKnownCasOK{}
 }
 
-/* ListWellKnownCasOK describes a response with status code 200, with default header values.
+/*
+ListWellKnownCasOK describes a response with status code 200, with default header values.
 
 A base64 encoded PKCS7 store
 */
@@ -69,9 +72,46 @@ type ListWellKnownCasOK struct {
 	Payload string
 }
 
-func (o *ListWellKnownCasOK) Error() string {
-	return fmt.Sprintf("[GET /.well-known/est/cacerts][%d] listWellKnownCasOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list well known cas o k response has a 2xx status code
+func (o *ListWellKnownCasOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list well known cas o k response has a 3xx status code
+func (o *ListWellKnownCasOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list well known cas o k response has a 4xx status code
+func (o *ListWellKnownCasOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list well known cas o k response has a 5xx status code
+func (o *ListWellKnownCasOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list well known cas o k response a status code equal to that given
+func (o *ListWellKnownCasOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list well known cas o k response
+func (o *ListWellKnownCasOK) Code() int {
+	return 200
+}
+
+func (o *ListWellKnownCasOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /.well-known/est/cacerts][%d] listWellKnownCasOK %s", 200, payload)
+}
+
+func (o *ListWellKnownCasOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /.well-known/est/cacerts][%d] listWellKnownCasOK %s", 200, payload)
+}
+
 func (o *ListWellKnownCasOK) GetPayload() string {
 	return o.Payload
 }
@@ -79,7 +119,7 @@ func (o *ListWellKnownCasOK) GetPayload() string {
 func (o *ListWellKnownCasOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

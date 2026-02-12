@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteMfaHandlerFunc turns a function with the right signature into a delete mfa handler
-type DeleteMfaHandlerFunc func(DeleteMfaParams, interface{}) middleware.Responder
+type DeleteMfaHandlerFunc func(DeleteMfaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteMfaHandlerFunc) Handle(params DeleteMfaParams, principal interface{}) middleware.Responder {
+func (fn DeleteMfaHandlerFunc) Handle(params DeleteMfaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteMfaHandler interface for that can handle valid delete mfa params
 type DeleteMfaHandler interface {
-	Handle(DeleteMfaParams, interface{}) middleware.Responder
+	Handle(DeleteMfaParams, any) middleware.Responder
 }
 
 // NewDeleteMfa creates a new http.Handler for the delete mfa operation
@@ -53,13 +53,12 @@ func NewDeleteMfa(ctx *middleware.Context, handler DeleteMfaHandler) *DeleteMfa 
 	return &DeleteMfa{Context: ctx, Handler: handler}
 }
 
-/* DeleteMfa swagger:route DELETE /current-identity/mfa Current Identity MFA deleteMfa
+/*
+	DeleteMfa swagger:route DELETE /current-identity/mfa Current Identity MFA deleteMfa
 
-Disable MFA for the current identity
+# Disable MFA for the current identity
 
 Disable MFA for the current identity. Requires a current valid time based one time password if MFA enrollment has been completed. If not, code should be an empty string. If one time passwords are not available and admin account can be used to remove MFA from the identity via `DELETE /identities/<id>/mfa`.
-
-
 */
 type DeleteMfa struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DeleteMfa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DeleteMfa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteCaHandlerFunc turns a function with the right signature into a delete ca handler
-type DeleteCaHandlerFunc func(DeleteCaParams, interface{}) middleware.Responder
+type DeleteCaHandlerFunc func(DeleteCaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteCaHandlerFunc) Handle(params DeleteCaParams, principal interface{}) middleware.Responder {
+func (fn DeleteCaHandlerFunc) Handle(params DeleteCaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteCaHandler interface for that can handle valid delete ca params
 type DeleteCaHandler interface {
-	Handle(DeleteCaParams, interface{}) middleware.Responder
+	Handle(DeleteCaParams, any) middleware.Responder
 }
 
 // NewDeleteCa creates a new http.Handler for the delete ca operation
@@ -53,14 +53,13 @@ func NewDeleteCa(ctx *middleware.Context, handler DeleteCaHandler) *DeleteCa {
 	return &DeleteCa{Context: ctx, Handler: handler}
 }
 
-/* DeleteCa swagger:route DELETE /cas/{id} Certificate Authority deleteCa
+/*
+	DeleteCa swagger:route DELETE /cas/{id} Certificate Authority deleteCa
 
-Delete a CA
+# Delete a CA
 
 Delete a CA by id. Deleting a CA will delete its associated certificate authenticators. This can make it
 impossible for identities to authenticate if they no longer have any valid authenticators. Requires admin access.
-
-
 */
 type DeleteCa struct {
 	Context *middleware.Context
@@ -81,9 +80,9 @@ func (o *DeleteCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -92,6 +91,7 @@ func (o *DeleteCa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

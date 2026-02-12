@@ -78,10 +78,12 @@ func NewEnrollParamsWithHTTPClient(client *http.Client) *EnrollParams {
 	}
 }
 
-/* EnrollParams contains all the parameters to send to the API endpoint
-   for the enroll operation.
+/*
+EnrollParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the enroll operation.
+
+	Typically these are written to a http.Request.
 */
 type EnrollParams struct {
 

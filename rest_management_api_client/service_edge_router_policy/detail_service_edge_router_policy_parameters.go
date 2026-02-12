@@ -76,10 +76,12 @@ func NewDetailServiceEdgeRouterPolicyParamsWithHTTPClient(client *http.Client) *
 	}
 }
 
-/* DetailServiceEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
-   for the detail service edge router policy operation.
+/*
+DetailServiceEdgeRouterPolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail service edge router policy operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailServiceEdgeRouterPolicyParams struct {
 

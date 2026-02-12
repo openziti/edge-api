@@ -50,7 +50,6 @@ func NewDetailSessionRoutePathParams() DetailSessionRoutePathParams {
 //
 // swagger:parameters detailSessionRoutePath
 type DetailSessionRoutePathParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -36,16 +36,16 @@ import (
 )
 
 // DetailCurrentAPISessionCertificateHandlerFunc turns a function with the right signature into a detail current Api session certificate handler
-type DetailCurrentAPISessionCertificateHandlerFunc func(DetailCurrentAPISessionCertificateParams, interface{}) middleware.Responder
+type DetailCurrentAPISessionCertificateHandlerFunc func(DetailCurrentAPISessionCertificateParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailCurrentAPISessionCertificateHandlerFunc) Handle(params DetailCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
+func (fn DetailCurrentAPISessionCertificateHandlerFunc) Handle(params DetailCurrentAPISessionCertificateParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailCurrentAPISessionCertificateHandler interface for that can handle valid detail current Api session certificate params
 type DetailCurrentAPISessionCertificateHandler interface {
-	Handle(DetailCurrentAPISessionCertificateParams, interface{}) middleware.Responder
+	Handle(DetailCurrentAPISessionCertificateParams, any) middleware.Responder
 }
 
 // NewDetailCurrentAPISessionCertificate creates a new http.Handler for the detail current Api session certificate operation
@@ -53,12 +53,12 @@ func NewDetailCurrentAPISessionCertificate(ctx *middleware.Context, handler Deta
 	return &DetailCurrentAPISessionCertificate{Context: ctx, Handler: handler}
 }
 
-/* DetailCurrentAPISessionCertificate swagger:route GET /current-api-session/certificates/{id} Current API Session detailCurrentApiSessionCertificate
+/*
+	DetailCurrentAPISessionCertificate swagger:route GET /current-api-session/certificates/{id} Current API Session detailCurrentApiSessionCertificate
 
-Retrieves an ephemeral certificate
+# Retrieves an ephemeral certificate
 
 Retrieves a single ephemeral certificate by id
-
 */
 type DetailCurrentAPISessionCertificate struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailCurrentAPISessionCertificate) ServeHTTP(rw http.ResponseWriter, r
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailCurrentAPISessionCertificate) ServeHTTP(rw http.ResponseWriter, r
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

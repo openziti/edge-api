@@ -30,11 +30,14 @@ package enrollment
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type RefreshEnrollmentReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *RefreshEnrollmentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *RefreshEnrollmentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewRefreshEnrollmentOK()
@@ -78,7 +81,7 @@ func (o *RefreshEnrollmentReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /enrollments/{id}/refresh] refreshEnrollment", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewRefreshEnrollmentOK() *RefreshEnrollmentOK {
 	return &RefreshEnrollmentOK{}
 }
 
-/* RefreshEnrollmentOK describes a response with status code 200, with default header values.
+/*
+RefreshEnrollmentOK describes a response with status code 200, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
 type RefreshEnrollmentOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *RefreshEnrollmentOK) Error() string {
-	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this refresh enrollment o k response has a 2xx status code
+func (o *RefreshEnrollmentOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this refresh enrollment o k response has a 3xx status code
+func (o *RefreshEnrollmentOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh enrollment o k response has a 4xx status code
+func (o *RefreshEnrollmentOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refresh enrollment o k response has a 5xx status code
+func (o *RefreshEnrollmentOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh enrollment o k response a status code equal to that given
+func (o *RefreshEnrollmentOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the refresh enrollment o k response
+func (o *RefreshEnrollmentOK) Code() int {
+	return 200
+}
+
+func (o *RefreshEnrollmentOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentOK %s", 200, payload)
+}
+
+func (o *RefreshEnrollmentOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentOK %s", 200, payload)
+}
+
 func (o *RefreshEnrollmentOK) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
 
 func (o *RefreshEnrollmentOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.CreateEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRefreshEnrollmentOK binds the response header WWW-Authenticate
+func (o *RefreshEnrollmentOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRefreshEnrollmentBadRequest creates a RefreshEnrollmentBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewRefreshEnrollmentBadRequest() *RefreshEnrollmentBadRequest {
 	return &RefreshEnrollmentBadRequest{}
 }
 
-/* RefreshEnrollmentBadRequest describes a response with status code 400, with default header values.
+/*
+RefreshEnrollmentBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type RefreshEnrollmentBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RefreshEnrollmentBadRequest) Error() string {
-	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this refresh enrollment bad request response has a 2xx status code
+func (o *RefreshEnrollmentBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this refresh enrollment bad request response has a 3xx status code
+func (o *RefreshEnrollmentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh enrollment bad request response has a 4xx status code
+func (o *RefreshEnrollmentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh enrollment bad request response has a 5xx status code
+func (o *RefreshEnrollmentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh enrollment bad request response a status code equal to that given
+func (o *RefreshEnrollmentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the refresh enrollment bad request response
+func (o *RefreshEnrollmentBadRequest) Code() int {
+	return 400
+}
+
+func (o *RefreshEnrollmentBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentBadRequest %s", 400, payload)
+}
+
+func (o *RefreshEnrollmentBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentBadRequest %s", 400, payload)
+}
+
 func (o *RefreshEnrollmentBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RefreshEnrollmentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRefreshEnrollmentBadRequest binds the response header WWW-Authenticate
+func (o *RefreshEnrollmentBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRefreshEnrollmentUnauthorized creates a RefreshEnrollmentUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewRefreshEnrollmentUnauthorized() *RefreshEnrollmentUnauthorized {
 	return &RefreshEnrollmentUnauthorized{}
 }
 
-/* RefreshEnrollmentUnauthorized describes a response with status code 401, with default header values.
+/*
+RefreshEnrollmentUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type RefreshEnrollmentUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RefreshEnrollmentUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this refresh enrollment unauthorized response has a 2xx status code
+func (o *RefreshEnrollmentUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this refresh enrollment unauthorized response has a 3xx status code
+func (o *RefreshEnrollmentUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh enrollment unauthorized response has a 4xx status code
+func (o *RefreshEnrollmentUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh enrollment unauthorized response has a 5xx status code
+func (o *RefreshEnrollmentUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh enrollment unauthorized response a status code equal to that given
+func (o *RefreshEnrollmentUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the refresh enrollment unauthorized response
+func (o *RefreshEnrollmentUnauthorized) Code() int {
+	return 401
+}
+
+func (o *RefreshEnrollmentUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentUnauthorized %s", 401, payload)
+}
+
+func (o *RefreshEnrollmentUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentUnauthorized %s", 401, payload)
+}
+
 func (o *RefreshEnrollmentUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RefreshEnrollmentUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRefreshEnrollmentUnauthorized binds the response header WWW-Authenticate
+func (o *RefreshEnrollmentUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRefreshEnrollmentTooManyRequests creates a RefreshEnrollmentTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewRefreshEnrollmentTooManyRequests() *RefreshEnrollmentTooManyRequests {
 	return &RefreshEnrollmentTooManyRequests{}
 }
 
-/* RefreshEnrollmentTooManyRequests describes a response with status code 429, with default header values.
+/*
+RefreshEnrollmentTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type RefreshEnrollmentTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RefreshEnrollmentTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this refresh enrollment too many requests response has a 2xx status code
+func (o *RefreshEnrollmentTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this refresh enrollment too many requests response has a 3xx status code
+func (o *RefreshEnrollmentTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh enrollment too many requests response has a 4xx status code
+func (o *RefreshEnrollmentTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh enrollment too many requests response has a 5xx status code
+func (o *RefreshEnrollmentTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh enrollment too many requests response a status code equal to that given
+func (o *RefreshEnrollmentTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the refresh enrollment too many requests response
+func (o *RefreshEnrollmentTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *RefreshEnrollmentTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentTooManyRequests %s", 429, payload)
+}
+
+func (o *RefreshEnrollmentTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentTooManyRequests %s", 429, payload)
+}
+
 func (o *RefreshEnrollmentTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RefreshEnrollmentTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRefreshEnrollmentTooManyRequests binds the response header WWW-Authenticate
+func (o *RefreshEnrollmentTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewRefreshEnrollmentServiceUnavailable creates a RefreshEnrollmentServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewRefreshEnrollmentServiceUnavailable() *RefreshEnrollmentServiceUnavailab
 	return &RefreshEnrollmentServiceUnavailable{}
 }
 
-/* RefreshEnrollmentServiceUnavailable describes a response with status code 503, with default header values.
+/*
+RefreshEnrollmentServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type RefreshEnrollmentServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *RefreshEnrollmentServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this refresh enrollment service unavailable response has a 2xx status code
+func (o *RefreshEnrollmentServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this refresh enrollment service unavailable response has a 3xx status code
+func (o *RefreshEnrollmentServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh enrollment service unavailable response has a 4xx status code
+func (o *RefreshEnrollmentServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refresh enrollment service unavailable response has a 5xx status code
+func (o *RefreshEnrollmentServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this refresh enrollment service unavailable response a status code equal to that given
+func (o *RefreshEnrollmentServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the refresh enrollment service unavailable response
+func (o *RefreshEnrollmentServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *RefreshEnrollmentServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentServiceUnavailable %s", 503, payload)
+}
+
+func (o *RefreshEnrollmentServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /enrollments/{id}/refresh][%d] refreshEnrollmentServiceUnavailable %s", 503, payload)
+}
+
 func (o *RefreshEnrollmentServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *RefreshEnrollmentServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderRefreshEnrollmentServiceUnavailable binds the response header WWW-Authenticate
+func (o *RefreshEnrollmentServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

@@ -55,10 +55,22 @@ paths:
 responses:
   listIdentityTypes:
     description: A list of identity types
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listIdentityTypesEnvelope'
   detailIdentityType:
     description: A single identity type
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailIdentityTypeEnvelope'
 

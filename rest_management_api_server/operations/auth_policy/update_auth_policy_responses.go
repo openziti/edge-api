@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // UpdateAuthPolicyOKCode is the HTTP code returned for type UpdateAuthPolicyOK
 const UpdateAuthPolicyOKCode int = 200
 
-/*UpdateAuthPolicyOK The update request was successful and the resource has been altered
+/*
+UpdateAuthPolicyOK The update request was successful and the resource has been altered
 
 swagger:response updateAuthPolicyOK
 */
 type UpdateAuthPolicyOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type UpdateAuthPolicyOK struct {
 func NewUpdateAuthPolicyOK() *UpdateAuthPolicyOK {
 
 	return &UpdateAuthPolicyOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update auth policy o k response
+func (o *UpdateAuthPolicyOK) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateAuthPolicyOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update auth policy o k response
+func (o *UpdateAuthPolicyOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update auth policy o k response
@@ -72,6 +89,23 @@ func (o *UpdateAuthPolicyOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *UpdateAuthPolicyOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *UpdateAuthPolicyOK) WriteResponse(rw http.ResponseWriter, producer runt
 // UpdateAuthPolicyBadRequestCode is the HTTP code returned for type UpdateAuthPolicyBadRequest
 const UpdateAuthPolicyBadRequestCode int = 400
 
-/*UpdateAuthPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateAuthPolicyBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateAuthPolicyBadRequest
 */
 type UpdateAuthPolicyBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type UpdateAuthPolicyBadRequest struct {
 func NewUpdateAuthPolicyBadRequest() *UpdateAuthPolicyBadRequest {
 
 	return &UpdateAuthPolicyBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update auth policy bad request response
+func (o *UpdateAuthPolicyBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateAuthPolicyBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update auth policy bad request response
+func (o *UpdateAuthPolicyBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update auth policy bad request response
@@ -116,6 +166,23 @@ func (o *UpdateAuthPolicyBadRequest) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *UpdateAuthPolicyBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *UpdateAuthPolicyBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // UpdateAuthPolicyUnauthorizedCode is the HTTP code returned for type UpdateAuthPolicyUnauthorized
 const UpdateAuthPolicyUnauthorizedCode int = 401
 
-/*UpdateAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateAuthPolicyUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateAuthPolicyUnauthorized
 */
 type UpdateAuthPolicyUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type UpdateAuthPolicyUnauthorized struct {
 func NewUpdateAuthPolicyUnauthorized() *UpdateAuthPolicyUnauthorized {
 
 	return &UpdateAuthPolicyUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update auth policy unauthorized response
+func (o *UpdateAuthPolicyUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateAuthPolicyUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update auth policy unauthorized response
+func (o *UpdateAuthPolicyUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update auth policy unauthorized response
@@ -160,6 +243,23 @@ func (o *UpdateAuthPolicyUnauthorized) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *UpdateAuthPolicyUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *UpdateAuthPolicyUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // UpdateAuthPolicyNotFoundCode is the HTTP code returned for type UpdateAuthPolicyNotFound
 const UpdateAuthPolicyNotFoundCode int = 404
 
-/*UpdateAuthPolicyNotFound The requested resource does not exist
+/*
+UpdateAuthPolicyNotFound The requested resource does not exist
 
 swagger:response updateAuthPolicyNotFound
 */
 type UpdateAuthPolicyNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type UpdateAuthPolicyNotFound struct {
 func NewUpdateAuthPolicyNotFound() *UpdateAuthPolicyNotFound {
 
 	return &UpdateAuthPolicyNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update auth policy not found response
+func (o *UpdateAuthPolicyNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateAuthPolicyNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update auth policy not found response
+func (o *UpdateAuthPolicyNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update auth policy not found response
@@ -204,6 +320,23 @@ func (o *UpdateAuthPolicyNotFound) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *UpdateAuthPolicyNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *UpdateAuthPolicyNotFound) WriteResponse(rw http.ResponseWriter, produce
 // UpdateAuthPolicyTooManyRequestsCode is the HTTP code returned for type UpdateAuthPolicyTooManyRequests
 const UpdateAuthPolicyTooManyRequestsCode int = 429
 
-/*UpdateAuthPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateAuthPolicyTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateAuthPolicyTooManyRequests
 */
 type UpdateAuthPolicyTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type UpdateAuthPolicyTooManyRequests struct {
 func NewUpdateAuthPolicyTooManyRequests() *UpdateAuthPolicyTooManyRequests {
 
 	return &UpdateAuthPolicyTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update auth policy too many requests response
+func (o *UpdateAuthPolicyTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateAuthPolicyTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update auth policy too many requests response
+func (o *UpdateAuthPolicyTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update auth policy too many requests response
@@ -248,6 +397,23 @@ func (o *UpdateAuthPolicyTooManyRequests) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *UpdateAuthPolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *UpdateAuthPolicyTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 // UpdateAuthPolicyServiceUnavailableCode is the HTTP code returned for type UpdateAuthPolicyServiceUnavailable
 const UpdateAuthPolicyServiceUnavailableCode int = 503
 
-/*UpdateAuthPolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+UpdateAuthPolicyServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response updateAuthPolicyServiceUnavailable
 */
 type UpdateAuthPolicyServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type UpdateAuthPolicyServiceUnavailable struct {
 func NewUpdateAuthPolicyServiceUnavailable() *UpdateAuthPolicyServiceUnavailable {
 
 	return &UpdateAuthPolicyServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update auth policy service unavailable response
+func (o *UpdateAuthPolicyServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateAuthPolicyServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update auth policy service unavailable response
+func (o *UpdateAuthPolicyServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update auth policy service unavailable response
@@ -291,6 +473,23 @@ func (o *UpdateAuthPolicyServiceUnavailable) SetPayload(payload *rest_model.APIE
 
 // WriteResponse to the client
 func (o *UpdateAuthPolicyServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

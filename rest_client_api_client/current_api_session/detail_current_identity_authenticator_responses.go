@@ -30,11 +30,14 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailCurrentIdentityAuthenticatorReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailCurrentIdentityAuthenticatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailCurrentIdentityAuthenticatorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailCurrentIdentityAuthenticatorOK()
@@ -66,7 +69,7 @@ func (o *DetailCurrentIdentityAuthenticatorReader) ReadResponse(response runtime
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /current-identity/authenticators/{id}] detailCurrentIdentityAuthenticator", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewDetailCurrentIdentityAuthenticatorOK() *DetailCurrentIdentityAuthenticat
 	return &DetailCurrentIdentityAuthenticatorOK{}
 }
 
-/* DetailCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
+/*
+DetailCurrentIdentityAuthenticatorOK describes a response with status code 200, with default header values.
 
 A singular authenticator resource
 */
 type DetailCurrentIdentityAuthenticatorOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailAuthenticatorEnvelope
 }
 
-func (o *DetailCurrentIdentityAuthenticatorOK) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail current identity authenticator o k response has a 2xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail current identity authenticator o k response has a 3xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail current identity authenticator o k response has a 4xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail current identity authenticator o k response has a 5xx status code
+func (o *DetailCurrentIdentityAuthenticatorOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail current identity authenticator o k response a status code equal to that given
+func (o *DetailCurrentIdentityAuthenticatorOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail current identity authenticator o k response
+func (o *DetailCurrentIdentityAuthenticatorOK) Code() int {
+	return 200
+}
+
+func (o *DetailCurrentIdentityAuthenticatorOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorOK %s", 200, payload)
+}
+
+func (o *DetailCurrentIdentityAuthenticatorOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorOK %s", 200, payload)
+}
+
 func (o *DetailCurrentIdentityAuthenticatorOK) GetPayload() *rest_model.DetailAuthenticatorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailCurrentIdentityAuthenticatorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailAuthenticatorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailCurrentIdentityAuthenticatorOK binds the response header WWW-Authenticate
+func (o *DetailCurrentIdentityAuthenticatorOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailCurrentIdentityAuthenticatorUnauthorized creates a DetailCurrentIdentityAuthenticatorUnauthorized with default headers values
@@ -107,31 +187,108 @@ func NewDetailCurrentIdentityAuthenticatorUnauthorized() *DetailCurrentIdentityA
 	return &DetailCurrentIdentityAuthenticatorUnauthorized{}
 }
 
-/* DetailCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailCurrentIdentityAuthenticatorUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailCurrentIdentityAuthenticatorUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailCurrentIdentityAuthenticatorUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail current identity authenticator unauthorized response has a 2xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail current identity authenticator unauthorized response has a 3xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail current identity authenticator unauthorized response has a 4xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail current identity authenticator unauthorized response has a 5xx status code
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail current identity authenticator unauthorized response a status code equal to that given
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail current identity authenticator unauthorized response
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+}
+
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorUnauthorized %s", 401, payload)
+}
+
 func (o *DetailCurrentIdentityAuthenticatorUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailCurrentIdentityAuthenticatorUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailCurrentIdentityAuthenticatorUnauthorized binds the response header WWW-Authenticate
+func (o *DetailCurrentIdentityAuthenticatorUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailCurrentIdentityAuthenticatorNotFound creates a DetailCurrentIdentityAuthenticatorNotFound with default headers values
@@ -139,29 +296,106 @@ func NewDetailCurrentIdentityAuthenticatorNotFound() *DetailCurrentIdentityAuthe
 	return &DetailCurrentIdentityAuthenticatorNotFound{}
 }
 
-/* DetailCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
+/*
+DetailCurrentIdentityAuthenticatorNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailCurrentIdentityAuthenticatorNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailCurrentIdentityAuthenticatorNotFound) Error() string {
-	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail current identity authenticator not found response has a 2xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail current identity authenticator not found response has a 3xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail current identity authenticator not found response has a 4xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail current identity authenticator not found response has a 5xx status code
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail current identity authenticator not found response a status code equal to that given
+func (o *DetailCurrentIdentityAuthenticatorNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail current identity authenticator not found response
+func (o *DetailCurrentIdentityAuthenticatorNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailCurrentIdentityAuthenticatorNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorNotFound %s", 404, payload)
+}
+
+func (o *DetailCurrentIdentityAuthenticatorNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /current-identity/authenticators/{id}][%d] detailCurrentIdentityAuthenticatorNotFound %s", 404, payload)
+}
+
 func (o *DetailCurrentIdentityAuthenticatorNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailCurrentIdentityAuthenticatorNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailCurrentIdentityAuthenticatorNotFound binds the response header WWW-Authenticate
+func (o *DetailCurrentIdentityAuthenticatorNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

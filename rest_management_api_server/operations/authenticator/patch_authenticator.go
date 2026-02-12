@@ -36,16 +36,16 @@ import (
 )
 
 // PatchAuthenticatorHandlerFunc turns a function with the right signature into a patch authenticator handler
-type PatchAuthenticatorHandlerFunc func(PatchAuthenticatorParams, interface{}) middleware.Responder
+type PatchAuthenticatorHandlerFunc func(PatchAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn PatchAuthenticatorHandlerFunc) Handle(params PatchAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn PatchAuthenticatorHandlerFunc) Handle(params PatchAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // PatchAuthenticatorHandler interface for that can handle valid patch authenticator params
 type PatchAuthenticatorHandler interface {
-	Handle(PatchAuthenticatorParams, interface{}) middleware.Responder
+	Handle(PatchAuthenticatorParams, any) middleware.Responder
 }
 
 // NewPatchAuthenticator creates a new http.Handler for the patch authenticator operation
@@ -53,12 +53,12 @@ func NewPatchAuthenticator(ctx *middleware.Context, handler PatchAuthenticatorHa
 	return &PatchAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* PatchAuthenticator swagger:route PATCH /authenticators/{id} Authenticator patchAuthenticator
+/*
+	PatchAuthenticator swagger:route PATCH /authenticators/{id} Authenticator patchAuthenticator
 
-Update the supplied fields on an authenticator
+# Update the supplied fields on an authenticator
 
 Update the supplied fields on an authenticator by id. Requires admin access.
-
 */
 type PatchAuthenticator struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *PatchAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *PatchAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListServicePoliciesOKCode is the HTTP code returned for type ListServicePoliciesOK
 const ListServicePoliciesOKCode int = 200
 
-/*ListServicePoliciesOK A list of service policies
+/*
+ListServicePoliciesOK A list of service policies
 
 swagger:response listServicePoliciesOK
 */
 type ListServicePoliciesOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListServicePoliciesOK struct {
 func NewListServicePoliciesOK() *ListServicePoliciesOK {
 
 	return &ListServicePoliciesOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service policies o k response
+func (o *ListServicePoliciesOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListServicePoliciesOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service policies o k response
+func (o *ListServicePoliciesOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service policies o k response
@@ -72,6 +89,23 @@ func (o *ListServicePoliciesOK) SetPayload(payload *rest_model.ListServicePolici
 // WriteResponse to the client
 func (o *ListServicePoliciesOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListServicePoliciesOK) WriteResponse(rw http.ResponseWriter, producer r
 // ListServicePoliciesBadRequestCode is the HTTP code returned for type ListServicePoliciesBadRequest
 const ListServicePoliciesBadRequestCode int = 400
 
-/*ListServicePoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListServicePoliciesBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServicePoliciesBadRequest
 */
 type ListServicePoliciesBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListServicePoliciesBadRequest struct {
 func NewListServicePoliciesBadRequest() *ListServicePoliciesBadRequest {
 
 	return &ListServicePoliciesBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service policies bad request response
+func (o *ListServicePoliciesBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListServicePoliciesBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service policies bad request response
+func (o *ListServicePoliciesBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service policies bad request response
@@ -116,6 +166,23 @@ func (o *ListServicePoliciesBadRequest) SetPayload(payload *rest_model.APIErrorE
 // WriteResponse to the client
 func (o *ListServicePoliciesBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListServicePoliciesBadRequest) WriteResponse(rw http.ResponseWriter, pr
 // ListServicePoliciesUnauthorizedCode is the HTTP code returned for type ListServicePoliciesUnauthorized
 const ListServicePoliciesUnauthorizedCode int = 401
 
-/*ListServicePoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServicePoliciesUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServicePoliciesUnauthorized
 */
 type ListServicePoliciesUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListServicePoliciesUnauthorized struct {
 func NewListServicePoliciesUnauthorized() *ListServicePoliciesUnauthorized {
 
 	return &ListServicePoliciesUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service policies unauthorized response
+func (o *ListServicePoliciesUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListServicePoliciesUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service policies unauthorized response
+func (o *ListServicePoliciesUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service policies unauthorized response
@@ -160,6 +243,23 @@ func (o *ListServicePoliciesUnauthorized) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *ListServicePoliciesUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListServicePoliciesUnauthorized) WriteResponse(rw http.ResponseWriter, 
 // ListServicePoliciesTooManyRequestsCode is the HTTP code returned for type ListServicePoliciesTooManyRequests
 const ListServicePoliciesTooManyRequestsCode int = 429
 
-/*ListServicePoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServicePoliciesTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServicePoliciesTooManyRequests
 */
 type ListServicePoliciesTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListServicePoliciesTooManyRequests struct {
 func NewListServicePoliciesTooManyRequests() *ListServicePoliciesTooManyRequests {
 
 	return &ListServicePoliciesTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service policies too many requests response
+func (o *ListServicePoliciesTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListServicePoliciesTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service policies too many requests response
+func (o *ListServicePoliciesTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service policies too many requests response
@@ -204,6 +320,23 @@ func (o *ListServicePoliciesTooManyRequests) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *ListServicePoliciesTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *ListServicePoliciesTooManyRequests) WriteResponse(rw http.ResponseWrite
 // ListServicePoliciesServiceUnavailableCode is the HTTP code returned for type ListServicePoliciesServiceUnavailable
 const ListServicePoliciesServiceUnavailableCode int = 503
 
-/*ListServicePoliciesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListServicePoliciesServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listServicePoliciesServiceUnavailable
 */
 type ListServicePoliciesServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type ListServicePoliciesServiceUnavailable struct {
 func NewListServicePoliciesServiceUnavailable() *ListServicePoliciesServiceUnavailable {
 
 	return &ListServicePoliciesServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service policies service unavailable response
+func (o *ListServicePoliciesServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListServicePoliciesServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service policies service unavailable response
+func (o *ListServicePoliciesServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service policies service unavailable response
@@ -247,6 +396,23 @@ func (o *ListServicePoliciesServiceUnavailable) SetPayload(payload *rest_model.A
 
 // WriteResponse to the client
 func (o *ListServicePoliciesServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

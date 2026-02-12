@@ -30,11 +30,14 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type VerifyMfaReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *VerifyMfaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *VerifyMfaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewVerifyMfaOK()
@@ -66,7 +69,7 @@ func (o *VerifyMfaReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /current-identity/mfa/verify] verifyMfa", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewVerifyMfaOK() *VerifyMfaOK {
 	return &VerifyMfaOK{}
 }
 
-/* VerifyMfaOK describes a response with status code 200, with default header values.
+/*
+VerifyMfaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type VerifyMfaOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *VerifyMfaOK) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this verify mfa o k response has a 2xx status code
+func (o *VerifyMfaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this verify mfa o k response has a 3xx status code
+func (o *VerifyMfaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify mfa o k response has a 4xx status code
+func (o *VerifyMfaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this verify mfa o k response has a 5xx status code
+func (o *VerifyMfaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify mfa o k response a status code equal to that given
+func (o *VerifyMfaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the verify mfa o k response
+func (o *VerifyMfaOK) Code() int {
+	return 200
+}
+
+func (o *VerifyMfaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaOK %s", 200, payload)
+}
+
+func (o *VerifyMfaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaOK %s", 200, payload)
+}
+
 func (o *VerifyMfaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *VerifyMfaOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyMfaOK binds the response header WWW-Authenticate
+func (o *VerifyMfaOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyMfaUnauthorized creates a VerifyMfaUnauthorized with default headers values
@@ -107,31 +187,108 @@ func NewVerifyMfaUnauthorized() *VerifyMfaUnauthorized {
 	return &VerifyMfaUnauthorized{}
 }
 
-/* VerifyMfaUnauthorized describes a response with status code 401, with default header values.
+/*
+VerifyMfaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type VerifyMfaUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyMfaUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this verify mfa unauthorized response has a 2xx status code
+func (o *VerifyMfaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify mfa unauthorized response has a 3xx status code
+func (o *VerifyMfaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify mfa unauthorized response has a 4xx status code
+func (o *VerifyMfaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this verify mfa unauthorized response has a 5xx status code
+func (o *VerifyMfaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify mfa unauthorized response a status code equal to that given
+func (o *VerifyMfaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the verify mfa unauthorized response
+func (o *VerifyMfaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *VerifyMfaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaUnauthorized %s", 401, payload)
+}
+
+func (o *VerifyMfaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaUnauthorized %s", 401, payload)
+}
+
 func (o *VerifyMfaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyMfaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyMfaUnauthorized binds the response header WWW-Authenticate
+func (o *VerifyMfaUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyMfaNotFound creates a VerifyMfaNotFound with default headers values
@@ -139,29 +296,106 @@ func NewVerifyMfaNotFound() *VerifyMfaNotFound {
 	return &VerifyMfaNotFound{}
 }
 
-/* VerifyMfaNotFound describes a response with status code 404, with default header values.
+/*
+VerifyMfaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type VerifyMfaNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyMfaNotFound) Error() string {
-	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this verify mfa not found response has a 2xx status code
+func (o *VerifyMfaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify mfa not found response has a 3xx status code
+func (o *VerifyMfaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify mfa not found response has a 4xx status code
+func (o *VerifyMfaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this verify mfa not found response has a 5xx status code
+func (o *VerifyMfaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify mfa not found response a status code equal to that given
+func (o *VerifyMfaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the verify mfa not found response
+func (o *VerifyMfaNotFound) Code() int {
+	return 404
+}
+
+func (o *VerifyMfaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaNotFound %s", 404, payload)
+}
+
+func (o *VerifyMfaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /current-identity/mfa/verify][%d] verifyMfaNotFound %s", 404, payload)
+}
+
 func (o *VerifyMfaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyMfaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyMfaNotFound binds the response header WWW-Authenticate
+func (o *VerifyMfaNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

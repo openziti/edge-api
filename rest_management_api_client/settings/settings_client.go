@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new settings API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new settings API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new settings API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -72,12 +98,12 @@ type ClientService interface {
 }
 
 /*
-  CreateControllerSetting creates a controller specific setting
+CreateControllerSetting creates a controller specific setting
 
-  Create a new controller specific settings object. Requires admin access.
+Create a new controller specific settings object. Requires admin access.
 */
 func (a *Client) CreateControllerSetting(params *CreateControllerSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateControllerSettingCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateControllerSettingParams()
 	}
@@ -97,28 +123,33 @@ func (a *Client) CreateControllerSetting(params *CreateControllerSettingParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateControllerSettingCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createControllerSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteControllerSetting deletes a controller setting object
+DeleteControllerSetting deletes a controller setting object
 
-  Delete a controller setting object by id. Requires admin access.
+Delete a controller setting object by id. Requires admin access.
 */
 func (a *Client) DeleteControllerSetting(params *DeleteControllerSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteControllerSettingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteControllerSettingParams()
 	}
@@ -138,28 +169,33 @@ func (a *Client) DeleteControllerSetting(params *DeleteControllerSettingParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteControllerSettingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteControllerSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailControllerSetting retrieves a single controller setting object
+DetailControllerSetting retrieves a single controller setting object
 
-  Retrieves a single controller setting object by id. Requires admin access.
+Retrieves a single controller setting object by id. Requires admin access.
 */
 func (a *Client) DetailControllerSetting(params *DetailControllerSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailControllerSettingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailControllerSettingParams()
 	}
@@ -179,28 +215,33 @@ func (a *Client) DetailControllerSetting(params *DetailControllerSettingParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailControllerSettingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailControllerSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailControllerSettingEffective retrieves a single controller s effective calculated settings from the instance and global configuration
+DetailControllerSettingEffective retrieves a single controller s effective calculated settings from the instance and global configuration
 
-  Retrieves a single controller's effective setting object by id. Requires admin access.
+Retrieves a single controller's effective setting object by id. Requires admin access.
 */
 func (a *Client) DetailControllerSettingEffective(params *DetailControllerSettingEffectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailControllerSettingEffectiveOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailControllerSettingEffectiveParams()
 	}
@@ -220,29 +261,33 @@ func (a *Client) DetailControllerSettingEffective(params *DetailControllerSettin
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailControllerSettingEffectiveOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailControllerSettingEffective: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListControllerSettings lists controller settings
+ListControllerSettings lists controller settings
 
-  Retrieves a list controller settings including the base `global` settings object and any overriding controller specific settings.
-
+Retrieves a list controller settings including the base `global` settings object and any overriding controller specific settings.
 */
 func (a *Client) ListControllerSettings(params *ListControllerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListControllerSettingsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListControllerSettingsParams()
 	}
@@ -262,28 +307,33 @@ func (a *Client) ListControllerSettings(params *ListControllerSettingsParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListControllerSettingsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listControllerSettings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchControllerSetting updates the supplied fields on a controller setting object
+PatchControllerSetting updates the supplied fields on a controller setting object
 
-  Update the supplied fields on a controller setting object. Requires admin access.
+Update the supplied fields on a controller setting object. Requires admin access.
 */
 func (a *Client) PatchControllerSetting(params *PatchControllerSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchControllerSettingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchControllerSettingParams()
 	}
@@ -303,28 +353,33 @@ func (a *Client) PatchControllerSetting(params *PatchControllerSettingParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchControllerSettingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchControllerSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateControllerSetting updates all fields on a controller setting object
+UpdateControllerSetting updates all fields on a controller setting object
 
-  Update all fields on a controller setting object by id. Requires admin access.
+Update all fields on a controller setting object by id. Requires admin access.
 */
 func (a *Client) UpdateControllerSetting(params *UpdateControllerSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateControllerSettingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateControllerSettingParams()
 	}
@@ -344,17 +399,22 @@ func (a *Client) UpdateControllerSetting(params *UpdateControllerSettingParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateControllerSettingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateControllerSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

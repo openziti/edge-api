@@ -76,10 +76,12 @@ func NewDetailCurrentAPISessionCertificateParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* DetailCurrentAPISessionCertificateParams contains all the parameters to send to the API endpoint
-   for the detail current Api session certificate operation.
+/*
+DetailCurrentAPISessionCertificateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail current Api session certificate operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailCurrentAPISessionCertificateParams struct {
 

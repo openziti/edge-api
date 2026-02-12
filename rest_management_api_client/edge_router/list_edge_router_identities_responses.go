@@ -30,11 +30,14 @@ package edge_router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListEdgeRouterIdentitiesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListEdgeRouterIdentitiesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListEdgeRouterIdentitiesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListEdgeRouterIdentitiesOK()
@@ -78,7 +81,7 @@ func (o *ListEdgeRouterIdentitiesReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge-routers/{id}/identities] listEdgeRouterIdentities", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListEdgeRouterIdentitiesOK() *ListEdgeRouterIdentitiesOK {
 	return &ListEdgeRouterIdentitiesOK{}
 }
 
-/* ListEdgeRouterIdentitiesOK describes a response with status code 200, with default header values.
+/*
+ListEdgeRouterIdentitiesOK describes a response with status code 200, with default header values.
 
 A list of identities
 */
 type ListEdgeRouterIdentitiesOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListIdentitiesEnvelope
 }
 
-func (o *ListEdgeRouterIdentitiesOK) Error() string {
-	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list edge router identities o k response has a 2xx status code
+func (o *ListEdgeRouterIdentitiesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list edge router identities o k response has a 3xx status code
+func (o *ListEdgeRouterIdentitiesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list edge router identities o k response has a 4xx status code
+func (o *ListEdgeRouterIdentitiesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list edge router identities o k response has a 5xx status code
+func (o *ListEdgeRouterIdentitiesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list edge router identities o k response a status code equal to that given
+func (o *ListEdgeRouterIdentitiesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list edge router identities o k response
+func (o *ListEdgeRouterIdentitiesOK) Code() int {
+	return 200
+}
+
+func (o *ListEdgeRouterIdentitiesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesOK %s", 200, payload)
+}
+
+func (o *ListEdgeRouterIdentitiesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesOK %s", 200, payload)
+}
+
 func (o *ListEdgeRouterIdentitiesOK) GetPayload() *rest_model.ListIdentitiesEnvelope {
 	return o.Payload
 }
 
 func (o *ListEdgeRouterIdentitiesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListIdentitiesEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListEdgeRouterIdentitiesOK binds the response header WWW-Authenticate
+func (o *ListEdgeRouterIdentitiesOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListEdgeRouterIdentitiesUnauthorized creates a ListEdgeRouterIdentitiesUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewListEdgeRouterIdentitiesUnauthorized() *ListEdgeRouterIdentitiesUnauthor
 	return &ListEdgeRouterIdentitiesUnauthorized{}
 }
 
-/* ListEdgeRouterIdentitiesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListEdgeRouterIdentitiesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListEdgeRouterIdentitiesUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEdgeRouterIdentitiesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list edge router identities unauthorized response has a 2xx status code
+func (o *ListEdgeRouterIdentitiesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list edge router identities unauthorized response has a 3xx status code
+func (o *ListEdgeRouterIdentitiesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list edge router identities unauthorized response has a 4xx status code
+func (o *ListEdgeRouterIdentitiesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list edge router identities unauthorized response has a 5xx status code
+func (o *ListEdgeRouterIdentitiesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list edge router identities unauthorized response a status code equal to that given
+func (o *ListEdgeRouterIdentitiesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list edge router identities unauthorized response
+func (o *ListEdgeRouterIdentitiesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListEdgeRouterIdentitiesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesUnauthorized %s", 401, payload)
+}
+
+func (o *ListEdgeRouterIdentitiesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesUnauthorized %s", 401, payload)
+}
+
 func (o *ListEdgeRouterIdentitiesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListEdgeRouterIdentitiesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListEdgeRouterIdentitiesUnauthorized binds the response header WWW-Authenticate
+func (o *ListEdgeRouterIdentitiesUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListEdgeRouterIdentitiesNotFound creates a ListEdgeRouterIdentitiesNotFound with default headers values
@@ -151,31 +308,108 @@ func NewListEdgeRouterIdentitiesNotFound() *ListEdgeRouterIdentitiesNotFound {
 	return &ListEdgeRouterIdentitiesNotFound{}
 }
 
-/* ListEdgeRouterIdentitiesNotFound describes a response with status code 404, with default header values.
+/*
+ListEdgeRouterIdentitiesNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type ListEdgeRouterIdentitiesNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEdgeRouterIdentitiesNotFound) Error() string {
-	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this list edge router identities not found response has a 2xx status code
+func (o *ListEdgeRouterIdentitiesNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list edge router identities not found response has a 3xx status code
+func (o *ListEdgeRouterIdentitiesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list edge router identities not found response has a 4xx status code
+func (o *ListEdgeRouterIdentitiesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list edge router identities not found response has a 5xx status code
+func (o *ListEdgeRouterIdentitiesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list edge router identities not found response a status code equal to that given
+func (o *ListEdgeRouterIdentitiesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list edge router identities not found response
+func (o *ListEdgeRouterIdentitiesNotFound) Code() int {
+	return 404
+}
+
+func (o *ListEdgeRouterIdentitiesNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesNotFound %s", 404, payload)
+}
+
+func (o *ListEdgeRouterIdentitiesNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesNotFound %s", 404, payload)
+}
+
 func (o *ListEdgeRouterIdentitiesNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListEdgeRouterIdentitiesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListEdgeRouterIdentitiesNotFound binds the response header WWW-Authenticate
+func (o *ListEdgeRouterIdentitiesNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListEdgeRouterIdentitiesTooManyRequests creates a ListEdgeRouterIdentitiesTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListEdgeRouterIdentitiesTooManyRequests() *ListEdgeRouterIdentitiesTooMa
 	return &ListEdgeRouterIdentitiesTooManyRequests{}
 }
 
-/* ListEdgeRouterIdentitiesTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListEdgeRouterIdentitiesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListEdgeRouterIdentitiesTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEdgeRouterIdentitiesTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list edge router identities too many requests response has a 2xx status code
+func (o *ListEdgeRouterIdentitiesTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list edge router identities too many requests response has a 3xx status code
+func (o *ListEdgeRouterIdentitiesTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list edge router identities too many requests response has a 4xx status code
+func (o *ListEdgeRouterIdentitiesTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list edge router identities too many requests response has a 5xx status code
+func (o *ListEdgeRouterIdentitiesTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list edge router identities too many requests response a status code equal to that given
+func (o *ListEdgeRouterIdentitiesTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list edge router identities too many requests response
+func (o *ListEdgeRouterIdentitiesTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListEdgeRouterIdentitiesTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesTooManyRequests %s", 429, payload)
+}
+
+func (o *ListEdgeRouterIdentitiesTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesTooManyRequests %s", 429, payload)
+}
+
 func (o *ListEdgeRouterIdentitiesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListEdgeRouterIdentitiesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListEdgeRouterIdentitiesTooManyRequests binds the response header WWW-Authenticate
+func (o *ListEdgeRouterIdentitiesTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListEdgeRouterIdentitiesServiceUnavailable creates a ListEdgeRouterIdentitiesServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListEdgeRouterIdentitiesServiceUnavailable() *ListEdgeRouterIdentitiesSe
 	return &ListEdgeRouterIdentitiesServiceUnavailable{}
 }
 
-/* ListEdgeRouterIdentitiesServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListEdgeRouterIdentitiesServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListEdgeRouterIdentitiesServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListEdgeRouterIdentitiesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list edge router identities service unavailable response has a 2xx status code
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list edge router identities service unavailable response has a 3xx status code
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list edge router identities service unavailable response has a 4xx status code
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list edge router identities service unavailable response has a 5xx status code
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list edge router identities service unavailable response a status code equal to that given
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list edge router identities service unavailable response
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge-routers/{id}/identities][%d] listEdgeRouterIdentitiesServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListEdgeRouterIdentitiesServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListEdgeRouterIdentitiesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListEdgeRouterIdentitiesServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListEdgeRouterIdentitiesServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

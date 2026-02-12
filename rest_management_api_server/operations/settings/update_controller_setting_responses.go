@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // UpdateControllerSettingOKCode is the HTTP code returned for type UpdateControllerSettingOK
 const UpdateControllerSettingOKCode int = 200
 
-/*UpdateControllerSettingOK The update request was successful and the resource has been altered
+/*
+UpdateControllerSettingOK The update request was successful and the resource has been altered
 
 swagger:response updateControllerSettingOK
 */
 type UpdateControllerSettingOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type UpdateControllerSettingOK struct {
 func NewUpdateControllerSettingOK() *UpdateControllerSettingOK {
 
 	return &UpdateControllerSettingOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update controller setting o k response
+func (o *UpdateControllerSettingOK) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateControllerSettingOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update controller setting o k response
+func (o *UpdateControllerSettingOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update controller setting o k response
@@ -72,6 +89,23 @@ func (o *UpdateControllerSettingOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *UpdateControllerSettingOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *UpdateControllerSettingOK) WriteResponse(rw http.ResponseWriter, produc
 // UpdateControllerSettingBadRequestCode is the HTTP code returned for type UpdateControllerSettingBadRequest
 const UpdateControllerSettingBadRequestCode int = 400
 
-/*UpdateControllerSettingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateControllerSettingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateControllerSettingBadRequest
 */
 type UpdateControllerSettingBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type UpdateControllerSettingBadRequest struct {
 func NewUpdateControllerSettingBadRequest() *UpdateControllerSettingBadRequest {
 
 	return &UpdateControllerSettingBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update controller setting bad request response
+func (o *UpdateControllerSettingBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateControllerSettingBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update controller setting bad request response
+func (o *UpdateControllerSettingBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update controller setting bad request response
@@ -116,6 +166,23 @@ func (o *UpdateControllerSettingBadRequest) SetPayload(payload *rest_model.APIEr
 // WriteResponse to the client
 func (o *UpdateControllerSettingBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *UpdateControllerSettingBadRequest) WriteResponse(rw http.ResponseWriter
 // UpdateControllerSettingUnauthorizedCode is the HTTP code returned for type UpdateControllerSettingUnauthorized
 const UpdateControllerSettingUnauthorizedCode int = 401
 
-/*UpdateControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateControllerSettingUnauthorized
 */
 type UpdateControllerSettingUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type UpdateControllerSettingUnauthorized struct {
 func NewUpdateControllerSettingUnauthorized() *UpdateControllerSettingUnauthorized {
 
 	return &UpdateControllerSettingUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update controller setting unauthorized response
+func (o *UpdateControllerSettingUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateControllerSettingUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update controller setting unauthorized response
+func (o *UpdateControllerSettingUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update controller setting unauthorized response
@@ -160,6 +243,23 @@ func (o *UpdateControllerSettingUnauthorized) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *UpdateControllerSettingUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *UpdateControllerSettingUnauthorized) WriteResponse(rw http.ResponseWrit
 // UpdateControllerSettingNotFoundCode is the HTTP code returned for type UpdateControllerSettingNotFound
 const UpdateControllerSettingNotFoundCode int = 404
 
-/*UpdateControllerSettingNotFound The requested resource does not exist
+/*
+UpdateControllerSettingNotFound The requested resource does not exist
 
 swagger:response updateControllerSettingNotFound
 */
 type UpdateControllerSettingNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type UpdateControllerSettingNotFound struct {
 func NewUpdateControllerSettingNotFound() *UpdateControllerSettingNotFound {
 
 	return &UpdateControllerSettingNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update controller setting not found response
+func (o *UpdateControllerSettingNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateControllerSettingNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update controller setting not found response
+func (o *UpdateControllerSettingNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update controller setting not found response
@@ -204,6 +320,23 @@ func (o *UpdateControllerSettingNotFound) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *UpdateControllerSettingNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *UpdateControllerSettingNotFound) WriteResponse(rw http.ResponseWriter, 
 // UpdateControllerSettingTooManyRequestsCode is the HTTP code returned for type UpdateControllerSettingTooManyRequests
 const UpdateControllerSettingTooManyRequestsCode int = 429
 
-/*UpdateControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+UpdateControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response updateControllerSettingTooManyRequests
 */
 type UpdateControllerSettingTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type UpdateControllerSettingTooManyRequests struct {
 func NewUpdateControllerSettingTooManyRequests() *UpdateControllerSettingTooManyRequests {
 
 	return &UpdateControllerSettingTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update controller setting too many requests response
+func (o *UpdateControllerSettingTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateControllerSettingTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update controller setting too many requests response
+func (o *UpdateControllerSettingTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update controller setting too many requests response
@@ -247,6 +396,23 @@ func (o *UpdateControllerSettingTooManyRequests) SetPayload(payload *rest_model.
 
 // WriteResponse to the client
 func (o *UpdateControllerSettingTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

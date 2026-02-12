@@ -74,7 +74,7 @@ const (
 )
 
 // for schema
-var postureCheckTypeEnum []interface{}
+var postureCheckTypeEnum []any
 
 func init() {
 	var res []PostureCheckType

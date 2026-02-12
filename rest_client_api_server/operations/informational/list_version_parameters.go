@@ -49,7 +49,6 @@ func NewListVersionParams() ListVersionParams {
 //
 // swagger:parameters listVersion
 type ListVersionParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

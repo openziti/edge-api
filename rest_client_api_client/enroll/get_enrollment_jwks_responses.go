@@ -30,11 +30,14 @@ package enroll
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type GetEnrollmentJwksReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetEnrollmentJwksReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetEnrollmentJwksReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetEnrollmentJwksOK()
@@ -54,7 +57,7 @@ func (o *GetEnrollmentJwksReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /enroll/jwks] getEnrollmentJwks", response, response.Code())
 	}
 }
 
@@ -63,29 +66,106 @@ func NewGetEnrollmentJwksOK() *GetEnrollmentJwksOK {
 	return &GetEnrollmentJwksOK{}
 }
 
-/* GetEnrollmentJwksOK describes a response with status code 200, with default header values.
+/*
+GetEnrollmentJwksOK describes a response with status code 200, with default header values.
 
 A JWKS response for enrollment.
 */
 type GetEnrollmentJwksOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Jwks
 }
 
-func (o *GetEnrollmentJwksOK) Error() string {
-	return fmt.Sprintf("[GET /enroll/jwks][%d] getEnrollmentJwksOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this get enrollment jwks o k response has a 2xx status code
+func (o *GetEnrollmentJwksOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this get enrollment jwks o k response has a 3xx status code
+func (o *GetEnrollmentJwksOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get enrollment jwks o k response has a 4xx status code
+func (o *GetEnrollmentJwksOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get enrollment jwks o k response has a 5xx status code
+func (o *GetEnrollmentJwksOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get enrollment jwks o k response a status code equal to that given
+func (o *GetEnrollmentJwksOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get enrollment jwks o k response
+func (o *GetEnrollmentJwksOK) Code() int {
+	return 200
+}
+
+func (o *GetEnrollmentJwksOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enroll/jwks][%d] getEnrollmentJwksOK %s", 200, payload)
+}
+
+func (o *GetEnrollmentJwksOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /enroll/jwks][%d] getEnrollmentJwksOK %s", 200, payload)
+}
+
 func (o *GetEnrollmentJwksOK) GetPayload() *rest_model.Jwks {
 	return o.Payload
 }
 
 func (o *GetEnrollmentJwksOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Jwks)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderGetEnrollmentJwksOK binds the response header WWW-Authenticate
+func (o *GetEnrollmentJwksOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

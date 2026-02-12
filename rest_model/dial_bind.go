@@ -65,7 +65,7 @@ const (
 )
 
 // for schema
-var dialBindEnum []interface{}
+var dialBindEnum []any
 
 func init() {
 	var res []DialBind

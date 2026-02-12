@@ -36,16 +36,16 @@ import (
 )
 
 // ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc turns a function with the right signature into a extend verify current identity authenticator handler
-type ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc func(ExtendVerifyCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+type ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc func(ExtendVerifyCurrentIdentityAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc) Handle(params ExtendVerifyCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc) Handle(params ExtendVerifyCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ExtendVerifyCurrentIdentityAuthenticatorHandler interface for that can handle valid extend verify current identity authenticator params
 type ExtendVerifyCurrentIdentityAuthenticatorHandler interface {
-	Handle(ExtendVerifyCurrentIdentityAuthenticatorParams, interface{}) middleware.Responder
+	Handle(ExtendVerifyCurrentIdentityAuthenticatorParams, any) middleware.Responder
 }
 
 // NewExtendVerifyCurrentIdentityAuthenticator creates a new http.Handler for the extend verify current identity authenticator operation
@@ -53,13 +53,13 @@ func NewExtendVerifyCurrentIdentityAuthenticator(ctx *middleware.Context, handle
 	return &ExtendVerifyCurrentIdentityAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* ExtendVerifyCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend-verify Current API Session Enroll Extend Enrollment extendVerifyCurrentIdentityAuthenticator
+/*
+	ExtendVerifyCurrentIdentityAuthenticator swagger:route POST /current-identity/authenticators/{id}/extend-verify Current API Session Enroll Extend Enrollment extendVerifyCurrentIdentityAuthenticator
 
-Allows the current identity to validate reciept of a new client certificate
+# Allows the current identity to validate reciept of a new client certificate
 
 After submitting a CSR for a new client certificate the resulting public certificate must be re-submitted to this endpoint to verify receipt.
 After receipt, the new client certificate must be used for new authentication requests.
-
 */
 type ExtendVerifyCurrentIdentityAuthenticator struct {
 	Context *middleware.Context
@@ -80,9 +80,9 @@ func (o *ExtendVerifyCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWri
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +91,7 @@ func (o *ExtendVerifyCurrentIdentityAuthenticator) ServeHTTP(rw http.ResponseWri
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -241,11 +242,15 @@ func (m *PostureCheckFailureOperatingSystem) validateActualValue(formats strfmt.
 
 	if m.ActualValue != nil {
 		if err := m.ActualValue.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actualValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actualValue")
 			}
+
 			return err
 		}
 	}
@@ -272,11 +277,15 @@ func (m *PostureCheckFailureOperatingSystem) validateExpectedValue(formats strfm
 
 		if m.ExpectedValue[i] != nil {
 			if err := m.ExpectedValue[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("expectedValue" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("expectedValue" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -307,12 +316,17 @@ func (m *PostureCheckFailureOperatingSystem) ContextValidate(ctx context.Context
 func (m *PostureCheckFailureOperatingSystem) contextValidateActualValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ActualValue != nil {
+
 		if err := m.ActualValue.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actualValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actualValue")
 			}
+
 			return err
 		}
 	}
@@ -325,12 +339,21 @@ func (m *PostureCheckFailureOperatingSystem) contextValidateExpectedValue(ctx co
 	for i := 0; i < len(m.ExpectedValue); i++ {
 
 		if m.ExpectedValue[i] != nil {
+
+			if swag.IsZero(m.ExpectedValue[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExpectedValue[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("expectedValue" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("expectedValue" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

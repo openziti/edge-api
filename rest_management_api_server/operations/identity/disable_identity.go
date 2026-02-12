@@ -36,16 +36,16 @@ import (
 )
 
 // DisableIdentityHandlerFunc turns a function with the right signature into a disable identity handler
-type DisableIdentityHandlerFunc func(DisableIdentityParams, interface{}) middleware.Responder
+type DisableIdentityHandlerFunc func(DisableIdentityParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DisableIdentityHandlerFunc) Handle(params DisableIdentityParams, principal interface{}) middleware.Responder {
+func (fn DisableIdentityHandlerFunc) Handle(params DisableIdentityParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DisableIdentityHandler interface for that can handle valid disable identity params
 type DisableIdentityHandler interface {
-	Handle(DisableIdentityParams, interface{}) middleware.Responder
+	Handle(DisableIdentityParams, any) middleware.Responder
 }
 
 // NewDisableIdentity creates a new http.Handler for the disable identity operation
@@ -53,13 +53,12 @@ func NewDisableIdentity(ctx *middleware.Context, handler DisableIdentityHandler)
 	return &DisableIdentity{Context: ctx, Handler: handler}
 }
 
-/* DisableIdentity swagger:route POST /identities/{id}/disable Identity disableIdentity
+/*
+	DisableIdentity swagger:route POST /identities/{id}/disable Identity disableIdentity
 
-Set an identity as disabled
+# Set an identity as disabled
 
 Reject an identity's API session requests for N minutes or indefinitely if 0.
-
-
 */
 type DisableIdentity struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DisableIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DisableIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

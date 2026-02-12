@@ -36,16 +36,16 @@ import (
 )
 
 // GetIdentityFailedServiceRequestsHandlerFunc turns a function with the right signature into a get identity failed service requests handler
-type GetIdentityFailedServiceRequestsHandlerFunc func(GetIdentityFailedServiceRequestsParams, interface{}) middleware.Responder
+type GetIdentityFailedServiceRequestsHandlerFunc func(GetIdentityFailedServiceRequestsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetIdentityFailedServiceRequestsHandlerFunc) Handle(params GetIdentityFailedServiceRequestsParams, principal interface{}) middleware.Responder {
+func (fn GetIdentityFailedServiceRequestsHandlerFunc) Handle(params GetIdentityFailedServiceRequestsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // GetIdentityFailedServiceRequestsHandler interface for that can handle valid get identity failed service requests params
 type GetIdentityFailedServiceRequestsHandler interface {
-	Handle(GetIdentityFailedServiceRequestsParams, interface{}) middleware.Responder
+	Handle(GetIdentityFailedServiceRequestsParams, any) middleware.Responder
 }
 
 // NewGetIdentityFailedServiceRequests creates a new http.Handler for the get identity failed service requests operation
@@ -53,15 +53,14 @@ func NewGetIdentityFailedServiceRequests(ctx *middleware.Context, handler GetIde
 	return &GetIdentityFailedServiceRequests{Context: ctx, Handler: handler}
 }
 
-/* GetIdentityFailedServiceRequests swagger:route GET /identities/{id}/failed-service-requests Identity getIdentityFailedServiceRequests
+/*
+	GetIdentityFailedServiceRequests swagger:route GET /identities/{id}/failed-service-requests Identity getIdentityFailedServiceRequests
 
-Retrieve a list of the most recent service failure requests due to posture checks
+# Retrieve a list of the most recent service failure requests due to posture checks
 
 Returns a list of service session requests that failed due to posture checks. The entries will contain
 every policy that was verified against and every failed check in each policy. Each check will include
 the historical posture data and posture check configuration.
-
-
 */
 type GetIdentityFailedServiceRequests struct {
 	Context *middleware.Context
@@ -82,9 +81,9 @@ func (o *GetIdentityFailedServiceRequests) ServeHTTP(rw http.ResponseWriter, r *
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -93,6 +92,7 @@ func (o *GetIdentityFailedServiceRequests) ServeHTTP(rw http.ResponseWriter, r *
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

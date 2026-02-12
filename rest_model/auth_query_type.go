@@ -65,7 +65,7 @@ const (
 )
 
 // for schema
-var authQueryTypeEnum []interface{}
+var authQueryTypeEnum []any
 
 func init() {
 	var res []AuthQueryType

@@ -30,7 +30,6 @@ package current_identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -55,7 +54,6 @@ func NewDetailMfaRecoveryCodesParams() DetailMfaRecoveryCodesParams {
 //
 // swagger:parameters detailMfaRecoveryCodes
 type DetailMfaRecoveryCodesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -63,6 +61,7 @@ type DetailMfaRecoveryCodesParams struct {
 	  In: header
 	*/
 	MfaValidationCode *string
+
 	/*An MFA validation request
 	  In: body
 	*/
@@ -83,7 +82,9 @@ func (o *DetailMfaRecoveryCodesParams) BindRequest(r *http.Request, route *middl
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.MfaCode
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			res = append(res, errors.NewParseError("mfaValidation", "body", "", err))
@@ -93,7 +94,7 @@ func (o *DetailMfaRecoveryCodesParams) BindRequest(r *http.Request, route *middl
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

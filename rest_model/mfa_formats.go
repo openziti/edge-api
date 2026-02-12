@@ -65,7 +65,7 @@ const (
 )
 
 // for schema
-var mfaFormatsEnum []interface{}
+var mfaFormatsEnum []any
 
 func init() {
 	var res []MfaFormats

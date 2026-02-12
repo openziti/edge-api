@@ -78,10 +78,12 @@ func NewRequestExtendAllCertAuthenticatorsParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* RequestExtendAllCertAuthenticatorsParams contains all the parameters to send to the API endpoint
-   for the request extend all cert authenticators operation.
+/*
+RequestExtendAllCertAuthenticatorsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the request extend all cert authenticators operation.
+
+	Typically these are written to a http.Request.
 */
 type RequestExtendAllCertAuthenticatorsParams struct {
 

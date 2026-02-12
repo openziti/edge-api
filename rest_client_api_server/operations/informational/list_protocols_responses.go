@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListProtocolsOKCode is the HTTP code returned for type ListProtocolsOK
 const ListProtocolsOKCode int = 200
 
-/*ListProtocolsOK A list of supported Edge protocols
+/*
+ListProtocolsOK A list of supported Edge protocols
 
 swagger:response listProtocolsOK
 */
 type ListProtocolsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListProtocolsOK struct {
 func NewListProtocolsOK() *ListProtocolsOK {
 
 	return &ListProtocolsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list protocols o k response
+func (o *ListProtocolsOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListProtocolsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list protocols o k response
+func (o *ListProtocolsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list protocols o k response
@@ -72,6 +89,23 @@ func (o *ListProtocolsOK) SetPayload(payload *rest_model.ListProtocolsEnvelope) 
 // WriteResponse to the client
 func (o *ListProtocolsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListProtocolsOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // ListProtocolsTooManyRequestsCode is the HTTP code returned for type ListProtocolsTooManyRequests
 const ListProtocolsTooManyRequestsCode int = 429
 
-/*ListProtocolsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListProtocolsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listProtocolsTooManyRequests
 */
 type ListProtocolsTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListProtocolsTooManyRequests struct {
 func NewListProtocolsTooManyRequests() *ListProtocolsTooManyRequests {
 
 	return &ListProtocolsTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list protocols too many requests response
+func (o *ListProtocolsTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListProtocolsTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list protocols too many requests response
+func (o *ListProtocolsTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list protocols too many requests response
@@ -116,6 +166,23 @@ func (o *ListProtocolsTooManyRequests) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *ListProtocolsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListProtocolsTooManyRequests) WriteResponse(rw http.ResponseWriter, pro
 // ListProtocolsServiceUnavailableCode is the HTTP code returned for type ListProtocolsServiceUnavailable
 const ListProtocolsServiceUnavailableCode int = 503
 
-/*ListProtocolsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListProtocolsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listProtocolsServiceUnavailable
 */
 type ListProtocolsServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListProtocolsServiceUnavailable struct {
 func NewListProtocolsServiceUnavailable() *ListProtocolsServiceUnavailable {
 
 	return &ListProtocolsServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list protocols service unavailable response
+func (o *ListProtocolsServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListProtocolsServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list protocols service unavailable response
+func (o *ListProtocolsServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list protocols service unavailable response
@@ -159,6 +242,23 @@ func (o *ListProtocolsServiceUnavailable) SetPayload(payload *rest_model.APIErro
 
 // WriteResponse to the client
 func (o *ListProtocolsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

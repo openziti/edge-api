@@ -50,7 +50,6 @@ func NewGetIdentityEnrollmentsParams() GetIdentityEnrollmentsParams {
 //
 // swagger:parameters getIdentityEnrollments
 type GetIdentityEnrollmentsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -52,7 +52,6 @@ func NewListServiceRoleAttributesParams() ListServiceRoleAttributesParams {
 //
 // swagger:parameters listServiceRoleAttributes
 type ListServiceRoleAttributesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,10 +59,12 @@ type ListServiceRoleAttributesParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
@@ -78,7 +79,6 @@ func (o *ListServiceRoleAttributesParams) BindRequest(r *http.Request, route *mi
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

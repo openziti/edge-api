@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailSpecBodyOKCode is the HTTP code returned for type DetailSpecBodyOK
 const DetailSpecBodyOKCode int = 200
 
-/*DetailSpecBodyOK Returns the document that represents the specification
+/*
+DetailSpecBodyOK Returns the document that represents the specification
 
 swagger:response detailSpecBodyOK
 */
 type DetailSpecBodyOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailSpecBodyOK struct {
 func NewDetailSpecBodyOK() *DetailSpecBodyOK {
 
 	return &DetailSpecBodyOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail spec body o k response
+func (o *DetailSpecBodyOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSpecBodyOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail spec body o k response
+func (o *DetailSpecBodyOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail spec body o k response
@@ -71,6 +88,23 @@ func (o *DetailSpecBodyOK) SetPayload(payload *rest_model.DetailSpecBodyEnvelope
 
 // WriteResponse to the client
 func (o *DetailSpecBodyOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(200)
 	if o.Payload != nil {

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,7 +41,8 @@ import (
 // GetCaJWTOKCode is the HTTP code returned for type GetCaJWTOK
 const GetCaJWTOKCode int = 200
 
-/*GetCaJWTOK The result is the JWT text to validate the CA
+/*
+GetCaJWTOK The result is the JWT text to validate the CA
 
 swagger:response getCaJwtOK
 */
@@ -82,11 +84,16 @@ func (o *GetCaJWTOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // GetCaJWTUnauthorizedCode is the HTTP code returned for type GetCaJWTUnauthorized
 const GetCaJWTUnauthorizedCode int = 401
 
-/*GetCaJWTUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetCaJWTUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getCaJwtUnauthorized
 */
 type GetCaJWTUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -98,6 +105,17 @@ type GetCaJWTUnauthorized struct {
 func NewGetCaJWTUnauthorized() *GetCaJWTUnauthorized {
 
 	return &GetCaJWTUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get ca Jwt unauthorized response
+func (o *GetCaJWTUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *GetCaJWTUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get ca Jwt unauthorized response
+func (o *GetCaJWTUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get ca Jwt unauthorized response
@@ -114,6 +132,23 @@ func (o *GetCaJWTUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelope) 
 // WriteResponse to the client
 func (o *GetCaJWTUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -126,11 +161,16 @@ func (o *GetCaJWTUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // GetCaJWTNotFoundCode is the HTTP code returned for type GetCaJWTNotFound
 const GetCaJWTNotFoundCode int = 404
 
-/*GetCaJWTNotFound The requested resource does not exist
+/*
+GetCaJWTNotFound The requested resource does not exist
 
 swagger:response getCaJwtNotFound
 */
 type GetCaJWTNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -142,6 +182,17 @@ type GetCaJWTNotFound struct {
 func NewGetCaJWTNotFound() *GetCaJWTNotFound {
 
 	return &GetCaJWTNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get ca Jwt not found response
+func (o *GetCaJWTNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *GetCaJWTNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get ca Jwt not found response
+func (o *GetCaJWTNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get ca Jwt not found response
@@ -158,6 +209,23 @@ func (o *GetCaJWTNotFound) SetPayload(payload *rest_model.APIErrorEnvelope) {
 // WriteResponse to the client
 func (o *GetCaJWTNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -170,11 +238,16 @@ func (o *GetCaJWTNotFound) WriteResponse(rw http.ResponseWriter, producer runtim
 // GetCaJWTTooManyRequestsCode is the HTTP code returned for type GetCaJWTTooManyRequests
 const GetCaJWTTooManyRequestsCode int = 429
 
-/*GetCaJWTTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetCaJWTTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getCaJwtTooManyRequests
 */
 type GetCaJWTTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -186,6 +259,17 @@ type GetCaJWTTooManyRequests struct {
 func NewGetCaJWTTooManyRequests() *GetCaJWTTooManyRequests {
 
 	return &GetCaJWTTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get ca Jwt too many requests response
+func (o *GetCaJWTTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *GetCaJWTTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get ca Jwt too many requests response
+func (o *GetCaJWTTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get ca Jwt too many requests response
@@ -202,6 +286,23 @@ func (o *GetCaJWTTooManyRequests) SetPayload(payload *rest_model.APIErrorEnvelop
 // WriteResponse to the client
 func (o *GetCaJWTTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -214,11 +315,16 @@ func (o *GetCaJWTTooManyRequests) WriteResponse(rw http.ResponseWriter, producer
 // GetCaJWTServiceUnavailableCode is the HTTP code returned for type GetCaJWTServiceUnavailable
 const GetCaJWTServiceUnavailableCode int = 503
 
-/*GetCaJWTServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+GetCaJWTServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response getCaJwtServiceUnavailable
 */
 type GetCaJWTServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -230,6 +336,17 @@ type GetCaJWTServiceUnavailable struct {
 func NewGetCaJWTServiceUnavailable() *GetCaJWTServiceUnavailable {
 
 	return &GetCaJWTServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get ca Jwt service unavailable response
+func (o *GetCaJWTServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *GetCaJWTServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get ca Jwt service unavailable response
+func (o *GetCaJWTServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get ca Jwt service unavailable response
@@ -245,6 +362,23 @@ func (o *GetCaJWTServiceUnavailable) SetPayload(payload *rest_model.APIErrorEnve
 
 // WriteResponse to the client
 func (o *GetCaJWTServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

@@ -76,10 +76,12 @@ func NewDetailCaParamsWithHTTPClient(client *http.Client) *DetailCaParams {
 	}
 }
 
-/* DetailCaParams contains all the parameters to send to the API endpoint
-   for the detail ca operation.
+/*
+DetailCaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail ca operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailCaParams struct {
 

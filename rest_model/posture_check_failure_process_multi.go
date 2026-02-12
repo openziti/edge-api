@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -262,11 +263,15 @@ func (m *PostureCheckFailureProcessMulti) validateActualValue(formats strfmt.Reg
 
 		if m.ActualValue[i] != nil {
 			if err := m.ActualValue[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("actualValue" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("actualValue" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -289,11 +294,15 @@ func (m *PostureCheckFailureProcessMulti) validateExpectedValue(formats strfmt.R
 
 		if m.ExpectedValue[i] != nil {
 			if err := m.ExpectedValue[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("expectedValue" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("expectedValue" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -315,11 +324,15 @@ func (m *PostureCheckFailureProcessMulti) validateSemantic(formats strfmt.Regist
 
 	if m.Semantic != nil {
 		if err := m.Semantic.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("semantic")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("semantic")
 			}
+
 			return err
 		}
 	}
@@ -354,12 +367,21 @@ func (m *PostureCheckFailureProcessMulti) contextValidateActualValue(ctx context
 	for i := 0; i < len(m.ActualValue); i++ {
 
 		if m.ActualValue[i] != nil {
+
+			if swag.IsZero(m.ActualValue[i]) { // not required
+				return nil
+			}
+
 			if err := m.ActualValue[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("actualValue" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("actualValue" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -374,12 +396,21 @@ func (m *PostureCheckFailureProcessMulti) contextValidateExpectedValue(ctx conte
 	for i := 0; i < len(m.ExpectedValue); i++ {
 
 		if m.ExpectedValue[i] != nil {
+
+			if swag.IsZero(m.ExpectedValue[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExpectedValue[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("expectedValue" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("expectedValue" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -392,12 +423,17 @@ func (m *PostureCheckFailureProcessMulti) contextValidateExpectedValue(ctx conte
 func (m *PostureCheckFailureProcessMulti) contextValidateSemantic(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Semantic != nil {
+
 		if err := m.Semantic.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("semantic")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("semantic")
 			}
+
 			return err
 		}
 	}

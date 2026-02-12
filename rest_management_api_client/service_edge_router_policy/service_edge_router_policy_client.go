@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new service edge router policy API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new service edge router policy API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new service edge router policy API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -74,12 +100,12 @@ type ClientService interface {
 }
 
 /*
-  CreateServiceEdgeRouterPolicy creates a service edge router policy resource
+CreateServiceEdgeRouterPolicy creates a service edge router policy resource
 
-  Create a service edge router policy resource. Requires admin access.
+Create a service edge router policy resource. Requires admin access.
 */
 func (a *Client) CreateServiceEdgeRouterPolicy(params *CreateServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateServiceEdgeRouterPolicyCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateServiceEdgeRouterPolicyParams()
 	}
@@ -99,28 +125,33 @@ func (a *Client) CreateServiceEdgeRouterPolicy(params *CreateServiceEdgeRouterPo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateServiceEdgeRouterPolicyCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createServiceEdgeRouterPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteServiceEdgeRouterPolicy deletes a service edge policy
+DeleteServiceEdgeRouterPolicy deletes a service edge policy
 
-  Delete a service edge policy by id. Requires admin access.
+Delete a service edge policy by id. Requires admin access.
 */
 func (a *Client) DeleteServiceEdgeRouterPolicy(params *DeleteServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServiceEdgeRouterPolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteServiceEdgeRouterPolicyParams()
 	}
@@ -140,28 +171,33 @@ func (a *Client) DeleteServiceEdgeRouterPolicy(params *DeleteServiceEdgeRouterPo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteServiceEdgeRouterPolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteServiceEdgeRouterPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailServiceEdgeRouterPolicy retrieves a single service edge policy
+DetailServiceEdgeRouterPolicy retrieves a single service edge policy
 
-  Retrieves a single service edge policy by id. Requires admin access.
+Retrieves a single service edge policy by id. Requires admin access.
 */
 func (a *Client) DetailServiceEdgeRouterPolicy(params *DetailServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailServiceEdgeRouterPolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailServiceEdgeRouterPolicyParams()
 	}
@@ -181,29 +217,33 @@ func (a *Client) DetailServiceEdgeRouterPolicy(params *DetailServiceEdgeRouterPo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailServiceEdgeRouterPolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailServiceEdgeRouterPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServiceEdgeRouterPolicies lists service edge router policies
+ListServiceEdgeRouterPolicies lists service edge router policies
 
-  Retrieves a list of service edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of service edge router policy resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServiceEdgeRouterPolicies(params *ListServiceEdgeRouterPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRouterPoliciesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServiceEdgeRouterPoliciesParams()
 	}
@@ -223,28 +263,33 @@ func (a *Client) ListServiceEdgeRouterPolicies(params *ListServiceEdgeRouterPoli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServiceEdgeRouterPoliciesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServiceEdgeRouterPolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServiceEdgeRouterPolicyEdgeRouters lists the edge routers that a service edge router policy applies to
+ListServiceEdgeRouterPolicyEdgeRouters lists the edge routers that a service edge router policy applies to
 
-  List the edge routers that a service edge router policy applies to
+List the edge routers that a service edge router policy applies to
 */
 func (a *Client) ListServiceEdgeRouterPolicyEdgeRouters(params *ListServiceEdgeRouterPolicyEdgeRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRouterPolicyEdgeRoutersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServiceEdgeRouterPolicyEdgeRoutersParams()
 	}
@@ -264,28 +309,33 @@ func (a *Client) ListServiceEdgeRouterPolicyEdgeRouters(params *ListServiceEdgeR
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServiceEdgeRouterPolicyEdgeRoutersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServiceEdgeRouterPolicyEdgeRouters: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServiceEdgeRouterPolicyServices lists the services that a service edge router policy applies to
+ListServiceEdgeRouterPolicyServices lists the services that a service edge router policy applies to
 
-  List the services that a service edge router policy applies to
+List the services that a service edge router policy applies to
 */
 func (a *Client) ListServiceEdgeRouterPolicyServices(params *ListServiceEdgeRouterPolicyServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceEdgeRouterPolicyServicesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServiceEdgeRouterPolicyServicesParams()
 	}
@@ -305,28 +355,33 @@ func (a *Client) ListServiceEdgeRouterPolicyServices(params *ListServiceEdgeRout
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServiceEdgeRouterPolicyServicesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServiceEdgeRouterPolicyServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchServiceEdgeRouterPolicy updates the supplied fields on a service edge policy
+PatchServiceEdgeRouterPolicy updates the supplied fields on a service edge policy
 
-  Update the supplied fields on a service edge policy. Requires admin access.
+Update the supplied fields on a service edge policy. Requires admin access.
 */
 func (a *Client) PatchServiceEdgeRouterPolicy(params *PatchServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServiceEdgeRouterPolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchServiceEdgeRouterPolicyParams()
 	}
@@ -346,28 +401,33 @@ func (a *Client) PatchServiceEdgeRouterPolicy(params *PatchServiceEdgeRouterPoli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchServiceEdgeRouterPolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchServiceEdgeRouterPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateServiceEdgeRouterPolicy updates all fields on a service edge policy
+UpdateServiceEdgeRouterPolicy updates all fields on a service edge policy
 
-  Update all fields on a service edge policy by id. Requires admin access.
+Update all fields on a service edge policy by id. Requires admin access.
 */
 func (a *Client) UpdateServiceEdgeRouterPolicy(params *UpdateServiceEdgeRouterPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateServiceEdgeRouterPolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateServiceEdgeRouterPolicyParams()
 	}
@@ -387,17 +447,22 @@ func (a *Client) UpdateServiceEdgeRouterPolicy(params *UpdateServiceEdgeRouterPo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateServiceEdgeRouterPolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateServiceEdgeRouterPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

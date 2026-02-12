@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateAuthenticatorHandlerFunc turns a function with the right signature into a update authenticator handler
-type UpdateAuthenticatorHandlerFunc func(UpdateAuthenticatorParams, interface{}) middleware.Responder
+type UpdateAuthenticatorHandlerFunc func(UpdateAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateAuthenticatorHandlerFunc) Handle(params UpdateAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn UpdateAuthenticatorHandlerFunc) Handle(params UpdateAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateAuthenticatorHandler interface for that can handle valid update authenticator params
 type UpdateAuthenticatorHandler interface {
-	Handle(UpdateAuthenticatorParams, interface{}) middleware.Responder
+	Handle(UpdateAuthenticatorParams, any) middleware.Responder
 }
 
 // NewUpdateAuthenticator creates a new http.Handler for the update authenticator operation
@@ -53,12 +53,12 @@ func NewUpdateAuthenticator(ctx *middleware.Context, handler UpdateAuthenticator
 	return &UpdateAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* UpdateAuthenticator swagger:route PUT /authenticators/{id} Authenticator updateAuthenticator
+/*
+	UpdateAuthenticator swagger:route PUT /authenticators/{id} Authenticator updateAuthenticator
 
-Update all fields on an authenticator
+# Update all fields on an authenticator
 
 Update all fields on an authenticator by id. Requires admin access.
-
 */
 type UpdateAuthenticator struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

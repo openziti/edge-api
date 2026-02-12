@@ -30,11 +30,14 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreateControllerSettingReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateControllerSettingReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateControllerSettingCreated()
@@ -72,7 +75,7 @@ func (o *CreateControllerSettingReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /controller-settings] createControllerSetting", response, response.Code())
 	}
 }
 
@@ -81,31 +84,108 @@ func NewCreateControllerSettingCreated() *CreateControllerSettingCreated {
 	return &CreateControllerSettingCreated{}
 }
 
-/* CreateControllerSettingCreated describes a response with status code 201, with default header values.
+/*
+CreateControllerSettingCreated describes a response with status code 201, with default header values.
 
 The create request was successful and the resource has been added at the following location
 */
 type CreateControllerSettingCreated struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.CreateEnvelope
 }
 
-func (o *CreateControllerSettingCreated) Error() string {
-	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingCreated  %+v", 201, o.Payload)
+// IsSuccess returns true when this create controller setting created response has a 2xx status code
+func (o *CreateControllerSettingCreated) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create controller setting created response has a 3xx status code
+func (o *CreateControllerSettingCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create controller setting created response has a 4xx status code
+func (o *CreateControllerSettingCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create controller setting created response has a 5xx status code
+func (o *CreateControllerSettingCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create controller setting created response a status code equal to that given
+func (o *CreateControllerSettingCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create controller setting created response
+func (o *CreateControllerSettingCreated) Code() int {
+	return 201
+}
+
+func (o *CreateControllerSettingCreated) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingCreated %s", 201, payload)
+}
+
+func (o *CreateControllerSettingCreated) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingCreated %s", 201, payload)
+}
+
 func (o *CreateControllerSettingCreated) GetPayload() *rest_model.CreateEnvelope {
 	return o.Payload
 }
 
 func (o *CreateControllerSettingCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.CreateEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateControllerSettingCreated binds the response header WWW-Authenticate
+func (o *CreateControllerSettingCreated) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateControllerSettingBadRequest creates a CreateControllerSettingBadRequest with default headers values
@@ -113,31 +193,108 @@ func NewCreateControllerSettingBadRequest() *CreateControllerSettingBadRequest {
 	return &CreateControllerSettingBadRequest{}
 }
 
-/* CreateControllerSettingBadRequest describes a response with status code 400, with default header values.
+/*
+CreateControllerSettingBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type CreateControllerSettingBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateControllerSettingBadRequest) Error() string {
-	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create controller setting bad request response has a 2xx status code
+func (o *CreateControllerSettingBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create controller setting bad request response has a 3xx status code
+func (o *CreateControllerSettingBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create controller setting bad request response has a 4xx status code
+func (o *CreateControllerSettingBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create controller setting bad request response has a 5xx status code
+func (o *CreateControllerSettingBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create controller setting bad request response a status code equal to that given
+func (o *CreateControllerSettingBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create controller setting bad request response
+func (o *CreateControllerSettingBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateControllerSettingBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingBadRequest %s", 400, payload)
+}
+
+func (o *CreateControllerSettingBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingBadRequest %s", 400, payload)
+}
+
 func (o *CreateControllerSettingBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateControllerSettingBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateControllerSettingBadRequest binds the response header WWW-Authenticate
+func (o *CreateControllerSettingBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateControllerSettingUnauthorized creates a CreateControllerSettingUnauthorized with default headers values
@@ -145,31 +302,108 @@ func NewCreateControllerSettingUnauthorized() *CreateControllerSettingUnauthoriz
 	return &CreateControllerSettingUnauthorized{}
 }
 
-/* CreateControllerSettingUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateControllerSettingUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreateControllerSettingUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateControllerSettingUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create controller setting unauthorized response has a 2xx status code
+func (o *CreateControllerSettingUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create controller setting unauthorized response has a 3xx status code
+func (o *CreateControllerSettingUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create controller setting unauthorized response has a 4xx status code
+func (o *CreateControllerSettingUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create controller setting unauthorized response has a 5xx status code
+func (o *CreateControllerSettingUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create controller setting unauthorized response a status code equal to that given
+func (o *CreateControllerSettingUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create controller setting unauthorized response
+func (o *CreateControllerSettingUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateControllerSettingUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingUnauthorized %s", 401, payload)
+}
+
+func (o *CreateControllerSettingUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingUnauthorized %s", 401, payload)
+}
+
 func (o *CreateControllerSettingUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateControllerSettingUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateControllerSettingUnauthorized binds the response header WWW-Authenticate
+func (o *CreateControllerSettingUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreateControllerSettingTooManyRequests creates a CreateControllerSettingTooManyRequests with default headers values
@@ -177,29 +411,106 @@ func NewCreateControllerSettingTooManyRequests() *CreateControllerSettingTooMany
 	return &CreateControllerSettingTooManyRequests{}
 }
 
-/* CreateControllerSettingTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreateControllerSettingTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreateControllerSettingTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreateControllerSettingTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create controller setting too many requests response has a 2xx status code
+func (o *CreateControllerSettingTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create controller setting too many requests response has a 3xx status code
+func (o *CreateControllerSettingTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create controller setting too many requests response has a 4xx status code
+func (o *CreateControllerSettingTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create controller setting too many requests response has a 5xx status code
+func (o *CreateControllerSettingTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create controller setting too many requests response a status code equal to that given
+func (o *CreateControllerSettingTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create controller setting too many requests response
+func (o *CreateControllerSettingTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreateControllerSettingTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingTooManyRequests %s", 429, payload)
+}
+
+func (o *CreateControllerSettingTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /controller-settings][%d] createControllerSettingTooManyRequests %s", 429, payload)
+}
+
 func (o *CreateControllerSettingTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreateControllerSettingTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreateControllerSettingTooManyRequests binds the response header WWW-Authenticate
+func (o *CreateControllerSettingTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

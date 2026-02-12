@@ -30,7 +30,7 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -56,7 +56,6 @@ func NewExtendCurrentIdentityAuthenticatorParams() ExtendCurrentIdentityAuthenti
 //
 // swagger:parameters extendCurrentIdentityAuthenticator
 type ExtendCurrentIdentityAuthenticatorParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -65,6 +64,7 @@ type ExtendCurrentIdentityAuthenticatorParams struct {
 	  In: body
 	*/
 	Extend *rest_model.IdentityExtendEnrollmentRequest
+
 	/*The id of the requested resource
 	  Required: true
 	  In: path
@@ -82,10 +82,12 @@ func (o *ExtendCurrentIdentityAuthenticatorParams) BindRequest(r *http.Request, 
 	o.HTTPRequest = r
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.IdentityExtendEnrollmentRequest
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("extend", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("extend", "body", "", err))
@@ -96,7 +98,7 @@ func (o *ExtendCurrentIdentityAuthenticatorParams) BindRequest(r *http.Request, 
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

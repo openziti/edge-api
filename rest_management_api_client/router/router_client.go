@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new router API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new router API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new router API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -82,12 +108,12 @@ type ClientService interface {
 }
 
 /*
-  CreateRouter creates a router resource
+CreateRouter creates a router resource
 
-  Create a router resource. Requires admin access.
+Create a router resource. Requires admin access.
 */
 func (a *Client) CreateRouter(params *CreateRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateRouterCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateRouterParams()
 	}
@@ -107,28 +133,33 @@ func (a *Client) CreateRouter(params *CreateRouterParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateRouterCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  CreateTransitRouter creates a router resource
+CreateTransitRouter creates a router resource
 
-  Create a router resource. Requires admin access.
+Create a router resource. Requires admin access.
 */
 func (a *Client) CreateTransitRouter(params *CreateTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTransitRouterCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTransitRouterParams()
 	}
@@ -148,28 +179,33 @@ func (a *Client) CreateTransitRouter(params *CreateTransitRouterParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTransitRouterCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createTransitRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteRouter deletes a router
+DeleteRouter deletes a router
 
-  Delete a router by id. Requires admin access.
+Delete a router by id. Requires admin access.
 */
 func (a *Client) DeleteRouter(params *DeleteRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteRouterParams()
 	}
@@ -189,28 +225,33 @@ func (a *Client) DeleteRouter(params *DeleteRouterParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteTransitRouter deletes a router
+DeleteTransitRouter deletes a router
 
-  Delete a router by id. Requires admin access.
+Delete a router by id. Requires admin access.
 */
 func (a *Client) DeleteTransitRouter(params *DeleteTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTransitRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTransitRouterParams()
 	}
@@ -230,28 +271,33 @@ func (a *Client) DeleteTransitRouter(params *DeleteTransitRouterParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTransitRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteTransitRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailRouter retrieves a single router
+DetailRouter retrieves a single router
 
-  Retrieves a single router by id. Requires admin access.
+Retrieves a single router by id. Requires admin access.
 */
 func (a *Client) DetailRouter(params *DetailRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailRouterParams()
 	}
@@ -271,28 +317,33 @@ func (a *Client) DetailRouter(params *DetailRouterParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailTransitRouter retrieves a single router
+DetailTransitRouter retrieves a single router
 
-  Retrieves a single router by id. Requires admin access.
+Retrieves a single router by id. Requires admin access.
 */
 func (a *Client) DetailTransitRouter(params *DetailTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailTransitRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailTransitRouterParams()
 	}
@@ -312,29 +363,33 @@ func (a *Client) DetailTransitRouter(params *DetailTransitRouterParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailTransitRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailTransitRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListRouters lists routers
+ListRouters lists routers
 
-  Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListRouters(params *ListRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRoutersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListRoutersParams()
 	}
@@ -354,29 +409,33 @@ func (a *Client) ListRouters(params *ListRoutersParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListRoutersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listRouters: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListTransitRouters lists routers
+ListTransitRouters lists routers
 
-  Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of router resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListTransitRouters(params *ListTransitRoutersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTransitRoutersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListTransitRoutersParams()
 	}
@@ -396,28 +455,33 @@ func (a *Client) ListTransitRouters(params *ListTransitRoutersParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListTransitRoutersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listTransitRouters: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchRouter updates the supplied fields on a router
+PatchRouter updates the supplied fields on a router
 
-  Update the supplied fields on a router. Requires admin access.
+Update the supplied fields on a router. Requires admin access.
 */
 func (a *Client) PatchRouter(params *PatchRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchRouterParams()
 	}
@@ -437,28 +501,33 @@ func (a *Client) PatchRouter(params *PatchRouterParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchTransitRouter updates the supplied fields on a router
+PatchTransitRouter updates the supplied fields on a router
 
-  Update the supplied fields on a router. Requires admin access.
+Update the supplied fields on a router. Requires admin access.
 */
 func (a *Client) PatchTransitRouter(params *PatchTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchTransitRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchTransitRouterParams()
 	}
@@ -478,28 +547,33 @@ func (a *Client) PatchTransitRouter(params *PatchTransitRouterParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchTransitRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchTransitRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateRouter updates all fields on a router
+UpdateRouter updates all fields on a router
 
-  Update all fields on a router by id. Requires admin access.
+Update all fields on a router by id. Requires admin access.
 */
 func (a *Client) UpdateRouter(params *UpdateRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateRouterParams()
 	}
@@ -519,28 +593,33 @@ func (a *Client) UpdateRouter(params *UpdateRouterParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateTransitRouter updates all fields on a router
+UpdateTransitRouter updates all fields on a router
 
-  Update all fields on a router by id. Requires admin access.
+Update all fields on a router by id. Requires admin access.
 */
 func (a *Client) UpdateTransitRouter(params *UpdateTransitRouterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTransitRouterOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateTransitRouterParams()
 	}
@@ -560,17 +639,22 @@ func (a *Client) UpdateTransitRouter(params *UpdateTransitRouterParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateTransitRouterOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateTransitRouter: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

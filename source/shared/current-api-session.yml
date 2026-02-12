@@ -58,10 +58,22 @@ paths:
 responses:
   totpTokenResponse:
     description: A TOTP token create response, contains a token used to satisfy posture checks
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/totpTokenEnvelope'
   detailCurrentAPISession:
     description: The API session associated with the session used to issue the request
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/currentApiSessionDetailEnvelope'
     examples:

@@ -30,11 +30,14 @@ package current_api_session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteCurrentAPISessionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteCurrentAPISessionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteCurrentAPISessionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteCurrentAPISessionOK()
@@ -60,7 +63,7 @@ func (o *DeleteCurrentAPISessionReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /current-api-session] DeleteCurrentAPISession", response, response.Code())
 	}
 }
 
@@ -69,31 +72,108 @@ func NewDeleteCurrentAPISessionOK() *DeleteCurrentAPISessionOK {
 	return &DeleteCurrentAPISessionOK{}
 }
 
-/* DeleteCurrentAPISessionOK describes a response with status code 200, with default header values.
+/*
+DeleteCurrentAPISessionOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type DeleteCurrentAPISessionOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteCurrentAPISessionOK) Error() string {
-	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete current Api session o k response has a 2xx status code
+func (o *DeleteCurrentAPISessionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete current Api session o k response has a 3xx status code
+func (o *DeleteCurrentAPISessionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete current Api session o k response has a 4xx status code
+func (o *DeleteCurrentAPISessionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete current Api session o k response has a 5xx status code
+func (o *DeleteCurrentAPISessionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete current Api session o k response a status code equal to that given
+func (o *DeleteCurrentAPISessionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete current Api session o k response
+func (o *DeleteCurrentAPISessionOK) Code() int {
+	return 200
+}
+
+func (o *DeleteCurrentAPISessionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionOK %s", 200, payload)
+}
+
+func (o *DeleteCurrentAPISessionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionOK %s", 200, payload)
+}
+
 func (o *DeleteCurrentAPISessionOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteCurrentAPISessionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteCurrentAPISessionOK binds the response header WWW-Authenticate
+func (o *DeleteCurrentAPISessionOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteCurrentAPISessionUnauthorized creates a DeleteCurrentAPISessionUnauthorized with default headers values
@@ -101,29 +181,106 @@ func NewDeleteCurrentAPISessionUnauthorized() *DeleteCurrentAPISessionUnauthoriz
 	return &DeleteCurrentAPISessionUnauthorized{}
 }
 
-/* DeleteCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteCurrentAPISessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteCurrentAPISessionUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteCurrentAPISessionUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete current Api session unauthorized response has a 2xx status code
+func (o *DeleteCurrentAPISessionUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete current Api session unauthorized response has a 3xx status code
+func (o *DeleteCurrentAPISessionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete current Api session unauthorized response has a 4xx status code
+func (o *DeleteCurrentAPISessionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete current Api session unauthorized response has a 5xx status code
+func (o *DeleteCurrentAPISessionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete current Api session unauthorized response a status code equal to that given
+func (o *DeleteCurrentAPISessionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete current Api session unauthorized response
+func (o *DeleteCurrentAPISessionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteCurrentAPISessionUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteCurrentAPISessionUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /current-api-session][%d] deleteCurrentApiSessionUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteCurrentAPISessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteCurrentAPISessionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteCurrentAPISessionUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteCurrentAPISessionUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

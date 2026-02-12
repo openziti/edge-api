@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -105,11 +106,15 @@ func (m *PolicyAdvice) validateCommonRouters(formats strfmt.Registry) error {
 
 		if m.CommonRouters[i] != nil {
 			if err := m.CommonRouters[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("commonRouters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("commonRouters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -126,11 +131,15 @@ func (m *PolicyAdvice) validateIdentity(formats strfmt.Registry) error {
 
 	if m.Identity != nil {
 		if err := m.Identity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("identity")
 			}
+
 			return err
 		}
 	}
@@ -145,11 +154,15 @@ func (m *PolicyAdvice) validateService(formats strfmt.Registry) error {
 
 	if m.Service != nil {
 		if err := m.Service.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("service")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("service")
 			}
+
 			return err
 		}
 	}
@@ -184,12 +197,21 @@ func (m *PolicyAdvice) contextValidateCommonRouters(ctx context.Context, formats
 	for i := 0; i < len(m.CommonRouters); i++ {
 
 		if m.CommonRouters[i] != nil {
+
+			if swag.IsZero(m.CommonRouters[i]) { // not required
+				return nil
+			}
+
 			if err := m.CommonRouters[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("commonRouters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("commonRouters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -202,12 +224,21 @@ func (m *PolicyAdvice) contextValidateCommonRouters(ctx context.Context, formats
 func (m *PolicyAdvice) contextValidateIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Identity != nil {
+
+		if swag.IsZero(m.Identity) { // not required
+			return nil
+		}
+
 		if err := m.Identity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("identity")
 			}
+
 			return err
 		}
 	}
@@ -218,12 +249,21 @@ func (m *PolicyAdvice) contextValidateIdentity(ctx context.Context, formats strf
 func (m *PolicyAdvice) contextValidateService(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Service != nil {
+
+		if swag.IsZero(m.Service) { // not required
+			return nil
+		}
+
 		if err := m.Service.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("service")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("service")
 			}
+
 			return err
 		}
 	}

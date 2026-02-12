@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteServiceHandlerFunc turns a function with the right signature into a delete service handler
-type DeleteServiceHandlerFunc func(DeleteServiceParams, interface{}) middleware.Responder
+type DeleteServiceHandlerFunc func(DeleteServiceParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteServiceHandlerFunc) Handle(params DeleteServiceParams, principal interface{}) middleware.Responder {
+func (fn DeleteServiceHandlerFunc) Handle(params DeleteServiceParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteServiceHandler interface for that can handle valid delete service params
 type DeleteServiceHandler interface {
-	Handle(DeleteServiceParams, interface{}) middleware.Responder
+	Handle(DeleteServiceParams, any) middleware.Responder
 }
 
 // NewDeleteService creates a new http.Handler for the delete service operation
@@ -53,12 +53,12 @@ func NewDeleteService(ctx *middleware.Context, handler DeleteServiceHandler) *De
 	return &DeleteService{Context: ctx, Handler: handler}
 }
 
-/* DeleteService swagger:route DELETE /services/{id} Service deleteService
+/*
+	DeleteService swagger:route DELETE /services/{id} Service deleteService
 
-Delete a service
+# Delete a service
 
 Delete a service by id. Requires admin access.
-
 */
 type DeleteService struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteService) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteService) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // ListPostureCheckRoleAttributesHandlerFunc turns a function with the right signature into a list posture check role attributes handler
-type ListPostureCheckRoleAttributesHandlerFunc func(ListPostureCheckRoleAttributesParams, interface{}) middleware.Responder
+type ListPostureCheckRoleAttributesHandlerFunc func(ListPostureCheckRoleAttributesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListPostureCheckRoleAttributesHandlerFunc) Handle(params ListPostureCheckRoleAttributesParams, principal interface{}) middleware.Responder {
+func (fn ListPostureCheckRoleAttributesHandlerFunc) Handle(params ListPostureCheckRoleAttributesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListPostureCheckRoleAttributesHandler interface for that can handle valid list posture check role attributes params
 type ListPostureCheckRoleAttributesHandler interface {
-	Handle(ListPostureCheckRoleAttributesParams, interface{}) middleware.Responder
+	Handle(ListPostureCheckRoleAttributesParams, any) middleware.Responder
 }
 
 // NewListPostureCheckRoleAttributes creates a new http.Handler for the list posture check role attributes operation
@@ -53,13 +53,12 @@ func NewListPostureCheckRoleAttributes(ctx *middleware.Context, handler ListPost
 	return &ListPostureCheckRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/* ListPostureCheckRoleAttributes swagger:route GET /posture-check-role-attributes Role Attributes listPostureCheckRoleAttributes
+/*
+	ListPostureCheckRoleAttributes swagger:route GET /posture-check-role-attributes Role Attributes listPostureCheckRoleAttributes
 
-List role attributes in use by posture checks
+# List role attributes in use by posture checks
 
 Retrieves a list of role attributes in use by posture checks; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListPostureCheckRoleAttributes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListPostureCheckRoleAttributes) ServeHTTP(rw http.ResponseWriter, r *ht
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListPostureCheckRoleAttributes) ServeHTTP(rw http.ResponseWriter, r *ht
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

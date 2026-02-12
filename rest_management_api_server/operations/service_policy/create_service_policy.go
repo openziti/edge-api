@@ -36,16 +36,16 @@ import (
 )
 
 // CreateServicePolicyHandlerFunc turns a function with the right signature into a create service policy handler
-type CreateServicePolicyHandlerFunc func(CreateServicePolicyParams, interface{}) middleware.Responder
+type CreateServicePolicyHandlerFunc func(CreateServicePolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateServicePolicyHandlerFunc) Handle(params CreateServicePolicyParams, principal interface{}) middleware.Responder {
+func (fn CreateServicePolicyHandlerFunc) Handle(params CreateServicePolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateServicePolicyHandler interface for that can handle valid create service policy params
 type CreateServicePolicyHandler interface {
-	Handle(CreateServicePolicyParams, interface{}) middleware.Responder
+	Handle(CreateServicePolicyParams, any) middleware.Responder
 }
 
 // NewCreateServicePolicy creates a new http.Handler for the create service policy operation
@@ -53,12 +53,12 @@ func NewCreateServicePolicy(ctx *middleware.Context, handler CreateServicePolicy
 	return &CreateServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* CreateServicePolicy swagger:route POST /service-policies Service Policy createServicePolicy
+/*
+	CreateServicePolicy swagger:route POST /service-policies Service Policy createServicePolicy
 
-Create a service policy resource
+# Create a service policy resource
 
 Create a service policy resource. Requires admin access.
-
 */
 type CreateServicePolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateServicePolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateServicePolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -78,10 +78,12 @@ func NewUpdateCurrentIdentityAuthenticatorParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* UpdateCurrentIdentityAuthenticatorParams contains all the parameters to send to the API endpoint
-   for the update current identity authenticator operation.
+/*
+UpdateCurrentIdentityAuthenticatorParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update current identity authenticator operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateCurrentIdentityAuthenticatorParams struct {
 

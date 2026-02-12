@@ -188,10 +188,22 @@ paths:
 responses:
   listConfigTypes:
     description: A list of config-types
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listConfigTypesEnvelope'
   detailConfigType:
     description: A singular config-type resource
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailConfigTypeEnvelope'
 

@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteExternalJWTSignerHandlerFunc turns a function with the right signature into a delete external Jwt signer handler
-type DeleteExternalJWTSignerHandlerFunc func(DeleteExternalJWTSignerParams, interface{}) middleware.Responder
+type DeleteExternalJWTSignerHandlerFunc func(DeleteExternalJWTSignerParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteExternalJWTSignerHandlerFunc) Handle(params DeleteExternalJWTSignerParams, principal interface{}) middleware.Responder {
+func (fn DeleteExternalJWTSignerHandlerFunc) Handle(params DeleteExternalJWTSignerParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteExternalJWTSignerHandler interface for that can handle valid delete external Jwt signer params
 type DeleteExternalJWTSignerHandler interface {
-	Handle(DeleteExternalJWTSignerParams, interface{}) middleware.Responder
+	Handle(DeleteExternalJWTSignerParams, any) middleware.Responder
 }
 
 // NewDeleteExternalJWTSigner creates a new http.Handler for the delete external Jwt signer operation
@@ -53,13 +53,12 @@ func NewDeleteExternalJWTSigner(ctx *middleware.Context, handler DeleteExternalJ
 	return &DeleteExternalJWTSigner{Context: ctx, Handler: handler}
 }
 
-/* DeleteExternalJWTSigner swagger:route DELETE /external-jwt-signers/{id} External JWT Signer deleteExternalJwtSigner
+/*
+	DeleteExternalJWTSigner swagger:route DELETE /external-jwt-signers/{id} External JWT Signer deleteExternalJwtSigner
 
-Delete an External JWT Signer
+# Delete an External JWT Signer
 
 Delete an External JWT Signer by id. Requires admin access.
-
-
 */
 type DeleteExternalJWTSigner struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DeleteExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DeleteExternalJWTSigner) ServeHTTP(rw http.ResponseWriter, r *http.Requ
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

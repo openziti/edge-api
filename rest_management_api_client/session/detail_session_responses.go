@@ -30,11 +30,14 @@ package session
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailSessionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailSessionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailSessionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailSessionOK()
@@ -78,7 +81,7 @@ func (o *DetailSessionReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sessions/{id}] detailSession", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailSessionOK() *DetailSessionOK {
 	return &DetailSessionOK{}
 }
 
-/* DetailSessionOK describes a response with status code 200, with default header values.
+/*
+DetailSessionOK describes a response with status code 200, with default header values.
 
 A single session
 */
 type DetailSessionOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailSessionManagementEnvelope
 }
 
-func (o *DetailSessionOK) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail session o k response has a 2xx status code
+func (o *DetailSessionOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail session o k response has a 3xx status code
+func (o *DetailSessionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session o k response has a 4xx status code
+func (o *DetailSessionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail session o k response has a 5xx status code
+func (o *DetailSessionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session o k response a status code equal to that given
+func (o *DetailSessionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail session o k response
+func (o *DetailSessionOK) Code() int {
+	return 200
+}
+
+func (o *DetailSessionOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionOK %s", 200, payload)
+}
+
+func (o *DetailSessionOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionOK %s", 200, payload)
+}
+
 func (o *DetailSessionOK) GetPayload() *rest_model.DetailSessionManagementEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailSessionManagementEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionOK binds the response header WWW-Authenticate
+func (o *DetailSessionOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionUnauthorized creates a DetailSessionUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailSessionUnauthorized() *DetailSessionUnauthorized {
 	return &DetailSessionUnauthorized{}
 }
 
-/* DetailSessionUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailSessionUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailSessionUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail session unauthorized response has a 2xx status code
+func (o *DetailSessionUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session unauthorized response has a 3xx status code
+func (o *DetailSessionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session unauthorized response has a 4xx status code
+func (o *DetailSessionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session unauthorized response has a 5xx status code
+func (o *DetailSessionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session unauthorized response a status code equal to that given
+func (o *DetailSessionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail session unauthorized response
+func (o *DetailSessionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailSessionUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionUnauthorized %s", 401, payload)
+}
+
+func (o *DetailSessionUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionUnauthorized %s", 401, payload)
+}
+
 func (o *DetailSessionUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionUnauthorized binds the response header WWW-Authenticate
+func (o *DetailSessionUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionNotFound creates a DetailSessionNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailSessionNotFound() *DetailSessionNotFound {
 	return &DetailSessionNotFound{}
 }
 
-/* DetailSessionNotFound describes a response with status code 404, with default header values.
+/*
+DetailSessionNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailSessionNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionNotFound) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail session not found response has a 2xx status code
+func (o *DetailSessionNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session not found response has a 3xx status code
+func (o *DetailSessionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session not found response has a 4xx status code
+func (o *DetailSessionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session not found response has a 5xx status code
+func (o *DetailSessionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session not found response a status code equal to that given
+func (o *DetailSessionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail session not found response
+func (o *DetailSessionNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailSessionNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionNotFound %s", 404, payload)
+}
+
+func (o *DetailSessionNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionNotFound %s", 404, payload)
+}
+
 func (o *DetailSessionNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionNotFound binds the response header WWW-Authenticate
+func (o *DetailSessionNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionTooManyRequests creates a DetailSessionTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailSessionTooManyRequests() *DetailSessionTooManyRequests {
 	return &DetailSessionTooManyRequests{}
 }
 
-/* DetailSessionTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailSessionTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailSessionTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail session too many requests response has a 2xx status code
+func (o *DetailSessionTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session too many requests response has a 3xx status code
+func (o *DetailSessionTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session too many requests response has a 4xx status code
+func (o *DetailSessionTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail session too many requests response has a 5xx status code
+func (o *DetailSessionTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail session too many requests response a status code equal to that given
+func (o *DetailSessionTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail session too many requests response
+func (o *DetailSessionTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailSessionTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailSessionTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailSessionTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailSessionTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailSessionServiceUnavailable creates a DetailSessionServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailSessionServiceUnavailable() *DetailSessionServiceUnavailable {
 	return &DetailSessionServiceUnavailable{}
 }
 
-/* DetailSessionServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailSessionServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailSessionServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailSessionServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail session service unavailable response has a 2xx status code
+func (o *DetailSessionServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail session service unavailable response has a 3xx status code
+func (o *DetailSessionServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail session service unavailable response has a 4xx status code
+func (o *DetailSessionServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail session service unavailable response has a 5xx status code
+func (o *DetailSessionServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail session service unavailable response a status code equal to that given
+func (o *DetailSessionServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail session service unavailable response
+func (o *DetailSessionServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailSessionServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailSessionServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /sessions/{id}][%d] detailSessionServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailSessionServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSessionServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSessionServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailSessionServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

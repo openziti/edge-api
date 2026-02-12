@@ -30,11 +30,14 @@ package identity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailIdentityReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailIdentityReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailIdentityReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailIdentityOK()
@@ -78,7 +81,7 @@ func (o *DetailIdentityReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /identities/{id}] detailIdentity", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailIdentityOK() *DetailIdentityOK {
 	return &DetailIdentityOK{}
 }
 
-/* DetailIdentityOK describes a response with status code 200, with default header values.
+/*
+DetailIdentityOK describes a response with status code 200, with default header values.
 
 A single identity
 */
 type DetailIdentityOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailIdentityEnvelope
 }
 
-func (o *DetailIdentityOK) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail identity o k response has a 2xx status code
+func (o *DetailIdentityOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail identity o k response has a 3xx status code
+func (o *DetailIdentityOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail identity o k response has a 4xx status code
+func (o *DetailIdentityOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail identity o k response has a 5xx status code
+func (o *DetailIdentityOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail identity o k response a status code equal to that given
+func (o *DetailIdentityOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail identity o k response
+func (o *DetailIdentityOK) Code() int {
+	return 200
+}
+
+func (o *DetailIdentityOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityOK %s", 200, payload)
+}
+
+func (o *DetailIdentityOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityOK %s", 200, payload)
+}
+
 func (o *DetailIdentityOK) GetPayload() *rest_model.DetailIdentityEnvelope {
 	return o.Payload
 }
 
 func (o *DetailIdentityOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailIdentityEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailIdentityOK binds the response header WWW-Authenticate
+func (o *DetailIdentityOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailIdentityUnauthorized creates a DetailIdentityUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailIdentityUnauthorized() *DetailIdentityUnauthorized {
 	return &DetailIdentityUnauthorized{}
 }
 
-/* DetailIdentityUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailIdentityUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailIdentityUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailIdentityUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail identity unauthorized response has a 2xx status code
+func (o *DetailIdentityUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail identity unauthorized response has a 3xx status code
+func (o *DetailIdentityUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail identity unauthorized response has a 4xx status code
+func (o *DetailIdentityUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail identity unauthorized response has a 5xx status code
+func (o *DetailIdentityUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail identity unauthorized response a status code equal to that given
+func (o *DetailIdentityUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail identity unauthorized response
+func (o *DetailIdentityUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailIdentityUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityUnauthorized %s", 401, payload)
+}
+
+func (o *DetailIdentityUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityUnauthorized %s", 401, payload)
+}
+
 func (o *DetailIdentityUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailIdentityUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailIdentityUnauthorized binds the response header WWW-Authenticate
+func (o *DetailIdentityUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailIdentityNotFound creates a DetailIdentityNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailIdentityNotFound() *DetailIdentityNotFound {
 	return &DetailIdentityNotFound{}
 }
 
-/* DetailIdentityNotFound describes a response with status code 404, with default header values.
+/*
+DetailIdentityNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailIdentityNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailIdentityNotFound) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail identity not found response has a 2xx status code
+func (o *DetailIdentityNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail identity not found response has a 3xx status code
+func (o *DetailIdentityNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail identity not found response has a 4xx status code
+func (o *DetailIdentityNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail identity not found response has a 5xx status code
+func (o *DetailIdentityNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail identity not found response a status code equal to that given
+func (o *DetailIdentityNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail identity not found response
+func (o *DetailIdentityNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailIdentityNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityNotFound %s", 404, payload)
+}
+
+func (o *DetailIdentityNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityNotFound %s", 404, payload)
+}
+
 func (o *DetailIdentityNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailIdentityNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailIdentityNotFound binds the response header WWW-Authenticate
+func (o *DetailIdentityNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailIdentityTooManyRequests creates a DetailIdentityTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailIdentityTooManyRequests() *DetailIdentityTooManyRequests {
 	return &DetailIdentityTooManyRequests{}
 }
 
-/* DetailIdentityTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailIdentityTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailIdentityTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailIdentityTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail identity too many requests response has a 2xx status code
+func (o *DetailIdentityTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail identity too many requests response has a 3xx status code
+func (o *DetailIdentityTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail identity too many requests response has a 4xx status code
+func (o *DetailIdentityTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail identity too many requests response has a 5xx status code
+func (o *DetailIdentityTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail identity too many requests response a status code equal to that given
+func (o *DetailIdentityTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail identity too many requests response
+func (o *DetailIdentityTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailIdentityTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailIdentityTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailIdentityTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailIdentityTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailIdentityTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailIdentityTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailIdentityServiceUnavailable creates a DetailIdentityServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailIdentityServiceUnavailable() *DetailIdentityServiceUnavailable {
 	return &DetailIdentityServiceUnavailable{}
 }
 
-/* DetailIdentityServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailIdentityServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailIdentityServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailIdentityServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail identity service unavailable response has a 2xx status code
+func (o *DetailIdentityServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail identity service unavailable response has a 3xx status code
+func (o *DetailIdentityServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail identity service unavailable response has a 4xx status code
+func (o *DetailIdentityServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail identity service unavailable response has a 5xx status code
+func (o *DetailIdentityServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail identity service unavailable response a status code equal to that given
+func (o *DetailIdentityServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail identity service unavailable response
+func (o *DetailIdentityServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailIdentityServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailIdentityServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identities/{id}][%d] detailIdentityServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailIdentityServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailIdentityServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailIdentityServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailIdentityServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

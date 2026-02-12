@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateServicePolicyHandlerFunc turns a function with the right signature into a update service policy handler
-type UpdateServicePolicyHandlerFunc func(UpdateServicePolicyParams, interface{}) middleware.Responder
+type UpdateServicePolicyHandlerFunc func(UpdateServicePolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateServicePolicyHandlerFunc) Handle(params UpdateServicePolicyParams, principal interface{}) middleware.Responder {
+func (fn UpdateServicePolicyHandlerFunc) Handle(params UpdateServicePolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateServicePolicyHandler interface for that can handle valid update service policy params
 type UpdateServicePolicyHandler interface {
-	Handle(UpdateServicePolicyParams, interface{}) middleware.Responder
+	Handle(UpdateServicePolicyParams, any) middleware.Responder
 }
 
 // NewUpdateServicePolicy creates a new http.Handler for the update service policy operation
@@ -53,12 +53,12 @@ func NewUpdateServicePolicy(ctx *middleware.Context, handler UpdateServicePolicy
 	return &UpdateServicePolicy{Context: ctx, Handler: handler}
 }
 
-/* UpdateServicePolicy swagger:route PUT /service-policies/{id} Service Policy updateServicePolicy
+/*
+	UpdateServicePolicy swagger:route PUT /service-policies/{id} Service Policy updateServicePolicy
 
-Update all fields on a service policy
+# Update all fields on a service policy
 
 Update all fields on a service policy by id. Requires admin access.
-
 */
 type UpdateServicePolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateServicePolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateServicePolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

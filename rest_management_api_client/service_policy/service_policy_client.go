@@ -33,12 +33,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new service policy API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new service policy API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new service policy API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -49,7 +75,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -76,12 +102,12 @@ type ClientService interface {
 }
 
 /*
-  CreateServicePolicy creates a service policy resource
+CreateServicePolicy creates a service policy resource
 
-  Create a service policy resource. Requires admin access.
+Create a service policy resource. Requires admin access.
 */
 func (a *Client) CreateServicePolicy(params *CreateServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateServicePolicyCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateServicePolicyParams()
 	}
@@ -101,28 +127,33 @@ func (a *Client) CreateServicePolicy(params *CreateServicePolicyParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateServicePolicyCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createServicePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DeleteServicePolicy deletes a service policy
+DeleteServicePolicy deletes a service policy
 
-  Delete a service policy by id. Requires admin access.
+Delete a service policy by id. Requires admin access.
 */
 func (a *Client) DeleteServicePolicy(params *DeleteServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServicePolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteServicePolicyParams()
 	}
@@ -142,28 +173,33 @@ func (a *Client) DeleteServicePolicy(params *DeleteServicePolicyParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteServicePolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteServicePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  DetailServicePolicy retrieves a single service policy
+DetailServicePolicy retrieves a single service policy
 
-  Retrieves a single service policy by id. Requires admin access.
+Retrieves a single service policy by id. Requires admin access.
 */
 func (a *Client) DetailServicePolicy(params *DetailServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetailServicePolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDetailServicePolicyParams()
 	}
@@ -183,29 +219,33 @@ func (a *Client) DetailServicePolicy(params *DetailServicePolicyParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DetailServicePolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for detailServicePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServicePolicies lists service policies
+ListServicePolicies lists service policies
 
-  Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of service policy resources; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServicePolicies(params *ListServicePoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePoliciesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServicePoliciesParams()
 	}
@@ -225,29 +265,33 @@ func (a *Client) ListServicePolicies(params *ListServicePoliciesParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServicePoliciesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServicePolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServicePolicyIdentities lists identities a service policy affects
+ListServicePolicyIdentities lists identities a service policy affects
 
-  Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of identity resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServicePolicyIdentities(params *ListServicePolicyIdentitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePolicyIdentitiesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServicePolicyIdentitiesParams()
 	}
@@ -267,29 +311,33 @@ func (a *Client) ListServicePolicyIdentities(params *ListServicePolicyIdentities
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServicePolicyIdentitiesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServicePolicyIdentities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServicePolicyPostureChecks lists posture check a service policy includes
+ListServicePolicyPostureChecks lists posture check a service policy includes
 
-  Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServicePolicyPostureChecks(params *ListServicePolicyPostureChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePolicyPostureChecksOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServicePolicyPostureChecksParams()
 	}
@@ -309,29 +357,33 @@ func (a *Client) ListServicePolicyPostureChecks(params *ListServicePolicyPosture
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServicePolicyPostureChecksOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServicePolicyPostureChecks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  ListServicePolicyServices lists services a service policy affects
+ListServicePolicyServices lists services a service policy affects
 
-  Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
-
+Retrieves a list of service resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
 */
 func (a *Client) ListServicePolicyServices(params *ListServicePolicyServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicePolicyServicesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServicePolicyServicesParams()
 	}
@@ -351,28 +403,33 @@ func (a *Client) ListServicePolicyServices(params *ListServicePolicyServicesPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServicePolicyServicesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listServicePolicyServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  PatchServicePolicy updates the supplied fields on a service policy
+PatchServicePolicy updates the supplied fields on a service policy
 
-  Update the supplied fields on a service policy. Requires admin access.
+Update the supplied fields on a service policy. Requires admin access.
 */
 func (a *Client) PatchServicePolicy(params *PatchServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServicePolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPatchServicePolicyParams()
 	}
@@ -392,28 +449,33 @@ func (a *Client) PatchServicePolicy(params *PatchServicePolicyParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PatchServicePolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchServicePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  UpdateServicePolicy updates all fields on a service policy
+UpdateServicePolicy updates all fields on a service policy
 
-  Update all fields on a service policy by id. Requires admin access.
+Update all fields on a service policy by id. Requires admin access.
 */
 func (a *Client) UpdateServicePolicy(params *UpdateServicePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateServicePolicyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateServicePolicyParams()
 	}
@@ -433,17 +495,22 @@ func (a *Client) UpdateServicePolicy(params *UpdateServicePolicyParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateServicePolicyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateServicePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

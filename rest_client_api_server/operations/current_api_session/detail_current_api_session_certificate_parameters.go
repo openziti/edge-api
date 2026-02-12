@@ -50,7 +50,6 @@ func NewDetailCurrentAPISessionCertificateParams() DetailCurrentAPISessionCertif
 //
 // swagger:parameters detailCurrentApiSessionCertificate
 type DetailCurrentAPISessionCertificateParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

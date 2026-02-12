@@ -36,16 +36,16 @@ import (
 )
 
 // ListServicePolicyPostureChecksHandlerFunc turns a function with the right signature into a list service policy posture checks handler
-type ListServicePolicyPostureChecksHandlerFunc func(ListServicePolicyPostureChecksParams, interface{}) middleware.Responder
+type ListServicePolicyPostureChecksHandlerFunc func(ListServicePolicyPostureChecksParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServicePolicyPostureChecksHandlerFunc) Handle(params ListServicePolicyPostureChecksParams, principal interface{}) middleware.Responder {
+func (fn ListServicePolicyPostureChecksHandlerFunc) Handle(params ListServicePolicyPostureChecksParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServicePolicyPostureChecksHandler interface for that can handle valid list service policy posture checks params
 type ListServicePolicyPostureChecksHandler interface {
-	Handle(ListServicePolicyPostureChecksParams, interface{}) middleware.Responder
+	Handle(ListServicePolicyPostureChecksParams, any) middleware.Responder
 }
 
 // NewListServicePolicyPostureChecks creates a new http.Handler for the list service policy posture checks operation
@@ -53,13 +53,12 @@ func NewListServicePolicyPostureChecks(ctx *middleware.Context, handler ListServ
 	return &ListServicePolicyPostureChecks{Context: ctx, Handler: handler}
 }
 
-/* ListServicePolicyPostureChecks swagger:route GET /service-policies/{id}/posture-checks Service Policy listServicePolicyPostureChecks
+/*
+	ListServicePolicyPostureChecks swagger:route GET /service-policies/{id}/posture-checks Service Policy listServicePolicyPostureChecks
 
-List posture check a service policy includes
+# List posture check a service policy includes
 
 Retrieves a list of posture check resources that are affected by a service policy; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServicePolicyPostureChecks struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServicePolicyPostureChecks) ServeHTTP(rw http.ResponseWriter, r *ht
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServicePolicyPostureChecks) ServeHTTP(rw http.ResponseWriter, r *ht
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -30,11 +30,14 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailSpecBodyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailSpecBodyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailSpecBodyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailSpecBodyOK()
@@ -54,7 +57,7 @@ func (o *DetailSpecBodyReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /specs/{id}/spec] detailSpecBody", response, response.Code())
 	}
 }
 
@@ -63,29 +66,106 @@ func NewDetailSpecBodyOK() *DetailSpecBodyOK {
 	return &DetailSpecBodyOK{}
 }
 
-/* DetailSpecBodyOK describes a response with status code 200, with default header values.
+/*
+DetailSpecBodyOK describes a response with status code 200, with default header values.
 
 Returns the document that represents the specification
 */
 type DetailSpecBodyOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailSpecBodyEnvelope
 }
 
-func (o *DetailSpecBodyOK) Error() string {
-	return fmt.Sprintf("[GET /specs/{id}/spec][%d] detailSpecBodyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail spec body o k response has a 2xx status code
+func (o *DetailSpecBodyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail spec body o k response has a 3xx status code
+func (o *DetailSpecBodyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail spec body o k response has a 4xx status code
+func (o *DetailSpecBodyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail spec body o k response has a 5xx status code
+func (o *DetailSpecBodyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail spec body o k response a status code equal to that given
+func (o *DetailSpecBodyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail spec body o k response
+func (o *DetailSpecBodyOK) Code() int {
+	return 200
+}
+
+func (o *DetailSpecBodyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /specs/{id}/spec][%d] detailSpecBodyOK %s", 200, payload)
+}
+
+func (o *DetailSpecBodyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /specs/{id}/spec][%d] detailSpecBodyOK %s", 200, payload)
+}
+
 func (o *DetailSpecBodyOK) GetPayload() *rest_model.DetailSpecBodyEnvelope {
 	return o.Payload
 }
 
 func (o *DetailSpecBodyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailSpecBodyEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailSpecBodyOK binds the response header WWW-Authenticate
+func (o *DetailSpecBodyOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

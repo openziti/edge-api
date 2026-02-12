@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"io"
 	"strconv"
 
@@ -80,7 +81,7 @@ func (m *ListPostureCheckEnvelope) UnmarshalJSON(raw []byte) error {
 	}
 
 	propData, err := UnmarshalPostureCheckDetailSlice(bytes.NewBuffer(data.Data), runtime.JSONConsumer())
-	if err != nil && err != io.EOF {
+	if err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -150,11 +151,15 @@ func (m *ListPostureCheckEnvelope) validateData(formats strfmt.Registry) error {
 	for i := 0; i < len(m.Data()); i++ {
 
 		if err := m.dataField[i].Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("data" + "." + strconv.Itoa(i))
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("data" + "." + strconv.Itoa(i))
 			}
+
 			return err
 		}
 
@@ -171,11 +176,15 @@ func (m *ListPostureCheckEnvelope) validateMeta(formats strfmt.Registry) error {
 
 	if m.Meta != nil {
 		if err := m.Meta.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}
@@ -205,12 +214,20 @@ func (m *ListPostureCheckEnvelope) contextValidateData(ctx context.Context, form
 
 	for i := 0; i < len(m.Data()); i++ {
 
+		if swag.IsZero(m.dataField[i]) { // not required
+			return nil
+		}
+
 		if err := m.dataField[i].ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("data" + "." + strconv.Itoa(i))
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("data" + "." + strconv.Itoa(i))
 			}
+
 			return err
 		}
 
@@ -222,12 +239,17 @@ func (m *ListPostureCheckEnvelope) contextValidateData(ctx context.Context, form
 func (m *ListPostureCheckEnvelope) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Meta != nil {
+
 		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("meta")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("meta")
 			}
+
 			return err
 		}
 	}

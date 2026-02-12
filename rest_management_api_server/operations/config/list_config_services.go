@@ -36,16 +36,16 @@ import (
 )
 
 // ListConfigServicesHandlerFunc turns a function with the right signature into a list config services handler
-type ListConfigServicesHandlerFunc func(ListConfigServicesParams, interface{}) middleware.Responder
+type ListConfigServicesHandlerFunc func(ListConfigServicesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListConfigServicesHandlerFunc) Handle(params ListConfigServicesParams, principal interface{}) middleware.Responder {
+func (fn ListConfigServicesHandlerFunc) Handle(params ListConfigServicesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListConfigServicesHandler interface for that can handle valid list config services params
 type ListConfigServicesHandler interface {
-	Handle(ListConfigServicesParams, interface{}) middleware.Responder
+	Handle(ListConfigServicesParams, any) middleware.Responder
 }
 
 // NewListConfigServices creates a new http.Handler for the list config services operation
@@ -53,13 +53,12 @@ func NewListConfigServices(ctx *middleware.Context, handler ListConfigServicesHa
 	return &ListConfigServices{Context: ctx, Handler: handler}
 }
 
-/* ListConfigServices swagger:route GET /configs/{id}/services Config listConfigServices
+/*
+	ListConfigServices swagger:route GET /configs/{id}/services Config listConfigServices
 
-List services referenced by a config
+# List services referenced by a config
 
 Retrieves a list of service resources that reference a given config; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListConfigServices struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListConfigServices) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListConfigServices) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

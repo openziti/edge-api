@@ -52,7 +52,6 @@ func NewListServiceServiceEdgeRouterPoliciesParams() ListServiceServiceEdgeRoute
 //
 // swagger:parameters listServiceServiceEdgeRouterPolicies
 type ListServiceServiceEdgeRouterPoliciesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,15 +59,18 @@ type ListServiceServiceEdgeRouterPoliciesParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*The id of the requested resource
 	  Required: true
 	  In: path
 	*/
 	ID string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
@@ -83,7 +85,6 @@ func (o *ListServiceServiceEdgeRouterPoliciesParams) BindRequest(r *http.Request
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

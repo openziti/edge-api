@@ -36,16 +36,16 @@ import (
 )
 
 // CreateIdentityHandlerFunc turns a function with the right signature into a create identity handler
-type CreateIdentityHandlerFunc func(CreateIdentityParams, interface{}) middleware.Responder
+type CreateIdentityHandlerFunc func(CreateIdentityParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateIdentityHandlerFunc) Handle(params CreateIdentityParams, principal interface{}) middleware.Responder {
+func (fn CreateIdentityHandlerFunc) Handle(params CreateIdentityParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateIdentityHandler interface for that can handle valid create identity params
 type CreateIdentityHandler interface {
-	Handle(CreateIdentityParams, interface{}) middleware.Responder
+	Handle(CreateIdentityParams, any) middleware.Responder
 }
 
 // NewCreateIdentity creates a new http.Handler for the create identity operation
@@ -53,12 +53,12 @@ func NewCreateIdentity(ctx *middleware.Context, handler CreateIdentityHandler) *
 	return &CreateIdentity{Context: ctx, Handler: handler}
 }
 
-/* CreateIdentity swagger:route POST /identities Identity createIdentity
+/*
+	CreateIdentity swagger:route POST /identities Identity createIdentity
 
-Create an identity resource
+# Create an identity resource
 
 Create an identity resource. Requires admin access.
-
 */
 type CreateIdentity struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateIdentity) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -50,7 +50,6 @@ func NewDetailPostureCheckTypeParams() DetailPostureCheckTypeParams {
 //
 // swagger:parameters detailPostureCheckType
 type DetailPostureCheckTypeParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

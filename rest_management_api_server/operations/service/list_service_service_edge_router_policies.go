@@ -36,16 +36,16 @@ import (
 )
 
 // ListServiceServiceEdgeRouterPoliciesHandlerFunc turns a function with the right signature into a list service service edge router policies handler
-type ListServiceServiceEdgeRouterPoliciesHandlerFunc func(ListServiceServiceEdgeRouterPoliciesParams, interface{}) middleware.Responder
+type ListServiceServiceEdgeRouterPoliciesHandlerFunc func(ListServiceServiceEdgeRouterPoliciesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServiceServiceEdgeRouterPoliciesHandlerFunc) Handle(params ListServiceServiceEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+func (fn ListServiceServiceEdgeRouterPoliciesHandlerFunc) Handle(params ListServiceServiceEdgeRouterPoliciesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServiceServiceEdgeRouterPoliciesHandler interface for that can handle valid list service service edge router policies params
 type ListServiceServiceEdgeRouterPoliciesHandler interface {
-	Handle(ListServiceServiceEdgeRouterPoliciesParams, interface{}) middleware.Responder
+	Handle(ListServiceServiceEdgeRouterPoliciesParams, any) middleware.Responder
 }
 
 // NewListServiceServiceEdgeRouterPolicies creates a new http.Handler for the list service service edge router policies operation
@@ -53,13 +53,12 @@ func NewListServiceServiceEdgeRouterPolicies(ctx *middleware.Context, handler Li
 	return &ListServiceServiceEdgeRouterPolicies{Context: ctx, Handler: handler}
 }
 
-/* ListServiceServiceEdgeRouterPolicies swagger:route GET /services/{id}/service-edge-router-policies Service listServiceServiceEdgeRouterPolicies
+/*
+	ListServiceServiceEdgeRouterPolicies swagger:route GET /services/{id}/service-edge-router-policies Service listServiceServiceEdgeRouterPolicies
 
-List service edge router policies that affect a specific service
+# List service edge router policies that affect a specific service
 
 Retrieves a list of service edge router policy resources that affect a specific service; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServiceServiceEdgeRouterPolicies struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServiceServiceEdgeRouterPolicies) ServeHTTP(rw http.ResponseWriter,
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServiceServiceEdgeRouterPolicies) ServeHTTP(rw http.ResponseWriter,
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

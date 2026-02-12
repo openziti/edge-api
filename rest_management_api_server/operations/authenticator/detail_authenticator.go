@@ -36,16 +36,16 @@ import (
 )
 
 // DetailAuthenticatorHandlerFunc turns a function with the right signature into a detail authenticator handler
-type DetailAuthenticatorHandlerFunc func(DetailAuthenticatorParams, interface{}) middleware.Responder
+type DetailAuthenticatorHandlerFunc func(DetailAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailAuthenticatorHandlerFunc) Handle(params DetailAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn DetailAuthenticatorHandlerFunc) Handle(params DetailAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailAuthenticatorHandler interface for that can handle valid detail authenticator params
 type DetailAuthenticatorHandler interface {
-	Handle(DetailAuthenticatorParams, interface{}) middleware.Responder
+	Handle(DetailAuthenticatorParams, any) middleware.Responder
 }
 
 // NewDetailAuthenticator creates a new http.Handler for the detail authenticator operation
@@ -53,12 +53,12 @@ func NewDetailAuthenticator(ctx *middleware.Context, handler DetailAuthenticator
 	return &DetailAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* DetailAuthenticator swagger:route GET /authenticators/{id} Authenticator detailAuthenticator
+/*
+	DetailAuthenticator swagger:route GET /authenticators/{id} Authenticator detailAuthenticator
 
-Retrieves a single authenticator
+# Retrieves a single authenticator
 
 Retrieves a single authenticator by id. Requires admin access.
-
 */
 type DetailAuthenticator struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DetailAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DetailAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

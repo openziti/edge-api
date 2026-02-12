@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // GetIdentityPostureDataOKCode is the HTTP code returned for type GetIdentityPostureDataOK
 const GetIdentityPostureDataOKCode int = 200
 
-/*GetIdentityPostureDataOK Returns the document that represents posture data
+/*
+GetIdentityPostureDataOK Returns the document that represents posture data
 
 swagger:response getIdentityPostureDataOK
 */
 type GetIdentityPostureDataOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type GetIdentityPostureDataOK struct {
 func NewGetIdentityPostureDataOK() *GetIdentityPostureDataOK {
 
 	return &GetIdentityPostureDataOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity posture data o k response
+func (o *GetIdentityPostureDataOK) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPostureDataOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity posture data o k response
+func (o *GetIdentityPostureDataOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity posture data o k response
@@ -72,6 +89,23 @@ func (o *GetIdentityPostureDataOK) SetPayload(payload *rest_model.PostureDataEnv
 // WriteResponse to the client
 func (o *GetIdentityPostureDataOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *GetIdentityPostureDataOK) WriteResponse(rw http.ResponseWriter, produce
 // GetIdentityPostureDataUnauthorizedCode is the HTTP code returned for type GetIdentityPostureDataUnauthorized
 const GetIdentityPostureDataUnauthorizedCode int = 401
 
-/*GetIdentityPostureDataUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetIdentityPostureDataUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityPostureDataUnauthorized
 */
 type GetIdentityPostureDataUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type GetIdentityPostureDataUnauthorized struct {
 func NewGetIdentityPostureDataUnauthorized() *GetIdentityPostureDataUnauthorized {
 
 	return &GetIdentityPostureDataUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity posture data unauthorized response
+func (o *GetIdentityPostureDataUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPostureDataUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity posture data unauthorized response
+func (o *GetIdentityPostureDataUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity posture data unauthorized response
@@ -116,6 +166,23 @@ func (o *GetIdentityPostureDataUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *GetIdentityPostureDataUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *GetIdentityPostureDataUnauthorized) WriteResponse(rw http.ResponseWrite
 // GetIdentityPostureDataNotFoundCode is the HTTP code returned for type GetIdentityPostureDataNotFound
 const GetIdentityPostureDataNotFoundCode int = 404
 
-/*GetIdentityPostureDataNotFound The requested resource does not exist
+/*
+GetIdentityPostureDataNotFound The requested resource does not exist
 
 swagger:response getIdentityPostureDataNotFound
 */
 type GetIdentityPostureDataNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type GetIdentityPostureDataNotFound struct {
 func NewGetIdentityPostureDataNotFound() *GetIdentityPostureDataNotFound {
 
 	return &GetIdentityPostureDataNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity posture data not found response
+func (o *GetIdentityPostureDataNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPostureDataNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity posture data not found response
+func (o *GetIdentityPostureDataNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity posture data not found response
@@ -160,6 +243,23 @@ func (o *GetIdentityPostureDataNotFound) SetPayload(payload *rest_model.APIError
 // WriteResponse to the client
 func (o *GetIdentityPostureDataNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *GetIdentityPostureDataNotFound) WriteResponse(rw http.ResponseWriter, p
 // GetIdentityPostureDataTooManyRequestsCode is the HTTP code returned for type GetIdentityPostureDataTooManyRequests
 const GetIdentityPostureDataTooManyRequestsCode int = 429
 
-/*GetIdentityPostureDataTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetIdentityPostureDataTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityPostureDataTooManyRequests
 */
 type GetIdentityPostureDataTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type GetIdentityPostureDataTooManyRequests struct {
 func NewGetIdentityPostureDataTooManyRequests() *GetIdentityPostureDataTooManyRequests {
 
 	return &GetIdentityPostureDataTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity posture data too many requests response
+func (o *GetIdentityPostureDataTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPostureDataTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity posture data too many requests response
+func (o *GetIdentityPostureDataTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity posture data too many requests response
@@ -204,6 +320,23 @@ func (o *GetIdentityPostureDataTooManyRequests) SetPayload(payload *rest_model.A
 // WriteResponse to the client
 func (o *GetIdentityPostureDataTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *GetIdentityPostureDataTooManyRequests) WriteResponse(rw http.ResponseWr
 // GetIdentityPostureDataServiceUnavailableCode is the HTTP code returned for type GetIdentityPostureDataServiceUnavailable
 const GetIdentityPostureDataServiceUnavailableCode int = 503
 
-/*GetIdentityPostureDataServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+GetIdentityPostureDataServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response getIdentityPostureDataServiceUnavailable
 */
 type GetIdentityPostureDataServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type GetIdentityPostureDataServiceUnavailable struct {
 func NewGetIdentityPostureDataServiceUnavailable() *GetIdentityPostureDataServiceUnavailable {
 
 	return &GetIdentityPostureDataServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity posture data service unavailable response
+func (o *GetIdentityPostureDataServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityPostureDataServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity posture data service unavailable response
+func (o *GetIdentityPostureDataServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity posture data service unavailable response
@@ -247,6 +396,23 @@ func (o *GetIdentityPostureDataServiceUnavailable) SetPayload(payload *rest_mode
 
 // WriteResponse to the client
 func (o *GetIdentityPostureDataServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

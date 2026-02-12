@@ -5,10 +5,22 @@ paths:
 responses:
   listAuthenticators:
     description: A list of authenticators
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listAuthenticatorsEnvelope'
   detailAuthenticator:
     description: A singular authenticator resource
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailAuthenticatorEnvelope'
 

@@ -50,7 +50,6 @@ func NewDetailEnrollmentParams() DetailEnrollmentParams {
 //
 // swagger:parameters detailEnrollment
 type DetailEnrollmentParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

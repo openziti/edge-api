@@ -254,10 +254,22 @@ paths:
 responses:
   listServicePolicies:
     description: A list of service policies
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listServicePoliciesEnvelope'
   detailServicePolicy:
     description: A single service policy
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailServicePolicyEnvelop'
 

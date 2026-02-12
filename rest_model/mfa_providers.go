@@ -62,7 +62,7 @@ const (
 )
 
 // for schema
-var mfaProvidersEnum []interface{}
+var mfaProvidersEnum []any
 
 func init() {
 	var res []MfaProviders

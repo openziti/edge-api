@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -85,11 +86,15 @@ func (m *GenericEnroll) validatePassword(formats strfmt.Registry) error {
 	}
 
 	if err := m.Password.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("password")
 		}
+
 		return err
 	}
 
@@ -102,11 +107,15 @@ func (m *GenericEnroll) validateUsername(formats strfmt.Registry) error {
 	}
 
 	if err := m.Username.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("username")
 		}
+
 		return err
 	}
 
@@ -133,12 +142,20 @@ func (m *GenericEnroll) ContextValidate(ctx context.Context, formats strfmt.Regi
 
 func (m *GenericEnroll) contextValidatePassword(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Password) { // not required
+		return nil
+	}
+
 	if err := m.Password.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("password")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("password")
 		}
+
 		return err
 	}
 
@@ -147,12 +164,20 @@ func (m *GenericEnroll) contextValidatePassword(ctx context.Context, formats str
 
 func (m *GenericEnroll) contextValidateUsername(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Username) { // not required
+		return nil
+	}
+
 	if err := m.Username.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("username")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("username")
 		}
+
 		return err
 	}
 

@@ -36,16 +36,16 @@ import (
 )
 
 // CreatePostureCheckHandlerFunc turns a function with the right signature into a create posture check handler
-type CreatePostureCheckHandlerFunc func(CreatePostureCheckParams, interface{}) middleware.Responder
+type CreatePostureCheckHandlerFunc func(CreatePostureCheckParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreatePostureCheckHandlerFunc) Handle(params CreatePostureCheckParams, principal interface{}) middleware.Responder {
+func (fn CreatePostureCheckHandlerFunc) Handle(params CreatePostureCheckParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreatePostureCheckHandler interface for that can handle valid create posture check params
 type CreatePostureCheckHandler interface {
-	Handle(CreatePostureCheckParams, interface{}) middleware.Responder
+	Handle(CreatePostureCheckParams, any) middleware.Responder
 }
 
 // NewCreatePostureCheck creates a new http.Handler for the create posture check operation
@@ -53,12 +53,12 @@ func NewCreatePostureCheck(ctx *middleware.Context, handler CreatePostureCheckHa
 	return &CreatePostureCheck{Context: ctx, Handler: handler}
 }
 
-/* CreatePostureCheck swagger:route POST /posture-checks Posture Checks createPostureCheck
+/*
+	CreatePostureCheck swagger:route POST /posture-checks Posture Checks createPostureCheck
+
+# Creates a Posture Checks
 
 Creates a Posture Checks
-
-Creates a Posture Checks
-
 */
 type CreatePostureCheck struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreatePostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreatePostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

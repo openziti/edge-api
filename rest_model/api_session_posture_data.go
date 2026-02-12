@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -83,11 +84,15 @@ func (m *APISessionPostureData) validateEndpointState(formats strfmt.Registry) e
 
 	if m.EndpointState != nil {
 		if err := m.EndpointState.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("endpointState")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("endpointState")
 			}
+
 			return err
 		}
 	}
@@ -103,11 +108,15 @@ func (m *APISessionPostureData) validateMfa(formats strfmt.Registry) error {
 
 	if m.Mfa != nil {
 		if err := m.Mfa.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("mfa")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("mfa")
 			}
+
 			return err
 		}
 	}
@@ -122,11 +131,15 @@ func (m *APISessionPostureData) validateSdkInfo(formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
 		if err := m.SdkInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sdkInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sdkInfo")
 			}
+
 			return err
 		}
 	}
@@ -159,12 +172,21 @@ func (m *APISessionPostureData) ContextValidate(ctx context.Context, formats str
 func (m *APISessionPostureData) contextValidateEndpointState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EndpointState != nil {
+
+		if swag.IsZero(m.EndpointState) { // not required
+			return nil
+		}
+
 		if err := m.EndpointState.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("endpointState")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("endpointState")
 			}
+
 			return err
 		}
 	}
@@ -175,12 +197,17 @@ func (m *APISessionPostureData) contextValidateEndpointState(ctx context.Context
 func (m *APISessionPostureData) contextValidateMfa(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mfa != nil {
+
 		if err := m.Mfa.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("mfa")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("mfa")
 			}
+
 			return err
 		}
 	}
@@ -191,12 +218,21 @@ func (m *APISessionPostureData) contextValidateMfa(ctx context.Context, formats 
 func (m *APISessionPostureData) contextValidateSdkInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
+
+		if swag.IsZero(m.SdkInfo) { // not required
+			return nil
+		}
+
 		if err := m.SdkInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sdkInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sdkInfo")
 			}
+
 			return err
 		}
 	}

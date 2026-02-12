@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteAuthPolicyHandlerFunc turns a function with the right signature into a delete auth policy handler
-type DeleteAuthPolicyHandlerFunc func(DeleteAuthPolicyParams, interface{}) middleware.Responder
+type DeleteAuthPolicyHandlerFunc func(DeleteAuthPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteAuthPolicyHandlerFunc) Handle(params DeleteAuthPolicyParams, principal interface{}) middleware.Responder {
+func (fn DeleteAuthPolicyHandlerFunc) Handle(params DeleteAuthPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteAuthPolicyHandler interface for that can handle valid delete auth policy params
 type DeleteAuthPolicyHandler interface {
-	Handle(DeleteAuthPolicyParams, interface{}) middleware.Responder
+	Handle(DeleteAuthPolicyParams, any) middleware.Responder
 }
 
 // NewDeleteAuthPolicy creates a new http.Handler for the delete auth policy operation
@@ -53,13 +53,12 @@ func NewDeleteAuthPolicy(ctx *middleware.Context, handler DeleteAuthPolicyHandle
 	return &DeleteAuthPolicy{Context: ctx, Handler: handler}
 }
 
-/* DeleteAuthPolicy swagger:route DELETE /auth-policies/{id} Auth Policy deleteAuthPolicy
+/*
+	DeleteAuthPolicy swagger:route DELETE /auth-policies/{id} Auth Policy deleteAuthPolicy
 
-Delete an Auth Policy
+# Delete an Auth Policy
 
 Delete an Auth Policy by id. Requires admin access.
-
-
 */
 type DeleteAuthPolicy struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DeleteAuthPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DeleteAuthPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -36,16 +36,16 @@ import (
 )
 
 // CreateEdgeRouterPolicyHandlerFunc turns a function with the right signature into a create edge router policy handler
-type CreateEdgeRouterPolicyHandlerFunc func(CreateEdgeRouterPolicyParams, interface{}) middleware.Responder
+type CreateEdgeRouterPolicyHandlerFunc func(CreateEdgeRouterPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateEdgeRouterPolicyHandlerFunc) Handle(params CreateEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+func (fn CreateEdgeRouterPolicyHandlerFunc) Handle(params CreateEdgeRouterPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateEdgeRouterPolicyHandler interface for that can handle valid create edge router policy params
 type CreateEdgeRouterPolicyHandler interface {
-	Handle(CreateEdgeRouterPolicyParams, interface{}) middleware.Responder
+	Handle(CreateEdgeRouterPolicyParams, any) middleware.Responder
 }
 
 // NewCreateEdgeRouterPolicy creates a new http.Handler for the create edge router policy operation
@@ -53,12 +53,12 @@ func NewCreateEdgeRouterPolicy(ctx *middleware.Context, handler CreateEdgeRouter
 	return &CreateEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* CreateEdgeRouterPolicy swagger:route POST /edge-router-policies Edge Router Policy createEdgeRouterPolicy
+/*
+	CreateEdgeRouterPolicy swagger:route POST /edge-router-policies Edge Router Policy createEdgeRouterPolicy
 
-Create an edge router policy resource
+# Create an edge router policy resource
 
 Create an edge router policy resource. Requires admin access.
-
 */
 type CreateEdgeRouterPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreateEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreateEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

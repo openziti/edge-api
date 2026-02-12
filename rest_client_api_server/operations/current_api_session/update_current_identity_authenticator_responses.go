@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // UpdateCurrentIdentityAuthenticatorOKCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorOK
 const UpdateCurrentIdentityAuthenticatorOKCode int = 200
 
-/*UpdateCurrentIdentityAuthenticatorOK The update request was successful and the resource has been altered
+/*
+UpdateCurrentIdentityAuthenticatorOK The update request was successful and the resource has been altered
 
 swagger:response updateCurrentIdentityAuthenticatorOK
 */
 type UpdateCurrentIdentityAuthenticatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type UpdateCurrentIdentityAuthenticatorOK struct {
 func NewUpdateCurrentIdentityAuthenticatorOK() *UpdateCurrentIdentityAuthenticatorOK {
 
 	return &UpdateCurrentIdentityAuthenticatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update current identity authenticator o k response
+func (o *UpdateCurrentIdentityAuthenticatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateCurrentIdentityAuthenticatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update current identity authenticator o k response
+func (o *UpdateCurrentIdentityAuthenticatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update current identity authenticator o k response
@@ -72,6 +89,23 @@ func (o *UpdateCurrentIdentityAuthenticatorOK) SetPayload(payload *rest_model.Em
 // WriteResponse to the client
 func (o *UpdateCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *UpdateCurrentIdentityAuthenticatorOK) WriteResponse(rw http.ResponseWri
 // UpdateCurrentIdentityAuthenticatorBadRequestCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorBadRequest
 const UpdateCurrentIdentityAuthenticatorBadRequestCode int = 400
 
-/*UpdateCurrentIdentityAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+UpdateCurrentIdentityAuthenticatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response updateCurrentIdentityAuthenticatorBadRequest
 */
 type UpdateCurrentIdentityAuthenticatorBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type UpdateCurrentIdentityAuthenticatorBadRequest struct {
 func NewUpdateCurrentIdentityAuthenticatorBadRequest() *UpdateCurrentIdentityAuthenticatorBadRequest {
 
 	return &UpdateCurrentIdentityAuthenticatorBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update current identity authenticator bad request response
+func (o *UpdateCurrentIdentityAuthenticatorBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateCurrentIdentityAuthenticatorBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update current identity authenticator bad request response
+func (o *UpdateCurrentIdentityAuthenticatorBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update current identity authenticator bad request response
@@ -116,6 +166,23 @@ func (o *UpdateCurrentIdentityAuthenticatorBadRequest) SetPayload(payload *rest_
 // WriteResponse to the client
 func (o *UpdateCurrentIdentityAuthenticatorBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *UpdateCurrentIdentityAuthenticatorBadRequest) WriteResponse(rw http.Res
 // UpdateCurrentIdentityAuthenticatorUnauthorizedCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorUnauthorized
 const UpdateCurrentIdentityAuthenticatorUnauthorizedCode int = 401
 
-/*UpdateCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+UpdateCurrentIdentityAuthenticatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response updateCurrentIdentityAuthenticatorUnauthorized
 */
 type UpdateCurrentIdentityAuthenticatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type UpdateCurrentIdentityAuthenticatorUnauthorized struct {
 func NewUpdateCurrentIdentityAuthenticatorUnauthorized() *UpdateCurrentIdentityAuthenticatorUnauthorized {
 
 	return &UpdateCurrentIdentityAuthenticatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update current identity authenticator unauthorized response
+func (o *UpdateCurrentIdentityAuthenticatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateCurrentIdentityAuthenticatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update current identity authenticator unauthorized response
+func (o *UpdateCurrentIdentityAuthenticatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update current identity authenticator unauthorized response
@@ -160,6 +243,23 @@ func (o *UpdateCurrentIdentityAuthenticatorUnauthorized) SetPayload(payload *res
 // WriteResponse to the client
 func (o *UpdateCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *UpdateCurrentIdentityAuthenticatorUnauthorized) WriteResponse(rw http.R
 // UpdateCurrentIdentityAuthenticatorNotFoundCode is the HTTP code returned for type UpdateCurrentIdentityAuthenticatorNotFound
 const UpdateCurrentIdentityAuthenticatorNotFoundCode int = 404
 
-/*UpdateCurrentIdentityAuthenticatorNotFound The requested resource does not exist
+/*
+UpdateCurrentIdentityAuthenticatorNotFound The requested resource does not exist
 
 swagger:response updateCurrentIdentityAuthenticatorNotFound
 */
 type UpdateCurrentIdentityAuthenticatorNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type UpdateCurrentIdentityAuthenticatorNotFound struct {
 func NewUpdateCurrentIdentityAuthenticatorNotFound() *UpdateCurrentIdentityAuthenticatorNotFound {
 
 	return &UpdateCurrentIdentityAuthenticatorNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the update current identity authenticator not found response
+func (o *UpdateCurrentIdentityAuthenticatorNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *UpdateCurrentIdentityAuthenticatorNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the update current identity authenticator not found response
+func (o *UpdateCurrentIdentityAuthenticatorNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the update current identity authenticator not found response
@@ -203,6 +319,23 @@ func (o *UpdateCurrentIdentityAuthenticatorNotFound) SetPayload(payload *rest_mo
 
 // WriteResponse to the client
 func (o *UpdateCurrentIdentityAuthenticatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(404)
 	if o.Payload != nil {

@@ -50,7 +50,6 @@ func NewReEnrollEdgeRouterParams() ReEnrollEdgeRouterParams {
 //
 // swagger:parameters reEnrollEdgeRouter
 type ReEnrollEdgeRouterParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

@@ -36,16 +36,16 @@ import (
 )
 
 // UpdatePostureCheckHandlerFunc turns a function with the right signature into a update posture check handler
-type UpdatePostureCheckHandlerFunc func(UpdatePostureCheckParams, interface{}) middleware.Responder
+type UpdatePostureCheckHandlerFunc func(UpdatePostureCheckParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdatePostureCheckHandlerFunc) Handle(params UpdatePostureCheckParams, principal interface{}) middleware.Responder {
+func (fn UpdatePostureCheckHandlerFunc) Handle(params UpdatePostureCheckParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdatePostureCheckHandler interface for that can handle valid update posture check params
 type UpdatePostureCheckHandler interface {
-	Handle(UpdatePostureCheckParams, interface{}) middleware.Responder
+	Handle(UpdatePostureCheckParams, any) middleware.Responder
 }
 
 // NewUpdatePostureCheck creates a new http.Handler for the update posture check operation
@@ -53,12 +53,12 @@ func NewUpdatePostureCheck(ctx *middleware.Context, handler UpdatePostureCheckHa
 	return &UpdatePostureCheck{Context: ctx, Handler: handler}
 }
 
-/* UpdatePostureCheck swagger:route PUT /posture-checks/{id} Posture Checks updatePostureCheck
+/*
+	UpdatePostureCheck swagger:route PUT /posture-checks/{id} Posture Checks updatePostureCheck
 
-Update all fields on a Posture Checks
+# Update all fields on a Posture Checks
 
 Update all fields on a Posture Checks by id
-
 */
 type UpdatePostureCheck struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdatePostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdatePostureCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

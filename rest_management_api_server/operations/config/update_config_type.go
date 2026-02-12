@@ -36,16 +36,16 @@ import (
 )
 
 // UpdateConfigTypeHandlerFunc turns a function with the right signature into a update config type handler
-type UpdateConfigTypeHandlerFunc func(UpdateConfigTypeParams, interface{}) middleware.Responder
+type UpdateConfigTypeHandlerFunc func(UpdateConfigTypeParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn UpdateConfigTypeHandlerFunc) Handle(params UpdateConfigTypeParams, principal interface{}) middleware.Responder {
+func (fn UpdateConfigTypeHandlerFunc) Handle(params UpdateConfigTypeParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // UpdateConfigTypeHandler interface for that can handle valid update config type params
 type UpdateConfigTypeHandler interface {
-	Handle(UpdateConfigTypeParams, interface{}) middleware.Responder
+	Handle(UpdateConfigTypeParams, any) middleware.Responder
 }
 
 // NewUpdateConfigType creates a new http.Handler for the update config type operation
@@ -53,12 +53,12 @@ func NewUpdateConfigType(ctx *middleware.Context, handler UpdateConfigTypeHandle
 	return &UpdateConfigType{Context: ctx, Handler: handler}
 }
 
-/* UpdateConfigType swagger:route PUT /config-types/{id} Config updateConfigType
+/*
+	UpdateConfigType swagger:route PUT /config-types/{id} Config updateConfigType
 
-Update all fields on a config-type
+# Update all fields on a config-type
 
 Update all fields on a config-type by id. Requires admin access.
-
 */
 type UpdateConfigType struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *UpdateConfigType) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *UpdateConfigType) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

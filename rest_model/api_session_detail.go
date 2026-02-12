@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -329,11 +330,15 @@ func (m *APISessionDetail) validateAuthQueries(formats strfmt.Registry) error {
 	}
 
 	if err := m.AuthQueries.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("authQueries")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("authQueries")
 		}
+
 		return err
 	}
 
@@ -379,11 +384,15 @@ func (m *APISessionDetail) validateIdentity(formats strfmt.Registry) error {
 
 	if m.Identity != nil {
 		if err := m.Identity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("identity")
 			}
+
 			return err
 		}
 	}
@@ -484,11 +493,15 @@ func (m *APISessionDetail) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *APISessionDetail) contextValidateAuthQueries(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.AuthQueries.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("authQueries")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("authQueries")
 		}
+
 		return err
 	}
 
@@ -498,12 +511,17 @@ func (m *APISessionDetail) contextValidateAuthQueries(ctx context.Context, forma
 func (m *APISessionDetail) contextValidateIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Identity != nil {
+
 		if err := m.Identity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("identity")
 			}
+
 			return err
 		}
 	}

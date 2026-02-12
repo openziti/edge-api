@@ -36,16 +36,16 @@ import (
 )
 
 // CreatePostureResponseHandlerFunc turns a function with the right signature into a create posture response handler
-type CreatePostureResponseHandlerFunc func(CreatePostureResponseParams, interface{}) middleware.Responder
+type CreatePostureResponseHandlerFunc func(CreatePostureResponseParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreatePostureResponseHandlerFunc) Handle(params CreatePostureResponseParams, principal interface{}) middleware.Responder {
+func (fn CreatePostureResponseHandlerFunc) Handle(params CreatePostureResponseParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreatePostureResponseHandler interface for that can handle valid create posture response params
 type CreatePostureResponseHandler interface {
-	Handle(CreatePostureResponseParams, interface{}) middleware.Responder
+	Handle(CreatePostureResponseParams, any) middleware.Responder
 }
 
 // NewCreatePostureResponse creates a new http.Handler for the create posture response operation
@@ -53,12 +53,12 @@ func NewCreatePostureResponse(ctx *middleware.Context, handler CreatePostureResp
 	return &CreatePostureResponse{Context: ctx, Handler: handler}
 }
 
-/* CreatePostureResponse swagger:route POST /posture-response Posture Checks createPostureResponse
+/*
+	CreatePostureResponse swagger:route POST /posture-response Posture Checks createPostureResponse
 
-Submit a posture response to a posture query
+# Submit a posture response to a posture query
 
 Submits posture responses
-
 */
 type CreatePostureResponse struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *CreatePostureResponse) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *CreatePostureResponse) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

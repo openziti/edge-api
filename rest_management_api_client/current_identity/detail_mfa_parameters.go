@@ -76,10 +76,12 @@ func NewDetailMfaParamsWithHTTPClient(client *http.Client) *DetailMfaParams {
 	}
 }
 
-/* DetailMfaParams contains all the parameters to send to the API endpoint
-   for the detail mfa operation.
+/*
+DetailMfaParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail mfa operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailMfaParams struct {
 	timeout    time.Duration

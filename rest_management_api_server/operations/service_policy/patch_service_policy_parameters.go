@@ -30,7 +30,7 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -56,7 +56,6 @@ func NewPatchServicePolicyParams() PatchServicePolicyParams {
 //
 // swagger:parameters patchServicePolicy
 type PatchServicePolicyParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -65,6 +64,7 @@ type PatchServicePolicyParams struct {
 	  In: path
 	*/
 	ID string
+
 	/*A service policy patch object
 	  Required: true
 	  In: body
@@ -87,10 +87,12 @@ func (o *PatchServicePolicyParams) BindRequest(r *http.Request, route *middlewar
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.ServicePolicyPatch
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("policy", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("policy", "body", "", err))
@@ -101,7 +103,7 @@ func (o *PatchServicePolicyParams) BindRequest(r *http.Request, route *middlewar
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

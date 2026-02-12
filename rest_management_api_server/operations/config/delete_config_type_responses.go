@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteConfigTypeOKCode is the HTTP code returned for type DeleteConfigTypeOK
 const DeleteConfigTypeOKCode int = 200
 
-/*DeleteConfigTypeOK The delete request was successful and the resource has been removed
+/*
+DeleteConfigTypeOK The delete request was successful and the resource has been removed
 
 swagger:response deleteConfigTypeOK
 */
 type DeleteConfigTypeOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteConfigTypeOK struct {
 func NewDeleteConfigTypeOK() *DeleteConfigTypeOK {
 
 	return &DeleteConfigTypeOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type o k response
+func (o *DeleteConfigTypeOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type o k response
+func (o *DeleteConfigTypeOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type o k response
@@ -72,6 +89,23 @@ func (o *DeleteConfigTypeOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteConfigTypeOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteConfigTypeBadRequestCode is the HTTP code returned for type DeleteConfigTypeBadRequest
 const DeleteConfigTypeBadRequestCode int = 400
 
-/*DeleteConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteConfigTypeBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteConfigTypeBadRequest
 */
 type DeleteConfigTypeBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteConfigTypeBadRequest struct {
 func NewDeleteConfigTypeBadRequest() *DeleteConfigTypeBadRequest {
 
 	return &DeleteConfigTypeBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type bad request response
+func (o *DeleteConfigTypeBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type bad request response
+func (o *DeleteConfigTypeBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type bad request response
@@ -116,6 +166,23 @@ func (o *DeleteConfigTypeBadRequest) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *DeleteConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteConfigTypeBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // DeleteConfigTypeUnauthorizedCode is the HTTP code returned for type DeleteConfigTypeUnauthorized
 const DeleteConfigTypeUnauthorizedCode int = 401
 
-/*DeleteConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteConfigTypeUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteConfigTypeUnauthorized
 */
 type DeleteConfigTypeUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteConfigTypeUnauthorized struct {
 func NewDeleteConfigTypeUnauthorized() *DeleteConfigTypeUnauthorized {
 
 	return &DeleteConfigTypeUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type unauthorized response
+func (o *DeleteConfigTypeUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type unauthorized response
+func (o *DeleteConfigTypeUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteConfigTypeUnauthorized) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *DeleteConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteConfigTypeUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DeleteConfigTypeNotFoundCode is the HTTP code returned for type DeleteConfigTypeNotFound
 const DeleteConfigTypeNotFoundCode int = 404
 
-/*DeleteConfigTypeNotFound The requested resource does not exist
+/*
+DeleteConfigTypeNotFound The requested resource does not exist
 
 swagger:response deleteConfigTypeNotFound
 */
 type DeleteConfigTypeNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteConfigTypeNotFound struct {
 func NewDeleteConfigTypeNotFound() *DeleteConfigTypeNotFound {
 
 	return &DeleteConfigTypeNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type not found response
+func (o *DeleteConfigTypeNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type not found response
+func (o *DeleteConfigTypeNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type not found response
@@ -204,6 +320,23 @@ func (o *DeleteConfigTypeNotFound) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *DeleteConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteConfigTypeNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DeleteConfigTypeConflictCode is the HTTP code returned for type DeleteConfigTypeConflict
 const DeleteConfigTypeConflictCode int = 409
 
-/*DeleteConfigTypeConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*
+DeleteConfigTypeConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteConfigTypeConflict
 */
 type DeleteConfigTypeConflict struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteConfigTypeConflict struct {
 func NewDeleteConfigTypeConflict() *DeleteConfigTypeConflict {
 
 	return &DeleteConfigTypeConflict{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type conflict response
+func (o *DeleteConfigTypeConflict) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeConflict {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type conflict response
+func (o *DeleteConfigTypeConflict) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type conflict response
@@ -248,6 +397,23 @@ func (o *DeleteConfigTypeConflict) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *DeleteConfigTypeConflict) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(409)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *DeleteConfigTypeConflict) WriteResponse(rw http.ResponseWriter, produce
 // DeleteConfigTypeTooManyRequestsCode is the HTTP code returned for type DeleteConfigTypeTooManyRequests
 const DeleteConfigTypeTooManyRequestsCode int = 429
 
-/*DeleteConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteConfigTypeTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteConfigTypeTooManyRequests
 */
 type DeleteConfigTypeTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type DeleteConfigTypeTooManyRequests struct {
 func NewDeleteConfigTypeTooManyRequests() *DeleteConfigTypeTooManyRequests {
 
 	return &DeleteConfigTypeTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type too many requests response
+func (o *DeleteConfigTypeTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type too many requests response
+func (o *DeleteConfigTypeTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type too many requests response
@@ -292,6 +474,23 @@ func (o *DeleteConfigTypeTooManyRequests) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DeleteConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -304,11 +503,16 @@ func (o *DeleteConfigTypeTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 // DeleteConfigTypeServiceUnavailableCode is the HTTP code returned for type DeleteConfigTypeServiceUnavailable
 const DeleteConfigTypeServiceUnavailableCode int = 503
 
-/*DeleteConfigTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeleteConfigTypeServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deleteConfigTypeServiceUnavailable
 */
 type DeleteConfigTypeServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -320,6 +524,17 @@ type DeleteConfigTypeServiceUnavailable struct {
 func NewDeleteConfigTypeServiceUnavailable() *DeleteConfigTypeServiceUnavailable {
 
 	return &DeleteConfigTypeServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete config type service unavailable response
+func (o *DeleteConfigTypeServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteConfigTypeServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete config type service unavailable response
+func (o *DeleteConfigTypeServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete config type service unavailable response
@@ -335,6 +550,23 @@ func (o *DeleteConfigTypeServiceUnavailable) SetPayload(payload *rest_model.APIE
 
 // WriteResponse to the client
 func (o *DeleteConfigTypeServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

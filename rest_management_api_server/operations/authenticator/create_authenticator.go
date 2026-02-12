@@ -36,16 +36,16 @@ import (
 )
 
 // CreateAuthenticatorHandlerFunc turns a function with the right signature into a create authenticator handler
-type CreateAuthenticatorHandlerFunc func(CreateAuthenticatorParams, interface{}) middleware.Responder
+type CreateAuthenticatorHandlerFunc func(CreateAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn CreateAuthenticatorHandlerFunc) Handle(params CreateAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn CreateAuthenticatorHandlerFunc) Handle(params CreateAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // CreateAuthenticatorHandler interface for that can handle valid create authenticator params
 type CreateAuthenticatorHandler interface {
-	Handle(CreateAuthenticatorParams, interface{}) middleware.Responder
+	Handle(CreateAuthenticatorParams, any) middleware.Responder
 }
 
 // NewCreateAuthenticator creates a new http.Handler for the create authenticator operation
@@ -53,13 +53,12 @@ func NewCreateAuthenticator(ctx *middleware.Context, handler CreateAuthenticator
 	return &CreateAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* CreateAuthenticator swagger:route POST /authenticators Authenticator createAuthenticator
+/*
+	CreateAuthenticator swagger:route POST /authenticators Authenticator createAuthenticator
 
-Creates an authenticator
+# Creates an authenticator
 
 Creates an authenticator for a specific identity. Requires admin access.
-
-
 */
 type CreateAuthenticator struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *CreateAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *CreateAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

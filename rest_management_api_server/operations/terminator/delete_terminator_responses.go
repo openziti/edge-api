@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteTerminatorOKCode is the HTTP code returned for type DeleteTerminatorOK
 const DeleteTerminatorOKCode int = 200
 
-/*DeleteTerminatorOK The delete request was successful and the resource has been removed
+/*
+DeleteTerminatorOK The delete request was successful and the resource has been removed
 
 swagger:response deleteTerminatorOK
 */
 type DeleteTerminatorOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteTerminatorOK struct {
 func NewDeleteTerminatorOK() *DeleteTerminatorOK {
 
 	return &DeleteTerminatorOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator o k response
+func (o *DeleteTerminatorOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator o k response
+func (o *DeleteTerminatorOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator o k response
@@ -72,6 +89,23 @@ func (o *DeleteTerminatorOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteTerminatorOK) WriteResponse(rw http.ResponseWriter, producer runt
 // DeleteTerminatorBadRequestCode is the HTTP code returned for type DeleteTerminatorBadRequest
 const DeleteTerminatorBadRequestCode int = 400
 
-/*DeleteTerminatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+DeleteTerminatorBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response deleteTerminatorBadRequest
 */
 type DeleteTerminatorBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteTerminatorBadRequest struct {
 func NewDeleteTerminatorBadRequest() *DeleteTerminatorBadRequest {
 
 	return &DeleteTerminatorBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator bad request response
+func (o *DeleteTerminatorBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator bad request response
+func (o *DeleteTerminatorBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator bad request response
@@ -116,6 +166,23 @@ func (o *DeleteTerminatorBadRequest) SetPayload(payload *rest_model.APIErrorEnve
 // WriteResponse to the client
 func (o *DeleteTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DeleteTerminatorBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // DeleteTerminatorUnauthorizedCode is the HTTP code returned for type DeleteTerminatorUnauthorized
 const DeleteTerminatorUnauthorizedCode int = 401
 
-/*DeleteTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteTerminatorUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteTerminatorUnauthorized
 */
 type DeleteTerminatorUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DeleteTerminatorUnauthorized struct {
 func NewDeleteTerminatorUnauthorized() *DeleteTerminatorUnauthorized {
 
 	return &DeleteTerminatorUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator unauthorized response
+func (o *DeleteTerminatorUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator unauthorized response
+func (o *DeleteTerminatorUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator unauthorized response
@@ -160,6 +243,23 @@ func (o *DeleteTerminatorUnauthorized) SetPayload(payload *rest_model.APIErrorEn
 // WriteResponse to the client
 func (o *DeleteTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DeleteTerminatorUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // DeleteTerminatorNotFoundCode is the HTTP code returned for type DeleteTerminatorNotFound
 const DeleteTerminatorNotFoundCode int = 404
 
-/*DeleteTerminatorNotFound The requested resource does not exist
+/*
+DeleteTerminatorNotFound The requested resource does not exist
 
 swagger:response deleteTerminatorNotFound
 */
 type DeleteTerminatorNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DeleteTerminatorNotFound struct {
 func NewDeleteTerminatorNotFound() *DeleteTerminatorNotFound {
 
 	return &DeleteTerminatorNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator not found response
+func (o *DeleteTerminatorNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator not found response
+func (o *DeleteTerminatorNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator not found response
@@ -204,6 +320,23 @@ func (o *DeleteTerminatorNotFound) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *DeleteTerminatorNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DeleteTerminatorNotFound) WriteResponse(rw http.ResponseWriter, produce
 // DeleteTerminatorConflictCode is the HTTP code returned for type DeleteTerminatorConflict
 const DeleteTerminatorConflictCode int = 409
 
-/*DeleteTerminatorConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
+/*
+DeleteTerminatorConflict The resource requested to be removed/altered cannot be as it is referenced by another object.
 
 swagger:response deleteTerminatorConflict
 */
 type DeleteTerminatorConflict struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DeleteTerminatorConflict struct {
 func NewDeleteTerminatorConflict() *DeleteTerminatorConflict {
 
 	return &DeleteTerminatorConflict{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator conflict response
+func (o *DeleteTerminatorConflict) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorConflict {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator conflict response
+func (o *DeleteTerminatorConflict) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator conflict response
@@ -248,6 +397,23 @@ func (o *DeleteTerminatorConflict) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *DeleteTerminatorConflict) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(409)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -260,11 +426,16 @@ func (o *DeleteTerminatorConflict) WriteResponse(rw http.ResponseWriter, produce
 // DeleteTerminatorTooManyRequestsCode is the HTTP code returned for type DeleteTerminatorTooManyRequests
 const DeleteTerminatorTooManyRequestsCode int = 429
 
-/*DeleteTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DeleteTerminatorTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response deleteTerminatorTooManyRequests
 */
 type DeleteTerminatorTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -276,6 +447,17 @@ type DeleteTerminatorTooManyRequests struct {
 func NewDeleteTerminatorTooManyRequests() *DeleteTerminatorTooManyRequests {
 
 	return &DeleteTerminatorTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator too many requests response
+func (o *DeleteTerminatorTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator too many requests response
+func (o *DeleteTerminatorTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator too many requests response
@@ -292,6 +474,23 @@ func (o *DeleteTerminatorTooManyRequests) SetPayload(payload *rest_model.APIErro
 // WriteResponse to the client
 func (o *DeleteTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -304,11 +503,16 @@ func (o *DeleteTerminatorTooManyRequests) WriteResponse(rw http.ResponseWriter, 
 // DeleteTerminatorServiceUnavailableCode is the HTTP code returned for type DeleteTerminatorServiceUnavailable
 const DeleteTerminatorServiceUnavailableCode int = 503
 
-/*DeleteTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DeleteTerminatorServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response deleteTerminatorServiceUnavailable
 */
 type DeleteTerminatorServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -320,6 +524,17 @@ type DeleteTerminatorServiceUnavailable struct {
 func NewDeleteTerminatorServiceUnavailable() *DeleteTerminatorServiceUnavailable {
 
 	return &DeleteTerminatorServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete terminator service unavailable response
+func (o *DeleteTerminatorServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteTerminatorServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete terminator service unavailable response
+func (o *DeleteTerminatorServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete terminator service unavailable response
@@ -335,6 +550,23 @@ func (o *DeleteTerminatorServiceUnavailable) SetPayload(payload *rest_model.APIE
 
 // WriteResponse to the client
 func (o *DeleteTerminatorServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

@@ -30,11 +30,14 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DetailServicePolicyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DetailServicePolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DetailServicePolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDetailServicePolicyOK()
@@ -78,7 +81,7 @@ func (o *DetailServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /service-policies/{id}] detailServicePolicy", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDetailServicePolicyOK() *DetailServicePolicyOK {
 	return &DetailServicePolicyOK{}
 }
 
-/* DetailServicePolicyOK describes a response with status code 200, with default header values.
+/*
+DetailServicePolicyOK describes a response with status code 200, with default header values.
 
 A single service policy
 */
 type DetailServicePolicyOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.DetailServicePolicyEnvelop
 }
 
-func (o *DetailServicePolicyOK) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this detail service policy o k response has a 2xx status code
+func (o *DetailServicePolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this detail service policy o k response has a 3xx status code
+func (o *DetailServicePolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service policy o k response has a 4xx status code
+func (o *DetailServicePolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail service policy o k response has a 5xx status code
+func (o *DetailServicePolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service policy o k response a status code equal to that given
+func (o *DetailServicePolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the detail service policy o k response
+func (o *DetailServicePolicyOK) Code() int {
+	return 200
+}
+
+func (o *DetailServicePolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyOK %s", 200, payload)
+}
+
+func (o *DetailServicePolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyOK %s", 200, payload)
+}
+
 func (o *DetailServicePolicyOK) GetPayload() *rest_model.DetailServicePolicyEnvelop {
 	return o.Payload
 }
 
 func (o *DetailServicePolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.DetailServicePolicyEnvelop)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailServicePolicyOK binds the response header WWW-Authenticate
+func (o *DetailServicePolicyOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailServicePolicyUnauthorized creates a DetailServicePolicyUnauthorized with default headers values
@@ -119,31 +199,108 @@ func NewDetailServicePolicyUnauthorized() *DetailServicePolicyUnauthorized {
 	return &DetailServicePolicyUnauthorized{}
 }
 
-/* DetailServicePolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DetailServicePolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DetailServicePolicyUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServicePolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this detail service policy unauthorized response has a 2xx status code
+func (o *DetailServicePolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service policy unauthorized response has a 3xx status code
+func (o *DetailServicePolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service policy unauthorized response has a 4xx status code
+func (o *DetailServicePolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail service policy unauthorized response has a 5xx status code
+func (o *DetailServicePolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service policy unauthorized response a status code equal to that given
+func (o *DetailServicePolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the detail service policy unauthorized response
+func (o *DetailServicePolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DetailServicePolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DetailServicePolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DetailServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailServicePolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailServicePolicyUnauthorized binds the response header WWW-Authenticate
+func (o *DetailServicePolicyUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailServicePolicyNotFound creates a DetailServicePolicyNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDetailServicePolicyNotFound() *DetailServicePolicyNotFound {
 	return &DetailServicePolicyNotFound{}
 }
 
-/* DetailServicePolicyNotFound describes a response with status code 404, with default header values.
+/*
+DetailServicePolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DetailServicePolicyNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServicePolicyNotFound) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this detail service policy not found response has a 2xx status code
+func (o *DetailServicePolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service policy not found response has a 3xx status code
+func (o *DetailServicePolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service policy not found response has a 4xx status code
+func (o *DetailServicePolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail service policy not found response has a 5xx status code
+func (o *DetailServicePolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service policy not found response a status code equal to that given
+func (o *DetailServicePolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the detail service policy not found response
+func (o *DetailServicePolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *DetailServicePolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyNotFound %s", 404, payload)
+}
+
+func (o *DetailServicePolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyNotFound %s", 404, payload)
+}
+
 func (o *DetailServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailServicePolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailServicePolicyNotFound binds the response header WWW-Authenticate
+func (o *DetailServicePolicyNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailServicePolicyTooManyRequests creates a DetailServicePolicyTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDetailServicePolicyTooManyRequests() *DetailServicePolicyTooManyRequests
 	return &DetailServicePolicyTooManyRequests{}
 }
 
-/* DetailServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DetailServicePolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DetailServicePolicyTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServicePolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this detail service policy too many requests response has a 2xx status code
+func (o *DetailServicePolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service policy too many requests response has a 3xx status code
+func (o *DetailServicePolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service policy too many requests response has a 4xx status code
+func (o *DetailServicePolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this detail service policy too many requests response has a 5xx status code
+func (o *DetailServicePolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this detail service policy too many requests response a status code equal to that given
+func (o *DetailServicePolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the detail service policy too many requests response
+func (o *DetailServicePolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DetailServicePolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DetailServicePolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DetailServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailServicePolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailServicePolicyTooManyRequests binds the response header WWW-Authenticate
+func (o *DetailServicePolicyTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDetailServicePolicyServiceUnavailable creates a DetailServicePolicyServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDetailServicePolicyServiceUnavailable() *DetailServicePolicyServiceUnava
 	return &DetailServicePolicyServiceUnavailable{}
 }
 
-/* DetailServicePolicyServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DetailServicePolicyServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DetailServicePolicyServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DetailServicePolicyServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this detail service policy service unavailable response has a 2xx status code
+func (o *DetailServicePolicyServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this detail service policy service unavailable response has a 3xx status code
+func (o *DetailServicePolicyServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this detail service policy service unavailable response has a 4xx status code
+func (o *DetailServicePolicyServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this detail service policy service unavailable response has a 5xx status code
+func (o *DetailServicePolicyServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this detail service policy service unavailable response a status code equal to that given
+func (o *DetailServicePolicyServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the detail service policy service unavailable response
+func (o *DetailServicePolicyServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DetailServicePolicyServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyServiceUnavailable %s", 503, payload)
+}
+
+func (o *DetailServicePolicyServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /service-policies/{id}][%d] detailServicePolicyServiceUnavailable %s", 503, payload)
+}
+
 func (o *DetailServicePolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DetailServicePolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDetailServicePolicyServiceUnavailable binds the response header WWW-Authenticate
+func (o *DetailServicePolicyServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

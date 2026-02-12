@@ -30,11 +30,14 @@ package posture_checks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeletePostureCheckReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeletePostureCheckReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeletePostureCheckReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeletePostureCheckOK()
@@ -78,7 +81,7 @@ func (o *DeletePostureCheckReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /posture-checks/{id}] deletePostureCheck", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewDeletePostureCheckOK() *DeletePostureCheckOK {
 	return &DeletePostureCheckOK{}
 }
 
-/* DeletePostureCheckOK describes a response with status code 200, with default header values.
+/*
+DeletePostureCheckOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeletePostureCheckOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeletePostureCheckOK) Error() string {
-	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete posture check o k response has a 2xx status code
+func (o *DeletePostureCheckOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete posture check o k response has a 3xx status code
+func (o *DeletePostureCheckOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete posture check o k response has a 4xx status code
+func (o *DeletePostureCheckOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete posture check o k response has a 5xx status code
+func (o *DeletePostureCheckOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete posture check o k response a status code equal to that given
+func (o *DeletePostureCheckOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete posture check o k response
+func (o *DeletePostureCheckOK) Code() int {
+	return 200
+}
+
+func (o *DeletePostureCheckOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckOK %s", 200, payload)
+}
+
+func (o *DeletePostureCheckOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckOK %s", 200, payload)
+}
+
 func (o *DeletePostureCheckOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeletePostureCheckOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeletePostureCheckOK binds the response header WWW-Authenticate
+func (o *DeletePostureCheckOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeletePostureCheckForbidden creates a DeletePostureCheckForbidden with default headers values
@@ -119,31 +199,108 @@ func NewDeletePostureCheckForbidden() *DeletePostureCheckForbidden {
 	return &DeletePostureCheckForbidden{}
 }
 
-/* DeletePostureCheckForbidden describes a response with status code 403, with default header values.
+/*
+DeletePostureCheckForbidden describes a response with status code 403, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeletePostureCheckForbidden struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeletePostureCheckForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckForbidden  %+v", 403, o.Payload)
+// IsSuccess returns true when this delete posture check forbidden response has a 2xx status code
+func (o *DeletePostureCheckForbidden) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete posture check forbidden response has a 3xx status code
+func (o *DeletePostureCheckForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete posture check forbidden response has a 4xx status code
+func (o *DeletePostureCheckForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete posture check forbidden response has a 5xx status code
+func (o *DeletePostureCheckForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete posture check forbidden response a status code equal to that given
+func (o *DeletePostureCheckForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete posture check forbidden response
+func (o *DeletePostureCheckForbidden) Code() int {
+	return 403
+}
+
+func (o *DeletePostureCheckForbidden) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckForbidden %s", 403, payload)
+}
+
+func (o *DeletePostureCheckForbidden) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckForbidden %s", 403, payload)
+}
+
 func (o *DeletePostureCheckForbidden) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeletePostureCheckForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeletePostureCheckForbidden binds the response header WWW-Authenticate
+func (o *DeletePostureCheckForbidden) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeletePostureCheckNotFound creates a DeletePostureCheckNotFound with default headers values
@@ -151,31 +308,108 @@ func NewDeletePostureCheckNotFound() *DeletePostureCheckNotFound {
 	return &DeletePostureCheckNotFound{}
 }
 
-/* DeletePostureCheckNotFound describes a response with status code 404, with default header values.
+/*
+DeletePostureCheckNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeletePostureCheckNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeletePostureCheckNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete posture check not found response has a 2xx status code
+func (o *DeletePostureCheckNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete posture check not found response has a 3xx status code
+func (o *DeletePostureCheckNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete posture check not found response has a 4xx status code
+func (o *DeletePostureCheckNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete posture check not found response has a 5xx status code
+func (o *DeletePostureCheckNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete posture check not found response a status code equal to that given
+func (o *DeletePostureCheckNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete posture check not found response
+func (o *DeletePostureCheckNotFound) Code() int {
+	return 404
+}
+
+func (o *DeletePostureCheckNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckNotFound %s", 404, payload)
+}
+
+func (o *DeletePostureCheckNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckNotFound %s", 404, payload)
+}
+
 func (o *DeletePostureCheckNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeletePostureCheckNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeletePostureCheckNotFound binds the response header WWW-Authenticate
+func (o *DeletePostureCheckNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeletePostureCheckTooManyRequests creates a DeletePostureCheckTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewDeletePostureCheckTooManyRequests() *DeletePostureCheckTooManyRequests {
 	return &DeletePostureCheckTooManyRequests{}
 }
 
-/* DeletePostureCheckTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeletePostureCheckTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeletePostureCheckTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeletePostureCheckTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete posture check too many requests response has a 2xx status code
+func (o *DeletePostureCheckTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete posture check too many requests response has a 3xx status code
+func (o *DeletePostureCheckTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete posture check too many requests response has a 4xx status code
+func (o *DeletePostureCheckTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete posture check too many requests response has a 5xx status code
+func (o *DeletePostureCheckTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete posture check too many requests response a status code equal to that given
+func (o *DeletePostureCheckTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete posture check too many requests response
+func (o *DeletePostureCheckTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeletePostureCheckTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckTooManyRequests %s", 429, payload)
+}
+
+func (o *DeletePostureCheckTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckTooManyRequests %s", 429, payload)
+}
+
 func (o *DeletePostureCheckTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeletePostureCheckTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeletePostureCheckTooManyRequests binds the response header WWW-Authenticate
+func (o *DeletePostureCheckTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeletePostureCheckServiceUnavailable creates a DeletePostureCheckServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewDeletePostureCheckServiceUnavailable() *DeletePostureCheckServiceUnavail
 	return &DeletePostureCheckServiceUnavailable{}
 }
 
-/* DeletePostureCheckServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeletePostureCheckServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeletePostureCheckServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeletePostureCheckServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete posture check service unavailable response has a 2xx status code
+func (o *DeletePostureCheckServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete posture check service unavailable response has a 3xx status code
+func (o *DeletePostureCheckServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete posture check service unavailable response has a 4xx status code
+func (o *DeletePostureCheckServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete posture check service unavailable response has a 5xx status code
+func (o *DeletePostureCheckServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete posture check service unavailable response a status code equal to that given
+func (o *DeletePostureCheckServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete posture check service unavailable response
+func (o *DeletePostureCheckServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeletePostureCheckServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeletePostureCheckServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /posture-checks/{id}][%d] deletePostureCheckServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeletePostureCheckServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeletePostureCheckServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeletePostureCheckServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeletePostureCheckServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

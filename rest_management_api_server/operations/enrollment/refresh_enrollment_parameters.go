@@ -30,7 +30,7 @@ package enrollment
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	stderrors "errors"
 	"io"
 	"net/http"
 
@@ -56,7 +56,6 @@ func NewRefreshEnrollmentParams() RefreshEnrollmentParams {
 //
 // swagger:parameters refreshEnrollment
 type RefreshEnrollmentParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -65,6 +64,7 @@ type RefreshEnrollmentParams struct {
 	  In: path
 	*/
 	ID string
+
 	/*An enrollment refresh request
 	  Required: true
 	  In: body
@@ -87,10 +87,12 @@ func (o *RefreshEnrollmentParams) BindRequest(r *http.Request, route *middleware
 	}
 
 	if runtime.HasBody(r) {
-		defer r.Body.Close()
+		defer func() {
+			_ = r.Body.Close()
+		}()
 		var body rest_model.EnrollmentRefresh
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
+			if stderrors.Is(err, io.EOF) {
 				res = append(res, errors.Required("refresh", "body", ""))
 			} else {
 				res = append(res, errors.NewParseError("refresh", "body", "", err))
@@ -101,7 +103,7 @@ func (o *RefreshEnrollmentParams) BindRequest(r *http.Request, route *middleware
 				res = append(res, err)
 			}
 
-			ctx := validate.WithOperationRequest(context.Background())
+			ctx := validate.WithOperationRequest(r.Context())
 			if err := body.ContextValidate(ctx, route.Formats); err != nil {
 				res = append(res, err)
 			}

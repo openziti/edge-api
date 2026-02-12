@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DeleteCurrentAPISessionOKCode is the HTTP code returned for type DeleteCurrentAPISessionOK
 const DeleteCurrentAPISessionOKCode int = 200
 
-/*DeleteCurrentAPISessionOK Base empty response
+/*
+DeleteCurrentAPISessionOK Base empty response
 
 swagger:response deleteCurrentApiSessionOK
 */
 type DeleteCurrentAPISessionOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DeleteCurrentAPISessionOK struct {
 func NewDeleteCurrentAPISessionOK() *DeleteCurrentAPISessionOK {
 
 	return &DeleteCurrentAPISessionOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session o k response
+func (o *DeleteCurrentAPISessionOK) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session o k response
+func (o *DeleteCurrentAPISessionOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session o k response
@@ -72,6 +89,23 @@ func (o *DeleteCurrentAPISessionOK) SetPayload(payload *rest_model.Empty) {
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DeleteCurrentAPISessionOK) WriteResponse(rw http.ResponseWriter, produc
 // DeleteCurrentAPISessionUnauthorizedCode is the HTTP code returned for type DeleteCurrentAPISessionUnauthorized
 const DeleteCurrentAPISessionUnauthorizedCode int = 401
 
-/*DeleteCurrentAPISessionUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DeleteCurrentAPISessionUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response deleteCurrentApiSessionUnauthorized
 */
 type DeleteCurrentAPISessionUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DeleteCurrentAPISessionUnauthorized struct {
 func NewDeleteCurrentAPISessionUnauthorized() *DeleteCurrentAPISessionUnauthorized {
 
 	return &DeleteCurrentAPISessionUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the delete current Api session unauthorized response
+func (o *DeleteCurrentAPISessionUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DeleteCurrentAPISessionUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the delete current Api session unauthorized response
+func (o *DeleteCurrentAPISessionUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the delete current Api session unauthorized response
@@ -115,6 +165,23 @@ func (o *DeleteCurrentAPISessionUnauthorized) SetPayload(payload *rest_model.API
 
 // WriteResponse to the client
 func (o *DeleteCurrentAPISessionUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(401)
 	if o.Payload != nil {

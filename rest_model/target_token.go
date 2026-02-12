@@ -62,7 +62,7 @@ const (
 )
 
 // for schema
-var targetTokenEnum []interface{}
+var targetTokenEnum []any
 
 func init() {
 	var res []TargetToken

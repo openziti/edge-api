@@ -50,7 +50,6 @@ func NewGetCaJWTParams() GetCaJWTParams {
 //
 // swagger:parameters getCaJwt
 type GetCaJWTParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

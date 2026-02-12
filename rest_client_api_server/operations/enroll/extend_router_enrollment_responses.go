@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ExtendRouterEnrollmentOKCode is the HTTP code returned for type ExtendRouterEnrollmentOK
 const ExtendRouterEnrollmentOKCode int = 200
 
-/*ExtendRouterEnrollmentOK A response containing the edge routers new signed certificates (server chain, server cert, CAs).
+/*
+ExtendRouterEnrollmentOK A response containing the edge routers new signed certificates (server chain, server cert, CAs).
 
 swagger:response extendRouterEnrollmentOK
 */
 type ExtendRouterEnrollmentOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ExtendRouterEnrollmentOK struct {
 func NewExtendRouterEnrollmentOK() *ExtendRouterEnrollmentOK {
 
 	return &ExtendRouterEnrollmentOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend router enrollment o k response
+func (o *ExtendRouterEnrollmentOK) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendRouterEnrollmentOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend router enrollment o k response
+func (o *ExtendRouterEnrollmentOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend router enrollment o k response
@@ -72,6 +89,23 @@ func (o *ExtendRouterEnrollmentOK) SetPayload(payload *rest_model.EnrollmentCert
 // WriteResponse to the client
 func (o *ExtendRouterEnrollmentOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ExtendRouterEnrollmentOK) WriteResponse(rw http.ResponseWriter, produce
 // ExtendRouterEnrollmentBadRequestCode is the HTTP code returned for type ExtendRouterEnrollmentBadRequest
 const ExtendRouterEnrollmentBadRequestCode int = 400
 
-/*ExtendRouterEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ExtendRouterEnrollmentBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response extendRouterEnrollmentBadRequest
 */
 type ExtendRouterEnrollmentBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ExtendRouterEnrollmentBadRequest struct {
 func NewExtendRouterEnrollmentBadRequest() *ExtendRouterEnrollmentBadRequest {
 
 	return &ExtendRouterEnrollmentBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend router enrollment bad request response
+func (o *ExtendRouterEnrollmentBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendRouterEnrollmentBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend router enrollment bad request response
+func (o *ExtendRouterEnrollmentBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend router enrollment bad request response
@@ -116,6 +166,23 @@ func (o *ExtendRouterEnrollmentBadRequest) SetPayload(payload *rest_model.APIErr
 // WriteResponse to the client
 func (o *ExtendRouterEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ExtendRouterEnrollmentBadRequest) WriteResponse(rw http.ResponseWriter,
 // ExtendRouterEnrollmentUnauthorizedCode is the HTTP code returned for type ExtendRouterEnrollmentUnauthorized
 const ExtendRouterEnrollmentUnauthorizedCode int = 401
 
-/*ExtendRouterEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ExtendRouterEnrollmentUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response extendRouterEnrollmentUnauthorized
 */
 type ExtendRouterEnrollmentUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ExtendRouterEnrollmentUnauthorized struct {
 func NewExtendRouterEnrollmentUnauthorized() *ExtendRouterEnrollmentUnauthorized {
 
 	return &ExtendRouterEnrollmentUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend router enrollment unauthorized response
+func (o *ExtendRouterEnrollmentUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendRouterEnrollmentUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend router enrollment unauthorized response
+func (o *ExtendRouterEnrollmentUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend router enrollment unauthorized response
@@ -160,6 +243,23 @@ func (o *ExtendRouterEnrollmentUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *ExtendRouterEnrollmentUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ExtendRouterEnrollmentUnauthorized) WriteResponse(rw http.ResponseWrite
 // ExtendRouterEnrollmentTooManyRequestsCode is the HTTP code returned for type ExtendRouterEnrollmentTooManyRequests
 const ExtendRouterEnrollmentTooManyRequestsCode int = 429
 
-/*ExtendRouterEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ExtendRouterEnrollmentTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response extendRouterEnrollmentTooManyRequests
 */
 type ExtendRouterEnrollmentTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ExtendRouterEnrollmentTooManyRequests struct {
 func NewExtendRouterEnrollmentTooManyRequests() *ExtendRouterEnrollmentTooManyRequests {
 
 	return &ExtendRouterEnrollmentTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the extend router enrollment too many requests response
+func (o *ExtendRouterEnrollmentTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ExtendRouterEnrollmentTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the extend router enrollment too many requests response
+func (o *ExtendRouterEnrollmentTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the extend router enrollment too many requests response
@@ -203,6 +319,23 @@ func (o *ExtendRouterEnrollmentTooManyRequests) SetPayload(payload *rest_model.A
 
 // WriteResponse to the client
 func (o *ExtendRouterEnrollmentTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

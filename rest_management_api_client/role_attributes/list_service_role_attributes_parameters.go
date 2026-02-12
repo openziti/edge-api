@@ -77,10 +77,12 @@ func NewListServiceRoleAttributesParamsWithHTTPClient(client *http.Client) *List
 	}
 }
 
-/* ListServiceRoleAttributesParams contains all the parameters to send to the API endpoint
-   for the list service role attributes operation.
+/*
+ListServiceRoleAttributesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list service role attributes operation.
+
+	Typically these are written to a http.Request.
 */
 type ListServiceRoleAttributesParams struct {
 

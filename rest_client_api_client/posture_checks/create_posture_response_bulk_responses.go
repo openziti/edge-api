@@ -30,11 +30,14 @@ package posture_checks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type CreatePostureResponseBulkReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreatePostureResponseBulkReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreatePostureResponseBulkReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewCreatePostureResponseBulkOK()
@@ -78,7 +81,7 @@ func (o *CreatePostureResponseBulkReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /posture-response-bulk] createPostureResponseBulk", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewCreatePostureResponseBulkOK() *CreatePostureResponseBulkOK {
 	return &CreatePostureResponseBulkOK{}
 }
 
-/* CreatePostureResponseBulkOK describes a response with status code 200, with default header values.
+/*
+CreatePostureResponseBulkOK describes a response with status code 200, with default header values.
 
 Contains a list of services that have had their timers altered
 */
 type CreatePostureResponseBulkOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.PostureResponseEnvelope
 }
 
-func (o *CreatePostureResponseBulkOK) Error() string {
-	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this create posture response bulk o k response has a 2xx status code
+func (o *CreatePostureResponseBulkOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this create posture response bulk o k response has a 3xx status code
+func (o *CreatePostureResponseBulkOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create posture response bulk o k response has a 4xx status code
+func (o *CreatePostureResponseBulkOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create posture response bulk o k response has a 5xx status code
+func (o *CreatePostureResponseBulkOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create posture response bulk o k response a status code equal to that given
+func (o *CreatePostureResponseBulkOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the create posture response bulk o k response
+func (o *CreatePostureResponseBulkOK) Code() int {
+	return 200
+}
+
+func (o *CreatePostureResponseBulkOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkOK %s", 200, payload)
+}
+
+func (o *CreatePostureResponseBulkOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkOK %s", 200, payload)
+}
+
 func (o *CreatePostureResponseBulkOK) GetPayload() *rest_model.PostureResponseEnvelope {
 	return o.Payload
 }
 
 func (o *CreatePostureResponseBulkOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.PostureResponseEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreatePostureResponseBulkOK binds the response header WWW-Authenticate
+func (o *CreatePostureResponseBulkOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreatePostureResponseBulkBadRequest creates a CreatePostureResponseBulkBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewCreatePostureResponseBulkBadRequest() *CreatePostureResponseBulkBadReque
 	return &CreatePostureResponseBulkBadRequest{}
 }
 
-/* CreatePostureResponseBulkBadRequest describes a response with status code 400, with default header values.
+/*
+CreatePostureResponseBulkBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type CreatePostureResponseBulkBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreatePostureResponseBulkBadRequest) Error() string {
-	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this create posture response bulk bad request response has a 2xx status code
+func (o *CreatePostureResponseBulkBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create posture response bulk bad request response has a 3xx status code
+func (o *CreatePostureResponseBulkBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create posture response bulk bad request response has a 4xx status code
+func (o *CreatePostureResponseBulkBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create posture response bulk bad request response has a 5xx status code
+func (o *CreatePostureResponseBulkBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create posture response bulk bad request response a status code equal to that given
+func (o *CreatePostureResponseBulkBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create posture response bulk bad request response
+func (o *CreatePostureResponseBulkBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreatePostureResponseBulkBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkBadRequest %s", 400, payload)
+}
+
+func (o *CreatePostureResponseBulkBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkBadRequest %s", 400, payload)
+}
+
 func (o *CreatePostureResponseBulkBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreatePostureResponseBulkBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreatePostureResponseBulkBadRequest binds the response header WWW-Authenticate
+func (o *CreatePostureResponseBulkBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreatePostureResponseBulkUnauthorized creates a CreatePostureResponseBulkUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewCreatePostureResponseBulkUnauthorized() *CreatePostureResponseBulkUnauth
 	return &CreatePostureResponseBulkUnauthorized{}
 }
 
-/* CreatePostureResponseBulkUnauthorized describes a response with status code 401, with default header values.
+/*
+CreatePostureResponseBulkUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type CreatePostureResponseBulkUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreatePostureResponseBulkUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this create posture response bulk unauthorized response has a 2xx status code
+func (o *CreatePostureResponseBulkUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create posture response bulk unauthorized response has a 3xx status code
+func (o *CreatePostureResponseBulkUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create posture response bulk unauthorized response has a 4xx status code
+func (o *CreatePostureResponseBulkUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create posture response bulk unauthorized response has a 5xx status code
+func (o *CreatePostureResponseBulkUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create posture response bulk unauthorized response a status code equal to that given
+func (o *CreatePostureResponseBulkUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create posture response bulk unauthorized response
+func (o *CreatePostureResponseBulkUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreatePostureResponseBulkUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkUnauthorized %s", 401, payload)
+}
+
+func (o *CreatePostureResponseBulkUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkUnauthorized %s", 401, payload)
+}
+
 func (o *CreatePostureResponseBulkUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreatePostureResponseBulkUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreatePostureResponseBulkUnauthorized binds the response header WWW-Authenticate
+func (o *CreatePostureResponseBulkUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreatePostureResponseBulkTooManyRequests creates a CreatePostureResponseBulkTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewCreatePostureResponseBulkTooManyRequests() *CreatePostureResponseBulkToo
 	return &CreatePostureResponseBulkTooManyRequests{}
 }
 
-/* CreatePostureResponseBulkTooManyRequests describes a response with status code 429, with default header values.
+/*
+CreatePostureResponseBulkTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type CreatePostureResponseBulkTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreatePostureResponseBulkTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this create posture response bulk too many requests response has a 2xx status code
+func (o *CreatePostureResponseBulkTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create posture response bulk too many requests response has a 3xx status code
+func (o *CreatePostureResponseBulkTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create posture response bulk too many requests response has a 4xx status code
+func (o *CreatePostureResponseBulkTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create posture response bulk too many requests response has a 5xx status code
+func (o *CreatePostureResponseBulkTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create posture response bulk too many requests response a status code equal to that given
+func (o *CreatePostureResponseBulkTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the create posture response bulk too many requests response
+func (o *CreatePostureResponseBulkTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *CreatePostureResponseBulkTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkTooManyRequests %s", 429, payload)
+}
+
+func (o *CreatePostureResponseBulkTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkTooManyRequests %s", 429, payload)
+}
+
 func (o *CreatePostureResponseBulkTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreatePostureResponseBulkTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreatePostureResponseBulkTooManyRequests binds the response header WWW-Authenticate
+func (o *CreatePostureResponseBulkTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewCreatePostureResponseBulkServiceUnavailable creates a CreatePostureResponseBulkServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewCreatePostureResponseBulkServiceUnavailable() *CreatePostureResponseBulk
 	return &CreatePostureResponseBulkServiceUnavailable{}
 }
 
-/* CreatePostureResponseBulkServiceUnavailable describes a response with status code 503, with default header values.
+/*
+CreatePostureResponseBulkServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type CreatePostureResponseBulkServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *CreatePostureResponseBulkServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this create posture response bulk service unavailable response has a 2xx status code
+func (o *CreatePostureResponseBulkServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this create posture response bulk service unavailable response has a 3xx status code
+func (o *CreatePostureResponseBulkServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create posture response bulk service unavailable response has a 4xx status code
+func (o *CreatePostureResponseBulkServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create posture response bulk service unavailable response has a 5xx status code
+func (o *CreatePostureResponseBulkServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create posture response bulk service unavailable response a status code equal to that given
+func (o *CreatePostureResponseBulkServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the create posture response bulk service unavailable response
+func (o *CreatePostureResponseBulkServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *CreatePostureResponseBulkServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkServiceUnavailable %s", 503, payload)
+}
+
+func (o *CreatePostureResponseBulkServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /posture-response-bulk][%d] createPostureResponseBulkServiceUnavailable %s", 503, payload)
+}
+
 func (o *CreatePostureResponseBulkServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *CreatePostureResponseBulkServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderCreatePostureResponseBulkServiceUnavailable binds the response header WWW-Authenticate
+func (o *CreatePostureResponseBulkServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CreateRouterCreatedCode is the HTTP code returned for type CreateRouterCreated
 const CreateRouterCreatedCode int = 201
 
-/*CreateRouterCreated The create request was successful and the resource has been added at the following location
+/*
+CreateRouterCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createRouterCreated
 */
 type CreateRouterCreated struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CreateRouterCreated struct {
 func NewCreateRouterCreated() *CreateRouterCreated {
 
 	return &CreateRouterCreated{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create router created response
+func (o *CreateRouterCreated) WithWWWAuthenticate(wWWAuthenticate []string) *CreateRouterCreated {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create router created response
+func (o *CreateRouterCreated) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create router created response
@@ -72,6 +89,23 @@ func (o *CreateRouterCreated) SetPayload(payload *rest_model.CreateEnvelope) {
 // WriteResponse to the client
 func (o *CreateRouterCreated) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(201)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CreateRouterCreated) WriteResponse(rw http.ResponseWriter, producer run
 // CreateRouterBadRequestCode is the HTTP code returned for type CreateRouterBadRequest
 const CreateRouterBadRequestCode int = 400
 
-/*CreateRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateRouterBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createRouterBadRequest
 */
 type CreateRouterBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CreateRouterBadRequest struct {
 func NewCreateRouterBadRequest() *CreateRouterBadRequest {
 
 	return &CreateRouterBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create router bad request response
+func (o *CreateRouterBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *CreateRouterBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create router bad request response
+func (o *CreateRouterBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create router bad request response
@@ -116,6 +166,23 @@ func (o *CreateRouterBadRequest) SetPayload(payload *rest_model.APIErrorEnvelope
 // WriteResponse to the client
 func (o *CreateRouterBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CreateRouterBadRequest) WriteResponse(rw http.ResponseWriter, producer 
 // CreateRouterUnauthorizedCode is the HTTP code returned for type CreateRouterUnauthorized
 const CreateRouterUnauthorizedCode int = 401
 
-/*CreateRouterUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateRouterUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createRouterUnauthorized
 */
 type CreateRouterUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CreateRouterUnauthorized struct {
 func NewCreateRouterUnauthorized() *CreateRouterUnauthorized {
 
 	return &CreateRouterUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create router unauthorized response
+func (o *CreateRouterUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CreateRouterUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create router unauthorized response
+func (o *CreateRouterUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create router unauthorized response
@@ -160,6 +243,23 @@ func (o *CreateRouterUnauthorized) SetPayload(payload *rest_model.APIErrorEnvelo
 // WriteResponse to the client
 func (o *CreateRouterUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *CreateRouterUnauthorized) WriteResponse(rw http.ResponseWriter, produce
 // CreateRouterTooManyRequestsCode is the HTTP code returned for type CreateRouterTooManyRequests
 const CreateRouterTooManyRequestsCode int = 429
 
-/*CreateRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateRouterTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createRouterTooManyRequests
 */
 type CreateRouterTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type CreateRouterTooManyRequests struct {
 func NewCreateRouterTooManyRequests() *CreateRouterTooManyRequests {
 
 	return &CreateRouterTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create router too many requests response
+func (o *CreateRouterTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *CreateRouterTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create router too many requests response
+func (o *CreateRouterTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create router too many requests response
@@ -204,6 +320,23 @@ func (o *CreateRouterTooManyRequests) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *CreateRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *CreateRouterTooManyRequests) WriteResponse(rw http.ResponseWriter, prod
 // CreateRouterServiceUnavailableCode is the HTTP code returned for type CreateRouterServiceUnavailable
 const CreateRouterServiceUnavailableCode int = 503
 
-/*CreateRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+CreateRouterServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response createRouterServiceUnavailable
 */
 type CreateRouterServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type CreateRouterServiceUnavailable struct {
 func NewCreateRouterServiceUnavailable() *CreateRouterServiceUnavailable {
 
 	return &CreateRouterServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create router service unavailable response
+func (o *CreateRouterServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *CreateRouterServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create router service unavailable response
+func (o *CreateRouterServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create router service unavailable response
@@ -247,6 +396,23 @@ func (o *CreateRouterServiceUnavailable) SetPayload(payload *rest_model.APIError
 
 // WriteResponse to the client
 func (o *CreateRouterServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

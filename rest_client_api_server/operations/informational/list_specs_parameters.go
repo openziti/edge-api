@@ -49,7 +49,6 @@ func NewListSpecsParams() ListSpecsParams {
 //
 // swagger:parameters listSpecs
 type ListSpecsParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

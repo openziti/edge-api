@@ -76,10 +76,12 @@ func NewDetailMfaQrCodeParamsWithHTTPClient(client *http.Client) *DetailMfaQrCod
 	}
 }
 
-/* DetailMfaQrCodeParams contains all the parameters to send to the API endpoint
-   for the detail mfa qr code operation.
+/*
+DetailMfaQrCodeParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail mfa qr code operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailMfaQrCodeParams struct {
 	timeout    time.Duration

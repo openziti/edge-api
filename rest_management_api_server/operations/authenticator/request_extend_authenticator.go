@@ -36,16 +36,16 @@ import (
 )
 
 // RequestExtendAuthenticatorHandlerFunc turns a function with the right signature into a request extend authenticator handler
-type RequestExtendAuthenticatorHandlerFunc func(RequestExtendAuthenticatorParams, interface{}) middleware.Responder
+type RequestExtendAuthenticatorHandlerFunc func(RequestExtendAuthenticatorParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn RequestExtendAuthenticatorHandlerFunc) Handle(params RequestExtendAuthenticatorParams, principal interface{}) middleware.Responder {
+func (fn RequestExtendAuthenticatorHandlerFunc) Handle(params RequestExtendAuthenticatorParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // RequestExtendAuthenticatorHandler interface for that can handle valid request extend authenticator params
 type RequestExtendAuthenticatorHandler interface {
-	Handle(RequestExtendAuthenticatorParams, interface{}) middleware.Responder
+	Handle(RequestExtendAuthenticatorParams, any) middleware.Responder
 }
 
 // NewRequestExtendAuthenticator creates a new http.Handler for the request extend authenticator operation
@@ -53,7 +53,8 @@ func NewRequestExtendAuthenticator(ctx *middleware.Context, handler RequestExten
 	return &RequestExtendAuthenticator{Context: ctx, Handler: handler}
 }
 
-/* RequestExtendAuthenticator swagger:route POST /authenticators/{id}/request-extend Authenticator requestExtendAuthenticator
+/*
+	RequestExtendAuthenticator swagger:route POST /authenticators/{id}/request-extend Authenticator requestExtendAuthenticator
 
 Indicate a certificate authenticator should be extended and optionally key rolled on next authentication.
 
@@ -63,8 +64,6 @@ a hint on whether private keys should be rolled. Clients that do not support ext
 may ignore one or both flags.
 
 If this request is made against a non-certificate based authenticator, it will return a 403-forbidden error.
-
-
 */
 type RequestExtendAuthenticator struct {
 	Context *middleware.Context
@@ -85,9 +84,9 @@ func (o *RequestExtendAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.R
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -96,6 +95,7 @@ func (o *RequestExtendAuthenticator) ServeHTTP(rw http.ResponseWriter, r *http.R
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

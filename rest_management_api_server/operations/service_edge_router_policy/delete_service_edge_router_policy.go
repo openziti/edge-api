@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteServiceEdgeRouterPolicyHandlerFunc turns a function with the right signature into a delete service edge router policy handler
-type DeleteServiceEdgeRouterPolicyHandlerFunc func(DeleteServiceEdgeRouterPolicyParams, interface{}) middleware.Responder
+type DeleteServiceEdgeRouterPolicyHandlerFunc func(DeleteServiceEdgeRouterPolicyParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteServiceEdgeRouterPolicyHandlerFunc) Handle(params DeleteServiceEdgeRouterPolicyParams, principal interface{}) middleware.Responder {
+func (fn DeleteServiceEdgeRouterPolicyHandlerFunc) Handle(params DeleteServiceEdgeRouterPolicyParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteServiceEdgeRouterPolicyHandler interface for that can handle valid delete service edge router policy params
 type DeleteServiceEdgeRouterPolicyHandler interface {
-	Handle(DeleteServiceEdgeRouterPolicyParams, interface{}) middleware.Responder
+	Handle(DeleteServiceEdgeRouterPolicyParams, any) middleware.Responder
 }
 
 // NewDeleteServiceEdgeRouterPolicy creates a new http.Handler for the delete service edge router policy operation
@@ -53,12 +53,12 @@ func NewDeleteServiceEdgeRouterPolicy(ctx *middleware.Context, handler DeleteSer
 	return &DeleteServiceEdgeRouterPolicy{Context: ctx, Handler: handler}
 }
 
-/* DeleteServiceEdgeRouterPolicy swagger:route DELETE /service-edge-router-policies/{id} Service Edge Router Policy deleteServiceEdgeRouterPolicy
+/*
+	DeleteServiceEdgeRouterPolicy swagger:route DELETE /service-edge-router-policies/{id} Service Edge Router Policy deleteServiceEdgeRouterPolicy
 
-Delete a service edge policy
+# Delete a service edge policy
 
 Delete a service edge policy by id. Requires admin access.
-
 */
 type DeleteServiceEdgeRouterPolicy struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteServiceEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *htt
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteServiceEdgeRouterPolicy) ServeHTTP(rw http.ResponseWriter, r *htt
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

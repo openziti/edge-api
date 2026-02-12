@@ -30,11 +30,14 @@ package informational
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListProtocolsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListProtocolsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListProtocolsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListProtocolsOK()
@@ -66,7 +69,7 @@ func (o *ListProtocolsReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /protocols] listProtocols", response, response.Code())
 	}
 }
 
@@ -75,31 +78,108 @@ func NewListProtocolsOK() *ListProtocolsOK {
 	return &ListProtocolsOK{}
 }
 
-/* ListProtocolsOK describes a response with status code 200, with default header values.
+/*
+ListProtocolsOK describes a response with status code 200, with default header values.
 
 A list of supported Edge protocols
 */
 type ListProtocolsOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListProtocolsEnvelope
 }
 
-func (o *ListProtocolsOK) Error() string {
-	return fmt.Sprintf("[GET /protocols][%d] listProtocolsOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list protocols o k response has a 2xx status code
+func (o *ListProtocolsOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list protocols o k response has a 3xx status code
+func (o *ListProtocolsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list protocols o k response has a 4xx status code
+func (o *ListProtocolsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list protocols o k response has a 5xx status code
+func (o *ListProtocolsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list protocols o k response a status code equal to that given
+func (o *ListProtocolsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list protocols o k response
+func (o *ListProtocolsOK) Code() int {
+	return 200
+}
+
+func (o *ListProtocolsOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsOK %s", 200, payload)
+}
+
+func (o *ListProtocolsOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsOK %s", 200, payload)
+}
+
 func (o *ListProtocolsOK) GetPayload() *rest_model.ListProtocolsEnvelope {
 	return o.Payload
 }
 
 func (o *ListProtocolsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListProtocolsEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListProtocolsOK binds the response header WWW-Authenticate
+func (o *ListProtocolsOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListProtocolsTooManyRequests creates a ListProtocolsTooManyRequests with default headers values
@@ -107,31 +187,108 @@ func NewListProtocolsTooManyRequests() *ListProtocolsTooManyRequests {
 	return &ListProtocolsTooManyRequests{}
 }
 
-/* ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListProtocolsTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListProtocolsTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListProtocolsTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list protocols too many requests response has a 2xx status code
+func (o *ListProtocolsTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list protocols too many requests response has a 3xx status code
+func (o *ListProtocolsTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list protocols too many requests response has a 4xx status code
+func (o *ListProtocolsTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list protocols too many requests response has a 5xx status code
+func (o *ListProtocolsTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list protocols too many requests response a status code equal to that given
+func (o *ListProtocolsTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list protocols too many requests response
+func (o *ListProtocolsTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListProtocolsTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests %s", 429, payload)
+}
+
+func (o *ListProtocolsTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsTooManyRequests %s", 429, payload)
+}
+
 func (o *ListProtocolsTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListProtocolsTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListProtocolsTooManyRequests binds the response header WWW-Authenticate
+func (o *ListProtocolsTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListProtocolsServiceUnavailable creates a ListProtocolsServiceUnavailable with default headers values
@@ -139,29 +296,106 @@ func NewListProtocolsServiceUnavailable() *ListProtocolsServiceUnavailable {
 	return &ListProtocolsServiceUnavailable{}
 }
 
-/* ListProtocolsServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListProtocolsServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListProtocolsServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListProtocolsServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /protocols][%d] listProtocolsServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list protocols service unavailable response has a 2xx status code
+func (o *ListProtocolsServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list protocols service unavailable response has a 3xx status code
+func (o *ListProtocolsServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list protocols service unavailable response has a 4xx status code
+func (o *ListProtocolsServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list protocols service unavailable response has a 5xx status code
+func (o *ListProtocolsServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list protocols service unavailable response a status code equal to that given
+func (o *ListProtocolsServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list protocols service unavailable response
+func (o *ListProtocolsServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListProtocolsServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListProtocolsServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /protocols][%d] listProtocolsServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListProtocolsServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListProtocolsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListProtocolsServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListProtocolsServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

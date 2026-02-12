@@ -36,16 +36,16 @@ import (
 )
 
 // ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc turns a function with the right signature into a list edge router service edge router policies handler
-type ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc func(ListEdgeRouterServiceEdgeRouterPoliciesParams, interface{}) middleware.Responder
+type ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc func(ListEdgeRouterServiceEdgeRouterPoliciesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc) Handle(params ListEdgeRouterServiceEdgeRouterPoliciesParams, principal interface{}) middleware.Responder {
+func (fn ListEdgeRouterServiceEdgeRouterPoliciesHandlerFunc) Handle(params ListEdgeRouterServiceEdgeRouterPoliciesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListEdgeRouterServiceEdgeRouterPoliciesHandler interface for that can handle valid list edge router service edge router policies params
 type ListEdgeRouterServiceEdgeRouterPoliciesHandler interface {
-	Handle(ListEdgeRouterServiceEdgeRouterPoliciesParams, interface{}) middleware.Responder
+	Handle(ListEdgeRouterServiceEdgeRouterPoliciesParams, any) middleware.Responder
 }
 
 // NewListEdgeRouterServiceEdgeRouterPolicies creates a new http.Handler for the list edge router service edge router policies operation
@@ -53,12 +53,12 @@ func NewListEdgeRouterServiceEdgeRouterPolicies(ctx *middleware.Context, handler
 	return &ListEdgeRouterServiceEdgeRouterPolicies{Context: ctx, Handler: handler}
 }
 
-/* ListEdgeRouterServiceEdgeRouterPolicies swagger:route GET /edge-routers/{id}/service-edge-router-policies Edge Router listEdgeRouterServiceEdgeRouterPolicies
+/*
+	ListEdgeRouterServiceEdgeRouterPolicies swagger:route GET /edge-routers/{id}/service-edge-router-policies Edge Router listEdgeRouterServiceEdgeRouterPolicies
 
-List the service policies that affect an edge router
+# List the service policies that affect an edge router
 
 Retrieves a list of service policies policies that apply to the specified edge router.
-
 */
 type ListEdgeRouterServiceEdgeRouterPolicies struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *ListEdgeRouterServiceEdgeRouterPolicies) ServeHTTP(rw http.ResponseWrit
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *ListEdgeRouterServiceEdgeRouterPolicies) ServeHTTP(rw http.ResponseWrit
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

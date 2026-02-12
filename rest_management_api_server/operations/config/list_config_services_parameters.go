@@ -52,7 +52,6 @@ func NewListConfigServicesParams() ListConfigServicesParams {
 //
 // swagger:parameters listConfigServices
 type ListConfigServicesParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
@@ -60,15 +59,18 @@ type ListConfigServicesParams struct {
 	  In: query
 	*/
 	Filter *string
+
 	/*The id of the requested resource
 	  Required: true
 	  In: path
 	*/
 	ID string
+
 	/*
 	  In: query
 	*/
 	Limit *int64
+
 	/*
 	  In: query
 	*/
@@ -83,7 +85,6 @@ func (o *ListConfigServicesParams) BindRequest(r *http.Request, route *middlewar
 	var res []error
 
 	o.HTTPRequest = r
-
 	qs := runtime.Values(r.URL.Query())
 
 	qFilter, qhkFilter, _ := qs.GetOK("filter")

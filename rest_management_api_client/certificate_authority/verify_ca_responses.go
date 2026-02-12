@@ -30,11 +30,14 @@ package certificate_authority
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type VerifyCaReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *VerifyCaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *VerifyCaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewVerifyCaOK()
@@ -84,7 +87,7 @@ func (o *VerifyCaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cas/{id}/verify] verifyCa", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewVerifyCaOK() *VerifyCaOK {
 	return &VerifyCaOK{}
 }
 
-/* VerifyCaOK describes a response with status code 200, with default header values.
+/*
+VerifyCaOK describes a response with status code 200, with default header values.
 
 Base empty response
 */
 type VerifyCaOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *VerifyCaOK) Error() string {
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this verify ca o k response has a 2xx status code
+func (o *VerifyCaOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this verify ca o k response has a 3xx status code
+func (o *VerifyCaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify ca o k response has a 4xx status code
+func (o *VerifyCaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this verify ca o k response has a 5xx status code
+func (o *VerifyCaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify ca o k response a status code equal to that given
+func (o *VerifyCaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the verify ca o k response
+func (o *VerifyCaOK) Code() int {
+	return 200
+}
+
+func (o *VerifyCaOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaOK %s", 200, payload)
+}
+
+func (o *VerifyCaOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaOK %s", 200, payload)
+}
+
 func (o *VerifyCaOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *VerifyCaOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyCaOK binds the response header WWW-Authenticate
+func (o *VerifyCaOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyCaBadRequest creates a VerifyCaBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewVerifyCaBadRequest() *VerifyCaBadRequest {
 	return &VerifyCaBadRequest{}
 }
 
-/* VerifyCaBadRequest describes a response with status code 400, with default header values.
+/*
+VerifyCaBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type VerifyCaBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyCaBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this verify ca bad request response has a 2xx status code
+func (o *VerifyCaBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify ca bad request response has a 3xx status code
+func (o *VerifyCaBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify ca bad request response has a 4xx status code
+func (o *VerifyCaBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this verify ca bad request response has a 5xx status code
+func (o *VerifyCaBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify ca bad request response a status code equal to that given
+func (o *VerifyCaBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the verify ca bad request response
+func (o *VerifyCaBadRequest) Code() int {
+	return 400
+}
+
+func (o *VerifyCaBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaBadRequest %s", 400, payload)
+}
+
+func (o *VerifyCaBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaBadRequest %s", 400, payload)
+}
+
 func (o *VerifyCaBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyCaBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyCaBadRequest binds the response header WWW-Authenticate
+func (o *VerifyCaBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyCaUnauthorized creates a VerifyCaUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewVerifyCaUnauthorized() *VerifyCaUnauthorized {
 	return &VerifyCaUnauthorized{}
 }
 
-/* VerifyCaUnauthorized describes a response with status code 401, with default header values.
+/*
+VerifyCaUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type VerifyCaUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyCaUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this verify ca unauthorized response has a 2xx status code
+func (o *VerifyCaUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify ca unauthorized response has a 3xx status code
+func (o *VerifyCaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify ca unauthorized response has a 4xx status code
+func (o *VerifyCaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this verify ca unauthorized response has a 5xx status code
+func (o *VerifyCaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify ca unauthorized response a status code equal to that given
+func (o *VerifyCaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the verify ca unauthorized response
+func (o *VerifyCaUnauthorized) Code() int {
+	return 401
+}
+
+func (o *VerifyCaUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaUnauthorized %s", 401, payload)
+}
+
+func (o *VerifyCaUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaUnauthorized %s", 401, payload)
+}
+
 func (o *VerifyCaUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyCaUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyCaUnauthorized binds the response header WWW-Authenticate
+func (o *VerifyCaUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyCaNotFound creates a VerifyCaNotFound with default headers values
@@ -189,31 +423,108 @@ func NewVerifyCaNotFound() *VerifyCaNotFound {
 	return &VerifyCaNotFound{}
 }
 
-/* VerifyCaNotFound describes a response with status code 404, with default header values.
+/*
+VerifyCaNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type VerifyCaNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyCaNotFound) Error() string {
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this verify ca not found response has a 2xx status code
+func (o *VerifyCaNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify ca not found response has a 3xx status code
+func (o *VerifyCaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify ca not found response has a 4xx status code
+func (o *VerifyCaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this verify ca not found response has a 5xx status code
+func (o *VerifyCaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify ca not found response a status code equal to that given
+func (o *VerifyCaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the verify ca not found response
+func (o *VerifyCaNotFound) Code() int {
+	return 404
+}
+
+func (o *VerifyCaNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaNotFound %s", 404, payload)
+}
+
+func (o *VerifyCaNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaNotFound %s", 404, payload)
+}
+
 func (o *VerifyCaNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyCaNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyCaNotFound binds the response header WWW-Authenticate
+func (o *VerifyCaNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyCaTooManyRequests creates a VerifyCaTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewVerifyCaTooManyRequests() *VerifyCaTooManyRequests {
 	return &VerifyCaTooManyRequests{}
 }
 
-/* VerifyCaTooManyRequests describes a response with status code 429, with default header values.
+/*
+VerifyCaTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type VerifyCaTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyCaTooManyRequests) Error() string {
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this verify ca too many requests response has a 2xx status code
+func (o *VerifyCaTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify ca too many requests response has a 3xx status code
+func (o *VerifyCaTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify ca too many requests response has a 4xx status code
+func (o *VerifyCaTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this verify ca too many requests response has a 5xx status code
+func (o *VerifyCaTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this verify ca too many requests response a status code equal to that given
+func (o *VerifyCaTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the verify ca too many requests response
+func (o *VerifyCaTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *VerifyCaTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaTooManyRequests %s", 429, payload)
+}
+
+func (o *VerifyCaTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaTooManyRequests %s", 429, payload)
+}
+
 func (o *VerifyCaTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyCaTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyCaTooManyRequests binds the response header WWW-Authenticate
+func (o *VerifyCaTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewVerifyCaServiceUnavailable creates a VerifyCaServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewVerifyCaServiceUnavailable() *VerifyCaServiceUnavailable {
 	return &VerifyCaServiceUnavailable{}
 }
 
-/* VerifyCaServiceUnavailable describes a response with status code 503, with default header values.
+/*
+VerifyCaServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type VerifyCaServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *VerifyCaServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this verify ca service unavailable response has a 2xx status code
+func (o *VerifyCaServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this verify ca service unavailable response has a 3xx status code
+func (o *VerifyCaServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this verify ca service unavailable response has a 4xx status code
+func (o *VerifyCaServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this verify ca service unavailable response has a 5xx status code
+func (o *VerifyCaServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this verify ca service unavailable response a status code equal to that given
+func (o *VerifyCaServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the verify ca service unavailable response
+func (o *VerifyCaServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *VerifyCaServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaServiceUnavailable %s", 503, payload)
+}
+
+func (o *VerifyCaServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cas/{id}/verify][%d] verifyCaServiceUnavailable %s", 503, payload)
+}
+
 func (o *VerifyCaServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *VerifyCaServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderVerifyCaServiceUnavailable binds the response header WWW-Authenticate
+func (o *VerifyCaServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

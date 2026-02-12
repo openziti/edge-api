@@ -3,10 +3,22 @@
 responses:
   listSessions:
     description: A list of sessions
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listSessionsEnvelope'
   detailSession:
     description: A single session
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailSessionEnvelope'
 

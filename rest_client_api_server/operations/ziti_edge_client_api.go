@@ -76,207 +76,438 @@ func NewZitiEdgeClientAPI(spec *loads.Document) *ZitiEdgeClientAPI {
 		APIKeyAuthenticator: security.APIKeyAuth,
 		BearerAuthenticator: security.BearerAuth,
 
-		ApplicationPkcs7Consumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
+		ApplicationPkcs7Consumer: runtime.ConsumerFunc(func(r io.Reader, target any) error {
+			_ = r
+			_ = target
+
 			return errors.NotImplemented("applicationPkcs7 consumer has not yet been implemented")
 		}),
-		ApplicationXPemFileConsumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
+		ApplicationXPemFileConsumer: runtime.ConsumerFunc(func(r io.Reader, target any) error {
+			_ = r
+			_ = target
+
 			return errors.NotImplemented("applicationXPemFile consumer has not yet been implemented")
 		}),
 		JSONConsumer: runtime.JSONConsumer(),
 		TxtConsumer:  runtime.TextConsumer(),
 
-		ApplicationPkcs7MimeProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+		ApplicationPkcs7MimeProducer: runtime.ProducerFunc(func(w io.Writer, data any) error {
+			_ = w
+			_ = data
+
 			return errors.NotImplemented("applicationPkcs7Mime producer has not yet been implemented")
 		}),
 		BinProducer:  runtime.ByteStreamProducer(),
 		JSONProducer: runtime.JSONProducer(),
-		TextYamlProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+		TextYamlProducer: runtime.ProducerFunc(func(w io.Writer, data any) error {
+			_ = w
+			_ = data
+
 			return errors.NotImplemented("textYaml producer has not yet been implemented")
 		}),
 
-		CurrentAPISessionDeleteCurrentAPISessionHandler: current_api_session.DeleteCurrentAPISessionHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionParams, principal interface{}) middleware.Responder {
+		CurrentAPISessionDeleteCurrentAPISessionHandler: current_api_session.DeleteCurrentAPISessionHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.DeleteCurrentAPISession has not yet been implemented")
 		}),
+
 		AuthenticationAuthenticateHandler: authentication.AuthenticateHandlerFunc(func(params authentication.AuthenticateParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation authentication.Authenticate has not yet been implemented")
 		}),
-		AuthenticationAuthenticateMfaHandler: authentication.AuthenticateMfaHandlerFunc(func(params authentication.AuthenticateMfaParams, principal interface{}) middleware.Responder {
+
+		AuthenticationAuthenticateMfaHandler: authentication.AuthenticateMfaHandlerFunc(func(params authentication.AuthenticateMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation authentication.AuthenticateMfa has not yet been implemented")
 		}),
-		CurrentAPISessionCreateCurrentAPISessionCertificateHandler: current_api_session.CreateCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.CreateCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionCreateCurrentAPISessionCertificateHandler: current_api_session.CreateCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.CreateCurrentAPISessionCertificateParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.CreateCurrentAPISessionCertificate has not yet been implemented")
 		}),
-		CurrentIdentityCreateMfaRecoveryCodesHandler: current_identity.CreateMfaRecoveryCodesHandlerFunc(func(params current_identity.CreateMfaRecoveryCodesParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityCreateMfaRecoveryCodesHandler: current_identity.CreateMfaRecoveryCodesHandlerFunc(func(params current_identity.CreateMfaRecoveryCodesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.CreateMfaRecoveryCodes has not yet been implemented")
 		}),
-		PostureChecksCreatePostureResponseHandler: posture_checks.CreatePostureResponseHandlerFunc(func(params posture_checks.CreatePostureResponseParams, principal interface{}) middleware.Responder {
+
+		PostureChecksCreatePostureResponseHandler: posture_checks.CreatePostureResponseHandlerFunc(func(params posture_checks.CreatePostureResponseParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.CreatePostureResponse has not yet been implemented")
 		}),
-		PostureChecksCreatePostureResponseBulkHandler: posture_checks.CreatePostureResponseBulkHandlerFunc(func(params posture_checks.CreatePostureResponseBulkParams, principal interface{}) middleware.Responder {
+
+		PostureChecksCreatePostureResponseBulkHandler: posture_checks.CreatePostureResponseBulkHandlerFunc(func(params posture_checks.CreatePostureResponseBulkParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation posture_checks.CreatePostureResponseBulk has not yet been implemented")
 		}),
-		SessionCreateSessionHandler: session.CreateSessionHandlerFunc(func(params session.CreateSessionParams, principal interface{}) middleware.Responder {
+
+		SessionCreateSessionHandler: session.CreateSessionHandlerFunc(func(params session.CreateSessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.CreateSession has not yet been implemented")
 		}),
-		CurrentAPISessionCreateTotpTokenHandler: current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionCreateTotpTokenHandler: current_api_session.CreateTotpTokenHandlerFunc(func(params current_api_session.CreateTotpTokenParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.CreateTotpToken has not yet been implemented")
 		}),
-		CurrentAPISessionDeleteCurrentAPISessionCertificateHandler: current_api_session.DeleteCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionDeleteCurrentAPISessionCertificateHandler: current_api_session.DeleteCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.DeleteCurrentAPISessionCertificateParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.DeleteCurrentAPISessionCertificate has not yet been implemented")
 		}),
-		CurrentIdentityDeleteMfaHandler: current_identity.DeleteMfaHandlerFunc(func(params current_identity.DeleteMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDeleteMfaHandler: current_identity.DeleteMfaHandlerFunc(func(params current_identity.DeleteMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DeleteMfa has not yet been implemented")
 		}),
-		ServiceDeleteServiceHandler: service.DeleteServiceHandlerFunc(func(params service.DeleteServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceDeleteServiceHandler: service.DeleteServiceHandlerFunc(func(params service.DeleteServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.DeleteService has not yet been implemented")
 		}),
-		SessionDeleteSessionHandler: session.DeleteSessionHandlerFunc(func(params session.DeleteSessionParams, principal interface{}) middleware.Responder {
+
+		SessionDeleteSessionHandler: session.DeleteSessionHandlerFunc(func(params session.DeleteSessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.DeleteSession has not yet been implemented")
 		}),
-		CurrentAPISessionDetailCurrentAPISessionCertificateHandler: current_api_session.DetailCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.DetailCurrentAPISessionCertificateParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionDetailCurrentAPISessionCertificateHandler: current_api_session.DetailCurrentAPISessionCertificateHandlerFunc(func(params current_api_session.DetailCurrentAPISessionCertificateParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.DetailCurrentAPISessionCertificate has not yet been implemented")
 		}),
-		CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler: current_api_session.DetailCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.DetailCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionDetailCurrentIdentityAuthenticatorHandler: current_api_session.DetailCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.DetailCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.DetailCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		CurrentIdentityDetailMfaHandler: current_identity.DetailMfaHandlerFunc(func(params current_identity.DetailMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDetailMfaHandler: current_identity.DetailMfaHandlerFunc(func(params current_identity.DetailMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DetailMfa has not yet been implemented")
 		}),
-		CurrentIdentityDetailMfaQrCodeHandler: current_identity.DetailMfaQrCodeHandlerFunc(func(params current_identity.DetailMfaQrCodeParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDetailMfaQrCodeHandler: current_identity.DetailMfaQrCodeHandlerFunc(func(params current_identity.DetailMfaQrCodeParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DetailMfaQrCode has not yet been implemented")
 		}),
-		CurrentIdentityDetailMfaRecoveryCodesHandler: current_identity.DetailMfaRecoveryCodesHandlerFunc(func(params current_identity.DetailMfaRecoveryCodesParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityDetailMfaRecoveryCodesHandler: current_identity.DetailMfaRecoveryCodesHandlerFunc(func(params current_identity.DetailMfaRecoveryCodesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.DetailMfaRecoveryCodes has not yet been implemented")
 		}),
-		ServiceDetailServiceHandler: service.DetailServiceHandlerFunc(func(params service.DetailServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceDetailServiceHandler: service.DetailServiceHandlerFunc(func(params service.DetailServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.DetailService has not yet been implemented")
 		}),
-		SessionDetailSessionHandler: session.DetailSessionHandlerFunc(func(params session.DetailSessionParams, principal interface{}) middleware.Responder {
+
+		SessionDetailSessionHandler: session.DetailSessionHandlerFunc(func(params session.DetailSessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.DetailSession has not yet been implemented")
 		}),
+
 		InformationalDetailSpecHandler: informational.DetailSpecHandlerFunc(func(params informational.DetailSpecParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.DetailSpec has not yet been implemented")
 		}),
+
 		InformationalDetailSpecBodyHandler: informational.DetailSpecBodyHandlerFunc(func(params informational.DetailSpecBodyParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.DetailSpecBody has not yet been implemented")
 		}),
+
 		EnrollEnrollHandler: enroll.EnrollHandlerFunc(func(params enroll.EnrollParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.Enroll has not yet been implemented")
 		}),
+
 		EnrollEnrollCaHandler: enroll.EnrollCaHandlerFunc(func(params enroll.EnrollCaParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollCa has not yet been implemented")
 		}),
+
 		EnrollEnrollErOttHandler: enroll.EnrollErOttHandlerFunc(func(params enroll.EnrollErOttParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollErOtt has not yet been implemented")
 		}),
-		CurrentIdentityEnrollMfaHandler: current_identity.EnrollMfaHandlerFunc(func(params current_identity.EnrollMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityEnrollMfaHandler: current_identity.EnrollMfaHandlerFunc(func(params current_identity.EnrollMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.EnrollMfa has not yet been implemented")
 		}),
+
 		EnrollEnrollOttHandler: enroll.EnrollOttHandlerFunc(func(params enroll.EnrollOttParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollOtt has not yet been implemented")
 		}),
+
 		EnrollEnrollOttCaHandler: enroll.EnrollOttCaHandlerFunc(func(params enroll.EnrollOttCaParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollOttCa has not yet been implemented")
 		}),
+
 		EnrollEnrollTokenHandler: enroll.EnrollTokenHandlerFunc(func(params enroll.EnrollTokenParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollToken has not yet been implemented")
 		}),
+
 		EnrollEnrollUpdbHandler: enroll.EnrollUpdbHandlerFunc(func(params enroll.EnrollUpdbParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollUpdb has not yet been implemented")
 		}),
+
 		EnrollEnrollmentChallengeHandler: enroll.EnrollmentChallengeHandlerFunc(func(params enroll.EnrollmentChallengeParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.EnrollmentChallenge has not yet been implemented")
 		}),
-		CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler: current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionExtendCurrentIdentityAuthenticatorHandler: current_api_session.ExtendCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ExtendCurrentIdentityAuthenticator has not yet been implemented")
 		}),
+
 		EnrollExtendRouterEnrollmentHandler: enroll.ExtendRouterEnrollmentHandlerFunc(func(params enroll.ExtendRouterEnrollmentParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.ExtendRouterEnrollment has not yet been implemented")
 		}),
-		CurrentAPISessionExtendVerifyCurrentIdentityAuthenticatorHandler: current_api_session.ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendVerifyCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionExtendVerifyCurrentIdentityAuthenticatorHandler: current_api_session.ExtendVerifyCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.ExtendVerifyCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ExtendVerifyCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		CurrentAPISessionGetCurrentAPISessionHandler: current_api_session.GetCurrentAPISessionHandlerFunc(func(params current_api_session.GetCurrentAPISessionParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionGetCurrentAPISessionHandler: current_api_session.GetCurrentAPISessionHandlerFunc(func(params current_api_session.GetCurrentAPISessionParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.GetCurrentAPISession has not yet been implemented")
 		}),
-		CurrentIdentityGetCurrentIdentityHandler: current_identity.GetCurrentIdentityHandlerFunc(func(params current_identity.GetCurrentIdentityParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityGetCurrentIdentityHandler: current_identity.GetCurrentIdentityHandlerFunc(func(params current_identity.GetCurrentIdentityParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.GetCurrentIdentity has not yet been implemented")
 		}),
-		CurrentIdentityGetCurrentIdentityEdgeRoutersHandler: current_identity.GetCurrentIdentityEdgeRoutersHandlerFunc(func(params current_identity.GetCurrentIdentityEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityGetCurrentIdentityEdgeRoutersHandler: current_identity.GetCurrentIdentityEdgeRoutersHandlerFunc(func(params current_identity.GetCurrentIdentityEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.GetCurrentIdentityEdgeRouters has not yet been implemented")
 		}),
+
 		EnrollGetEnrollmentJwksHandler: enroll.GetEnrollmentJwksHandlerFunc(func(params enroll.GetEnrollmentJwksParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enroll.GetEnrollmentJwks has not yet been implemented")
 		}),
-		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal interface{}) middleware.Responder {
+
+		ControllersListControllersHandler: controllers.ListControllersHandlerFunc(func(params controllers.ListControllersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation controllers.ListControllers has not yet been implemented")
 		}),
-		CurrentAPISessionListCurrentAPISessionCertificatesHandler: current_api_session.ListCurrentAPISessionCertificatesHandlerFunc(func(params current_api_session.ListCurrentAPISessionCertificatesParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionListCurrentAPISessionCertificatesHandler: current_api_session.ListCurrentAPISessionCertificatesHandlerFunc(func(params current_api_session.ListCurrentAPISessionCertificatesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ListCurrentAPISessionCertificates has not yet been implemented")
 		}),
-		CurrentAPISessionListCurrentIdentityAuthenticatorsHandler: current_api_session.ListCurrentIdentityAuthenticatorsHandlerFunc(func(params current_api_session.ListCurrentIdentityAuthenticatorsParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionListCurrentIdentityAuthenticatorsHandler: current_api_session.ListCurrentIdentityAuthenticatorsHandlerFunc(func(params current_api_session.ListCurrentIdentityAuthenticatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ListCurrentIdentityAuthenticators has not yet been implemented")
 		}),
+
 		InformationalListEnumeratedCapabilitiesHandler: informational.ListEnumeratedCapabilitiesHandlerFunc(func(params informational.ListEnumeratedCapabilitiesParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
 		}),
+
 		ExternalJWTSignerListExternalJWTSignersHandler: external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation external_jwt_signer.ListExternalJWTSigners has not yet been implemented")
 		}),
+
 		EnrollmentListNetworkJWTsHandler: enrollment.ListNetworkJWTsHandlerFunc(func(params enrollment.ListNetworkJWTsParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
 		}),
+
 		InformationalListProtocolsHandler: informational.ListProtocolsHandlerFunc(func(params informational.ListProtocolsParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListProtocols has not yet been implemented")
 		}),
+
 		InformationalListRootHandler: informational.ListRootHandlerFunc(func(params informational.ListRootParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListRoot has not yet been implemented")
 		}),
-		ServiceListServiceEdgeRoutersHandler: service.ListServiceEdgeRoutersHandlerFunc(func(params service.ListServiceEdgeRoutersParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceEdgeRoutersHandler: service.ListServiceEdgeRoutersHandlerFunc(func(params service.ListServiceEdgeRoutersParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceEdgeRouters has not yet been implemented")
 		}),
-		ServiceListServiceTerminatorsHandler: service.ListServiceTerminatorsHandlerFunc(func(params service.ListServiceTerminatorsParams, principal interface{}) middleware.Responder {
+
+		ServiceListServiceTerminatorsHandler: service.ListServiceTerminatorsHandlerFunc(func(params service.ListServiceTerminatorsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServiceTerminators has not yet been implemented")
 		}),
-		CurrentAPISessionListServiceUpdatesHandler: current_api_session.ListServiceUpdatesHandlerFunc(func(params current_api_session.ListServiceUpdatesParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionListServiceUpdatesHandler: current_api_session.ListServiceUpdatesHandlerFunc(func(params current_api_session.ListServiceUpdatesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.ListServiceUpdates has not yet been implemented")
 		}),
-		ServiceListServicesHandler: service.ListServicesHandlerFunc(func(params service.ListServicesParams, principal interface{}) middleware.Responder {
+
+		ServiceListServicesHandler: service.ListServicesHandlerFunc(func(params service.ListServicesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.ListServices has not yet been implemented")
 		}),
-		SessionListSessionsHandler: session.ListSessionsHandlerFunc(func(params session.ListSessionsParams, principal interface{}) middleware.Responder {
+
+		SessionListSessionsHandler: session.ListSessionsHandlerFunc(func(params session.ListSessionsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation session.ListSessions has not yet been implemented")
 		}),
+
 		InformationalListSpecsHandler: informational.ListSpecsHandlerFunc(func(params informational.ListSpecsParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListSpecs has not yet been implemented")
 		}),
+
 		InformationalListVersionHandler: informational.ListVersionHandlerFunc(func(params informational.ListVersionParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation informational.ListVersion has not yet been implemented")
 		}),
+
 		WellKnownListWellKnownCasHandler: well_known.ListWellKnownCasHandlerFunc(func(params well_known.ListWellKnownCasParams) middleware.Responder {
+			_ = params
+
 			return middleware.NotImplemented("operation well_known.ListWellKnownCas has not yet been implemented")
 		}),
-		CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler: current_api_session.PatchCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.PatchCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionPatchCurrentIdentityAuthenticatorHandler: current_api_session.PatchCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.PatchCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.PatchCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		ServicePatchServiceHandler: service.PatchServiceHandlerFunc(func(params service.PatchServiceParams, principal interface{}) middleware.Responder {
+
+		ServicePatchServiceHandler: service.PatchServiceHandlerFunc(func(params service.PatchServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.PatchService has not yet been implemented")
 		}),
-		CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler: current_api_session.UpdateCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.UpdateCurrentIdentityAuthenticatorParams, principal interface{}) middleware.Responder {
+
+		CurrentAPISessionUpdateCurrentIdentityAuthenticatorHandler: current_api_session.UpdateCurrentIdentityAuthenticatorHandlerFunc(func(params current_api_session.UpdateCurrentIdentityAuthenticatorParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_api_session.UpdateCurrentIdentityAuthenticator has not yet been implemented")
 		}),
-		ServiceUpdateServiceHandler: service.UpdateServiceHandlerFunc(func(params service.UpdateServiceParams, principal interface{}) middleware.Responder {
+
+		ServiceUpdateServiceHandler: service.UpdateServiceHandlerFunc(func(params service.UpdateServiceParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation service.UpdateService has not yet been implemented")
 		}),
-		CurrentIdentityVerifyMfaHandler: current_identity.VerifyMfaHandlerFunc(func(params current_identity.VerifyMfaParams, principal interface{}) middleware.Responder {
+
+		CurrentIdentityVerifyMfaHandler: current_identity.VerifyMfaHandlerFunc(func(params current_identity.VerifyMfaParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
 			return middleware.NotImplemented("operation current_identity.VerifyMfa has not yet been implemented")
 		}),
 
-		Oauth2Auth: func(token string, scopes []string) (interface{}, error) {
+		Oauth2Auth: func(token string, scopes []string) (any, error) {
+			_ = token
+			_ = scopes
+
 			return nil, errors.NotImplemented("oauth2 bearer auth (oauth2) has not yet been implemented")
 		},
 		// Applies when the "zt-session" header is set
-		ZtSessionAuth: func(token string) (interface{}, error) {
+		ZtSessionAuth: func(token string) (any, error) {
+			_ = token
+
 			return nil, errors.NotImplemented("api key auth (ztSession) zt-session from header param [zt-session] has not yet been implemented")
 		},
 		// default authorizer is authorized meaning no requests are blocked
@@ -337,11 +568,11 @@ type ZitiEdgeClientAPI struct {
 
 	// Oauth2Auth registers a function that takes an access token and a collection of required scopes and returns a principal
 	// it performs authentication based on an oauth2 bearer token provided in the request
-	Oauth2Auth func(string, []string) (interface{}, error)
+	Oauth2Auth func(string, []string) (any, error)
 
 	// ZtSessionAuth registers a function that takes a token and returns a principal
 	// it performs authentication based on an api key zt-session provided in the header
-	ZtSessionAuth func(string) (interface{}, error)
+	ZtSessionAuth func(string) (any, error)
 
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
@@ -481,7 +712,7 @@ type ZitiEdgeClientAPI struct {
 	CommandLineOptionsGroups []swag.CommandLineOptionsGroup
 
 	// User defined logger function.
-	Logger func(string, ...interface{})
+	Logger func(string, ...any)
 }
 
 // UseRedoc for documentation at /docs
@@ -770,6 +1001,7 @@ func (o *ZitiEdgeClientAPI) AuthenticatorsFor(schemes map[string]spec.SecuritySc
 
 		}
 	}
+
 	return result
 }
 
@@ -779,6 +1011,7 @@ func (o *ZitiEdgeClientAPI) Authorizer() runtime.Authorizer {
 }
 
 // ConsumersFor gets the consumers for the specified media types.
+//
 // MIME type parameters are ignored here.
 func (o *ZitiEdgeClientAPI) ConsumersFor(mediaTypes []string) map[string]runtime.Consumer {
 	result := make(map[string]runtime.Consumer, len(mediaTypes))
@@ -798,10 +1031,12 @@ func (o *ZitiEdgeClientAPI) ConsumersFor(mediaTypes []string) map[string]runtime
 			result[mt] = c
 		}
 	}
+
 	return result
 }
 
 // ProducersFor gets the producers for the specified media types.
+//
 // MIME type parameters are ignored here.
 func (o *ZitiEdgeClientAPI) ProducersFor(mediaTypes []string) map[string]runtime.Producer {
 	result := make(map[string]runtime.Producer, len(mediaTypes))
@@ -821,6 +1056,7 @@ func (o *ZitiEdgeClientAPI) ProducersFor(mediaTypes []string) map[string]runtime
 			result[mt] = p
 		}
 	}
+
 	return result
 }
 
@@ -1132,6 +1368,6 @@ func (o *ZitiEdgeClientAPI) AddMiddlewareFor(method, path string, builder middle
 	}
 	o.Init()
 	if h, ok := o.handlers[um][path]; ok {
-		o.handlers[method][path] = builder(h)
+		o.handlers[um][path] = builder(h)
 	}
 }

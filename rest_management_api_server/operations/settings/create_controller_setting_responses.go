@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // CreateControllerSettingCreatedCode is the HTTP code returned for type CreateControllerSettingCreated
 const CreateControllerSettingCreatedCode int = 201
 
-/*CreateControllerSettingCreated The create request was successful and the resource has been added at the following location
+/*
+CreateControllerSettingCreated The create request was successful and the resource has been added at the following location
 
 swagger:response createControllerSettingCreated
 */
 type CreateControllerSettingCreated struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type CreateControllerSettingCreated struct {
 func NewCreateControllerSettingCreated() *CreateControllerSettingCreated {
 
 	return &CreateControllerSettingCreated{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create controller setting created response
+func (o *CreateControllerSettingCreated) WithWWWAuthenticate(wWWAuthenticate []string) *CreateControllerSettingCreated {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create controller setting created response
+func (o *CreateControllerSettingCreated) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create controller setting created response
@@ -72,6 +89,23 @@ func (o *CreateControllerSettingCreated) SetPayload(payload *rest_model.CreateEn
 // WriteResponse to the client
 func (o *CreateControllerSettingCreated) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(201)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *CreateControllerSettingCreated) WriteResponse(rw http.ResponseWriter, p
 // CreateControllerSettingBadRequestCode is the HTTP code returned for type CreateControllerSettingBadRequest
 const CreateControllerSettingBadRequestCode int = 400
 
-/*CreateControllerSettingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+CreateControllerSettingBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response createControllerSettingBadRequest
 */
 type CreateControllerSettingBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type CreateControllerSettingBadRequest struct {
 func NewCreateControllerSettingBadRequest() *CreateControllerSettingBadRequest {
 
 	return &CreateControllerSettingBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create controller setting bad request response
+func (o *CreateControllerSettingBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *CreateControllerSettingBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create controller setting bad request response
+func (o *CreateControllerSettingBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create controller setting bad request response
@@ -116,6 +166,23 @@ func (o *CreateControllerSettingBadRequest) SetPayload(payload *rest_model.APIEr
 // WriteResponse to the client
 func (o *CreateControllerSettingBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *CreateControllerSettingBadRequest) WriteResponse(rw http.ResponseWriter
 // CreateControllerSettingUnauthorizedCode is the HTTP code returned for type CreateControllerSettingUnauthorized
 const CreateControllerSettingUnauthorizedCode int = 401
 
-/*CreateControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+CreateControllerSettingUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response createControllerSettingUnauthorized
 */
 type CreateControllerSettingUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type CreateControllerSettingUnauthorized struct {
 func NewCreateControllerSettingUnauthorized() *CreateControllerSettingUnauthorized {
 
 	return &CreateControllerSettingUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create controller setting unauthorized response
+func (o *CreateControllerSettingUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *CreateControllerSettingUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create controller setting unauthorized response
+func (o *CreateControllerSettingUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create controller setting unauthorized response
@@ -160,6 +243,23 @@ func (o *CreateControllerSettingUnauthorized) SetPayload(payload *rest_model.API
 // WriteResponse to the client
 func (o *CreateControllerSettingUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *CreateControllerSettingUnauthorized) WriteResponse(rw http.ResponseWrit
 // CreateControllerSettingTooManyRequestsCode is the HTTP code returned for type CreateControllerSettingTooManyRequests
 const CreateControllerSettingTooManyRequestsCode int = 429
 
-/*CreateControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+CreateControllerSettingTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response createControllerSettingTooManyRequests
 */
 type CreateControllerSettingTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type CreateControllerSettingTooManyRequests struct {
 func NewCreateControllerSettingTooManyRequests() *CreateControllerSettingTooManyRequests {
 
 	return &CreateControllerSettingTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the create controller setting too many requests response
+func (o *CreateControllerSettingTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *CreateControllerSettingTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the create controller setting too many requests response
+func (o *CreateControllerSettingTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the create controller setting too many requests response
@@ -203,6 +319,23 @@ func (o *CreateControllerSettingTooManyRequests) SetPayload(payload *rest_model.
 
 // WriteResponse to the client
 func (o *CreateControllerSettingTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(429)
 	if o.Payload != nil {

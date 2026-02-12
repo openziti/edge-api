@@ -36,16 +36,16 @@ import (
 )
 
 // ListEnrollmentsHandlerFunc turns a function with the right signature into a list enrollments handler
-type ListEnrollmentsHandlerFunc func(ListEnrollmentsParams, interface{}) middleware.Responder
+type ListEnrollmentsHandlerFunc func(ListEnrollmentsParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListEnrollmentsHandlerFunc) Handle(params ListEnrollmentsParams, principal interface{}) middleware.Responder {
+func (fn ListEnrollmentsHandlerFunc) Handle(params ListEnrollmentsParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListEnrollmentsHandler interface for that can handle valid list enrollments params
 type ListEnrollmentsHandler interface {
-	Handle(ListEnrollmentsParams, interface{}) middleware.Responder
+	Handle(ListEnrollmentsParams, any) middleware.Responder
 }
 
 // NewListEnrollments creates a new http.Handler for the list enrollments operation
@@ -53,13 +53,12 @@ func NewListEnrollments(ctx *middleware.Context, handler ListEnrollmentsHandler)
 	return &ListEnrollments{Context: ctx, Handler: handler}
 }
 
-/* ListEnrollments swagger:route GET /enrollments Enrollment listEnrollments
+/*
+	ListEnrollments swagger:route GET /enrollments Enrollment listEnrollments
 
-List outstanding enrollments
+# List outstanding enrollments
 
 Retrieves a list of outstanding enrollments; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListEnrollments struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListEnrollments) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListEnrollments) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

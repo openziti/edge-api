@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -125,11 +126,15 @@ func (m *SessionManagementDetail) validateServicePolicies(formats strfmt.Registr
 
 		if m.ServicePolicies[i] != nil {
 			if err := m.ServicePolicies[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("servicePolicies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("servicePolicies" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -163,12 +168,21 @@ func (m *SessionManagementDetail) contextValidateServicePolicies(ctx context.Con
 	for i := 0; i < len(m.ServicePolicies); i++ {
 
 		if m.ServicePolicies[i] != nil {
+
+			if swag.IsZero(m.ServicePolicies[i]) { // not required
+				return nil
+			}
+
 			if err := m.ServicePolicies[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("servicePolicies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("servicePolicies" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

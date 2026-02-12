@@ -26,6 +26,12 @@ paths:
 responses:
   listCurrentApiSessionServiceUpdates:
     description: Data indicating necessary service updates
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listCurrentApiSessionServiceUpdatesEnvelope'
 

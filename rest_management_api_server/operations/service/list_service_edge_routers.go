@@ -36,16 +36,16 @@ import (
 )
 
 // ListServiceEdgeRoutersHandlerFunc turns a function with the right signature into a list service edge routers handler
-type ListServiceEdgeRoutersHandlerFunc func(ListServiceEdgeRoutersParams, interface{}) middleware.Responder
+type ListServiceEdgeRoutersHandlerFunc func(ListServiceEdgeRoutersParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServiceEdgeRoutersHandlerFunc) Handle(params ListServiceEdgeRoutersParams, principal interface{}) middleware.Responder {
+func (fn ListServiceEdgeRoutersHandlerFunc) Handle(params ListServiceEdgeRoutersParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServiceEdgeRoutersHandler interface for that can handle valid list service edge routers params
 type ListServiceEdgeRoutersHandler interface {
-	Handle(ListServiceEdgeRoutersParams, interface{}) middleware.Responder
+	Handle(ListServiceEdgeRoutersParams, any) middleware.Responder
 }
 
 // NewListServiceEdgeRouters creates a new http.Handler for the list service edge routers operation
@@ -53,13 +53,12 @@ func NewListServiceEdgeRouters(ctx *middleware.Context, handler ListServiceEdgeR
 	return &ListServiceEdgeRouters{Context: ctx, Handler: handler}
 }
 
-/* ListServiceEdgeRouters swagger:route GET /services/{id}/edge-routers Service listServiceEdgeRouters
+/*
+	ListServiceEdgeRouters swagger:route GET /services/{id}/edge-routers Service listServiceEdgeRouters
 
-List accessible edge-routers
+# List accessible edge-routers
 
 Retrieves a list of edge-routers that may be used to access the given service. Supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServiceEdgeRouters struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServiceEdgeRouters) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServiceEdgeRouters) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

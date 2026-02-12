@@ -36,16 +36,16 @@ import (
 )
 
 // DetailMfaRecoveryCodesHandlerFunc turns a function with the right signature into a detail mfa recovery codes handler
-type DetailMfaRecoveryCodesHandlerFunc func(DetailMfaRecoveryCodesParams, interface{}) middleware.Responder
+type DetailMfaRecoveryCodesHandlerFunc func(DetailMfaRecoveryCodesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailMfaRecoveryCodesHandlerFunc) Handle(params DetailMfaRecoveryCodesParams, principal interface{}) middleware.Responder {
+func (fn DetailMfaRecoveryCodesHandlerFunc) Handle(params DetailMfaRecoveryCodesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailMfaRecoveryCodesHandler interface for that can handle valid detail mfa recovery codes params
 type DetailMfaRecoveryCodesHandler interface {
-	Handle(DetailMfaRecoveryCodesParams, interface{}) middleware.Responder
+	Handle(DetailMfaRecoveryCodesParams, any) middleware.Responder
 }
 
 // NewDetailMfaRecoveryCodes creates a new http.Handler for the detail mfa recovery codes operation
@@ -53,13 +53,12 @@ func NewDetailMfaRecoveryCodes(ctx *middleware.Context, handler DetailMfaRecover
 	return &DetailMfaRecoveryCodes{Context: ctx, Handler: handler}
 }
 
-/* DetailMfaRecoveryCodes swagger:route GET /current-identity/mfa/recovery-codes Current Identity MFA detailMfaRecoveryCodes
+/*
+	DetailMfaRecoveryCodes swagger:route GET /current-identity/mfa/recovery-codes Current Identity MFA detailMfaRecoveryCodes
 
-For a completed MFA enrollment view the current recovery codes
+# For a completed MFA enrollment view the current recovery codes
 
 Allows the viewing of recovery codes of an MFA enrollment. Requires a current valid time based one time password to interact with. Available after a completed MFA enrollment.
-
-
 */
 type DetailMfaRecoveryCodes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DetailMfaRecoveryCodes) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DetailMfaRecoveryCodes) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

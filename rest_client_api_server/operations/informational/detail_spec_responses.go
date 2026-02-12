@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailSpecOKCode is the HTTP code returned for type DetailSpecOK
 const DetailSpecOKCode int = 200
 
-/*DetailSpecOK A single specification
+/*
+DetailSpecOK A single specification
 
 swagger:response detailSpecOK
 */
 type DetailSpecOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailSpecOK struct {
 func NewDetailSpecOK() *DetailSpecOK {
 
 	return &DetailSpecOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail spec o k response
+func (o *DetailSpecOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSpecOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail spec o k response
+func (o *DetailSpecOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail spec o k response
@@ -71,6 +88,23 @@ func (o *DetailSpecOK) SetPayload(payload *rest_model.DetailSpecEnvelope) {
 
 // WriteResponse to the client
 func (o *DetailSpecOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(200)
 	if o.Payload != nil {

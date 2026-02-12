@@ -30,11 +30,14 @@ package service_policy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type DeleteServicePolicyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteServicePolicyOK()
@@ -90,7 +93,7 @@ func (o *DeleteServicePolicyReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /service-policies/{id}] deleteServicePolicy", response, response.Code())
 	}
 }
 
@@ -99,31 +102,108 @@ func NewDeleteServicePolicyOK() *DeleteServicePolicyOK {
 	return &DeleteServicePolicyOK{}
 }
 
-/* DeleteServicePolicyOK describes a response with status code 200, with default header values.
+/*
+DeleteServicePolicyOK describes a response with status code 200, with default header values.
 
 The delete request was successful and the resource has been removed
 */
 type DeleteServicePolicyOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *DeleteServicePolicyOK) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this delete service policy o k response has a 2xx status code
+func (o *DeleteServicePolicyOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this delete service policy o k response has a 3xx status code
+func (o *DeleteServicePolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy o k response has a 4xx status code
+func (o *DeleteServicePolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete service policy o k response has a 5xx status code
+func (o *DeleteServicePolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy o k response a status code equal to that given
+func (o *DeleteServicePolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete service policy o k response
+func (o *DeleteServicePolicyOK) Code() int {
+	return 200
+}
+
+func (o *DeleteServicePolicyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyOK %s", 200, payload)
+}
+
+func (o *DeleteServicePolicyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyOK %s", 200, payload)
+}
+
 func (o *DeleteServicePolicyOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyOK binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteServicePolicyBadRequest creates a DeleteServicePolicyBadRequest with default headers values
@@ -131,31 +211,108 @@ func NewDeleteServicePolicyBadRequest() *DeleteServicePolicyBadRequest {
 	return &DeleteServicePolicyBadRequest{}
 }
 
-/* DeleteServicePolicyBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteServicePolicyBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type DeleteServicePolicyBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this delete service policy bad request response has a 2xx status code
+func (o *DeleteServicePolicyBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy bad request response has a 3xx status code
+func (o *DeleteServicePolicyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy bad request response has a 4xx status code
+func (o *DeleteServicePolicyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy bad request response has a 5xx status code
+func (o *DeleteServicePolicyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy bad request response a status code equal to that given
+func (o *DeleteServicePolicyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete service policy bad request response
+func (o *DeleteServicePolicyBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteServicePolicyBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyBadRequest %s", 400, payload)
+}
+
+func (o *DeleteServicePolicyBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyBadRequest %s", 400, payload)
+}
+
 func (o *DeleteServicePolicyBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyBadRequest binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteServicePolicyUnauthorized creates a DeleteServicePolicyUnauthorized with default headers values
@@ -163,31 +320,108 @@ func NewDeleteServicePolicyUnauthorized() *DeleteServicePolicyUnauthorized {
 	return &DeleteServicePolicyUnauthorized{}
 }
 
-/* DeleteServicePolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteServicePolicyUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type DeleteServicePolicyUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this delete service policy unauthorized response has a 2xx status code
+func (o *DeleteServicePolicyUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy unauthorized response has a 3xx status code
+func (o *DeleteServicePolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy unauthorized response has a 4xx status code
+func (o *DeleteServicePolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy unauthorized response has a 5xx status code
+func (o *DeleteServicePolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy unauthorized response a status code equal to that given
+func (o *DeleteServicePolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete service policy unauthorized response
+func (o *DeleteServicePolicyUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteServicePolicyUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyUnauthorized %s", 401, payload)
+}
+
+func (o *DeleteServicePolicyUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyUnauthorized %s", 401, payload)
+}
+
 func (o *DeleteServicePolicyUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyUnauthorized binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteServicePolicyNotFound creates a DeleteServicePolicyNotFound with default headers values
@@ -195,31 +429,108 @@ func NewDeleteServicePolicyNotFound() *DeleteServicePolicyNotFound {
 	return &DeleteServicePolicyNotFound{}
 }
 
-/* DeleteServicePolicyNotFound describes a response with status code 404, with default header values.
+/*
+DeleteServicePolicyNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type DeleteServicePolicyNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this delete service policy not found response has a 2xx status code
+func (o *DeleteServicePolicyNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy not found response has a 3xx status code
+func (o *DeleteServicePolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy not found response has a 4xx status code
+func (o *DeleteServicePolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy not found response has a 5xx status code
+func (o *DeleteServicePolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy not found response a status code equal to that given
+func (o *DeleteServicePolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete service policy not found response
+func (o *DeleteServicePolicyNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteServicePolicyNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyNotFound %s", 404, payload)
+}
+
+func (o *DeleteServicePolicyNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyNotFound %s", 404, payload)
+}
+
 func (o *DeleteServicePolicyNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyNotFound binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteServicePolicyConflict creates a DeleteServicePolicyConflict with default headers values
@@ -227,31 +538,108 @@ func NewDeleteServicePolicyConflict() *DeleteServicePolicyConflict {
 	return &DeleteServicePolicyConflict{}
 }
 
-/* DeleteServicePolicyConflict describes a response with status code 409, with default header values.
+/*
+DeleteServicePolicyConflict describes a response with status code 409, with default header values.
 
 The resource requested to be removed/altered cannot be as it is referenced by another object.
 */
 type DeleteServicePolicyConflict struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyConflict) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyConflict  %+v", 409, o.Payload)
+// IsSuccess returns true when this delete service policy conflict response has a 2xx status code
+func (o *DeleteServicePolicyConflict) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy conflict response has a 3xx status code
+func (o *DeleteServicePolicyConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy conflict response has a 4xx status code
+func (o *DeleteServicePolicyConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy conflict response has a 5xx status code
+func (o *DeleteServicePolicyConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy conflict response a status code equal to that given
+func (o *DeleteServicePolicyConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete service policy conflict response
+func (o *DeleteServicePolicyConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteServicePolicyConflict) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyConflict %s", 409, payload)
+}
+
+func (o *DeleteServicePolicyConflict) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyConflict %s", 409, payload)
+}
+
 func (o *DeleteServicePolicyConflict) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyConflict binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyConflict) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteServicePolicyTooManyRequests creates a DeleteServicePolicyTooManyRequests with default headers values
@@ -259,31 +647,108 @@ func NewDeleteServicePolicyTooManyRequests() *DeleteServicePolicyTooManyRequests
 	return &DeleteServicePolicyTooManyRequests{}
 }
 
-/* DeleteServicePolicyTooManyRequests describes a response with status code 429, with default header values.
+/*
+DeleteServicePolicyTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type DeleteServicePolicyTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyTooManyRequests) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this delete service policy too many requests response has a 2xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy too many requests response has a 3xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy too many requests response has a 4xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete service policy too many requests response has a 5xx status code
+func (o *DeleteServicePolicyTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete service policy too many requests response a status code equal to that given
+func (o *DeleteServicePolicyTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the delete service policy too many requests response
+func (o *DeleteServicePolicyTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *DeleteServicePolicyTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests %s", 429, payload)
+}
+
+func (o *DeleteServicePolicyTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyTooManyRequests %s", 429, payload)
+}
+
 func (o *DeleteServicePolicyTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyTooManyRequests binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewDeleteServicePolicyServiceUnavailable creates a DeleteServicePolicyServiceUnavailable with default headers values
@@ -291,29 +756,106 @@ func NewDeleteServicePolicyServiceUnavailable() *DeleteServicePolicyServiceUnava
 	return &DeleteServicePolicyServiceUnavailable{}
 }
 
-/* DeleteServicePolicyServiceUnavailable describes a response with status code 503, with default header values.
+/*
+DeleteServicePolicyServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type DeleteServicePolicyServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *DeleteServicePolicyServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this delete service policy service unavailable response has a 2xx status code
+func (o *DeleteServicePolicyServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this delete service policy service unavailable response has a 3xx status code
+func (o *DeleteServicePolicyServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete service policy service unavailable response has a 4xx status code
+func (o *DeleteServicePolicyServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete service policy service unavailable response has a 5xx status code
+func (o *DeleteServicePolicyServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete service policy service unavailable response a status code equal to that given
+func (o *DeleteServicePolicyServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the delete service policy service unavailable response
+func (o *DeleteServicePolicyServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *DeleteServicePolicyServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyServiceUnavailable %s", 503, payload)
+}
+
+func (o *DeleteServicePolicyServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /service-policies/{id}][%d] deleteServicePolicyServiceUnavailable %s", 503, payload)
+}
+
 func (o *DeleteServicePolicyServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *DeleteServicePolicyServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderDeleteServicePolicyServiceUnavailable binds the response header WWW-Authenticate
+func (o *DeleteServicePolicyServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

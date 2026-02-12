@@ -62,7 +62,7 @@ const (
 )
 
 // for schema
-var semanticEnum []interface{}
+var semanticEnum []any
 
 func init() {
 	var res []Semantic

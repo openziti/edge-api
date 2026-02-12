@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // DetailSessionRoutePathOKCode is the HTTP code returned for type DetailSessionRoutePathOK
 const DetailSessionRoutePathOKCode int = 200
 
-/*DetailSessionRoutePathOK A single session's route path
+/*
+DetailSessionRoutePathOK A single session's route path
 
 swagger:response detailSessionRoutePathOK
 */
 type DetailSessionRoutePathOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type DetailSessionRoutePathOK struct {
 func NewDetailSessionRoutePathOK() *DetailSessionRoutePathOK {
 
 	return &DetailSessionRoutePathOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail session route path o k response
+func (o *DetailSessionRoutePathOK) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSessionRoutePathOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail session route path o k response
+func (o *DetailSessionRoutePathOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail session route path o k response
@@ -72,6 +89,23 @@ func (o *DetailSessionRoutePathOK) SetPayload(payload *rest_model.DetailSessionR
 // WriteResponse to the client
 func (o *DetailSessionRoutePathOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *DetailSessionRoutePathOK) WriteResponse(rw http.ResponseWriter, produce
 // DetailSessionRoutePathUnauthorizedCode is the HTTP code returned for type DetailSessionRoutePathUnauthorized
 const DetailSessionRoutePathUnauthorizedCode int = 401
 
-/*DetailSessionRoutePathUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+DetailSessionRoutePathUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response detailSessionRoutePathUnauthorized
 */
 type DetailSessionRoutePathUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type DetailSessionRoutePathUnauthorized struct {
 func NewDetailSessionRoutePathUnauthorized() *DetailSessionRoutePathUnauthorized {
 
 	return &DetailSessionRoutePathUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail session route path unauthorized response
+func (o *DetailSessionRoutePathUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSessionRoutePathUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail session route path unauthorized response
+func (o *DetailSessionRoutePathUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail session route path unauthorized response
@@ -116,6 +166,23 @@ func (o *DetailSessionRoutePathUnauthorized) SetPayload(payload *rest_model.APIE
 // WriteResponse to the client
 func (o *DetailSessionRoutePathUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *DetailSessionRoutePathUnauthorized) WriteResponse(rw http.ResponseWrite
 // DetailSessionRoutePathNotFoundCode is the HTTP code returned for type DetailSessionRoutePathNotFound
 const DetailSessionRoutePathNotFoundCode int = 404
 
-/*DetailSessionRoutePathNotFound The requested resource does not exist
+/*
+DetailSessionRoutePathNotFound The requested resource does not exist
 
 swagger:response detailSessionRoutePathNotFound
 */
 type DetailSessionRoutePathNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type DetailSessionRoutePathNotFound struct {
 func NewDetailSessionRoutePathNotFound() *DetailSessionRoutePathNotFound {
 
 	return &DetailSessionRoutePathNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail session route path not found response
+func (o *DetailSessionRoutePathNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSessionRoutePathNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail session route path not found response
+func (o *DetailSessionRoutePathNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail session route path not found response
@@ -160,6 +243,23 @@ func (o *DetailSessionRoutePathNotFound) SetPayload(payload *rest_model.APIError
 // WriteResponse to the client
 func (o *DetailSessionRoutePathNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *DetailSessionRoutePathNotFound) WriteResponse(rw http.ResponseWriter, p
 // DetailSessionRoutePathTooManyRequestsCode is the HTTP code returned for type DetailSessionRoutePathTooManyRequests
 const DetailSessionRoutePathTooManyRequestsCode int = 429
 
-/*DetailSessionRoutePathTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+DetailSessionRoutePathTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response detailSessionRoutePathTooManyRequests
 */
 type DetailSessionRoutePathTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type DetailSessionRoutePathTooManyRequests struct {
 func NewDetailSessionRoutePathTooManyRequests() *DetailSessionRoutePathTooManyRequests {
 
 	return &DetailSessionRoutePathTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail session route path too many requests response
+func (o *DetailSessionRoutePathTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSessionRoutePathTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail session route path too many requests response
+func (o *DetailSessionRoutePathTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail session route path too many requests response
@@ -204,6 +320,23 @@ func (o *DetailSessionRoutePathTooManyRequests) SetPayload(payload *rest_model.A
 // WriteResponse to the client
 func (o *DetailSessionRoutePathTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *DetailSessionRoutePathTooManyRequests) WriteResponse(rw http.ResponseWr
 // DetailSessionRoutePathServiceUnavailableCode is the HTTP code returned for type DetailSessionRoutePathServiceUnavailable
 const DetailSessionRoutePathServiceUnavailableCode int = 503
 
-/*DetailSessionRoutePathServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+DetailSessionRoutePathServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response detailSessionRoutePathServiceUnavailable
 */
 type DetailSessionRoutePathServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type DetailSessionRoutePathServiceUnavailable struct {
 func NewDetailSessionRoutePathServiceUnavailable() *DetailSessionRoutePathServiceUnavailable {
 
 	return &DetailSessionRoutePathServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the detail session route path service unavailable response
+func (o *DetailSessionRoutePathServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *DetailSessionRoutePathServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the detail session route path service unavailable response
+func (o *DetailSessionRoutePathServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the detail session route path service unavailable response
@@ -247,6 +396,23 @@ func (o *DetailSessionRoutePathServiceUnavailable) SetPayload(payload *rest_mode
 
 // WriteResponse to the client
 func (o *DetailSessionRoutePathServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

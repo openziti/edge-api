@@ -49,7 +49,6 @@ func NewListWellKnownCasParams() ListWellKnownCasParams {
 //
 // swagger:parameters listWellKnownCas
 type ListWellKnownCasParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 }

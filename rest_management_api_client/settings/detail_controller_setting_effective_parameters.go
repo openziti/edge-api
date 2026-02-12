@@ -76,10 +76,12 @@ func NewDetailControllerSettingEffectiveParamsWithHTTPClient(client *http.Client
 	}
 }
 
-/* DetailControllerSettingEffectiveParams contains all the parameters to send to the API endpoint
-   for the detail controller setting effective operation.
+/*
+DetailControllerSettingEffectiveParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the detail controller setting effective operation.
+
+	Typically these are written to a http.Request.
 */
 type DetailControllerSettingEffectiveParams struct {
 

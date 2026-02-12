@@ -36,16 +36,16 @@ import (
 )
 
 // DetailMfaHandlerFunc turns a function with the right signature into a detail mfa handler
-type DetailMfaHandlerFunc func(DetailMfaParams, interface{}) middleware.Responder
+type DetailMfaHandlerFunc func(DetailMfaParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DetailMfaHandlerFunc) Handle(params DetailMfaParams, principal interface{}) middleware.Responder {
+func (fn DetailMfaHandlerFunc) Handle(params DetailMfaParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DetailMfaHandler interface for that can handle valid detail mfa params
 type DetailMfaHandler interface {
-	Handle(DetailMfaParams, interface{}) middleware.Responder
+	Handle(DetailMfaParams, any) middleware.Responder
 }
 
 // NewDetailMfa creates a new http.Handler for the detail mfa operation
@@ -53,13 +53,12 @@ func NewDetailMfa(ctx *middleware.Context, handler DetailMfaHandler) *DetailMfa 
 	return &DetailMfa{Context: ctx, Handler: handler}
 }
 
-/* DetailMfa swagger:route GET /current-identity/mfa Current Identity MFA detailMfa
+/*
+	DetailMfa swagger:route GET /current-identity/mfa Current Identity MFA detailMfa
 
-Returns the current status of MFA enrollment
+# Returns the current status of MFA enrollment
 
 Returns details about the current MFA enrollment. If enrollment has not been completed it will return the current MFA configuration details necessary to complete a `POST /current-identity/mfa/verify`.
-
-
 */
 type DetailMfa struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *DetailMfa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *DetailMfa) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

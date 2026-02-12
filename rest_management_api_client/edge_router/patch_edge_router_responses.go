@@ -30,11 +30,14 @@ package edge_router
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type PatchEdgeRouterReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *PatchEdgeRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *PatchEdgeRouterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewPatchEdgeRouterOK()
@@ -84,7 +87,7 @@ func (o *PatchEdgeRouterReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /edge-routers/{id}] patchEdgeRouter", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewPatchEdgeRouterOK() *PatchEdgeRouterOK {
 	return &PatchEdgeRouterOK{}
 }
 
-/* PatchEdgeRouterOK describes a response with status code 200, with default header values.
+/*
+PatchEdgeRouterOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
 type PatchEdgeRouterOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *PatchEdgeRouterOK) Error() string {
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch edge router o k response has a 2xx status code
+func (o *PatchEdgeRouterOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch edge router o k response has a 3xx status code
+func (o *PatchEdgeRouterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch edge router o k response has a 4xx status code
+func (o *PatchEdgeRouterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch edge router o k response has a 5xx status code
+func (o *PatchEdgeRouterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch edge router o k response a status code equal to that given
+func (o *PatchEdgeRouterOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch edge router o k response
+func (o *PatchEdgeRouterOK) Code() int {
+	return 200
+}
+
+func (o *PatchEdgeRouterOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterOK %s", 200, payload)
+}
+
+func (o *PatchEdgeRouterOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterOK %s", 200, payload)
+}
+
 func (o *PatchEdgeRouterOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *PatchEdgeRouterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchEdgeRouterOK binds the response header WWW-Authenticate
+func (o *PatchEdgeRouterOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchEdgeRouterBadRequest creates a PatchEdgeRouterBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewPatchEdgeRouterBadRequest() *PatchEdgeRouterBadRequest {
 	return &PatchEdgeRouterBadRequest{}
 }
 
-/* PatchEdgeRouterBadRequest describes a response with status code 400, with default header values.
+/*
+PatchEdgeRouterBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type PatchEdgeRouterBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchEdgeRouterBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch edge router bad request response has a 2xx status code
+func (o *PatchEdgeRouterBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch edge router bad request response has a 3xx status code
+func (o *PatchEdgeRouterBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch edge router bad request response has a 4xx status code
+func (o *PatchEdgeRouterBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch edge router bad request response has a 5xx status code
+func (o *PatchEdgeRouterBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch edge router bad request response a status code equal to that given
+func (o *PatchEdgeRouterBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch edge router bad request response
+func (o *PatchEdgeRouterBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchEdgeRouterBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterBadRequest %s", 400, payload)
+}
+
+func (o *PatchEdgeRouterBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterBadRequest %s", 400, payload)
+}
+
 func (o *PatchEdgeRouterBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchEdgeRouterBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchEdgeRouterBadRequest binds the response header WWW-Authenticate
+func (o *PatchEdgeRouterBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchEdgeRouterUnauthorized creates a PatchEdgeRouterUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewPatchEdgeRouterUnauthorized() *PatchEdgeRouterUnauthorized {
 	return &PatchEdgeRouterUnauthorized{}
 }
 
-/* PatchEdgeRouterUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchEdgeRouterUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type PatchEdgeRouterUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchEdgeRouterUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch edge router unauthorized response has a 2xx status code
+func (o *PatchEdgeRouterUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch edge router unauthorized response has a 3xx status code
+func (o *PatchEdgeRouterUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch edge router unauthorized response has a 4xx status code
+func (o *PatchEdgeRouterUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch edge router unauthorized response has a 5xx status code
+func (o *PatchEdgeRouterUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch edge router unauthorized response a status code equal to that given
+func (o *PatchEdgeRouterUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch edge router unauthorized response
+func (o *PatchEdgeRouterUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchEdgeRouterUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterUnauthorized %s", 401, payload)
+}
+
+func (o *PatchEdgeRouterUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterUnauthorized %s", 401, payload)
+}
+
 func (o *PatchEdgeRouterUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchEdgeRouterUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchEdgeRouterUnauthorized binds the response header WWW-Authenticate
+func (o *PatchEdgeRouterUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchEdgeRouterNotFound creates a PatchEdgeRouterNotFound with default headers values
@@ -189,31 +423,108 @@ func NewPatchEdgeRouterNotFound() *PatchEdgeRouterNotFound {
 	return &PatchEdgeRouterNotFound{}
 }
 
-/* PatchEdgeRouterNotFound describes a response with status code 404, with default header values.
+/*
+PatchEdgeRouterNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type PatchEdgeRouterNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchEdgeRouterNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch edge router not found response has a 2xx status code
+func (o *PatchEdgeRouterNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch edge router not found response has a 3xx status code
+func (o *PatchEdgeRouterNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch edge router not found response has a 4xx status code
+func (o *PatchEdgeRouterNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch edge router not found response has a 5xx status code
+func (o *PatchEdgeRouterNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch edge router not found response a status code equal to that given
+func (o *PatchEdgeRouterNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch edge router not found response
+func (o *PatchEdgeRouterNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchEdgeRouterNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterNotFound %s", 404, payload)
+}
+
+func (o *PatchEdgeRouterNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterNotFound %s", 404, payload)
+}
+
 func (o *PatchEdgeRouterNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchEdgeRouterNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchEdgeRouterNotFound binds the response header WWW-Authenticate
+func (o *PatchEdgeRouterNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchEdgeRouterTooManyRequests creates a PatchEdgeRouterTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewPatchEdgeRouterTooManyRequests() *PatchEdgeRouterTooManyRequests {
 	return &PatchEdgeRouterTooManyRequests{}
 }
 
-/* PatchEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchEdgeRouterTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type PatchEdgeRouterTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchEdgeRouterTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch edge router too many requests response has a 2xx status code
+func (o *PatchEdgeRouterTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch edge router too many requests response has a 3xx status code
+func (o *PatchEdgeRouterTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch edge router too many requests response has a 4xx status code
+func (o *PatchEdgeRouterTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch edge router too many requests response has a 5xx status code
+func (o *PatchEdgeRouterTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch edge router too many requests response a status code equal to that given
+func (o *PatchEdgeRouterTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch edge router too many requests response
+func (o *PatchEdgeRouterTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchEdgeRouterTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchEdgeRouterTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchEdgeRouterTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchEdgeRouterTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchEdgeRouterTooManyRequests binds the response header WWW-Authenticate
+func (o *PatchEdgeRouterTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchEdgeRouterServiceUnavailable creates a PatchEdgeRouterServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewPatchEdgeRouterServiceUnavailable() *PatchEdgeRouterServiceUnavailable {
 	return &PatchEdgeRouterServiceUnavailable{}
 }
 
-/* PatchEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
+/*
+PatchEdgeRouterServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type PatchEdgeRouterServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchEdgeRouterServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this patch edge router service unavailable response has a 2xx status code
+func (o *PatchEdgeRouterServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch edge router service unavailable response has a 3xx status code
+func (o *PatchEdgeRouterServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch edge router service unavailable response has a 4xx status code
+func (o *PatchEdgeRouterServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch edge router service unavailable response has a 5xx status code
+func (o *PatchEdgeRouterServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this patch edge router service unavailable response a status code equal to that given
+func (o *PatchEdgeRouterServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the patch edge router service unavailable response
+func (o *PatchEdgeRouterServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *PatchEdgeRouterServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterServiceUnavailable %s", 503, payload)
+}
+
+func (o *PatchEdgeRouterServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /edge-routers/{id}][%d] patchEdgeRouterServiceUnavailable %s", 503, payload)
+}
+
 func (o *PatchEdgeRouterServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchEdgeRouterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchEdgeRouterServiceUnavailable binds the response header WWW-Authenticate
+func (o *PatchEdgeRouterServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

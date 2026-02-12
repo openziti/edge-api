@@ -33,6 +33,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"io"
 	"strconv"
 
@@ -85,7 +86,7 @@ func (m *PolicyFailure) UnmarshalJSON(raw []byte) error {
 	var propChecks []PostureCheckFailure
 	if string(data.Checks) != "null" {
 		checks, err := UnmarshalPostureCheckFailureSlice(bytes.NewBuffer(data.Checks), runtime.JSONConsumer())
-		if err != nil && err != io.EOF {
+		if err != nil && !stderrors.Is(err, io.EOF) {
 			return err
 		}
 		propChecks = checks
@@ -159,11 +160,15 @@ func (m *PolicyFailure) validateChecks(formats strfmt.Registry) error {
 	for i := 0; i < len(m.Checks()); i++ {
 
 		if err := m.checksField[i].Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("checks" + "." + strconv.Itoa(i))
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("checks" + "." + strconv.Itoa(i))
 			}
+
 			return err
 		}
 
@@ -190,12 +195,20 @@ func (m *PolicyFailure) contextValidateChecks(ctx context.Context, formats strfm
 
 	for i := 0; i < len(m.Checks()); i++ {
 
+		if swag.IsZero(m.checksField[i]) { // not required
+			return nil
+		}
+
 		if err := m.checksField[i].ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("checks" + "." + strconv.Itoa(i))
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("checks" + "." + strconv.Itoa(i))
 			}
+
 			return err
 		}
 

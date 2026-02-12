@@ -36,16 +36,16 @@ import (
 )
 
 // ListServiceRoleAttributesHandlerFunc turns a function with the right signature into a list service role attributes handler
-type ListServiceRoleAttributesHandlerFunc func(ListServiceRoleAttributesParams, interface{}) middleware.Responder
+type ListServiceRoleAttributesHandlerFunc func(ListServiceRoleAttributesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListServiceRoleAttributesHandlerFunc) Handle(params ListServiceRoleAttributesParams, principal interface{}) middleware.Responder {
+func (fn ListServiceRoleAttributesHandlerFunc) Handle(params ListServiceRoleAttributesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListServiceRoleAttributesHandler interface for that can handle valid list service role attributes params
 type ListServiceRoleAttributesHandler interface {
-	Handle(ListServiceRoleAttributesParams, interface{}) middleware.Responder
+	Handle(ListServiceRoleAttributesParams, any) middleware.Responder
 }
 
 // NewListServiceRoleAttributes creates a new http.Handler for the list service role attributes operation
@@ -53,13 +53,12 @@ func NewListServiceRoleAttributes(ctx *middleware.Context, handler ListServiceRo
 	return &ListServiceRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/* ListServiceRoleAttributes swagger:route GET /service-role-attributes Role Attributes listServiceRoleAttributes
+/*
+	ListServiceRoleAttributes swagger:route GET /service-role-attributes Role Attributes listServiceRoleAttributes
 
-List role attributes in use by services
+# List role attributes in use by services
 
 Retrieves a list of role attributes in use by services; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListServiceRoleAttributes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListServiceRoleAttributes) ServeHTTP(rw http.ResponseWriter, r *http.Re
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListServiceRoleAttributes) ServeHTTP(rw http.ResponseWriter, r *http.Re
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

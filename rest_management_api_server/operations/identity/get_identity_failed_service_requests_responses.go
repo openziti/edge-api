@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // GetIdentityFailedServiceRequestsOKCode is the HTTP code returned for type GetIdentityFailedServiceRequestsOK
 const GetIdentityFailedServiceRequestsOKCode int = 200
 
-/*GetIdentityFailedServiceRequestsOK Returns a list of service request failures
+/*
+GetIdentityFailedServiceRequestsOK Returns a list of service request failures
 
 swagger:response getIdentityFailedServiceRequestsOK
 */
 type GetIdentityFailedServiceRequestsOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type GetIdentityFailedServiceRequestsOK struct {
 func NewGetIdentityFailedServiceRequestsOK() *GetIdentityFailedServiceRequestsOK {
 
 	return &GetIdentityFailedServiceRequestsOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity failed service requests o k response
+func (o *GetIdentityFailedServiceRequestsOK) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityFailedServiceRequestsOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity failed service requests o k response
+func (o *GetIdentityFailedServiceRequestsOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity failed service requests o k response
@@ -72,6 +89,23 @@ func (o *GetIdentityFailedServiceRequestsOK) SetPayload(payload *rest_model.Fail
 // WriteResponse to the client
 func (o *GetIdentityFailedServiceRequestsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *GetIdentityFailedServiceRequestsOK) WriteResponse(rw http.ResponseWrite
 // GetIdentityFailedServiceRequestsUnauthorizedCode is the HTTP code returned for type GetIdentityFailedServiceRequestsUnauthorized
 const GetIdentityFailedServiceRequestsUnauthorizedCode int = 401
 
-/*GetIdentityFailedServiceRequestsUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+GetIdentityFailedServiceRequestsUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response getIdentityFailedServiceRequestsUnauthorized
 */
 type GetIdentityFailedServiceRequestsUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type GetIdentityFailedServiceRequestsUnauthorized struct {
 func NewGetIdentityFailedServiceRequestsUnauthorized() *GetIdentityFailedServiceRequestsUnauthorized {
 
 	return &GetIdentityFailedServiceRequestsUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity failed service requests unauthorized response
+func (o *GetIdentityFailedServiceRequestsUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityFailedServiceRequestsUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity failed service requests unauthorized response
+func (o *GetIdentityFailedServiceRequestsUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity failed service requests unauthorized response
@@ -116,6 +166,23 @@ func (o *GetIdentityFailedServiceRequestsUnauthorized) SetPayload(payload *rest_
 // WriteResponse to the client
 func (o *GetIdentityFailedServiceRequestsUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *GetIdentityFailedServiceRequestsUnauthorized) WriteResponse(rw http.Res
 // GetIdentityFailedServiceRequestsNotFoundCode is the HTTP code returned for type GetIdentityFailedServiceRequestsNotFound
 const GetIdentityFailedServiceRequestsNotFoundCode int = 404
 
-/*GetIdentityFailedServiceRequestsNotFound The requested resource does not exist
+/*
+GetIdentityFailedServiceRequestsNotFound The requested resource does not exist
 
 swagger:response getIdentityFailedServiceRequestsNotFound
 */
 type GetIdentityFailedServiceRequestsNotFound struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type GetIdentityFailedServiceRequestsNotFound struct {
 func NewGetIdentityFailedServiceRequestsNotFound() *GetIdentityFailedServiceRequestsNotFound {
 
 	return &GetIdentityFailedServiceRequestsNotFound{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity failed service requests not found response
+func (o *GetIdentityFailedServiceRequestsNotFound) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityFailedServiceRequestsNotFound {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity failed service requests not found response
+func (o *GetIdentityFailedServiceRequestsNotFound) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity failed service requests not found response
@@ -160,6 +243,23 @@ func (o *GetIdentityFailedServiceRequestsNotFound) SetPayload(payload *rest_mode
 // WriteResponse to the client
 func (o *GetIdentityFailedServiceRequestsNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(404)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *GetIdentityFailedServiceRequestsNotFound) WriteResponse(rw http.Respons
 // GetIdentityFailedServiceRequestsTooManyRequestsCode is the HTTP code returned for type GetIdentityFailedServiceRequestsTooManyRequests
 const GetIdentityFailedServiceRequestsTooManyRequestsCode int = 429
 
-/*GetIdentityFailedServiceRequestsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+GetIdentityFailedServiceRequestsTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response getIdentityFailedServiceRequestsTooManyRequests
 */
 type GetIdentityFailedServiceRequestsTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type GetIdentityFailedServiceRequestsTooManyRequests struct {
 func NewGetIdentityFailedServiceRequestsTooManyRequests() *GetIdentityFailedServiceRequestsTooManyRequests {
 
 	return &GetIdentityFailedServiceRequestsTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity failed service requests too many requests response
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityFailedServiceRequestsTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity failed service requests too many requests response
+func (o *GetIdentityFailedServiceRequestsTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity failed service requests too many requests response
@@ -204,6 +320,23 @@ func (o *GetIdentityFailedServiceRequestsTooManyRequests) SetPayload(payload *re
 // WriteResponse to the client
 func (o *GetIdentityFailedServiceRequestsTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *GetIdentityFailedServiceRequestsTooManyRequests) WriteResponse(rw http.
 // GetIdentityFailedServiceRequestsServiceUnavailableCode is the HTTP code returned for type GetIdentityFailedServiceRequestsServiceUnavailable
 const GetIdentityFailedServiceRequestsServiceUnavailableCode int = 503
 
-/*GetIdentityFailedServiceRequestsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+GetIdentityFailedServiceRequestsServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response getIdentityFailedServiceRequestsServiceUnavailable
 */
 type GetIdentityFailedServiceRequestsServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type GetIdentityFailedServiceRequestsServiceUnavailable struct {
 func NewGetIdentityFailedServiceRequestsServiceUnavailable() *GetIdentityFailedServiceRequestsServiceUnavailable {
 
 	return &GetIdentityFailedServiceRequestsServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the get identity failed service requests service unavailable response
+func (o *GetIdentityFailedServiceRequestsServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *GetIdentityFailedServiceRequestsServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the get identity failed service requests service unavailable response
+func (o *GetIdentityFailedServiceRequestsServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the get identity failed service requests service unavailable response
@@ -247,6 +396,23 @@ func (o *GetIdentityFailedServiceRequestsServiceUnavailable) SetPayload(payload 
 
 // WriteResponse to the client
 func (o *GetIdentityFailedServiceRequestsServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {

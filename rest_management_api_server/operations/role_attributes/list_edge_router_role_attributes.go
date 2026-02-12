@@ -36,16 +36,16 @@ import (
 )
 
 // ListEdgeRouterRoleAttributesHandlerFunc turns a function with the right signature into a list edge router role attributes handler
-type ListEdgeRouterRoleAttributesHandlerFunc func(ListEdgeRouterRoleAttributesParams, interface{}) middleware.Responder
+type ListEdgeRouterRoleAttributesHandlerFunc func(ListEdgeRouterRoleAttributesParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn ListEdgeRouterRoleAttributesHandlerFunc) Handle(params ListEdgeRouterRoleAttributesParams, principal interface{}) middleware.Responder {
+func (fn ListEdgeRouterRoleAttributesHandlerFunc) Handle(params ListEdgeRouterRoleAttributesParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // ListEdgeRouterRoleAttributesHandler interface for that can handle valid list edge router role attributes params
 type ListEdgeRouterRoleAttributesHandler interface {
-	Handle(ListEdgeRouterRoleAttributesParams, interface{}) middleware.Responder
+	Handle(ListEdgeRouterRoleAttributesParams, any) middleware.Responder
 }
 
 // NewListEdgeRouterRoleAttributes creates a new http.Handler for the list edge router role attributes operation
@@ -53,13 +53,12 @@ func NewListEdgeRouterRoleAttributes(ctx *middleware.Context, handler ListEdgeRo
 	return &ListEdgeRouterRoleAttributes{Context: ctx, Handler: handler}
 }
 
-/* ListEdgeRouterRoleAttributes swagger:route GET /edge-router-role-attributes Role Attributes listEdgeRouterRoleAttributes
+/*
+	ListEdgeRouterRoleAttributes swagger:route GET /edge-router-role-attributes Role Attributes listEdgeRouterRoleAttributes
 
-List role attributes in use by edge routers
+# List role attributes in use by edge routers
 
 Retrieves a list of role attributes in use by edge routers; supports filtering, sorting, and pagination. Requires admin access.
-
-
 */
 type ListEdgeRouterRoleAttributes struct {
 	Context *middleware.Context
@@ -80,9 +79,9 @@ func (o *ListEdgeRouterRoleAttributes) ServeHTTP(rw http.ResponseWriter, r *http
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -91,6 +90,7 @@ func (o *ListEdgeRouterRoleAttributes) ServeHTTP(rw http.ResponseWriter, r *http
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

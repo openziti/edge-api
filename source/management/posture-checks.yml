@@ -167,10 +167,22 @@ paths:
 responses:
   listPostureChecks:
     description: A list of posture checks
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/listPostureCheckEnvelope'
   detailPostureCheck:
     description: Retrieves a singular posture check by id
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
     schema:
       $ref: '#/definitions/detailPostureCheckEnvelope'
 

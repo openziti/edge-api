@@ -50,7 +50,6 @@ func NewDetailSessionParams() DetailSessionParams {
 //
 // swagger:parameters detailSession
 type DetailSessionParams struct {
-
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 

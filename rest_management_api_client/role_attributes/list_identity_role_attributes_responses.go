@@ -30,11 +30,14 @@ package role_attributes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type ListIdentityRoleAttributesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListIdentityRoleAttributesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListIdentityRoleAttributesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListIdentityRoleAttributesOK()
@@ -78,7 +81,7 @@ func (o *ListIdentityRoleAttributesReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /identity-role-attributes] listIdentityRoleAttributes", response, response.Code())
 	}
 }
 
@@ -87,31 +90,108 @@ func NewListIdentityRoleAttributesOK() *ListIdentityRoleAttributesOK {
 	return &ListIdentityRoleAttributesOK{}
 }
 
-/* ListIdentityRoleAttributesOK describes a response with status code 200, with default header values.
+/*
+ListIdentityRoleAttributesOK describes a response with status code 200, with default header values.
 
 A list of role attributes
 */
 type ListIdentityRoleAttributesOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.ListRoleAttributesEnvelope
 }
 
-func (o *ListIdentityRoleAttributesOK) Error() string {
-	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this list identity role attributes o k response has a 2xx status code
+func (o *ListIdentityRoleAttributesOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this list identity role attributes o k response has a 3xx status code
+func (o *ListIdentityRoleAttributesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity role attributes o k response has a 4xx status code
+func (o *ListIdentityRoleAttributesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list identity role attributes o k response has a 5xx status code
+func (o *ListIdentityRoleAttributesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity role attributes o k response a status code equal to that given
+func (o *ListIdentityRoleAttributesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list identity role attributes o k response
+func (o *ListIdentityRoleAttributesOK) Code() int {
+	return 200
+}
+
+func (o *ListIdentityRoleAttributesOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesOK %s", 200, payload)
+}
+
+func (o *ListIdentityRoleAttributesOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesOK %s", 200, payload)
+}
+
 func (o *ListIdentityRoleAttributesOK) GetPayload() *rest_model.ListRoleAttributesEnvelope {
 	return o.Payload
 }
 
 func (o *ListIdentityRoleAttributesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.ListRoleAttributesEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListIdentityRoleAttributesOK binds the response header WWW-Authenticate
+func (o *ListIdentityRoleAttributesOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListIdentityRoleAttributesBadRequest creates a ListIdentityRoleAttributesBadRequest with default headers values
@@ -119,31 +199,108 @@ func NewListIdentityRoleAttributesBadRequest() *ListIdentityRoleAttributesBadReq
 	return &ListIdentityRoleAttributesBadRequest{}
 }
 
-/* ListIdentityRoleAttributesBadRequest describes a response with status code 400, with default header values.
+/*
+ListIdentityRoleAttributesBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type ListIdentityRoleAttributesBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityRoleAttributesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this list identity role attributes bad request response has a 2xx status code
+func (o *ListIdentityRoleAttributesBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity role attributes bad request response has a 3xx status code
+func (o *ListIdentityRoleAttributesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity role attributes bad request response has a 4xx status code
+func (o *ListIdentityRoleAttributesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list identity role attributes bad request response has a 5xx status code
+func (o *ListIdentityRoleAttributesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity role attributes bad request response a status code equal to that given
+func (o *ListIdentityRoleAttributesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list identity role attributes bad request response
+func (o *ListIdentityRoleAttributesBadRequest) Code() int {
+	return 400
+}
+
+func (o *ListIdentityRoleAttributesBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesBadRequest %s", 400, payload)
+}
+
+func (o *ListIdentityRoleAttributesBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesBadRequest %s", 400, payload)
+}
+
 func (o *ListIdentityRoleAttributesBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListIdentityRoleAttributesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListIdentityRoleAttributesBadRequest binds the response header WWW-Authenticate
+func (o *ListIdentityRoleAttributesBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListIdentityRoleAttributesUnauthorized creates a ListIdentityRoleAttributesUnauthorized with default headers values
@@ -151,31 +308,108 @@ func NewListIdentityRoleAttributesUnauthorized() *ListIdentityRoleAttributesUnau
 	return &ListIdentityRoleAttributesUnauthorized{}
 }
 
-/* ListIdentityRoleAttributesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListIdentityRoleAttributesUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type ListIdentityRoleAttributesUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityRoleAttributesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this list identity role attributes unauthorized response has a 2xx status code
+func (o *ListIdentityRoleAttributesUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity role attributes unauthorized response has a 3xx status code
+func (o *ListIdentityRoleAttributesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity role attributes unauthorized response has a 4xx status code
+func (o *ListIdentityRoleAttributesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list identity role attributes unauthorized response has a 5xx status code
+func (o *ListIdentityRoleAttributesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity role attributes unauthorized response a status code equal to that given
+func (o *ListIdentityRoleAttributesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list identity role attributes unauthorized response
+func (o *ListIdentityRoleAttributesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListIdentityRoleAttributesUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesUnauthorized %s", 401, payload)
+}
+
+func (o *ListIdentityRoleAttributesUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesUnauthorized %s", 401, payload)
+}
+
 func (o *ListIdentityRoleAttributesUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListIdentityRoleAttributesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListIdentityRoleAttributesUnauthorized binds the response header WWW-Authenticate
+func (o *ListIdentityRoleAttributesUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListIdentityRoleAttributesTooManyRequests creates a ListIdentityRoleAttributesTooManyRequests with default headers values
@@ -183,31 +417,108 @@ func NewListIdentityRoleAttributesTooManyRequests() *ListIdentityRoleAttributesT
 	return &ListIdentityRoleAttributesTooManyRequests{}
 }
 
-/* ListIdentityRoleAttributesTooManyRequests describes a response with status code 429, with default header values.
+/*
+ListIdentityRoleAttributesTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type ListIdentityRoleAttributesTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityRoleAttributesTooManyRequests) Error() string {
-	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this list identity role attributes too many requests response has a 2xx status code
+func (o *ListIdentityRoleAttributesTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity role attributes too many requests response has a 3xx status code
+func (o *ListIdentityRoleAttributesTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity role attributes too many requests response has a 4xx status code
+func (o *ListIdentityRoleAttributesTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list identity role attributes too many requests response has a 5xx status code
+func (o *ListIdentityRoleAttributesTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list identity role attributes too many requests response a status code equal to that given
+func (o *ListIdentityRoleAttributesTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the list identity role attributes too many requests response
+func (o *ListIdentityRoleAttributesTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *ListIdentityRoleAttributesTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesTooManyRequests %s", 429, payload)
+}
+
+func (o *ListIdentityRoleAttributesTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesTooManyRequests %s", 429, payload)
+}
+
 func (o *ListIdentityRoleAttributesTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListIdentityRoleAttributesTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListIdentityRoleAttributesTooManyRequests binds the response header WWW-Authenticate
+func (o *ListIdentityRoleAttributesTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewListIdentityRoleAttributesServiceUnavailable creates a ListIdentityRoleAttributesServiceUnavailable with default headers values
@@ -215,29 +526,106 @@ func NewListIdentityRoleAttributesServiceUnavailable() *ListIdentityRoleAttribut
 	return &ListIdentityRoleAttributesServiceUnavailable{}
 }
 
-/* ListIdentityRoleAttributesServiceUnavailable describes a response with status code 503, with default header values.
+/*
+ListIdentityRoleAttributesServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type ListIdentityRoleAttributesServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *ListIdentityRoleAttributesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this list identity role attributes service unavailable response has a 2xx status code
+func (o *ListIdentityRoleAttributesServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this list identity role attributes service unavailable response has a 3xx status code
+func (o *ListIdentityRoleAttributesServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list identity role attributes service unavailable response has a 4xx status code
+func (o *ListIdentityRoleAttributesServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list identity role attributes service unavailable response has a 5xx status code
+func (o *ListIdentityRoleAttributesServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list identity role attributes service unavailable response a status code equal to that given
+func (o *ListIdentityRoleAttributesServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the list identity role attributes service unavailable response
+func (o *ListIdentityRoleAttributesServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *ListIdentityRoleAttributesServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesServiceUnavailable %s", 503, payload)
+}
+
+func (o *ListIdentityRoleAttributesServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /identity-role-attributes][%d] listIdentityRoleAttributesServiceUnavailable %s", 503, payload)
+}
+
 func (o *ListIdentityRoleAttributesServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *ListIdentityRoleAttributesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderListIdentityRoleAttributesServiceUnavailable binds the response header WWW-Authenticate
+func (o *ListIdentityRoleAttributesServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

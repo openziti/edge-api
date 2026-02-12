@@ -32,6 +32,7 @@ package rest_model
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -82,7 +83,7 @@ type IdentityDetail struct {
 
 	// edge router connection status
 	// Required: true
-	// Enum: [online offline unknown]
+	// Enum: ["online","offline","unknown"]
 	EdgeRouterConnectionStatus *string `json:"edgeRouterConnectionStatus"`
 
 	// enrollment
@@ -537,11 +538,15 @@ func (m *IdentityDetail) validateAppData(formats strfmt.Registry) error {
 
 	if m.AppData != nil {
 		if err := m.AppData.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("appData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("appData")
 			}
+
 			return err
 		}
 	}
@@ -557,11 +562,15 @@ func (m *IdentityDetail) validateAuthPolicy(formats strfmt.Registry) error {
 
 	if m.AuthPolicy != nil {
 		if err := m.AuthPolicy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("authPolicy")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("authPolicy")
 			}
+
 			return err
 		}
 	}
@@ -586,11 +595,15 @@ func (m *IdentityDetail) validateAuthenticators(formats strfmt.Registry) error {
 
 	if m.Authenticators != nil {
 		if err := m.Authenticators.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("authenticators")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("authenticators")
 			}
+
 			return err
 		}
 	}
@@ -610,11 +623,15 @@ func (m *IdentityDetail) validateDefaultHostingCost(formats strfmt.Registry) err
 
 	if m.DefaultHostingCost != nil {
 		if err := m.DefaultHostingCost.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("defaultHostingCost")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("defaultHostingCost")
 			}
+
 			return err
 		}
 	}
@@ -629,11 +646,15 @@ func (m *IdentityDetail) validateDefaultHostingPrecedence(formats strfmt.Registr
 	}
 
 	if err := m.DefaultHostingPrecedence.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("defaultHostingPrecedence")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("defaultHostingPrecedence")
 		}
+
 		return err
 	}
 
@@ -675,7 +696,7 @@ func (m *IdentityDetail) validateDisabledUntil(formats strfmt.Registry) error {
 	return nil
 }
 
-var identityDetailTypeEdgeRouterConnectionStatusPropEnum []interface{}
+var identityDetailTypeEdgeRouterConnectionStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -717,11 +738,15 @@ func (m *IdentityDetail) validateEnrollment(formats strfmt.Registry) error {
 
 	if m.Enrollment != nil {
 		if err := m.Enrollment.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("enrollment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("enrollment")
 			}
+
 			return err
 		}
 	}
@@ -737,11 +762,15 @@ func (m *IdentityDetail) validateEnvInfo(formats strfmt.Registry) error {
 
 	if m.EnvInfo != nil {
 		if err := m.EnvInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("envInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("envInfo")
 			}
+
 			return err
 		}
 	}
@@ -789,11 +818,15 @@ func (m *IdentityDetail) validateInterfaces(formats strfmt.Registry) error {
 
 		if m.Interfaces[i] != nil {
 			if err := m.Interfaces[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -847,11 +880,15 @@ func (m *IdentityDetail) validatePermissions(formats strfmt.Registry) error {
 
 	if m.Permissions != nil {
 		if err := m.Permissions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("permissions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("permissions")
 			}
+
 			return err
 		}
 	}
@@ -867,11 +904,15 @@ func (m *IdentityDetail) validateRoleAttributes(formats strfmt.Registry) error {
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -887,11 +928,15 @@ func (m *IdentityDetail) validateSdkInfo(formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
 		if err := m.SdkInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sdkInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sdkInfo")
 			}
+
 			return err
 		}
 	}
@@ -907,11 +952,15 @@ func (m *IdentityDetail) validateServiceHostingCosts(formats strfmt.Registry) er
 
 	if m.ServiceHostingCosts != nil {
 		if err := m.ServiceHostingCosts.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("serviceHostingCosts")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("serviceHostingCosts")
 			}
+
 			return err
 		}
 	}
@@ -927,11 +976,15 @@ func (m *IdentityDetail) validateServiceHostingPrecedences(formats strfmt.Regist
 
 	if m.ServiceHostingPrecedences != nil {
 		if err := m.ServiceHostingPrecedences.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("serviceHostingPrecedences")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("serviceHostingPrecedences")
 			}
+
 			return err
 		}
 	}
@@ -947,11 +1000,15 @@ func (m *IdentityDetail) validateType(formats strfmt.Registry) error {
 
 	if m.Type != nil {
 		if err := m.Type.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("type")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("type")
 			}
+
 			return err
 		}
 	}
@@ -1042,12 +1099,21 @@ func (m *IdentityDetail) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *IdentityDetail) contextValidateAppData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppData != nil {
+
+		if swag.IsZero(m.AppData) { // not required
+			return nil
+		}
+
 		if err := m.AppData.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("appData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("appData")
 			}
+
 			return err
 		}
 	}
@@ -1058,12 +1124,17 @@ func (m *IdentityDetail) contextValidateAppData(ctx context.Context, formats str
 func (m *IdentityDetail) contextValidateAuthPolicy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AuthPolicy != nil {
+
 		if err := m.AuthPolicy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("authPolicy")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("authPolicy")
 			}
+
 			return err
 		}
 	}
@@ -1074,12 +1145,17 @@ func (m *IdentityDetail) contextValidateAuthPolicy(ctx context.Context, formats 
 func (m *IdentityDetail) contextValidateAuthenticators(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Authenticators != nil {
+
 		if err := m.Authenticators.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("authenticators")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("authenticators")
 			}
+
 			return err
 		}
 	}
@@ -1090,12 +1166,17 @@ func (m *IdentityDetail) contextValidateAuthenticators(ctx context.Context, form
 func (m *IdentityDetail) contextValidateDefaultHostingCost(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DefaultHostingCost != nil {
+
 		if err := m.DefaultHostingCost.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("defaultHostingCost")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("defaultHostingCost")
 			}
+
 			return err
 		}
 	}
@@ -1105,12 +1186,20 @@ func (m *IdentityDetail) contextValidateDefaultHostingCost(ctx context.Context, 
 
 func (m *IdentityDetail) contextValidateDefaultHostingPrecedence(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.DefaultHostingPrecedence) { // not required
+		return nil
+	}
+
 	if err := m.DefaultHostingPrecedence.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("defaultHostingPrecedence")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("defaultHostingPrecedence")
 		}
+
 		return err
 	}
 
@@ -1120,12 +1209,17 @@ func (m *IdentityDetail) contextValidateDefaultHostingPrecedence(ctx context.Con
 func (m *IdentityDetail) contextValidateEnrollment(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Enrollment != nil {
+
 		if err := m.Enrollment.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("enrollment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("enrollment")
 			}
+
 			return err
 		}
 	}
@@ -1136,12 +1230,17 @@ func (m *IdentityDetail) contextValidateEnrollment(ctx context.Context, formats 
 func (m *IdentityDetail) contextValidateEnvInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EnvInfo != nil {
+
 		if err := m.EnvInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("envInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("envInfo")
 			}
+
 			return err
 		}
 	}
@@ -1154,12 +1253,21 @@ func (m *IdentityDetail) contextValidateInterfaces(ctx context.Context, formats 
 	for i := 0; i < len(m.Interfaces); i++ {
 
 		if m.Interfaces[i] != nil {
+
+			if swag.IsZero(m.Interfaces[i]) { // not required
+				return nil
+			}
+
 			if err := m.Interfaces[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("interfaces" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("interfaces" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -1173,11 +1281,15 @@ func (m *IdentityDetail) contextValidatePermissions(ctx context.Context, formats
 
 	if m.Permissions != nil {
 		if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("permissions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("permissions")
 			}
+
 			return err
 		}
 	}
@@ -1189,11 +1301,15 @@ func (m *IdentityDetail) contextValidateRoleAttributes(ctx context.Context, form
 
 	if m.RoleAttributes != nil {
 		if err := m.RoleAttributes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("roleAttributes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("roleAttributes")
 			}
+
 			return err
 		}
 	}
@@ -1204,12 +1320,17 @@ func (m *IdentityDetail) contextValidateRoleAttributes(ctx context.Context, form
 func (m *IdentityDetail) contextValidateSdkInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SdkInfo != nil {
+
 		if err := m.SdkInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sdkInfo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sdkInfo")
 			}
+
 			return err
 		}
 	}
@@ -1220,11 +1341,15 @@ func (m *IdentityDetail) contextValidateSdkInfo(ctx context.Context, formats str
 func (m *IdentityDetail) contextValidateServiceHostingCosts(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.ServiceHostingCosts.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("serviceHostingCosts")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("serviceHostingCosts")
 		}
+
 		return err
 	}
 
@@ -1234,11 +1359,15 @@ func (m *IdentityDetail) contextValidateServiceHostingCosts(ctx context.Context,
 func (m *IdentityDetail) contextValidateServiceHostingPrecedences(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.ServiceHostingPrecedences.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("serviceHostingPrecedences")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("serviceHostingPrecedences")
 		}
+
 		return err
 	}
 
@@ -1248,12 +1377,17 @@ func (m *IdentityDetail) contextValidateServiceHostingPrecedences(ctx context.Co
 func (m *IdentityDetail) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Type != nil {
+
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("type")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("type")
 			}
+
 			return err
 		}
 	}

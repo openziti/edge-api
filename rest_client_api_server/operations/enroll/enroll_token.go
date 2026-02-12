@@ -53,10 +53,10 @@ func NewEnrollToken(ctx *middleware.Context, handler EnrollTokenHandler) *Enroll
 	return &EnrollToken{Context: ctx, Handler: handler}
 }
 
-/* EnrollToken swagger:route POST /enroll/token Enroll enrollToken
+/*
+	EnrollToken swagger:route POST /enroll/token Enroll enrollToken
 
 EnrollToken enroll token API
-
 */
 type EnrollToken struct {
 	Context *middleware.Context
@@ -75,6 +75,7 @@ func (o *EnrollToken) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

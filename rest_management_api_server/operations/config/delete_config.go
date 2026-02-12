@@ -36,16 +36,16 @@ import (
 )
 
 // DeleteConfigHandlerFunc turns a function with the right signature into a delete config handler
-type DeleteConfigHandlerFunc func(DeleteConfigParams, interface{}) middleware.Responder
+type DeleteConfigHandlerFunc func(DeleteConfigParams, any) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteConfigHandlerFunc) Handle(params DeleteConfigParams, principal interface{}) middleware.Responder {
+func (fn DeleteConfigHandlerFunc) Handle(params DeleteConfigParams, principal any) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteConfigHandler interface for that can handle valid delete config params
 type DeleteConfigHandler interface {
-	Handle(DeleteConfigParams, interface{}) middleware.Responder
+	Handle(DeleteConfigParams, any) middleware.Responder
 }
 
 // NewDeleteConfig creates a new http.Handler for the delete config operation
@@ -53,12 +53,12 @@ func NewDeleteConfig(ctx *middleware.Context, handler DeleteConfigHandler) *Dele
 	return &DeleteConfig{Context: ctx, Handler: handler}
 }
 
-/* DeleteConfig swagger:route DELETE /configs/{id} Config deleteConfig
+/*
+	DeleteConfig swagger:route DELETE /configs/{id} Config deleteConfig
 
-Delete a config
+# Delete a config
 
 Delete a config by id. Requires admin access.
-
 */
 type DeleteConfig struct {
 	Context *middleware.Context
@@ -79,9 +79,9 @@ func (o *DeleteConfig) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		*r = *aCtx
 	}
-	var principal interface{}
+	var principal any
 	if uprinc != nil {
-		principal = uprinc.(interface{}) // this is really a interface{}, I promise
+		principal = uprinc
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
@@ -90,6 +90,7 @@ func (o *DeleteConfig) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request
+
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

@@ -30,11 +30,14 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -45,7 +48,7 @@ type PatchConfigTypeReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *PatchConfigTypeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *PatchConfigTypeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewPatchConfigTypeOK()
@@ -84,7 +87,7 @@ func (o *PatchConfigTypeReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /config-types/{id}] patchConfigType", response, response.Code())
 	}
 }
 
@@ -93,31 +96,108 @@ func NewPatchConfigTypeOK() *PatchConfigTypeOK {
 	return &PatchConfigTypeOK{}
 }
 
-/* PatchConfigTypeOK describes a response with status code 200, with default header values.
+/*
+PatchConfigTypeOK describes a response with status code 200, with default header values.
 
 The patch request was successful and the resource has been altered
 */
 type PatchConfigTypeOK struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.Empty
 }
 
-func (o *PatchConfigTypeOK) Error() string {
-	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeOK  %+v", 200, o.Payload)
+// IsSuccess returns true when this patch config type o k response has a 2xx status code
+func (o *PatchConfigTypeOK) IsSuccess() bool {
+	return true
 }
+
+// IsRedirect returns true when this patch config type o k response has a 3xx status code
+func (o *PatchConfigTypeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch config type o k response has a 4xx status code
+func (o *PatchConfigTypeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch config type o k response has a 5xx status code
+func (o *PatchConfigTypeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch config type o k response a status code equal to that given
+func (o *PatchConfigTypeOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch config type o k response
+func (o *PatchConfigTypeOK) Code() int {
+	return 200
+}
+
+func (o *PatchConfigTypeOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeOK %s", 200, payload)
+}
+
+func (o *PatchConfigTypeOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeOK %s", 200, payload)
+}
+
 func (o *PatchConfigTypeOK) GetPayload() *rest_model.Empty {
 	return o.Payload
 }
 
 func (o *PatchConfigTypeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.Empty)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchConfigTypeOK binds the response header WWW-Authenticate
+func (o *PatchConfigTypeOK) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchConfigTypeBadRequest creates a PatchConfigTypeBadRequest with default headers values
@@ -125,31 +205,108 @@ func NewPatchConfigTypeBadRequest() *PatchConfigTypeBadRequest {
 	return &PatchConfigTypeBadRequest{}
 }
 
-/* PatchConfigTypeBadRequest describes a response with status code 400, with default header values.
+/*
+PatchConfigTypeBadRequest describes a response with status code 400, with default header values.
 
 The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 */
 type PatchConfigTypeBadRequest struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchConfigTypeBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeBadRequest  %+v", 400, o.Payload)
+// IsSuccess returns true when this patch config type bad request response has a 2xx status code
+func (o *PatchConfigTypeBadRequest) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch config type bad request response has a 3xx status code
+func (o *PatchConfigTypeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch config type bad request response has a 4xx status code
+func (o *PatchConfigTypeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch config type bad request response has a 5xx status code
+func (o *PatchConfigTypeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch config type bad request response a status code equal to that given
+func (o *PatchConfigTypeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch config type bad request response
+func (o *PatchConfigTypeBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchConfigTypeBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeBadRequest %s", 400, payload)
+}
+
+func (o *PatchConfigTypeBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeBadRequest %s", 400, payload)
+}
+
 func (o *PatchConfigTypeBadRequest) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchConfigTypeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchConfigTypeBadRequest binds the response header WWW-Authenticate
+func (o *PatchConfigTypeBadRequest) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchConfigTypeUnauthorized creates a PatchConfigTypeUnauthorized with default headers values
@@ -157,31 +314,108 @@ func NewPatchConfigTypeUnauthorized() *PatchConfigTypeUnauthorized {
 	return &PatchConfigTypeUnauthorized{}
 }
 
-/* PatchConfigTypeUnauthorized describes a response with status code 401, with default header values.
+/*
+PatchConfigTypeUnauthorized describes a response with status code 401, with default header values.
 
 The supplied session does not have the correct access rights to request this resource
 */
 type PatchConfigTypeUnauthorized struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchConfigTypeUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeUnauthorized  %+v", 401, o.Payload)
+// IsSuccess returns true when this patch config type unauthorized response has a 2xx status code
+func (o *PatchConfigTypeUnauthorized) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch config type unauthorized response has a 3xx status code
+func (o *PatchConfigTypeUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch config type unauthorized response has a 4xx status code
+func (o *PatchConfigTypeUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch config type unauthorized response has a 5xx status code
+func (o *PatchConfigTypeUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch config type unauthorized response a status code equal to that given
+func (o *PatchConfigTypeUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch config type unauthorized response
+func (o *PatchConfigTypeUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchConfigTypeUnauthorized) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeUnauthorized %s", 401, payload)
+}
+
+func (o *PatchConfigTypeUnauthorized) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeUnauthorized %s", 401, payload)
+}
+
 func (o *PatchConfigTypeUnauthorized) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchConfigTypeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchConfigTypeUnauthorized binds the response header WWW-Authenticate
+func (o *PatchConfigTypeUnauthorized) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchConfigTypeNotFound creates a PatchConfigTypeNotFound with default headers values
@@ -189,31 +423,108 @@ func NewPatchConfigTypeNotFound() *PatchConfigTypeNotFound {
 	return &PatchConfigTypeNotFound{}
 }
 
-/* PatchConfigTypeNotFound describes a response with status code 404, with default header values.
+/*
+PatchConfigTypeNotFound describes a response with status code 404, with default header values.
 
 The requested resource does not exist
 */
 type PatchConfigTypeNotFound struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchConfigTypeNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeNotFound  %+v", 404, o.Payload)
+// IsSuccess returns true when this patch config type not found response has a 2xx status code
+func (o *PatchConfigTypeNotFound) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch config type not found response has a 3xx status code
+func (o *PatchConfigTypeNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch config type not found response has a 4xx status code
+func (o *PatchConfigTypeNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch config type not found response has a 5xx status code
+func (o *PatchConfigTypeNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch config type not found response a status code equal to that given
+func (o *PatchConfigTypeNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch config type not found response
+func (o *PatchConfigTypeNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchConfigTypeNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeNotFound %s", 404, payload)
+}
+
+func (o *PatchConfigTypeNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeNotFound %s", 404, payload)
+}
+
 func (o *PatchConfigTypeNotFound) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchConfigTypeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchConfigTypeNotFound binds the response header WWW-Authenticate
+func (o *PatchConfigTypeNotFound) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchConfigTypeTooManyRequests creates a PatchConfigTypeTooManyRequests with default headers values
@@ -221,31 +532,108 @@ func NewPatchConfigTypeTooManyRequests() *PatchConfigTypeTooManyRequests {
 	return &PatchConfigTypeTooManyRequests{}
 }
 
-/* PatchConfigTypeTooManyRequests describes a response with status code 429, with default header values.
+/*
+PatchConfigTypeTooManyRequests describes a response with status code 429, with default header values.
 
 The resource requested is rate limited and the rate limit has been exceeded
 */
 type PatchConfigTypeTooManyRequests struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchConfigTypeTooManyRequests) Error() string {
-	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeTooManyRequests  %+v", 429, o.Payload)
+// IsSuccess returns true when this patch config type too many requests response has a 2xx status code
+func (o *PatchConfigTypeTooManyRequests) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch config type too many requests response has a 3xx status code
+func (o *PatchConfigTypeTooManyRequests) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch config type too many requests response has a 4xx status code
+func (o *PatchConfigTypeTooManyRequests) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch config type too many requests response has a 5xx status code
+func (o *PatchConfigTypeTooManyRequests) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch config type too many requests response a status code equal to that given
+func (o *PatchConfigTypeTooManyRequests) IsCode(code int) bool {
+	return code == 429
+}
+
+// Code gets the status code for the patch config type too many requests response
+func (o *PatchConfigTypeTooManyRequests) Code() int {
+	return 429
+}
+
+func (o *PatchConfigTypeTooManyRequests) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeTooManyRequests %s", 429, payload)
+}
+
+func (o *PatchConfigTypeTooManyRequests) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeTooManyRequests %s", 429, payload)
+}
+
 func (o *PatchConfigTypeTooManyRequests) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchConfigTypeTooManyRequests) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchConfigTypeTooManyRequests binds the response header WWW-Authenticate
+func (o *PatchConfigTypeTooManyRequests) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }
 
 // NewPatchConfigTypeServiceUnavailable creates a PatchConfigTypeServiceUnavailable with default headers values
@@ -253,29 +641,106 @@ func NewPatchConfigTypeServiceUnavailable() *PatchConfigTypeServiceUnavailable {
 	return &PatchConfigTypeServiceUnavailable{}
 }
 
-/* PatchConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
+/*
+PatchConfigTypeServiceUnavailable describes a response with status code 503, with default header values.
 
 The request could not be completed due to the server being busy or in a temporarily bad state
 */
 type PatchConfigTypeServiceUnavailable struct {
+
+	/* Denotes different type of security token related information
+	 */
+	WWWAuthenticate []string
+
 	Payload *rest_model.APIErrorEnvelope
 }
 
-func (o *PatchConfigTypeServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeServiceUnavailable  %+v", 503, o.Payload)
+// IsSuccess returns true when this patch config type service unavailable response has a 2xx status code
+func (o *PatchConfigTypeServiceUnavailable) IsSuccess() bool {
+	return false
 }
+
+// IsRedirect returns true when this patch config type service unavailable response has a 3xx status code
+func (o *PatchConfigTypeServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch config type service unavailable response has a 4xx status code
+func (o *PatchConfigTypeServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch config type service unavailable response has a 5xx status code
+func (o *PatchConfigTypeServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this patch config type service unavailable response a status code equal to that given
+func (o *PatchConfigTypeServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the patch config type service unavailable response
+func (o *PatchConfigTypeServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *PatchConfigTypeServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeServiceUnavailable %s", 503, payload)
+}
+
+func (o *PatchConfigTypeServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /config-types/{id}][%d] patchConfigTypeServiceUnavailable %s", 503, payload)
+}
+
 func (o *PatchConfigTypeServiceUnavailable) GetPayload() *rest_model.APIErrorEnvelope {
 	return o.Payload
 }
 
 func (o *PatchConfigTypeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	// hydrates response header WWW-Authenticate
+	hdrWWWAuthenticate := response.GetHeader("WWW-Authenticate")
+
+	if hdrWWWAuthenticate != "" {
+
+		// binding header items for WWW-Authenticate
+		valWWWAuthenticate, err := o.bindHeaderWWWAuthenticate(hdrWWWAuthenticate, formats)
+		if err != nil {
+			return err
+		}
+
+		o.WWWAuthenticate = valWWWAuthenticate
+	}
+
 	o.Payload = new(rest_model.APIErrorEnvelope)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
 	return nil
+}
+
+// bindHeaderPatchConfigTypeServiceUnavailable binds the response header WWW-Authenticate
+func (o *PatchConfigTypeServiceUnavailable) bindHeaderWWWAuthenticate(hdr string, formats strfmt.Registry) ([]string, error) {
+	wWWAuthenticateIV := hdr
+
+	var (
+		wWWAuthenticateIC []string
+	)
+	// items.CollectionFormat: ""
+	wWWAuthenticateIR := swag.SplitByFormat(wWWAuthenticateIV, "")
+
+	for _, wWWAuthenticateIIV := range wWWAuthenticateIR {
+
+		// convert split string to string
+		wWWAuthenticateIIC := wWWAuthenticateIIV                          // string as string
+		wWWAuthenticateIC = append(wWWAuthenticateIC, wWWAuthenticateIIC) // roll-up string into []string
+	}
+
+	return wWWAuthenticateIC, nil
 }

@@ -76,10 +76,12 @@ func NewEnableIdentityParamsWithHTTPClient(client *http.Client) *EnableIdentityP
 	}
 }
 
-/* EnableIdentityParams contains all the parameters to send to the API endpoint
-   for the enable identity operation.
+/*
+EnableIdentityParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the enable identity operation.
+
+	Typically these are written to a http.Request.
 */
 type EnableIdentityParams struct {
 

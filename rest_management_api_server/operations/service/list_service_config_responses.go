@@ -33,6 +33,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	"github.com/openziti/edge-api/rest_model"
 )
@@ -40,11 +41,16 @@ import (
 // ListServiceConfigOKCode is the HTTP code returned for type ListServiceConfigOK
 const ListServiceConfigOKCode int = 200
 
-/*ListServiceConfigOK A list of configs
+/*
+ListServiceConfigOK A list of configs
 
 swagger:response listServiceConfigOK
 */
 type ListServiceConfigOK struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -56,6 +62,17 @@ type ListServiceConfigOK struct {
 func NewListServiceConfigOK() *ListServiceConfigOK {
 
 	return &ListServiceConfigOK{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service config o k response
+func (o *ListServiceConfigOK) WithWWWAuthenticate(wWWAuthenticate []string) *ListServiceConfigOK {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service config o k response
+func (o *ListServiceConfigOK) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service config o k response
@@ -72,6 +89,23 @@ func (o *ListServiceConfigOK) SetPayload(payload *rest_model.ListConfigsEnvelope
 // WriteResponse to the client
 func (o *ListServiceConfigOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(200)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -84,11 +118,16 @@ func (o *ListServiceConfigOK) WriteResponse(rw http.ResponseWriter, producer run
 // ListServiceConfigBadRequestCode is the HTTP code returned for type ListServiceConfigBadRequest
 const ListServiceConfigBadRequestCode int = 400
 
-/*ListServiceConfigBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
+/*
+ListServiceConfigBadRequest The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
 
 swagger:response listServiceConfigBadRequest
 */
 type ListServiceConfigBadRequest struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -100,6 +139,17 @@ type ListServiceConfigBadRequest struct {
 func NewListServiceConfigBadRequest() *ListServiceConfigBadRequest {
 
 	return &ListServiceConfigBadRequest{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service config bad request response
+func (o *ListServiceConfigBadRequest) WithWWWAuthenticate(wWWAuthenticate []string) *ListServiceConfigBadRequest {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service config bad request response
+func (o *ListServiceConfigBadRequest) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service config bad request response
@@ -116,6 +166,23 @@ func (o *ListServiceConfigBadRequest) SetPayload(payload *rest_model.APIErrorEnv
 // WriteResponse to the client
 func (o *ListServiceConfigBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(400)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -128,11 +195,16 @@ func (o *ListServiceConfigBadRequest) WriteResponse(rw http.ResponseWriter, prod
 // ListServiceConfigUnauthorizedCode is the HTTP code returned for type ListServiceConfigUnauthorized
 const ListServiceConfigUnauthorizedCode int = 401
 
-/*ListServiceConfigUnauthorized The supplied session does not have the correct access rights to request this resource
+/*
+ListServiceConfigUnauthorized The supplied session does not have the correct access rights to request this resource
 
 swagger:response listServiceConfigUnauthorized
 */
 type ListServiceConfigUnauthorized struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -144,6 +216,17 @@ type ListServiceConfigUnauthorized struct {
 func NewListServiceConfigUnauthorized() *ListServiceConfigUnauthorized {
 
 	return &ListServiceConfigUnauthorized{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service config unauthorized response
+func (o *ListServiceConfigUnauthorized) WithWWWAuthenticate(wWWAuthenticate []string) *ListServiceConfigUnauthorized {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service config unauthorized response
+func (o *ListServiceConfigUnauthorized) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service config unauthorized response
@@ -160,6 +243,23 @@ func (o *ListServiceConfigUnauthorized) SetPayload(payload *rest_model.APIErrorE
 // WriteResponse to the client
 func (o *ListServiceConfigUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(401)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -172,11 +272,16 @@ func (o *ListServiceConfigUnauthorized) WriteResponse(rw http.ResponseWriter, pr
 // ListServiceConfigTooManyRequestsCode is the HTTP code returned for type ListServiceConfigTooManyRequests
 const ListServiceConfigTooManyRequestsCode int = 429
 
-/*ListServiceConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
+/*
+ListServiceConfigTooManyRequests The resource requested is rate limited and the rate limit has been exceeded
 
 swagger:response listServiceConfigTooManyRequests
 */
 type ListServiceConfigTooManyRequests struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -188,6 +293,17 @@ type ListServiceConfigTooManyRequests struct {
 func NewListServiceConfigTooManyRequests() *ListServiceConfigTooManyRequests {
 
 	return &ListServiceConfigTooManyRequests{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service config too many requests response
+func (o *ListServiceConfigTooManyRequests) WithWWWAuthenticate(wWWAuthenticate []string) *ListServiceConfigTooManyRequests {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service config too many requests response
+func (o *ListServiceConfigTooManyRequests) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service config too many requests response
@@ -204,6 +320,23 @@ func (o *ListServiceConfigTooManyRequests) SetPayload(payload *rest_model.APIErr
 // WriteResponse to the client
 func (o *ListServiceConfigTooManyRequests) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
+
 	rw.WriteHeader(429)
 	if o.Payload != nil {
 		payload := o.Payload
@@ -216,11 +349,16 @@ func (o *ListServiceConfigTooManyRequests) WriteResponse(rw http.ResponseWriter,
 // ListServiceConfigServiceUnavailableCode is the HTTP code returned for type ListServiceConfigServiceUnavailable
 const ListServiceConfigServiceUnavailableCode int = 503
 
-/*ListServiceConfigServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
+/*
+ListServiceConfigServiceUnavailable The request could not be completed due to the server being busy or in a temporarily bad state
 
 swagger:response listServiceConfigServiceUnavailable
 */
 type ListServiceConfigServiceUnavailable struct {
+	/*Denotes different type of security token related information
+
+	 */
+	WWWAuthenticate []string `json:"WWW-Authenticate"`
 
 	/*
 	  In: Body
@@ -232,6 +370,17 @@ type ListServiceConfigServiceUnavailable struct {
 func NewListServiceConfigServiceUnavailable() *ListServiceConfigServiceUnavailable {
 
 	return &ListServiceConfigServiceUnavailable{}
+}
+
+// WithWWWAuthenticate adds the wWWAuthenticate to the list service config service unavailable response
+func (o *ListServiceConfigServiceUnavailable) WithWWWAuthenticate(wWWAuthenticate []string) *ListServiceConfigServiceUnavailable {
+	o.WWWAuthenticate = wWWAuthenticate
+	return o
+}
+
+// SetWWWAuthenticate sets the wWWAuthenticate to the list service config service unavailable response
+func (o *ListServiceConfigServiceUnavailable) SetWWWAuthenticate(wWWAuthenticate []string) {
+	o.WWWAuthenticate = wWWAuthenticate
 }
 
 // WithPayload adds the payload to the list service config service unavailable response
@@ -247,6 +396,23 @@ func (o *ListServiceConfigServiceUnavailable) SetPayload(payload *rest_model.API
 
 // WriteResponse to the client
 func (o *ListServiceConfigServiceUnavailable) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	// response header WWW-Authenticate
+
+	var wWWAuthenticateIR []string
+	for _, wWWAuthenticateI := range o.WWWAuthenticate {
+		wWWAuthenticateIS := wWWAuthenticateI
+		if wWWAuthenticateIS != "" {
+			wWWAuthenticateIR = append(wWWAuthenticateIR, wWWAuthenticateIS)
+		}
+	}
+	wWWAuthenticate := swag.JoinByFormat(wWWAuthenticateIR, "")
+	if len(wWWAuthenticate) > 0 {
+		hv := wWWAuthenticate[0]
+		if hv != "" {
+			rw.Header().Set("WWW-Authenticate", hv)
+		}
+	}
 
 	rw.WriteHeader(503)
 	if o.Payload != nil {
