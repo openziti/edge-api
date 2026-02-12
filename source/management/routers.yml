@@ -430,6 +430,10 @@ definitions:
             type: array
             items:
               $ref: '../shared/interfaces.yml#/definitions/interface'
+          ctrlChanListeners:
+            type: array
+            items:
+              type: string
 
   routerCreate:
     type: object
@@ -448,6 +452,11 @@ definitions:
         x-nullable: true
       disabled:
         type: boolean
+        x-nullable: true
+      ctrlChanListeners:
+        type: array
+        items:
+          type: string
         x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
@@ -469,6 +478,11 @@ definitions:
       disabled:
         type: boolean
         x-nullable: true
+      ctrlChanListeners:
+        type: array
+        items:
+          type: string
+        x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   routerPatch:
@@ -486,6 +500,11 @@ definitions:
         x-nullable: true
       disabled:
         type: boolean
+        x-nullable: true
+      ctrlChanListeners:
+        type: array
+        items:
+          type: string
         x-nullable: true
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'

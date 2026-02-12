@@ -52,6 +52,9 @@ type RouterDetail struct {
 	// Minimum: 0
 	Cost *int64 `json:"cost"`
 
+	// ctrl chan listeners
+	CtrlChanListeners []string `json:"ctrlChanListeners"`
+
 	// disabled
 	// Required: true
 	Disabled *bool `json:"disabled"`
@@ -113,6 +116,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO1 struct {
 		Cost *int64 `json:"cost"`
 
+		CtrlChanListeners []string `json:"ctrlChanListeners"`
+
 		Disabled *bool `json:"disabled"`
 
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
@@ -144,6 +149,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 	}
 
 	m.Cost = dataAO1.Cost
+
+	m.CtrlChanListeners = dataAO1.CtrlChanListeners
 
 	m.Disabled = dataAO1.Disabled
 
@@ -186,6 +193,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 	var dataAO1 struct {
 		Cost *int64 `json:"cost"`
 
+		CtrlChanListeners []string `json:"ctrlChanListeners"`
+
 		Disabled *bool `json:"disabled"`
 
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
@@ -214,6 +223,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 	}
 
 	dataAO1.Cost = m.Cost
+
+	dataAO1.CtrlChanListeners = m.CtrlChanListeners
 
 	dataAO1.Disabled = m.Disabled
 
