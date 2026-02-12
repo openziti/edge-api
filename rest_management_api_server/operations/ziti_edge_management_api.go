@@ -1323,13 +1323,6 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			return middleware.NotImplemented("operation identity.RemoveIdentityMfa has not yet been implemented")
 		}),
 
-		AuthenticatorRequestExtendAllCertAuthenticatorsHandler: authenticator.RequestExtendAllCertAuthenticatorsHandlerFunc(func(params authenticator.RequestExtendAllCertAuthenticatorsParams, principal any) middleware.Responder {
-			_ = params
-			_ = principal
-
-			return middleware.NotImplemented("operation authenticator.RequestExtendAllCertAuthenticators has not yet been implemented")
-		}),
-
 		AuthenticatorRequestExtendAuthenticatorHandler: authenticator.RequestExtendAuthenticatorHandlerFunc(func(params authenticator.RequestExtendAuthenticatorParams, principal any) middleware.Responder {
 			_ = params
 			_ = principal
@@ -1908,8 +1901,6 @@ type ZitiEdgeManagementAPI struct {
 	EnrollmentRefreshEnrollmentHandler enrollment.RefreshEnrollmentHandler
 	// IdentityRemoveIdentityMfaHandler sets the operation handler for the remove identity mfa operation
 	IdentityRemoveIdentityMfaHandler identity.RemoveIdentityMfaHandler
-	// AuthenticatorRequestExtendAllCertAuthenticatorsHandler sets the operation handler for the request extend all cert authenticators operation
-	AuthenticatorRequestExtendAllCertAuthenticatorsHandler authenticator.RequestExtendAllCertAuthenticatorsHandler
 	// AuthenticatorRequestExtendAuthenticatorHandler sets the operation handler for the request extend authenticator operation
 	AuthenticatorRequestExtendAuthenticatorHandler authenticator.RequestExtendAuthenticatorHandler
 	// AuthPolicyUpdateAuthPolicyHandler sets the operation handler for the update auth policy operation
@@ -2574,9 +2565,6 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.IdentityRemoveIdentityMfaHandler == nil {
 		unregistered = append(unregistered, "identity.RemoveIdentityMfaHandler")
-	}
-	if o.AuthenticatorRequestExtendAllCertAuthenticatorsHandler == nil {
-		unregistered = append(unregistered, "authenticator.RequestExtendAllCertAuthenticatorsHandler")
 	}
 	if o.AuthenticatorRequestExtendAuthenticatorHandler == nil {
 		unregistered = append(unregistered, "authenticator.RequestExtendAuthenticatorHandler")
@@ -3455,10 +3443,6 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/identities/{id}/mfa"] = identity.NewRemoveIdentityMfa(o.context, o.IdentityRemoveIdentityMfaHandler)
-	if o.handlers["POST"] == nil {
-		o.handlers["POST"] = make(map[string]http.Handler)
-	}
-	o.handlers["POST"]["/identities/{id}/request-extend"] = authenticator.NewRequestExtendAllCertAuthenticators(o.context, o.AuthenticatorRequestExtendAllCertAuthenticatorsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

@@ -2,36 +2,75 @@ $PSDefaultParameterValues += @{ 'New-RegKey:ErrorAction' = 'Stop' }
 
 $ProgressPreference = 'SilentlyContinue'
 
+function Invoke-VersionBumpPrompt {
+    param([string]$ApiName, [string]$CurrentVersion)
+    Write-Host "$ApiName version not changed, currently $CurrentVersion."
+    Write-Host "  1) Stop/cancel (default)"
+    Write-Host "  2) Bump fix version"
+    Write-Host "  3) Bump minor version"
+    Write-Host "  4) Bump major version"
+    Write-Host "  5) Continue anyway"
+    $choice = Read-Host "Select [1-5]"
+    $bumpScript = Join-Path $PSScriptRoot "bump_version.ps1"
+    switch ($choice) {
+        "2" { & $bumpScript -Part fix }
+        "3" { & $bumpScript -Part minor }
+        "4" { & $bumpScript -Part major }
+        "5" { Write-Host "Continuing with unchanged version." }
+        default { throw "Aborted." }
+    }
+}
+
 $orignalLocaltion = Get-Location
 try
 {
     # Expected version (without leading "v")
     $ExpectedSwaggerVersion = "0.33.1"
+    $SwaggerRepo    = "https://github.com/go-swagger/go-swagger"
+    $SwaggerRelease = "$SwaggerRepo/releases/tag/v$ExpectedSwaggerVersion"
 
-    Get-Command swagger -ErrorAction "SilentlyContinue" | Out-Null
-    if (-not$?)
+    if (-not (Get-Command swagger -ErrorAction SilentlyContinue))
     {
-        throw "Command 'swagger' not installed. See: https://github.com/go-swagger/go-swagger for installation, install version $ExpectedSwaggerVersion"
+        throw "'swagger' is not installed. Install from $SwaggerRepo or download v$ExpectedSwaggerVersion directly from $SwaggerRelease"
     }
 
     $output = & swagger version 2>&1
     $text = ($output | Out-String).Trim()
 
     $m = [regex]::Match($text, 'version:\s*v(\d+\.\d+\.\d+)')
-    if( -not ($m.Success)) {
-        Pop-Location
+    if (-not $m.Success) {
         throw "could not parse swagger version, expected 'version: v#.#.#'"
     }
 
-    if ($m.Groups[1].Value -ne $ExpectedSwaggerVersion) {
-        Pop-Location
-        throw "swagger version mismatch. Expected v$ExpectedSwaggerVersion, found v" + $m.Groups[1]
+    $InstalledSwaggerVersion = $m.Groups[1].Value
+    if ($InstalledSwaggerVersion -ne $ExpectedSwaggerVersion) {
+        throw "swagger version v$InstalledSwaggerVersion found, expected v$ExpectedSwaggerVersion. Install from $SwaggerRepo or download v$ExpectedSwaggerVersion directly from $SwaggerRelease"
     }
 
     $rootDir = Join-Path $PSScriptRoot "../" -Resolve
     $sourceDir = Join-Path $PSScriptRoot "../source" -Resolve
 
     $copyrightFile = Join-Path $PSScriptRoot "template.copyright.txt" -Resolve
+
+    $clientSourceFile = Join-Path $sourceDir "client.yml"
+    $clientSourceVersion = (Select-String -Path $clientSourceFile -Pattern '^\s*version:\s*(.+)' | Select-Object -First 1).Matches.Groups[1].Value.Trim()
+    $clientMainContent = git -C $rootDir show origin/main:source/client.yml 2>$null
+    if ($clientMainContent) {
+        $clientMainVersion = ($clientMainContent | Select-String -Pattern '^\s*version:\s*(.+)' | Select-Object -First 1).Matches.Groups[1].Value.Trim()
+        if ($clientSourceVersion -eq $clientMainVersion) {
+            Invoke-VersionBumpPrompt -ApiName "Client API" -CurrentVersion $clientSourceVersion
+        }
+    }
+
+    $managementSourceFile = Join-Path $sourceDir "management.yml"
+    $managementSourceVersion = (Select-String -Path $managementSourceFile -Pattern '^\s*version:\s*(.+)' | Select-Object -First 1).Matches.Groups[1].Value.Trim()
+    $managementMainContent = git -C $rootDir show origin/main:source/management.yml 2>$null
+    if ($managementMainContent) {
+        $managementMainVersion = ($managementMainContent | Select-String -Pattern '^\s*version:\s*(.+)' | Select-Object -First 1).Matches.Groups[1].Value.Trim()
+        if ($managementSourceVersion -eq $managementMainVersion) {
+            Invoke-VersionBumpPrompt -ApiName "Management API" -CurrentVersion $managementSourceVersion
+        }
+    }
 
     "...generating Open API 2.0 specs from source: client.yml"
     Push-Location $sourceDir

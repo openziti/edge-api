@@ -430,44 +430,6 @@ paths:
           $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
         '503':
           $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
-  identity-id-request-extend-all-certs:
-    parameters:
-      - $ref: '../shared/parameters.yml#/id'
-    post:
-      summary: Indicate all certificate authenticators for the identity should be extended and optionally key rolled on next authentication.
-      description: |
-        Allows all certificate authenticators on an identity to be flagged for early extension and optionally private 
-        key rolling. Connecting clients will receive flags in their API Session indicating that an early extension is 
-        request and a hint on whether private keys should be rolled. Clients that do not support extension or cannot 
-        roll keys may ignore one or both flags.
-
-        If this request is made against an identity with zero certificate authenticators, a 403 will be returned.
-      security:
-        - ztSession: [ ]
-        - oauth2: [ openid ]
-      tags:
-        - Authenticator
-      operationId: requestExtendAllCertAuthenticators
-      parameters:
-        - name: requestExtendAuthenticator
-          in: body
-          required: true
-          description: A request to flag a certificate authenticator for early extension/key rolling.
-          schema:
-            $ref: '../shared/authenticators.yml#/definitions/requestExtendAuthenticator'
-      responses:
-        '200':
-          $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
-        '404':
-          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
-        '403':
-          $ref: '../shared/standard-responses.yml#/responses/permanentStateConflict'
-        '401':
-          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
-        '429':
-          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
-        '503':
-          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
   identities-id-enrollments:
     parameters:
       - $ref: '../shared/parameters.yml#/id'

@@ -6,11 +6,17 @@ set -o pipefail
 
 GO_SWAGGER_VERSION="v0.33.1"
 GO_SWAGGER_HASH="2af7725271cf99ace5d44ab134acb53bffcc5734"
-if ! command -v swagger &>/dev/null \
-|| [[ "$(swagger version | awk '$1~/^version:/{print $2}')" != "${GO_SWAGGER_VERSION}" \
-|| "$(swagger version | awk '$1~/^commit:/{print $2}')" != "${GO_SWAGGER_HASH}" ]]
-then
-  echo >&2 "Go Swagger executable 'swagger' ${GO_SWAGGER_VERSION} (${GO_SWAGGER_HASH}) is required. Download the binary from GitHub: https://github.com/go-swagger/go-swagger/releases/tag/v0.29.0"
+GO_SWAGGER_REPO="https://github.com/go-swagger/go-swagger"
+GO_SWAGGER_RELEASE="${GO_SWAGGER_REPO}/releases/tag/${GO_SWAGGER_VERSION}"
+if ! command -v swagger &>/dev/null; then
+  echo >&2 "'swagger' is not installed. Install from ${GO_SWAGGER_REPO} or download ${GO_SWAGGER_VERSION} directly from ${GO_SWAGGER_RELEASE}"
+  exit 1
+fi
+INSTALLED_SWAGGER_VERSION="$(swagger version | awk '$1~/^version:/{print $2}')"
+INSTALLED_SWAGGER_HASH="$(swagger version | awk '$1~/^commit:/{print $2}')"
+if [[ "${INSTALLED_SWAGGER_VERSION}" != "${GO_SWAGGER_VERSION}" \
+   || "${INSTALLED_SWAGGER_HASH}" != "${GO_SWAGGER_HASH}" ]]; then
+  echo >&2 "swagger version ${INSTALLED_SWAGGER_VERSION} found, expected ${GO_SWAGGER_VERSION}. Install from ${GO_SWAGGER_REPO} or download ${GO_SWAGGER_VERSION} directly from ${GO_SWAGGER_RELEASE}"
   exit 1
 fi
 
@@ -34,6 +40,37 @@ managementSourceSpec=$(realpath "$rootDir/source/management.yml")
 managementSwagSpec=$(realpath -m "$rootDir/management.yml")
 
 copyrightFile=$(realpath "$scriptDir/template.copyright.txt")
+
+prompt_version_check() {
+  local apiName="$1"
+  local currentVersion="$2"
+  echo "${apiName} version not changed, currently ${currentVersion}."
+  echo "  1) Stop/cancel (default)"
+  echo "  2) Bump fix version"
+  echo "  3) Bump minor version"
+  echo "  4) Bump major version"
+  echo "  5) Continue anyway"
+  read -r -p "Select [1-5]: " choice
+  case "${choice}" in
+    2) bash "$scriptDir/bump_version.sh" fix ;;
+    3) bash "$scriptDir/bump_version.sh" minor ;;
+    4) bash "$scriptDir/bump_version.sh" major ;;
+    5) echo "Continuing with unchanged version." ;;
+    *) echo "Aborted."; exit 1 ;;
+  esac
+}
+
+clientSourceVersion=$(grep -m1 '^\s*version:' "$clientSourceSpec" | awk '{print $2}')
+clientMainVersion=$(git -C "$rootDir" show origin/main:source/client.yml 2>/dev/null | grep -m1 '^\s*version:' | awk '{print $2}' || true)
+if [[ -n "$clientMainVersion" && "$clientSourceVersion" == "$clientMainVersion" ]]; then
+  prompt_version_check "Client API" "$clientSourceVersion"
+fi
+
+managementSourceVersion=$(grep -m1 '^\s*version:' "$managementSourceSpec" | awk '{print $2}')
+managementMainVersion=$(git -C "$rootDir" show origin/main:source/management.yml 2>/dev/null | grep -m1 '^\s*version:' | awk '{print $2}' || true)
+if [[ -n "$managementMainVersion" && "$managementSourceVersion" == "$managementMainVersion" ]]; then
+  prompt_version_check "Management API" "$managementSourceVersion"
+fi
 
 echo "...flattening client spec"
 echo swagger flatten "$clientSourceSpec" -o "$clientSwagSpec" --format yaml
