@@ -8392,6 +8392,9 @@ func init() {
             "isOnline": {
               "type": "boolean"
             },
+            "isPreferredLeader": {
+              "type": "boolean"
+            },
             "lastJoinedAt": {
               "type": "string",
               "format": "date-time"
@@ -19129,6 +19132,9 @@ func init() {
               "type": "string"
             },
             "isOnline": {
+              "type": "boolean"
+            },
+            "isPreferredLeader": {
               "type": "boolean"
             },
             "lastJoinedAt": {

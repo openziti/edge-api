@@ -63,6 +63,9 @@ type ControllerDetail struct {
 	// Required: true
 	IsOnline *bool `json:"isOnline"`
 
+	// is preferred leader
+	IsPreferredLeader bool `json:"isPreferredLeader,omitempty"`
+
 	// last joined at
 	// Required: true
 	// Format: date-time
@@ -94,6 +97,8 @@ func (m *ControllerDetail) UnmarshalJSON(raw []byte) error {
 
 		IsOnline *bool `json:"isOnline"`
 
+		IsPreferredLeader bool `json:"isPreferredLeader,omitempty"`
+
 		LastJoinedAt *strfmt.DateTime `json:"lastJoinedAt"`
 
 		Name *string `json:"name"`
@@ -111,6 +116,8 @@ func (m *ControllerDetail) UnmarshalJSON(raw []byte) error {
 	m.Fingerprint = dataAO1.Fingerprint
 
 	m.IsOnline = dataAO1.IsOnline
+
+	m.IsPreferredLeader = dataAO1.IsPreferredLeader
 
 	m.LastJoinedAt = dataAO1.LastJoinedAt
 
@@ -139,6 +146,8 @@ func (m ControllerDetail) MarshalJSON() ([]byte, error) {
 
 		IsOnline *bool `json:"isOnline"`
 
+		IsPreferredLeader bool `json:"isPreferredLeader,omitempty"`
+
 		LastJoinedAt *strfmt.DateTime `json:"lastJoinedAt"`
 
 		Name *string `json:"name"`
@@ -153,6 +162,8 @@ func (m ControllerDetail) MarshalJSON() ([]byte, error) {
 	dataAO1.Fingerprint = m.Fingerprint
 
 	dataAO1.IsOnline = m.IsOnline
+
+	dataAO1.IsPreferredLeader = m.IsPreferredLeader
 
 	dataAO1.LastJoinedAt = m.LastJoinedAt
 
