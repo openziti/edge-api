@@ -99,3 +99,5 @@ definitions:
           lastJoinedAt:
             type: string
             format: date-time
+          isPreferredLeader:
+            type: boolean

@@ -5727,6 +5727,8 @@ definitions:
                     type: string
                 isOnline:
                     type: boolean
+                isPreferredLeader:
+                    type: boolean
                 lastJoinedAt:
                     format: date-time
                     type: string
