@@ -15,7 +15,7 @@ info:
         name: Apache 2.0
         url: https://www.apache.org/licenses/LICENSE-2.0.html
     title: Ziti Edge Management
-    version: 0.26.54
+    version: 0.27.0
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -23809,6 +23809,13 @@ definitions:
                 minimum: !!float 0
                 type: integer
                 x-nullable: true
+            ctrlChanListeners:
+                additionalProperties:
+                    items:
+                        type: string
+                    type: array
+                type: object
+                x-nullable: true
             disabled:
                 type: boolean
                 x-nullable: true
@@ -23835,6 +23842,12 @@ definitions:
                     type: string
                     x-nullable: true
                     x-omitempty: false
+                ctrlChanListeners:
+                    additionalProperties:
+                        items:
+                            type: string
+                        type: array
+                    type: object
                 enrollmentCreatedAt:
                     format: date-time
                     type: string
@@ -23924,6 +23937,13 @@ definitions:
                 maximum: !!float 65535
                 minimum: !!float 0
                 type: integer
+                x-nullable: true
+            ctrlChanListeners:
+                additionalProperties:
+                    items:
+                        type: string
+                    type: array
+                type: object
                 x-nullable: true
             disabled:
                 type: boolean
@@ -24024,6 +24044,13 @@ definitions:
                 maximum: !!float 65535
                 minimum: !!float 0
                 type: integer
+                x-nullable: true
+            ctrlChanListeners:
+                additionalProperties:
+                    items:
+                        type: string
+                    type: array
+                type: object
                 x-nullable: true
             disabled:
                 type: boolean
@@ -26309,6 +26336,13 @@ definitions:
                 minimum: !!float 0
                 type: integer
                 x-nullable: true
+            ctrlChanListeners:
+                additionalProperties:
+                    items:
+                        type: string
+                    type: array
+                type: object
+                x-nullable: true
             disabled:
                 type: boolean
                 x-nullable: true
@@ -26330,6 +26364,12 @@ definitions:
                     maximum: !!float 65535
                     minimum: !!float 0
                     type: integer
+                ctrlChanListeners:
+                    additionalProperties:
+                        items:
+                            type: string
+                        type: array
+                    type: object
                 disabled:
                     type: boolean
                 enrollmentCreatedAt:
@@ -26399,6 +26439,13 @@ definitions:
                 minimum: !!float 0
                 type: integer
                 x-nullable: true
+            ctrlChanListeners:
+                additionalProperties:
+                    items:
+                        type: string
+                    type: array
+                type: object
+                x-nullable: true
             disabled:
                 type: boolean
                 x-nullable: true
@@ -26416,6 +26463,13 @@ definitions:
                 maximum: !!float 65535
                 minimum: !!float 0
                 type: integer
+                x-nullable: true
+            ctrlChanListeners:
+                additionalProperties:
+                    items:
+                        type: string
+                    type: array
+                type: object
                 x-nullable: true
             disabled:
                 type: boolean

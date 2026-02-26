@@ -49,6 +49,9 @@ type RouterUpdate struct {
 	// Minimum: 0
 	Cost *int64 `json:"cost,omitempty"`
 
+	// ctrl chan listeners
+	CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
+
 	// disabled
 	Disabled *bool `json:"disabled,omitempty"`
 
