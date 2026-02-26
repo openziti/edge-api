@@ -18,6 +18,7 @@ package rest_util
 
 import (
 	"fmt"
+
 	"github.com/openziti/edge-api/rest_model"
 )
 
@@ -53,11 +54,11 @@ func (e *APIFormattedError) Error() string {
 	causeStr := ""
 
 	if e.Cause != nil {
-		if e.Cause.APIError.Code != "" {
+		if e.Cause.Code != "" {
 			cause := APIFormattedError{APIError: &e.Cause.APIError}
 			causeStr = cause.Error()
-		} else if e.Cause.APIFieldError.Field != "" {
-			causeStr = fmt.Sprintf("error in field %s with value %v: %s", e.Cause.APIFieldError.Field, e.Cause.APIFieldError.Value, e.Cause.APIFieldError.Reason)
+		} else if e.Cause.Field != "" {
+			causeStr = fmt.Sprintf("error in field %s with value %v: %s", e.Cause.Field, e.Cause.Value, e.Cause.Reason)
 		}
 	}
 	result := fmt.Sprintf("error for request %s: %s: %s", e.RequestID, e.Code, e.Message)
