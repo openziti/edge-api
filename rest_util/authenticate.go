@@ -22,14 +22,15 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"net/http"
+	"net/url"
+
 	"github.com/go-openapi/runtime"
 	openapiclient "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/openziti/edge-api/rest_management_api_client"
 	"github.com/openziti/edge-api/rest_management_api_client/authentication"
 	"github.com/openziti/edge-api/rest_model"
-	"net/http"
-	"net/url"
 )
 
 // Authenticator is an interface that facilitates obtaining an API Session.
@@ -183,7 +184,7 @@ type AuthenticatorIdentity struct {
 
 func (a *AuthenticatorIdentity) BuildHttpClient() (*http.Client, error) {
 	return a.BuildHttpClientWithModifyTls(func(config *tls.Config) {
-		src := a.CertProvider.ClientTLSConfig()
+		src := a.ClientTLSConfig()
 		config.Certificates = src.Certificates
 		config.RootCAs = src.RootCAs
 	})
@@ -268,7 +269,7 @@ func (a *AuthenticatorAuthHeader) AuthenticateRequest(request runtime.ClientRequ
 }
 
 func (a *AuthenticatorAuthHeader) BuildHttpClient() (*http.Client, error) {
-	return a.AuthenticatorBase.BuildHttpClientWithModifyTls(func(config *tls.Config) {
+	return a.BuildHttpClientWithModifyTls(func(config *tls.Config) {
 		config.InsecureSkipVerify = true
 	})
 }
