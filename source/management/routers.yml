@@ -462,6 +462,7 @@ definitions:
           items:
             type: string
         x-nullable: true
+        x-omitempty: false
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   routerUpdate:
@@ -489,6 +490,7 @@ definitions:
           items:
             type: string
         x-nullable: true
+        x-omitempty: false
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
   routerPatch:
@@ -514,5 +516,6 @@ definitions:
           items:
             type: string
         x-nullable: true
+        x-omitempty: false
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'

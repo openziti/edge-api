@@ -53,7 +53,7 @@ type EdgeRouterPatch struct {
 	Cost *int64 `json:"cost,omitempty"`
 
 	// ctrl chan listeners
-	CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
+	CtrlChanListeners map[string][]string `json:"ctrlChanListeners"`
 
 	// disabled
 	Disabled *bool `json:"disabled,omitempty"`
