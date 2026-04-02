@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.28.0"
+    "version": "0.29.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -34391,6 +34391,15 @@ func init() {
         },
         "tags": {
           "$ref": "#/definitions/tags"
+        },
+        "target": {
+          "description": "Indicates the target of this config type, e.g. \"service\" or \"router\"",
+          "type": "string",
+          "enum": [
+            "service",
+            "router"
+          ],
+          "x-nullable": true
         }
       }
     },
@@ -34416,6 +34425,15 @@ func init() {
               "description": "A JSON schema to enforce configuration against",
               "type": "object",
               "additionalProperties": true
+            },
+            "target": {
+              "description": "Indicates the target of this config type, e.g. \"service\" or \"router\"",
+              "type": "string",
+              "enum": [
+                "service",
+                "router"
+              ],
+              "x-nullable": true
             }
           }
         }
@@ -40351,7 +40369,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.28.0"
+    "version": "0.29.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -74792,6 +74810,15 @@ func init() {
         },
         "tags": {
           "$ref": "#/definitions/tags"
+        },
+        "target": {
+          "description": "Indicates the target of this config type, e.g. \"service\" or \"router\"",
+          "type": "string",
+          "enum": [
+            "service",
+            "router"
+          ],
+          "x-nullable": true
         }
       }
     },
@@ -74817,6 +74844,15 @@ func init() {
               "description": "A JSON schema to enforce configuration against",
               "type": "object",
               "additionalProperties": true
+            },
+            "target": {
+              "description": "Indicates the target of this config type, e.g. \"service\" or \"router\"",
+              "type": "string",
+              "enum": [
+                "service",
+                "router"
+              ],
+              "x-nullable": true
             }
           }
         }
