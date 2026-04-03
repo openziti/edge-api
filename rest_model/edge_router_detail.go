@@ -52,6 +52,9 @@ type EdgeRouterDetail struct {
 	// cert pem
 	CertPem *string `json:"certPem"`
 
+	// Config IDs associated with this edge router
+	Configs []string `json:"configs"`
+
 	// ctrl chan listeners
 	CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
 
@@ -117,6 +120,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 	var dataAO2 struct {
 		CertPem *string `json:"certPem"`
 
+		Configs []string `json:"configs"`
+
 		CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
 
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
@@ -148,6 +153,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 	}
 
 	m.CertPem = dataAO2.CertPem
+
+	m.Configs = dataAO2.Configs
 
 	m.CtrlChanListeners = dataAO2.CtrlChanListeners
 
@@ -196,6 +203,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 	var dataAO2 struct {
 		CertPem *string `json:"certPem"`
 
+		Configs []string `json:"configs"`
+
 		CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
 
 		EnrollmentCreatedAt *strfmt.DateTime `json:"enrollmentCreatedAt,omitempty"`
@@ -224,6 +233,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 	}
 
 	dataAO2.CertPem = m.CertPem
+
+	dataAO2.Configs = m.Configs
 
 	dataAO2.CtrlChanListeners = m.CtrlChanListeners
 

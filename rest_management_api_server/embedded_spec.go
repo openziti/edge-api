@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.29.0"
+    "version": "0.28.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -35325,6 +35325,13 @@ func init() {
         "appData": {
           "$ref": "#/definitions/tags"
         },
+        "configs": {
+          "description": "Config IDs to associate with this edge router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -35390,6 +35397,13 @@ func init() {
               "type": "string",
               "x-nullable": true,
               "x-omitempty": false
+            },
+            "configs": {
+              "description": "Config IDs associated with this edge router",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "ctrlChanListeners": {
               "type": "object",
@@ -35498,6 +35512,13 @@ func init() {
       "properties": {
         "appData": {
           "$ref": "#/definitions/tags"
+        },
+        "configs": {
+          "description": "Config IDs to associate with this edge router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "cost": {
           "type": "integer",
@@ -35661,6 +35682,13 @@ func init() {
       "properties": {
         "appData": {
           "$ref": "#/definitions/tags"
+        },
+        "configs": {
+          "description": "Config IDs to associate with this edge router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "cost": {
           "type": "integer",
@@ -39071,6 +39099,13 @@ func init() {
         "name"
       ],
       "properties": {
+        "configs": {
+          "description": "Config IDs to associate with this router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -39121,6 +39156,13 @@ func init() {
             "disabled"
           ],
           "properties": {
+            "configs": {
+              "description": "Config IDs associated with this router",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
             "cost": {
               "type": "integer",
               "maximum": 65535
@@ -39218,6 +39260,13 @@ func init() {
     "routerPatch": {
       "type": "object",
       "properties": {
+        "configs": {
+          "description": "Config IDs to associate with this router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -39256,6 +39305,13 @@ func init() {
         "name"
       ],
       "properties": {
+        "configs": {
+          "description": "Config IDs to associate with this router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -40369,7 +40425,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.29.0"
+    "version": "0.28.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -75744,6 +75800,13 @@ func init() {
         "appData": {
           "$ref": "#/definitions/tags"
         },
+        "configs": {
+          "description": "Config IDs to associate with this edge router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -75810,6 +75873,13 @@ func init() {
               "type": "string",
               "x-nullable": true,
               "x-omitempty": false
+            },
+            "configs": {
+              "description": "Config IDs associated with this edge router",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "ctrlChanListeners": {
               "type": "object",
@@ -75918,6 +75988,13 @@ func init() {
       "properties": {
         "appData": {
           "$ref": "#/definitions/tags"
+        },
+        "configs": {
+          "description": "Config IDs to associate with this edge router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "cost": {
           "type": "integer",
@@ -76082,6 +76159,13 @@ func init() {
       "properties": {
         "appData": {
           "$ref": "#/definitions/tags"
+        },
+        "configs": {
+          "description": "Config IDs to associate with this edge router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "cost": {
           "type": "integer",
@@ -79495,6 +79579,13 @@ func init() {
         "name"
       ],
       "properties": {
+        "configs": {
+          "description": "Config IDs to associate with this router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -79546,6 +79637,13 @@ func init() {
             "disabled"
           ],
           "properties": {
+            "configs": {
+              "description": "Config IDs associated with this router",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
             "cost": {
               "type": "integer",
               "maximum": 65535,
@@ -79644,6 +79742,13 @@ func init() {
     "routerPatch": {
       "type": "object",
       "properties": {
+        "configs": {
+          "description": "Config IDs to associate with this router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -79683,6 +79788,13 @@ func init() {
         "name"
       ],
       "properties": {
+        "configs": {
+          "description": "Config IDs to associate with this router",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,

@@ -47,6 +47,9 @@ type EdgeRouterPatch struct {
 	// app data
 	AppData *Tags `json:"appData,omitempty"`
 
+	// Config IDs to associate with this edge router
+	Configs []string `json:"configs"`
+
 	// cost
 	// Maximum: 65535
 	// Minimum: 0

@@ -44,6 +44,9 @@ import (
 // swagger:model routerUpdate
 type RouterUpdate struct {
 
+	// Config IDs to associate with this router
+	Configs []string `json:"configs"`
+
 	// cost
 	// Maximum: 65535
 	// Minimum: 0
