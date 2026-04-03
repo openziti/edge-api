@@ -46,6 +46,9 @@ import (
 type RouterDetail struct {
 	BaseEntity
 
+	// Config IDs associated with this router
+	Configs []string `json:"configs"`
+
 	// cost
 	// Required: true
 	// Maximum: 65535
@@ -114,6 +117,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
+		Configs []string `json:"configs"`
+
 		Cost *int64 `json:"cost"`
 
 		CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
@@ -147,6 +152,8 @@ func (m *RouterDetail) UnmarshalJSON(raw []byte) error {
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
 	}
+
+	m.Configs = dataAO1.Configs
 
 	m.Cost = dataAO1.Cost
 
@@ -191,6 +198,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO0)
 	var dataAO1 struct {
+		Configs []string `json:"configs"`
+
 		Cost *int64 `json:"cost"`
 
 		CtrlChanListeners map[string][]string `json:"ctrlChanListeners,omitempty"`
@@ -221,6 +230,8 @@ func (m RouterDetail) MarshalJSON() ([]byte, error) {
 
 		UnverifiedFingerprint *string `json:"unverifiedFingerprint"`
 	}
+
+	dataAO1.Configs = m.Configs
 
 	dataAO1.Cost = m.Cost
 

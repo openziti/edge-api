@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	"encoding/json"
 	stderrors "errors"
 
 	"github.com/go-openapi/errors"
@@ -54,6 +55,10 @@ type ConfigTypeCreate struct {
 
 	// tags
 	Tags *Tags `json:"tags,omitempty"`
+
+	// Indicates the target of this config type, e.g. "service" or "router"
+	// Enum: ["service","router"]
+	Target *string `json:"target,omitempty"`
 }
 
 // Validate validates this config type create
@@ -65,6 +70,10 @@ func (m *ConfigTypeCreate) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTarget(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,6 +110,48 @@ func (m *ConfigTypeCreate) validateTags(formats strfmt.Registry) error {
 
 			return err
 		}
+	}
+
+	return nil
+}
+
+var configTypeCreateTypeTargetPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["service","router"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		configTypeCreateTypeTargetPropEnum = append(configTypeCreateTypeTargetPropEnum, v)
+	}
+}
+
+const (
+
+	// ConfigTypeCreateTargetService captures enum value "service"
+	ConfigTypeCreateTargetService string = "service"
+
+	// ConfigTypeCreateTargetRouter captures enum value "router"
+	ConfigTypeCreateTargetRouter string = "router"
+)
+
+// prop value enum
+func (m *ConfigTypeCreate) validateTargetEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, configTypeCreateTypeTargetPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ConfigTypeCreate) validateTarget(formats strfmt.Registry) error {
+	if swag.IsZero(m.Target) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTargetEnum("target", "body", *m.Target); err != nil {
+		return err
 	}
 
 	return nil
