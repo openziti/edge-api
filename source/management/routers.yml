@@ -436,6 +436,11 @@ definitions:
               type: array
               items:
                 type: string
+          configs:
+            description: Config IDs associated with this router
+            type: array
+            items:
+              type: string
 
   routerCreate:
     type: object
@@ -465,6 +470,11 @@ definitions:
         x-omitempty: false
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      configs:
+        description: Config IDs to associate with this router
+        type: array
+        items:
+          type: string
   routerUpdate:
     type: object
     required:
@@ -493,6 +503,11 @@ definitions:
         x-omitempty: false
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      configs:
+        description: Config IDs to associate with this router
+        type: array
+        items:
+          type: string
   routerPatch:
     type: object
     properties:
@@ -519,3 +534,8 @@ definitions:
         x-omitempty: false
       tags:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      configs:
+        description: Config IDs to associate with this router
+        type: array
+        items:
+          type: string

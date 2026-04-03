@@ -373,6 +373,11 @@ definitions:
         $ref: '../shared/base-entity.yml#/definitions/tags'
       appData:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      configs:
+        description: Config IDs to associate with this edge router
+        type: array
+        items:
+          type: string
 
   edgeRouterUpdate:
     description: An edge router update object
@@ -409,6 +414,11 @@ definitions:
         $ref: '../shared/base-entity.yml#/definitions/tags'
       appData:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      configs:
+        description: Config IDs to associate with this edge router
+        type: array
+        items:
+          type: string
 
   edgeRouterPatch:
     description: An edge router patch object
@@ -444,6 +454,11 @@ definitions:
         $ref: '../shared/base-entity.yml#/definitions/tags'
       appData:
         $ref: '../shared/base-entity.yml#/definitions/tags'
+      configs:
+        description: Config IDs to associate with this edge router
+        type: array
+        items:
+          type: string
   edgeRouterList:
     description: A list of edge router resources
     type: array
@@ -512,6 +527,11 @@ definitions:
             type: array
             items:
               $ref: '../shared/interfaces.yml#/definitions/interface'
+          configs:
+            description: Config IDs associated with this edge router
+            type: array
+            items:
+              type: string
 
     example:
       id: b0766b8d-bd1a-4d28-8415-639b29d3c83d

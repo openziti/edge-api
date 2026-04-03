@@ -23578,7 +23578,9 @@ definitions:
             tags:
                 $ref: '#/definitions/tags'
             target:
-                description: Indicates the target of this config type, e.g. "service" or "router"
+                description: |
+                    Indicates the target of this config type, e.g. "service" or "router". If not provided,
+                    defaults to "service".
                 enum:
                     - service
                     - router
@@ -24197,6 +24199,11 @@ definitions:
         properties:
             appData:
                 $ref: '#/definitions/tags'
+            configs:
+                description: Config IDs to associate with this edge router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -24236,6 +24243,11 @@ definitions:
                     type: string
                     x-nullable: true
                     x-omitempty: false
+                configs:
+                    description: Config IDs associated with this edge router
+                    items:
+                        type: string
+                    type: array
                 ctrlChanListeners:
                     additionalProperties:
                         items:
@@ -24327,6 +24339,11 @@ definitions:
         properties:
             appData:
                 $ref: '#/definitions/tags'
+            configs:
+                description: Config IDs to associate with this edge router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -24435,6 +24452,11 @@ definitions:
         properties:
             appData:
                 $ref: '#/definitions/tags'
+            configs:
+                description: Config IDs to associate with this edge router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -26776,6 +26798,11 @@ definitions:
         x-omitempty: false
     routerCreate:
         properties:
+            configs:
+                description: Config IDs to associate with this router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -26806,6 +26833,11 @@ definitions:
         allOf:
             - $ref: '#/definitions/baseEntity'
             - properties:
+                configs:
+                    description: Config IDs associated with this router
+                    items:
+                        type: string
+                    type: array
                 cost:
                     maximum: !!float 65535
                     minimum: !!float 0
@@ -26880,6 +26912,11 @@ definitions:
         type: array
     routerPatch:
         properties:
+            configs:
+                description: Config IDs to associate with this router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -26906,6 +26943,11 @@ definitions:
         type: object
     routerUpdate:
         properties:
+            configs:
+                description: Config IDs to associate with this router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0

@@ -56,7 +56,9 @@ type ConfigTypeCreate struct {
 	// tags
 	Tags *Tags `json:"tags,omitempty"`
 
-	// Indicates the target of this config type, e.g. "service" or "router"
+	// Indicates the target of this config type, e.g. "service" or "router". If not provided,
+	// defaults to "service".
+	//
 	// Enum: ["service","router"]
 	Target *string `json:"target,omitempty"`
 }

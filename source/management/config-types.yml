@@ -273,7 +273,9 @@ definitions:
         type: object
         additionalProperties: true
       target:
-        description: Indicates the target of this config type, e.g. "service" or "router"
+        description: |
+          Indicates the target of this config type, e.g. "service" or "router". If not provided,
+          defaults to "service".
         type: string
         x-nullable: true
         enum:
