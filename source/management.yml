@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.28.0
+  version: 0.28.1
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -286,6 +286,11 @@ paths:
     $ref: 'management/terminators.yml#/paths/terminators'
   '/terminators/{id}':
     $ref: 'management/terminators.yml#/paths/terminators-id'
+
+  '/revocations':
+    $ref: 'management/revocations.yml#/paths/revocations'
+  '/revocations/{id}':
+    $ref: 'management/revocations.yml#/paths/revocations-id'
 
   '/routers':
     $ref: 'management/routers.yml#/paths/routers'

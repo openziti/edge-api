@@ -51,6 +51,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_client/identity"
 	"github.com/openziti/edge-api/rest_management_api_client/informational"
 	"github.com/openziti/edge-api/rest_management_api_client/posture_checks"
+	"github.com/openziti/edge-api/rest_management_api_client/revocation"
 	"github.com/openziti/edge-api/rest_management_api_client/role_attributes"
 	"github.com/openziti/edge-api/rest_management_api_client/router"
 	"github.com/openziti/edge-api/rest_management_api_client/service"
@@ -121,6 +122,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *ZitiEdgeMa
 	cli.Identity = identity.New(transport, formats)
 	cli.Informational = informational.New(transport, formats)
 	cli.PostureChecks = posture_checks.New(transport, formats)
+	cli.Revocation = revocation.New(transport, formats)
 	cli.RoleAttributes = role_attributes.New(transport, formats)
 	cli.Router = router.New(transport, formats)
 	cli.Service = service.New(transport, formats)
@@ -208,6 +210,8 @@ type ZitiEdgeManagement struct {
 
 	PostureChecks posture_checks.ClientService
 
+	Revocation revocation.ClientService
+
 	RoleAttributes role_attributes.ClientService
 
 	Router router.ClientService
@@ -249,6 +253,7 @@ func (c *ZitiEdgeManagement) SetTransport(transport runtime.ClientTransport) {
 	c.Identity.SetTransport(transport)
 	c.Informational.SetTransport(transport)
 	c.PostureChecks.SetTransport(transport)
+	c.Revocation.SetTransport(transport)
 	c.RoleAttributes.SetTransport(transport)
 	c.Router.SetTransport(transport)
 	c.Service.SetTransport(transport)
