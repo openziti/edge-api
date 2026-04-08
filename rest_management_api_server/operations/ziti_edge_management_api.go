@@ -61,6 +61,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/identity"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/informational"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/posture_checks"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/revocation"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/role_attributes"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/router"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service"
@@ -244,6 +245,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			_ = principal
 
 			return middleware.NotImplemented("operation posture_checks.CreatePostureCheck has not yet been implemented")
+		}),
+
+		RevocationCreateRevocationHandler: revocation.CreateRevocationHandlerFunc(func(params revocation.CreateRevocationParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation revocation.CreateRevocation has not yet been implemented")
 		}),
 
 		RouterCreateRouterHandler: router.CreateRouterHandlerFunc(func(params router.CreateRouterParams, principal any) middleware.Responder {
@@ -587,6 +595,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			_ = principal
 
 			return middleware.NotImplemented("operation posture_checks.DetailPostureCheckType has not yet been implemented")
+		}),
+
+		RevocationDetailRevocationHandler: revocation.DetailRevocationHandlerFunc(func(params revocation.DetailRevocationParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation revocation.DetailRevocation has not yet been implemented")
 		}),
 
 		RouterDetailRouterHandler: router.DetailRouterHandlerFunc(func(params router.DetailRouterParams, principal any) middleware.Responder {
@@ -1003,6 +1018,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			_ = principal
 
 			return middleware.NotImplemented("operation posture_checks.ListPostureChecks has not yet been implemented")
+		}),
+
+		RevocationListRevocationsHandler: revocation.ListRevocationsHandlerFunc(func(params revocation.ListRevocationsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation revocation.ListRevocations has not yet been implemented")
 		}),
 
 		InformationalListRootHandler: informational.ListRootHandlerFunc(func(params informational.ListRootParams) middleware.Responder {
@@ -1591,6 +1613,8 @@ type ZitiEdgeManagementAPI struct {
 	CurrentIdentityCreateMfaRecoveryCodesHandler current_identity.CreateMfaRecoveryCodesHandler
 	// PostureChecksCreatePostureCheckHandler sets the operation handler for the create posture check operation
 	PostureChecksCreatePostureCheckHandler posture_checks.CreatePostureCheckHandler
+	// RevocationCreateRevocationHandler sets the operation handler for the create revocation operation
+	RevocationCreateRevocationHandler revocation.CreateRevocationHandler
 	// RouterCreateRouterHandler sets the operation handler for the create router operation
 	RouterCreateRouterHandler router.CreateRouterHandler
 	// ServiceCreateServiceHandler sets the operation handler for the create service operation
@@ -1689,6 +1713,8 @@ type ZitiEdgeManagementAPI struct {
 	PostureChecksDetailPostureCheckHandler posture_checks.DetailPostureCheckHandler
 	// PostureChecksDetailPostureCheckTypeHandler sets the operation handler for the detail posture check type operation
 	PostureChecksDetailPostureCheckTypeHandler posture_checks.DetailPostureCheckTypeHandler
+	// RevocationDetailRevocationHandler sets the operation handler for the detail revocation operation
+	RevocationDetailRevocationHandler revocation.DetailRevocationHandler
 	// RouterDetailRouterHandler sets the operation handler for the detail router operation
 	RouterDetailRouterHandler router.DetailRouterHandler
 	// ServiceDetailServiceHandler sets the operation handler for the detail service operation
@@ -1809,6 +1835,8 @@ type ZitiEdgeManagementAPI struct {
 	PostureChecksListPostureCheckTypesHandler posture_checks.ListPostureCheckTypesHandler
 	// PostureChecksListPostureChecksHandler sets the operation handler for the list posture checks operation
 	PostureChecksListPostureChecksHandler posture_checks.ListPostureChecksHandler
+	// RevocationListRevocationsHandler sets the operation handler for the list revocations operation
+	RevocationListRevocationsHandler revocation.ListRevocationsHandler
 	// InformationalListRootHandler sets the operation handler for the list root operation
 	InformationalListRootHandler informational.ListRootHandler
 	// RouterListRoutersHandler sets the operation handler for the list routers operation
@@ -2101,6 +2129,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.PostureChecksCreatePostureCheckHandler == nil {
 		unregistered = append(unregistered, "posture_checks.CreatePostureCheckHandler")
 	}
+	if o.RevocationCreateRevocationHandler == nil {
+		unregistered = append(unregistered, "revocation.CreateRevocationHandler")
+	}
 	if o.RouterCreateRouterHandler == nil {
 		unregistered = append(unregistered, "router.CreateRouterHandler")
 	}
@@ -2247,6 +2278,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.PostureChecksDetailPostureCheckTypeHandler == nil {
 		unregistered = append(unregistered, "posture_checks.DetailPostureCheckTypeHandler")
+	}
+	if o.RevocationDetailRevocationHandler == nil {
+		unregistered = append(unregistered, "revocation.DetailRevocationHandler")
 	}
 	if o.RouterDetailRouterHandler == nil {
 		unregistered = append(unregistered, "router.DetailRouterHandler")
@@ -2427,6 +2461,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.PostureChecksListPostureChecksHandler == nil {
 		unregistered = append(unregistered, "posture_checks.ListPostureChecksHandler")
+	}
+	if o.RevocationListRevocationsHandler == nil {
+		unregistered = append(unregistered, "revocation.ListRevocationsHandler")
 	}
 	if o.InformationalListRootHandler == nil {
 		unregistered = append(unregistered, "informational.ListRootHandler")
@@ -2826,6 +2863,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/revocations"] = revocation.NewCreateRevocation(o.context, o.RevocationCreateRevocationHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/routers"] = router.NewCreateRouter(o.context, o.RouterCreateRouterHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -3019,6 +3060,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/posture-check-types/{id}"] = posture_checks.NewDetailPostureCheckType(o.context, o.PostureChecksDetailPostureCheckTypeHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/revocations/{id}"] = revocation.NewDetailRevocation(o.context, o.RevocationDetailRevocationHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -3259,6 +3304,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/posture-checks"] = posture_checks.NewListPostureChecks(o.context, o.PostureChecksListPostureChecksHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/revocations"] = revocation.NewListRevocations(o.context, o.RevocationListRevocationsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

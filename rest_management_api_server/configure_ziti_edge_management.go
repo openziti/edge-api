@@ -53,6 +53,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/identity"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/informational"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/posture_checks"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/revocation"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/role_attributes"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/router"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/service"
@@ -281,6 +282,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			_ = principal
 
 			return middleware.NotImplemented("operation posture_checks.CreatePostureCheck has not yet been implemented")
+		})
+	}
+	if api.RevocationCreateRevocationHandler == nil {
+		api.RevocationCreateRevocationHandler = revocation.CreateRevocationHandlerFunc(func(params revocation.CreateRevocationParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation revocation.CreateRevocation has not yet been implemented")
 		})
 	}
 	if api.RouterCreateRouterHandler == nil {
@@ -673,6 +682,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			_ = principal
 
 			return middleware.NotImplemented("operation posture_checks.DetailPostureCheckType has not yet been implemented")
+		})
+	}
+	if api.RevocationDetailRevocationHandler == nil {
+		api.RevocationDetailRevocationHandler = revocation.DetailRevocationHandlerFunc(func(params revocation.DetailRevocationParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation revocation.DetailRevocation has not yet been implemented")
 		})
 	}
 	if api.RouterDetailRouterHandler == nil {
@@ -1149,6 +1166,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			_ = principal
 
 			return middleware.NotImplemented("operation posture_checks.ListPostureChecks has not yet been implemented")
+		})
+	}
+	if api.RevocationListRevocationsHandler == nil {
+		api.RevocationListRevocationsHandler = revocation.ListRevocationsHandlerFunc(func(params revocation.ListRevocationsParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation revocation.ListRevocations has not yet been implemented")
 		})
 	}
 	if api.InformationalListRootHandler == nil {
