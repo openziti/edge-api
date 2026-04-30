@@ -31,6 +31,7 @@ package rest_model
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -52,6 +53,10 @@ type ConfigTypeDetail struct {
 	// A JSON schema to enforce configuration against
 	// Required: true
 	Schema any `json:"schema"`
+
+	// Indicates the target of this config type, e.g. "service" or "router"
+	// Enum: ["service","router"]
+	Target *string `json:"target,omitempty"`
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
@@ -68,6 +73,8 @@ func (m *ConfigTypeDetail) UnmarshalJSON(raw []byte) error {
 		Name *string `json:"name"`
 
 		Schema any `json:"schema"`
+
+		Target *string `json:"target,omitempty"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
@@ -76,6 +83,8 @@ func (m *ConfigTypeDetail) UnmarshalJSON(raw []byte) error {
 	m.Name = dataAO1.Name
 
 	m.Schema = dataAO1.Schema
+
+	m.Target = dataAO1.Target
 
 	return nil
 }
@@ -93,11 +102,15 @@ func (m ConfigTypeDetail) MarshalJSON() ([]byte, error) {
 		Name *string `json:"name"`
 
 		Schema any `json:"schema"`
+
+		Target *string `json:"target,omitempty"`
 	}
 
 	dataAO1.Name = m.Name
 
 	dataAO1.Schema = m.Schema
+
+	dataAO1.Target = m.Target
 
 	jsonDataAO1, errAO1 := swag.WriteJSON(dataAO1)
 	if errAO1 != nil {
@@ -124,6 +137,10 @@ func (m *ConfigTypeDetail) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTarget(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -143,6 +160,40 @@ func (m *ConfigTypeDetail) validateSchema(formats strfmt.Registry) error {
 
 	if m.Schema == nil {
 		return errors.Required("schema", "body", nil)
+	}
+
+	return nil
+}
+
+var configTypeDetailTypeTargetPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["service","router"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		configTypeDetailTypeTargetPropEnum = append(configTypeDetailTypeTargetPropEnum, v)
+	}
+}
+
+// property enum
+func (m *ConfigTypeDetail) validateTargetEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, configTypeDetailTypeTargetPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ConfigTypeDetail) validateTarget(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Target) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTargetEnum("target", "body", *m.Target); err != nil {
+		return err
 	}
 
 	return nil

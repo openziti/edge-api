@@ -250,6 +250,13 @@ definitions:
             description: A JSON schema to enforce configuration against
             type: object
             additionalProperties: true
+          target:
+            description: Indicates the target of this config type, e.g. "service" or "router"
+            type: string
+            x-nullable: true
+            enum:
+              - service
+              - router
   configTypeCreate:
     type: object
     description: A config-type create object
@@ -265,6 +272,15 @@ definitions:
         description: A JSON schema to enforce configuration against
         type: object
         additionalProperties: true
+      target:
+        description: |
+          Indicates the target of this config type, e.g. "service" or "router". If not provided,
+          defaults to "service".
+        type: string
+        x-nullable: true
+        enum:
+          - service
+          - router
   configTypeUpdate:
     description: A config-type update object
     type: object

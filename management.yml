@@ -15,7 +15,7 @@ info:
         name: Apache 2.0
         url: https://www.apache.org/licenses/LICENSE-2.0.html
     title: Ziti Edge Management
-    version: 0.28.1
+    version: 0.29.0
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -23577,6 +23577,15 @@ definitions:
                 type: object
             tags:
                 $ref: '#/definitions/tags'
+            target:
+                description: |
+                    Indicates the target of this config type, e.g. "service" or "router". If not provided,
+                    defaults to "service".
+                enum:
+                    - service
+                    - router
+                type: string
+                x-nullable: true
         required:
             - name
         type: object
@@ -23591,6 +23600,13 @@ definitions:
                     additionalProperties: true
                     description: A JSON schema to enforce configuration against
                     type: object
+                target:
+                    description: Indicates the target of this config type, e.g. "service" or "router"
+                    enum:
+                        - service
+                        - router
+                    type: string
+                    x-nullable: true
               required:
                 - name
                 - schema
@@ -24183,6 +24199,11 @@ definitions:
         properties:
             appData:
                 $ref: '#/definitions/tags'
+            configs:
+                description: Config IDs to associate with this edge router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -24222,6 +24243,11 @@ definitions:
                     type: string
                     x-nullable: true
                     x-omitempty: false
+                configs:
+                    description: Config IDs associated with this edge router
+                    items:
+                        type: string
+                    type: array
                 ctrlChanListeners:
                     additionalProperties:
                         items:
@@ -24313,6 +24339,11 @@ definitions:
         properties:
             appData:
                 $ref: '#/definitions/tags'
+            configs:
+                description: Config IDs to associate with this edge router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -24421,6 +24452,11 @@ definitions:
         properties:
             appData:
                 $ref: '#/definitions/tags'
+            configs:
+                description: Config IDs to associate with this edge router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -26762,6 +26798,11 @@ definitions:
         x-omitempty: false
     routerCreate:
         properties:
+            configs:
+                description: Config IDs to associate with this router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -26792,6 +26833,11 @@ definitions:
         allOf:
             - $ref: '#/definitions/baseEntity'
             - properties:
+                configs:
+                    description: Config IDs associated with this router
+                    items:
+                        type: string
+                    type: array
                 cost:
                     maximum: !!float 65535
                     minimum: !!float 0
@@ -26866,6 +26912,11 @@ definitions:
         type: array
     routerPatch:
         properties:
+            configs:
+                description: Config IDs to associate with this router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
@@ -26892,6 +26943,11 @@ definitions:
         type: object
     routerUpdate:
         properties:
+            configs:
+                description: Config IDs to associate with this router
+                items:
+                    type: string
+                type: array
             cost:
                 maximum: !!float 65535
                 minimum: !!float 0
