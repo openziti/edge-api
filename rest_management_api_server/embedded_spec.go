@@ -12757,6 +12757,192 @@ func init() {
         }
       ]
     },
+    "/edge-router-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves edge router role attributes along with per-source usage counts.\nEach response item reports how many edge routers declare the attribute\nand how many edge-router policies or service-edge-router policies\nreference it. When ` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are\nalso returned. Requires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List edge router role attributes with usage breakdowns",
+        "operationId": "listEdgeRouterRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
     "/edge-router-role-attributes": {
       "get": {
         "security": [
@@ -20901,6 +21087,192 @@ func init() {
         }
       ]
     },
+    "/identity-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves identity role attributes along with per-source usage counts.\nEach response item reports how many identities declare the attribute and\nhow many service policies or edge-router policies reference it. When\n` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are also returned.\nRequires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List identity role attributes with usage breakdowns",
+        "operationId": "listIdentityRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
     "/identity-role-attributes": {
       "get": {
         "security": [
@@ -21521,6 +21893,192 @@ func init() {
                   "apiEnrollmentVersion": "0.0.1",
                   "apiVersion": "0.0.1"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posture-check-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves posture check role attributes along with per-source usage\ncounts. Each response item reports how many posture checks declare the\nattribute and how many service policies reference it. When\n` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are also returned.\nRequires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List posture check role attributes with usage breakdowns",
+        "operationId": "listPostureCheckRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
               }
             }
           }
@@ -27984,6 +28542,192 @@ func init() {
           "required": true
         }
       ]
+    },
+    "/service-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves service role attributes along with per-source usage counts.\nEach response item reports how many services declare the attribute and\nhow many service policies or service-edge-router policies reference it.\nWhen ` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are also\nreturned. Requires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List service role attributes with usage breakdowns",
+        "operationId": "listServiceRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
     },
     "/service-role-attributes": {
       "get": {
@@ -37860,6 +38604,21 @@ func init() {
         }
       }
     },
+    "listRoleAttributeUsageEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/roleAttributeUsageList"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "listRoleAttributesEnvelope": {
       "type": "object",
       "required": [
@@ -39715,6 +40474,53 @@ func init() {
         "IDENTITY",
         "API_SESSION"
       ]
+    },
+    "roleAttributeSourceUsage": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "description": "Number of entities from this source that use the attribute.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "ids": {
+          "description": "The entity ids that contribute to ` + "`" + `count` + "`" + `. Populated only when the\nrequest includes ` + "`" + `withIds=true` + "`" + `.\n",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "roleAttributeUsageDetail": {
+      "type": "object",
+      "required": [
+        "roleAttribute",
+        "usage"
+      ],
+      "properties": {
+        "roleAttribute": {
+          "description": "The role attribute value (without any leading '#').",
+          "type": "string"
+        },
+        "usage": {
+          "description": "Per-source usage breakdown keyed by source name. Source names include\nthe defining-entity collection (\"identities\", \"edgeRouters\",\n\"services\", \"postureChecks\") and the policy collections that may\nreference the attribute (\"servicePolicies\", \"edgeRouterPolicies\",\n\"serviceEdgeRouterPolicies\"). Sources that don't apply to the\nendpoint are omitted; sources that apply but have no references are\nstill emitted with a zero count for schema symmetry.\n",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/roleAttributeSourceUsage"
+          }
+        }
+      }
+    },
+    "roleAttributeUsageList": {
+      "description": "An array of role attributes, each with a per-source usage breakdown\ndescribing how many entities declare the attribute and how many\npolicies reference it.\n",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/roleAttributeUsageDetail"
+      }
     },
     "roleAttributesList": {
       "description": "An array of role attributes",
@@ -53755,6 +54561,192 @@ func init() {
         }
       ]
     },
+    "/edge-router-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves edge router role attributes along with per-source usage counts.\nEach response item reports how many edge routers declare the attribute\nand how many edge-router policies or service-edge-router policies\nreference it. When ` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are\nalso returned. Requires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List edge router role attributes with usage breakdowns",
+        "operationId": "listEdgeRouterRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
     "/edge-router-role-attributes": {
       "get": {
         "security": [
@@ -61899,6 +62891,192 @@ func init() {
         }
       ]
     },
+    "/identity-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves identity role attributes along with per-source usage counts.\nEach response item reports how many identities declare the attribute and\nhow many service policies or edge-router policies reference it. When\n` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are also returned.\nRequires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List identity role attributes with usage breakdowns",
+        "operationId": "listIdentityRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
     "/identity-role-attributes": {
       "get": {
         "security": [
@@ -62519,6 +63697,192 @@ func init() {
                   "apiEnrollmentVersion": "0.0.1",
                   "apiVersion": "0.0.1"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posture-check-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves posture check role attributes along with per-source usage\ncounts. Each response item reports how many posture checks declare the\nattribute and how many service policies reference it. When\n` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are also returned.\nRequires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List posture check role attributes with usage breakdowns",
+        "operationId": "listPostureCheckRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
               }
             }
           }
@@ -68982,6 +70346,192 @@ func init() {
           "required": true
         }
       ]
+    },
+    "/service-role-attribute-usage": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Retrieves service role attributes along with per-source usage counts.\nEach response item reports how many services declare the attribute and\nhow many service policies or service-edge-router policies reference it.\nWhen ` + "`" + `withIds=true` + "`" + `, the entity ids backing each count are also\nreturned. Requires admin access.\n",
+        "tags": [
+          "Role Attributes"
+        ],
+        "summary": "List service role attributes with usage breakdowns",
+        "operationId": "listServiceRoleAttributeUsage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "When true, each usage breakdown in the response also includes the list of\nentity ids that contribute to the count. Defaults to false to keep\nresponses small when the id list is not needed.\n",
+            "name": "withIds",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of role attributes with per-source usage breakdowns",
+            "schema": {
+              "$ref": "#/definitions/listRoleAttributeUsageEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
     },
     "/service-role-attributes": {
       "get": {
@@ -78977,6 +80527,21 @@ func init() {
         }
       }
     },
+    "listRoleAttributeUsageEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/roleAttributeUsageList"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "listRoleAttributesEnvelope": {
       "type": "object",
       "required": [
@@ -80832,6 +82397,53 @@ func init() {
         "IDENTITY",
         "API_SESSION"
       ]
+    },
+    "roleAttributeSourceUsage": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "description": "Number of entities from this source that use the attribute.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "ids": {
+          "description": "The entity ids that contribute to ` + "`" + `count` + "`" + `. Populated only when the\nrequest includes ` + "`" + `withIds=true` + "`" + `.\n",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "roleAttributeUsageDetail": {
+      "type": "object",
+      "required": [
+        "roleAttribute",
+        "usage"
+      ],
+      "properties": {
+        "roleAttribute": {
+          "description": "The role attribute value (without any leading '#').",
+          "type": "string"
+        },
+        "usage": {
+          "description": "Per-source usage breakdown keyed by source name. Source names include\nthe defining-entity collection (\"identities\", \"edgeRouters\",\n\"services\", \"postureChecks\") and the policy collections that may\nreference the attribute (\"servicePolicies\", \"edgeRouterPolicies\",\n\"serviceEdgeRouterPolicies\"). Sources that don't apply to the\nendpoint are omitted; sources that apply but have no references are\nstill emitted with a zero count for schema symmetry.\n",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/roleAttributeSourceUsage"
+          }
+        }
+      }
+    },
+    "roleAttributeUsageList": {
+      "description": "An array of role attributes, each with a per-source usage breakdown\ndescribing how many entities declare the attribute and how many\npolicies reference it.\n",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/roleAttributeUsageDetail"
+      }
     },
     "roleAttributesList": {
       "description": "An array of role attributes",
