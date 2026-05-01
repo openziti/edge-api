@@ -251,12 +251,13 @@ definitions:
             type: object
             additionalProperties: true
           target:
-            description: Indicates the target of this config type, e.g. "service" or "router"
+            description: Indicates the target of this config type, e.g. "service", "router" or "other"
             type: string
             x-nullable: true
             enum:
               - service
               - router
+              - other
   configTypeCreate:
     type: object
     description: A config-type create object
@@ -274,13 +275,14 @@ definitions:
         additionalProperties: true
       target:
         description: |
-          Indicates the target of this config type, e.g. "service" or "router". If not provided,
+          Indicates the target of this config type, e.g. "service", "router" or "other". If not provided,
           defaults to "service".
         type: string
         x-nullable: true
         enum:
           - service
           - router
+          - other
   configTypeUpdate:
     description: A config-type update object
     type: object
