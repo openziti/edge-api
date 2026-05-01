@@ -1018,6 +1018,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation edge_router_policy.ListEdgeRouterPolicyIdentities has not yet been implemented")
 		})
 	}
+	if api.RoleAttributesListEdgeRouterRoleAttributeUsageHandler == nil {
+		api.RoleAttributesListEdgeRouterRoleAttributeUsageHandler = role_attributes.ListEdgeRouterRoleAttributeUsageHandlerFunc(func(params role_attributes.ListEdgeRouterRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListEdgeRouterRoleAttributeUsage has not yet been implemented")
+		})
+	}
 	if api.RoleAttributesListEdgeRouterRoleAttributesHandler == nil {
 		api.RoleAttributesListEdgeRouterRoleAttributesHandler = role_attributes.ListEdgeRouterRoleAttributesHandlerFunc(func(params role_attributes.ListEdgeRouterRoleAttributesParams, principal any) middleware.Responder {
 			_ = params
@@ -1089,6 +1097,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation identity.ListIdentityEdgeRouters has not yet been implemented")
 		})
 	}
+	if api.RoleAttributesListIdentityRoleAttributeUsageHandler == nil {
+		api.RoleAttributesListIdentityRoleAttributeUsageHandler = role_attributes.ListIdentityRoleAttributeUsageHandlerFunc(func(params role_attributes.ListIdentityRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListIdentityRoleAttributeUsage has not yet been implemented")
+		})
+	}
 	if api.RoleAttributesListIdentityRoleAttributesHandler == nil {
 		api.RoleAttributesListIdentityRoleAttributesHandler = role_attributes.ListIdentityRoleAttributesHandlerFunc(func(params role_attributes.ListIdentityRoleAttributesParams, principal any) middleware.Responder {
 			_ = params
@@ -1142,6 +1158,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			_ = params
 
 			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
+		})
+	}
+	if api.RoleAttributesListPostureCheckRoleAttributeUsageHandler == nil {
+		api.RoleAttributesListPostureCheckRoleAttributeUsageHandler = role_attributes.ListPostureCheckRoleAttributeUsageHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributeUsage has not yet been implemented")
 		})
 	}
 	if api.RoleAttributesListPostureCheckRoleAttributesHandler == nil {
@@ -1269,6 +1293,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			_ = principal
 
 			return middleware.NotImplemented("operation service_policy.ListServicePolicyServices has not yet been implemented")
+		})
+	}
+	if api.RoleAttributesListServiceRoleAttributeUsageHandler == nil {
+		api.RoleAttributesListServiceRoleAttributeUsageHandler = role_attributes.ListServiceRoleAttributeUsageHandlerFunc(func(params role_attributes.ListServiceRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListServiceRoleAttributeUsage has not yet been implemented")
 		})
 	}
 	if api.RoleAttributesListServiceRoleAttributesHandler == nil {

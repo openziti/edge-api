@@ -23,6 +23,14 @@ filter:
   name: filter
   type: string
   in: query
+withIds:
+  name: withIds
+  type: boolean
+  in: query
+  description: |
+    When true, each usage breakdown in the response also includes the list of
+    entity ids that contribute to the count. Defaults to false to keep
+    responses small when the id list is not needed.
 token:
   name: token
   type: string

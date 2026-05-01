@@ -108,6 +108,134 @@ paths:
         '503':
           $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
 
+  identity-role-attribute-usage:
+    get:
+      summary: List identity role attributes with usage breakdowns
+      description: |
+        Retrieves identity role attributes along with per-source usage counts.
+        Each response item reports how many identities declare the attribute and
+        how many service policies or edge-router policies reference it. When
+        `withIds=true`, the entity ids backing each count are also returned.
+        Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Role Attributes
+      operationId: listIdentityRoleAttributeUsage
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+        - $ref: '../shared/parameters.yml#/withIds'
+      responses:
+        '200':
+          $ref: '#/responses/listRoleAttributeUsage'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+
+  edge-router-role-attribute-usage:
+    get:
+      summary: List edge router role attributes with usage breakdowns
+      description: |
+        Retrieves edge router role attributes along with per-source usage counts.
+        Each response item reports how many edge routers declare the attribute
+        and how many edge-router policies or service-edge-router policies
+        reference it. When `withIds=true`, the entity ids backing each count are
+        also returned. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Role Attributes
+      operationId: listEdgeRouterRoleAttributeUsage
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+        - $ref: '../shared/parameters.yml#/withIds'
+      responses:
+        '200':
+          $ref: '#/responses/listRoleAttributeUsage'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+
+  service-role-attribute-usage:
+    get:
+      summary: List service role attributes with usage breakdowns
+      description: |
+        Retrieves service role attributes along with per-source usage counts.
+        Each response item reports how many services declare the attribute and
+        how many service policies or service-edge-router policies reference it.
+        When `withIds=true`, the entity ids backing each count are also
+        returned. Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Role Attributes
+      operationId: listServiceRoleAttributeUsage
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+        - $ref: '../shared/parameters.yml#/withIds'
+      responses:
+        '200':
+          $ref: '#/responses/listRoleAttributeUsage'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+
+  posture-check-role-attribute-usage:
+    get:
+      summary: List posture check role attributes with usage breakdowns
+      description: |
+        Retrieves posture check role attributes along with per-source usage
+        counts. Each response item reports how many posture checks declare the
+        attribute and how many service policies reference it. When
+        `withIds=true`, the entity ids backing each count are also returned.
+        Requires admin access.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Role Attributes
+      operationId: listPostureCheckRoleAttributeUsage
+      parameters:
+        - $ref: '../shared/parameters.yml#/limit'
+        - $ref: '../shared/parameters.yml#/offset'
+        - $ref: '../shared/parameters.yml#/filter'
+        - $ref: '../shared/parameters.yml#/withIds'
+      responses:
+        '200':
+          $ref: '#/responses/listRoleAttributeUsage'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+
 responses:
   listRoleAttributes:
     description: A list of role attributes
@@ -119,6 +247,17 @@ responses:
           type: string
     schema:
       $ref: '#/definitions/listRoleAttributesEnvelope'
+
+  listRoleAttributeUsage:
+    description: A list of role attributes with per-source usage breakdowns
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
+    schema:
+      $ref: '#/definitions/listRoleAttributeUsageEnvelope'
 
 definitions:
   listRoleAttributesEnvelope:
@@ -136,3 +275,59 @@ definitions:
     type: array
     items:
       type: string
+
+  listRoleAttributeUsageEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/roleAttributeUsageList'
+  roleAttributeUsageList:
+    description: |
+      An array of role attributes, each with a per-source usage breakdown
+      describing how many entities declare the attribute and how many
+      policies reference it.
+    type: array
+    items:
+      $ref: '#/definitions/roleAttributeUsageDetail'
+  roleAttributeUsageDetail:
+    type: object
+    required:
+      - roleAttribute
+      - usage
+    properties:
+      roleAttribute:
+        description: The role attribute value (without any leading '#').
+        type: string
+      usage:
+        description: |
+          Per-source usage breakdown keyed by source name. Source names include
+          the defining-entity collection ("identities", "edgeRouters",
+          "services", "postureChecks") and the policy collections that may
+          reference the attribute ("servicePolicies", "edgeRouterPolicies",
+          "serviceEdgeRouterPolicies"). Sources that don't apply to the
+          endpoint are omitted; sources that apply but have no references are
+          still emitted with a zero count for schema symmetry.
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/roleAttributeSourceUsage'
+  roleAttributeSourceUsage:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        description: Number of entities from this source that use the attribute.
+        type: integer
+        format: int64
+      ids:
+        description: |
+          The entity ids that contribute to `count`. Populated only when the
+          request includes `withIds=true`.
+        type: array
+        items:
+          type: string

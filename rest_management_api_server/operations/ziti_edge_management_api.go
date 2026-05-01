@@ -889,6 +889,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			return middleware.NotImplemented("operation edge_router_policy.ListEdgeRouterPolicyIdentities has not yet been implemented")
 		}),
 
+		RoleAttributesListEdgeRouterRoleAttributeUsageHandler: role_attributes.ListEdgeRouterRoleAttributeUsageHandlerFunc(func(params role_attributes.ListEdgeRouterRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListEdgeRouterRoleAttributeUsage has not yet been implemented")
+		}),
+
 		RoleAttributesListEdgeRouterRoleAttributesHandler: role_attributes.ListEdgeRouterRoleAttributesHandlerFunc(func(params role_attributes.ListEdgeRouterRoleAttributesParams, principal any) middleware.Responder {
 			_ = params
 			_ = principal
@@ -951,6 +958,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			return middleware.NotImplemented("operation identity.ListIdentityEdgeRouters has not yet been implemented")
 		}),
 
+		RoleAttributesListIdentityRoleAttributeUsageHandler: role_attributes.ListIdentityRoleAttributeUsageHandlerFunc(func(params role_attributes.ListIdentityRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListIdentityRoleAttributeUsage has not yet been implemented")
+		}),
+
 		RoleAttributesListIdentityRoleAttributesHandler: role_attributes.ListIdentityRoleAttributesHandlerFunc(func(params role_attributes.ListIdentityRoleAttributesParams, principal any) middleware.Responder {
 			_ = params
 			_ = principal
@@ -997,6 +1011,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			_ = params
 
 			return middleware.NotImplemented("operation enrollment.ListNetworkJWTs has not yet been implemented")
+		}),
+
+		RoleAttributesListPostureCheckRoleAttributeUsageHandler: role_attributes.ListPostureCheckRoleAttributeUsageHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListPostureCheckRoleAttributeUsage has not yet been implemented")
 		}),
 
 		RoleAttributesListPostureCheckRoleAttributesHandler: role_attributes.ListPostureCheckRoleAttributesHandlerFunc(func(params role_attributes.ListPostureCheckRoleAttributesParams, principal any) middleware.Responder {
@@ -1108,6 +1129,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			_ = principal
 
 			return middleware.NotImplemented("operation service_policy.ListServicePolicyServices has not yet been implemented")
+		}),
+
+		RoleAttributesListServiceRoleAttributeUsageHandler: role_attributes.ListServiceRoleAttributeUsageHandlerFunc(func(params role_attributes.ListServiceRoleAttributeUsageParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation role_attributes.ListServiceRoleAttributeUsage has not yet been implemented")
 		}),
 
 		RoleAttributesListServiceRoleAttributesHandler: role_attributes.ListServiceRoleAttributesHandlerFunc(func(params role_attributes.ListServiceRoleAttributesParams, principal any) middleware.Responder {
@@ -1797,6 +1825,8 @@ type ZitiEdgeManagementAPI struct {
 	EdgeRouterPolicyListEdgeRouterPolicyEdgeRoutersHandler edge_router_policy.ListEdgeRouterPolicyEdgeRoutersHandler
 	// EdgeRouterPolicyListEdgeRouterPolicyIdentitiesHandler sets the operation handler for the list edge router policy identities operation
 	EdgeRouterPolicyListEdgeRouterPolicyIdentitiesHandler edge_router_policy.ListEdgeRouterPolicyIdentitiesHandler
+	// RoleAttributesListEdgeRouterRoleAttributeUsageHandler sets the operation handler for the list edge router role attribute usage operation
+	RoleAttributesListEdgeRouterRoleAttributeUsageHandler role_attributes.ListEdgeRouterRoleAttributeUsageHandler
 	// RoleAttributesListEdgeRouterRoleAttributesHandler sets the operation handler for the list edge router role attributes operation
 	RoleAttributesListEdgeRouterRoleAttributesHandler role_attributes.ListEdgeRouterRoleAttributesHandler
 	// EdgeRouterListEdgeRouterServiceEdgeRouterPoliciesHandler sets the operation handler for the list edge router service edge router policies operation
@@ -1815,6 +1845,8 @@ type ZitiEdgeManagementAPI struct {
 	IdentityListIdentitiesHandler identity.ListIdentitiesHandler
 	// IdentityListIdentityEdgeRoutersHandler sets the operation handler for the list identity edge routers operation
 	IdentityListIdentityEdgeRoutersHandler identity.ListIdentityEdgeRoutersHandler
+	// RoleAttributesListIdentityRoleAttributeUsageHandler sets the operation handler for the list identity role attribute usage operation
+	RoleAttributesListIdentityRoleAttributeUsageHandler role_attributes.ListIdentityRoleAttributeUsageHandler
 	// RoleAttributesListIdentityRoleAttributesHandler sets the operation handler for the list identity role attributes operation
 	RoleAttributesListIdentityRoleAttributesHandler role_attributes.ListIdentityRoleAttributesHandler
 	// IdentityListIdentityServicePoliciesHandler sets the operation handler for the list identity service policies operation
@@ -1829,6 +1861,8 @@ type ZitiEdgeManagementAPI struct {
 	IdentityListIdentitysServiceConfigsHandler identity.ListIdentitysServiceConfigsHandler
 	// EnrollmentListNetworkJWTsHandler sets the operation handler for the list network j w ts operation
 	EnrollmentListNetworkJWTsHandler enrollment.ListNetworkJWTsHandler
+	// RoleAttributesListPostureCheckRoleAttributeUsageHandler sets the operation handler for the list posture check role attribute usage operation
+	RoleAttributesListPostureCheckRoleAttributeUsageHandler role_attributes.ListPostureCheckRoleAttributeUsageHandler
 	// RoleAttributesListPostureCheckRoleAttributesHandler sets the operation handler for the list posture check role attributes operation
 	RoleAttributesListPostureCheckRoleAttributesHandler role_attributes.ListPostureCheckRoleAttributesHandler
 	// PostureChecksListPostureCheckTypesHandler sets the operation handler for the list posture check types operation
@@ -1861,6 +1895,8 @@ type ZitiEdgeManagementAPI struct {
 	ServicePolicyListServicePolicyPostureChecksHandler service_policy.ListServicePolicyPostureChecksHandler
 	// ServicePolicyListServicePolicyServicesHandler sets the operation handler for the list service policy services operation
 	ServicePolicyListServicePolicyServicesHandler service_policy.ListServicePolicyServicesHandler
+	// RoleAttributesListServiceRoleAttributeUsageHandler sets the operation handler for the list service role attribute usage operation
+	RoleAttributesListServiceRoleAttributeUsageHandler role_attributes.ListServiceRoleAttributeUsageHandler
 	// RoleAttributesListServiceRoleAttributesHandler sets the operation handler for the list service role attributes operation
 	RoleAttributesListServiceRoleAttributesHandler role_attributes.ListServiceRoleAttributesHandler
 	// ServiceListServiceServiceEdgeRouterPoliciesHandler sets the operation handler for the list service service edge router policies operation
@@ -2405,6 +2441,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.EdgeRouterPolicyListEdgeRouterPolicyIdentitiesHandler == nil {
 		unregistered = append(unregistered, "edge_router_policy.ListEdgeRouterPolicyIdentitiesHandler")
 	}
+	if o.RoleAttributesListEdgeRouterRoleAttributeUsageHandler == nil {
+		unregistered = append(unregistered, "role_attributes.ListEdgeRouterRoleAttributeUsageHandler")
+	}
 	if o.RoleAttributesListEdgeRouterRoleAttributesHandler == nil {
 		unregistered = append(unregistered, "role_attributes.ListEdgeRouterRoleAttributesHandler")
 	}
@@ -2432,6 +2471,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	if o.IdentityListIdentityEdgeRoutersHandler == nil {
 		unregistered = append(unregistered, "identity.ListIdentityEdgeRoutersHandler")
 	}
+	if o.RoleAttributesListIdentityRoleAttributeUsageHandler == nil {
+		unregistered = append(unregistered, "role_attributes.ListIdentityRoleAttributeUsageHandler")
+	}
 	if o.RoleAttributesListIdentityRoleAttributesHandler == nil {
 		unregistered = append(unregistered, "role_attributes.ListIdentityRoleAttributesHandler")
 	}
@@ -2452,6 +2494,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.EnrollmentListNetworkJWTsHandler == nil {
 		unregistered = append(unregistered, "enrollment.ListNetworkJWTsHandler")
+	}
+	if o.RoleAttributesListPostureCheckRoleAttributeUsageHandler == nil {
+		unregistered = append(unregistered, "role_attributes.ListPostureCheckRoleAttributeUsageHandler")
 	}
 	if o.RoleAttributesListPostureCheckRoleAttributesHandler == nil {
 		unregistered = append(unregistered, "role_attributes.ListPostureCheckRoleAttributesHandler")
@@ -2500,6 +2545,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.ServicePolicyListServicePolicyServicesHandler == nil {
 		unregistered = append(unregistered, "service_policy.ListServicePolicyServicesHandler")
+	}
+	if o.RoleAttributesListServiceRoleAttributeUsageHandler == nil {
+		unregistered = append(unregistered, "role_attributes.ListServiceRoleAttributeUsageHandler")
 	}
 	if o.RoleAttributesListServiceRoleAttributesHandler == nil {
 		unregistered = append(unregistered, "role_attributes.ListServiceRoleAttributesHandler")
@@ -3231,6 +3279,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/edge-router-role-attribute-usage"] = role_attributes.NewListEdgeRouterRoleAttributeUsage(o.context, o.RoleAttributesListEdgeRouterRoleAttributeUsageHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/edge-router-role-attributes"] = role_attributes.NewListEdgeRouterRoleAttributes(o.context, o.RoleAttributesListEdgeRouterRoleAttributesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -3267,6 +3319,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/identity-role-attribute-usage"] = role_attributes.NewListIdentityRoleAttributeUsage(o.context, o.RoleAttributesListIdentityRoleAttributeUsageHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/identity-role-attributes"] = role_attributes.NewListIdentityRoleAttributes(o.context, o.RoleAttributesListIdentityRoleAttributesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -3292,6 +3348,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/network-jwts"] = enrollment.NewListNetworkJWTs(o.context, o.EnrollmentListNetworkJWTsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/posture-check-role-attribute-usage"] = role_attributes.NewListPostureCheckRoleAttributeUsage(o.context, o.RoleAttributesListPostureCheckRoleAttributeUsageHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -3356,6 +3416,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/service-policies/{id}/services"] = service_policy.NewListServicePolicyServices(o.context, o.ServicePolicyListServicePolicyServicesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/service-role-attribute-usage"] = role_attributes.NewListServiceRoleAttributeUsage(o.context, o.RoleAttributesListServiceRoleAttributeUsageHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
