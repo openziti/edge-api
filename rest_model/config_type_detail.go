@@ -55,7 +55,7 @@ type ConfigTypeDetail struct {
 	Schema any `json:"schema"`
 
 	// Indicates the target of this config type, e.g. "service" or "router"
-	// Enum: ["service","router"]
+	// Enum: ["service","router","other"]
 	Target *string `json:"target,omitempty"`
 }
 
@@ -169,7 +169,7 @@ var configTypeDetailTypeTargetPropEnum []any
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["service","router"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["service","router","other"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

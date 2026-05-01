@@ -257,6 +257,7 @@ definitions:
             enum:
               - service
               - router
+              - other
   configTypeCreate:
     type: object
     description: A config-type create object
@@ -281,6 +282,7 @@ definitions:
         enum:
           - service
           - router
+          - other
   configTypeUpdate:
     description: A config-type update object
     type: object
