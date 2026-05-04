@@ -5631,6 +5631,7 @@ definitions:
         enum:
             - OIDC_AUTH
             - HA_CONTROLLER
+            - OIDC_AUTH_WITH_CSR
         type: string
     clientExternalJwtSignerDetail:
         allOf:

@@ -31,9 +31,23 @@ if not semver.VersionInfo.is_valid(current_version):
 # Parse current version
 current_version_info = semver.VersionInfo.parse(current_version)
 
-# Get the latest git tag
-result = subprocess.run(['git', 'describe', '--tags', '--abbrev=0', 'origin/main'], capture_output=True, text=True)
-latest_tag = result.stdout.strip()
+# Check that the version file matches the spec major.minor
+with open('version', 'r') as f:
+    version_file_content = f.read().strip()
+
+expected_version_file = f"{current_version_info.major}.{current_version_info.minor}"
+if version_file_content != expected_version_file:
+    raise ValueError(
+        f"Version file contains '{version_file_content}' but spec version is '{current_version}'. "
+        f"Expected version file to contain '{expected_version_file}'."
+    )
+
+# Get the latest git tag by semver ordering (not by reachability, which breaks on shallow clones)
+result = subprocess.run(['git', 'tag', '--sort=-v:refname'], capture_output=True, text=True)
+all_tags = [t for t in result.stdout.strip().split('\n') if t and semver.VersionInfo.is_valid(t.lstrip('v'))]
+if not all_tags:
+    raise ValueError("No valid semver tags found in the repository.")
+latest_tag = all_tags[0]
 print(f"Latest tag: {latest_tag}")
 latest_tag = latest_tag.lstrip('v')
 print(f"Latest tag stripped of leading v: {latest_tag}")

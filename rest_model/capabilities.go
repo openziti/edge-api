@@ -59,6 +59,9 @@ const (
 
 	// CapabilitiesHACONTROLLER captures enum value "HA_CONTROLLER"
 	CapabilitiesHACONTROLLER Capabilities = "HA_CONTROLLER"
+
+	// CapabilitiesOIDCAUTHWITHCSR captures enum value "OIDC_AUTH_WITH_CSR"
+	CapabilitiesOIDCAUTHWITHCSR Capabilities = "OIDC_AUTH_WITH_CSR"
 )
 
 // for schema
@@ -66,7 +69,7 @@ var capabilitiesEnum []any
 
 func init() {
 	var res []Capabilities
-	if err := json.Unmarshal([]byte(`["OIDC_AUTH","HA_CONTROLLER"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["OIDC_AUTH","HA_CONTROLLER","OIDC_AUTH_WITH_CSR"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
