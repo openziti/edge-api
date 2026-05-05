@@ -124,6 +124,8 @@ paths:
 
   '/edge-router-role-attributes':
     $ref: 'management/role-attributes.yml#/paths/edge-router-role-attributes'
+  '/edge-router-role-attribute-usage':
+    $ref: 'management/role-attributes.yml#/paths/edge-router-role-attribute-usage'
 
   '/edge-routers':
     $ref: 'management/edge-routers.yml#/paths/edge-routers'
@@ -196,6 +198,8 @@ paths:
 
   '/identity-role-attributes':
     $ref: 'management/role-attributes.yml#/paths/identity-role-attributes'
+  '/identity-role-attribute-usage':
+    $ref: 'management/role-attributes.yml#/paths/identity-role-attribute-usage'
 
   '/identity-types':
     $ref: 'management/identity-types.yml#/paths/identity-types'
@@ -212,6 +216,8 @@ paths:
 
   '/posture-check-role-attributes':
     $ref: 'management/role-attributes.yml#/paths/posture-check-role-attributes'
+  '/posture-check-role-attribute-usage':
+    $ref: 'management/role-attributes.yml#/paths/posture-check-role-attribute-usage'
 
   '/posture-check-types':
     $ref: 'management/posture-check-types.yml#/paths/posture-check-types'
@@ -229,6 +235,8 @@ paths:
 
   '/service-role-attributes':
     $ref: 'management/role-attributes.yml#/paths/service-role-attributes'
+  '/service-role-attribute-usage':
+    $ref: 'management/role-attributes.yml#/paths/service-role-attribute-usage'
 
   '/service-policies':
     $ref: 'management/service-policies.yml#/paths/service-policies'

@@ -80,15 +80,74 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	ListEdgeRouterRoleAttributeUsage(params *ListEdgeRouterRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterRoleAttributeUsageOK, error)
+
 	ListEdgeRouterRoleAttributes(params *ListEdgeRouterRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterRoleAttributesOK, error)
+
+	ListIdentityRoleAttributeUsage(params *ListIdentityRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityRoleAttributeUsageOK, error)
 
 	ListIdentityRoleAttributes(params *ListIdentityRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityRoleAttributesOK, error)
 
+	ListPostureCheckRoleAttributeUsage(params *ListPostureCheckRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckRoleAttributeUsageOK, error)
+
 	ListPostureCheckRoleAttributes(params *ListPostureCheckRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckRoleAttributesOK, error)
+
+	ListServiceRoleAttributeUsage(params *ListServiceRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceRoleAttributeUsageOK, error)
 
 	ListServiceRoleAttributes(params *ListServiceRoleAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceRoleAttributesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+	ListEdgeRouterRoleAttributeUsage lists edge router role attributes with usage breakdowns
+
+	Retrieves edge router role attributes along with per-source usage counts.
+
+Each response item reports how many edge routers declare the attribute
+and how many edge-router policies or service-edge-router policies
+reference it. When `withIds=true`, the entity ids backing each count are
+also returned. Requires admin access.
+*/
+func (a *Client) ListEdgeRouterRoleAttributeUsage(params *ListEdgeRouterRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEdgeRouterRoleAttributeUsageOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListEdgeRouterRoleAttributeUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listEdgeRouterRoleAttributeUsage",
+		Method:             "GET",
+		PathPattern:        "/edge-router-role-attribute-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListEdgeRouterRoleAttributeUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListEdgeRouterRoleAttributeUsageOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listEdgeRouterRoleAttributeUsage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -134,6 +193,57 @@ func (a *Client) ListEdgeRouterRoleAttributes(params *ListEdgeRouterRoleAttribut
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listEdgeRouterRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	ListIdentityRoleAttributeUsage lists identity role attributes with usage breakdowns
+
+	Retrieves identity role attributes along with per-source usage counts.
+
+Each response item reports how many identities declare the attribute and
+how many service policies or edge-router policies reference it. When
+`withIds=true`, the entity ids backing each count are also returned.
+Requires admin access.
+*/
+func (a *Client) ListIdentityRoleAttributeUsage(params *ListIdentityRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIdentityRoleAttributeUsageOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListIdentityRoleAttributeUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listIdentityRoleAttributeUsage",
+		Method:             "GET",
+		PathPattern:        "/identity-role-attribute-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListIdentityRoleAttributeUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListIdentityRoleAttributeUsageOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listIdentityRoleAttributeUsage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -184,6 +294,57 @@ func (a *Client) ListIdentityRoleAttributes(params *ListIdentityRoleAttributesPa
 }
 
 /*
+	ListPostureCheckRoleAttributeUsage lists posture check role attributes with usage breakdowns
+
+	Retrieves posture check role attributes along with per-source usage
+
+counts. Each response item reports how many posture checks declare the
+attribute and how many service policies reference it. When
+`withIds=true`, the entity ids backing each count are also returned.
+Requires admin access.
+*/
+func (a *Client) ListPostureCheckRoleAttributeUsage(params *ListPostureCheckRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostureCheckRoleAttributeUsageOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListPostureCheckRoleAttributeUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listPostureCheckRoleAttributeUsage",
+		Method:             "GET",
+		PathPattern:        "/posture-check-role-attribute-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListPostureCheckRoleAttributeUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListPostureCheckRoleAttributeUsageOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listPostureCheckRoleAttributeUsage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 ListPostureCheckRoleAttributes lists role attributes in use by posture checks
 
 Retrieves a list of role attributes in use by posture checks; supports filtering, sorting, and pagination. Requires admin access.
@@ -226,6 +387,57 @@ func (a *Client) ListPostureCheckRoleAttributes(params *ListPostureCheckRoleAttr
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listPostureCheckRoleAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	ListServiceRoleAttributeUsage lists service role attributes with usage breakdowns
+
+	Retrieves service role attributes along with per-source usage counts.
+
+Each response item reports how many services declare the attribute and
+how many service policies or service-edge-router policies reference it.
+When `withIds=true`, the entity ids backing each count are also
+returned. Requires admin access.
+*/
+func (a *Client) ListServiceRoleAttributeUsage(params *ListServiceRoleAttributeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceRoleAttributeUsageOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListServiceRoleAttributeUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listServiceRoleAttributeUsage",
+		Method:             "GET",
+		PathPattern:        "/service-role-attribute-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListServiceRoleAttributeUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListServiceRoleAttributeUsageOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listServiceRoleAttributeUsage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
