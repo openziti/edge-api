@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.30.0"
+    "version": "0.31.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -35513,7 +35513,8 @@ func init() {
       "type": "string",
       "enum": [
         "OIDC_AUTH",
-        "HA_CONTROLLER"
+        "HA_CONTROLLER",
+        "OIDC_AUTH_WITH_CSR"
       ]
     },
     "commonEdgeRouterProperties": {
@@ -41870,7 +41871,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.30.0"
+    "version": "0.31.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -77432,7 +77433,8 @@ func init() {
       "type": "string",
       "enum": [
         "OIDC_AUTH",
-        "HA_CONTROLLER"
+        "HA_CONTROLLER",
+        "OIDC_AUTH_WITH_CSR"
       ]
     },
     "commonEdgeRouterProperties": {
