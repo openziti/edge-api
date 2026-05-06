@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.29.0"
+    "version": "0.30.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -35685,11 +35685,12 @@ func init() {
           "$ref": "#/definitions/tags"
         },
         "target": {
-          "description": "Indicates the target of this config type, e.g. \"service\" or \"router\". If not provided,\ndefaults to \"service\".\n",
+          "description": "Indicates the target of this config type, e.g. \"service\", \"router\" or \"other\". If not provided,\ndefaults to \"service\".\n",
           "type": "string",
           "enum": [
             "service",
-            "router"
+            "router",
+            "other"
           ],
           "x-nullable": true
         }
@@ -35719,11 +35720,12 @@ func init() {
               "additionalProperties": true
             },
             "target": {
-              "description": "Indicates the target of this config type, e.g. \"service\" or \"router\"",
+              "description": "Indicates the target of this config type, e.g. \"service\", \"router\" or \"other\"",
               "type": "string",
               "enum": [
                 "service",
-                "router"
+                "router",
+                "other"
               ],
               "x-nullable": true
             }
@@ -41868,7 +41870,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.29.0"
+    "version": "0.30.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -77603,11 +77605,12 @@ func init() {
           "$ref": "#/definitions/tags"
         },
         "target": {
-          "description": "Indicates the target of this config type, e.g. \"service\" or \"router\". If not provided,\ndefaults to \"service\".\n",
+          "description": "Indicates the target of this config type, e.g. \"service\", \"router\" or \"other\". If not provided,\ndefaults to \"service\".\n",
           "type": "string",
           "enum": [
             "service",
-            "router"
+            "router",
+            "other"
           ],
           "x-nullable": true
         }
@@ -77637,11 +77640,12 @@ func init() {
               "additionalProperties": true
             },
             "target": {
-              "description": "Indicates the target of this config type, e.g. \"service\" or \"router\"",
+              "description": "Indicates the target of this config type, e.g. \"service\", \"router\" or \"other\"",
               "type": "string",
               "enum": [
                 "service",
-                "router"
+                "router",
+                "other"
               ],
               "x-nullable": true
             }

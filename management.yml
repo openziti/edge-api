@@ -15,7 +15,7 @@ info:
         name: Apache 2.0
         url: https://www.apache.org/licenses/LICENSE-2.0.html
     title: Ziti Edge Management
-    version: 0.29.0
+    version: 0.30.0
 host: demo.ziti.dev
 basePath: /edge/management/v1
 paths:
@@ -24107,11 +24107,12 @@ definitions:
                 $ref: '#/definitions/tags'
             target:
                 description: |
-                    Indicates the target of this config type, e.g. "service" or "router". If not provided,
+                    Indicates the target of this config type, e.g. "service", "router" or "other". If not provided,
                     defaults to "service".
                 enum:
                     - service
                     - router
+                    - other
                 type: string
                 x-nullable: true
         required:
@@ -24129,10 +24130,11 @@ definitions:
                     description: A JSON schema to enforce configuration against
                     type: object
                 target:
-                    description: Indicates the target of this config type, e.g. "service" or "router"
+                    description: Indicates the target of this config type, e.g. "service", "router" or "other"
                     enum:
                         - service
                         - router
+                        - other
                     type: string
                     x-nullable: true
               required:
