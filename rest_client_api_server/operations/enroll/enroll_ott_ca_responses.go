@@ -42,7 +42,7 @@ import (
 const EnrollOttCaOKCode int = 200
 
 /*
-EnrollOttCaOK Base empty response
+EnrollOttCaOK A response to a successful enrollment that carries no certificates, only common enrollment data such as the list of controllers
 
 swagger:response enrollOttCaOK
 */
@@ -55,7 +55,7 @@ type EnrollOttCaOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *rest_model.Empty `json:"body,omitempty"`
+	Payload *rest_model.EnrollmentResponseEnvelope `json:"body,omitempty"`
 }
 
 // NewEnrollOttCaOK creates EnrollOttCaOK with default headers values
@@ -76,13 +76,13 @@ func (o *EnrollOttCaOK) SetWWWAuthenticate(wWWAuthenticate []string) {
 }
 
 // WithPayload adds the payload to the enroll ott ca o k response
-func (o *EnrollOttCaOK) WithPayload(payload *rest_model.Empty) *EnrollOttCaOK {
+func (o *EnrollOttCaOK) WithPayload(payload *rest_model.EnrollmentResponseEnvelope) *EnrollOttCaOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the enroll ott ca o k response
-func (o *EnrollOttCaOK) SetPayload(payload *rest_model.Empty) {
+func (o *EnrollOttCaOK) SetPayload(payload *rest_model.EnrollmentResponseEnvelope) {
 	o.Payload = payload
 }
 

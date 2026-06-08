@@ -42,7 +42,7 @@ import (
 const EnrollUpdbOKCode int = 200
 
 /*
-EnrollUpdbOK Base empty response
+EnrollUpdbOK A response to a successful username/password enrollment carrying the established username and common enrollment data
 
 swagger:response enrollUpdbOK
 */
@@ -55,7 +55,7 @@ type EnrollUpdbOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *rest_model.Empty `json:"body,omitempty"`
+	Payload *rest_model.EnrollmentResponseUpdbEnvelope `json:"body,omitempty"`
 }
 
 // NewEnrollUpdbOK creates EnrollUpdbOK with default headers values
@@ -76,13 +76,13 @@ func (o *EnrollUpdbOK) SetWWWAuthenticate(wWWAuthenticate []string) {
 }
 
 // WithPayload adds the payload to the enroll updb o k response
-func (o *EnrollUpdbOK) WithPayload(payload *rest_model.Empty) *EnrollUpdbOK {
+func (o *EnrollUpdbOK) WithPayload(payload *rest_model.EnrollmentResponseUpdbEnvelope) *EnrollUpdbOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the enroll updb o k response
-func (o *EnrollUpdbOK) SetPayload(payload *rest_model.Empty) {
+func (o *EnrollUpdbOK) SetPayload(payload *rest_model.EnrollmentResponseUpdbEnvelope) {
 	o.Payload = payload
 }
 

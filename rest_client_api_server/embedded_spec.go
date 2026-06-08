@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.31.0"
+    "version": "0.32.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -4308,9 +4308,9 @@ func init() {
         "operationId": "enrollOttCa",
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "A response to a successful enrollment that carries no certificates, only common enrollment data such as the list of controllers",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/enrollmentResponseEnvelope"
             },
             "headers": {
               "WWW-Authenticate": {
@@ -4646,9 +4646,9 @@ func init() {
         "operationId": "enrollUpdb",
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "A response to a successful username/password enrollment carrying the established username and common enrollment data",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/enrollmentResponseUpdbEnvelope"
             },
             "headers": {
               "WWW-Authenticate": {
@@ -8811,27 +8811,81 @@ func init() {
       }
     },
     "enrollmentCerts": {
-      "type": "object",
-      "properties": {
-        "ca": {
-          "description": "A PEM encoded set of CA certificates to trust",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/enrollmentResponse"
         },
-        "cert": {
-          "description": "A PEM encoded set of certificates to use as the client chain",
-          "type": "string"
-        },
-        "serverCert": {
-          "description": "A PEM encoded set of certificates to use as the servers chain",
-          "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "ca": {
+              "description": "A PEM encoded set of CA certificates to trust",
+              "type": "string"
+            },
+            "cert": {
+              "description": "A PEM encoded set of certificates to use as the client chain",
+              "type": "string"
+            },
+            "serverCert": {
+              "description": "A PEM encoded set of certificates to use as the servers chain",
+              "type": "string"
+            }
+          }
         }
-      }
+      ]
     },
     "enrollmentCertsEnvelope": {
       "type": "object",
       "properties": {
         "data": {
           "$ref": "#/definitions/enrollmentCerts"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "enrollmentResponse": {
+      "description": "Common data returned on any successful enrollment, regardless of method. The controllers field carries the set of controllers in the cluster the enrolling client may connect to.",
+      "type": "object",
+      "properties": {
+        "controllers": {
+          "$ref": "#/definitions/controllersList"
+        }
+      }
+    },
+    "enrollmentResponseEnvelope": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/enrollmentResponse"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "enrollmentResponseUpdb": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/enrollmentResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "username": {
+              "description": "The username established for the enrolled identity",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "enrollmentResponseUpdbEnvelope": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/enrollmentResponseUpdb"
         },
         "meta": {
           "$ref": "#/definitions/meta"
@@ -10724,7 +10778,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.31.0"
+    "version": "0.32.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -14968,9 +15022,9 @@ func init() {
         "operationId": "enrollOttCa",
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "A response to a successful enrollment that carries no certificates, only common enrollment data such as the list of controllers",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/enrollmentResponseEnvelope"
             },
             "headers": {
               "WWW-Authenticate": {
@@ -15306,9 +15360,9 @@ func init() {
         "operationId": "enrollUpdb",
         "responses": {
           "200": {
-            "description": "Base empty response",
+            "description": "A response to a successful username/password enrollment carrying the established username and common enrollment data",
             "schema": {
-              "$ref": "#/definitions/empty"
+              "$ref": "#/definitions/enrollmentResponseUpdbEnvelope"
             },
             "headers": {
               "WWW-Authenticate": {
@@ -19554,27 +19608,81 @@ func init() {
       }
     },
     "enrollmentCerts": {
-      "type": "object",
-      "properties": {
-        "ca": {
-          "description": "A PEM encoded set of CA certificates to trust",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/enrollmentResponse"
         },
-        "cert": {
-          "description": "A PEM encoded set of certificates to use as the client chain",
-          "type": "string"
-        },
-        "serverCert": {
-          "description": "A PEM encoded set of certificates to use as the servers chain",
-          "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "ca": {
+              "description": "A PEM encoded set of CA certificates to trust",
+              "type": "string"
+            },
+            "cert": {
+              "description": "A PEM encoded set of certificates to use as the client chain",
+              "type": "string"
+            },
+            "serverCert": {
+              "description": "A PEM encoded set of certificates to use as the servers chain",
+              "type": "string"
+            }
+          }
         }
-      }
+      ]
     },
     "enrollmentCertsEnvelope": {
       "type": "object",
       "properties": {
         "data": {
           "$ref": "#/definitions/enrollmentCerts"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "enrollmentResponse": {
+      "description": "Common data returned on any successful enrollment, regardless of method. The controllers field carries the set of controllers in the cluster the enrolling client may connect to.",
+      "type": "object",
+      "properties": {
+        "controllers": {
+          "$ref": "#/definitions/controllersList"
+        }
+      }
+    },
+    "enrollmentResponseEnvelope": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/enrollmentResponse"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "enrollmentResponseUpdb": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/enrollmentResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "username": {
+              "description": "The username established for the enrolled identity",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "enrollmentResponseUpdbEnvelope": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/enrollmentResponseUpdb"
         },
         "meta": {
           "$ref": "#/definitions/meta"

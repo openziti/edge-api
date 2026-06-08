@@ -113,7 +113,7 @@ paths:
         - Enroll
       responses:
         '200':
-          $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+          $ref: '#/responses/enrollmentResponse'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '429':
@@ -190,7 +190,7 @@ paths:
         - Enroll
       responses:
         '200':
-          $ref: '../shared/standard-responses.yml#/responses/emptyResponse'
+          $ref: '#/responses/enrollmentResponseUpdb'
         '400':
           $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
         '404':
@@ -325,6 +325,26 @@ responses:
           type: string
     schema:
       $ref: '#/definitions/enrollmentCertsEnvelope'
+  enrollmentResponse:
+    description: A response to a successful enrollment that carries no certificates, only common enrollment data such as the list of controllers
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
+    schema:
+      $ref: '#/definitions/enrollmentResponseEnvelope'
+  enrollmentResponseUpdb:
+    description: A response to a successful username/password enrollment carrying the established username and common enrollment data
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
+    schema:
+      $ref: '#/definitions/enrollmentResponseUpdbEnvelope'
   getJwksResponse:
     description: A JWKS response for enrollment.
     headers:
@@ -391,6 +411,34 @@ definitions:
         type: string
       serverCsr:
         type: string
+  enrollmentResponseEnvelope:
+    type: object
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/enrollmentResponse'
+  enrollmentResponse:
+    type: object
+    description: Common data returned on any successful enrollment, regardless of method. The controllers field carries the set of controllers in the cluster the enrolling client may connect to.
+    properties:
+      controllers:
+        $ref: '../shared/controllers.yml#/definitions/controllersList'
+  enrollmentResponseUpdbEnvelope:
+    type: object
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        $ref: '#/definitions/enrollmentResponseUpdb'
+  enrollmentResponseUpdb:
+    allOf:
+      - $ref: '#/definitions/enrollmentResponse'
+      - type: object
+        properties:
+          username:
+            type: string
+            description: The username established for the enrolled identity
   enrollmentCertsEnvelope:
     type: object
     properties:
@@ -399,17 +447,19 @@ definitions:
       data:
         $ref: '#/definitions/enrollmentCerts'
   enrollmentCerts:
-    type: object
-    properties:
-      serverCert:
-        type: string
-        description: A PEM encoded set of certificates to use as the servers chain
-      cert:
-        type: string
-        description: A PEM encoded set of certificates to use as the client chain
-      ca:
-        type: string
-        description: A PEM encoded set of CA certificates to trust
+    allOf:
+      - $ref: '#/definitions/enrollmentResponse'
+      - type: object
+        properties:
+          serverCert:
+            type: string
+            description: A PEM encoded set of certificates to use as the servers chain
+          cert:
+            type: string
+            description: A PEM encoded set of certificates to use as the client chain
+          ca:
+            type: string
+            description: A PEM encoded set of CA certificates to trust
   routerExtendEnrollmentRequest:
     type: object
     required:
