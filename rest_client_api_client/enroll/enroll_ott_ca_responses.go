@@ -87,7 +87,7 @@ func NewEnrollOttCaOK() *EnrollOttCaOK {
 /*
 EnrollOttCaOK describes a response with status code 200, with default header values.
 
-Base empty response
+A response to a successful enrollment that carries no certificates, only common enrollment data such as the list of controllers
 */
 type EnrollOttCaOK struct {
 
@@ -95,7 +95,7 @@ type EnrollOttCaOK struct {
 	 */
 	WWWAuthenticate []string
 
-	Payload *rest_model.Empty
+	Payload *rest_model.EnrollmentResponseEnvelope
 }
 
 // IsSuccess returns true when this enroll ott ca o k response has a 2xx status code
@@ -138,7 +138,7 @@ func (o *EnrollOttCaOK) String() string {
 	return fmt.Sprintf("[POST /enroll/ottca][%d] enrollOttCaOK %s", 200, payload)
 }
 
-func (o *EnrollOttCaOK) GetPayload() *rest_model.Empty {
+func (o *EnrollOttCaOK) GetPayload() *rest_model.EnrollmentResponseEnvelope {
 	return o.Payload
 }
 
@@ -158,7 +158,7 @@ func (o *EnrollOttCaOK) readResponse(response runtime.ClientResponse, consumer r
 		o.WWWAuthenticate = valWWWAuthenticate
 	}
 
-	o.Payload = new(rest_model.Empty)
+	o.Payload = new(rest_model.EnrollmentResponseEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

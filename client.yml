@@ -15,7 +15,7 @@ info:
         name: Apache 2.0
         url: https://www.apache.org/licenses/LICENSE-2.0.html
     title: Ziti Edge Client
-    version: 0.31.0
+    version: 0.32.0
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -2982,7 +2982,7 @@ paths:
             operationId: enrollOttCa
             responses:
                 "200":
-                    description: Base empty response
+                    description: A response to a successful enrollment that carries no certificates, only common enrollment data such as the list of controllers
                     headers:
                         WWW-Authenticate:
                             description: Denotes different type of security token related information
@@ -2990,7 +2990,7 @@ paths:
                                 type: string
                             type: array
                     schema:
-                        $ref: '#/definitions/empty'
+                        $ref: '#/definitions/enrollmentResponseEnvelope'
                 "400":
                     description: The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
                     examples:
@@ -3223,7 +3223,7 @@ paths:
             operationId: enrollUpdb
             responses:
                 "200":
-                    description: Base empty response
+                    description: A response to a successful username/password enrollment carrying the established username and common enrollment data
                     headers:
                         WWW-Authenticate:
                             description: Denotes different type of security token related information
@@ -3231,7 +3231,7 @@ paths:
                                 type: string
                             type: array
                     schema:
-                        $ref: '#/definitions/empty'
+                        $ref: '#/definitions/enrollmentResponseUpdbEnvelope'
                 "400":
                     description: The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information
                     examples:
@@ -6001,21 +6001,51 @@ definitions:
             - data
         type: object
     enrollmentCerts:
-        properties:
-            ca:
-                description: A PEM encoded set of CA certificates to trust
-                type: string
-            cert:
-                description: A PEM encoded set of certificates to use as the client chain
-                type: string
-            serverCert:
-                description: A PEM encoded set of certificates to use as the servers chain
-                type: string
-        type: object
+        allOf:
+            - $ref: '#/definitions/enrollmentResponse'
+            - properties:
+                ca:
+                    description: A PEM encoded set of CA certificates to trust
+                    type: string
+                cert:
+                    description: A PEM encoded set of certificates to use as the client chain
+                    type: string
+                serverCert:
+                    description: A PEM encoded set of certificates to use as the servers chain
+                    type: string
+              type: object
     enrollmentCertsEnvelope:
         properties:
             data:
                 $ref: '#/definitions/enrollmentCerts'
+            meta:
+                $ref: '#/definitions/meta'
+        type: object
+    enrollmentResponse:
+        description: Common data returned on any successful enrollment, regardless of method. The controllers field carries the set of controllers in the cluster the enrolling client may connect to.
+        properties:
+            controllers:
+                $ref: '#/definitions/controllersList'
+        type: object
+    enrollmentResponseEnvelope:
+        properties:
+            data:
+                $ref: '#/definitions/enrollmentResponse'
+            meta:
+                $ref: '#/definitions/meta'
+        type: object
+    enrollmentResponseUpdb:
+        allOf:
+            - $ref: '#/definitions/enrollmentResponse'
+            - properties:
+                username:
+                    description: The username established for the enrolled identity
+                    type: string
+              type: object
+    enrollmentResponseUpdbEnvelope:
+        properties:
+            data:
+                $ref: '#/definitions/enrollmentResponseUpdb'
             meta:
                 $ref: '#/definitions/meta'
         type: object

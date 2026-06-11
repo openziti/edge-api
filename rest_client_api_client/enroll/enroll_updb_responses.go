@@ -95,7 +95,7 @@ func NewEnrollUpdbOK() *EnrollUpdbOK {
 /*
 EnrollUpdbOK describes a response with status code 200, with default header values.
 
-Base empty response
+A response to a successful username/password enrollment carrying the established username and common enrollment data
 */
 type EnrollUpdbOK struct {
 
@@ -103,7 +103,7 @@ type EnrollUpdbOK struct {
 	 */
 	WWWAuthenticate []string
 
-	Payload *rest_model.Empty
+	Payload *rest_model.EnrollmentResponseUpdbEnvelope
 }
 
 // IsSuccess returns true when this enroll updb o k response has a 2xx status code
@@ -146,7 +146,7 @@ func (o *EnrollUpdbOK) String() string {
 	return fmt.Sprintf("[POST /enroll/updb][%d] enrollUpdbOK %s", 200, payload)
 }
 
-func (o *EnrollUpdbOK) GetPayload() *rest_model.Empty {
+func (o *EnrollUpdbOK) GetPayload() *rest_model.EnrollmentResponseUpdbEnvelope {
 	return o.Payload
 }
 
@@ -166,7 +166,7 @@ func (o *EnrollUpdbOK) readResponse(response runtime.ClientResponse, consumer ru
 		o.WWWAuthenticate = valWWWAuthenticate
 	}
 
-	o.Payload = new(rest_model.Empty)
+	o.Payload = new(rest_model.EnrollmentResponseUpdbEnvelope)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

@@ -37,24 +37,18 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnrollmentCerts enrollment certs
+// EnrollmentResponseUpdb enrollment response updb
 //
-// swagger:model enrollmentCerts
-type EnrollmentCerts struct {
+// swagger:model enrollmentResponseUpdb
+type EnrollmentResponseUpdb struct {
 	EnrollmentResponse
 
-	// A PEM encoded set of CA certificates to trust
-	Ca string `json:"ca,omitempty"`
-
-	// A PEM encoded set of certificates to use as the client chain
-	Cert string `json:"cert,omitempty"`
-
-	// A PEM encoded set of certificates to use as the servers chain
-	ServerCert string `json:"serverCert,omitempty"`
+	// The username established for the enrolled identity
+	Username string `json:"username,omitempty"`
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
-func (m *EnrollmentCerts) UnmarshalJSON(raw []byte) error {
+func (m *EnrollmentResponseUpdb) UnmarshalJSON(raw []byte) error {
 	// AO0
 	var aO0 EnrollmentResponse
 	if err := swag.ReadJSON(raw, &aO0); err != nil {
@@ -64,27 +58,19 @@ func (m *EnrollmentCerts) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
-		Ca string `json:"ca,omitempty"`
-
-		Cert string `json:"cert,omitempty"`
-
-		ServerCert string `json:"serverCert,omitempty"`
+		Username string `json:"username,omitempty"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
 	}
 
-	m.Ca = dataAO1.Ca
-
-	m.Cert = dataAO1.Cert
-
-	m.ServerCert = dataAO1.ServerCert
+	m.Username = dataAO1.Username
 
 	return nil
 }
 
 // MarshalJSON marshals this object to a JSON structure
-func (m EnrollmentCerts) MarshalJSON() ([]byte, error) {
+func (m EnrollmentResponseUpdb) MarshalJSON() ([]byte, error) {
 	_parts := make([][]byte, 0, 2)
 
 	aO0, err := swag.WriteJSON(m.EnrollmentResponse)
@@ -93,18 +79,10 @@ func (m EnrollmentCerts) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO0)
 	var dataAO1 struct {
-		Ca string `json:"ca,omitempty"`
-
-		Cert string `json:"cert,omitempty"`
-
-		ServerCert string `json:"serverCert,omitempty"`
+		Username string `json:"username,omitempty"`
 	}
 
-	dataAO1.Ca = m.Ca
-
-	dataAO1.Cert = m.Cert
-
-	dataAO1.ServerCert = m.ServerCert
+	dataAO1.Username = m.Username
 
 	jsonDataAO1, errAO1 := swag.WriteJSON(dataAO1)
 	if errAO1 != nil {
@@ -114,8 +92,8 @@ func (m EnrollmentCerts) MarshalJSON() ([]byte, error) {
 	return swag.ConcatJSON(_parts...), nil
 }
 
-// Validate validates this enrollment certs
-func (m *EnrollmentCerts) Validate(formats strfmt.Registry) error {
+// Validate validates this enrollment response updb
+func (m *EnrollmentResponseUpdb) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	// validation for a type composition with EnrollmentResponse
@@ -129,8 +107,8 @@ func (m *EnrollmentCerts) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this enrollment certs based on the context it is used
-func (m *EnrollmentCerts) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this enrollment response updb based on the context it is used
+func (m *EnrollmentResponseUpdb) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	// validation for a type composition with EnrollmentResponse
@@ -145,7 +123,7 @@ func (m *EnrollmentCerts) ContextValidate(ctx context.Context, formats strfmt.Re
 }
 
 // MarshalBinary interface implementation
-func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
+func (m *EnrollmentResponseUpdb) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -153,8 +131,8 @@ func (m *EnrollmentCerts) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *EnrollmentCerts) UnmarshalBinary(b []byte) error {
-	var res EnrollmentCerts
+func (m *EnrollmentResponseUpdb) UnmarshalBinary(b []byte) error {
+	var res EnrollmentResponseUpdb
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
