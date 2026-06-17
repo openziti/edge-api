@@ -41,5 +41,14 @@ definitions:
         x-nullable: true
       disabled:
         type: boolean
+      capabilities:
+        description: >
+          Capabilities this edge router advertises, used by SDK clients to
+          select a router that supports a given feature before connecting.
+          Open-ended: clients ignore values they do not recognize. Absent when
+          the controller predates this field.
+        type: array
+        items:
+          type: string
       appData:
         $ref: 'base-entity.yml#/definitions/tags'

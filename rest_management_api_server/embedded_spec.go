@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.32.0"
+    "version": "0.33.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -35533,6 +35533,13 @@ func init() {
         "appData": {
           "$ref": "#/definitions/tags"
         },
+        "capabilities": {
+          "description": "Capabilities this edge router advertises, used by SDK clients to select a router that supports a given feature before connecting. Open-ended: clients ignore values they do not recognize. Absent when the controller predates this field.\n",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "cost": {
           "type": "integer",
           "maximum": 65535,
@@ -41871,7 +41878,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.32.0"
+    "version": "0.33.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -77452,6 +77459,13 @@ func init() {
       "properties": {
         "appData": {
           "$ref": "#/definitions/tags"
+        },
+        "capabilities": {
+          "description": "Capabilities this edge router advertises, used by SDK clients to select a router that supports a given feature before connecting. Open-ended: clients ignore values they do not recognize. Absent when the controller predates this field.\n",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "cost": {
           "type": "integer",

@@ -47,6 +47,10 @@ type CommonEdgeRouterProperties struct {
 	// app data
 	AppData *Tags `json:"appData,omitempty"`
 
+	// Capabilities this edge router advertises, used by SDK clients to select a router that supports a given feature before connecting. Open-ended: clients ignore values they do not recognize. Absent when the controller predates this field.
+	//
+	Capabilities []string `json:"capabilities"`
+
 	// cost
 	// Required: true
 	// Maximum: 65535
