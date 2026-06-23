@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.33.0
+  version: 0.34.0
   title: Ziti Edge Client
   description: OpenZiti Edge Client API
   contact:
@@ -141,6 +141,9 @@ paths:
 
   '/enumerated-capabilities':
     $ref: 'shared/version.yml#/paths/enumerated-capabilities'
+
+  '/enumerated-router-capabilities':
+    $ref: 'shared/edge-routers.yml#/paths/enumerated-router-capabilities'
 
 definitions:
   # Polymorphic types aren't explicitly used anywhere except here. Removal will cause them to be trimmed

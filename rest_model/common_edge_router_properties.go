@@ -84,6 +84,10 @@ type CommonEdgeRouterProperties struct {
 	// sync status
 	// Required: true
 	SyncStatus *string `json:"syncStatus"`
+
+	// The version of the edge router binary, as reported to the controller when the router connects. Empty when the controller has not yet received a version from the router or predates this field.
+	//
+	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this common edge router properties

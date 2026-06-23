@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.33.0"
+    "version": "0.34.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -4843,6 +4843,122 @@ func init() {
         }
       }
     },
+    "/enumerated-router-capabilities": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "tags": [
+          "Informational"
+        ],
+        "summary": "Returns all router capabilities this version of the controller is aware of",
+        "operationId": "listEnumeratedRouterCapabilities",
+        "responses": {
+          "200": {
+            "description": "A typed and enumerated list of router capabilities",
+            "schema": {
+              "$ref": "#/definitions/listEnumeratedRouterCapabilitiesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
     "/external-jwt-signers": {
       "get": {
         "description": "Retrieves a list of external JWT signers for authentication",
@@ -8357,6 +8473,10 @@ func init() {
         },
         "syncStatus": {
           "type": "string"
+        },
+        "version": {
+          "description": "The version of the edge router binary, as reported to the controller when the router connects. Empty when the controller has not yet received a version from the router or predates this field.\n",
+          "type": "string"
         }
       }
     },
@@ -9562,6 +9682,24 @@ func init() {
         }
       }
     },
+    "listEnumeratedRouterCapabilitiesEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/routerCapabilities"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "listNetworkJWTsEnvelope": {
       "type": "object",
       "required": [
@@ -10246,6 +10384,15 @@ func init() {
         }
       }
     },
+    "routerCapabilities": {
+      "type": "string",
+      "enum": [
+        "MULTI_CHANNEL",
+        "SERVICE_SUBSCRIPTIONS",
+        "RDM_SUPPORTED",
+        "CONNECT_V2"
+      ]
+    },
     "routerExtendEnrollmentRequest": {
       "type": "object",
       "required": [
@@ -10785,7 +10932,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.33.0"
+    "version": "0.34.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -15564,6 +15711,122 @@ func init() {
         }
       }
     },
+    "/enumerated-router-capabilities": {
+      "get": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "tags": [
+          "Informational"
+        ],
+        "summary": "Returns all router capabilities this version of the controller is aware of",
+        "operationId": "listEnumeratedRouterCapabilities",
+        "responses": {
+          "200": {
+            "description": "A typed and enumerated list of router capabilities",
+            "schema": {
+              "$ref": "#/definitions/listEnumeratedRouterCapabilitiesEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
+    },
     "/external-jwt-signers": {
       "get": {
         "description": "Retrieves a list of external JWT signers for authentication",
@@ -19161,6 +19424,10 @@ func init() {
         },
         "syncStatus": {
           "type": "string"
+        },
+        "version": {
+          "description": "The version of the edge router binary, as reported to the controller when the router connects. Empty when the controller has not yet received a version from the router or predates this field.\n",
+          "type": "string"
         }
       }
     },
@@ -20368,6 +20635,24 @@ func init() {
         }
       }
     },
+    "listEnumeratedRouterCapabilitiesEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/routerCapabilities"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "listNetworkJWTsEnvelope": {
       "type": "object",
       "required": [
@@ -21051,6 +21336,15 @@ func init() {
           "type": "string"
         }
       }
+    },
+    "routerCapabilities": {
+      "type": "string",
+      "enum": [
+        "MULTI_CHANNEL",
+        "SERVICE_SUBSCRIPTIONS",
+        "RDM_SUPPORTED",
+        "CONNECT_V2"
+      ]
     },
     "routerExtendEnrollmentRequest": {
       "type": "object",
