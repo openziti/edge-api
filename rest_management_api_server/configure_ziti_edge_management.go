@@ -1073,6 +1073,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			return middleware.NotImplemented("operation informational.ListEnumeratedCapabilities has not yet been implemented")
 		})
 	}
+	if api.InformationalListEnumeratedRouterCapabilitiesHandler == nil {
+		api.InformationalListEnumeratedRouterCapabilitiesHandler = informational.ListEnumeratedRouterCapabilitiesHandlerFunc(func(params informational.ListEnumeratedRouterCapabilitiesParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation informational.ListEnumeratedRouterCapabilities has not yet been implemented")
+		})
+	}
 	if api.ExternalJWTSignerListExternalJWTSignersHandler == nil {
 		api.ExternalJWTSignerListExternalJWTSignersHandler = external_jwt_signer.ListExternalJWTSignersHandlerFunc(func(params external_jwt_signer.ListExternalJWTSignersParams, principal any) middleware.Responder {
 			_ = params

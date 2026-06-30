@@ -110,6 +110,8 @@ type ClientService interface {
 
 	ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesParams, opts ...ClientOption) (*ListEnumeratedCapabilitiesOK, error)
 
+	ListEnumeratedRouterCapabilities(params *ListEnumeratedRouterCapabilitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEnumeratedRouterCapabilitiesOK, error)
+
 	ListRoot(params *ListRootParams, opts ...ClientOption) (*ListRootOK, error)
 
 	ListSpecs(params *ListSpecsParams, opts ...ClientOption) (*ListSpecsOK, error)
@@ -251,6 +253,50 @@ func (a *Client) ListEnumeratedCapabilities(params *ListEnumeratedCapabilitiesPa
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listEnumeratedCapabilities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListEnumeratedRouterCapabilities returns all router capabilities this version of the controller is aware of
+*/
+func (a *Client) ListEnumeratedRouterCapabilities(params *ListEnumeratedRouterCapabilitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEnumeratedRouterCapabilitiesOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListEnumeratedRouterCapabilitiesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listEnumeratedRouterCapabilities",
+		Method:             "GET",
+		PathPattern:        "/enumerated-router-capabilities",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListEnumeratedRouterCapabilitiesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListEnumeratedRouterCapabilitiesOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listEnumeratedRouterCapabilities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
