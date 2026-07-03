@@ -65,6 +65,12 @@ const (
 
 	// RouterCapabilitiesCONNECTV2 captures enum value "CONNECT_V2"
 	RouterCapabilitiesCONNECTV2 RouterCapabilities = "CONNECT_V2"
+
+	// RouterCapabilitiesPOSTURECHECKS captures enum value "POSTURE_CHECKS"
+	RouterCapabilitiesPOSTURECHECKS RouterCapabilities = "POSTURE_CHECKS"
+
+	// RouterCapabilitiesBINDSUCCESS captures enum value "BIND_SUCCESS"
+	RouterCapabilitiesBINDSUCCESS RouterCapabilities = "BIND_SUCCESS"
 )
 
 // for schema
@@ -72,7 +78,7 @@ var routerCapabilitiesEnum []any
 
 func init() {
 	var res []RouterCapabilities
-	if err := json.Unmarshal([]byte(`["MULTI_CHANNEL","SERVICE_SUBSCRIPTIONS","RDM_SUPPORTED","CONNECT_V2"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["MULTI_CHANNEL","SERVICE_SUBSCRIPTIONS","RDM_SUPPORTED","CONNECT_V2","POSTURE_CHECKS","BIND_SUCCESS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -481,6 +481,13 @@ definitions:
           - revision
           - isTunnelerEnabled
         properties:
+          capabilitiesMask:
+            description: >
+              The raw router capabilities bitmask as reported to the controller,
+              exposed for diagnostics. The capabilities array is the decoded,
+              human-readable form of the bits this controller recognizes.
+            type: integer
+            format: int64
           isVerified:
             type: boolean
           enrollmentToken:
