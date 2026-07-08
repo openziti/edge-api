@@ -40694,7 +40694,6 @@ func init() {
       "enum": [
         "MULTI_CHANNEL",
         "SERVICE_SUBSCRIPTIONS",
-        "RDM_SUPPORTED",
         "CONNECT_V2",
         "POSTURE_CHECKS",
         "BIND_SUCCESS"
@@ -82781,7 +82780,6 @@ func init() {
       "enum": [
         "MULTI_CHANNEL",
         "SERVICE_SUBSCRIPTIONS",
-        "RDM_SUPPORTED",
         "CONNECT_V2",
         "POSTURE_CHECKS",
         "BIND_SUCCESS"
