@@ -49,6 +49,10 @@ type EdgeRouterDetail struct {
 
 	CommonEdgeRouterProperties
 
+	// The raw router capabilities bitmask as reported to the controller, exposed for diagnostics. The capabilities array is the decoded, human-readable form of the bits this controller recognizes.
+	//
+	CapabilitiesMask int64 `json:"capabilitiesMask,omitempty"`
+
 	// cert pem
 	CertPem *string `json:"certPem"`
 
@@ -118,6 +122,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 
 	// AO2
 	var dataAO2 struct {
+		CapabilitiesMask int64 `json:"capabilitiesMask,omitempty"`
+
 		CertPem *string `json:"certPem"`
 
 		Configs []string `json:"configs"`
@@ -151,6 +157,8 @@ func (m *EdgeRouterDetail) UnmarshalJSON(raw []byte) error {
 	if err := swag.ReadJSON(raw, &dataAO2); err != nil {
 		return err
 	}
+
+	m.CapabilitiesMask = dataAO2.CapabilitiesMask
 
 	m.CertPem = dataAO2.CertPem
 
@@ -201,6 +209,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 	}
 	_parts = append(_parts, aO1)
 	var dataAO2 struct {
+		CapabilitiesMask int64 `json:"capabilitiesMask,omitempty"`
+
 		CertPem *string `json:"certPem"`
 
 		Configs []string `json:"configs"`
@@ -231,6 +241,8 @@ func (m EdgeRouterDetail) MarshalJSON() ([]byte, error) {
 
 		VersionInfo *VersionInfo `json:"versionInfo,omitempty"`
 	}
+
+	dataAO2.CapabilitiesMask = m.CapabilitiesMask
 
 	dataAO2.CertPem = m.CertPem
 

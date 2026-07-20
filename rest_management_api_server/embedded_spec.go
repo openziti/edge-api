@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.34.0"
+    "version": "0.35.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -36830,6 +36830,11 @@ func init() {
             "isTunnelerEnabled"
           ],
           "properties": {
+            "capabilitiesMask": {
+              "description": "The raw router capabilities bitmask as reported to the controller, exposed for diagnostics. The capabilities array is the decoded, human-readable form of the bits this controller recognizes.\n",
+              "type": "integer",
+              "format": "int64"
+            },
             "certPem": {
               "type": "string",
               "x-nullable": true,
@@ -40689,8 +40694,9 @@ func init() {
       "enum": [
         "MULTI_CHANNEL",
         "SERVICE_SUBSCRIPTIONS",
-        "RDM_SUPPORTED",
-        "CONNECT_V2"
+        "CONNECT_V2",
+        "POSTURE_CHECKS",
+        "BIND_SUCCESS"
       ]
     },
     "routerCreate": {
@@ -42025,7 +42031,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.34.0"
+    "version": "0.35.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -78906,6 +78912,11 @@ func init() {
             "isTunnelerEnabled"
           ],
           "properties": {
+            "capabilitiesMask": {
+              "description": "The raw router capabilities bitmask as reported to the controller, exposed for diagnostics. The capabilities array is the decoded, human-readable form of the bits this controller recognizes.\n",
+              "type": "integer",
+              "format": "int64"
+            },
             "certPem": {
               "type": "string",
               "x-nullable": true,
@@ -82769,8 +82780,9 @@ func init() {
       "enum": [
         "MULTI_CHANNEL",
         "SERVICE_SUBSCRIPTIONS",
-        "RDM_SUPPORTED",
-        "CONNECT_V2"
+        "CONNECT_V2",
+        "POSTURE_CHECKS",
+        "BIND_SUCCESS"
       ]
     },
     "routerCreate": {
