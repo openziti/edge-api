@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.35.0"
+    "version": "0.36.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -10871,6 +10871,13 @@ func init() {
           "type": "string",
           "example": "2020-02-11 16:09:08"
         },
+        "buildFlags": {
+          "description": "Flags supplied when this controller binary was built, naming build time choices a client may need to know about. Distinct from capabilities, which describe features the controller offers over the API. Open-ended: the values are defined by whoever produced the build, and clients ignore values they do not recognize. Absent when the controller predates this field or was built without flags.\n",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "capabilities": {
           "type": "array",
           "items": {
@@ -10933,7 +10940,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.35.0"
+    "version": "0.36.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -21825,6 +21832,13 @@ func init() {
         "buildDate": {
           "type": "string",
           "example": "2020-02-11 16:09:08"
+        },
+        "buildFlags": {
+          "description": "Flags supplied when this controller binary was built, naming build time choices a client may need to know about. Distinct from capabilities, which describe features the controller offers over the API. Open-ended: the values are defined by whoever produced the build, and clients ignore values they do not recognize. Absent when the controller predates this field or was built without flags.\n",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "capabilities": {
           "type": "array",
