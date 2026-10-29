@@ -49,6 +49,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authentication"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authenticator"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/certificate_authority"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/change_set"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/config"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/controllers"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/current_api_session"
@@ -168,6 +169,13 @@ func NewZitiEdgeManagementAPI(spec *loads.Document) *ZitiEdgeManagementAPI {
 			_ = principal
 
 			return middleware.NotImplemented("operation certificate_authority.CreateCa has not yet been implemented")
+		}),
+
+		ChangeSetCreateChangeSetHandler: change_set.CreateChangeSetHandlerFunc(func(params change_set.CreateChangeSetParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation change_set.CreateChangeSet has not yet been implemented")
 		}),
 
 		ConfigCreateConfigHandler: config.CreateConfigHandlerFunc(func(params config.CreateConfigParams, principal any) middleware.Responder {
@@ -1626,6 +1634,8 @@ type ZitiEdgeManagementAPI struct {
 	AuthenticatorCreateAuthenticatorHandler authenticator.CreateAuthenticatorHandler
 	// CertificateAuthorityCreateCaHandler sets the operation handler for the create ca operation
 	CertificateAuthorityCreateCaHandler certificate_authority.CreateCaHandler
+	// ChangeSetCreateChangeSetHandler sets the operation handler for the create change set operation
+	ChangeSetCreateChangeSetHandler change_set.CreateChangeSetHandler
 	// ConfigCreateConfigHandler sets the operation handler for the create config operation
 	ConfigCreateConfigHandler config.CreateConfigHandler
 	// ConfigCreateConfigTypeHandler sets the operation handler for the create config type operation
@@ -2140,6 +2150,9 @@ func (o *ZitiEdgeManagementAPI) Validate() error {
 	}
 	if o.CertificateAuthorityCreateCaHandler == nil {
 		unregistered = append(unregistered, "certificate_authority.CreateCaHandler")
+	}
+	if o.ChangeSetCreateChangeSetHandler == nil {
+		unregistered = append(unregistered, "change_set.CreateChangeSetHandler")
 	}
 	if o.ConfigCreateConfigHandler == nil {
 		unregistered = append(unregistered, "config.CreateConfigHandler")
@@ -2876,6 +2889,10 @@ func (o *ZitiEdgeManagementAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/cas"] = certificate_authority.NewCreateCa(o.context, o.CertificateAuthorityCreateCaHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/change-sets"] = change_set.NewCreateChangeSet(o.context, o.ChangeSetCreateChangeSetHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

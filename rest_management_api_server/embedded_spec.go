@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.36.0"
+    "version": "0.37.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -5040,6 +5040,249 @@ func init() {
           "required": true
         }
       ]
+    },
+    "/change-sets": {
+      "post": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Applies the changes in order as one transaction: either every change is applied or none is. A\nchange set is not stored and cannot be retrieved afterwards.\n\nEach change names an entity type and an action and carries the JSON body the single-entity\nendpoint for that type and action accepts, which is validated against that endpoint's request\nmodel. The supported entity types are ` + "`" + `config` + "`" + `, ` + "`" + `service` + "`" + `, ` + "`" + `service-policy` + "`" + `,\n` + "`" + `edge-router-policy` + "`" + `, ` + "`" + `service-edge-router-policy` + "`" + `, ` + "`" + `identity` + "`" + ` and ` + "`" + `edge-router` + "`" + `; the actions\nare ` + "`" + `create` + "`" + `, ` + "`" + `update` + "`" + `, ` + "`" + `patch` + "`" + ` and ` + "`" + `delete` + "`" + `.\n\nA ` + "`" + `create` + "`" + ` may declare a ` + "`" + `referenceId` + "`" + `, a label that later changes in the same change set use\nto name the entity it created: as ` + "`" + `${label}` + "`" + ` where an id is expected, as ` + "`" + `@${label}` + "`" + ` in a role\nlist, or as the ` + "`" + `id` + "`" + ` of an ` + "`" + `update` + "`" + `, ` + "`" + `patch` + "`" + ` or ` + "`" + `delete` + "`" + `. References are backward-only: a label\nis usable from the change after the one that declares it. In this release tokens are accepted\nin ` + "`" + `id` + "`" + ` for every type and in these fields:\n\n- ` + "`" + `service` + "`" + `: ` + "`" + `configs` + "`" + `\n- ` + "`" + `service-policy` + "`" + `: ` + "`" + `identityRoles` + "`" + `, ` + "`" + `serviceRoles` + "`" + `\n- ` + "`" + `edge-router-policy` + "`" + `: ` + "`" + `identityRoles` + "`" + `, ` + "`" + `edgeRouterRoles` + "`" + `\n- ` + "`" + `service-edge-router-policy` + "`" + `: ` + "`" + `serviceRoles` + "`" + `, ` + "`" + `edgeRouterRoles` + "`" + `\n- ` + "`" + `identity` + "`" + `: the keys of ` + "`" + `serviceHostingCosts` + "`" + ` and ` + "`" + `serviceHostingPrecedences` + "`" + `\n- ` + "`" + `edge-router` + "`" + `: ` + "`" + `configs` + "`" + `\n\nOther fields that hold ids, such as a config's ` + "`" + `configTypeId` + "`" + `, an identity's ` + "`" + `authPolicyId` + "`" + ` and\na service policy's ` + "`" + `postureCheckRoles` + "`" + `, take literal ids only, because their entity types cannot\nbe created in a change set. Free-form fields such as config ` + "`" + `data` + "`" + `, ` + "`" + `tags` + "`" + ` and ` + "`" + `appData` + "`" + ` are\nnever inspected.\n\nOn success the response holds one result per change, in change order, with the id the change\ncreated or targeted and a link to the entity. On failure nothing has been applied, and the\nresponse is the error the failing change would have produced on its own endpoint, with the\nmessage prefixed by the change's index and label, as in ` + "`" + `change 3 (svc): ...` + "`" + `. Ids assigned by\nthe change set appear in the error as their ` + "`" + `${label}` + "`" + ` tokens.\n\nRequires admin access or the ` + "`" + `change-set.create` + "`" + ` permission. Each change is also checked\nagainst the permission its single-entity endpoint requires, with an ` + "`" + `edge-router` + "`" + ` change\nchecked as ` + "`" + `router` + "`" + `. The controller may cap the number of changes in a change set and the size\nof the request body; a change set over either cap is rejected before any change is examined.\n",
+        "tags": [
+          "Change Set"
+        ],
+        "summary": "Apply a set of changes as one unit",
+        "operationId": "createChangeSet",
+        "parameters": [
+          {
+            "description": "The changes to apply",
+            "name": "changeSet",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/changeSetCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The change set was applied. One result per change, in change order.",
+            "schema": {
+              "$ref": "#/definitions/changeSetEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "cause": null,
+                  "causeMessage": "",
+                  "code": "NOT_FOUND",
+                  "message": "The resource requested was not found or is no longer available",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The resource requested to be removed/altered cannot be as it is referenced by another object.",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "causeMessage": "referenced by /some-resource/05f4f710-c155-4a74-86d5-77558eb9cb42",
+                  "code": "CONFLICT_CANNOT_MODIFY_REFERENCED",
+                  "message": "The resource cannot be deleted/modified. Remove all referencing resources first.",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
     },
     "/config-types": {
       "get": {
@@ -35630,8 +35873,169 @@ func init() {
       "enum": [
         "OIDC_AUTH",
         "HA_CONTROLLER",
-        "OIDC_AUTH_WITH_CSR"
+        "OIDC_AUTH_WITH_CSR",
+        "CHANGE_SETS"
       ]
+    },
+    "changeSetChange": {
+      "description": "One change of a change set",
+      "type": "object",
+      "required": [
+        "entityType",
+        "action"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "create",
+            "update",
+            "patch",
+            "delete"
+          ]
+        },
+        "body": {
+          "description": "The request body the single-entity endpoint accepts for this entity type and action: the type's create, update or patch model. Required for create, update and patch and not allowed on a delete.\n",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "entityType": {
+          "description": "The entity type the change applies to, in the singular: ` + "`" + `config` + "`" + `, ` + "`" + `service` + "`" + `, ` + "`" + `service-policy` + "`" + `, ` + "`" + `edge-router-policy` + "`" + `, ` + "`" + `service-edge-router-policy` + "`" + `, ` + "`" + `identity` + "`" + ` or ` + "`" + `edge-router` + "`" + `.\n",
+          "type": "string",
+          "example": "service"
+        },
+        "id": {
+          "description": "The id of the entity to update, patch or delete. Required for those actions and not allowed on a create. May be a ` + "`" + `${referenceId}` + "`" + ` token naming an earlier create of the same type.\n",
+          "type": "string"
+        },
+        "ifExists": {
+          "description": "On a delete, skip the change instead of failing the change set when the entity does not exist. Not allowed on other actions.\n",
+          "type": "boolean"
+        },
+        "referenceId": {
+          "description": "A label for the entity this change creates, unique within the change set, which later changes use as ` + "`" + `${referenceId}` + "`" + `. Allowed on a create only.\n",
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "example": "svc"
+        }
+      }
+    },
+    "changeSetCreate": {
+      "description": "A set of changes to apply as one unit",
+      "type": "object",
+      "required": [
+        "changes"
+      ],
+      "properties": {
+        "changes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/changeSetChange"
+          }
+        }
+      },
+      "example": {
+        "changes": [
+          {
+            "action": "create",
+            "body": {
+              "configTypeId": "g7cIWbcGg",
+              "data": {
+                "addresses": [
+                  "example.ziti"
+                ],
+                "portRanges": [
+                  {
+                    "high": 80,
+                    "low": 80
+                  }
+                ],
+                "protocols": [
+                  "tcp"
+                ]
+              },
+              "name": "example.intercept.v1"
+            },
+            "entityType": "config",
+            "referenceId": "cfg"
+          },
+          {
+            "action": "create",
+            "body": {
+              "configs": [
+                "${cfg}"
+              ],
+              "encryptionRequired": true,
+              "name": "example"
+            },
+            "entityType": "service",
+            "referenceId": "svc"
+          },
+          {
+            "action": "create",
+            "body": {
+              "identityRoles": [
+                "#example-clients"
+              ],
+              "name": "example-dial",
+              "semantic": "AnyOf",
+              "serviceRoles": [
+                "@${svc}"
+              ],
+              "type": "Dial"
+            },
+            "entityType": "service-policy"
+          },
+          {
+            "action": "delete",
+            "entityType": "service",
+            "id": "7f3b1c2a-0d4e-4f5a-9b6c-8d7e6f5a4b3c",
+            "ifExists": true
+          }
+        ]
+      }
+    },
+    "changeSetEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "description": "One result per change, in change order",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/changeSetResult"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "changeSetResult": {
+      "description": "The outcome of one change",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "_links": {
+          "$ref": "#/definitions/links"
+        },
+        "id": {
+          "description": "The id of the entity the change created or targeted",
+          "type": "string"
+        },
+        "referenceId": {
+          "description": "The label the change declared, if any",
+          "type": "string",
+          "x-omitempty": true,
+          "example": "svc"
+        }
+      }
     },
     "commonEdgeRouterProperties": {
       "type": "object",
@@ -39115,6 +39519,8 @@ func init() {
           "ca.create",
           "ca.update",
           "ca.delete",
+          "change-set",
+          "change-set.create",
           "config",
           "config.read",
           "config.create",
@@ -42038,7 +42444,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.36.0"
+    "version": "0.37.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/management/v1",
@@ -47014,6 +47420,249 @@ func init() {
           "required": true
         }
       ]
+    },
+    "/change-sets": {
+      "post": {
+        "security": [
+          {
+            "ztSession": []
+          },
+          {
+            "oauth2": [
+              "openid"
+            ]
+          }
+        ],
+        "description": "Applies the changes in order as one transaction: either every change is applied or none is. A\nchange set is not stored and cannot be retrieved afterwards.\n\nEach change names an entity type and an action and carries the JSON body the single-entity\nendpoint for that type and action accepts, which is validated against that endpoint's request\nmodel. The supported entity types are ` + "`" + `config` + "`" + `, ` + "`" + `service` + "`" + `, ` + "`" + `service-policy` + "`" + `,\n` + "`" + `edge-router-policy` + "`" + `, ` + "`" + `service-edge-router-policy` + "`" + `, ` + "`" + `identity` + "`" + ` and ` + "`" + `edge-router` + "`" + `; the actions\nare ` + "`" + `create` + "`" + `, ` + "`" + `update` + "`" + `, ` + "`" + `patch` + "`" + ` and ` + "`" + `delete` + "`" + `.\n\nA ` + "`" + `create` + "`" + ` may declare a ` + "`" + `referenceId` + "`" + `, a label that later changes in the same change set use\nto name the entity it created: as ` + "`" + `${label}` + "`" + ` where an id is expected, as ` + "`" + `@${label}` + "`" + ` in a role\nlist, or as the ` + "`" + `id` + "`" + ` of an ` + "`" + `update` + "`" + `, ` + "`" + `patch` + "`" + ` or ` + "`" + `delete` + "`" + `. References are backward-only: a label\nis usable from the change after the one that declares it. In this release tokens are accepted\nin ` + "`" + `id` + "`" + ` for every type and in these fields:\n\n- ` + "`" + `service` + "`" + `: ` + "`" + `configs` + "`" + `\n- ` + "`" + `service-policy` + "`" + `: ` + "`" + `identityRoles` + "`" + `, ` + "`" + `serviceRoles` + "`" + `\n- ` + "`" + `edge-router-policy` + "`" + `: ` + "`" + `identityRoles` + "`" + `, ` + "`" + `edgeRouterRoles` + "`" + `\n- ` + "`" + `service-edge-router-policy` + "`" + `: ` + "`" + `serviceRoles` + "`" + `, ` + "`" + `edgeRouterRoles` + "`" + `\n- ` + "`" + `identity` + "`" + `: the keys of ` + "`" + `serviceHostingCosts` + "`" + ` and ` + "`" + `serviceHostingPrecedences` + "`" + `\n- ` + "`" + `edge-router` + "`" + `: ` + "`" + `configs` + "`" + `\n\nOther fields that hold ids, such as a config's ` + "`" + `configTypeId` + "`" + `, an identity's ` + "`" + `authPolicyId` + "`" + ` and\na service policy's ` + "`" + `postureCheckRoles` + "`" + `, take literal ids only, because their entity types cannot\nbe created in a change set. Free-form fields such as config ` + "`" + `data` + "`" + `, ` + "`" + `tags` + "`" + ` and ` + "`" + `appData` + "`" + ` are\nnever inspected.\n\nOn success the response holds one result per change, in change order, with the id the change\ncreated or targeted and a link to the entity. On failure nothing has been applied, and the\nresponse is the error the failing change would have produced on its own endpoint, with the\nmessage prefixed by the change's index and label, as in ` + "`" + `change 3 (svc): ...` + "`" + `. Ids assigned by\nthe change set appear in the error as their ` + "`" + `${label}` + "`" + ` tokens.\n\nRequires admin access or the ` + "`" + `change-set.create` + "`" + ` permission. Each change is also checked\nagainst the permission its single-entity endpoint requires, with an ` + "`" + `edge-router` + "`" + ` change\nchecked as ` + "`" + `router` + "`" + `. The controller may cap the number of changes in a change set and the size\nof the request body; a change set over either cap is rejected before any change is examined.\n",
+        "tags": [
+          "Change Set"
+        ],
+        "summary": "Apply a set of changes as one unit",
+        "operationId": "createChangeSet",
+        "parameters": [
+          {
+            "description": "The changes to apply",
+            "name": "changeSet",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/changeSetCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The change set was applied. One result per change, in change order.",
+            "schema": {
+              "$ref": "#/definitions/changeSetEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          },
+          "400": {
+            "description": "The supplied request contains invalid fields or could not be parsed (json and non-json bodies). The error's code, message, and cause fields can be inspected for further information",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": {
+                    "details": {
+                      "context": "(root)",
+                      "field": "(root)",
+                      "property": "fooField3"
+                    },
+                    "field": "(root)",
+                    "message": "(root): fooField3 is required",
+                    "type": "required",
+                    "value": {
+                      "fooField": "abc",
+                      "fooField2": "def"
+                    }
+                  },
+                  "causeMessage": "schema validation failed",
+                  "code": "COULD_NOT_VALIDATE",
+                  "message": "The supplied request contains an invalid document",
+                  "requestId": "ac6766d6-3a09-44b3-8d8a-1b541d97fdd9"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied session does not have the correct access rights to request this resource",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "cause": "",
+                  "causeMessage": "",
+                  "code": "UNAUTHORIZED",
+                  "message": "The request could not be completed. The session is not authorized or the credentials are invalid",
+                  "requestId": "0bfe7a04-9229-4b7a-812c-9eb3cc0eac0f"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource does not exist",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "cause": null,
+                  "causeMessage": "",
+                  "code": "NOT_FOUND",
+                  "message": "The resource requested was not found or is no longer available",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The resource requested to be removed/altered cannot be as it is referenced by another object.",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {
+                      "id": "71a3000f-7dda-491a-9b90-a19f4ee6c406"
+                    }
+                  },
+                  "causeMessage": "referenced by /some-resource/05f4f710-c155-4a74-86d5-77558eb9cb42",
+                  "code": "CONFLICT_CANNOT_MODIFY_REFERENCED",
+                  "message": "The resource cannot be deleted/modified. Remove all referencing resources first.",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The resource requested is rate limited and the rate limit has been exceeded",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "args": {
+                    "urlVars": {}
+                  },
+                  "causeMessage": "you have hit a rate limit in the requested operation",
+                  "code": "RATE_LIMITED",
+                  "message": "The resource is rate limited and the rate limit has been exceeded. Please try again later",
+                  "requestId": "270908d6-f2ef-4577-b973-67bec18ae376"
+                },
+                "meta": {
+                  "apiEnrollmentVersion": "0.0.1",
+                  "apiVersion": "0.0.1"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request could not be completed due to the server being busy or in a temporarily bad state",
+            "schema": {
+              "$ref": "#/definitions/apiErrorEnvelope"
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Denotes different type of security token related information"
+              }
+            }
+          }
+        }
+      }
     },
     "/config-types": {
       "get": {
@@ -77717,8 +78366,169 @@ func init() {
       "enum": [
         "OIDC_AUTH",
         "HA_CONTROLLER",
-        "OIDC_AUTH_WITH_CSR"
+        "OIDC_AUTH_WITH_CSR",
+        "CHANGE_SETS"
       ]
+    },
+    "changeSetChange": {
+      "description": "One change of a change set",
+      "type": "object",
+      "required": [
+        "entityType",
+        "action"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "create",
+            "update",
+            "patch",
+            "delete"
+          ]
+        },
+        "body": {
+          "description": "The request body the single-entity endpoint accepts for this entity type and action: the type's create, update or patch model. Required for create, update and patch and not allowed on a delete.\n",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "entityType": {
+          "description": "The entity type the change applies to, in the singular: ` + "`" + `config` + "`" + `, ` + "`" + `service` + "`" + `, ` + "`" + `service-policy` + "`" + `, ` + "`" + `edge-router-policy` + "`" + `, ` + "`" + `service-edge-router-policy` + "`" + `, ` + "`" + `identity` + "`" + ` or ` + "`" + `edge-router` + "`" + `.\n",
+          "type": "string",
+          "example": "service"
+        },
+        "id": {
+          "description": "The id of the entity to update, patch or delete. Required for those actions and not allowed on a create. May be a ` + "`" + `${referenceId}` + "`" + ` token naming an earlier create of the same type.\n",
+          "type": "string"
+        },
+        "ifExists": {
+          "description": "On a delete, skip the change instead of failing the change set when the entity does not exist. Not allowed on other actions.\n",
+          "type": "boolean"
+        },
+        "referenceId": {
+          "description": "A label for the entity this change creates, unique within the change set, which later changes use as ` + "`" + `${referenceId}` + "`" + `. Allowed on a create only.\n",
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "example": "svc"
+        }
+      }
+    },
+    "changeSetCreate": {
+      "description": "A set of changes to apply as one unit",
+      "type": "object",
+      "required": [
+        "changes"
+      ],
+      "properties": {
+        "changes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/changeSetChange"
+          }
+        }
+      },
+      "example": {
+        "changes": [
+          {
+            "action": "create",
+            "body": {
+              "configTypeId": "g7cIWbcGg",
+              "data": {
+                "addresses": [
+                  "example.ziti"
+                ],
+                "portRanges": [
+                  {
+                    "high": 80,
+                    "low": 80
+                  }
+                ],
+                "protocols": [
+                  "tcp"
+                ]
+              },
+              "name": "example.intercept.v1"
+            },
+            "entityType": "config",
+            "referenceId": "cfg"
+          },
+          {
+            "action": "create",
+            "body": {
+              "configs": [
+                "${cfg}"
+              ],
+              "encryptionRequired": true,
+              "name": "example"
+            },
+            "entityType": "service",
+            "referenceId": "svc"
+          },
+          {
+            "action": "create",
+            "body": {
+              "identityRoles": [
+                "#example-clients"
+              ],
+              "name": "example-dial",
+              "semantic": "AnyOf",
+              "serviceRoles": [
+                "@${svc}"
+              ],
+              "type": "Dial"
+            },
+            "entityType": "service-policy"
+          },
+          {
+            "action": "delete",
+            "entityType": "service",
+            "id": "7f3b1c2a-0d4e-4f5a-9b6c-8d7e6f5a4b3c",
+            "ifExists": true
+          }
+        ]
+      }
+    },
+    "changeSetEnvelope": {
+      "type": "object",
+      "required": [
+        "meta",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "description": "One result per change, in change order",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/changeSetResult"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "changeSetResult": {
+      "description": "The outcome of one change",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "_links": {
+          "$ref": "#/definitions/links"
+        },
+        "id": {
+          "description": "The id of the entity the change created or targeted",
+          "type": "string"
+        },
+        "referenceId": {
+          "description": "The label the change declared, if any",
+          "type": "string",
+          "x-omitempty": true,
+          "example": "svc"
+        }
+      }
     },
     "commonEdgeRouterProperties": {
       "type": "object",
@@ -81208,6 +82018,8 @@ func init() {
           "ca.create",
           "ca.update",
           "ca.delete",
+          "change-set",
+          "change-set.create",
           "config",
           "config.read",
           "config.create",

@@ -64,7 +64,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.36.0"
+    "version": "0.37.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -8359,7 +8359,8 @@ func init() {
       "enum": [
         "OIDC_AUTH",
         "HA_CONTROLLER",
-        "OIDC_AUTH_WITH_CSR"
+        "OIDC_AUTH_WITH_CSR",
+        "CHANGE_SETS"
       ]
     },
     "clientExternalJwtSignerDetail": {
@@ -10014,6 +10015,8 @@ func init() {
           "ca.create",
           "ca.update",
           "ca.delete",
+          "change-set",
+          "change-set.create",
           "config",
           "config.read",
           "config.create",
@@ -10940,7 +10943,7 @@ func init() {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "0.36.0"
+    "version": "0.37.0"
   },
   "host": "demo.ziti.dev",
   "basePath": "/edge/client/v1",
@@ -19317,7 +19320,8 @@ func init() {
       "enum": [
         "OIDC_AUTH",
         "HA_CONTROLLER",
-        "OIDC_AUTH_WITH_CSR"
+        "OIDC_AUTH_WITH_CSR",
+        "CHANGE_SETS"
       ]
     },
     "clientExternalJwtSignerDetail": {
@@ -20975,6 +20979,8 @@ func init() {
           "ca.create",
           "ca.update",
           "ca.delete",
+          "change-set",
+          "change-set.create",
           "config",
           "config.read",
           "config.create",
