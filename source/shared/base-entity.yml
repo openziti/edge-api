@@ -91,6 +91,9 @@ definitions:
         - "ca.update"
         - "ca.delete"
 
+        - "change-set"
+        - "change-set.create"
+
         - "config"
         - "config.read"
         - "config.create"

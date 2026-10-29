@@ -39,6 +39,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_client/authentication"
 	"github.com/openziti/edge-api/rest_management_api_client/authenticator"
 	"github.com/openziti/edge-api/rest_management_api_client/certificate_authority"
+	"github.com/openziti/edge-api/rest_management_api_client/change_set"
 	"github.com/openziti/edge-api/rest_management_api_client/config"
 	"github.com/openziti/edge-api/rest_management_api_client/controllers"
 	"github.com/openziti/edge-api/rest_management_api_client/current_api_session"
@@ -110,6 +111,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *ZitiEdgeMa
 	cli.Authentication = authentication.New(transport, formats)
 	cli.Authenticator = authenticator.New(transport, formats)
 	cli.CertificateAuthority = certificate_authority.New(transport, formats)
+	cli.ChangeSet = change_set.New(transport, formats)
 	cli.Config = config.New(transport, formats)
 	cli.Controllers = controllers.New(transport, formats)
 	cli.CurrentAPISession = current_api_session.New(transport, formats)
@@ -186,6 +188,8 @@ type ZitiEdgeManagement struct {
 
 	CertificateAuthority certificate_authority.ClientService
 
+	ChangeSet change_set.ClientService
+
 	Config config.ClientService
 
 	Controllers controllers.ClientService
@@ -241,6 +245,7 @@ func (c *ZitiEdgeManagement) SetTransport(transport runtime.ClientTransport) {
 	c.Authentication.SetTransport(transport)
 	c.Authenticator.SetTransport(transport)
 	c.CertificateAuthority.SetTransport(transport)
+	c.ChangeSet.SetTransport(transport)
 	c.Config.SetTransport(transport)
 	c.Controllers.SetTransport(transport)
 	c.CurrentAPISession.SetTransport(transport)

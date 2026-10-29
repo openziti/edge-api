@@ -15,7 +15,7 @@ info:
         name: Apache 2.0
         url: https://www.apache.org/licenses/LICENSE-2.0.html
     title: Ziti Edge Client
-    version: 0.36.0
+    version: 0.37.0
 host: demo.ziti.dev
 basePath: /edge/client/v1
 paths:
@@ -5708,6 +5708,7 @@ definitions:
             - OIDC_AUTH
             - HA_CONTROLLER
             - OIDC_AUTH_WITH_CSR
+            - CHANGE_SETS
         type: string
     clientExternalJwtSignerDetail:
         allOf:
@@ -6826,6 +6827,8 @@ definitions:
                 - ca.create
                 - ca.update
                 - ca.delete
+                - change-set
+                - change-set.create
                 - config
                 - config.read
                 - config.create

@@ -1,0 +1,200 @@
+---
+paths:
+  change-sets:
+    post:
+      summary: Apply a set of changes as one unit
+      description: |
+        Applies the changes in order as one transaction: either every change is applied or none is. A
+        change set is not stored and cannot be retrieved afterwards.
+
+        Each change names an entity type and an action and carries the JSON body the single-entity
+        endpoint for that type and action accepts, which is validated against that endpoint's request
+        model. The supported entity types are `config`, `service`, `service-policy`,
+        `edge-router-policy`, `service-edge-router-policy`, `identity` and `edge-router`; the actions
+        are `create`, `update`, `patch` and `delete`.
+
+        A `create` may declare a `referenceId`, a label that later changes in the same change set use
+        to name the entity it created: as `${label}` where an id is expected, as `@${label}` in a role
+        list, or as the `id` of an `update`, `patch` or `delete`. References are backward-only: a label
+        is usable from the change after the one that declares it. In this release tokens are accepted
+        in `id` for every type and in these fields:
+
+        - `service`: `configs`
+        - `service-policy`: `identityRoles`, `serviceRoles`
+        - `edge-router-policy`: `identityRoles`, `edgeRouterRoles`
+        - `service-edge-router-policy`: `serviceRoles`, `edgeRouterRoles`
+        - `identity`: the keys of `serviceHostingCosts` and `serviceHostingPrecedences`
+        - `edge-router`: `configs`
+
+        Other fields that hold ids, such as a config's `configTypeId`, an identity's `authPolicyId` and
+        a service policy's `postureCheckRoles`, take literal ids only, because their entity types cannot
+        be created in a change set. Free-form fields such as config `data`, `tags` and `appData` are
+        never inspected.
+
+        On success the response holds one result per change, in change order, with the id the change
+        created or targeted and a link to the entity. On failure nothing has been applied, and the
+        response is the error the failing change would have produced on its own endpoint, with the
+        message prefixed by the change's index and label, as in `change 3 (svc): ...`. Ids assigned by
+        the change set appear in the error as their `${label}` tokens.
+
+        Requires admin access or the `change-set.create` permission. Each change is also checked
+        against the permission its single-entity endpoint requires, with an `edge-router` change
+        checked as `router`. The controller may cap the number of changes in a change set and the size
+        of the request body; a change set over either cap is rejected before any change is examined.
+      security:
+        - ztSession: [ ]
+        - oauth2: [ openid ]
+      tags:
+        - Change Set
+      operationId: createChangeSet
+      parameters:
+        - name: changeSet
+          in: body
+          required: true
+          description: The changes to apply
+          schema:
+            $ref: '#/definitions/changeSetCreate'
+      responses:
+        '200':
+          $ref: '#/responses/createChangeSet'
+        '400':
+          $ref: '../shared/standard-responses.yml#/responses/badRequestResponse'
+        '401':
+          $ref: '../shared/standard-responses.yml#/responses/unauthorizedResponse'
+        '404':
+          $ref: '../shared/standard-responses.yml#/responses/notFoundResponse'
+        '409':
+          $ref: '../shared/standard-responses.yml#/responses/cannotDeleteReferencedResourceResponse'
+        '429':
+          $ref: '../shared/standard-responses.yml#/responses/rateLimitedResponse'
+        '503':
+          $ref: '../shared/standard-responses.yml#/responses/serverUnavailableResponse'
+
+responses:
+  createChangeSet:
+    description: The change set was applied. One result per change, in change order.
+    headers:
+      WWW-Authenticate:
+        description: "Denotes different type of security token related information"
+        type: array
+        items:
+          type: string
+    schema:
+      $ref: '#/definitions/changeSetEnvelope'
+
+definitions:
+  changeSetEnvelope:
+    type: object
+    required:
+      - meta
+      - data
+    properties:
+      meta:
+        $ref: '../shared/standard-responses.yml#/definitions/meta'
+      data:
+        description: One result per change, in change order
+        type: array
+        items:
+          $ref: '#/definitions/changeSetResult'
+  changeSetResult:
+    description: The outcome of one change
+    type: object
+    required:
+      - id
+    properties:
+      referenceId:
+        description: The label the change declared, if any
+        type: string
+        x-omitempty: true
+        example: svc
+      id:
+        description: The id of the entity the change created or targeted
+        type: string
+      _links:
+        $ref: '../shared/base-entity.yml#/definitions/links'
+  changeSetCreate:
+    description: A set of changes to apply as one unit
+    type: object
+    required:
+      - changes
+    properties:
+      changes:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/changeSetChange'
+    example:
+      changes:
+        - entityType: config
+          action: create
+          referenceId: cfg
+          body:
+            name: example.intercept.v1
+            configTypeId: g7cIWbcGg
+            data:
+              protocols: [ tcp ]
+              addresses: [ example.ziti ]
+              portRanges: [ { low: 80, high: 80 } ]
+        - entityType: service
+          action: create
+          referenceId: svc
+          body:
+            name: example
+            encryptionRequired: true
+            configs: [ '${cfg}' ]
+        - entityType: service-policy
+          action: create
+          body:
+            name: example-dial
+            type: Dial
+            semantic: AnyOf
+            serviceRoles: [ '@${svc}' ]
+            identityRoles: [ '#example-clients' ]
+        - entityType: service
+          action: delete
+          id: 7f3b1c2a-0d4e-4f5a-9b6c-8d7e6f5a4b3c
+          ifExists: true
+  changeSetChange:
+    description: One change of a change set
+    type: object
+    required:
+      - entityType
+      - action
+    properties:
+      entityType:
+        description: >
+          The entity type the change applies to, in the singular: `config`, `service`, `service-policy`,
+          `edge-router-policy`, `service-edge-router-policy`, `identity` or `edge-router`.
+        type: string
+        example: service
+      action:
+        type: string
+        enum:
+          - create
+          - update
+          - patch
+          - delete
+      referenceId:
+        description: >
+          A label for the entity this change creates, unique within the change set, which later changes
+          use as `${referenceId}`. Allowed on a create only.
+        type: string
+        pattern: '^[A-Za-z][A-Za-z0-9_-]{0,63}$'
+        example: svc
+      id:
+        description: >
+          The id of the entity to update, patch or delete. Required for those actions and not allowed on
+          a create. May be a `${referenceId}` token naming an earlier create of the same type.
+        type: string
+      ifExists:
+        description: >
+          On a delete, skip the change instead of failing the change set when the entity does not exist.
+          Not allowed on other actions.
+        type: boolean
+      body:
+        description: >
+          The request body the single-entity endpoint accepts for this entity type and action: the type's
+          create, update or patch model. Required for create, update and patch and not allowed on a
+          delete.
+        type: object
+        additionalProperties: true
