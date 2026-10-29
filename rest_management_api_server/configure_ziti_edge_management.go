@@ -41,6 +41,7 @@ import (
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authentication"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/authenticator"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/certificate_authority"
+	"github.com/openziti/edge-api/rest_management_api_server/operations/change_set"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/config"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/controllers"
 	"github.com/openziti/edge-api/rest_management_api_server/operations/current_api_session"
@@ -194,6 +195,14 @@ func configureAPI(api *operations.ZitiEdgeManagementAPI) http.Handler {
 			_ = principal
 
 			return middleware.NotImplemented("operation certificate_authority.CreateCa has not yet been implemented")
+		})
+	}
+	if api.ChangeSetCreateChangeSetHandler == nil {
+		api.ChangeSetCreateChangeSetHandler = change_set.CreateChangeSetHandlerFunc(func(params change_set.CreateChangeSetParams, principal any) middleware.Responder {
+			_ = params
+			_ = principal
+
+			return middleware.NotImplemented("operation change_set.CreateChangeSet has not yet been implemented")
 		})
 	}
 	if api.ConfigCreateConfigHandler == nil {
