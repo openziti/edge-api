@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.36.0
+  version: 0.37.0
   title: Ziti Edge Management
   description: OpenZiti Edge Management API
   contact:
@@ -71,6 +71,9 @@ paths:
     $ref: 'management/cas.yml#/paths/cas-id-jwt'
   '/cas/{id}/verify':
     $ref: 'management/cas.yml#/paths/cas-id-verify'
+
+  '/change-sets':
+    $ref: 'management/change-sets.yml#/paths/change-sets'
 
   '/config-types':
     $ref: 'management/config-types.yml#/paths/config-types'
